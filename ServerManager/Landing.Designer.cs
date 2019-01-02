@@ -172,6 +172,7 @@
             this.Controls.Add(this.TopBar);
             this.MainMenuStrip = this.TopBar;
             this.Name = "Landing";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ServerManager";
             this.BuildSelector.ResumeLayout(false);
             this.ServerData.ResumeLayout(false);
