@@ -13,11 +13,11 @@ namespace ServerManager
         /// <summary>
         /// Path of the current executable.
         /// </summary>
-        private static string Location = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
+        private static string MainFolder = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
         /// <summary>
         /// Path of the Data folder.
         /// </summary>
-        private static string Data = Path.Combine(Location, "Data");
+        private static string Data = Path.Combine(MainFolder, "Data");
 
         public Landing()
         {
