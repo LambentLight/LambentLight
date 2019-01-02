@@ -1,4 +1,4 @@
-﻿using HtmlAgilityPack;
+using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,7 +6,6 @@ using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Reflection;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -193,11 +192,8 @@ namespace ServerManager
 
         private void DownloadClient_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
-            // Get the download percentage
-            float Percentage = (float)e.BytesReceived / e.TotalBytesToReceive * 100f;
-            // And append the download progress
-            ServerOutput.AppendText($"Downloaded {(int)Percentage}% of 100% ({e.BytesReceived} of {e.TotalBytesToReceive})");
-            ServerOutput.AppendText(Environment.NewLine);
+            // Get the download percentage and show it on the progress bar
+            GeneralProgress.Value = (int)((float)e.BytesReceived / e.TotalBytesToReceive * 100f);
         }
     }
 }

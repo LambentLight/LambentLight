@@ -42,6 +42,7 @@ namespace ServerManager
             this.StartServer = new System.Windows.Forms.ToolStripMenuItem();
             this.OpenSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.DownloadClient = new System.Net.WebClient();
+            this.GeneralProgress = new System.Windows.Forms.ProgressBar();
             this.BuildSelector.SuspendLayout();
             this.ServerData.SuspendLayout();
             this.Console.SuspendLayout();
@@ -122,6 +123,7 @@ namespace ServerManager
             this.Console.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.Console.Controls.Add(this.GeneralProgress);
             this.Console.Controls.Add(this.ServerInput);
             this.Console.Controls.Add(this.ServerOutput);
             this.Console.Location = new System.Drawing.Point(12, 83);
@@ -149,7 +151,7 @@ namespace ServerManager
             this.ServerOutput.Multiline = true;
             this.ServerOutput.Name = "ServerOutput";
             this.ServerOutput.ReadOnly = true;
-            this.ServerOutput.Size = new System.Drawing.Size(764, 304);
+            this.ServerOutput.Size = new System.Drawing.Size(764, 275);
             this.ServerOutput.TabIndex = 0;
             // 
             // TopBar
@@ -187,6 +189,13 @@ namespace ServerManager
             this.DownloadClient.QueryString = ((System.Collections.Specialized.NameValueCollection)(resources.GetObject("DownloadClient.QueryString")));
             this.DownloadClient.UseDefaultCredentials = false;
             this.DownloadClient.DownloadProgressChanged += new System.Net.DownloadProgressChangedEventHandler(this.DownloadClient_DownloadProgressChanged);
+            // 
+            // GeneralProgress
+            // 
+            this.GeneralProgress.Location = new System.Drawing.Point(6, 300);
+            this.GeneralProgress.Name = "GeneralProgress";
+            this.GeneralProgress.Size = new System.Drawing.Size(764, 23);
+            this.GeneralProgress.TabIndex = 2;
             // 
             // Landing
             // 
@@ -227,6 +236,7 @@ namespace ServerManager
         private System.Windows.Forms.ToolStripMenuItem OpenSettings;
         private System.Windows.Forms.ToolStripMenuItem StartServer;
         private System.Net.WebClient DownloadClient;
+        private System.Windows.Forms.ProgressBar GeneralProgress;
     }
 }
 
