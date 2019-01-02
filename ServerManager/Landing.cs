@@ -1,4 +1,4 @@
-﻿using HtmlAgilityPack;
+using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -180,10 +180,9 @@ namespace ServerManager
                 {
                     await Task.Delay(0);
                 }
-                // Check if a folder already exists
+                // Sanity check: Check if the folder already exists and delete it recursively
                 if (Directory.Exists(BuildFolder))
                 {
-                    // If it does, delete it recursively
                     Directory.Delete(BuildFolder, true);
                 }
                 // Create the folder for the current build
