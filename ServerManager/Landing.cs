@@ -157,7 +157,7 @@ namespace ServerManager
             // If there is no build selected, return
             if (BuildList.SelectedIndex == -1 || DataList.SelectedIndex == -1)
             {
-                ServerOutput.AppendLine("You need to select a Build and a Server Data");
+                ServerOutput.AppendLine("You need to select a Build and a Server Data.");
                 return;
             }
 
@@ -173,6 +173,7 @@ namespace ServerManager
                 Uri DownloadOrigin = new Uri(string.Format(DownloadUrl, BuildList.SelectedItem.ToString()));
                 string DownloadLocation = Path.Combine(Builds, BuildList.SelectedItem.ToString() + ".zip");
                 // And download the file
+                ServerOutput.AppendLine("The download for the file has started, check the Progress Bar.");
                 await DownloadClient.DownloadFileTaskAsync(DownloadOrigin, DownloadLocation);
                 // Wait until the file has been downloaded
                 while (DownloadClient.IsBusy)
@@ -191,6 +192,7 @@ namespace ServerManager
                 ServerOutput.AppendLine("The file was downloaded, extracting the content...");
                 // And extract the files
                 await Task.Run(() => ZipFile.ExtractToDirectory(DownloadLocation, BuildFolder));
+                ServerOutput.AppendLine("The file has been extracted, no problems found.");
                 // Finally, restore the progress bar status
                 GeneralProgress.Value = 0;
             }
