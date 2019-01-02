@@ -65,6 +65,7 @@
             this.RefreshBuilds.TabIndex = 2;
             this.RefreshBuilds.Text = "Refresh List";
             this.RefreshBuilds.UseVisualStyleBackColor = true;
+            this.RefreshBuilds.Click += new System.EventHandler(this.RefreshBuilds_Click);
             // 
             // BuildList
             // 

@@ -42,5 +42,11 @@ namespace ServerManager
             // And show it as a dialog (so the user is unable to launch a server)
             SettingsWindow.ShowDialog();
         }
+
+        private void RefreshBuilds_Click(object sender, EventArgs e)
+        {
+            // Self explanatory
+            RefreshServerBuilds();
+        }
     }
 }
