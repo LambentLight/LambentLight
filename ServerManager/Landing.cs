@@ -1,4 +1,4 @@
-using HtmlAgilityPack;
+﻿using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -165,9 +165,10 @@ namespace ServerManager
             string BuildFolder = Path.Combine(Builds, BuildList.SelectedItem.ToString());
 
             // Check if the FiveM build exists locally
-            // If not, download it
             if (!Directory.Exists(BuildFolder))
             {
+                // Looks like there is no build, notify the user
+                ServerOutput.AppendLine("The build was not found locally, attempting a download...");
                 // Store the download origin and destination
                 Uri DownloadOrigin = new Uri(string.Format(DownloadUrl, BuildList.SelectedItem.ToString()));
                 string DownloadLocation = Path.Combine(Builds, BuildList.SelectedItem.ToString() + ".zip");
@@ -186,6 +187,8 @@ namespace ServerManager
                 }
                 // Create the folder for the current build
                 Directory.CreateDirectory(BuildFolder);
+                // Notify the user about the extraction
+                ServerOutput.AppendLine("The file was downloaded, extracting the content...");
                 // And extract the files
                 await Task.Run(() => ZipFile.ExtractToDirectory(DownloadLocation, BuildFolder));
                 // Finally, restore the progress bar status
