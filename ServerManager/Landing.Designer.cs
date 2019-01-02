@@ -1,4 +1,4 @@
-﻿namespace ServerManager
+namespace ServerManager
 {
     partial class Landing
     {
@@ -143,6 +143,7 @@
             this.ServerOutput.Location = new System.Drawing.Point(6, 19);
             this.ServerOutput.Multiline = true;
             this.ServerOutput.Name = "ServerOutput";
+            this.ServerOutput.ReadOnly = true;
             this.ServerOutput.Size = new System.Drawing.Size(764, 304);
             this.ServerOutput.TabIndex = 0;
             // 
