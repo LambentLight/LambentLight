@@ -1,4 +1,4 @@
-using HtmlAgilityPack;
+﻿using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +10,9 @@ namespace ServerManager
     {
         public Landing()
         {
+            // Initialize the UI
             InitializeComponent();
-
+            // And refresh the list of server builds
             RefreshServerBuilds();
         }
 
@@ -36,7 +37,9 @@ namespace ServerManager
 
         private void OpenSettings_Click(object sender, EventArgs e)
         {
+            // Create an instance of the Settings window
             Settings SettingsWindow = new Settings();
+            // And show it as a dialog (so the user is unable to launch a server)
             SettingsWindow.ShowDialog();
         }
     }
