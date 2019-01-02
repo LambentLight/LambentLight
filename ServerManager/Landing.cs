@@ -3,7 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Reflection;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace ServerManager
@@ -15,16 +17,30 @@ namespace ServerManager
         /// </summary>
         private static string MainFolder = new Uri(Path.GetDirectoryName(Assembly.GetExecutingAssembly().CodeBase)).LocalPath;
         /// <summary>
-        /// Path of the Data folder.
+        /// Path of the Server Builds data.
+        /// </summary>
+        private static string Builds = Path.Combine(MainFolder, "Builds");
+        /// <summary>
+        /// Path of the User Data folder.
         /// </summary>
         private static string Data = Path.Combine(MainFolder, "Data");
+        /// <summary>
+        /// The place where the build should be downloaded.
+        /// </summary>
+        private static string DownloadUrl = "https://runtime.fivem.net/artifacts/fivem/build_server_windows/master/{0}/server.zip";
 
         public Landing()
         {
+            // Check if the folder "Builds" exists
+            if (!Directory.Exists(Builds))
+            {
+                // If not, create it
+                Directory.CreateDirectory(Builds);
+            }
             // Check if the folder "Data" exists
             if (!Directory.Exists(Data))
             {
-                // If not, create ir
+                // If not, create it
                 Directory.CreateDirectory(Data);
             }
             // Initialize the UI
@@ -133,6 +149,35 @@ namespace ServerManager
             {
                 Properties.Settings.Default.LastData = DataList.SelectedItem.ToString();
             }
+        }
+
+        private void StartServer_Click(object sender, EventArgs e)
+        {
+            // If there is no build selected, return
+            if (BuildList.SelectedIndex == -1)
+            {
+                return;
+            }
+
+            // Store the path that we are going to use
+            string BuildFolder = Path.Combine(Builds, BuildList.SelectedItem.ToString());
+
+            // Check if the FiveM build exists locally
+            // If not, download it
+            if (!Directory.Exists(BuildFolder))
+            {
+                Uri DownloadLocation = new Uri(string.Format(DownloadUrl, BuildList.SelectedItem.ToString()));
+                DownloadClient.DownloadFileAsync(DownloadLocation, Path.Combine(Builds, BuildList.SelectedItem.ToString() + ".zip"));
+            }
+        }
+
+        private void DownloadClient_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        {
+            // Get the download percentage
+            float Percentage = (float)e.BytesReceived / e.TotalBytesToReceive * 100f;
+            // And append the download progress
+            ServerOutput.AppendText($"Downloaded {(int)Percentage}% of 100% ({e.BytesReceived} of {e.TotalBytesToReceive})");
+            ServerOutput.AppendText(Environment.NewLine);
         }
     }
 }

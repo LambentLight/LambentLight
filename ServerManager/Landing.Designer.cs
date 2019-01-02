@@ -28,6 +28,7 @@ namespace ServerManager
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Landing));
             this.BuildSelector = new System.Windows.Forms.GroupBox();
             this.RefreshBuilds = new System.Windows.Forms.Button();
             this.BuildList = new System.Windows.Forms.ComboBox();
@@ -38,7 +39,9 @@ namespace ServerManager
             this.ServerInput = new System.Windows.Forms.TextBox();
             this.ServerOutput = new System.Windows.Forms.TextBox();
             this.TopBar = new System.Windows.Forms.MenuStrip();
+            this.StartServer = new System.Windows.Forms.ToolStripMenuItem();
             this.OpenSettings = new System.Windows.Forms.ToolStripMenuItem();
+            this.DownloadClient = new System.Net.WebClient();
             this.BuildSelector.SuspendLayout();
             this.ServerData.SuspendLayout();
             this.Console.SuspendLayout();
@@ -152,6 +155,7 @@ namespace ServerManager
             // TopBar
             // 
             this.TopBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.StartServer,
             this.OpenSettings});
             this.TopBar.Location = new System.Drawing.Point(0, 0);
             this.TopBar.Name = "TopBar";
@@ -159,12 +163,30 @@ namespace ServerManager
             this.TopBar.TabIndex = 3;
             this.TopBar.Text = "menuStrip1";
             // 
+            // StartServer
+            // 
+            this.StartServer.Name = "StartServer";
+            this.StartServer.Size = new System.Drawing.Size(78, 20);
+            this.StartServer.Text = "Start Server";
+            this.StartServer.Click += new System.EventHandler(this.StartServer_Click);
+            // 
             // OpenSettings
             // 
             this.OpenSettings.Name = "OpenSettings";
             this.OpenSettings.Size = new System.Drawing.Size(61, 20);
             this.OpenSettings.Text = "Settings";
             this.OpenSettings.Click += new System.EventHandler(this.OpenSettings_Click);
+            // 
+            // DownloadClient
+            // 
+            this.DownloadClient.BaseAddress = "";
+            this.DownloadClient.CachePolicy = null;
+            this.DownloadClient.Credentials = null;
+            this.DownloadClient.Encoding = ((System.Text.Encoding)(resources.GetObject("DownloadClient.Encoding")));
+            this.DownloadClient.Headers = ((System.Net.WebHeaderCollection)(resources.GetObject("DownloadClient.Headers")));
+            this.DownloadClient.QueryString = ((System.Collections.Specialized.NameValueCollection)(resources.GetObject("DownloadClient.QueryString")));
+            this.DownloadClient.UseDefaultCredentials = false;
+            this.DownloadClient.DownloadProgressChanged += new System.Net.DownloadProgressChangedEventHandler(this.DownloadClient_DownloadProgressChanged);
             // 
             // Landing
             // 
@@ -203,6 +225,8 @@ namespace ServerManager
         private System.Windows.Forms.TextBox ServerOutput;
         private System.Windows.Forms.MenuStrip TopBar;
         private System.Windows.Forms.ToolStripMenuItem OpenSettings;
+        private System.Windows.Forms.ToolStripMenuItem StartServer;
+        private System.Net.WebClient DownloadClient;
     }
 }
 
