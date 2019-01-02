@@ -1,4 +1,7 @@
-﻿using System;
+﻿using HtmlAgilityPack;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace ServerManager
@@ -8,6 +11,25 @@ namespace ServerManager
         public Landing()
         {
             InitializeComponent();
+
+            RefreshServerBuilds();
+        }
+
+        private void RefreshServerBuilds()
+        {
+            // Clear the list of items
+            BuildList.Items.Clear();
+            // Create a new web parser
+            HtmlWeb Web = new HtmlWeb();
+            // Get the document from the FiveM build list
+            HtmlAgilityPack.HtmlDocument Doc = Web.Load("https://runtime.fivem.net/artifacts/fivem/build_server_windows/master/");
+            // Create a list of versions from the links without the "/" at the end
+            List<string> Versions = Doc.DocumentNode.SelectNodes("//a").Select(X => X.InnerText.TrimEnd('/')).ToList();
+
+            foreach (string Version in Versions)
+            {
+                BuildList.Items.Add(Version);
+            }
         }
 
         private void OpenSettings_Click(object sender, EventArgs e)
