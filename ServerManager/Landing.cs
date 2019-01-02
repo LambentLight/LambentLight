@@ -216,7 +216,6 @@ namespace ServerManager
             ServerProcess.StartInfo.RedirectStandardError = true;
             ServerProcess.StartInfo.RedirectStandardOutput = true;
             ServerProcess.StartInfo.CreateNoWindow = true;
-            // ServerProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
             ServerProcess.OutputDataReceived += (s, a) => ServerOutput.Invoke(new Action(() => ServerOutput.AppendLine(a.Data)));
             ServerProcess.Start();
             ServerProcess.BeginOutputReadLine();
