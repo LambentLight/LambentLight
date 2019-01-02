@@ -135,6 +135,8 @@ namespace ServerManager
             // 
             // GeneralProgress
             // 
+            this.GeneralProgress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.GeneralProgress.Location = new System.Drawing.Point(6, 300);
             this.GeneralProgress.Name = "GeneralProgress";
             this.GeneralProgress.Size = new System.Drawing.Size(764, 23);
