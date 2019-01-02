@@ -55,6 +55,8 @@
             // 
             // BuildList
             // 
+            this.BuildList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.BuildList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.BuildList.FormattingEnabled = true;
             this.BuildList.Location = new System.Drawing.Point(6, 19);
@@ -64,6 +66,7 @@
             // 
             // ServerData
             // 
+            this.ServerData.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.ServerData.Controls.Add(this.RefreshData);
             this.ServerData.Controls.Add(this.DataList);
             this.ServerData.Location = new System.Drawing.Point(408, 12);
@@ -75,6 +78,7 @@
             // 
             // RefreshBuilds
             // 
+            this.RefreshBuilds.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.RefreshBuilds.Location = new System.Drawing.Point(296, 18);
             this.RefreshBuilds.Name = "RefreshBuilds";
             this.RefreshBuilds.Size = new System.Drawing.Size(75, 23);
@@ -84,6 +88,8 @@
             // 
             // DataList
             // 
+            this.DataList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.DataList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.DataList.FormattingEnabled = true;
             this.DataList.Location = new System.Drawing.Point(6, 19);
@@ -93,6 +99,7 @@
             // 
             // RefreshData
             // 
+            this.RefreshData.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.RefreshData.Location = new System.Drawing.Point(299, 18);
             this.RefreshData.Name = "RefreshData";
             this.RefreshData.Size = new System.Drawing.Size(75, 23);
@@ -102,6 +109,9 @@
             // 
             // Console
             // 
+            this.Console.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.Console.Controls.Add(this.ServerInput);
             this.Console.Controls.Add(this.ServerOutput);
             this.Console.Location = new System.Drawing.Point(12, 68);
@@ -113,6 +123,9 @@
             // 
             // ServerOutput
             // 
+            this.ServerOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ServerOutput.Location = new System.Drawing.Point(6, 19);
             this.ServerOutput.Multiline = true;
             this.ServerOutput.Name = "ServerOutput";
@@ -121,6 +134,8 @@
             // 
             // ServerInput
             // 
+            this.ServerInput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ServerInput.Location = new System.Drawing.Point(6, 344);
             this.ServerInput.Name = "ServerInput";
             this.ServerInput.Size = new System.Drawing.Size(764, 20);
