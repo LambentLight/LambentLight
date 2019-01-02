@@ -2,10 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ServerManager
@@ -166,10 +168,26 @@ namespace ServerManager
             // If not, download it
             if (!Directory.Exists(BuildFolder))
             {
-                // Store the download location
-                Uri DownloadLocation = new Uri(string.Format(DownloadUrl, BuildList.SelectedItem.ToString()));
-                // And download the file in a separate thread
-                DownloadClient.DownloadFileAsync(DownloadLocation, Path.Combine(Builds, BuildList.SelectedItem.ToString() + ".zip"));
+                // Store the download origin and destination
+                Uri DownloadOrigin = new Uri(string.Format(DownloadUrl, BuildList.SelectedItem.ToString()));
+                string DownloadLocation = Path.Combine(Builds, BuildList.SelectedItem.ToString() + ".zip");
+                // And download the file
+                await DownloadClient.DownloadFileTaskAsync(DownloadOrigin, DownloadLocation);
+                // Wait until the file has been downloaded
+                while (DownloadClient.IsBusy)
+                {
+                    await Task.Delay(0);
+                }
+                // Check if a folder already exists
+                if (Directory.Exists(BuildFolder))
+                {
+                    // If it does, delete it recursively
+                    Directory.Delete(BuildFolder, true);
+                }
+                // Create the folder for the current build
+                Directory.CreateDirectory(BuildFolder);
+                // And extract the files
+                await Task.Run(() => ZipFile.ExtractToDirectory(DownloadLocation, BuildFolder));
             }
         }
 
