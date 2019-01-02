@@ -1,6 +1,7 @@
-using HtmlAgilityPack;
+﻿using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -29,6 +30,10 @@ namespace ServerManager
         /// The place where the build should be downloaded.
         /// </summary>
         private static string DownloadUrl = "https://runtime.fivem.net/artifacts/fivem/build_server_windows/master/{0}/server.zip";
+        /// <summary>
+        /// Information for the server process.
+        /// </summary>
+        private static Process ServerProcess = new Process();
 
         public Landing()
         {
@@ -154,24 +159,31 @@ namespace ServerManager
 
         private async void StartServer_Click(object sender, EventArgs e)
         {
-            // If there is no build selected, return
+            // Check that the user has entered a FiveM license key
+            if (string.IsNullOrWhiteSpace(Properties.Settings.Default.License))
+            {
+                ServerOutput.AppendLine("To start a server, go to the Settings menu and add a FiveM license.");
+                return;
+            }
+
+            // And also check if there is no build selected, return
             if (BuildList.SelectedIndex == -1 || DataList.SelectedIndex == -1)
             {
                 ServerOutput.AppendLine("You need to select a Build and a Server Data.");
                 return;
             }
 
-            // Store the path that we are going to use
+            // Store the path that we are going to use with the download origin and destination
             string BuildFolder = Path.Combine(Builds, BuildList.SelectedItem.ToString());
+            string DataFolder = Path.Combine(Data, DataList.SelectedItem.ToString());
+            Uri DownloadOrigin = new Uri(string.Format(DownloadUrl, BuildList.SelectedItem.ToString()));
+            string DownloadLocation = Path.Combine(Builds, BuildList.SelectedItem.ToString() + ".zip");
 
             // Check if the FiveM build exists locally
             if (!Directory.Exists(BuildFolder))
             {
                 // Looks like there is no build, notify the user
                 ServerOutput.AppendLine("The build was not found locally, attempting a download...");
-                // Store the download origin and destination
-                Uri DownloadOrigin = new Uri(string.Format(DownloadUrl, BuildList.SelectedItem.ToString()));
-                string DownloadLocation = Path.Combine(Builds, BuildList.SelectedItem.ToString() + ".zip");
                 // And download the file
                 ServerOutput.AppendLine("The download for the file has started, check the Progress Bar.");
                 await DownloadClient.DownloadFileTaskAsync(DownloadOrigin, DownloadLocation);
@@ -195,6 +207,20 @@ namespace ServerManager
                 // Finally, restore the progress bar status
                 GeneralProgress.Value = 0;
             }
+
+            // Set the parameters for launching the server process and capture the output
+            ServerProcess.StartInfo.FileName = Path.Combine(BuildFolder, "FXServer.exe");
+            ServerProcess.StartInfo.Arguments = $"+set citizen_dir \"{BuildFolder}\\citizen\" +set sv_licenseKey {Properties.Settings.Default.License} +exec server.cfg";
+            ServerProcess.StartInfo.WorkingDirectory = DataFolder;
+            ServerProcess.StartInfo.UseShellExecute = false;
+            ServerProcess.StartInfo.RedirectStandardError = true;
+            ServerProcess.StartInfo.RedirectStandardOutput = true;
+            ServerProcess.StartInfo.CreateNoWindow = true;
+            // ServerProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+            ServerProcess.OutputDataReceived += (s, a) => ServerOutput.Invoke(new Action(() => ServerOutput.AppendLine(a.Data)));
+            ServerProcess.Start();
+            ServerProcess.BeginOutputReadLine();
+            ServerProcess.BeginErrorReadLine();
         }
 
         private void DownloadClient_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
