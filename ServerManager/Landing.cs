@@ -188,6 +188,8 @@ namespace ServerManager
                 Directory.CreateDirectory(BuildFolder);
                 // And extract the files
                 await Task.Run(() => ZipFile.ExtractToDirectory(DownloadLocation, BuildFolder));
+                // Finally, restore the progress bar status
+                GeneralProgress.Value = 0;
             }
         }
 
