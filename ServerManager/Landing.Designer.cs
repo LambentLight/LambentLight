@@ -159,6 +159,7 @@
             this.OpenSettings.Name = "OpenSettings";
             this.OpenSettings.Size = new System.Drawing.Size(61, 20);
             this.OpenSettings.Text = "Settings";
+            this.OpenSettings.Click += new System.EventHandler(this.OpenSettings_Click);
             // 
             // Landing
             // 
