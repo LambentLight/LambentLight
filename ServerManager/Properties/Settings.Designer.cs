@@ -70,5 +70,17 @@ namespace ServerManager.Properties {
                 this["DownloadScripts"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastBuild {
+            get {
+                return ((string)(this["LastBuild"]));
+            }
+            set {
+                this["LastBuild"] = value;
+            }
+        }
     }
 }

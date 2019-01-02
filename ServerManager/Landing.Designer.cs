@@ -77,6 +77,7 @@
             this.BuildList.Name = "BuildList";
             this.BuildList.Size = new System.Drawing.Size(284, 21);
             this.BuildList.TabIndex = 0;
+            this.BuildList.SelectedIndexChanged += new System.EventHandler(this.BuildList_SelectedIndexChanged);
             // 
             // ServerData
             // 

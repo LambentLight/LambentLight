@@ -33,6 +33,19 @@ namespace ServerManager
                 // And add that version into the ComboBox
                 BuildList.Items.Add(Version);
             }
+
+            // Finally, restore the last build used
+            RestoreLastBuildUsed();
+        }
+
+        private void RestoreLastBuildUsed()
+        {
+            // If the last used build is not null or a white space and the item exists
+            if (!string.IsNullOrWhiteSpace(Properties.Settings.Default.LastBuild) && BuildList.FindStringExact(Properties.Settings.Default.LastBuild) != -1)
+            {
+                // Get the number of the index and set it as selected
+                BuildList.SelectedIndex = BuildList.FindStringExact(Properties.Settings.Default.LastBuild);
+            }
         }
 
         private void OpenSettings_Click(object sender, EventArgs e)
@@ -47,6 +60,15 @@ namespace ServerManager
         {
             // Self explanatory
             RefreshServerBuilds();
+        }
+
+        private void BuildList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Store the last used server build if is not empty or a whitespace
+            if (!string.IsNullOrWhiteSpace(BuildList.SelectedItem.ToString()))
+            {
+                Properties.Settings.Default.LastBuild = BuildList.SelectedItem.ToString();
+            }
         }
     }
 }
