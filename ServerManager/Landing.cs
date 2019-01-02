@@ -151,7 +151,7 @@ namespace ServerManager
             }
         }
 
-        private void StartServer_Click(object sender, EventArgs e)
+        private async void StartServer_Click(object sender, EventArgs e)
         {
             // If there is no build selected, return
             if (BuildList.SelectedIndex == -1)
@@ -166,7 +166,9 @@ namespace ServerManager
             // If not, download it
             if (!Directory.Exists(BuildFolder))
             {
+                // Store the download location
                 Uri DownloadLocation = new Uri(string.Format(DownloadUrl, BuildList.SelectedItem.ToString()));
+                // And download the file in a separate thread
                 DownloadClient.DownloadFileAsync(DownloadLocation, Path.Combine(Builds, BuildList.SelectedItem.ToString() + ".zip"));
             }
         }
