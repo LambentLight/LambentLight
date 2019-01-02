@@ -1,4 +1,4 @@
-﻿using HtmlAgilityPack;
+using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,8 +26,10 @@ namespace ServerManager
             // Create a list of versions from the links without the "/" at the end
             List<string> Versions = Doc.DocumentNode.SelectNodes("//a").Select(X => X.InnerText.TrimEnd('/')).ToList();
 
-            foreach (string Version in Versions)
+            // Iterate over the versions that we got without the "Previous Directory" button or "Revoked" folder
+            foreach (string Version in Versions.Where(X => X != ".." && X != "revoked"))
             {
+                // And add that version into the ComboBox
                 BuildList.Items.Add(Version);
             }
         }
