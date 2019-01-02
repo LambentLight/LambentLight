@@ -155,8 +155,9 @@ namespace ServerManager
         private async void StartServer_Click(object sender, EventArgs e)
         {
             // If there is no build selected, return
-            if (BuildList.SelectedIndex == -1)
+            if (BuildList.SelectedIndex == -1 || DataList.SelectedIndex == -1)
             {
+                ServerOutput.AppendLine("You need to select a Build and a Server Data");
                 return;
             }
 
