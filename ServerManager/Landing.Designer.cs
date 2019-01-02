@@ -100,6 +100,7 @@ namespace ServerManager
             this.RefreshData.TabIndex = 3;
             this.RefreshData.Text = "Refresh List";
             this.RefreshData.UseVisualStyleBackColor = true;
+            this.RefreshData.Click += new System.EventHandler(this.RefreshData_Click);
             // 
             // DataList
             // 
@@ -111,6 +112,7 @@ namespace ServerManager
             this.DataList.Name = "DataList";
             this.DataList.Size = new System.Drawing.Size(287, 21);
             this.DataList.TabIndex = 0;
+            this.DataList.SelectedIndexChanged += new System.EventHandler(this.DataList_SelectedIndexChanged);
             // 
             // Console
             // 
