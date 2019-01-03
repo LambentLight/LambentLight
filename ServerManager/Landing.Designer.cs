@@ -41,6 +41,7 @@ namespace ServerManager
             this.ServerOutput = new System.Windows.Forms.TextBox();
             this.TopBar = new System.Windows.Forms.MenuStrip();
             this.StartServer = new System.Windows.Forms.ToolStripMenuItem();
+            this.CreateServerData = new System.Windows.Forms.ToolStripMenuItem();
             this.OpenSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.DownloadClient = new System.Net.WebClient();
             this.BuildSelector.SuspendLayout();
@@ -168,6 +169,7 @@ namespace ServerManager
             // 
             this.TopBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.StartServer,
+            this.CreateServerData,
             this.OpenSettings});
             this.TopBar.Location = new System.Drawing.Point(0, 0);
             this.TopBar.Name = "TopBar";
@@ -181,6 +183,12 @@ namespace ServerManager
             this.StartServer.Size = new System.Drawing.Size(78, 20);
             this.StartServer.Text = "Start Server";
             this.StartServer.Click += new System.EventHandler(this.StartServer_Click);
+            // 
+            // CreateServerData
+            // 
+            this.CreateServerData.Name = "CreateServerData";
+            this.CreateServerData.Size = new System.Drawing.Size(115, 20);
+            this.CreateServerData.Text = "Create Server Data";
             // 
             // OpenSettings
             // 
@@ -240,6 +248,7 @@ namespace ServerManager
         private System.Windows.Forms.ToolStripMenuItem StartServer;
         private System.Net.WebClient DownloadClient;
         private System.Windows.Forms.ProgressBar GeneralProgress;
+        private System.Windows.Forms.ToolStripMenuItem CreateServerData;
     }
 }
 
