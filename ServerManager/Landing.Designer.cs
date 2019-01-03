@@ -189,6 +189,7 @@ namespace ServerManager
             this.CreateServerData.Name = "CreateServerData";
             this.CreateServerData.Size = new System.Drawing.Size(115, 20);
             this.CreateServerData.Text = "Create Server Data";
+            this.CreateServerData.Click += new System.EventHandler(this.CreateServerData_Click);
             // 
             // OpenSettings
             // 

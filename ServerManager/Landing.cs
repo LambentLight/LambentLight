@@ -1,4 +1,4 @@
-using HtmlAgilityPack;
+﻿using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -234,6 +234,64 @@ namespace ServerManager
                 // Show the percentage on the progress bar
                 GeneralProgress.Value = Percentage;
             }
+        }
+
+        private async void CreateServerData_Click(object sender, EventArgs e)
+        {
+            // Request for the name of the server data folder
+            string DataName = Microsoft.VisualBasic.Interaction.InputBox("Insert the name for your server data folder:", "Server Data creator");
+
+            // Check that is not null or empty, if it does return
+            if (string.IsNullOrWhiteSpace(DataName))
+            {
+                ServerOutput.AppendLine("Looks like the name that you entered is not valid, or you closed the window.");
+                return;
+            }
+
+            // Store the path
+            string NewPath = Path.Combine(Data, DataName);
+
+            // Make sure that the folder does not exists
+            if (Directory.Exists(NewPath))
+            {
+                ServerOutput.AppendLine("The name that you just entered is already being used.");
+                return;
+            }
+
+            // Check if the user wants to download the cfx-server-data repo
+            if (Properties.Settings.Default.DownloadScripts)
+            {
+                // Store the location of the file
+                string DataFile = Path.Combine(Data, "cfx-server-data.zip");
+                // Notify the user about the download
+                ServerOutput.AppendLine("Downloading the cfx-server-data repository...");
+                // And start getting the file
+                await DownloadClient.DownloadFileTaskAsync("https://github.com/citizenfx/cfx-server-data/archive/master.zip", DataFile);
+                // Wait until the file has been downloaded
+                while (DownloadClient.IsBusy)
+                {
+                    await Task.Delay(0);
+                }
+                // Notify the user about the extraction
+                ServerOutput.AppendLine("The file was downloaded, extracting the content...");
+                // And extract the files
+                await Task.Run(() => ZipFile.ExtractToDirectory(DataFile, Data));
+                ServerOutput.AppendLine("The file has been extracted, no problems found.");
+                // Then, rename the folder to the one requested by the user
+                Directory.Move(Path.Combine(Data, "cfx-server-data-master"), NewPath);
+                // Finally, delete the leftover file
+                File.Delete(DataFile);
+            }
+            else
+            {
+                // Create the directory for the server data
+                Directory.CreateDirectory(NewPath);
+                ServerOutput.AppendLine("New Server Data folder has been created.");
+            }
+
+            // Dump the template for the server configuration
+            File.WriteAllBytes(Path.Combine(NewPath, "server.cfg"), Properties.Resources.ServerTemplate);
+            ServerOutput.AppendLine("A Template for the new Server Data folder has been created.");
         }
     }
 }
