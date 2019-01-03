@@ -121,6 +121,24 @@ namespace ServerManager
             }
         }
 
+        private void StartServerNow(string BuildFolder, string DataFolder)
+        {
+            // Set the parameters for launching the server process and capture the output
+            ServerProcess = new Process();
+            ServerProcess.StartInfo.FileName = Path.Combine(BuildFolder, "FXServer.exe");
+            ServerProcess.StartInfo.Arguments = $"+set citizen_dir \"{BuildFolder}\\citizen\" +set sv_licenseKey {Properties.Settings.Default.License} +exec server.cfg";
+            ServerProcess.StartInfo.WorkingDirectory = DataFolder;
+            ServerProcess.StartInfo.UseShellExecute = false;
+            ServerProcess.StartInfo.RedirectStandardError = true;
+            ServerProcess.StartInfo.RedirectStandardInput = true;
+            ServerProcess.StartInfo.RedirectStandardOutput = true;
+            ServerProcess.StartInfo.CreateNoWindow = true;
+            ServerProcess.OutputDataReceived += (S, A) => ServerOutput.Invoke(new Action(() => { if (!string.IsNullOrWhiteSpace(A.Data)) ServerOutput.AppendLine(A.Data); }));
+            ServerProcess.Start();
+            ServerProcess.BeginOutputReadLine();
+            ServerProcess.BeginErrorReadLine();
+        }
+
         private bool StopServerNow()
         {
             // If the server process is running, stop it
@@ -227,20 +245,7 @@ namespace ServerManager
                 GeneralProgress.Value = 0;
             }
 
-            // Set the parameters for launching the server process and capture the output
-            ServerProcess = new Process();
-            ServerProcess.StartInfo.FileName = Path.Combine(BuildFolder, "FXServer.exe");
-            ServerProcess.StartInfo.Arguments = $"+set citizen_dir \"{BuildFolder}\\citizen\" +set sv_licenseKey {Properties.Settings.Default.License} +exec server.cfg";
-            ServerProcess.StartInfo.WorkingDirectory = DataFolder;
-            ServerProcess.StartInfo.UseShellExecute = false;
-            ServerProcess.StartInfo.RedirectStandardError = true;
-            ServerProcess.StartInfo.RedirectStandardInput = true;
-            ServerProcess.StartInfo.RedirectStandardOutput = true;
-            ServerProcess.StartInfo.CreateNoWindow = true;
-            ServerProcess.OutputDataReceived += (S, A) => ServerOutput.Invoke(new Action(() => { if (!string.IsNullOrWhiteSpace(A.Data)) ServerOutput.AppendLine(A.Data); }));
-            ServerProcess.Start();
-            ServerProcess.BeginOutputReadLine();
-            ServerProcess.BeginErrorReadLine();
+            StartServerNow(BuildFolder, DataFolder);
         }
 
         private void DownloadClient_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
