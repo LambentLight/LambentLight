@@ -34,6 +34,10 @@ namespace ServerManager
         /// Information for the server process.
         /// </summary>
         private static Process ServerProcess = new Process();
+        /// <summary>
+        /// The current server status.
+        /// </summary>
+        private static Status ServerStatus = Status.Stopped;
 
         public Landing()
         {
@@ -137,11 +141,14 @@ namespace ServerManager
             ServerProcess.Start();
             ServerProcess.BeginOutputReadLine();
             ServerProcess.BeginErrorReadLine();
+            ServerStatus = Status.Running;
         }
 
         private bool StopServerNow()
         {
-            // If the server process is running, stop it
+            // Set the status as stopped
+            ServerStatus = Status.Stopped;
+            // If the server process is running, kill it
             if (ServerProcess.IsRunning())
             {
                 ServerProcess.Kill();
@@ -346,6 +353,21 @@ namespace ServerManager
                 ServerProcess.StandardInput.WriteLine(ServerInput.Text);
                 ServerProcess.StandardInput.WriteLine(Environment.NewLine);
                 ServerInput.Text = string.Empty;
+            }
+        }
+
+        private void AutoRestart_Tick(object sender, EventArgs e)
+        {
+            // If the current status is running but the process is not there
+            if (ServerStatus == Status.Running && !ServerProcess.IsRunning() && Properties.Settings.Default.AutoRestart)
+            {
+                // Force a stop just in case
+                StopServerNow();
+                // Store the build and data folders
+                string BuildFolder = Path.Combine(Builds, BuildList.SelectedItem.ToString());
+                string DataFolder = Path.Combine(Data, DataList.SelectedItem.ToString());
+                // Start the server... again
+                StartServerNow(BuildFolder, DataFolder);
             }
         }
     }

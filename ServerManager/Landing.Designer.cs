@@ -28,6 +28,7 @@ namespace ServerManager
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Landing));
             this.BuildSelector = new System.Windows.Forms.GroupBox();
             this.RefreshBuilds = new System.Windows.Forms.Button();
@@ -45,6 +46,7 @@ namespace ServerManager
             this.CreateServerData = new System.Windows.Forms.ToolStripMenuItem();
             this.OpenSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.DownloadClient = new System.Net.WebClient();
+            this.AutoRestart = new System.Windows.Forms.Timer(this.components);
             this.BuildSelector.SuspendLayout();
             this.ServerData.SuspendLayout();
             this.Console.SuspendLayout();
@@ -219,6 +221,12 @@ namespace ServerManager
             this.DownloadClient.UseDefaultCredentials = false;
             this.DownloadClient.DownloadProgressChanged += new System.Net.DownloadProgressChangedEventHandler(this.DownloadClient_DownloadProgressChanged);
             // 
+            // AutoRestart
+            // 
+            this.AutoRestart.Enabled = true;
+            this.AutoRestart.Interval = 500;
+            this.AutoRestart.Tick += new System.EventHandler(this.AutoRestart_Tick);
+            // 
             // Landing
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -262,6 +270,7 @@ namespace ServerManager
         private System.Windows.Forms.ProgressBar GeneralProgress;
         private System.Windows.Forms.ToolStripMenuItem CreateServerData;
         private System.Windows.Forms.ToolStripMenuItem StopServer;
+        private System.Windows.Forms.Timer AutoRestart;
     }
 }
 
