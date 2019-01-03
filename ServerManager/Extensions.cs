@@ -16,6 +16,10 @@ namespace ServerManager
             Box.AppendText(Environment.NewLine);
         }
 
+        /// <summary>
+        /// Cheks if the current process is running.
+        /// </summary>
+        /// <returns>True if the process is running, false otherwise.</returns>
         public static bool IsRunning(this Process Check)
         {
             try
