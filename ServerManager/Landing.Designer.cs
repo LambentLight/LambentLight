@@ -152,6 +152,7 @@ namespace ServerManager
             this.ServerInput.Name = "ServerInput";
             this.ServerInput.Size = new System.Drawing.Size(764, 20);
             this.ServerInput.TabIndex = 1;
+            this.ServerInput.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ServerInput_KeyDown);
             // 
             // ServerOutput
             // 

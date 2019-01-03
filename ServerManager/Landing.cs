@@ -216,6 +216,7 @@ namespace ServerManager
             ServerProcess.StartInfo.WorkingDirectory = DataFolder;
             ServerProcess.StartInfo.UseShellExecute = false;
             ServerProcess.StartInfo.RedirectStandardError = true;
+            ServerProcess.StartInfo.RedirectStandardInput = true;
             ServerProcess.StartInfo.RedirectStandardOutput = true;
             ServerProcess.StartInfo.CreateNoWindow = true;
             ServerProcess.OutputDataReceived += (S, A) => ServerOutput.Invoke(new Action(() => { if (!string.IsNullOrWhiteSpace(A.Data)) ServerOutput.AppendLine(A.Data); }));
@@ -315,6 +316,17 @@ namespace ServerManager
             {
                 ServerProcess.Kill();
                 ServerOutput.AppendLine("FXServer has been stopped by the user.");
+            }
+        }
+
+        private void ServerInput_KeyDown(object sender, KeyEventArgs e)
+        {
+            // Check if the key pressed was Enter or Return and the server is running
+            if ((e.KeyCode == Keys.Return || e.KeyCode == Keys.Enter) && ServerProcess.IsRunning())
+            {
+                ServerProcess.StandardInput.WriteLine(ServerInput.Text);
+                ServerProcess.StandardInput.WriteLine(Environment.NewLine);
+                ServerInput.Text = string.Empty;
             }
         }
     }
