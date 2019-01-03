@@ -1,4 +1,4 @@
-﻿using HtmlAgilityPack;
+using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -224,8 +224,14 @@ namespace ServerManager
 
         private void DownloadClient_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
-            // Get the download percentage and show it on the progress bar
-            GeneralProgress.Value = (int)((float)e.BytesReceived / e.TotalBytesToReceive * 100f);
+            // Calculate the percentage of the download
+            int Percentage = (int)((float)e.BytesReceived / e.TotalBytesToReceive * 100f);
+            // Make a sanity check to make sure about the download progress
+            if (Percentage >= GeneralProgress.Minimum && Percentage <= GeneralProgress.Maximum)
+            {
+                // Show the percentage on the progress bar
+                GeneralProgress.Value = Percentage;
+            }
         }
     }
 }
