@@ -121,6 +121,21 @@ namespace ServerManager
             }
         }
 
+        private bool StopServerNow()
+        {
+            // If the server process is running, stop it
+            if (ServerProcess.IsRunning())
+            {
+                ServerProcess.Kill();
+                return true;
+            }
+            // At this point, is not running
+            else
+            {
+                return false;
+            }
+        }
+
         private void OpenSettings_Click(object sender, EventArgs e)
         {
             // Create an instance of the Settings window
@@ -303,18 +318,14 @@ namespace ServerManager
         private void Landing_FormClosing(object sender, FormClosingEventArgs e)
         {
             // If the server process is running, stop it
-            if (ServerProcess.IsRunning())
-            {
-                ServerProcess.Kill();
-            }
+            StopServerNow();
         }
 
         private void StopServer_Click(object sender, EventArgs e)
         {
             // If the server process is running, stop it
-            if (ServerProcess.IsRunning())
+            if (StopServerNow())
             {
-                ServerProcess.Kill();
                 ServerOutput.AppendLine("FXServer has been stopped by the user.");
             }
         }
