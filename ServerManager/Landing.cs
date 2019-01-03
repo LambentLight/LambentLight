@@ -1,4 +1,4 @@
-using HtmlAgilityPack;
+﻿using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -294,6 +294,9 @@ namespace ServerManager
             // Dump the template for the server configuration
             File.WriteAllBytes(Path.Combine(NewPath, "server.cfg"), Properties.Resources.ServerTemplate);
             ServerOutput.AppendLine("A Template for the new Server Data folder has been created.");
+
+            // Finally, refresh the list of server data folders
+            RefreshServerData();
         }
     }
 }
