@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace ServerManager
@@ -13,6 +14,23 @@ namespace ServerManager
         {
             Box.AppendText(Line);
             Box.AppendText(Environment.NewLine);
+        }
+
+        public static bool IsRunning(this Process Check)
+        {
+            try
+            {
+                Process.GetProcessById(Check.Id);
+            }
+            catch (ArgumentException)
+            {
+                return false;
+            }
+            catch (InvalidOperationException)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

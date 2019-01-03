@@ -302,15 +302,20 @@ namespace ServerManager
         private void Landing_FormClosing(object sender, FormClosingEventArgs e)
         {
             // If the server process is running, stop it
-            ServerProcess.Kill();
+            if (ServerProcess.IsRunning())
+            {
+                ServerProcess.Kill();
+            }
         }
 
         private void StopServer_Click(object sender, EventArgs e)
         {
             // If the server process is running, stop it
-            ServerProcess.Kill();
-            // Plus, notify the user about what we have done
-            ServerOutput.AppendLine("FXServer has been stopped by the user.");
+            if (ServerProcess.IsRunning())
+            {
+                ServerProcess.Kill();
+                ServerOutput.AppendLine("FXServer has been stopped by the user.");
+            }
         }
     }
 }
