@@ -1,4 +1,4 @@
-using HtmlAgilityPack;
+﻿using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -303,6 +303,14 @@ namespace ServerManager
         {
             // If the server process is running, stop it
             ServerProcess.Kill();
+        }
+
+        private void StopServer_Click(object sender, EventArgs e)
+        {
+            // If the server process is running, stop it
+            ServerProcess.Kill();
+            // Plus, notify the user about what we have done
+            ServerOutput.AppendLine("FXServer has been stopped by the user.");
         }
     }
 }

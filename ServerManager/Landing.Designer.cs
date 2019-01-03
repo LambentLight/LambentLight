@@ -41,6 +41,7 @@ namespace ServerManager
             this.ServerOutput = new System.Windows.Forms.TextBox();
             this.TopBar = new System.Windows.Forms.MenuStrip();
             this.StartServer = new System.Windows.Forms.ToolStripMenuItem();
+            this.StopServer = new System.Windows.Forms.ToolStripMenuItem();
             this.CreateServerData = new System.Windows.Forms.ToolStripMenuItem();
             this.OpenSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.DownloadClient = new System.Net.WebClient();
@@ -169,6 +170,7 @@ namespace ServerManager
             // 
             this.TopBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.StartServer,
+            this.StopServer,
             this.CreateServerData,
             this.OpenSettings});
             this.TopBar.Location = new System.Drawing.Point(0, 0);
@@ -183,6 +185,13 @@ namespace ServerManager
             this.StartServer.Size = new System.Drawing.Size(78, 20);
             this.StartServer.Text = "Start Server";
             this.StartServer.Click += new System.EventHandler(this.StartServer_Click);
+            // 
+            // StopServer
+            // 
+            this.StopServer.Name = "StopServer";
+            this.StopServer.Size = new System.Drawing.Size(78, 20);
+            this.StopServer.Text = "Stop Server";
+            this.StopServer.Click += new System.EventHandler(this.StopServer_Click);
             // 
             // CreateServerData
             // 
@@ -200,6 +209,7 @@ namespace ServerManager
             // 
             // DownloadClient
             // 
+            this.DownloadClient.BaseAddress = "";
             this.DownloadClient.CachePolicy = null;
             this.DownloadClient.Credentials = null;
             this.DownloadClient.Encoding = ((System.Text.Encoding)(resources.GetObject("DownloadClient.Encoding")));
@@ -250,6 +260,7 @@ namespace ServerManager
         private System.Net.WebClient DownloadClient;
         private System.Windows.Forms.ProgressBar GeneralProgress;
         private System.Windows.Forms.ToolStripMenuItem CreateServerData;
+        private System.Windows.Forms.ToolStripMenuItem StopServer;
     }
 }
 
