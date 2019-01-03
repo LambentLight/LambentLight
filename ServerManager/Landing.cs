@@ -127,6 +127,8 @@ namespace ServerManager
             if (ServerProcess.IsRunning())
             {
                 ServerProcess.Kill();
+                ServerProcess.CancelOutputRead();
+                ServerProcess.CancelErrorRead();
                 return true;
             }
             // At this point, is not running
@@ -226,6 +228,7 @@ namespace ServerManager
             }
 
             // Set the parameters for launching the server process and capture the output
+            ServerProcess = new Process();
             ServerProcess.StartInfo.FileName = Path.Combine(BuildFolder, "FXServer.exe");
             ServerProcess.StartInfo.Arguments = $"+set citizen_dir \"{BuildFolder}\\citizen\" +set sv_licenseKey {Properties.Settings.Default.License} +exec server.cfg";
             ServerProcess.StartInfo.WorkingDirectory = DataFolder;
