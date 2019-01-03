@@ -54,6 +54,8 @@ namespace ServerManager
             // And refresh the list of server builds and server data
             RefreshServerBuilds();
             RefreshServerData();
+            // Set the security protocol as TLS 1.2 (for some reason, SSL3 does not works)
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
         }
 
         private void RefreshServerBuilds()
