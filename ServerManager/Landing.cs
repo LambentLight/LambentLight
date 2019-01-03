@@ -1,4 +1,4 @@
-﻿using HtmlAgilityPack;
+using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -279,8 +279,10 @@ namespace ServerManager
                 ServerOutput.AppendLine("The file has been extracted, no problems found.");
                 // Then, rename the folder to the one requested by the user
                 Directory.Move(Path.Combine(Data, "cfx-server-data-master"), NewPath);
-                // Finally, delete the leftover file
+                // Delete the temporary file
                 File.Delete(DataFile);
+                // Finally, restore the progress bar status
+                GeneralProgress.Value = 0;
             }
             else
             {
