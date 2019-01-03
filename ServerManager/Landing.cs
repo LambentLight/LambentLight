@@ -298,5 +298,11 @@ namespace ServerManager
             // Finally, refresh the list of server data folders
             RefreshServerData();
         }
+
+        private void Landing_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // If the server process is running, stop it
+            ServerProcess.Kill();
+        }
     }
 }

@@ -200,7 +200,6 @@ namespace ServerManager
             // 
             // DownloadClient
             // 
-            this.DownloadClient.BaseAddress = "";
             this.DownloadClient.CachePolicy = null;
             this.DownloadClient.Credentials = null;
             this.DownloadClient.Encoding = ((System.Text.Encoding)(resources.GetObject("DownloadClient.Encoding")));
@@ -222,6 +221,7 @@ namespace ServerManager
             this.Name = "Landing";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ServerManager";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Landing_FormClosing);
             this.BuildSelector.ResumeLayout(false);
             this.ServerData.ResumeLayout(false);
             this.Console.ResumeLayout(false);
