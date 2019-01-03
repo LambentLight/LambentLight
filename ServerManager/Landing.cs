@@ -1,4 +1,4 @@
-﻿using HtmlAgilityPack;
+using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -218,7 +218,7 @@ namespace ServerManager
             ServerProcess.StartInfo.RedirectStandardError = true;
             ServerProcess.StartInfo.RedirectStandardOutput = true;
             ServerProcess.StartInfo.CreateNoWindow = true;
-            ServerProcess.OutputDataReceived += (s, a) => ServerOutput.Invoke(new Action(() => ServerOutput.AppendLine(a.Data)));
+            ServerProcess.OutputDataReceived += (S, A) => ServerOutput.Invoke(new Action(() => { if (!string.IsNullOrWhiteSpace(A.Data)) ServerOutput.AppendLine(A.Data); }));
             ServerProcess.Start();
             ServerProcess.BeginOutputReadLine();
             ServerProcess.BeginErrorReadLine();
