@@ -44,11 +44,11 @@ namespace ServerManager
             this.StartServer = new System.Windows.Forms.ToolStripMenuItem();
             this.StopServer = new System.Windows.Forms.ToolStripMenuItem();
             this.CreateServerData = new System.Windows.Forms.ToolStripMenuItem();
+            this.EditServerConfig = new System.Windows.Forms.ToolStripMenuItem();
             this.FiveMLicense = new System.Windows.Forms.ToolStripMenuItem();
             this.OpenSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.DownloadClient = new System.Net.WebClient();
             this.AutoRestart = new System.Windows.Forms.Timer(this.components);
-            this.EditServerConfig = new System.Windows.Forms.ToolStripMenuItem();
             this.BuildSelector.SuspendLayout();
             this.ServerData.SuspendLayout();
             this.Console.SuspendLayout();
@@ -195,6 +195,7 @@ namespace ServerManager
             // 
             // StopServer
             // 
+            this.StopServer.Enabled = false;
             this.StopServer.Name = "StopServer";
             this.StopServer.Size = new System.Drawing.Size(78, 20);
             this.StopServer.Text = "Stop Server";
@@ -206,6 +207,13 @@ namespace ServerManager
             this.CreateServerData.Size = new System.Drawing.Size(115, 20);
             this.CreateServerData.Text = "Create Server Data";
             this.CreateServerData.Click += new System.EventHandler(this.CreateServerData_Click);
+            // 
+            // EditServerConfig
+            // 
+            this.EditServerConfig.Name = "EditServerConfig";
+            this.EditServerConfig.Size = new System.Drawing.Size(151, 20);
+            this.EditServerConfig.Text = "Edit Server Configuration";
+            this.EditServerConfig.Click += new System.EventHandler(this.EditServerConfig_Click);
             // 
             // FiveMLicense
             // 
@@ -237,13 +245,6 @@ namespace ServerManager
             this.AutoRestart.Enabled = true;
             this.AutoRestart.Interval = 500;
             this.AutoRestart.Tick += new System.EventHandler(this.AutoRestart_Tick);
-            // 
-            // EditServerConfig
-            // 
-            this.EditServerConfig.Name = "EditServerConfig";
-            this.EditServerConfig.Size = new System.Drawing.Size(151, 20);
-            this.EditServerConfig.Text = "Edit Server Configuration";
-            this.EditServerConfig.Click += new System.EventHandler(this.EditServerConfig_Click);
             // 
             // Landing
             // 

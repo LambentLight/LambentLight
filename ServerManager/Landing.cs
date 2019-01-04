@@ -72,6 +72,11 @@ namespace ServerManager
 
         private void LimitAvailableControls()
         {
+            StartServer.Enabled = false;
+            StopServer.Enabled = true;
+            EditServerConfig.Enabled = false;
+            OpenSettings.Enabled = false;
+
             BuildList.Enabled = false;
             DataList.Enabled = false;
             RefreshBuilds.Enabled = false;
@@ -80,6 +85,11 @@ namespace ServerManager
 
         private void RemoveControlLimit()
         {
+            StartServer.Enabled = true;
+            StopServer.Enabled = false;
+            EditServerConfig.Enabled = true;
+            OpenSettings.Enabled = true;
+
             BuildList.Enabled = true;
             DataList.Enabled = true;
             RefreshBuilds.Enabled = true;
