@@ -7,7 +7,7 @@ version: "0.1.0.{build}"
 # The AppVeyor image to use, usually the most up-to-date
 image: Visual Studio 2017
 
-# Assembly patching: Change the Product Version and File Version 
+# Assembly patching: Change the Product Version and File Version
 assembly_info:
   patch: true
   file: Properties\AssemblyInfo.cs
