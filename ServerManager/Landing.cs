@@ -412,6 +412,7 @@ namespace ServerManager
             if (ServerStatus == Status.Running && !ServerProcess.IsRunning() && Properties.Settings.Default.AutoRestart)
             {
                 // Show the last exit code to the user
+                // NOTE: This is always going to show 1
                 ServerOutput.AppendLine("The server has crashed, exit code: " + ServerProcess.ExitCode);
                 // Force a stop just in case
                 StopServerNow();
