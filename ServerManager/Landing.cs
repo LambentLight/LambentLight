@@ -70,8 +70,26 @@ namespace ServerManager
             }
         }
 
+        private void LockSelectors()
+        {
+            BuildList.Enabled = false;
+            DataList.Enabled = false;
+            RefreshBuilds.Enabled = false;
+            RefreshData.Enabled = false;
+        }
+
+        private void UnlockSelectors()
+        {
+            BuildList.Enabled = true;
+            DataList.Enabled = true;
+            RefreshBuilds.Enabled = true;
+            RefreshData.Enabled = true;
+        }
+
         private void RefreshServerBuilds()
         {
+            // Lock both of the selectors
+            LockSelectors();
             // Clear the list of items
             BuildList.Items.Clear();
             // Create a new web parser
@@ -88,12 +106,15 @@ namespace ServerManager
                 BuildList.Items.Add(Version);
             }
 
-            // Finally, restore the last build used
+            // Finally, unlock the selectors and restore the last build used
+            UnlockSelectors();
             RestoreLastBuildUsed();
         }
 
         private void RefreshServerData()
         {
+            // Lock both of the selectors
+            LockSelectors();
             // Clear the list of items
             DataList.Items.Clear();
             // Iterate over the subdirectories in the "Data" folder
@@ -109,7 +130,8 @@ namespace ServerManager
                 }
             }
 
-            // Finally, restore the last server data used
+            // Finally, unlock the selectors and the last server data used
+            UnlockSelectors();
             RestoreLastDataUsed();
         }
 
@@ -135,6 +157,8 @@ namespace ServerManager
 
         private void StartServerNow(string BuildFolder, string DataFolder)
         {
+            // Lock both of the selectors
+            LockSelectors();
             // Set the parameters for launching the server process and capture the output
             ServerProcess = new Process();
             ServerProcess.StartInfo.FileName = Path.Combine(BuildFolder, "FXServer.exe");
@@ -156,6 +180,8 @@ namespace ServerManager
         {
             // Set the status as stopped
             ServerStatus = Status.Stopped;
+            // Unlock the selectors
+            UnlockSelectors();
             // If the server process is running, kill it
             if (ServerProcess.IsRunning())
             {
@@ -305,6 +331,9 @@ namespace ServerManager
                 return;
             }
 
+            // Lock both of the selectors to avoid unexpected behaviours
+            LockSelectors();
+
             // Check if the user wants to download the cfx-server-data repo
             if (Properties.Settings.Default.DownloadScripts)
             {
@@ -342,8 +371,9 @@ namespace ServerManager
             File.WriteAllBytes(Path.Combine(NewPath, "server.cfg"), Properties.Resources.ServerTemplate);
             ServerOutput.AppendLine("A Template for the new Server Data folder has been created.");
 
-            // Finally, refresh the list of server data folders
+            // Finally, refresh the list of server data folders and unlock the selectors
             RefreshServerData();
+            UnlockSelectors();
         }
 
         private void Landing_FormClosing(object sender, FormClosingEventArgs e)
