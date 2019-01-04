@@ -411,6 +411,8 @@ namespace ServerManager
             // If the current status is running but the process is not there
             if (ServerStatus == Status.Running && !ServerProcess.IsRunning() && Properties.Settings.Default.AutoRestart)
             {
+                // Show the last exit code to the user
+                ServerOutput.AppendLine("The server has crashed, exit code: " + ServerProcess.ExitCode);
                 // Force a stop just in case
                 StopServerNow();
                 // Store the build and data folders
