@@ -70,36 +70,23 @@ namespace ServerManager
             }
         }
 
-        private void LimitAvailableControls()
+        private void LimitAvailableControls(bool enable)
         {
-            StartServer.Enabled = false;
-            StopServer.Enabled = true;
-            EditServerConfig.Enabled = false;
-            OpenSettings.Enabled = false;
+            StartServer.Enabled = !enable;
+            StopServer.Enabled = enable;
+            EditServerConfig.Enabled = !enable;
+            OpenSettings.Enabled = !enable;
 
-            BuildList.Enabled = false;
-            DataList.Enabled = false;
-            RefreshBuilds.Enabled = false;
-            RefreshData.Enabled = false;
-        }
-
-        private void RemoveControlLimit()
-        {
-            StartServer.Enabled = true;
-            StopServer.Enabled = false;
-            EditServerConfig.Enabled = true;
-            OpenSettings.Enabled = true;
-
-            BuildList.Enabled = true;
-            DataList.Enabled = true;
-            RefreshBuilds.Enabled = true;
-            RefreshData.Enabled = true;
+            BuildList.Enabled = !enable;
+            DataList.Enabled = !enable;
+            RefreshBuilds.Enabled = !enable;
+            RefreshData.Enabled = !enable;
         }
 
         private void RefreshServerBuilds()
         {
             // Lock both of the selectors
-            LimitAvailableControls();
+            LimitAvailableControls(true);
             // Clear the list of items
             BuildList.Items.Clear();
             // Create a new web parser
@@ -108,23 +95,25 @@ namespace ServerManager
             HtmlAgilityPack.HtmlDocument Doc = Web.Load("https://runtime.fivem.net/artifacts/fivem/build_server_windows/master/");
             // Create a list of versions from the links without the "/" at the end
             List<string> Versions = Doc.DocumentNode.SelectNodes("//a").Select(X => X.InnerText.TrimEnd('/')).ToList();
-
+            // Reverse the List so the latest versions are at the top of the list
+            Versions.Reverse();
+            
             // Iterate over the versions that we got without the "Previous Directory" button or "Revoked" folder
             foreach (string Version in Versions.Where(X => X != ".." && X != "revoked"))
             {
                 // And add that version into the ComboBox
                 BuildList.Items.Add(Version);
             }
-
+            
             // Finally, unlock the selectors and restore the last build used
-            RemoveControlLimit();
+            LimitAvailableControls(false);
             RestoreLastBuildUsed();
         }
 
         private void RefreshServerData()
         {
             // Lock both of the selectors
-            LimitAvailableControls();
+            LimitAvailableControls(true);
             // Clear the list of items
             DataList.Items.Clear();
             // Iterate over the subdirectories in the "Data" folder
@@ -141,7 +130,7 @@ namespace ServerManager
             }
 
             // Finally, unlock the selectors and the last server data used
-            RemoveControlLimit();
+            LimitAvailableControls(false);
             RestoreLastDataUsed();
         }
 
@@ -168,7 +157,7 @@ namespace ServerManager
         private void StartServerNow(string BuildFolder, string DataFolder)
         {
             // Lock both of the selectors
-            LimitAvailableControls();
+            LimitAvailableControls(true);
             // Set the parameters for launching the server process and capture the output
             ServerProcess = new Process();
             ServerProcess.StartInfo.FileName = Path.Combine(BuildFolder, "FXServer.exe");
@@ -191,7 +180,7 @@ namespace ServerManager
             // Set the status as stopped
             ServerStatus = Status.Stopped;
             // Unlock the selectors
-            RemoveControlLimit();
+            LimitAvailableControls(false);
             // If the server process is running, kill it
             if (ServerProcess.IsRunning())
             {
@@ -342,7 +331,7 @@ namespace ServerManager
             }
 
             // Lock both of the selectors to avoid unexpected behaviours
-            LimitAvailableControls();
+            LimitAvailableControls(true);
 
             // Check if the user wants to download the cfx-server-data repo
             if (Properties.Settings.Default.DownloadScripts)
@@ -386,7 +375,7 @@ namespace ServerManager
             // And if the server is stopped, enable the selectors
             if (ServerStatus == Status.Stopped)
             {
-                RemoveControlLimit();
+                LimitAvailableControls(false);
             }
         }
 
@@ -411,7 +400,6 @@ namespace ServerManager
             if ((e.KeyCode == Keys.Return || e.KeyCode == Keys.Enter) && ServerProcess.IsRunning())
             {
                 ServerProcess.StandardInput.WriteLine(ServerInput.Text);
-                ServerProcess.StandardInput.WriteLine(Environment.NewLine);
                 ServerInput.Text = string.Empty;
             }
         }
