@@ -23,6 +23,8 @@ namespace ServerManager
             Properties.Settings.Default.AutoRestart = AutoRestart.Checked;
             Properties.Settings.Default.ClearCache = ClearCache.Checked;
             Properties.Settings.Default.DownloadScripts = DownloadScripts.Checked;
+            // Save the configuration
+            Properties.Settings.Default.Save();
             // And close the settings window
             Close();
         }
