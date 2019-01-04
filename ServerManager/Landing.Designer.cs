@@ -246,6 +246,7 @@ namespace ServerManager
             this.Controls.Add(this.BuildSelector);
             this.Controls.Add(this.TopBar);
             this.MainMenuStrip = this.TopBar;
+            this.MinimumSize = new System.Drawing.Size(816, 489);
             this.Name = "Landing";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ServerManager";
