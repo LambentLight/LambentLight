@@ -44,6 +44,7 @@ namespace ServerManager
             this.StartServer = new System.Windows.Forms.ToolStripMenuItem();
             this.StopServer = new System.Windows.Forms.ToolStripMenuItem();
             this.CreateServerData = new System.Windows.Forms.ToolStripMenuItem();
+            this.FiveMLicense = new System.Windows.Forms.ToolStripMenuItem();
             this.OpenSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.DownloadClient = new System.Net.WebClient();
             this.AutoRestart = new System.Windows.Forms.Timer(this.components);
@@ -175,6 +176,7 @@ namespace ServerManager
             this.StartServer,
             this.StopServer,
             this.CreateServerData,
+            this.FiveMLicense,
             this.OpenSettings});
             this.TopBar.Location = new System.Drawing.Point(0, 0);
             this.TopBar.Name = "TopBar";
@@ -202,6 +204,13 @@ namespace ServerManager
             this.CreateServerData.Size = new System.Drawing.Size(115, 20);
             this.CreateServerData.Text = "Create Server Data";
             this.CreateServerData.Click += new System.EventHandler(this.CreateServerData_Click);
+            // 
+            // FiveMLicense
+            // 
+            this.FiveMLicense.Name = "FiveMLicense";
+            this.FiveMLicense.Size = new System.Drawing.Size(143, 20);
+            this.FiveMLicense.Text = "Generate FiveM License";
+            this.FiveMLicense.Click += new System.EventHandler(this.FiveMLicense_Click);
             // 
             // OpenSettings
             // 
@@ -271,6 +280,7 @@ namespace ServerManager
         private System.Windows.Forms.ToolStripMenuItem CreateServerData;
         private System.Windows.Forms.ToolStripMenuItem StopServer;
         private System.Windows.Forms.Timer AutoRestart;
+        private System.Windows.Forms.ToolStripMenuItem FiveMLicense;
     }
 }
 

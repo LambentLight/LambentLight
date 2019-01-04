@@ -416,5 +416,11 @@ namespace ServerManager
                 StartServerNow(BuildFolder, DataFolder);
             }
         }
+
+        private void FiveMLicense_Click(object sender, EventArgs e)
+        {
+            // Open the License page for FiveM servers on the default browser
+            Process.Start("https://keymaster.fivem.net");
+        }
     }
 }
