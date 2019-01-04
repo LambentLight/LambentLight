@@ -429,5 +429,21 @@ namespace ServerManager
             // Open the License page for FiveM servers on the default browser
             Process.Start("https://keymaster.fivem.net");
         }
+
+        private void EditServerConfig_Click(object sender, EventArgs e)
+        {
+            // If there is no selected server data, return
+            if (DataList.SelectedIndex == -1)
+            {
+                return;
+            }
+
+            // Store the path of our configuration file
+            string FilePath = Path.Combine(Data, DataList.SelectedItem.ToString(), "server.cfg");
+
+            // Create a new editor window and show it as a dialog
+            Editor FileEditor = new Editor(FilePath);
+            FileEditor.ShowDialog();
+        }
     }
 }

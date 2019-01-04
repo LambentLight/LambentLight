@@ -48,6 +48,7 @@ namespace ServerManager
             this.OpenSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.DownloadClient = new System.Net.WebClient();
             this.AutoRestart = new System.Windows.Forms.Timer(this.components);
+            this.EditServerConfig = new System.Windows.Forms.ToolStripMenuItem();
             this.BuildSelector.SuspendLayout();
             this.ServerData.SuspendLayout();
             this.Console.SuspendLayout();
@@ -176,6 +177,7 @@ namespace ServerManager
             this.StartServer,
             this.StopServer,
             this.CreateServerData,
+            this.EditServerConfig,
             this.FiveMLicense,
             this.OpenSettings});
             this.TopBar.Location = new System.Drawing.Point(0, 0);
@@ -236,6 +238,13 @@ namespace ServerManager
             this.AutoRestart.Interval = 500;
             this.AutoRestart.Tick += new System.EventHandler(this.AutoRestart_Tick);
             // 
+            // EditServerConfig
+            // 
+            this.EditServerConfig.Name = "EditServerConfig";
+            this.EditServerConfig.Size = new System.Drawing.Size(151, 20);
+            this.EditServerConfig.Text = "Edit Server Configuration";
+            this.EditServerConfig.Click += new System.EventHandler(this.EditServerConfig_Click);
+            // 
             // Landing
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -282,6 +291,7 @@ namespace ServerManager
         private System.Windows.Forms.ToolStripMenuItem StopServer;
         private System.Windows.Forms.Timer AutoRestart;
         private System.Windows.Forms.ToolStripMenuItem FiveMLicense;
+        private System.Windows.Forms.ToolStripMenuItem EditServerConfig;
     }
 }
 
