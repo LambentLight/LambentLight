@@ -252,6 +252,14 @@ namespace ServerManager
                 GeneralProgress.Value = 0;
             }
 
+            // If the user wants to delete the cache folder and is there
+            if (Directory.Exists(Path.Combine(DataFolder, "cache")) && Properties.Settings.Default.ClearCache)
+            {
+                // Remove it and notify the user
+                Directory.Delete(Path.Combine(DataFolder, "cache"), true);
+                ServerOutput.AppendLine("The 'cache' folder was present and it was removed.");
+            }
+
             StartServerNow(BuildFolder, DataFolder);
         }
 
