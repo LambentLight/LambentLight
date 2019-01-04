@@ -371,9 +371,13 @@ namespace ServerManager
             File.WriteAllBytes(Path.Combine(NewPath, "server.cfg"), Properties.Resources.ServerTemplate);
             ServerOutput.AppendLine("A Template for the new Server Data folder has been created.");
 
-            // Finally, refresh the list of server data folders and unlock the selectors
+            // Finally, refresh the list of server data folders
             RefreshServerData();
-            UnlockSelectors();
+            // And if the server is stopped, enable the selectors
+            if (ServerStatus == Status.Stopped)
+            {
+                UnlockSelectors();
+            }
         }
 
         private void Landing_FormClosing(object sender, FormClosingEventArgs e)
