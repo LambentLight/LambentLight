@@ -70,7 +70,7 @@ namespace ServerManager
             }
         }
 
-        private void LockSelectors()
+        private void LimitAvailableControls()
         {
             BuildList.Enabled = false;
             DataList.Enabled = false;
@@ -78,7 +78,7 @@ namespace ServerManager
             RefreshData.Enabled = false;
         }
 
-        private void UnlockSelectors()
+        private void RemoveControlLimit()
         {
             BuildList.Enabled = true;
             DataList.Enabled = true;
@@ -89,7 +89,7 @@ namespace ServerManager
         private void RefreshServerBuilds()
         {
             // Lock both of the selectors
-            LockSelectors();
+            LimitAvailableControls();
             // Clear the list of items
             BuildList.Items.Clear();
             // Create a new web parser
@@ -107,14 +107,14 @@ namespace ServerManager
             }
 
             // Finally, unlock the selectors and restore the last build used
-            UnlockSelectors();
+            RemoveControlLimit();
             RestoreLastBuildUsed();
         }
 
         private void RefreshServerData()
         {
             // Lock both of the selectors
-            LockSelectors();
+            LimitAvailableControls();
             // Clear the list of items
             DataList.Items.Clear();
             // Iterate over the subdirectories in the "Data" folder
@@ -131,7 +131,7 @@ namespace ServerManager
             }
 
             // Finally, unlock the selectors and the last server data used
-            UnlockSelectors();
+            RemoveControlLimit();
             RestoreLastDataUsed();
         }
 
@@ -158,7 +158,7 @@ namespace ServerManager
         private void StartServerNow(string BuildFolder, string DataFolder)
         {
             // Lock both of the selectors
-            LockSelectors();
+            LimitAvailableControls();
             // Set the parameters for launching the server process and capture the output
             ServerProcess = new Process();
             ServerProcess.StartInfo.FileName = Path.Combine(BuildFolder, "FXServer.exe");
@@ -181,7 +181,7 @@ namespace ServerManager
             // Set the status as stopped
             ServerStatus = Status.Stopped;
             // Unlock the selectors
-            UnlockSelectors();
+            RemoveControlLimit();
             // If the server process is running, kill it
             if (ServerProcess.IsRunning())
             {
@@ -332,7 +332,7 @@ namespace ServerManager
             }
 
             // Lock both of the selectors to avoid unexpected behaviours
-            LockSelectors();
+            LimitAvailableControls();
 
             // Check if the user wants to download the cfx-server-data repo
             if (Properties.Settings.Default.DownloadScripts)
@@ -376,7 +376,7 @@ namespace ServerManager
             // And if the server is stopped, enable the selectors
             if (ServerStatus == Status.Stopped)
             {
-                UnlockSelectors();
+                RemoveControlLimit();
             }
         }
 
