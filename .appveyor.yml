@@ -3,7 +3,7 @@
 # Released under MIT
 
 # This should be changed after every major release
-version: "0.2.1.{build}"
+version: "0.2.2.{build}"
 # The AppVeyor image to use, usually the most up-to-date
 image: Visual Studio 2017
 
