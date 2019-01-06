@@ -70,17 +70,17 @@ namespace ServerManager
             }
         }
 
-        private void LimitAvailableControls(bool enable)
+        private void LimitAvailableControls(bool Enable)
         {
-            StartServer.Enabled = !enable;
-            StopServer.Enabled = enable;
-            EditServerConfig.Enabled = !enable;
-            OpenSettings.Enabled = !enable;
+            StartServer.Enabled = !Enable;
+            StopServer.Enabled = Enable;
+            EditServerConfig.Enabled = !Enable;
+            OpenSettings.Enabled = !Enable;
 
-            BuildList.Enabled = !enable;
-            DataList.Enabled = !enable;
-            RefreshBuilds.Enabled = !enable;
-            RefreshData.Enabled = !enable;
+            BuildList.Enabled = !Enable;
+            DataList.Enabled = !Enable;
+            RefreshBuilds.Enabled = !Enable;
+            RefreshData.Enabled = !Enable;
         }
 
         private void RefreshServerBuilds()
