@@ -65,5 +65,14 @@
         "license": "https://raw.githubusercontent.com/justalemon/ServerManager/master/LICENSE",
         "type": 1,
         "compression": 0
+    },
+    {
+        "name": "mraes Heli Script",
+        "version": "1.0",
+        "path": "heli",
+        "folder": "heli",
+        "download": "https://forum.fivem.net/uploads/default/original/2X/c/c32a4e8b175dae17b1b475b702d42d1bfd1869f1.zip",
+        "type": 1,
+        "compression": 0
     }
 ]
