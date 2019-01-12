@@ -15,6 +15,7 @@ namespace ServerManager
             AutoRestart.Checked = Properties.Settings.Default.AutoRestart;
             ClearCache.Checked = Properties.Settings.Default.ClearCache;
             DownloadScripts.Checked = Properties.Settings.Default.DownloadScripts;
+            ShowConfigOpt.Checked = Properties.Settings.Default.ConfigLine;
         }
 
         private void Save_Click(object sender, EventArgs e)
@@ -25,6 +26,7 @@ namespace ServerManager
             Properties.Settings.Default.AutoRestart = AutoRestart.Checked;
             Properties.Settings.Default.ClearCache = ClearCache.Checked;
             Properties.Settings.Default.DownloadScripts = DownloadScripts.Checked;
+            Properties.Settings.Default.ConfigLine = ShowConfigOpt.Checked;
             // Save the configuration
             Properties.Settings.Default.Save();
             // And close the settings window

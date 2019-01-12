@@ -38,9 +38,12 @@
             this.Cancel = new System.Windows.Forms.Button();
             this.ResourceAPI = new System.Windows.Forms.GroupBox();
             this.ResourceDownload = new System.Windows.Forms.TextBox();
+            this.ScriptDLOptions = new System.Windows.Forms.GroupBox();
+            this.ShowConfigOpt = new System.Windows.Forms.CheckBox();
             this.LicenseInput.SuspendLayout();
             this.Running.SuspendLayout();
             this.ResourceAPI.SuspendLayout();
+            this.ScriptDLOptions.SuspendLayout();
             this.SuspendLayout();
             // 
             // LicenseInput
@@ -118,7 +121,7 @@
             // 
             this.Save.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Save.Location = new System.Drawing.Point(166, 221);
+            this.Save.Location = new System.Drawing.Point(166, 299);
             this.Save.Name = "Save";
             this.Save.Size = new System.Drawing.Size(75, 23);
             this.Save.TabIndex = 2;
@@ -130,7 +133,7 @@
             // 
             this.Cancel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Cancel.Location = new System.Drawing.Point(247, 221);
+            this.Cancel.Location = new System.Drawing.Point(247, 299);
             this.Cancel.Name = "Cancel";
             this.Cancel.Size = new System.Drawing.Size(75, 23);
             this.Cancel.TabIndex = 3;
@@ -159,11 +162,32 @@
             this.ResourceDownload.Size = new System.Drawing.Size(298, 20);
             this.ResourceDownload.TabIndex = 0;
             // 
+            // ScriptDLOptions
+            // 
+            this.ScriptDLOptions.Controls.Add(this.ShowConfigOpt);
+            this.ScriptDLOptions.Location = new System.Drawing.Point(12, 217);
+            this.ScriptDLOptions.Name = "ScriptDLOptions";
+            this.ScriptDLOptions.Size = new System.Drawing.Size(310, 40);
+            this.ScriptDLOptions.TabIndex = 4;
+            this.ScriptDLOptions.TabStop = false;
+            this.ScriptDLOptions.Text = "Script Download Options";
+            // 
+            // ShowConfigOpt
+            // 
+            this.ShowConfigOpt.AutoSize = true;
+            this.ShowConfigOpt.Location = new System.Drawing.Point(6, 19);
+            this.ShowConfigOpt.Name = "ShowConfigOpt";
+            this.ShowConfigOpt.Size = new System.Drawing.Size(268, 17);
+            this.ShowConfigOpt.TabIndex = 0;
+            this.ShowConfigOpt.Text = "After downloading, show config option for auto start";
+            this.ShowConfigOpt.UseVisualStyleBackColor = true;
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(334, 251);
+            this.ClientSize = new System.Drawing.Size(334, 329);
+            this.Controls.Add(this.ScriptDLOptions);
             this.Controls.Add(this.ResourceAPI);
             this.Controls.Add(this.Cancel);
             this.Controls.Add(this.Save);
@@ -181,6 +205,8 @@
             this.Running.PerformLayout();
             this.ResourceAPI.ResumeLayout(false);
             this.ResourceAPI.PerformLayout();
+            this.ScriptDLOptions.ResumeLayout(false);
+            this.ScriptDLOptions.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -197,5 +223,7 @@
         private System.Windows.Forms.Button Cancel;
         private System.Windows.Forms.GroupBox ResourceAPI;
         private System.Windows.Forms.TextBox ResourceDownload;
+        private System.Windows.Forms.GroupBox ScriptDLOptions;
+        private System.Windows.Forms.CheckBox ShowConfigOpt;
     }
 }

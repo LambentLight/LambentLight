@@ -118,5 +118,17 @@ namespace ServerManager.Properties {
                 this["Resources"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ConfigLine {
+            get {
+                return ((bool)(this["ConfigLine"]));
+            }
+            set {
+                this["ConfigLine"] = value;
+            }
+        }
     }
 }

@@ -189,8 +189,11 @@ namespace ServerManager
                 Directory.Delete(OutputDir, true);
             }
 
-            // Show the line that needs to be added on the configuration
-            Interaction.InputBox("To start the resource with the server, copy and paste this line on your server.cfg:", "Resource Installed", $"start {Selected.Folder}");
+            // Show the configuration line for auto start if the user needs it
+            if (Properties.Settings.Default.ConfigLine)
+            {
+                Interaction.InputBox("To start the resource with the server, copy and paste this line on your server.cfg:", "Resource Installed", $"start {Selected.Folder}");
+            }
 
             // Finally, restore the menu
             ResourceSelector.Enabled = true;
