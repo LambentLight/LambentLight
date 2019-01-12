@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.VisualBasic;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -154,6 +155,9 @@ namespace ServerManager
             Status.Text = "Extraction finished, moving the folder...";
             Directory.Move(OutputDir, Destination);
             Status.Text = $"Done! {Selected.Name} {Selected.Version} has been installed";
+
+            // Show the line that needs to be added on the configuration
+            Interaction.InputBox("To start the resource with the server, copy and paste this line on your server.cfg:", "Resource Installed", $"start {Selected.Folder}");
 
             // Finally, restore the menu
             ResourceSelector.Enabled = true;
