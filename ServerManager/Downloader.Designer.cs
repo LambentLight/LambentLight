@@ -57,7 +57,6 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ResourceSelector.FormattingEnabled = true;
             this.ResourceSelector.Location = new System.Drawing.Point(12, 12);
-            this.ResourceSelector.MultiColumn = true;
             this.ResourceSelector.Name = "ResourceSelector";
             this.ResourceSelector.Size = new System.Drawing.Size(310, 394);
             this.ResourceSelector.TabIndex = 2;
