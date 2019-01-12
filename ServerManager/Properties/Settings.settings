@@ -23,5 +23,8 @@
     <Setting Name="UpgradeRequired" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="Resources" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://raw.githubusercontent.com/justalemon/ServerManager/master/resources.json</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

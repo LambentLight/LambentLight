@@ -36,12 +36,17 @@
             this.AutoRestart = new System.Windows.Forms.CheckBox();
             this.Save = new System.Windows.Forms.Button();
             this.Cancel = new System.Windows.Forms.Button();
+            this.ResourceAPI = new System.Windows.Forms.GroupBox();
+            this.ResourceDownload = new System.Windows.Forms.TextBox();
             this.LicenseInput.SuspendLayout();
             this.Running.SuspendLayout();
+            this.ResourceAPI.SuspendLayout();
             this.SuspendLayout();
             // 
             // LicenseInput
             // 
+            this.LicenseInput.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.LicenseInput.Controls.Add(this.License);
             this.LicenseInput.Location = new System.Drawing.Point(12, 12);
             this.LicenseInput.Name = "LicenseInput";
@@ -52,6 +57,8 @@
             // 
             // License
             // 
+            this.License.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.License.Location = new System.Drawing.Point(6, 19);
             this.License.Name = "License";
             this.License.Size = new System.Drawing.Size(298, 20);
@@ -59,10 +66,12 @@
             // 
             // Running
             // 
+            this.Running.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.Running.Controls.Add(this.DownloadScripts);
             this.Running.Controls.Add(this.ClearCache);
             this.Running.Controls.Add(this.AutoRestart);
-            this.Running.Location = new System.Drawing.Point(12, 68);
+            this.Running.Location = new System.Drawing.Point(12, 124);
             this.Running.Name = "Running";
             this.Running.Size = new System.Drawing.Size(310, 87);
             this.Running.TabIndex = 1;
@@ -71,6 +80,8 @@
             // 
             // DownloadScripts
             // 
+            this.DownloadScripts.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.DownloadScripts.AutoSize = true;
             this.DownloadScripts.Location = new System.Drawing.Point(6, 65);
             this.DownloadScripts.Name = "DownloadScripts";
@@ -81,6 +92,8 @@
             // 
             // ClearCache
             // 
+            this.ClearCache.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ClearCache.AutoSize = true;
             this.ClearCache.Location = new System.Drawing.Point(6, 42);
             this.ClearCache.Name = "ClearCache";
@@ -91,6 +104,8 @@
             // 
             // AutoRestart
             // 
+            this.AutoRestart.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.AutoRestart.AutoSize = true;
             this.AutoRestart.Location = new System.Drawing.Point(6, 19);
             this.AutoRestart.Name = "AutoRestart";
@@ -101,7 +116,9 @@
             // 
             // Save
             // 
-            this.Save.Location = new System.Drawing.Point(166, 161);
+            this.Save.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Save.Location = new System.Drawing.Point(166, 221);
             this.Save.Name = "Save";
             this.Save.Size = new System.Drawing.Size(75, 23);
             this.Save.TabIndex = 2;
@@ -111,7 +128,9 @@
             // 
             // Cancel
             // 
-            this.Cancel.Location = new System.Drawing.Point(247, 161);
+            this.Cancel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Cancel.Location = new System.Drawing.Point(247, 221);
             this.Cancel.Name = "Cancel";
             this.Cancel.Size = new System.Drawing.Size(75, 23);
             this.Cancel.TabIndex = 3;
@@ -119,11 +138,33 @@
             this.Cancel.UseVisualStyleBackColor = true;
             this.Cancel.Click += new System.EventHandler(this.Cancel_Click);
             // 
+            // ResourceAPI
+            // 
+            this.ResourceAPI.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ResourceAPI.Controls.Add(this.ResourceDownload);
+            this.ResourceAPI.Location = new System.Drawing.Point(12, 68);
+            this.ResourceAPI.Name = "ResourceAPI";
+            this.ResourceAPI.Size = new System.Drawing.Size(310, 50);
+            this.ResourceAPI.TabIndex = 1;
+            this.ResourceAPI.TabStop = false;
+            this.ResourceAPI.Text = "Resource API";
+            // 
+            // ResourceDownload
+            // 
+            this.ResourceDownload.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ResourceDownload.Location = new System.Drawing.Point(6, 19);
+            this.ResourceDownload.Name = "ResourceDownload";
+            this.ResourceDownload.Size = new System.Drawing.Size(298, 20);
+            this.ResourceDownload.TabIndex = 0;
+            // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(334, 191);
+            this.ClientSize = new System.Drawing.Size(334, 251);
+            this.Controls.Add(this.ResourceAPI);
             this.Controls.Add(this.Cancel);
             this.Controls.Add(this.Save);
             this.Controls.Add(this.Running);
@@ -138,6 +179,8 @@
             this.LicenseInput.PerformLayout();
             this.Running.ResumeLayout(false);
             this.Running.PerformLayout();
+            this.ResourceAPI.ResumeLayout(false);
+            this.ResourceAPI.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -152,5 +195,7 @@
         private System.Windows.Forms.CheckBox ClearCache;
         private System.Windows.Forms.Button Save;
         private System.Windows.Forms.Button Cancel;
+        private System.Windows.Forms.GroupBox ResourceAPI;
+        private System.Windows.Forms.TextBox ResourceDownload;
     }
 }

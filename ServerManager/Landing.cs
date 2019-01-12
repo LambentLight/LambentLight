@@ -106,8 +106,6 @@ namespace ServerManager
             HtmlAgilityPack.HtmlDocument Doc = Web.Load("https://runtime.fivem.net/artifacts/fivem/build_server_windows/master/");
             // Create a list of versions from the links without the "/" at the end
             List<string> Versions = Doc.DocumentNode.SelectNodes("//a").Select(X => X.InnerText.TrimEnd('/')).ToList();
-            // Reverse the List so the latest versions are at the top of the list
-            Versions.Reverse();
             
             // Iterate over the versions that we got and ignore those that are not builds or have a "Non-breaking space"
             foreach (string Version in Versions.Where(X => !InvalidBuilds.Contains(X) && !X.Contains("&nbsp")))
@@ -453,6 +451,19 @@ namespace ServerManager
             // Create a new editor window and show it as a dialog
             Editor FileEditor = new Editor(FilePath);
             FileEditor.ShowDialog();
+        }
+
+        private void ResourceDownloader_Click(object sender, EventArgs e)
+        {
+            // If there is no selected server data, return
+            if (DataList.SelectedIndex == -1)
+            {
+                return;
+            }
+
+            // Otherwise, open the downloader window
+            Downloader Window = new Downloader(Path.Combine(Data, DataList.SelectedItem.ToString()));
+            Window.ShowDialog();
         }
     }
 }
