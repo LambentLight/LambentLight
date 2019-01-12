@@ -17,7 +17,8 @@ namespace ServerManager
     public enum CompressionType
     {
         Zip = 0,
-        SevenZip = 1
+        SevenZip = 1,
+        Rar = 2
     }
 
     /// <summary>
