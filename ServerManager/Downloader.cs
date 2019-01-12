@@ -1,5 +1,9 @@
-using Microsoft.VisualBasic;
+﻿using Microsoft.VisualBasic;
 using Newtonsoft.Json;
+using SharpCompress.Archives;
+using SharpCompress.Archives.Rar;
+using SharpCompress.Archives.SevenZip;
+using SharpCompress.Common;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -26,6 +30,10 @@ namespace ServerManager
         /// List of resources that the user can download.
         /// </summary>
         private List<Resource> Resources = new List<Resource>();
+        /// <summary>
+        /// Extraction Options used for 7zip and Rar,
+        /// </summary>
+        private ExtractionOptions ExtractOpts = new ExtractionOptions() { ExtractFullPath = true };
 
         public Downloader(string DataFolder)
         {
@@ -143,6 +151,24 @@ namespace ServerManager
             {
                 case CompressionType.Zip:
                     await Task.Run(() => ZipFile.ExtractToDirectory(Downloaded, OutputDir));
+                    break;
+                case CompressionType.SevenZip:
+                    using (SevenZipArchive SevenZip = SevenZipArchive.Open(Downloaded))
+                    {
+                        foreach (SevenZipArchiveEntry Entry in SevenZip.Entries.Where(X => !X.IsDirectory))
+                        {
+                            Entry.WriteToDirectory(OutputDir, ExtractOpts);
+                        }
+                    }
+                    break;
+                case CompressionType.Rar:
+                    using (RarArchive Rar = RarArchive.Open(Downloaded))
+                    {
+                        foreach (RarArchiveEntry Entry in Rar.Entries.Where(X => !X.IsDirectory))
+                        {
+                            Entry.WriteToDirectory(OutputDir, new ExtractionOptions() { ExtractFullPath = true });
+                        }
+                    }
                     break;
                 default:
                     throw new NotSupportedException("That compression format is not supported at this moment.");
