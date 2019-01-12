@@ -153,7 +153,7 @@ namespace ServerManager
 
             // Extraction finished, move the folder
             Status.Text = "Extraction finished, moving the folder...";
-            Directory.Move(OutputDir, Destination);
+            Directory.Move(Path.Combine(OutputDir, Selected.Path ?? ""), Destination);
             Status.Text = $"Done! {Selected.Name} {Selected.Version} has been installed";
 
             // Show the line that needs to be added on the configuration
