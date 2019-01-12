@@ -1,4 +1,4 @@
-﻿using HtmlAgilityPack;
+using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -106,8 +106,6 @@ namespace ServerManager
             HtmlAgilityPack.HtmlDocument Doc = Web.Load("https://runtime.fivem.net/artifacts/fivem/build_server_windows/master/");
             // Create a list of versions from the links without the "/" at the end
             List<string> Versions = Doc.DocumentNode.SelectNodes("//a").Select(X => X.InnerText.TrimEnd('/')).ToList();
-            // Reverse the List so the latest versions are at the top of the list
-            Versions.Reverse();
             
             // Iterate over the versions that we got and ignore those that are not builds or have a "Non-breaking space"
             foreach (string Version in Versions.Where(X => !InvalidBuilds.Contains(X) && !X.Contains("&nbsp")))
