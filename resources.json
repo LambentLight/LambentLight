@@ -9,6 +9,16 @@
         "compression": 0
     },
     {
+        "name": "vSync",
+        "version": "1.4.0",
+        "path": "vSync-1.4.0\\vSync",
+        "folder": "vSync",
+        "download": "https://github.com/TomGrobbe/vSync/releases/download/v1.4.0/vSync-1.4.0.zip",
+        "license": "https://raw.githubusercontent.com/TomGrobbe/vSync/master/LICENSE",
+        "type": 1,
+        "compression": 0
+    },
+    {
         "name": "FRFuel",
         "version": "1.3",
         "folder": "frfuel",
@@ -82,5 +92,220 @@
         "download": "https://forum.fivem.net/uploads/default/original/2X/1/177659060c024f93bfa20450856734f5ea31ab52.rar",
         "type": 1,
         "compression": 2
+    },
+    {
+        "name": "LiveMap",
+        "version": "2.2.12",
+        "path": "live_map-2.2.12",
+        "folder": "live_map",
+        "download": "https://github.com/TGRHavoc/live_map/archive/v2.2.12.zip",
+        "license": "https://raw.githubusercontent.com/TGRHavoc/live_map/master/license",
+        "type": 1,
+        "compression": 0
+    },
+    {
+        "name": "EasyAdmin",
+        "version": "4.511",
+        "path": "EasyAdmin",
+        "folder": "EasyAdmin",
+        "download": "https://github.com/Bluethefurry/EasyAdmin/releases/download/4.511/EasyAdmin-with-NativeUI.zip",
+        "type": 1,
+        "compression": 0
+    },
+    {
+        "name": "NativeUI Lua",
+        "version": "2.1",
+        "path": "NativeUILua-2.1.0\\NativeUI",
+        "folder": "NativeUI",
+        "download": "https://github.com/FrazzIe/NativeUILua/archive/2.1.0.zip",
+        "type": 1,
+        "compression": 0
+    },
+    {
+        "name": "vRP",
+        "version": "1.0",
+        "path": "vRP-1.0\\vrp",
+        "folder": "vrp",
+        "download": "https://github.com/ImagicTheCat/vRP/archive/1.0.zip",
+        "license": "https://raw.githubusercontent.com/ImagicTheCat/vRP/master/LICENSE",
+        "type": 1,
+        "compression": 0
+    },
+    {
+        "name": "vRP MySQL",
+        "version": "1.0",
+        "path": "vRP-1.0\\vrp_mysql",
+        "folder": "vrp_mysql",
+        "download": "https://github.com/ImagicTheCat/vRP/archive/1.0.zip",
+        "license": "https://raw.githubusercontent.com/ImagicTheCat/vRP/master/LICENSE",
+        "type": 1,
+        "compression": 0
+    },
+    {
+        "name": "SecurityCams",
+        "version": "9e9c151d4c1d55b4fcd18b668b5cdca6b70c4df0",
+        "path": "securitycams-9e9c151d4c1d55b4fcd18b668b5cdca6b70c4df0",
+        "folder": "securitycams",
+        "download": "https://github.com/xander1998/securitycams/archive/9e9c151d4c1d55b4fcd18b668b5cdca6b70c4df0.zip",
+        "license": "https://raw.githubusercontent.com/creativecommons/legalcode/master/by-nc-nd_4.0.txt",
+        "type": 1,
+        "compression": 0
+    },
+    {
+        "name": "SecurityCams for ESX",
+        "version": "2.0.1",
+        "path": "esx_securitycam-2.0.1",
+        "folder": "esx_securitycams",
+        "download": "https://github.com/LifeGoal/esx_securitycam/archive/2.0.1.zip",
+        "license": "https://raw.githubusercontent.com/creativecommons/legalcode/master/by-nc-nd_4.0.txt",
+        "type": 1,
+        "compression": 0
+    },
+    {
+        "name": "ESX",
+        "version": "1.1.0",
+        "path": "es_extended-1.1.0",
+        "folder": "es_extended",
+        "download": "https://github.com/ESX-Org/es_extended/archive/1.1.0.zip",
+        "license": "https://raw.githubusercontent.com/ESX-Org/es_extended/master/LICENSE",
+        "type": 1,
+        "compression": 0
+    },
+    {
+        "name": "ESX Menu Default",
+        "version": "1.0.3",
+        "path": "esx_menu_default-1.0.3",
+        "folder": "esx_menu_default",
+        "download": "https://github.com/ESX-Org/esx_menu_default/archive/1.0.3.zip",
+        "license": "https://raw.githubusercontent.com/ESX-Org/esx_menu_default/master/LICENSE",
+        "type": 1,
+        "compression": 0
+    },
+    {
+        "name": "ESX Menu Dialog",
+        "version": "1.1.0",
+        "path": "esx_menu_dialog-1.1.0",
+        "folder": "esx_menu_dialog",
+        "download": "https://github.com/ESX-Org/esx_menu_dialog/archive/1.1.0.zip",
+        "license": "https://raw.githubusercontent.com/ESX-Org/esx_menu_dialog/master/LICENSE",
+        "type": 1,
+        "compression": 0
+    },
+    {
+        "name": "ESX Menu List",
+        "version": "1.0.1",
+        "path": "esx_menu_list-1.0.1",
+        "folder": "esx_menu_list",
+        "download": "https://github.com/ESX-Org/esx_menu_list/archive/1.0.1.zip",
+        "license": "https://raw.githubusercontent.com/ESX-Org/esx_menu_list/master/LICENSE",
+        "type": 1,
+        "compression": 0
+    },
+    {
+        "name": "ESX Billing",
+        "version": "1.1.0",
+        "path": "esx_billing-1.1.0",
+        "folder": "esx_billing",
+        "download": "https://github.com/ESX-Org/esx_billing/archive/1.1.0.zip",
+        "license": "https://raw.githubusercontent.com/ESX-Org/esx_billing/master/LICENSE",
+        "type": 1,
+        "compression": 0
+    },
+    {
+        "name": "ESX Society",
+        "version": "1.0.4",
+        "path": "esx_society-1.0.4",
+        "folder": "esx_society",
+        "download": "https://github.com/ESX-Org/esx_society/archive/1.0.4.zip",
+        "license": "https://raw.githubusercontent.com/ESX-Org/esx_society/master/LICENSE",
+        "type": 1,
+        "compression": 0
+    },
+    {
+        "name": "ESX DataStore",
+        "version": "1.0.1",
+        "path": "esx_datastore-1.0.1",
+        "folder": "esx_datastore",
+        "download": "https://github.com/ESX-Org/esx_datastore/archive/1.0.1.zip",
+        "license": "https://raw.githubusercontent.com/ESX-Org/esx_datastore/master/LICENSE",
+        "type": 1,
+        "compression": 0
+    },
+    {
+        "name": "ESX Identity",
+        "version": "1.0.3",
+        "path": "esx_identity-1.0.3",
+        "folder": "esx_identity",
+        "download": "https://github.com/ESX-Org/esx_identity/archive/1.0.3.zip",
+        "license": "https://raw.githubusercontent.com/ESX-Org/esx_identity/master/LICENSE",
+        "type": 1,
+        "compression": 0
+    },
+    {
+        "name": "ESX License",
+        "version": "1.0",
+        "path": "esx_license-1.0.0",
+        "folder": "esx_license",
+        "download": "https://github.com/ESX-Org/esx_license/archive/1.0.0.zip",
+        "license": "https://raw.githubusercontent.com/ESX-Org/esx_license/master/LICENSE",
+        "type": 1,
+        "compression": 0
+    },
+    {
+        "name": "ESX Police Job",
+        "version": "1.3.0",
+        "path": "esx_policejob-1.3.0",
+        "folder": "esx_policejob",
+        "download": "https://github.com/ESX-Org/esx_policejob/archive/1.3.0.zip",
+        "license": "https://raw.githubusercontent.com/ESX-Org/esx_policejob/master/LICENSE",
+        "type": 1,
+        "compression": 0
+    },
+    {
+        "name": "pNotify",
+        "version": "d8c135071cd82c5ae48329786b1e5d17a30fcb21",
+        "path": "pNotify-d8c135071cd82c5ae48329786b1e5d17a30fcb21\\pNotify",
+        "folder": "pNotify",
+        "download": "https://github.com/Nick78111/pNotify/archive/d8c135071cd82c5ae48329786b1e5d17a30fcb21.zip",
+        "license": "https://raw.githubusercontent.com/Nick78111/pNotify/master/LICENSE",
+        "type": 1,
+        "compression": 0
+    },
+    {
+        "name": "mhacking",
+        "version": "5a131cfbafda26371a1842ed2e0bcb27d68c1982",
+        "path": "FiveM-Scripts-5a131cfbafda26371a1842ed2e0bcb27d68c1982\\mhacking",
+        "folder": "mhacking",
+        "download": "https://github.com/GHMatti/FiveM-Scripts/5a131cfbafda26371a1842ed2e0bcb27d68c1982/master.zip",
+        "type": 1,
+        "compression": 0
+    },
+    {
+        "name": "mtracker",
+        "version": "5a131cfbafda26371a1842ed2e0bcb27d68c1982",
+        "path": "FiveM-Scripts-5a131cfbafda26371a1842ed2e0bcb27d68c1982\\mtracker",
+        "folder": "mtracker",
+        "download": "https://github.com/GHMatti/FiveM-Scripts/5a131cfbafda26371a1842ed2e0bcb27d68c1982/master.zip",
+        "type": 1,
+        "compression": 0
+    },
+    {
+        "name": "K9",
+        "version": "ea0e1818c04475844a61a8fb6298358b5b210a2d",
+        "path": "k9-ea0e1818c04475844a61a8fb6298358b5b210a2d",
+        "folder": "k9",
+        "download": "https://github.com/xander1998/k9/archive/ea0e1818c04475844a61a8fb6298358b5b210a2d.zip",
+        "license": "https://raw.githubusercontent.com/creativecommons/legalcode/master/by-nc-nd_4.0.txt",
+        "type": 1,
+        "compression": 0
+    },
+    {
+        "name": "JoinTransition",
+        "version": "1.1",
+        "path": "JoinTransition-1.1",
+        "folder": "jointransition",
+        "download": "https://github.com/TomGrobbe/JoinTransition/archive/v1.1.zip",
+        "type": 1,
+        "compression": 0
     }
 ]
