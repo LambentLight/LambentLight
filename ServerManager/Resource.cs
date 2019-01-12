@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 
 namespace ServerManager
 {
@@ -66,5 +67,24 @@ namespace ServerManager
         /// </summary>
         [JsonProperty("compression")]
         public CompressionType Compresion { get; set; }
+
+        /// <summary>
+        /// Gets the extension of the resource based on the compression format.
+        /// </summary>
+        /// <returns>The .ext extension.</returns>
+        public string GetExtension()
+        {
+            switch (Compresion)
+            {
+                case CompressionType.Zip:
+                    return ".zip";
+                case CompressionType.SevenZip:
+                    return ".7z";
+                case CompressionType.Rar:
+                    return ".rar";
+                default:
+                    throw new SystemException("How did we get here?");
+            }
+        }
     }
 }

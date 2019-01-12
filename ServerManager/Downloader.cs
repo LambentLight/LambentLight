@@ -1,4 +1,4 @@
-﻿using Microsoft.VisualBasic;
+using Microsoft.VisualBasic;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -120,7 +120,7 @@ namespace ServerManager
             Status.Text = $"Downloading {Selected.Name} {Selected.Version}";
 
             // Create the URL for the destination
-            string Downloaded = Path.Combine(Temp, $"{Selected.Folder}" + (Selected.Compresion == CompressionType.Zip ? ".zip": ".7z"));
+            string Downloaded = Path.Combine(Temp, $"{Selected.Folder}" + Selected.GetExtension());
             // Make sure that the file does not exists
             if (File.Exists(Downloaded))
             {
