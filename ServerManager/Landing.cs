@@ -38,6 +38,17 @@ namespace ServerManager
         /// The current server status.
         /// </summary>
         private static Status ServerStatus = Status.Stopped;
+        /// <summary>
+        /// Links on the builds page that should not be considered as builds.
+        /// </summary>
+        private static List<string> InvalidBuilds = new List<string>
+        {
+            "Parent directory",
+            "revoked",
+            "Date",
+            "File Size",
+            "File Name"
+        };
 
         public Landing()
         {
@@ -98,8 +109,8 @@ namespace ServerManager
             // Reverse the List so the latest versions are at the top of the list
             Versions.Reverse();
             
-            // Iterate over the versions that we got without the "Previous Directory" button or "Revoked" folder
-            foreach (string Version in Versions.Where(X => X != ".." && X != "revoked"))
+            // Iterate over the versions that we got and ignore those that are not builds or have a "Non-breaking space"
+            foreach (string Version in Versions.Where(X => !InvalidBuilds.Contains(X) && !X.Contains("&nbsp")))
             {
                 // And add that version into the ComboBox
                 BuildList.Items.Add(Version);
