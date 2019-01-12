@@ -35,5 +35,25 @@
         "license": "https://raw.githubusercontent.com/FiveM-Scripts/Cops_FiveM/master/LICENSE",
         "type": 1,
         "compression": 0
+    },
+    {
+        "name": "ELS",
+        "version": "1.75",
+        "path": "ELS-FiveM-1.75",
+        "folder": "els",
+        "download": "https://github.com/MrDaGree/ELS-FiveM/archive/1.75.zip",
+        "license": "https://raw.githubusercontent.com/MrDaGree/ELS-FiveM/master/LICENSE",
+        "type": 1,
+        "compression": 0
+    },
+    {
+        "name": "ELS",
+        "version": "1.1.3a",
+        "path": "ELS-FiveM-1.1.3-a-",
+        "folder": "els",
+        "download": "https://github.com/MrDaGree/ELS-FiveM/archive/1.1.3(a).zip",
+        "license": "https://raw.githubusercontent.com/MrDaGree/ELS-FiveM/master/LICENSE",
+        "type": 1,
+        "compression": 0
     }
 ]
