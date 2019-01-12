@@ -25,5 +25,15 @@
         "license": "https://raw.githubusercontent.com/thers/FRFuel/master/LICENSE.md",
         "type": 1,
         "compression": 0
+    },
+    {
+        "name": "Cops",
+        "version": "1.4.5",
+        "path": "Cops_FiveM-1.4.5\\police",
+        "folder": "police",
+        "download": "https://github.com/FiveM-Scripts/Cops_FiveM/archive/1.4.5.zip",
+        "license": "https://raw.githubusercontent.com/FiveM-Scripts/Cops_FiveM/master/LICENSE",
+        "type": 1,
+        "compression": 0
     }
 ]
