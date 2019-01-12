@@ -11,6 +11,7 @@ namespace ServerManager
             InitializeComponent();
             // And set the values from the configuration
             License.Text = Properties.Settings.Default.License;
+            ResourceDownload.Text = Properties.Settings.Default.Resources;
             AutoRestart.Checked = Properties.Settings.Default.AutoRestart;
             ClearCache.Checked = Properties.Settings.Default.ClearCache;
             DownloadScripts.Checked = Properties.Settings.Default.DownloadScripts;
@@ -20,6 +21,7 @@ namespace ServerManager
         {
             // Store the values on their respective places
             Properties.Settings.Default.License = License.Text;
+            Properties.Settings.Default.Resources = ResourceDownload.Text;
             Properties.Settings.Default.AutoRestart = AutoRestart.Checked;
             Properties.Settings.Default.ClearCache = ClearCache.Checked;
             Properties.Settings.Default.DownloadScripts = DownloadScripts.Checked;
