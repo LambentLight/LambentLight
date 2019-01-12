@@ -307,5 +307,25 @@
         "download": "https://github.com/TomGrobbe/JoinTransition/archive/v1.1.zip",
         "type": 1,
         "compression": 0
+    },
+    {
+        "name": "SexySpeedometer",
+        "version": "8.3",
+        "path": "SexySpeedometer-FiveM-U8.3",
+        "folder": "sexyspeedometer",
+        "download": "https://github.com/Bluethefurry/SexySpeedometer-FiveM/archive/U8.3.zip",
+        "license": "https://raw.githubusercontent.com/Bluethefurry/SexySpeedometer-FiveM/master/LICENSE",
+        "type": 1,
+        "compression": 0
+    },
+    {
+        "name": "SexySpeedometer Initial D Edition",
+        "version": "64cb183e64b3a590338bed2d0890853027735b0b",
+        "path": "initialdspeedo-fivem-64cb183e64b3a590338bed2d0890853027735b0b",
+        "folder": "sexyspeedometer",
+        "download": "https://github.com/Bluethefurry/initialdspeedo-fivem/archive/64cb183e64b3a590338bed2d0890853027735b0b.zip",
+        "license": "https://raw.githubusercontent.com/Bluethefurry/SexySpeedometer-FiveM/master/LICENSE",
+        "type": 1,
+        "compression": 0
     }
 ]
