@@ -31,6 +31,11 @@ namespace ServerManager
         [JsonProperty("name")]
         public string Name { get; set; }
         /// <summary>
+        /// Readable version of the mod.
+        /// </summary>
+        [JsonProperty("version")]
+        public string Version { get; set; }
+        /// <summary>
         /// Path of the resource inside of the compressed file.
         /// </summary>
         [JsonProperty("path")]
@@ -45,6 +50,11 @@ namespace ServerManager
         /// </summary>
         [JsonProperty("download")]
         public string Download { get; set; }
+        /// <summary>
+        /// License to show the user.
+        /// </summary>
+        [JsonProperty("license")]
+        public string License { get; set; }
         /// <summary>
         /// Type of resource being installed.
         /// </summary>
