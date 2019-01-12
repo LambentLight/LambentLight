@@ -73,5 +73,14 @@
         "download": "https://forum.fivem.net/uploads/default/original/2X/c/c32a4e8b175dae17b1b475b702d42d1bfd1869f1.zip",
         "type": 1,
         "compression": 0
+    },
+    {
+        "name": "Luxart Vehicle Control",
+        "version": "1.01",
+        "path": "lux_vehcontrol",
+        "folder": "lux_vehcontrol",
+        "download": "https://forum.fivem.net/uploads/default/original/2X/1/177659060c024f93bfa20450856734f5ea31ab52.rar",
+        "type": 1,
+        "compression": 2
     }
 ]
