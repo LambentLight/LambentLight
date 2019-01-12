@@ -45,6 +45,7 @@ namespace ServerManager
             this.StopServer = new System.Windows.Forms.ToolStripMenuItem();
             this.CreateServerData = new System.Windows.Forms.ToolStripMenuItem();
             this.EditServerConfig = new System.Windows.Forms.ToolStripMenuItem();
+            this.ResourceDownloader = new System.Windows.Forms.ToolStripMenuItem();
             this.FiveMLicense = new System.Windows.Forms.ToolStripMenuItem();
             this.OpenSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.DownloadClient = new System.Net.WebClient();
@@ -178,6 +179,7 @@ namespace ServerManager
             this.StopServer,
             this.CreateServerData,
             this.EditServerConfig,
+            this.ResourceDownloader,
             this.FiveMLicense,
             this.OpenSettings});
             this.TopBar.Location = new System.Drawing.Point(0, 0);
@@ -214,6 +216,13 @@ namespace ServerManager
             this.EditServerConfig.Size = new System.Drawing.Size(151, 20);
             this.EditServerConfig.Text = "Edit Server Configuration";
             this.EditServerConfig.Click += new System.EventHandler(this.EditServerConfig_Click);
+            // 
+            // ResourceDownloader
+            // 
+            this.ResourceDownloader.Name = "ResourceDownloader";
+            this.ResourceDownloader.Size = new System.Drawing.Size(134, 20);
+            this.ResourceDownloader.Text = "Resource Downloader";
+            this.ResourceDownloader.Click += new System.EventHandler(this.ResourceDownloader_Click);
             // 
             // FiveMLicense
             // 
@@ -293,6 +302,7 @@ namespace ServerManager
         private System.Windows.Forms.Timer AutoRestart;
         private System.Windows.Forms.ToolStripMenuItem FiveMLicense;
         private System.Windows.Forms.ToolStripMenuItem EditServerConfig;
+        private System.Windows.Forms.ToolStripMenuItem ResourceDownloader;
     }
 }
 

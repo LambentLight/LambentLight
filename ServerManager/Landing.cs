@@ -1,4 +1,4 @@
-using HtmlAgilityPack;
+﻿using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -451,6 +451,19 @@ namespace ServerManager
             // Create a new editor window and show it as a dialog
             Editor FileEditor = new Editor(FilePath);
             FileEditor.ShowDialog();
+        }
+
+        private void ResourceDownloader_Click(object sender, EventArgs e)
+        {
+            // If there is no selected server data, return
+            if (DataList.SelectedIndex == -1)
+            {
+                return;
+            }
+
+            // Otherwise, open the downloader window
+            Downloader Window = new Downloader(Path.Combine(Data, DataList.SelectedItem.ToString()));
+            Window.ShowDialog();
         }
     }
 }
