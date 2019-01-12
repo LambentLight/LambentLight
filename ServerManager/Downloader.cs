@@ -179,9 +179,15 @@ namespace ServerManager
             Directory.Move(Path.Combine(OutputDir, Selected.Path ?? ""), Destination);
             Status.Text = $"Done! {Selected.Name} {Selected.Version} has been installed";
 
-            // Delete the file and extraction folder
-            File.Delete(Downloaded);
-            Directory.Delete(OutputDir, true);
+            // Delete the file and extraction folder if they are stil present
+            if (File.Exists(Downloaded))
+            {
+                File.Delete(Downloaded);
+            }
+            if (Directory.Exists(OutputDir))
+            {
+                Directory.Delete(OutputDir, true);
+            }
 
             // Show the line that needs to be added on the configuration
             Interaction.InputBox("To start the resource with the server, copy and paste this line on your server.cfg:", "Resource Installed", $"start {Selected.Folder}");
