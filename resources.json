@@ -1,7 +1,7 @@
 [
     {
         "name": "vMenu",
-        "version": "2.2.0",
+        "version": "2.2",
         "folder": "vMenu",
         "download": "https://github.com/TomGrobbe/vMenu/releases/download/v2.2.0/vMenu-v2.2.0.zip",
         "license": "https://raw.githubusercontent.com/TomGrobbe/vMenu/master/LICENSE.md",
