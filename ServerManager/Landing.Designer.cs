@@ -50,6 +50,7 @@ namespace ServerManager
             this.OpenSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.DownloadClient = new System.Net.WebClient();
             this.AutoRestart = new System.Windows.Forms.Timer(this.components);
+            this.ScheduledRestart = new System.Windows.Forms.Timer(this.components);
             this.BuildSelector.SuspendLayout();
             this.ServerData.SuspendLayout();
             this.Console.SuspendLayout();
@@ -255,6 +256,11 @@ namespace ServerManager
             this.AutoRestart.Interval = 500;
             this.AutoRestart.Tick += new System.EventHandler(this.AutoRestart_Tick);
             // 
+            // ScheduledRestart
+            // 
+            this.ScheduledRestart.Interval = 5000;
+            this.ScheduledRestart.Tick += new System.EventHandler(this.ScheduledRestart_Tick);
+            // 
             // Landing
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -303,6 +309,7 @@ namespace ServerManager
         private System.Windows.Forms.ToolStripMenuItem FiveMLicense;
         private System.Windows.Forms.ToolStripMenuItem EditServerConfig;
         private System.Windows.Forms.ToolStripMenuItem ResourceDownloader;
+        private System.Windows.Forms.Timer ScheduledRestart;
     }
 }
 

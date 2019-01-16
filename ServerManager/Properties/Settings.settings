@@ -29,5 +29,14 @@
     <Setting Name="ConfigLine" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="ScheduledTime" Type="System.TimeSpan" Scope="User">
+      <Value Profile="(Default)">12:00:00</Value>
+    </Setting>
+    <Setting Name="ScheduledRestart" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ScheduledMode" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

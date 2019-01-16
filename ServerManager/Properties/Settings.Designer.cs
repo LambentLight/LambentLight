@@ -130,5 +130,41 @@ namespace ServerManager.Properties {
                 this["ConfigLine"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("12:00:00")]
+        public global::System.TimeSpan ScheduledTime {
+            get {
+                return ((global::System.TimeSpan)(this["ScheduledTime"]));
+            }
+            set {
+                this["ScheduledTime"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ScheduledRestart {
+            get {
+                return ((bool)(this["ScheduledRestart"]));
+            }
+            set {
+                this["ScheduledRestart"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int ScheduledMode {
+            get {
+                return ((int)(this["ScheduledMode"]));
+            }
+            set {
+                this["ScheduledMode"] = value;
+            }
+        }
     }
 }

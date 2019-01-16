@@ -49,6 +49,10 @@ namespace ServerManager
             "File Size",
             "File Name"
         };
+        /// <summary>
+        /// If the last scheduled restart was completed.
+        /// </summary>
+        private bool LastRestart = false;
 
         public Landing()
         {
@@ -78,6 +82,24 @@ namespace ServerManager
                 Properties.Settings.Default.Upgrade();
                 Properties.Settings.Default.UpgradeRequired = false;
                 Properties.Settings.Default.Save();
+            }
+
+            // If there is the user wants scheduled restarts
+            if (Properties.Settings.Default.ScheduledRestart)
+            {
+                // Enable them
+                ScheduledRestart.Enabled = true;
+
+                // And, if the user is restarting every few minutes/hours/days
+                if (Properties.Settings.Default.ScheduledMode == 0)
+                {
+                    ScheduledRestart.Interval = (int)Properties.Settings.Default.ScheduledTime.TotalMilliseconds;
+                }
+                // Otherwise, set another interval
+                else if (Properties.Settings.Default.ScheduledMode == 1)
+                {
+                    ScheduledRestart.Interval = 100;
+                }
             }
         }
 
@@ -163,8 +185,11 @@ namespace ServerManager
             }
         }
 
-        private void StartServerNow(string BuildFolder, string DataFolder)
+        private void StartServerNow()
         {
+            // Get the build and data folders
+            string BuildFolder = Path.Combine(Builds, BuildList.SelectedItem.ToString());
+            string DataFolder = Path.Combine(Data, DataList.SelectedItem.ToString());
             // Lock both of the selectors
             LimitAvailableControls(true);
             // Set the parameters for launching the server process and capture the output
@@ -209,8 +234,13 @@ namespace ServerManager
         {
             // Create an instance of the Settings window
             Settings SettingsWindow = new Settings();
-            // And show it as a dialog (so the user is unable to launch a server)
+            // Show it as a dialog (so the user is unable to launch a server)
             SettingsWindow.ShowDialog();
+            // Once we return, set the interval time if the type of restart is zero
+            if (Properties.Settings.Default.ScheduledMode == 0)
+            {
+                ScheduledRestart.Interval = (int)Properties.Settings.Default.ScheduledTime.TotalMilliseconds;
+            }
         }
 
         private void RefreshBuilds_Click(object sender, EventArgs e)
@@ -302,7 +332,7 @@ namespace ServerManager
                 ServerOutput.AppendLine("The 'cache' folder was present and it was removed.");
             }
 
-            StartServerNow(BuildFolder, DataFolder);
+            StartServerNow();
         }
 
         private void DownloadClient_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
@@ -427,7 +457,7 @@ namespace ServerManager
                 string BuildFolder = Path.Combine(Builds, BuildList.SelectedItem.ToString());
                 string DataFolder = Path.Combine(Data, DataList.SelectedItem.ToString());
                 // Start the server... again
-                StartServerNow(BuildFolder, DataFolder);
+                StartServerNow();
             }
         }
 
@@ -464,6 +494,48 @@ namespace ServerManager
             // Otherwise, open the downloader window
             Downloader Window = new Downloader(Path.Combine(Data, DataList.SelectedItem.ToString()));
             Window.ShowDialog();
+        }
+
+        private void PerformRestart()
+        {
+            // Disable the autorestart thingy
+            AutoRestart.Enabled = false;
+            // Stop the server
+            StopServerNow();
+            // Once is stopped, start it again
+            StartServerNow();
+            // And enable the autorestart on crash
+            AutoRestart.Enabled = true;
+        }
+
+        private void ScheduledRestart_Tick(object sender, EventArgs e)
+        {
+            // If the server is running and the task is over time
+            if (ServerStatus == Status.Running && Properties.Settings.Default.ScheduledMode == 0)
+            {
+                PerformRestart();
+            }
+            // Otherwise, if the restart is on specific times
+            else if (ServerStatus == Status.Running && Properties.Settings.Default.ScheduledMode == 1)
+            {
+                // Store the current time and restart time
+                DateTime Now = DateTime.Now;
+                TimeSpan Set = Properties.Settings.Default.ScheduledTime;
+                // See if the time is correct
+                bool TimeMatches = Now.Hour == Set.Hours && Now.Minute == Set.Minutes && Now.Second == Set.Seconds;
+
+                // If the time matches and there has not been a restart
+                if (TimeMatches && !LastRestart)
+                {
+                    LastRestart = true;
+                    PerformRestart();
+                }
+                // If the time does not matches but there has been a restart
+                else if (!TimeMatches && LastRestart)
+                {
+                    LastRestart = false;
+                }
+            }
         }
     }
 }
