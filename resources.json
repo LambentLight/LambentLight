@@ -19,6 +19,16 @@
         "compression": 0
     },
     {
+        "name": "async",
+        "version": "1.0.1",
+        "path": "async-1.0.1",
+        "folder": "async",
+        "download": "https://github.com/ESX-Org/async/archive/1.0.1.zip",
+        "license": "https://raw.githubusercontent.com/ESX-Org/async/master/LICENSE",
+        "type": 1,
+        "compression": 0
+    },
+    {
         "name": "mysql-async",
         "version": "3.0.8",
         "path": "fivem-mysql-async-3.0.8",
