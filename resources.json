@@ -19,7 +19,7 @@
         "compression": 0
     },
     {
-        "name": "fivem-mysql-async",
+        "name": "mysql-async",
         "version": "3.0.8",
         "path": "fivem-mysql-async-3.0.8",
         "folder": "mysql-async",
