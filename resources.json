@@ -19,6 +19,16 @@
         "compression": 0
     },
     {
+        "name": "fivem-mysql-async",
+        "version": "3.0.8",
+        "path": "fivem-mysql-async-3.0.8",
+        "folder": "mysql-async",
+        "download": "https://github.com/brouznouf/fivem-mysql-async/archive/3.0.8.zip",
+        "license": "https://raw.githubusercontent.com/brouznouf/fivem-mysql-async/master/LICENSE",
+        "type": 1,
+        "compression": 0
+    },
+    {
         "name": "FRFuel",
         "version": "1.3",
         "folder": "frfuel",
