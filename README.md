@@ -13,7 +13,7 @@ NOTE: This is not ready for production! I'm not responsable for random crashes a
 
 ## Prerequisites
 
-* Windows 10 Anniversary Update (build 1607) or higher
+* Windows 8.1/Server 2012 or Windows 10/Server 2016
 
 ## Install
 
