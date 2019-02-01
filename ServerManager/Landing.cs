@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -208,6 +209,17 @@ namespace ServerManager
             ServerProcess.BeginOutputReadLine();
             ServerProcess.BeginErrorReadLine();
             ServerStatus = Status.Running;
+
+            // Try to get the RCON password
+            string Config = File.ReadAllText(Path.Combine(DataFolder, "server.cfg"));
+            Match RCON = Expressions.RCONPassword.Match(Config);
+            Match Port = Expressions.PortUDP.Match(Config);
+            
+            // If both matches are successful
+            if (RCON.Success && Port.Success)
+            {
+                // Do the work
+            }
         }
 
         private bool StopServerNow()
