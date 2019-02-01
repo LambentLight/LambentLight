@@ -7,6 +7,7 @@ using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Reflection;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -405,8 +406,10 @@ namespace ServerManager
                 ServerOutput.AppendLine("New Server Data folder has been created.");
             }
 
-            // Dump the template for the server configuration
-            File.WriteAllBytes(Path.Combine(NewPath, "server.cfg"), Properties.Resources.ServerTemplate);
+            // Get the string and add a random rcon password to it
+            string Config = string.Format(Encoding.UTF8.GetString(Properties.Resources.ServerTemplate), Tools.GenerateSecureString(16));
+            // Then, write the file and notify the user
+            File.WriteAllText(Path.Combine(NewPath, "server.cfg"), Config);
             ServerOutput.AppendLine("A Template for the new Server Data folder has been created.");
 
             // Finally, refresh the list of server data folders
