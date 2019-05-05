@@ -102,23 +102,47 @@ namespace ServerManager
             // Get the document from the FiveM build list
             HtmlAgilityPack.HtmlDocument Doc = Web.Load("https://runtime.fivem.net/artifacts/fivem/build_server_windows/master/");
 
+            // Create a list for storing the builds
+            List<string> Builds = new List<string>();
+
             // If the status code is 200
             if (HttpCode == HttpStatusCode.OK)
             {
                 // Create a list of versions from the links without the "/" at the end
                 List<string> Versions = Doc.DocumentNode.SelectNodes("//a").Select(X => X.InnerText.TrimEnd('/')).ToList();
 
-                // Iterate over the versions that we got and ignore those that are not builds or have a "Non-breaking space"
-                foreach (string Version in Versions.Where(X => !InvalidBuilds.Contains(X) && !X.Contains("&nbsp")))
+                // Iterate over the versions that we got
+                foreach (string Version in Versions)
                 {
-                    // And add that version into the ComboBox
-                    BuildList.Items.Add(Version);
+                    // If the build is not invalid and it does not contains an "Non-breaking space"
+                    if (!InvalidBuilds.Contains(Version) && !Version.Contains("&nbsp"))
+                    {
+                        // And add that version into the ComboBox
+                        Builds.Add(Version);
+                    }
                 }
             }
             // Otherwise
             else
             {
                 MessageBox.Show($"We were unable to fetch the FXServer Builds\n\n{(int)HttpCode} {HttpCode}" , "Unable to refresh Builds", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            // Add the existing builds
+            foreach (string Dir in Directory.GetDirectories("Builds"))
+            {
+                // If the build is not already on that list and the server executable exists on that folder
+                if (!Builds.Contains(Path.GetFileName(Dir)) && File.Exists(Path.Combine(Dir, "FXServer.exe")))
+                {
+                    // Add it to the list
+                    Builds.Add(Path.GetFileName(Dir));
+                }
+            }
+
+            // Finally, add them into the combobox
+            foreach (string Build in Builds)
+            {
+                BuildList.Items.Add(Build);
             }
             
             // Finally, unlock the selectors and restore the last build used
