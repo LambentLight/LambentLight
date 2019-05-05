@@ -103,7 +103,7 @@ namespace ServerManager
             HtmlAgilityPack.HtmlDocument Doc = Web.Load("https://runtime.fivem.net/artifacts/fivem/build_server_windows/master/");
 
             // Create a list for storing the builds
-            List<string> Builds = new List<string>();
+            List<string> FoundBuilds = new List<string>();
 
             // If the status code is 200
             if (HttpCode == HttpStatusCode.OK)
@@ -118,7 +118,7 @@ namespace ServerManager
                     if (!InvalidBuilds.Contains(Version) && !Version.Contains("&nbsp"))
                     {
                         // And add that version into the ComboBox
-                        Builds.Add(Version);
+                        FoundBuilds.Add(Version);
                     }
                 }
             }
@@ -129,18 +129,18 @@ namespace ServerManager
             }
 
             // Add the existing builds
-            foreach (string Dir in Directory.GetDirectories("Builds"))
+            foreach (string Dir in Directory.GetDirectories(Builds))
             {
                 // If the build is not already on that list and the server executable exists on that folder
                 if (!Builds.Contains(Path.GetFileName(Dir)) && File.Exists(Path.Combine(Dir, "FXServer.exe")))
                 {
                     // Add it to the list
-                    Builds.Add(Path.GetFileName(Dir));
+                    FoundBuilds.Add(Path.GetFileName(Dir));
                 }
             }
 
             // Finally, add them into the combobox
-            foreach (string Build in Builds)
+            foreach (string Build in FoundBuilds)
             {
                 BuildList.Items.Add(Build);
             }
