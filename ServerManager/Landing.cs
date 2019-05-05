@@ -1,4 +1,4 @@
-using HtmlAgilityPack;
+﻿using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -89,22 +89,36 @@ namespace ServerManager
 
         private void RefreshServerBuilds()
         {
+            // Create a variable to see if the page is valid
+            HttpStatusCode HttpCode = HttpStatusCode.NotFound;
+
             // Lock both of the selectors
             LimitAvailableControls(true);
             // Clear the list of items
             BuildList.Items.Clear();
-            // Create a new web parser
+            // Create a new web parser and add a post request handler
             HtmlWeb Web = new HtmlWeb();
+            Web.PostResponse += (request, response) => { HttpCode = response.StatusCode; };
             // Get the document from the FiveM build list
             HtmlAgilityPack.HtmlDocument Doc = Web.Load("https://runtime.fivem.net/artifacts/fivem/build_server_windows/master/");
-            // Create a list of versions from the links without the "/" at the end
-            List<string> Versions = Doc.DocumentNode.SelectNodes("//a").Select(X => X.InnerText.TrimEnd('/')).ToList();
-            
-            // Iterate over the versions that we got and ignore those that are not builds or have a "Non-breaking space"
-            foreach (string Version in Versions.Where(X => !InvalidBuilds.Contains(X) && !X.Contains("&nbsp")))
+
+            // If the status code is 200
+            if (HttpCode == HttpStatusCode.OK)
             {
-                // And add that version into the ComboBox
-                BuildList.Items.Add(Version);
+                // Create a list of versions from the links without the "/" at the end
+                List<string> Versions = Doc.DocumentNode.SelectNodes("//a").Select(X => X.InnerText.TrimEnd('/')).ToList();
+
+                // Iterate over the versions that we got and ignore those that are not builds or have a "Non-breaking space"
+                foreach (string Version in Versions.Where(X => !InvalidBuilds.Contains(X) && !X.Contains("&nbsp")))
+                {
+                    // And add that version into the ComboBox
+                    BuildList.Items.Add(Version);
+                }
+            }
+            // Otherwise
+            else
+            {
+                MessageBox.Show($"We were unable to fetch the FXServer Builds\n\n{(int)HttpCode} {HttpCode}" , "Unable to refresh Builds", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             
             // Finally, unlock the selectors and restore the last build used
