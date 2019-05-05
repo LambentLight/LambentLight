@@ -1,4 +1,4 @@
-﻿using HtmlAgilityPack;
+using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -72,37 +72,6 @@ namespace ServerManager
             }
             // Initialize the UI
             InitializeComponent();
-            // And refresh the list of server builds and server data
-            RefreshServerBuilds();
-            RefreshServerData();
-            // Set the security protocol as TLS 1.2 (for some reason, SSL3 does not works)
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-            // Check if the settings require an update
-            if (Properties.Settings.Default.UpgradeRequired)
-            {
-                // If they do, upgrade and save them
-                Properties.Settings.Default.Upgrade();
-                Properties.Settings.Default.UpgradeRequired = false;
-                Properties.Settings.Default.Save();
-            }
-
-            // If there is the user wants scheduled restarts
-            if (Properties.Settings.Default.ScheduledRestart)
-            {
-                // Enable them
-                ScheduledRestart.Enabled = true;
-
-                // And, if the user is restarting every few minutes/hours/days
-                if (Properties.Settings.Default.ScheduledMode == 0)
-                {
-                    ScheduledRestart.Interval = (int)Properties.Settings.Default.ScheduledTime.TotalMilliseconds;
-                }
-                // Otherwise, set another interval
-                else if (Properties.Settings.Default.ScheduledMode == 1)
-                {
-                    ScheduledRestart.Interval = 100;
-                }
-            }
         }
 
         private void LimitAvailableControls(bool Enable)
@@ -549,6 +518,41 @@ namespace ServerManager
                 else if (!TimeMatches && LastRestart)
                 {
                     LastRestart = false;
+                }
+            }
+        }
+
+        private void Landing_Shown(object sender, EventArgs e)
+        {
+            // And refresh the list of server builds and server data
+            RefreshServerBuilds();
+            RefreshServerData();
+            // Set the security protocol as TLS 1.2 (for some reason, SSL3 does not works)
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            // Check if the settings require an update
+            if (Properties.Settings.Default.UpgradeRequired)
+            {
+                // If they do, upgrade and save them
+                Properties.Settings.Default.Upgrade();
+                Properties.Settings.Default.UpgradeRequired = false;
+                Properties.Settings.Default.Save();
+            }
+
+            // If there is the user wants scheduled restarts
+            if (Properties.Settings.Default.ScheduledRestart)
+            {
+                // Enable them
+                ScheduledRestart.Enabled = true;
+
+                // And, if the user is restarting every few minutes/hours/days
+                if (Properties.Settings.Default.ScheduledMode == 0)
+                {
+                    ScheduledRestart.Interval = (int)Properties.Settings.Default.ScheduledTime.TotalMilliseconds;
+                }
+                // Otherwise, set another interval
+                else if (Properties.Settings.Default.ScheduledMode == 1)
+                {
+                    ScheduledRestart.Interval = 100;
                 }
             }
         }

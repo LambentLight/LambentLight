@@ -276,6 +276,7 @@ namespace ServerManager
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ServerManager";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Landing_FormClosing);
+            this.Shown += new System.EventHandler(this.Landing_Shown);
             this.BuildSelector.ResumeLayout(false);
             this.ServerData.ResumeLayout(false);
             this.Console.ResumeLayout(false);
