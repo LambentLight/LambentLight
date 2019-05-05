@@ -76,3 +76,11 @@ NOTE: This is not ready for production! I'm not responsable for random crashes a
 ### 0.4
 
 * NEW: Added scheduled restarts
+
+### 0.5
+
+* NEW: Updated dependencies
+* NEW: Added generation of RCON passwords
+* NEW: We now require .NET Framework 4.7.2
+* NEW: Now you get notified when is not possible to update the builds
+* FIX: You now get the existing builds listed and available when is not possible to update them
