@@ -461,6 +461,7 @@ namespace ServerManager
             if ((e.KeyCode == Keys.Return || e.KeyCode == Keys.Enter) && ServerProcess.IsRunning())
             {
                 ServerProcess.StandardInput.WriteLine(ServerInput.Text);
+                ServerProcess.StandardInput.Flush();
                 ServerInput.Text = string.Empty;
             }
         }
