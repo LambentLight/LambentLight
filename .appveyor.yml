@@ -1,17 +1,19 @@
-# AppVeyor template for FiveM and ScriptHookVDotNet modifications
-# (C) 2018-2019 Hannele Ruiz
-# Released under MIT
+# AppVeyor template for GTA IV/EFLC/V C# Mods
 
 # This should be changed after every major release
-version: "0.4.0.{build}"
+version: "0.5.0.{build}"
 # The AppVeyor image to use, usually the most up-to-date
 image: Visual Studio 2017
 
+# NOTE: This is meant to be used with the Visual Studio templates
+# Check https://github.com/justalemon/RageVSTemplates for more info
+
 # Send a Discord notification to notify the build progress
+# Uses SkyHook: https://github.com/Commit451/skyhook
 notifications:
   - provider: Webhook
     url:
-      secure: RQOjbD0a6023xZNVZ7zzk7PjRpoF448yAGSM8koDLhlw6u4CikzjvfmSgFjyvqMAxTs6oq/Pb+idg+/mZ1Jvogbll9tqmpbCmBIY529euveHS7O7r0ELq+8HuL1osif7VJJnAcHKiU78B+B2Yni2sJV/DxnZc/ScvoJMtLJC7zi6q+n5iDsjsdsnhTD3cK6y
+      secure: RQOjbD0a6023xZNVZ7zzk7PjRpoF448yAGSM8koDLhmkmzUM5yPCgmaad8aJqIs8RUNIyviWWVKgyVoHDnXu54LGOTNVOCWgVLopKG8FA/Ofnc/R3wb8e0Y1VLME2TDc4OyE8nUxd78/lJY7qiz0pR1OZDgDregNYwczlizdDJNHSumbS17VNKQygVqdwoqd
 
 # Assembly patching: Change the Product Version and File Version
 assembly_info:
@@ -20,7 +22,7 @@ assembly_info:
   assembly_version: "{version}"
   assembly_file_version: "{version}"
 
-# Some simple stuff: If this is a tag, use the tag without the v at the start as our version
+# Some simple stuff: If this is a tag, use it as the version without the V at the start
 init:
   - ps: if ($env:APPVEYOR_REPO_TAG -eq "true") { Update-AppveyorBuild -Version "$($env:APPVEYOR_REPO_TAG_NAME.TrimStart("v"))" }
 
@@ -34,13 +36,14 @@ install:
 build_script:
   - msbuild %APPVEYOR_PROJECT_NAME%.sln /t:Build /p:Configuration=Release
 
-# After the build, package the output files from the release folder
+# After the build, package the output files from the respective folder
 # REMEMBER: Set the output location to "..\bin\Debug\" and "..\bin\Release\"
+# If you used the Visual Studio templates, this is done automatically
 after_build:
   - 7z a %APPVEYOR_PROJECT_NAME%.7z %APPVEYOR_BUILD_FOLDER%\bin\Release\*
   - appveyor PushArtifact %APPVEYOR_PROJECT_NAME%.7z
 
-# During tags, deploy the 7zip file(s) to GitHub Releases
+# If this is a tag, deploy the 7zip file(s) to GitHub Releases
 deploy:
   release: v$(APPVEYOR_BUILD_VERSION)
   provider: GitHub
