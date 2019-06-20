@@ -7,7 +7,7 @@
 <a href="https://dependabot.com"><img src="https://api.dependabot.com/badges/status?host=github&repo=justalemon/ServerManager"></a>
 <a href="https://discord.gg/Cf6sspj"><img src="https://img.shields.io/badge/discord-join-7289DA.svg"></a>
 <br>
-DumpsterDiving is a mod for Grand Theft Auto V that implements the Dumpster Diving/Looting from Grand Theft Auto: Chinatown Wars.
+ServerManager is an application for managing dedicated FiveM servers. It helps with the configuration, installation of plugins and other administrative tasks.
 <br><br>
 <img src="https://raw.githubusercontent.com/justalemon/ServerManager/master/preview.png"/>
 </div>
