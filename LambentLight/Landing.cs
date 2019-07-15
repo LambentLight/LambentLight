@@ -1,4 +1,4 @@
-﻿using HtmlAgilityPack;
+using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -55,6 +55,10 @@ namespace LambentLight
         /// If the last scheduled restart was completed.
         /// </summary>
         private bool LastRestart = false;
+        /// <summary>
+        /// The page that contains all of the FiveM builds.
+        /// </summary>
+        private const string BuildsPage = "https://runtime.fivem.net/artifacts/fivem/build_server_windows/master/";
 
         public Landing()
         {
@@ -100,7 +104,7 @@ namespace LambentLight
             HtmlWeb Web = new HtmlWeb();
             Web.PostResponse += (request, response) => { HttpCode = response.StatusCode; };
             // Get the document from the FiveM build list
-            HtmlAgilityPack.HtmlDocument Doc = Web.Load("https://runtime.fivem.net/artifacts/fivem/build_server_windows/master/");
+            HtmlAgilityPack.HtmlDocument Doc = Web.Load(BuildsPage);
 
             // Create a list for storing the builds
             List<string> FoundBuilds = new List<string>();
