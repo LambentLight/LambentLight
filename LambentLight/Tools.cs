@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography;
 
-namespace ServerManager
+namespace LambentLight
 {
     /// <summary>
     /// Set of tools to make development easier.

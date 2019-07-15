@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 
-namespace ServerManager
+namespace LambentLight
 {
     /// <summary>
     /// Type of resource.

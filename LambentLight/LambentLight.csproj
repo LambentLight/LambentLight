@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{1CEF7E35-7A34-42FB-9297-040963C7B42D}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>ServerManager</RootNamespace>
-    <AssemblyName>ServerManager</AssemblyName>
+    <RootNamespace>LambentLight</RootNamespace>
+    <AssemblyName>LambentLight</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -15,7 +15,7 @@
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>ServerManager.Program</StartupObject>
+    <StartupObject>LambentLight.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
     <DebugSymbols>true</DebugSymbols>

@@ -12,7 +12,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ServerManager
+namespace LambentLight
 {
     public partial class Landing : Form
     {

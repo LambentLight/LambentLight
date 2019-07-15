@@ -1,4 +1,4 @@
-namespace ServerManager
+namespace LambentLight
 {
     partial class Landing
     {
@@ -274,7 +274,7 @@ namespace ServerManager
             this.MinimumSize = new System.Drawing.Size(816, 489);
             this.Name = "Landing";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "ServerManager";
+            this.Text = "LambentLight";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Landing_FormClosing);
             this.Shown += new System.EventHandler(this.Landing_Shown);
             this.BuildSelector.ResumeLayout(false);

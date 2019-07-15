@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Windows.Forms;
 
-namespace ServerManager
+namespace LambentLight
 {
     public static class Extensions
     {

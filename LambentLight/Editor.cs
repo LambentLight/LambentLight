@@ -2,7 +2,7 @@
 using System.IO;
 using System.Windows.Forms;
 
-namespace ServerManager
+namespace LambentLight
 {
     public partial class Editor : Form
     {

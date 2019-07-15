@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace ServerManager
+namespace LambentLight
 {
     /// <summary>
     /// RegEx expressions.

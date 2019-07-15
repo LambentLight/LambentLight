@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace ServerManager
+namespace LambentLight
 {
     static class Program
     {

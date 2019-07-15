@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace ServerManager
+namespace LambentLight
 {
     public partial class Settings : Form
     {

@@ -1,4 +1,4 @@
-﻿namespace ServerManager
+﻿namespace LambentLight
 {
     /// <summary>
     /// Current server status.

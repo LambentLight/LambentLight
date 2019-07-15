@@ -1,10 +1,10 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("ServerManager")]
+[assembly: AssemblyTitle("LambentLight")]
 [assembly: AssemblyDescription("Some random FiveM server manager created in 72 hours")]
 [assembly: AssemblyCompany("Hannele Ruiz")]
-[assembly: AssemblyProduct("ServerManager")]
+[assembly: AssemblyProduct("LambentLight")]
 [assembly: AssemblyCopyright("© 2019 Hannele Ruiz")]
 
 [assembly: ComVisible(false)]

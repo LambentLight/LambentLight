@@ -1,4 +1,4 @@
-﻿namespace ServerManager
+﻿namespace LambentLight
 {
     partial class Downloader
     {
