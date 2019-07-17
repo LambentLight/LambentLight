@@ -1,4 +1,5 @@
 using HtmlAgilityPack;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -59,6 +60,10 @@ namespace LambentLight
         /// The page that contains all of the FiveM builds.
         /// </summary>
         private const string BuildsPage = "https://runtime.fivem.net/artifacts/fivem/build_server_windows/master/";
+        /// <summary>
+        /// Our client for making web requests.
+        /// </summary>
+        private WebClient Client = new WebClient();
 
         public Landing()
         {
@@ -93,43 +98,24 @@ namespace LambentLight
 
         private void RefreshServerBuilds()
         {
-            // Create a variable to see if the page is valid
-            HttpStatusCode HttpCode = HttpStatusCode.NotFound;
-
             // Lock both of the selectors
             LimitAvailableControls(true);
             // Clear the list of items
             BuildList.Items.Clear();
-            // Create a new web parser and add a post request handler
-            HtmlWeb Web = new HtmlWeb();
-            Web.PostResponse += (request, response) => { HttpCode = response.StatusCode; };
-            // Get the document from the FiveM build list
-            HtmlAgilityPack.HtmlDocument Doc = Web.Load(BuildsPage);
 
             // Create a list for storing the builds
             List<string> FoundBuilds = new List<string>();
 
             // If the status code is 200
-            if (HttpCode == HttpStatusCode.OK)
+            try
             {
-                // Create a list of versions from the links without the "/" at the end
-                List<string> Versions = Doc.DocumentNode.SelectNodes("//a").Select(X => X.InnerText.TrimEnd('/')).ToList();
-
-                // Iterate over the versions that we got
-                foreach (string Version in Versions)
-                {
-                    // If the build is not invalid and it does not contains an "Non-breaking space"
-                    if (!InvalidBuilds.Contains(Version) && !Version.Contains("&nbsp"))
-                    {
-                        // And add that version into the ComboBox
-                        FoundBuilds.Add(Version);
-                    }
-                }
+                // Parse the builds as a list of strings
+                FoundBuilds = JsonConvert.DeserializeObject<List<string>>(Client.DownloadString(Properties.Settings.Default.Builds));
             }
             // Otherwise
-            else
+            catch (WebException e)
             {
-                MessageBox.Show($"We were unable to fetch the FXServer Builds\n\n{(int)HttpCode} {HttpCode}" , "Unable to refresh Builds", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show($"We were unable to fetch the FXServer Builds\n\n{(int)e.Status} {e.Status}" , "Unable to refresh Builds", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             // Add the existing builds
