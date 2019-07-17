@@ -12,6 +12,7 @@ namespace LambentLight
             // And set the values from the configuration
             License.Text = Properties.Settings.Default.License;
             ResourceDownload.Text = Properties.Settings.Default.Resources;
+            BuildsBox.Text = Properties.Settings.Default.Builds;
             AutoRestart.Checked = Properties.Settings.Default.AutoRestart;
             ClearCache.Checked = Properties.Settings.Default.ClearCache;
             DownloadScripts.Checked = Properties.Settings.Default.DownloadScripts;
@@ -39,6 +40,7 @@ namespace LambentLight
             // Store the values on their respective places
             Properties.Settings.Default.License = License.Text;
             Properties.Settings.Default.Resources = ResourceDownload.Text;
+            Properties.Settings.Default.Builds = BuildsBox.Text;
             Properties.Settings.Default.AutoRestart = AutoRestart.Checked;
             Properties.Settings.Default.ClearCache = ClearCache.Checked;
             Properties.Settings.Default.DownloadScripts = DownloadScripts.Checked;

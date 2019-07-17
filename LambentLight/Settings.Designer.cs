@@ -41,16 +41,19 @@
             this.ScriptDLOptions = new System.Windows.Forms.GroupBox();
             this.ShowConfigOpt = new System.Windows.Forms.CheckBox();
             this.Scheduled = new System.Windows.Forms.GroupBox();
-            this.ScheduledRestarts = new System.Windows.Forms.CheckBox();
-            this.ScheduledMode = new System.Windows.Forms.ComboBox();
-            this.Mode = new System.Windows.Forms.Label();
-            this.Time = new System.Windows.Forms.Label();
             this.ScheduledTime = new System.Windows.Forms.TextBox();
+            this.Time = new System.Windows.Forms.Label();
+            this.Mode = new System.Windows.Forms.Label();
+            this.ScheduledMode = new System.Windows.Forms.ComboBox();
+            this.ScheduledRestarts = new System.Windows.Forms.CheckBox();
+            this.BuildsGroup = new System.Windows.Forms.GroupBox();
+            this.BuildsBox = new System.Windows.Forms.TextBox();
             this.LicenseInput.SuspendLayout();
             this.Running.SuspendLayout();
             this.ResourceAPI.SuspendLayout();
             this.ScriptDLOptions.SuspendLayout();
             this.Scheduled.SuspendLayout();
+            this.BuildsGroup.SuspendLayout();
             this.SuspendLayout();
             // 
             // LicenseInput
@@ -81,7 +84,7 @@
             this.Running.Controls.Add(this.DownloadScripts);
             this.Running.Controls.Add(this.ClearCache);
             this.Running.Controls.Add(this.AutoRestart);
-            this.Running.Location = new System.Drawing.Point(12, 124);
+            this.Running.Location = new System.Drawing.Point(12, 180);
             this.Running.Name = "Running";
             this.Running.Size = new System.Drawing.Size(310, 87);
             this.Running.TabIndex = 1;
@@ -128,7 +131,7 @@
             // 
             this.Save.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Save.Location = new System.Drawing.Point(166, 375);
+            this.Save.Location = new System.Drawing.Point(166, 430);
             this.Save.Name = "Save";
             this.Save.Size = new System.Drawing.Size(75, 23);
             this.Save.TabIndex = 2;
@@ -140,7 +143,7 @@
             // 
             this.Cancel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Cancel.Location = new System.Drawing.Point(247, 375);
+            this.Cancel.Location = new System.Drawing.Point(247, 430);
             this.Cancel.Name = "Cancel";
             this.Cancel.Size = new System.Drawing.Size(75, 23);
             this.Cancel.TabIndex = 3;
@@ -172,7 +175,7 @@
             // ScriptDLOptions
             // 
             this.ScriptDLOptions.Controls.Add(this.ShowConfigOpt);
-            this.ScriptDLOptions.Location = new System.Drawing.Point(12, 217);
+            this.ScriptDLOptions.Location = new System.Drawing.Point(12, 273);
             this.ScriptDLOptions.Name = "ScriptDLOptions";
             this.ScriptDLOptions.Size = new System.Drawing.Size(310, 40);
             this.ScriptDLOptions.TabIndex = 4;
@@ -198,25 +201,41 @@
             this.Scheduled.Controls.Add(this.Mode);
             this.Scheduled.Controls.Add(this.ScheduledMode);
             this.Scheduled.Controls.Add(this.ScheduledRestarts);
-            this.Scheduled.Location = new System.Drawing.Point(12, 263);
+            this.Scheduled.Location = new System.Drawing.Point(12, 319);
             this.Scheduled.Name = "Scheduled";
             this.Scheduled.Size = new System.Drawing.Size(310, 104);
             this.Scheduled.TabIndex = 5;
             this.Scheduled.TabStop = false;
             this.Scheduled.Text = "Scheduled Server Restarts";
             // 
-            // ScheduledRestarts
+            // ScheduledTime
             // 
-            this.ScheduledRestarts.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.ScheduledTime.Location = new System.Drawing.Point(47, 69);
+            this.ScheduledTime.Name = "ScheduledTime";
+            this.ScheduledTime.Size = new System.Drawing.Size(257, 20);
+            this.ScheduledTime.TabIndex = 5;
+            // 
+            // Time
+            // 
+            this.Time.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ScheduledRestarts.AutoSize = true;
-            this.ScheduledRestarts.Location = new System.Drawing.Point(6, 19);
-            this.ScheduledRestarts.Name = "ScheduledRestarts";
-            this.ScheduledRestarts.Size = new System.Drawing.Size(189, 17);
-            this.ScheduledRestarts.TabIndex = 0;
-            this.ScheduledRestarts.Text = "Enable Scheduled Server Restarts";
-            this.ScheduledRestarts.UseVisualStyleBackColor = true;
-            this.ScheduledRestarts.CheckedChanged += new System.EventHandler(this.ScheduledRestarts_CheckedChanged);
+            this.Time.AutoSize = true;
+            this.Time.Location = new System.Drawing.Point(3, 72);
+            this.Time.Name = "Time";
+            this.Time.Size = new System.Drawing.Size(30, 13);
+            this.Time.TabIndex = 4;
+            this.Time.Text = "Time";
+            // 
+            // Mode
+            // 
+            this.Mode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Mode.AutoSize = true;
+            this.Mode.Location = new System.Drawing.Point(3, 45);
+            this.Mode.Name = "Mode";
+            this.Mode.Size = new System.Drawing.Size(34, 13);
+            this.Mode.TabIndex = 3;
+            this.Mode.Text = "Mode";
             // 
             // ScheduledMode
             // 
@@ -232,40 +251,46 @@
             this.ScheduledMode.Size = new System.Drawing.Size(257, 21);
             this.ScheduledMode.TabIndex = 2;
             // 
-            // Mode
+            // ScheduledRestarts
             // 
-            this.Mode.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.ScheduledRestarts.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Mode.AutoSize = true;
-            this.Mode.Location = new System.Drawing.Point(3, 45);
-            this.Mode.Name = "Mode";
-            this.Mode.Size = new System.Drawing.Size(34, 13);
-            this.Mode.TabIndex = 3;
-            this.Mode.Text = "Mode";
+            this.ScheduledRestarts.AutoSize = true;
+            this.ScheduledRestarts.Location = new System.Drawing.Point(6, 19);
+            this.ScheduledRestarts.Name = "ScheduledRestarts";
+            this.ScheduledRestarts.Size = new System.Drawing.Size(189, 17);
+            this.ScheduledRestarts.TabIndex = 0;
+            this.ScheduledRestarts.Text = "Enable Scheduled Server Restarts";
+            this.ScheduledRestarts.UseVisualStyleBackColor = true;
+            this.ScheduledRestarts.CheckedChanged += new System.EventHandler(this.ScheduledRestarts_CheckedChanged);
             // 
-            // Time
+            // BuildsGroup
             // 
-            this.Time.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.BuildsGroup.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.Time.AutoSize = true;
-            this.Time.Location = new System.Drawing.Point(3, 72);
-            this.Time.Name = "Time";
-            this.Time.Size = new System.Drawing.Size(30, 13);
-            this.Time.TabIndex = 4;
-            this.Time.Text = "Time";
+            this.BuildsGroup.Controls.Add(this.BuildsBox);
+            this.BuildsGroup.Location = new System.Drawing.Point(12, 124);
+            this.BuildsGroup.Name = "BuildsGroup";
+            this.BuildsGroup.Size = new System.Drawing.Size(310, 50);
+            this.BuildsGroup.TabIndex = 2;
+            this.BuildsGroup.TabStop = false;
+            this.BuildsGroup.Text = "Builds API";
             // 
-            // ScheduledTime
+            // BuildsBox
             // 
-            this.ScheduledTime.Location = new System.Drawing.Point(47, 69);
-            this.ScheduledTime.Name = "ScheduledTime";
-            this.ScheduledTime.Size = new System.Drawing.Size(257, 20);
-            this.ScheduledTime.TabIndex = 5;
+            this.BuildsBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.BuildsBox.Location = new System.Drawing.Point(6, 19);
+            this.BuildsBox.Name = "BuildsBox";
+            this.BuildsBox.Size = new System.Drawing.Size(298, 20);
+            this.BuildsBox.TabIndex = 0;
             // 
             // Settings
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(334, 405);
+            this.ClientSize = new System.Drawing.Size(334, 460);
+            this.Controls.Add(this.BuildsGroup);
             this.Controls.Add(this.Scheduled);
             this.Controls.Add(this.ScriptDLOptions);
             this.Controls.Add(this.ResourceAPI);
@@ -289,6 +314,8 @@
             this.ScriptDLOptions.PerformLayout();
             this.Scheduled.ResumeLayout(false);
             this.Scheduled.PerformLayout();
+            this.BuildsGroup.ResumeLayout(false);
+            this.BuildsGroup.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -313,5 +340,7 @@
         private System.Windows.Forms.ComboBox ScheduledMode;
         private System.Windows.Forms.TextBox ScheduledTime;
         private System.Windows.Forms.Label Time;
+        private System.Windows.Forms.GroupBox BuildsGroup;
+        private System.Windows.Forms.TextBox BuildsBox;
     }
 }

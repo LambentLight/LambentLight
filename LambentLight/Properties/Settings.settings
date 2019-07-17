@@ -38,5 +38,8 @@
     <Setting Name="ScheduledMode" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
+    <Setting Name="Builds" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://raw.githubusercontent.com/LambentLight/BuildMetadata/master/builds.json</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
