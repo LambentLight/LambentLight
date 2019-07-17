@@ -24,7 +24,7 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="Resources" Type="System.String" Scope="User">
-      <Value Profile="(Default)">https://raw.githubusercontent.com/LambentLight/LambentLight/master/resources.json</Value>
+      <Value Profile="(Default)">https://raw.githubusercontent.com/LambentLight/ResourceMetadata/master/resources.json</Value>
     </Setting>
     <Setting Name="ConfigLine" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
