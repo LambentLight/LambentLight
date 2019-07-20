@@ -35,9 +35,12 @@
             this.TopStrip = new System.Windows.Forms.MenuStrip();
             this.StartItem = new System.Windows.Forms.ToolStripMenuItem();
             this.StopItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.LogsTab = new System.Windows.Forms.TabPage();
+            this.Tabs = new System.Windows.Forms.TabControl();
             this.BuildsGroup.SuspendLayout();
             this.DataGroup.SuspendLayout();
             this.TopStrip.SuspendLayout();
+            this.Tabs.SuspendLayout();
             this.SuspendLayout();
             // 
             // BuildsGroup
@@ -108,11 +111,34 @@
             this.StopItem.Size = new System.Drawing.Size(59, 20);
             this.StopItem.Text = "Stop";
             // 
+            // LogsTab
+            // 
+            this.LogsTab.Location = new System.Drawing.Point(4, 22);
+            this.LogsTab.Name = "LogsTab";
+            this.LogsTab.Padding = new System.Windows.Forms.Padding(3);
+            this.LogsTab.Size = new System.Drawing.Size(767, 313);
+            this.LogsTab.TabIndex = 0;
+            this.LogsTab.Text = "Logs";
+            this.LogsTab.UseVisualStyleBackColor = true;
+            // 
+            // Tabs
+            // 
+            this.Tabs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Tabs.Controls.Add(this.LogsTab);
+            this.Tabs.Location = new System.Drawing.Point(12, 85);
+            this.Tabs.Name = "Tabs";
+            this.Tabs.SelectedIndex = 0;
+            this.Tabs.Size = new System.Drawing.Size(775, 339);
+            this.Tabs.TabIndex = 3;
+            // 
             // Landing
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(799, 436);
+            this.Controls.Add(this.Tabs);
             this.Controls.Add(this.DataGroup);
             this.Controls.Add(this.BuildsGroup);
             this.Controls.Add(this.TopStrip);
@@ -125,6 +151,7 @@
             this.DataGroup.ResumeLayout(false);
             this.TopStrip.ResumeLayout(false);
             this.TopStrip.PerformLayout();
+            this.Tabs.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -139,6 +166,8 @@
         private System.Windows.Forms.MenuStrip TopStrip;
         private System.Windows.Forms.ToolStripMenuItem StartItem;
         private System.Windows.Forms.ToolStripMenuItem StopItem;
+        private System.Windows.Forms.TabPage LogsTab;
+        private System.Windows.Forms.TabControl Tabs;
     }
 }
 
