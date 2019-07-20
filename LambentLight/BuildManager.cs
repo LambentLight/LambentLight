@@ -125,6 +125,13 @@ namespace LambentLight
                 // And add the build
                 box.Items.Add(StoredBuild);
             }
+
+            // If the number of items is higher than zero
+            if (box.Items.Count > 0)
+            {
+                // Select the first item
+                box.SelectedIndex = 0;
+            }
         }
     }
 }

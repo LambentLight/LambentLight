@@ -96,6 +96,13 @@ namespace LambentLight
                 // Add it to the combo box
                 box.Items.Add(Folder);
             }
+
+            // If the number of items is higher than zero
+            if (box.Items.Count > 0)
+            {
+                // Select the first item
+                box.SelectedIndex = 0;
+            }
         }
     }
 }
