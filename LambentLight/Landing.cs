@@ -15,6 +15,7 @@ namespace LambentLight
         public Landing()
         {
             InitializeComponent();
+            BuildManager.Fill(BuildsBox);
         }
     }
 }
