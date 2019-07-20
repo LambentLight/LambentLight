@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
 
@@ -21,6 +21,10 @@ namespace LambentLight
         /// If the folder has a FiveM server configuration file.
         /// </summary>
         public bool HasConfiguration => File.Exists(Path.Combine(Location, "server.cfg"));
+        /// <summary>
+        /// The absolute path of the data folder.
+        /// </summary>
+        public string Absolute => Path.GetFullPath(Location);
 
         /// <summary>
         /// Creates a new instance of the data folder.
