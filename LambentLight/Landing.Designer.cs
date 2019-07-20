@@ -33,8 +33,8 @@
             this.DataGroup = new System.Windows.Forms.GroupBox();
             this.DataBox = new System.Windows.Forms.ComboBox();
             this.TopStrip = new System.Windows.Forms.MenuStrip();
-            this.StopItem = new System.Windows.Forms.ToolStripMenuItem();
             this.StartItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.StopItem = new System.Windows.Forms.ToolStripMenuItem();
             this.BuildsGroup.SuspendLayout();
             this.DataGroup.SuspendLayout();
             this.TopStrip.SuspendLayout();
@@ -94,19 +94,19 @@
             this.TopStrip.TabIndex = 2;
             this.TopStrip.Text = "menuStrip1";
             // 
-            // StopItem
-            // 
-            this.StopItem.Image = global::LambentLight.Properties.Resources.Stop;
-            this.StopItem.Name = "StopItem";
-            this.StopItem.Size = new System.Drawing.Size(59, 20);
-            this.StopItem.Text = "Stop";
-            // 
             // StartItem
             // 
             this.StartItem.Image = global::LambentLight.Properties.Resources.Play;
             this.StartItem.Name = "StartItem";
             this.StartItem.Size = new System.Drawing.Size(59, 20);
             this.StartItem.Text = "Start";
+            // 
+            // StopItem
+            // 
+            this.StopItem.Image = global::LambentLight.Properties.Resources.Stop;
+            this.StopItem.Name = "StopItem";
+            this.StopItem.Size = new System.Drawing.Size(59, 20);
+            this.StopItem.Text = "Stop";
             // 
             // Landing
             // 
@@ -117,6 +117,7 @@
             this.Controls.Add(this.BuildsGroup);
             this.Controls.Add(this.TopStrip);
             this.MainMenuStrip = this.TopStrip;
+            this.MinimumSize = new System.Drawing.Size(815, 475);
             this.Name = "Landing";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LambentLight: A FiveM Server Manager";
