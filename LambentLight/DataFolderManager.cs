@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -41,7 +41,7 @@ namespace LambentLight
         /// <returns>The name of the directory.</returns>
         public override string ToString()
         {
-            return Path.GetDirectoryName(Location);
+            return Path.GetFileName(Location);
         }
     }
 
