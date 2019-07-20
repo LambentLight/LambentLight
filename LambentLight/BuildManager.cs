@@ -2,7 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Net;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace LambentLight
@@ -12,10 +14,6 @@ namespace LambentLight
     /// </summary>
     public class Build
     {
-        /// <summary>
-        /// The Uri or URL for downloading the builds from the FiveM servers.
-        /// </summary>
-        public const string DownloadUri = "https://runtime.fivem.net/artifacts/fivem/build_server_windows/master/{0}/server.zip";
         /// <summary>
         /// The ID of the build. This can be either the folder name or Upstream identifier.
         /// </summary>
@@ -72,6 +70,10 @@ namespace LambentLight
     /// </summary>
     public static class BuildManager
     {
+        /// <summary>
+        /// The Uri or URL for downloading the builds from the FiveM servers.
+        /// </summary>
+        public const string DownloadUri = "https://runtime.fivem.net/artifacts/fivem/build_server_windows/master/{0}/server.zip";
         /// <summary>
         /// The web client for REST calls.
         /// </summary>
@@ -132,6 +134,43 @@ namespace LambentLight
                 // Select the first item
                 box.SelectedIndex = 0;
             }
+        }
+
+        /// <summary>
+        /// Downloads the specified build.
+        /// </summary>
+        /// <param name="build">The build to download.</param>
+        public static async Task Download(Build build)
+        {
+            // If the builds folder does not exists, create it
+            if (!Directory.Exists("Builds"))
+            {
+                Directory.CreateDirectory("Builds");
+            }
+
+            // Create the Uri and destination location
+            Uri URL = new Uri(string.Format(DownloadUri, build.ID));
+            string Destination = Path.Combine("Builds", build.ID + ".zip");
+
+            // Start downloading the file
+            Client.DownloadFileAsync(URL, Destination);
+
+            // While the client is bussy, wait
+            while (Client.IsBusy)
+            {
+                await Task.Delay(0);
+            }
+
+            // If the current build folder exists, delete it
+            if (build.IsAvailable)
+            {
+                Directory.Delete(build.Folder, true);
+            }
+            // Create the folder for the files
+            Directory.CreateDirectory(build.Folder);
+
+            // Finally, extract the values
+            await Task.Run(() => ZipFile.ExtractToDirectory(Destination, build.Folder));
         }
     }
 }
