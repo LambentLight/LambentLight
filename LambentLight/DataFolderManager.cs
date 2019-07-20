@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -78,7 +78,11 @@ namespace LambentLight
             }
         }
 
-        public static void Fill (ComboBox box)
+        /// <summary>
+        /// Fills the specified ComboBox with 
+        /// </summary>
+        /// <param name="box"></param>
+        public static void Fill(ComboBox box)
         {
             // Refresh the list of folders first
             Refresh();
