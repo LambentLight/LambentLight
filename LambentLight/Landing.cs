@@ -18,5 +18,10 @@ namespace LambentLight
             BuildManager.Fill(BuildsBox);
             DataFolderManager.Fill(DataBox);
         }
+
+        private async void StartItem_Click(object sender, EventArgs e)
+        {
+            await ServerManager.Start((Build)BuildsBox.SelectedItem, (DataFolder)DataBox.SelectedItem);
+        }
     }
 }

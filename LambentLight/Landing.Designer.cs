@@ -33,13 +33,13 @@
             this.DataGroup = new System.Windows.Forms.GroupBox();
             this.DataBox = new System.Windows.Forms.ComboBox();
             this.TopStrip = new System.Windows.Forms.MenuStrip();
-            this.LogsTab = new System.Windows.Forms.TabPage();
-            this.Tabs = new System.Windows.Forms.TabControl();
-            this.LogBox = new System.Windows.Forms.TextBox();
             this.StartItem = new System.Windows.Forms.ToolStripMenuItem();
             this.StopItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CreateItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExitItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.LogsTab = new System.Windows.Forms.TabPage();
+            this.LogBox = new System.Windows.Forms.TextBox();
+            this.Tabs = new System.Windows.Forms.TabControl();
             this.BuildsGroup.SuspendLayout();
             this.DataGroup.SuspendLayout();
             this.TopStrip.SuspendLayout();
@@ -103,45 +103,13 @@
             this.TopStrip.TabIndex = 2;
             this.TopStrip.Text = "menuStrip1";
             // 
-            // LogsTab
-            // 
-            this.LogsTab.Controls.Add(this.LogBox);
-            this.LogsTab.Location = new System.Drawing.Point(4, 22);
-            this.LogsTab.Name = "LogsTab";
-            this.LogsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.LogsTab.Size = new System.Drawing.Size(767, 313);
-            this.LogsTab.TabIndex = 0;
-            this.LogsTab.Text = "Logs";
-            this.LogsTab.UseVisualStyleBackColor = true;
-            // 
-            // Tabs
-            // 
-            this.Tabs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Tabs.Controls.Add(this.LogsTab);
-            this.Tabs.Location = new System.Drawing.Point(12, 85);
-            this.Tabs.Name = "Tabs";
-            this.Tabs.SelectedIndex = 0;
-            this.Tabs.Size = new System.Drawing.Size(775, 339);
-            this.Tabs.TabIndex = 3;
-            // 
-            // LogBox
-            // 
-            this.LogBox.Location = new System.Drawing.Point(6, 6);
-            this.LogBox.Multiline = true;
-            this.LogBox.Name = "LogBox";
-            this.LogBox.ReadOnly = true;
-            this.LogBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.LogBox.Size = new System.Drawing.Size(755, 301);
-            this.LogBox.TabIndex = 0;
-            // 
             // StartItem
             // 
             this.StartItem.Image = global::LambentLight.Properties.Resources.Play;
             this.StartItem.Name = "StartItem";
             this.StartItem.Size = new System.Drawing.Size(94, 20);
             this.StartItem.Text = "Start Server";
+            this.StartItem.Click += new System.EventHandler(this.StartItem_Click);
             // 
             // StopItem
             // 
@@ -163,6 +131,39 @@
             this.ExitItem.Name = "ExitItem";
             this.ExitItem.Size = new System.Drawing.Size(54, 20);
             this.ExitItem.Text = "Exit";
+            // 
+            // LogsTab
+            // 
+            this.LogsTab.Controls.Add(this.LogBox);
+            this.LogsTab.Location = new System.Drawing.Point(4, 22);
+            this.LogsTab.Name = "LogsTab";
+            this.LogsTab.Padding = new System.Windows.Forms.Padding(3);
+            this.LogsTab.Size = new System.Drawing.Size(767, 313);
+            this.LogsTab.TabIndex = 0;
+            this.LogsTab.Text = "Logs";
+            this.LogsTab.UseVisualStyleBackColor = true;
+            // 
+            // LogBox
+            // 
+            this.LogBox.Location = new System.Drawing.Point(6, 6);
+            this.LogBox.Multiline = true;
+            this.LogBox.Name = "LogBox";
+            this.LogBox.ReadOnly = true;
+            this.LogBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.LogBox.Size = new System.Drawing.Size(755, 301);
+            this.LogBox.TabIndex = 0;
+            // 
+            // Tabs
+            // 
+            this.Tabs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Tabs.Controls.Add(this.LogsTab);
+            this.Tabs.Location = new System.Drawing.Point(12, 85);
+            this.Tabs.Name = "Tabs";
+            this.Tabs.SelectedIndex = 0;
+            this.Tabs.Size = new System.Drawing.Size(775, 339);
+            this.Tabs.TabIndex = 3;
             // 
             // Landing
             // 
