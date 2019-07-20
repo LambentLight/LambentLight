@@ -32,6 +32,7 @@
             this.BuildsBox = new System.Windows.Forms.ComboBox();
             this.DataGroup = new System.Windows.Forms.GroupBox();
             this.DataBox = new System.Windows.Forms.ComboBox();
+            this.TopStrip = new System.Windows.Forms.MenuStrip();
             this.BuildsGroup.SuspendLayout();
             this.DataGroup.SuspendLayout();
             this.SuspendLayout();
@@ -39,7 +40,7 @@
             // BuildsGroup
             // 
             this.BuildsGroup.Controls.Add(this.BuildsBox);
-            this.BuildsGroup.Location = new System.Drawing.Point(12, 41);
+            this.BuildsGroup.Location = new System.Drawing.Point(12, 27);
             this.BuildsGroup.Name = "BuildsGroup";
             this.BuildsGroup.Size = new System.Drawing.Size(300, 52);
             this.BuildsGroup.TabIndex = 0;
@@ -61,7 +62,7 @@
             // 
             this.DataGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.DataGroup.Controls.Add(this.DataBox);
-            this.DataGroup.Location = new System.Drawing.Point(487, 41);
+            this.DataGroup.Location = new System.Drawing.Point(487, 27);
             this.DataGroup.Name = "DataGroup";
             this.DataGroup.Size = new System.Drawing.Size(300, 52);
             this.DataGroup.TabIndex = 1;
@@ -79,6 +80,14 @@
             this.DataBox.Size = new System.Drawing.Size(288, 21);
             this.DataBox.TabIndex = 0;
             // 
+            // TopStrip
+            // 
+            this.TopStrip.Location = new System.Drawing.Point(0, 0);
+            this.TopStrip.Name = "TopStrip";
+            this.TopStrip.Size = new System.Drawing.Size(799, 24);
+            this.TopStrip.TabIndex = 2;
+            this.TopStrip.Text = "menuStrip1";
+            // 
             // Landing
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -86,12 +95,15 @@
             this.ClientSize = new System.Drawing.Size(799, 436);
             this.Controls.Add(this.DataGroup);
             this.Controls.Add(this.BuildsGroup);
+            this.Controls.Add(this.TopStrip);
+            this.MainMenuStrip = this.TopStrip;
             this.Name = "Landing";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LambentLight: A FiveM Server Manager";
             this.BuildsGroup.ResumeLayout(false);
             this.DataGroup.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -101,6 +113,7 @@
         private System.Windows.Forms.ComboBox BuildsBox;
         private System.Windows.Forms.GroupBox DataGroup;
         private System.Windows.Forms.ComboBox DataBox;
+        private System.Windows.Forms.MenuStrip TopStrip;
     }
 }
 
