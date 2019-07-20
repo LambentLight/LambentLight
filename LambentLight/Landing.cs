@@ -16,6 +16,7 @@ namespace LambentLight
         {
             InitializeComponent();
             BuildManager.Fill(BuildsBox);
+            DataFolderManager.Fill(DataBox);
         }
     }
 }
