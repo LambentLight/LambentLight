@@ -125,15 +125,15 @@
             // 
             this.StartItem.Image = global::LambentLight.Properties.Resources.Play;
             this.StartItem.Name = "StartItem";
-            this.StartItem.Size = new System.Drawing.Size(59, 20);
-            this.StartItem.Text = "Start";
+            this.StartItem.Size = new System.Drawing.Size(94, 20);
+            this.StartItem.Text = "Start Server";
             // 
             // StopItem
             // 
             this.StopItem.Image = global::LambentLight.Properties.Resources.Stop;
             this.StopItem.Name = "StopItem";
-            this.StopItem.Size = new System.Drawing.Size(59, 20);
-            this.StopItem.Text = "Stop";
+            this.StopItem.Size = new System.Drawing.Size(94, 20);
+            this.StopItem.Text = "Stop Server";
             // 
             // CreateItem
             // 
