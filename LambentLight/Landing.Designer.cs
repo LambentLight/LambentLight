@@ -38,9 +38,11 @@
             this.StartItem = new System.Windows.Forms.ToolStripMenuItem();
             this.StopItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CreateItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.LogBox = new System.Windows.Forms.TextBox();
             this.BuildsGroup.SuspendLayout();
             this.DataGroup.SuspendLayout();
             this.TopStrip.SuspendLayout();
+            this.LogsTab.SuspendLayout();
             this.Tabs.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -101,6 +103,7 @@
             // 
             // LogsTab
             // 
+            this.LogsTab.Controls.Add(this.LogBox);
             this.LogsTab.Location = new System.Drawing.Point(4, 22);
             this.LogsTab.Name = "LogsTab";
             this.LogsTab.Padding = new System.Windows.Forms.Padding(3);
@@ -142,6 +145,16 @@
             this.CreateItem.Size = new System.Drawing.Size(132, 20);
             this.CreateItem.Text = "Create Data Folder";
             // 
+            // LogBox
+            // 
+            this.LogBox.Location = new System.Drawing.Point(6, 6);
+            this.LogBox.Multiline = true;
+            this.LogBox.Name = "LogBox";
+            this.LogBox.ReadOnly = true;
+            this.LogBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.LogBox.Size = new System.Drawing.Size(755, 301);
+            this.LogBox.TabIndex = 0;
+            // 
             // Landing
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -160,6 +173,8 @@
             this.DataGroup.ResumeLayout(false);
             this.TopStrip.ResumeLayout(false);
             this.TopStrip.PerformLayout();
+            this.LogsTab.ResumeLayout(false);
+            this.LogsTab.PerformLayout();
             this.Tabs.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -178,6 +193,7 @@
         private System.Windows.Forms.TabPage LogsTab;
         private System.Windows.Forms.TabControl Tabs;
         private System.Windows.Forms.ToolStripMenuItem CreateItem;
+        private System.Windows.Forms.TextBox LogBox;
     }
 }
 
