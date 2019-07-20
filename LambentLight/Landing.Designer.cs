@@ -33,10 +33,11 @@
             this.DataGroup = new System.Windows.Forms.GroupBox();
             this.DataBox = new System.Windows.Forms.ComboBox();
             this.TopStrip = new System.Windows.Forms.MenuStrip();
-            this.StartItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.StopItem = new System.Windows.Forms.ToolStripMenuItem();
             this.LogsTab = new System.Windows.Forms.TabPage();
             this.Tabs = new System.Windows.Forms.TabControl();
+            this.StartItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.StopItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CreateItem = new System.Windows.Forms.ToolStripMenuItem();
             this.BuildsGroup.SuspendLayout();
             this.DataGroup.SuspendLayout();
             this.TopStrip.SuspendLayout();
@@ -90,26 +91,13 @@
             // 
             this.TopStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.StartItem,
-            this.StopItem});
+            this.StopItem,
+            this.CreateItem});
             this.TopStrip.Location = new System.Drawing.Point(0, 0);
             this.TopStrip.Name = "TopStrip";
             this.TopStrip.Size = new System.Drawing.Size(799, 24);
             this.TopStrip.TabIndex = 2;
             this.TopStrip.Text = "menuStrip1";
-            // 
-            // StartItem
-            // 
-            this.StartItem.Image = global::LambentLight.Properties.Resources.Play;
-            this.StartItem.Name = "StartItem";
-            this.StartItem.Size = new System.Drawing.Size(59, 20);
-            this.StartItem.Text = "Start";
-            // 
-            // StopItem
-            // 
-            this.StopItem.Image = global::LambentLight.Properties.Resources.Stop;
-            this.StopItem.Name = "StopItem";
-            this.StopItem.Size = new System.Drawing.Size(59, 20);
-            this.StopItem.Text = "Stop";
             // 
             // LogsTab
             // 
@@ -132,6 +120,27 @@
             this.Tabs.SelectedIndex = 0;
             this.Tabs.Size = new System.Drawing.Size(775, 339);
             this.Tabs.TabIndex = 3;
+            // 
+            // StartItem
+            // 
+            this.StartItem.Image = global::LambentLight.Properties.Resources.Play;
+            this.StartItem.Name = "StartItem";
+            this.StartItem.Size = new System.Drawing.Size(59, 20);
+            this.StartItem.Text = "Start";
+            // 
+            // StopItem
+            // 
+            this.StopItem.Image = global::LambentLight.Properties.Resources.Stop;
+            this.StopItem.Name = "StopItem";
+            this.StopItem.Size = new System.Drawing.Size(59, 20);
+            this.StopItem.Text = "Stop";
+            // 
+            // CreateItem
+            // 
+            this.CreateItem.Image = global::LambentLight.Properties.Resources.Add;
+            this.CreateItem.Name = "CreateItem";
+            this.CreateItem.Size = new System.Drawing.Size(132, 20);
+            this.CreateItem.Text = "Create Data Folder";
             // 
             // Landing
             // 
@@ -168,6 +177,7 @@
         private System.Windows.Forms.ToolStripMenuItem StopItem;
         private System.Windows.Forms.TabPage LogsTab;
         private System.Windows.Forms.TabControl Tabs;
+        private System.Windows.Forms.ToolStripMenuItem CreateItem;
     }
 }
 
