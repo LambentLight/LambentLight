@@ -33,8 +33,11 @@
             this.DataGroup = new System.Windows.Forms.GroupBox();
             this.DataBox = new System.Windows.Forms.ComboBox();
             this.TopStrip = new System.Windows.Forms.MenuStrip();
+            this.StopItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.StartItem = new System.Windows.Forms.ToolStripMenuItem();
             this.BuildsGroup.SuspendLayout();
             this.DataGroup.SuspendLayout();
+            this.TopStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // BuildsGroup
@@ -82,11 +85,28 @@
             // 
             // TopStrip
             // 
+            this.TopStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.StartItem,
+            this.StopItem});
             this.TopStrip.Location = new System.Drawing.Point(0, 0);
             this.TopStrip.Name = "TopStrip";
             this.TopStrip.Size = new System.Drawing.Size(799, 24);
             this.TopStrip.TabIndex = 2;
             this.TopStrip.Text = "menuStrip1";
+            // 
+            // StopItem
+            // 
+            this.StopItem.Image = global::LambentLight.Properties.Resources.Stop;
+            this.StopItem.Name = "StopItem";
+            this.StopItem.Size = new System.Drawing.Size(59, 20);
+            this.StopItem.Text = "Stop";
+            // 
+            // StartItem
+            // 
+            this.StartItem.Image = global::LambentLight.Properties.Resources.Play;
+            this.StartItem.Name = "StartItem";
+            this.StartItem.Size = new System.Drawing.Size(59, 20);
+            this.StartItem.Text = "Start";
             // 
             // Landing
             // 
@@ -102,6 +122,8 @@
             this.Text = "LambentLight: A FiveM Server Manager";
             this.BuildsGroup.ResumeLayout(false);
             this.DataGroup.ResumeLayout(false);
+            this.TopStrip.ResumeLayout(false);
+            this.TopStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -114,6 +136,8 @@
         private System.Windows.Forms.GroupBox DataGroup;
         private System.Windows.Forms.ComboBox DataBox;
         private System.Windows.Forms.MenuStrip TopStrip;
+        private System.Windows.Forms.ToolStripMenuItem StartItem;
+        private System.Windows.Forms.ToolStripMenuItem StopItem;
     }
 }
 
