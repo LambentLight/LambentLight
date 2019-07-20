@@ -35,10 +35,11 @@
             this.TopStrip = new System.Windows.Forms.MenuStrip();
             this.LogsTab = new System.Windows.Forms.TabPage();
             this.Tabs = new System.Windows.Forms.TabControl();
+            this.LogBox = new System.Windows.Forms.TextBox();
             this.StartItem = new System.Windows.Forms.ToolStripMenuItem();
             this.StopItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CreateItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.LogBox = new System.Windows.Forms.TextBox();
+            this.ExitItem = new System.Windows.Forms.ToolStripMenuItem();
             this.BuildsGroup.SuspendLayout();
             this.DataGroup.SuspendLayout();
             this.TopStrip.SuspendLayout();
@@ -94,7 +95,8 @@
             this.TopStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.StartItem,
             this.StopItem,
-            this.CreateItem});
+            this.CreateItem,
+            this.ExitItem});
             this.TopStrip.Location = new System.Drawing.Point(0, 0);
             this.TopStrip.Name = "TopStrip";
             this.TopStrip.Size = new System.Drawing.Size(799, 24);
@@ -124,6 +126,16 @@
             this.Tabs.Size = new System.Drawing.Size(775, 339);
             this.Tabs.TabIndex = 3;
             // 
+            // LogBox
+            // 
+            this.LogBox.Location = new System.Drawing.Point(6, 6);
+            this.LogBox.Multiline = true;
+            this.LogBox.Name = "LogBox";
+            this.LogBox.ReadOnly = true;
+            this.LogBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.LogBox.Size = new System.Drawing.Size(755, 301);
+            this.LogBox.TabIndex = 0;
+            // 
             // StartItem
             // 
             this.StartItem.Image = global::LambentLight.Properties.Resources.Play;
@@ -145,15 +157,12 @@
             this.CreateItem.Size = new System.Drawing.Size(132, 20);
             this.CreateItem.Text = "Create Data Folder";
             // 
-            // LogBox
+            // ExitItem
             // 
-            this.LogBox.Location = new System.Drawing.Point(6, 6);
-            this.LogBox.Multiline = true;
-            this.LogBox.Name = "LogBox";
-            this.LogBox.ReadOnly = true;
-            this.LogBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.LogBox.Size = new System.Drawing.Size(755, 301);
-            this.LogBox.TabIndex = 0;
+            this.ExitItem.Image = global::LambentLight.Properties.Resources.Exit;
+            this.ExitItem.Name = "ExitItem";
+            this.ExitItem.Size = new System.Drawing.Size(54, 20);
+            this.ExitItem.Text = "Exit";
             // 
             // Landing
             // 
@@ -194,6 +203,7 @@
         private System.Windows.Forms.TabControl Tabs;
         private System.Windows.Forms.ToolStripMenuItem CreateItem;
         private System.Windows.Forms.TextBox LogBox;
+        private System.Windows.Forms.ToolStripMenuItem ExitItem;
     }
 }
 
