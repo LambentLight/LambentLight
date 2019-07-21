@@ -46,5 +46,29 @@ namespace LambentLight.Properties {
                 this["License"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool DownloadScripts {
+            get {
+                return ((bool)(this["DownloadScripts"]));
+            }
+            set {
+                this["DownloadScripts"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool CreateConfig {
+            get {
+                return ((bool)(this["CreateConfig"]));
+            }
+            set {
+                this["CreateConfig"] = value;
+            }
+        }
     }
 }
