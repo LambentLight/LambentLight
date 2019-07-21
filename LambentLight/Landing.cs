@@ -32,6 +32,10 @@ namespace LambentLight
         {
             // Initialize the UI elements
             InitializeComponent();
+        }
+
+        private void Landing_Load(object sender, EventArgs e)
+        {
             // Create a new configuration for NLog
             LoggingConfiguration NewConfig = new LoggingConfiguration();
             // Add a rule for logging to the TextBox

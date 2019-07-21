@@ -182,6 +182,7 @@
             this.Name = "Landing";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LambentLight: A FiveM Server Manager";
+            this.Load += new System.EventHandler(this.Landing_Load);
             this.BuildsGroup.ResumeLayout(false);
             this.DataGroup.ResumeLayout(false);
             this.TopStrip.ResumeLayout(false);
