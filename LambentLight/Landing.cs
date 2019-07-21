@@ -79,6 +79,18 @@ namespace LambentLight
             Close();
         }
 
+        private void BuildRefreshButton_Click(object sender, EventArgs e)
+        {
+            // Refresh the list of builds
+            BuildManager.Fill(BuildsBox);
+        }
+
+        private void FolderRefreshButton_Click(object sender, EventArgs e)
+        {
+            // Refresh the folders of data
+            DataFolderManager.Fill(DataBox);
+        }
+
         private void VisibleTextBox_CheckedChanged(object sender, EventArgs e)
         {
             // Change the enabled status of the License TextBox

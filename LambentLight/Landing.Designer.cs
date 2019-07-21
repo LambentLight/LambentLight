@@ -52,6 +52,8 @@
             this.SaveLicenseButton = new System.Windows.Forms.Button();
             this.VisibleCheckBox = new System.Windows.Forms.CheckBox();
             this.LicenseTextBox = new System.Windows.Forms.TextBox();
+            this.BuildRefreshButton = new System.Windows.Forms.Button();
+            this.FolderRefreshButton = new System.Windows.Forms.Button();
             this.BuildsGroup.SuspendLayout();
             this.DataGroup.SuspendLayout();
             this.TopStrip.SuspendLayout();
@@ -64,10 +66,11 @@
             // 
             // BuildsGroup
             // 
+            this.BuildsGroup.Controls.Add(this.BuildRefreshButton);
             this.BuildsGroup.Controls.Add(this.BuildsBox);
             this.BuildsGroup.Location = new System.Drawing.Point(12, 27);
             this.BuildsGroup.Name = "BuildsGroup";
-            this.BuildsGroup.Size = new System.Drawing.Size(300, 52);
+            this.BuildsGroup.Size = new System.Drawing.Size(380, 52);
             this.BuildsGroup.TabIndex = 0;
             this.BuildsGroup.TabStop = false;
             this.BuildsGroup.Text = "Build";
@@ -80,16 +83,17 @@
             this.BuildsBox.FormattingEnabled = true;
             this.BuildsBox.Location = new System.Drawing.Point(6, 19);
             this.BuildsBox.Name = "BuildsBox";
-            this.BuildsBox.Size = new System.Drawing.Size(288, 21);
+            this.BuildsBox.Size = new System.Drawing.Size(287, 21);
             this.BuildsBox.TabIndex = 0;
             // 
             // DataGroup
             // 
             this.DataGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.DataGroup.Controls.Add(this.FolderRefreshButton);
             this.DataGroup.Controls.Add(this.DataBox);
-            this.DataGroup.Location = new System.Drawing.Point(487, 27);
+            this.DataGroup.Location = new System.Drawing.Point(407, 27);
             this.DataGroup.Name = "DataGroup";
-            this.DataGroup.Size = new System.Drawing.Size(300, 52);
+            this.DataGroup.Size = new System.Drawing.Size(380, 52);
             this.DataGroup.TabIndex = 1;
             this.DataGroup.TabStop = false;
             this.DataGroup.Text = "Data Folder";
@@ -102,7 +106,7 @@
             this.DataBox.FormattingEnabled = true;
             this.DataBox.Location = new System.Drawing.Point(6, 19);
             this.DataBox.Name = "DataBox";
-            this.DataBox.Size = new System.Drawing.Size(288, 21);
+            this.DataBox.Size = new System.Drawing.Size(287, 21);
             this.DataBox.TabIndex = 0;
             // 
             // TopStrip
@@ -319,6 +323,28 @@
             this.LicenseTextBox.Size = new System.Drawing.Size(358, 20);
             this.LicenseTextBox.TabIndex = 0;
             // 
+            // BuildRefreshButton
+            // 
+            this.BuildRefreshButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BuildRefreshButton.Location = new System.Drawing.Point(299, 18);
+            this.BuildRefreshButton.Name = "BuildRefreshButton";
+            this.BuildRefreshButton.Size = new System.Drawing.Size(75, 23);
+            this.BuildRefreshButton.TabIndex = 1;
+            this.BuildRefreshButton.Text = "Refresh";
+            this.BuildRefreshButton.UseVisualStyleBackColor = true;
+            this.BuildRefreshButton.Click += new System.EventHandler(this.BuildRefreshButton_Click);
+            // 
+            // FolderRefreshButton
+            // 
+            this.FolderRefreshButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.FolderRefreshButton.Location = new System.Drawing.Point(299, 18);
+            this.FolderRefreshButton.Name = "FolderRefreshButton";
+            this.FolderRefreshButton.Size = new System.Drawing.Size(75, 23);
+            this.FolderRefreshButton.TabIndex = 1;
+            this.FolderRefreshButton.Text = "Refresh";
+            this.FolderRefreshButton.UseVisualStyleBackColor = true;
+            this.FolderRefreshButton.Click += new System.EventHandler(this.FolderRefreshButton_Click);
+            // 
             // Landing
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -377,6 +403,8 @@
         private System.Windows.Forms.Label BuildsLabel;
         private System.Windows.Forms.TextBox BuildsTextBox;
         private System.Windows.Forms.Button SaveAPIsButton;
+        private System.Windows.Forms.Button BuildRefreshButton;
+        private System.Windows.Forms.Button FolderRefreshButton;
     }
 }
 
