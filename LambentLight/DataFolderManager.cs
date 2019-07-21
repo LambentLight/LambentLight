@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using NLog;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -52,6 +53,10 @@ namespace LambentLight
     public static class DataFolderManager
     {
         /// <summary>
+        /// The logger for our current class.
+        /// </summary>
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+        /// <summary>
         /// Our current set of data folders.
         /// </summary>
         public static List<DataFolder> Folders = new List<DataFolder>();
@@ -77,6 +82,9 @@ namespace LambentLight
                 // And add our data folder
                 Folders.Add(new DataFolder(Dir));
             }
+
+            // Log what we have just done
+            Logger.Info("The list of server data folders has been updated");
         }
 
         /// <summary>

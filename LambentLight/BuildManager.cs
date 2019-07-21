@@ -1,4 +1,5 @@
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -71,6 +72,10 @@ namespace LambentLight
     public static class BuildManager
     {
         /// <summary>
+        /// The logger for our current class.
+        /// </summary>
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+        /// <summary>
         /// The Uri or URL for downloading the builds from the FiveM servers.
         /// </summary>
         public const string DownloadUri = "https://runtime.fivem.net/artifacts/fivem/build_server_windows/master/{0}/server.zip";
@@ -102,11 +107,14 @@ namespace LambentLight
                 // Set the build list to empty
                 Builds = new List<Build>();
                 // Notify the user
-                MessageBox.Show($"Unable to fetch the new FiveM builds: Code {(int)e.Status} ({e.Status})", "Failed to update Builds");
+                Logger.Error("Unable to fetch the new FiveM builds: Code {0} ({1})", (int)e.Status, e.Status);
             }
 
             // Create a temporary list of builds
             Builds = JsonConvert.DeserializeObject<List<Build>>(RawBuilds, new BuildConverter());
+
+            // Log what we have just done
+            Logger.Info("The list of builds has been updated");
         }
 
         /// <summary>
@@ -142,6 +150,9 @@ namespace LambentLight
         /// <param name="build">The build to download.</param>
         public static async Task Download(Build build)
         {
+            // Log that we are starting the download
+            Logger.Info("Build {0} is not available, attempting download...", build.ID);
+
             // If the builds folder does not exists, create it
             if (!Directory.Exists("Builds"))
             {
@@ -174,6 +185,9 @@ namespace LambentLight
 
             // Delete the temporary ZIP file
             File.Delete(Destination);
+
+            // Log that we have finished the download
+            Logger.Info("The download of build {0} has finished", build.ID);
         }
     }
 }
