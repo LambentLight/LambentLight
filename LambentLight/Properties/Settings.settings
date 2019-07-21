@@ -5,5 +5,8 @@
     <Setting Name="Builds" Type="System.String" Scope="User">
       <Value Profile="(Default)">https://raw.githubusercontent.com/LambentLight/Metadata/master/builds.json</Value>
     </Setting>
+    <Setting Name="License" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

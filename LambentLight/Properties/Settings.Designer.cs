@@ -34,5 +34,17 @@ namespace LambentLight.Properties {
                 this["Builds"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string License {
+            get {
+                return ((string)(this["License"]));
+            }
+            set {
+                this["License"] = value;
+            }
+        }
     }
 }
