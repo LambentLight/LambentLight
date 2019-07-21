@@ -72,11 +72,23 @@ namespace LambentLight
             Server.StartInfo.RedirectStandardOutput = true;
             Server.StartInfo.CreateNoWindow = true;
             Server.OutputDataReceived += (S, A) => { if (!string.IsNullOrWhiteSpace(A.Data)) Logger.Info(A.Data); } ;
+            Server.Exited += ProcessExited;
             Server.Start();
             Server.BeginOutputReadLine();
             Server.BeginErrorReadLine();
 
             return true;
+        }
+
+        private static void ProcessExited(object sender, EventArgs args)
+        {
+            // If the code is not zero, start it again
+            if (Server.ExitCode != 0)
+            {
+                Server.Start();
+                Server.BeginOutputReadLine();
+                Server.BeginErrorReadLine();
+            }
         }
 
         /// <summary>
