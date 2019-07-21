@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -153,7 +153,7 @@ namespace LambentLight
             string Destination = Path.Combine("Builds", build.ID + ".zip");
 
             // Start downloading the file
-            Client.DownloadFileAsync(URL, Destination);
+            await Client.DownloadFileTaskAsync(URL, Destination);
 
             // While the client is bussy, wait
             while (Client.IsBusy)
