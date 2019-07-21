@@ -29,8 +29,10 @@
         private void InitializeComponent()
         {
             this.BuildsGroup = new System.Windows.Forms.GroupBox();
+            this.BuildRefreshButton = new System.Windows.Forms.Button();
             this.BuildsBox = new System.Windows.Forms.ComboBox();
             this.DataGroup = new System.Windows.Forms.GroupBox();
+            this.FolderRefreshButton = new System.Windows.Forms.Button();
             this.DataBox = new System.Windows.Forms.ComboBox();
             this.TopStrip = new System.Windows.Forms.MenuStrip();
             this.StartItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -41,6 +43,8 @@
             this.LogTextBox = new System.Windows.Forms.TextBox();
             this.Tabs = new System.Windows.Forms.TabControl();
             this.SettingsTab = new System.Windows.Forms.TabPage();
+            this.FolderCreationGroupBox = new System.Windows.Forms.GroupBox();
+            this.DownloadScriptsCheckBox = new System.Windows.Forms.CheckBox();
             this.APIsGroupBox = new System.Windows.Forms.GroupBox();
             this.SaveAPIsButton = new System.Windows.Forms.Button();
             this.BuildsTextBox = new System.Windows.Forms.TextBox();
@@ -52,14 +56,14 @@
             this.SaveLicenseButton = new System.Windows.Forms.Button();
             this.VisibleCheckBox = new System.Windows.Forms.CheckBox();
             this.LicenseTextBox = new System.Windows.Forms.TextBox();
-            this.BuildRefreshButton = new System.Windows.Forms.Button();
-            this.FolderRefreshButton = new System.Windows.Forms.Button();
+            this.CreateConfigCheckBox = new System.Windows.Forms.CheckBox();
             this.BuildsGroup.SuspendLayout();
             this.DataGroup.SuspendLayout();
             this.TopStrip.SuspendLayout();
             this.LogsTab.SuspendLayout();
             this.Tabs.SuspendLayout();
             this.SettingsTab.SuspendLayout();
+            this.FolderCreationGroupBox.SuspendLayout();
             this.APIsGroupBox.SuspendLayout();
             this.LicenseGroupBox.SuspendLayout();
             this.SuspendLayout();
@@ -74,6 +78,17 @@
             this.BuildsGroup.TabIndex = 0;
             this.BuildsGroup.TabStop = false;
             this.BuildsGroup.Text = "Build";
+            // 
+            // BuildRefreshButton
+            // 
+            this.BuildRefreshButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BuildRefreshButton.Location = new System.Drawing.Point(299, 18);
+            this.BuildRefreshButton.Name = "BuildRefreshButton";
+            this.BuildRefreshButton.Size = new System.Drawing.Size(75, 23);
+            this.BuildRefreshButton.TabIndex = 1;
+            this.BuildRefreshButton.Text = "Refresh";
+            this.BuildRefreshButton.UseVisualStyleBackColor = true;
+            this.BuildRefreshButton.Click += new System.EventHandler(this.BuildRefreshButton_Click);
             // 
             // BuildsBox
             // 
@@ -97,6 +112,17 @@
             this.DataGroup.TabIndex = 1;
             this.DataGroup.TabStop = false;
             this.DataGroup.Text = "Data Folder";
+            // 
+            // FolderRefreshButton
+            // 
+            this.FolderRefreshButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.FolderRefreshButton.Location = new System.Drawing.Point(299, 18);
+            this.FolderRefreshButton.Name = "FolderRefreshButton";
+            this.FolderRefreshButton.Size = new System.Drawing.Size(75, 23);
+            this.FolderRefreshButton.TabIndex = 1;
+            this.FolderRefreshButton.Text = "Refresh";
+            this.FolderRefreshButton.UseVisualStyleBackColor = true;
+            this.FolderRefreshButton.Click += new System.EventHandler(this.FolderRefreshButton_Click);
             // 
             // DataBox
             // 
@@ -193,6 +219,7 @@
             // 
             // SettingsTab
             // 
+            this.SettingsTab.Controls.Add(this.FolderCreationGroupBox);
             this.SettingsTab.Controls.Add(this.APIsGroupBox);
             this.SettingsTab.Controls.Add(this.LicenseGroupBox);
             this.SettingsTab.Location = new System.Drawing.Point(4, 22);
@@ -202,6 +229,28 @@
             this.SettingsTab.TabIndex = 1;
             this.SettingsTab.Text = "Settings";
             this.SettingsTab.UseVisualStyleBackColor = true;
+            // 
+            // FolderCreationGroupBox
+            // 
+            this.FolderCreationGroupBox.Controls.Add(this.CreateConfigCheckBox);
+            this.FolderCreationGroupBox.Controls.Add(this.DownloadScriptsCheckBox);
+            this.FolderCreationGroupBox.Location = new System.Drawing.Point(6, 86);
+            this.FolderCreationGroupBox.Name = "FolderCreationGroupBox";
+            this.FolderCreationGroupBox.Size = new System.Drawing.Size(370, 68);
+            this.FolderCreationGroupBox.TabIndex = 2;
+            this.FolderCreationGroupBox.TabStop = false;
+            this.FolderCreationGroupBox.Text = "Data Folder Creation";
+            // 
+            // DownloadScriptsCheckBox
+            // 
+            this.DownloadScriptsCheckBox.AutoSize = true;
+            this.DownloadScriptsCheckBox.Location = new System.Drawing.Point(6, 19);
+            this.DownloadScriptsCheckBox.Name = "DownloadScriptsCheckBox";
+            this.DownloadScriptsCheckBox.Size = new System.Drawing.Size(238, 17);
+            this.DownloadScriptsCheckBox.TabIndex = 0;
+            this.DownloadScriptsCheckBox.Text = "Download Base Scripts from the FiveM Repo";
+            this.DownloadScriptsCheckBox.UseVisualStyleBackColor = true;
+            this.DownloadScriptsCheckBox.CheckedChanged += new System.EventHandler(this.DownloadScriptsCheckBox_CheckedChanged);
             // 
             // APIsGroupBox
             // 
@@ -323,27 +372,16 @@
             this.LicenseTextBox.Size = new System.Drawing.Size(358, 20);
             this.LicenseTextBox.TabIndex = 0;
             // 
-            // BuildRefreshButton
+            // CreateConfigCheckBox
             // 
-            this.BuildRefreshButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BuildRefreshButton.Location = new System.Drawing.Point(299, 18);
-            this.BuildRefreshButton.Name = "BuildRefreshButton";
-            this.BuildRefreshButton.Size = new System.Drawing.Size(75, 23);
-            this.BuildRefreshButton.TabIndex = 1;
-            this.BuildRefreshButton.Text = "Refresh";
-            this.BuildRefreshButton.UseVisualStyleBackColor = true;
-            this.BuildRefreshButton.Click += new System.EventHandler(this.BuildRefreshButton_Click);
-            // 
-            // FolderRefreshButton
-            // 
-            this.FolderRefreshButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.FolderRefreshButton.Location = new System.Drawing.Point(299, 18);
-            this.FolderRefreshButton.Name = "FolderRefreshButton";
-            this.FolderRefreshButton.Size = new System.Drawing.Size(75, 23);
-            this.FolderRefreshButton.TabIndex = 1;
-            this.FolderRefreshButton.Text = "Refresh";
-            this.FolderRefreshButton.UseVisualStyleBackColor = true;
-            this.FolderRefreshButton.Click += new System.EventHandler(this.FolderRefreshButton_Click);
+            this.CreateConfigCheckBox.AutoSize = true;
+            this.CreateConfigCheckBox.Location = new System.Drawing.Point(6, 42);
+            this.CreateConfigCheckBox.Name = "CreateConfigCheckBox";
+            this.CreateConfigCheckBox.Size = new System.Drawing.Size(276, 17);
+            this.CreateConfigCheckBox.TabIndex = 1;
+            this.CreateConfigCheckBox.Text = "Generate Configuration after creating the Data Folder";
+            this.CreateConfigCheckBox.UseVisualStyleBackColor = true;
+            this.CreateConfigCheckBox.CheckedChanged += new System.EventHandler(this.CreateConfigCheckBox_CheckedChanged);
             // 
             // Landing
             // 
@@ -368,6 +406,8 @@
             this.LogsTab.PerformLayout();
             this.Tabs.ResumeLayout(false);
             this.SettingsTab.ResumeLayout(false);
+            this.FolderCreationGroupBox.ResumeLayout(false);
+            this.FolderCreationGroupBox.PerformLayout();
             this.APIsGroupBox.ResumeLayout(false);
             this.APIsGroupBox.PerformLayout();
             this.LicenseGroupBox.ResumeLayout(false);
@@ -405,6 +445,9 @@
         private System.Windows.Forms.Button SaveAPIsButton;
         private System.Windows.Forms.Button BuildRefreshButton;
         private System.Windows.Forms.Button FolderRefreshButton;
+        private System.Windows.Forms.GroupBox FolderCreationGroupBox;
+        private System.Windows.Forms.CheckBox DownloadScriptsCheckBox;
+        private System.Windows.Forms.CheckBox CreateConfigCheckBox;
     }
 }
 

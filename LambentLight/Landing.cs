@@ -1,4 +1,4 @@
-﻿using NLog;
+using NLog;
 using NLog.Config;
 using System;
 using System.Collections.Generic;
@@ -56,6 +56,8 @@ namespace LambentLight
 
             // Load the API URLs
             BuildsTextBox.Text = Properties.Settings.Default.Builds;
+            DownloadScriptsCheckBox.Checked = Properties.Settings.Default.DownloadScripts;
+            CreateConfigCheckBox.Checked = Properties.Settings.Default.CreateConfig;
         }
 
         private async void StartItem_Click(object sender, EventArgs e)
@@ -147,6 +149,20 @@ namespace LambentLight
         {
             // Save the URLs on the configuration
             Properties.Settings.Default.Builds = BuildsTextBox.Text;
+            Properties.Settings.Default.Save();
+        }
+
+        private void DownloadScriptsCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            // Save the curent status on the settings
+            Properties.Settings.Default.DownloadScripts = DownloadScriptsCheckBox.Checked;
+            Properties.Settings.Default.Save();
+        }
+
+        private void CreateConfigCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            // Save the curent status on the settings
+            Properties.Settings.Default.CreateConfig = CreateConfigCheckBox.Checked;
             Properties.Settings.Default.Save();
         }
     }
