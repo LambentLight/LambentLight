@@ -36,13 +36,13 @@ namespace LambentLight
         /// </summary>
         /// <param name="build">The build to use.</param>
         /// <param name="data">The folder to use the data from.</param>
-        public static async Task Start(Build build, DataFolder data)
+        public static async Task<bool> Start(Build build, DataFolder data)
         {
             // If there is a server instance running, log it and return
             if (Server != null)
             {
                 Logger.Warn("There is already a server running");
-                return;
+                return false;
             }
 
             // If the build is not available
@@ -50,18 +50,23 @@ namespace LambentLight
             {
                 await BuildManager.Download(build);
             }
+
+            return true;
         }
 
         /// <summary>
         /// Stops the server if is running.
         /// </summary>
-        public static async Task Stop()
+        public static async Task<bool> Stop()
         {
             // If there is no server running, notify the user and return
             if (Server == null)
             {
                 Logger.Warn("The FiveM server is not running");
+                return false;
             }
+
+            return true;
         }
     }
 }

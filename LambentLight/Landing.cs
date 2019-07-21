@@ -14,6 +14,20 @@ namespace LambentLight
 {
     public partial class Landing : Form
     {
+        /// <summary>
+        /// Sets the locked status of some of the UI elements.
+        /// </summary>
+        public bool Locked
+        {
+            set
+            {
+                StartItem.Enabled = !value;
+                StopItem.Enabled = value;
+                CreateItem.Enabled = !value;
+                ExitItem.Enabled = !value;
+            }
+        }
+
         public Landing()
         {
             // Initialize the UI elements
@@ -27,18 +41,20 @@ namespace LambentLight
             // And filll the Builds and Data folders
             BuildManager.Fill(BuildsBox);
             DataFolderManager.Fill(DataBox);
+            // Set the elements to unlocked
+            Locked = false;
         }
 
         private async void StartItem_Click(object sender, EventArgs e)
         {
             // Start the build with the selected options
-            await ServerManager.Start((Build)BuildsBox.SelectedItem, (DataFolder)DataBox.SelectedItem);
+            Locked = await ServerManager.Start((Build)BuildsBox.SelectedItem, (DataFolder)DataBox.SelectedItem);
         }
 
         private async void StopItem_Click(object sender, EventArgs e)
         {
             // Stop the server if is present
-            await ServerManager.Stop();
+            Locked = await ServerManager.Stop();
         }
 
         private async void CreateItem_Click(object sender, EventArgs e)
