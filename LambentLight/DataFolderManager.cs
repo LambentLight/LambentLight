@@ -1,6 +1,8 @@
-﻿using NLog;
+using NLog;
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -121,6 +123,23 @@ namespace LambentLight
         public static async Task Create(string name)
         {
 
+        }
+
+        /// <summary>
+        /// Creates a secure string via RNGCryptoServiceProvider.
+        /// </summary>
+        /// <param name="Length">The desired lenght of the string.</param>
+        /// <returns>The secure string with the specified length.</returns>
+        private static string GenerateSecureString(int Length)
+        {
+            // Create a new instance of RNGCryptoServiceProvider
+            RNGCryptoServiceProvider RNG = new RNGCryptoServiceProvider();
+            // Create a place to store the output
+            byte[] Output = new byte[Length];
+            // Create the random string as bytes
+            RNG.GetBytes(Output);
+            // And then, return that byte array as a string
+            return Convert.ToBase64String(Output);
         }
     }
 }
