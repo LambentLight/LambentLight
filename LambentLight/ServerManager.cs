@@ -1,7 +1,8 @@
-using NLog;
+﻿using NLog;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -57,6 +58,23 @@ namespace LambentLight
             {
                 await BuildManager.Download(build);
             }
+
+            // Store the absolute path of the folder
+            string AbsPath = Path.GetFullPath(build.Folder);
+            // Create a new server object and set the correct properties
+            Server = new Process();
+            Server.StartInfo.FileName = Path.Combine(AbsPath, "FXServer.exe");
+            Server.StartInfo.Arguments = string.Format("+set citizen_dir \"{0}\" +set sv_licenseKey {1} +exec server.cfg", Path.Combine(AbsPath, "citizen"), Properties.Settings.Default.License);
+            Server.StartInfo.WorkingDirectory = data.Absolute;
+            Server.StartInfo.UseShellExecute = false;
+            Server.StartInfo.RedirectStandardError = true;
+            Server.StartInfo.RedirectStandardInput = true;
+            Server.StartInfo.RedirectStandardOutput = true;
+            Server.StartInfo.CreateNoWindow = true;
+            Server.OutputDataReceived += (S, A) => { if (!string.IsNullOrWhiteSpace(A.Data)) Logger.Info(A.Data); } ;
+            Server.Start();
+            Server.BeginOutputReadLine();
+            Server.BeginErrorReadLine();
 
             return true;
         }
