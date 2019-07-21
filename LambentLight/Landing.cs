@@ -1,4 +1,6 @@
-﻿using System;
+﻿using NLog;
+using NLog.Config;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +17,9 @@ namespace LambentLight
         public Landing()
         {
             InitializeComponent();
+            LoggingConfiguration NewConfig = new LoggingConfiguration();
+            NewConfig.AddRule(LogLevel.Info, LogLevel.Fatal, new TextBoxTarget() { Box = LogBox });
+            LogManager.Configuration = NewConfig;
             BuildManager.Fill(BuildsBox);
             DataFolderManager.Fill(DataBox);
         }
