@@ -18,7 +18,7 @@ namespace LambentLight
         {
             InitializeComponent();
             LoggingConfiguration NewConfig = new LoggingConfiguration();
-            NewConfig.AddRule(LogLevel.Info, LogLevel.Fatal, new TextBoxTarget() { Box = LogBox });
+            NewConfig.AddRule(LogLevel.Info, LogLevel.Fatal, new TextBoxTarget() { Box = LogBox, Layout = "[${date}] [${level}] [${logger}] ${message}" });
             LogManager.Configuration = NewConfig;
             BuildManager.Fill(BuildsBox);
             DataFolderManager.Fill(DataBox);

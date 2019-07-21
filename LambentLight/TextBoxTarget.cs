@@ -18,7 +18,7 @@ namespace LambentLight
         /// <param name="LogEvent">The log information.</param>
         protected override void Write(LogEventInfo LogEvent)
         {
-            Box.Text += $"[{LogEvent.TimeStamp}] [{LogEvent.Level}] {LogEvent.Message}";
+            Box.Text += Layout.Render(LogEvent);
         }
     }
 }
