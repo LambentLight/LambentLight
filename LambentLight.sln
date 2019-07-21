@@ -7,14 +7,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LambentLight", "LambentLigh
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{82D5450B-2CF8-45C5-B3BD-24F43433771D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{82D5450B-2CF8-45C5-B3BD-24F43433771D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{82D5450B-2CF8-45C5-B3BD-24F43433771D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{82D5450B-2CF8-45C5-B3BD-24F43433771D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{82D5450B-2CF8-45C5-B3BD-24F43433771D}.Debug|x64.ActiveCfg = Debug|x64
+		{82D5450B-2CF8-45C5-B3BD-24F43433771D}.Debug|x64.Build.0 = Debug|x64
+		{82D5450B-2CF8-45C5-B3BD-24F43433771D}.Release|x64.ActiveCfg = Release|x64
+		{82D5450B-2CF8-45C5-B3BD-24F43433771D}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
