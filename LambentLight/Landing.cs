@@ -1,4 +1,4 @@
-using NLog;
+﻿using NLog;
 using NLog.Config;
 using System;
 using System.Collections.Generic;
@@ -7,6 +7,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -54,7 +55,10 @@ namespace LambentLight
             // Set the elements to unlocked
             Locked = false;
 
-            // Load the API URLs
+            // Tell the Web Clients to use TLS 1.2 instead of SSL3
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
+            // Load the settings
             BuildsTextBox.Text = Properties.Settings.Default.Builds;
             DownloadScriptsCheckBox.Checked = Properties.Settings.Default.DownloadScripts;
             CreateConfigCheckBox.Checked = Properties.Settings.Default.CreateConfig;
