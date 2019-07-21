@@ -34,5 +34,25 @@ namespace LambentLight
             // Start the build with the selected options
             await ServerManager.Start((Build)BuildsBox.SelectedItem, (DataFolder)DataBox.SelectedItem);
         }
+
+        private async void StopItem_Click(object sender, EventArgs e)
+        {
+            // Stop the server if is present
+            await ServerManager.Stop();
+        }
+
+        private async void CreateItem_Click(object sender, EventArgs e)
+        {
+            // Ask the user for inputing a server data folder name
+            string FolderName = Microsoft.VisualBasic.Interaction.InputBox("Please insert a name for the new Server Data Folder:", "New Server Data Folder");
+            // Create a server data folder
+            await DataFolderManager.Create(FolderName);
+        }
+
+        private void ExitItem_Click(object sender, EventArgs e)
+        {
+            // Close the current form
+            Close();
+        }
     }
 }

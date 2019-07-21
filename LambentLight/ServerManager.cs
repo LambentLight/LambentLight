@@ -45,5 +45,13 @@ namespace LambentLight
                 await BuildManager.Download(build);
             }
         }
+
+        /// <summary>
+        /// Stops the server if is running.
+        /// </summary>
+        public static async Task Stop()
+        {
+
+        }
     }
 }

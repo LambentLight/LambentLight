@@ -117,6 +117,7 @@
             this.StopItem.Name = "StopItem";
             this.StopItem.Size = new System.Drawing.Size(94, 20);
             this.StopItem.Text = "Stop Server";
+            this.StopItem.Click += new System.EventHandler(this.StopItem_Click);
             // 
             // CreateItem
             // 
@@ -124,6 +125,7 @@
             this.CreateItem.Name = "CreateItem";
             this.CreateItem.Size = new System.Drawing.Size(132, 20);
             this.CreateItem.Text = "Create Data Folder";
+            this.CreateItem.Click += new System.EventHandler(this.CreateItem_Click);
             // 
             // ExitItem
             // 
@@ -131,6 +133,7 @@
             this.ExitItem.Name = "ExitItem";
             this.ExitItem.Size = new System.Drawing.Size(54, 20);
             this.ExitItem.Text = "Exit";
+            this.ExitItem.Click += new System.EventHandler(this.ExitItem_Click);
             // 
             // LogsTab
             // 

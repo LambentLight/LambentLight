@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace LambentLight
@@ -103,6 +104,15 @@ namespace LambentLight
                 // Select the first item
                 box.SelectedIndex = 0;
             }
+        }
+
+        /// <summary>
+        /// Creates a new server data folder.
+        /// </summary>
+        /// <param name="name">The name of the folder.</param>
+        public static async Task Create(string name)
+        {
+
         }
     }
 }
