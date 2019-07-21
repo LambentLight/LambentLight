@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -73,6 +74,38 @@ namespace LambentLight
         {
             // Close the current form
             Close();
+        }
+
+        private void VisibleTextBox_CheckedChanged(object sender, EventArgs e)
+        {
+            // Change the enabled status of the License TextBox
+            LicenseTextBox.Enabled = VisibleCheckBox.Checked;
+            SaveLicenseButton.Enabled = VisibleCheckBox.Checked;
+            // If the CheckBox is enabled
+            if (VisibleCheckBox.Checked)
+            {
+                // Fill the text box with the license
+                LicenseTextBox.Text = Properties.Settings.Default.License;
+            }
+            // Otherwise
+            else
+            {
+                // Delete it
+                LicenseTextBox.Text = string.Empty;
+            }
+        }
+
+        private void GenerateLicenseButton_Click(object sender, EventArgs e)
+        {
+            // Open the FiveM Keymaster page
+            Process.Start("https://keymaster.fivem.net");
+        }
+
+        private void SaveLicenseButton_Click(object sender, EventArgs e)
+        {
+            // Save the license on the text box
+            Properties.Settings.Default.License = LicenseTextBox.Text;
+            Properties.Settings.Default.Save();
         }
     }
 }
