@@ -40,7 +40,7 @@ namespace LambentLight
             // Create a new configuration for NLog
             LoggingConfiguration NewConfig = new LoggingConfiguration();
             // Add a rule for logging to the TextBox
-            NewConfig.AddRule(LogLevel.Info, LogLevel.Fatal, new TextBoxTarget() { Box = LogBox, Layout = "[${date}] [${level}] ${message}" });
+            NewConfig.AddRule(LogLevel.Info, LogLevel.Fatal, new TextBoxTarget() { Box = LogTextBox, Layout = "[${date}] [${level}] ${message}" });
             // Set the already created configuration
             LogManager.Configuration = NewConfig;
             // And filll the Builds and Data folders
@@ -48,6 +48,9 @@ namespace LambentLight
             DataFolderManager.Fill(DataBox);
             // Set the elements to unlocked
             Locked = false;
+
+            // Load the API URLs
+            BuildsTextBox.Text = Properties.Settings.Default.Builds;
         }
 
         private async void StartItem_Click(object sender, EventArgs e)
@@ -105,6 +108,13 @@ namespace LambentLight
         {
             // Save the license on the text box
             Properties.Settings.Default.License = LicenseTextBox.Text;
+            Properties.Settings.Default.Save();
+        }
+
+        private void SaveAPIsButton_Click(object sender, EventArgs e)
+        {
+            // Save the URLs on the configuration
+            Properties.Settings.Default.Builds = BuildsTextBox.Text;
             Properties.Settings.Default.Save();
         }
     }

@@ -38,20 +38,27 @@
             this.CreateItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExitItem = new System.Windows.Forms.ToolStripMenuItem();
             this.LogsTab = new System.Windows.Forms.TabPage();
-            this.LogBox = new System.Windows.Forms.TextBox();
+            this.LogTextBox = new System.Windows.Forms.TextBox();
             this.Tabs = new System.Windows.Forms.TabControl();
             this.SettingsTab = new System.Windows.Forms.TabPage();
+            this.APIsGroupBox = new System.Windows.Forms.GroupBox();
+            this.SaveAPIsButton = new System.Windows.Forms.Button();
+            this.BuildsTextBox = new System.Windows.Forms.TextBox();
+            this.BuildsLabel = new System.Windows.Forms.Label();
+            this.ResourcesTextBox = new System.Windows.Forms.TextBox();
+            this.ResourcesLabel = new System.Windows.Forms.Label();
             this.LicenseGroupBox = new System.Windows.Forms.GroupBox();
+            this.GenerateLicenseButton = new System.Windows.Forms.Button();
             this.SaveLicenseButton = new System.Windows.Forms.Button();
             this.VisibleCheckBox = new System.Windows.Forms.CheckBox();
             this.LicenseTextBox = new System.Windows.Forms.TextBox();
-            this.GenerateLicenseButton = new System.Windows.Forms.Button();
             this.BuildsGroup.SuspendLayout();
             this.DataGroup.SuspendLayout();
             this.TopStrip.SuspendLayout();
             this.LogsTab.SuspendLayout();
             this.Tabs.SuspendLayout();
             this.SettingsTab.SuspendLayout();
+            this.APIsGroupBox.SuspendLayout();
             this.LicenseGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -145,7 +152,7 @@
             // 
             // LogsTab
             // 
-            this.LogsTab.Controls.Add(this.LogBox);
+            this.LogsTab.Controls.Add(this.LogTextBox);
             this.LogsTab.Location = new System.Drawing.Point(4, 22);
             this.LogsTab.Name = "LogsTab";
             this.LogsTab.Padding = new System.Windows.Forms.Padding(3);
@@ -154,18 +161,18 @@
             this.LogsTab.Text = "Logs";
             this.LogsTab.UseVisualStyleBackColor = true;
             // 
-            // LogBox
+            // LogTextBox
             // 
-            this.LogBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.LogTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.LogBox.Location = new System.Drawing.Point(6, 6);
-            this.LogBox.Multiline = true;
-            this.LogBox.Name = "LogBox";
-            this.LogBox.ReadOnly = true;
-            this.LogBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.LogBox.Size = new System.Drawing.Size(755, 301);
-            this.LogBox.TabIndex = 0;
+            this.LogTextBox.Location = new System.Drawing.Point(6, 6);
+            this.LogTextBox.Multiline = true;
+            this.LogTextBox.Name = "LogTextBox";
+            this.LogTextBox.ReadOnly = true;
+            this.LogTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.LogTextBox.Size = new System.Drawing.Size(755, 301);
+            this.LogTextBox.TabIndex = 0;
             // 
             // Tabs
             // 
@@ -182,6 +189,7 @@
             // 
             // SettingsTab
             // 
+            this.SettingsTab.Controls.Add(this.APIsGroupBox);
             this.SettingsTab.Controls.Add(this.LicenseGroupBox);
             this.SettingsTab.Location = new System.Drawing.Point(4, 22);
             this.SettingsTab.Name = "SettingsTab";
@@ -191,6 +199,68 @@
             this.SettingsTab.Text = "Settings";
             this.SettingsTab.UseVisualStyleBackColor = true;
             // 
+            // APIsGroupBox
+            // 
+            this.APIsGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.APIsGroupBox.Controls.Add(this.SaveAPIsButton);
+            this.APIsGroupBox.Controls.Add(this.BuildsTextBox);
+            this.APIsGroupBox.Controls.Add(this.BuildsLabel);
+            this.APIsGroupBox.Controls.Add(this.ResourcesTextBox);
+            this.APIsGroupBox.Controls.Add(this.ResourcesLabel);
+            this.APIsGroupBox.Location = new System.Drawing.Point(391, 6);
+            this.APIsGroupBox.Name = "APIsGroupBox";
+            this.APIsGroupBox.Size = new System.Drawing.Size(370, 125);
+            this.APIsGroupBox.TabIndex = 1;
+            this.APIsGroupBox.TabStop = false;
+            this.APIsGroupBox.Text = "API URLs";
+            // 
+            // SaveAPIsButton
+            // 
+            this.SaveAPIsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.SaveAPIsButton.Location = new System.Drawing.Point(289, 97);
+            this.SaveAPIsButton.Name = "SaveAPIsButton";
+            this.SaveAPIsButton.Size = new System.Drawing.Size(75, 23);
+            this.SaveAPIsButton.TabIndex = 4;
+            this.SaveAPIsButton.Text = "Save";
+            this.SaveAPIsButton.UseVisualStyleBackColor = true;
+            this.SaveAPIsButton.Click += new System.EventHandler(this.SaveAPIsButton_Click);
+            // 
+            // BuildsTextBox
+            // 
+            this.BuildsTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.BuildsTextBox.Location = new System.Drawing.Point(6, 71);
+            this.BuildsTextBox.Name = "BuildsTextBox";
+            this.BuildsTextBox.Size = new System.Drawing.Size(358, 20);
+            this.BuildsTextBox.TabIndex = 3;
+            // 
+            // BuildsLabel
+            // 
+            this.BuildsLabel.AutoSize = true;
+            this.BuildsLabel.Location = new System.Drawing.Point(6, 55);
+            this.BuildsLabel.Name = "BuildsLabel";
+            this.BuildsLabel.Size = new System.Drawing.Size(35, 13);
+            this.BuildsLabel.TabIndex = 2;
+            this.BuildsLabel.Text = "Builds";
+            // 
+            // ResourcesTextBox
+            // 
+            this.ResourcesTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ResourcesTextBox.Location = new System.Drawing.Point(6, 32);
+            this.ResourcesTextBox.Name = "ResourcesTextBox";
+            this.ResourcesTextBox.Size = new System.Drawing.Size(358, 20);
+            this.ResourcesTextBox.TabIndex = 1;
+            // 
+            // ResourcesLabel
+            // 
+            this.ResourcesLabel.AutoSize = true;
+            this.ResourcesLabel.Location = new System.Drawing.Point(6, 16);
+            this.ResourcesLabel.Name = "ResourcesLabel";
+            this.ResourcesLabel.Size = new System.Drawing.Size(58, 13);
+            this.ResourcesLabel.TabIndex = 0;
+            this.ResourcesLabel.Text = "Resources";
+            // 
             // LicenseGroupBox
             // 
             this.LicenseGroupBox.Controls.Add(this.GenerateLicenseButton);
@@ -199,21 +269,33 @@
             this.LicenseGroupBox.Controls.Add(this.LicenseTextBox);
             this.LicenseGroupBox.Location = new System.Drawing.Point(6, 6);
             this.LicenseGroupBox.Name = "LicenseGroupBox";
-            this.LicenseGroupBox.Size = new System.Drawing.Size(344, 74);
+            this.LicenseGroupBox.Size = new System.Drawing.Size(370, 74);
             this.LicenseGroupBox.TabIndex = 0;
             this.LicenseGroupBox.TabStop = false;
             this.LicenseGroupBox.Text = "FiveM License";
+            // 
+            // GenerateLicenseButton
+            // 
+            this.GenerateLicenseButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.GenerateLicenseButton.Location = new System.Drawing.Point(208, 45);
+            this.GenerateLicenseButton.Name = "GenerateLicenseButton";
+            this.GenerateLicenseButton.Size = new System.Drawing.Size(75, 23);
+            this.GenerateLicenseButton.TabIndex = 3;
+            this.GenerateLicenseButton.Text = "Generate";
+            this.GenerateLicenseButton.UseVisualStyleBackColor = true;
+            this.GenerateLicenseButton.Click += new System.EventHandler(this.GenerateLicenseButton_Click);
             // 
             // SaveLicenseButton
             // 
             this.SaveLicenseButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.SaveLicenseButton.Enabled = false;
-            this.SaveLicenseButton.Location = new System.Drawing.Point(263, 45);
+            this.SaveLicenseButton.Location = new System.Drawing.Point(289, 45);
             this.SaveLicenseButton.Name = "SaveLicenseButton";
             this.SaveLicenseButton.Size = new System.Drawing.Size(75, 23);
             this.SaveLicenseButton.TabIndex = 2;
             this.SaveLicenseButton.Text = "Save";
             this.SaveLicenseButton.UseVisualStyleBackColor = true;
+            this.SaveLicenseButton.Click += new System.EventHandler(this.SaveLicenseButton_Click);
             // 
             // VisibleCheckBox
             // 
@@ -234,19 +316,8 @@
             this.LicenseTextBox.Enabled = false;
             this.LicenseTextBox.Location = new System.Drawing.Point(6, 19);
             this.LicenseTextBox.Name = "LicenseTextBox";
-            this.LicenseTextBox.Size = new System.Drawing.Size(332, 20);
+            this.LicenseTextBox.Size = new System.Drawing.Size(358, 20);
             this.LicenseTextBox.TabIndex = 0;
-            // 
-            // GenerateLicenseButton
-            // 
-            this.GenerateLicenseButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.GenerateLicenseButton.Location = new System.Drawing.Point(182, 45);
-            this.GenerateLicenseButton.Name = "GenerateLicenseButton";
-            this.GenerateLicenseButton.Size = new System.Drawing.Size(75, 23);
-            this.GenerateLicenseButton.TabIndex = 3;
-            this.GenerateLicenseButton.Text = "Generate";
-            this.GenerateLicenseButton.UseVisualStyleBackColor = true;
-            this.GenerateLicenseButton.Click += new System.EventHandler(this.GenerateLicenseButton_Click);
             // 
             // Landing
             // 
@@ -271,6 +342,8 @@
             this.LogsTab.PerformLayout();
             this.Tabs.ResumeLayout(false);
             this.SettingsTab.ResumeLayout(false);
+            this.APIsGroupBox.ResumeLayout(false);
+            this.APIsGroupBox.PerformLayout();
             this.LicenseGroupBox.ResumeLayout(false);
             this.LicenseGroupBox.PerformLayout();
             this.ResumeLayout(false);
@@ -290,7 +363,7 @@
         private System.Windows.Forms.TabPage LogsTab;
         private System.Windows.Forms.TabControl Tabs;
         private System.Windows.Forms.ToolStripMenuItem CreateItem;
-        private System.Windows.Forms.TextBox LogBox;
+        private System.Windows.Forms.TextBox LogTextBox;
         private System.Windows.Forms.ToolStripMenuItem ExitItem;
         private System.Windows.Forms.TabPage SettingsTab;
         private System.Windows.Forms.GroupBox LicenseGroupBox;
@@ -298,6 +371,12 @@
         private System.Windows.Forms.CheckBox VisibleCheckBox;
         private System.Windows.Forms.Button SaveLicenseButton;
         private System.Windows.Forms.Button GenerateLicenseButton;
+        private System.Windows.Forms.GroupBox APIsGroupBox;
+        private System.Windows.Forms.Label ResourcesLabel;
+        private System.Windows.Forms.TextBox ResourcesTextBox;
+        private System.Windows.Forms.Label BuildsLabel;
+        private System.Windows.Forms.TextBox BuildsTextBox;
+        private System.Windows.Forms.Button SaveAPIsButton;
     }
 }
 
