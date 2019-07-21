@@ -1,5 +1,6 @@
 ﻿using NLog;
 using NLog.Targets;
+using System;
 using System.Windows.Forms;
 
 namespace LambentLight
@@ -18,7 +19,7 @@ namespace LambentLight
         /// <param name="LogEvent">The log information.</param>
         protected override void Write(LogEventInfo LogEvent)
         {
-            Box.Text += Layout.Render(LogEvent);
+            Box.Text += Layout.Render(LogEvent) + Environment.NewLine;
         }
     }
 }
