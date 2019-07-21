@@ -103,6 +103,7 @@
     <None Include="Resources\Play.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\server.cfg" />
     <None Include="Resources\Stop.png" />
   </ItemGroup>
   <ItemGroup>
