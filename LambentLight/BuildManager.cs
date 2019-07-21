@@ -108,6 +108,7 @@ namespace LambentLight
                 Builds = new List<Build>();
                 // Notify the user
                 Logger.Error("Unable to fetch the new FiveM builds: Code {0} ({1})", (int)e.Status, e.Status);
+                return;
             }
 
             // Create a temporary list of builds
