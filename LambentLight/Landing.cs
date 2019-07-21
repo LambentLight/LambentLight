@@ -16,6 +16,11 @@ namespace LambentLight
     public partial class Landing : Form
     {
         /// <summary>
+        /// The logger for our current class.
+        /// </summary>
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+        /// <summary>
         /// Sets the locked status of some of the UI elements.
         /// </summary>
         public bool Locked
@@ -55,6 +60,21 @@ namespace LambentLight
 
         private async void StartItem_Click(object sender, EventArgs e)
         {
+            // Ensure that we have an item available
+            if (BuildsBox.SelectedItem == null)
+            {
+                // If not, notify the user and return
+                Logger.Info("You have not selected a FiveM/CitizenFX server build");
+                return;
+            }
+            // Do the same with server data folders
+            if (DataBox.SelectedItem == null)
+            {
+                // Notify and return
+                Logger.Info("You have not selected a Server Data folder");
+                return;
+            }
+
             // Start the build with the selected options
             Locked = await ServerManager.Start((Build)BuildsBox.SelectedItem, (DataFolder)DataBox.SelectedItem);
         }
