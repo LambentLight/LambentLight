@@ -171,6 +171,9 @@ namespace LambentLight
 
             // Finally, extract the values
             await Task.Run(() => ZipFile.ExtractToDirectory(Destination, build.Folder));
+
+            // Delete the temporary ZIP file
+            File.Delete(Destination);
         }
     }
 }
