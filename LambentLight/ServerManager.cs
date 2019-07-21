@@ -1,4 +1,4 @@
-﻿using NLog;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -42,6 +42,13 @@ namespace LambentLight
             if (Server != null)
             {
                 Logger.Warn("There is already a server running");
+                return false;
+            }
+
+            // If there is no license set up, notify it and return
+            if (string.IsNullOrWhiteSpace(Properties.Settings.Default.License))
+            {
+                Logger.Error("There is no valid FiveM license set up!");
                 return false;
             }
 
