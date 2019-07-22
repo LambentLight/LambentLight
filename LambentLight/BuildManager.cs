@@ -42,10 +42,12 @@ namespace LambentLight
         /// Gets the string representation of a build.
         /// </summary>
         /// <returns>The ID of the build.</returns>
-        public override string ToString()
-        {
-            return ID;
-        }
+        public override string ToString() => ID;
+
+        /// <summary>
+        /// Checks if the compared object has the same ID as the current one.
+        /// </summary>
+        public override bool Equals(object obj) => obj is Build && ID == ((Build)obj).ID;
     }
 
     /// <summary>

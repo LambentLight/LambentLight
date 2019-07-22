@@ -50,10 +50,12 @@ namespace LambentLight
         /// Gets the directory name.
         /// </summary>
         /// <returns>The name of the directory.</returns>
-        public override string ToString()
-        {
-            return Name;
-        }
+        public override string ToString() => Name;
+
+        /// <summary>
+        /// Checks if the compared object has the same name as the current one.
+        /// </summary>
+        public override bool Equals(object obj) => obj is DataFolder && Name == ((DataFolder)obj).Name;
     }
 
     /// <summary>
