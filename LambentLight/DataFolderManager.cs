@@ -127,7 +127,7 @@ namespace LambentLight
         /// Creates a new server data folder.
         /// </summary>
         /// <param name="name">The name of the folder.</param>
-        public static async Task Create(string name)
+        public static async Task<DataFolder> Create(string name)
         {
             // Create the Data folder if it does not exists
             if (Directory.Exists("Data"))
@@ -139,7 +139,7 @@ namespace LambentLight
             if (string.IsNullOrWhiteSpace(name))
             {
                 Logger.Warn("The path that you have entered is null or consists only of whitespaces");
-                return;
+                return null;
             }
 
             // Generate the destination path
@@ -149,7 +149,7 @@ namespace LambentLight
             if (Directory.Exists(NewPath))
             {
                 Logger.Warn("The specified folder name already exists");
-                return;
+                return null;
             }
 
             // If the user wants to download the scripts
@@ -192,6 +192,9 @@ namespace LambentLight
                 string Config = string.Format(Encoding.UTF8.GetString(Properties.Resources.server_cfg), GenerateSecureString(32));
                 File.WriteAllText(Path.Combine(NewPath, "server.cfg"), Config);
             }
+
+            // Finally, return the data object
+            return new DataFolder(NewPath);
         }
 
         /// <summary>

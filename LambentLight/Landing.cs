@@ -95,8 +95,20 @@ namespace LambentLight
         {
             // Ask the user for inputing a server data folder name
             string FolderName = Microsoft.VisualBasic.Interaction.InputBox("Please insert a name for the new Server Data Folder:", "New Server Data Folder");
+            // Lock the fields
+            Locked = true;
             // Create a server data folder
-            await DataFolderManager.Create(FolderName);
+            DataFolder NewFolder = await DataFolderManager.Create(FolderName);
+            // If the creation of the new folder succeded
+            if (NewFolder != null)
+            {
+                // Update the fields
+                DataFolderManager.Fill(DataBox);
+                // And select the new item
+                DataBox.SelectedItem = NewFolder;
+            }
+            // Then unlock the fields
+            Locked = false;
         }
 
         private void ExitItem_Click(object sender, EventArgs e)
