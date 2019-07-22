@@ -1,4 +1,4 @@
-using NLog;
+﻿using NLog;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -94,15 +94,22 @@ namespace LambentLight
         /// <summary>
         /// Stops the server if is running.
         /// </summary>
-        public static async Task<bool> Stop()
+        public static void Stop()
         {
             // If there is no server running, notify the user and return
             if (Server == null)
             {
                 Logger.Warn("The FiveM server is not running");
-                return false;
             }
 
+            // If the server process is running, kill it
+            if (Server.IsRunning())
+            {
+                Server.Kill();
+                Server.CancelOutputRead();
+                Server.CancelErrorRead();
+                Logger.Info("The FiveM server has been stopped");
+            }
         }
 
         /// <summary>

@@ -89,10 +89,11 @@ namespace LambentLight
             Locked = await ServerManager.Start((Build)BuildsBox.SelectedItem, (DataFolder)DataBox.SelectedItem);
         }
 
-        private async void StopItem_Click(object sender, EventArgs e)
+        private void StopItem_Click(object sender, EventArgs e)
         {
-            // Stop the server if is present
-            Locked = await ServerManager.Stop();
+            // Stop the server if is present and unlock the controls
+            ServerManager.Stop();
+            Locked = false;
         }
 
         private async void CreateItem_Click(object sender, EventArgs e)
