@@ -148,10 +148,16 @@ namespace LambentLight
 
         private static void RestartEveryEvent(object sender, EventArgs args)
         {
+            // Just restart the server
+            Restart();
+        }
+
+        public static void Restart()
+        {
             // If the server is running
             if (Server != null && Server.Process.IsRunning())
             {
-                // Create a new instace of the server
+                // Create a new instance of the server
                 ServerInformation NewServer = GenerateClass(Server.Build, Server.Folder);
                 // Stop the existing server
                 Stop();
