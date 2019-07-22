@@ -1,4 +1,4 @@
-﻿using NLog;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -133,7 +133,7 @@ namespace LambentLight
         private static void EnsureServerRunning(object sender, EventArgs args)
         {
             // If the code is not zero, start it again
-            if (!Server.Process.IsRunning() && Server.Process.ExitCode != 0)
+            if (Server != null && !Server.Process.IsRunning() && Server.Process.ExitCode != 0)
             {
                 Server = GenerateClass(Server.Build, Server.Folder);
                 Server.Process.Start();
