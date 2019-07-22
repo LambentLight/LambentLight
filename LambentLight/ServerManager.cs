@@ -126,7 +126,7 @@ namespace LambentLight
             {
                 // Subscribe our event
                 AutoRestart.Interval = 100;
-                AutoRestart.Tick += EnsureServerRunning;
+                AutoRestart.Tick += RestartOnBadExitEvent;
                 AutoRestart.Enabled = true;
             }
             // If the user wants automated restarts every few hours/minutes/seconds
@@ -147,33 +147,9 @@ namespace LambentLight
             return true;
         }
 
-        private static void EnsureServerRunning(object sender, EventArgs args)
-        {
-            // If the code is not zero, start it again
-            if (Server != null && !Server.Process.IsRunning() && Server.Process.ExitCode != 0)
-            {
-                Server = GenerateClass(Server.Build, Server.Folder);
-                Server.Process.Start();
-            }
-        }
-
-        private static void RestartEveryEvent(object sender, EventArgs args)
-        {
-            // Just restart the server
-            Restart();
-        }
-
-        private static void RestartAtEvent(object sender, EventArgs args)
-        {
-            // If the hour, minute and second matches, restart the server
-            if (DateTime.Now.Hour == Properties.Settings.Default.RestartAtTime.Hours &&
-                DateTime.Now.Minute == Properties.Settings.Default.RestartAtTime.Minutes &&
-                DateTime.Now.Second == Properties.Settings.Default.RestartAtTime.Seconds)
-            {
-                Restart();
-            }
-        }
-
+        /// <summary>
+        /// Restarts the server if is running.
+        /// </summary>
         public static void Restart()
         {
             // If the server is running
@@ -225,6 +201,42 @@ namespace LambentLight
                 Server = null;
                 // And notify the user
                 Logger.Info("The FiveM server has been stopped");
+            }
+        }
+
+        /// <summary>
+        /// Event that gets triggered to check if the server has crashed.
+        /// </summary>
+        private static void RestartOnBadExitEvent(object sender, EventArgs args)
+        {
+            // If the code is not zero, start it again
+            if (Server != null && !Server.Process.IsRunning() && Server.Process.ExitCode != 0)
+            {
+                Server = GenerateClass(Server.Build, Server.Folder);
+                Server.Process.Start();
+            }
+        }
+
+        /// <summary>
+        /// Event that restarts the server every few hours/minutes/seconds.
+        /// </summary>
+        private static void RestartEveryEvent(object sender, EventArgs args)
+        {
+            // Just restart the server
+            Restart();
+        }
+
+        /// <summary>
+        /// Event that restarts the server at specific times of the day.
+        /// </summary>
+        private static void RestartAtEvent(object sender, EventArgs args)
+        {
+            // If the hour, minute and second matches, restart the server
+            if (DateTime.Now.Hour == Properties.Settings.Default.RestartAtTime.Hours &&
+                DateTime.Now.Minute == Properties.Settings.Default.RestartAtTime.Minutes &&
+                DateTime.Now.Second == Properties.Settings.Default.RestartAtTime.Seconds)
+            {
+                Restart();
             }
         }
 
