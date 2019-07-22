@@ -40,11 +40,35 @@ namespace LambentLight
         /// <summary>
         /// The server process that is currently running.
         /// </summary>
-        public static Process Server { get; private set; } = null;
+        public static ServerInformation Server { get; private set; } = null;
         /// <summary>
         /// If the FiveM server is running or not.
         /// </summary>
-        public static bool IsServerRunning => Server != null && Server.IsRunning();
+        public static bool IsServerRunning => Server != null && Server.Process.IsRunning();
+
+        private static ServerInformation GenerateClass(Build build, DataFolder data)
+        {
+            // Store the absolute path of the folder
+            string AbsPath = Path.GetFullPath(build.Folder);
+            // Create a new Server object
+            ServerInformation NewServer = new ServerInformation();
+            // Create a new server object and set the correct properties
+            NewServer.Process = new Process();
+            NewServer.Process.StartInfo.FileName = Path.Combine(AbsPath, "FXServer.exe");
+            NewServer.Process.StartInfo.Arguments = string.Format("+set citizen_dir \"{0}\" +set sv_licenseKey {1} +exec server.cfg", Path.Combine(AbsPath, "citizen"), Properties.Settings.Default.License);
+            NewServer.Process.StartInfo.WorkingDirectory = data.Absolute;
+            NewServer.Process.StartInfo.UseShellExecute = false;
+            NewServer.Process.StartInfo.RedirectStandardError = true;
+            NewServer.Process.StartInfo.RedirectStandardInput = true;
+            NewServer.Process.StartInfo.RedirectStandardOutput = true;
+            NewServer.Process.StartInfo.CreateNoWindow = true;
+            NewServer.Process.OutputDataReceived += (S, A) => { if (!string.IsNullOrWhiteSpace(A.Data)) Logger.Info(A.Data); };
+            NewServer.Process.Start();
+            NewServer.Process.BeginOutputReadLine();
+            NewServer.Process.BeginErrorReadLine();
+            // Finally, return the new class
+            return NewServer;
+        }
 
         /// <summary>
         /// Starts the CFX server process.
@@ -73,23 +97,8 @@ namespace LambentLight
                 await BuildManager.Download(build);
             }
 
-            // Store the absolute path of the folder
-            string AbsPath = Path.GetFullPath(build.Folder);
-            // Create a new server object and set the correct properties
-            Server = new Process();
-            Server.StartInfo.FileName = Path.Combine(AbsPath, "FXServer.exe");
-            Server.StartInfo.Arguments = string.Format("+set citizen_dir \"{0}\" +set sv_licenseKey {1} +exec server.cfg", Path.Combine(AbsPath, "citizen"), Properties.Settings.Default.License);
-            Server.StartInfo.WorkingDirectory = data.Absolute;
-            Server.StartInfo.UseShellExecute = false;
-            Server.StartInfo.RedirectStandardError = true;
-            Server.StartInfo.RedirectStandardInput = true;
-            Server.StartInfo.RedirectStandardOutput = true;
-            Server.StartInfo.CreateNoWindow = true;
-            Server.OutputDataReceived += (S, A) => { if (!string.IsNullOrWhiteSpace(A.Data)) Logger.Info(A.Data); } ;
-            Server.Exited += ProcessExited;
-            Server.Start();
-            Server.BeginOutputReadLine();
-            Server.BeginErrorReadLine();
+            // Create and save the new class that contains the information that we need
+            Server = GenerateClass(build, data);
 
             return true;
         }
@@ -117,11 +126,12 @@ namespace LambentLight
             }
 
             // If the server process is running, kill it
-            if (Server.IsRunning())
+            if (Server.Process.IsRunning())
             {
-                Server.Kill();
-                Server.CancelOutputRead();
-                Server.CancelErrorRead();
+                Server.Process.Kill();
+                Server.Process.CancelOutputRead();
+                Server.Process.CancelErrorRead();
+                Server = null;
                 Logger.Info("The FiveM server has been stopped");
             }
         }
