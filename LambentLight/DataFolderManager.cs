@@ -17,9 +17,13 @@ namespace LambentLight
     public class DataFolder
     {
         /// <summary>
+        /// The name of the folder.
+        /// </summary>
+        public string Name { get; private set; }
+        /// <summary>
         /// The location of the server data folder
         /// </summary>
-        public string Location { get; private set; }
+        public string Location => Path.Combine("Data", Name);
         /// <summary>
         /// If the data folder exists.
         /// </summary>
@@ -36,10 +40,10 @@ namespace LambentLight
         /// <summary>
         /// Creates a new instance of the data folder.
         /// </summary>
-        /// <param name="location">The location of the data folder.</param>
-        public DataFolder(string location)
+        /// <param name="name">The name of the folder inside of Data.</param>
+        public DataFolder(string name)
         {
-            Location = location;
+            Name = name;
         }
 
         /// <summary>
@@ -48,7 +52,7 @@ namespace LambentLight
         /// <returns>The name of the directory.</returns>
         public override string ToString()
         {
-            return Path.GetFileName(Location);
+            return Name;
         }
     }
 
@@ -89,7 +93,7 @@ namespace LambentLight
             foreach (string Dir in Directory.GetDirectories("Data"))
             {
                 // And add our data folder
-                Folders.Add(new DataFolder(Dir));
+                Folders.Add(new DataFolder(Path.GetFileName(Dir)));
             }
 
             // Log what we have just done
@@ -194,7 +198,7 @@ namespace LambentLight
             }
 
             // Finally, return the data object
-            return new DataFolder(NewPath);
+            return new DataFolder(name);
         }
 
         /// <summary>
