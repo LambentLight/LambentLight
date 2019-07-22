@@ -59,6 +59,7 @@
             this.LicenseTextBox = new System.Windows.Forms.TextBox();
             this.RuntimeGroupBox = new System.Windows.Forms.GroupBox();
             this.AutoRestartCheckBox = new System.Windows.Forms.CheckBox();
+            this.ClearCacheCheckBox = new System.Windows.Forms.CheckBox();
             this.BuildsGroup.SuspendLayout();
             this.DataGroup.SuspendLayout();
             this.TopStrip.SuspendLayout();
@@ -389,6 +390,7 @@
             // 
             // RuntimeGroupBox
             // 
+            this.RuntimeGroupBox.Controls.Add(this.ClearCacheCheckBox);
             this.RuntimeGroupBox.Controls.Add(this.AutoRestartCheckBox);
             this.RuntimeGroupBox.Location = new System.Drawing.Point(391, 137);
             this.RuntimeGroupBox.Name = "RuntimeGroupBox";
@@ -407,6 +409,17 @@
             this.AutoRestartCheckBox.Text = "Automatically restart the server if it crashes";
             this.AutoRestartCheckBox.UseVisualStyleBackColor = true;
             this.AutoRestartCheckBox.CheckedChanged += new System.EventHandler(this.AutoRestartCheckBox_CheckedChanged);
+            // 
+            // ClearCacheCheckBox
+            // 
+            this.ClearCacheCheckBox.AutoSize = true;
+            this.ClearCacheCheckBox.Location = new System.Drawing.Point(6, 42);
+            this.ClearCacheCheckBox.Name = "ClearCacheCheckBox";
+            this.ClearCacheCheckBox.Size = new System.Drawing.Size(223, 17);
+            this.ClearCacheCheckBox.TabIndex = 1;
+            this.ClearCacheCheckBox.Text = "Clear the cache prior to starting the server";
+            this.ClearCacheCheckBox.UseVisualStyleBackColor = true;
+            this.ClearCacheCheckBox.CheckedChanged += new System.EventHandler(this.ClearCacheCheckBox_CheckedChanged);
             // 
             // Landing
             // 
@@ -477,6 +490,7 @@
         private System.Windows.Forms.CheckBox CreateConfigCheckBox;
         private System.Windows.Forms.GroupBox RuntimeGroupBox;
         private System.Windows.Forms.CheckBox AutoRestartCheckBox;
+        private System.Windows.Forms.CheckBox ClearCacheCheckBox;
     }
 }
 

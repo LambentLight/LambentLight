@@ -66,6 +66,8 @@ namespace LambentLight
             BuildsTextBox.Text = Properties.Settings.Default.Builds;
             DownloadScriptsCheckBox.Checked = Properties.Settings.Default.DownloadScripts;
             CreateConfigCheckBox.Checked = Properties.Settings.Default.CreateConfig;
+            AutoRestartCheckBox.Checked = Properties.Settings.Default.AutoRestart;
+            ClearCacheCheckBox.Checked = Properties.Settings.Default.ClearCache;
         }
 
         private async void StartItem_Click(object sender, EventArgs e)
@@ -191,6 +193,13 @@ namespace LambentLight
         {
             // Save the curent status on the settings
             Properties.Settings.Default.AutoRestart = AutoRestartCheckBox.Checked;
+            Properties.Settings.Default.Save();
+        }
+
+        private void ClearCacheCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            // Save the curent status on the settings
+            Properties.Settings.Default.ClearCache = ClearCacheCheckBox.Checked;
             Properties.Settings.Default.Save();
         }
     }

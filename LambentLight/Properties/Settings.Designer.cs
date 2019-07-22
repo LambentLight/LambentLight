@@ -94,5 +94,17 @@ namespace LambentLight.Properties {
                 this["AutoRestart"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ClearCache {
+            get {
+                return ((bool)(this["ClearCache"]));
+            }
+            set {
+                this["ClearCache"] = value;
+            }
+        }
     }
 }

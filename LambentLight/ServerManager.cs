@@ -108,6 +108,14 @@ namespace LambentLight
                 await BuildManager.Download(build);
             }
 
+            // Format the path for the cache folder
+            string Cache = Path.Combine(data.Location, "cache");
+            // If there is a cache folder and the user wants them gone, remove it
+            if (Properties.Settings.Default.ClearCache && Directory.Exists(Cache))
+            {
+                Directory.Delete(Cache, true);
+                Logger.Info("The cache folder was present on '{0}'", data.Name);
+            }
             // Create and save the new class that contains the information that we need
             Server = GenerateClass(build, data);
 
