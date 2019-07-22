@@ -82,5 +82,17 @@ namespace LambentLight.Properties {
                 this["UpgradeRequired"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool KeepAlive {
+            get {
+                return ((bool)(this["KeepAlive"]));
+            }
+            set {
+                this["KeepAlive"] = value;
+            }
+        }
     }
 }
