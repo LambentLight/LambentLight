@@ -1,4 +1,4 @@
-﻿using NLog;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -103,6 +103,26 @@ namespace LambentLight
                 return false;
             }
 
+        }
+
+        /// <summary>
+        /// Cheks if the current process is running.
+        /// </summary>
+        /// <returns>true if the process is running, false otherwise.</returns>
+        public static bool IsRunning(this Process Check)
+        {
+            try
+            {
+                Process.GetProcessById(Check.Id);
+            }
+            catch (ArgumentException)
+            {
+                return false;
+            }
+            catch (InvalidOperationException)
+            {
+                return false;
+            }
             return true;
         }
     }
