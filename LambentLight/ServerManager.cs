@@ -1,4 +1,4 @@
-﻿using NLog;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -9,6 +9,25 @@ using System.Threading.Tasks;
 
 namespace LambentLight
 {
+    /// <summary>
+    /// Class for storing some values for the launch of the server.
+    /// </summary>
+    public class ServerInformation
+    {
+        /// <summary>
+        /// The FiveM build used to launch the process.
+        /// </summary>
+        public Build Build { get; set; }
+        /// <summary>
+        /// The Data Folder with the server information.
+        /// </summary>
+        public DataFolder Folder { get; set; }
+        /// <summary>
+        /// The server process.
+        /// </summary>
+        public Process Process { get; set; }
+    }
+
     /// <summary>
     /// Manages the start, stop and restart of the CFX server.
     /// </summary>
