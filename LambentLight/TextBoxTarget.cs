@@ -19,7 +19,7 @@ namespace LambentLight
         /// <param name="LogEvent">The log information.</param>
         protected override void Write(LogEventInfo LogEvent)
         {
-            Box.Invoke(new Action(() => Box.Text += Layout.Render(LogEvent) + Environment.NewLine));
+            Box.Invoke(new Action(() => Box.AppendText(Layout.Render(LogEvent) + Environment.NewLine)));
         }
     }
 }
