@@ -49,10 +49,11 @@ namespace LambentLight
         /// <summary>
         /// Timer that keeps the server running even after crashes.
         /// </summary>
-        public static Timer AutoRestart = new Timer()
-        {
-            Interval = 100
-        };
+        public static Timer AutoRestart = new Timer();
+        /// <summary>
+        /// Timer that restarts the specified
+        /// </summary>
+        public static Timer RestartEvery = new Timer();
 
         private static ServerInformation GenerateClass(Build build, DataFolder data)
         {
@@ -123,8 +124,16 @@ namespace LambentLight
             if (Properties.Settings.Default.AutoRestart)
             {
                 // Subscribe our event
+                AutoRestart.Interval = 100;
                 AutoRestart.Tick += EnsureServerRunning;
                 AutoRestart.Enabled = true;
+            }
+            // If the user wants automated restarts every few hours/minutes/seconds
+            if (Properties.Settings.Default.RestartEvery)
+            {
+                RestartEvery.Interval = (int)Properties.Settings.Default.RestartEveryTime.TotalMilliseconds;
+                RestartEvery.Tick += RestartEveryEvent;
+                RestartEvery.Enabled = true;
             }
 
             return true;
@@ -136,6 +145,22 @@ namespace LambentLight
             if (Server != null && !Server.Process.IsRunning() && Server.Process.ExitCode != 0)
             {
                 Server = GenerateClass(Server.Build, Server.Folder);
+                Server.Process.Start();
+            }
+        }
+
+        private static void RestartEveryEvent(object sender, EventArgs args)
+        {
+            // If the server is running
+            if (Server != null && Server.Process.IsRunning())
+            {
+                // Create a new instace of the server
+                ServerInformation NewServer = GenerateClass(Server.Build, Server.Folder);
+                // Stop the existing server
+                Stop();
+                // Set the new server
+                Server = NewServer;
+                // And start it
                 Server.Process.Start();
             }
         }
