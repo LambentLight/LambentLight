@@ -60,6 +60,13 @@
             this.RuntimeGroupBox = new System.Windows.Forms.GroupBox();
             this.AutoRestartCheckBox = new System.Windows.Forms.CheckBox();
             this.ClearCacheCheckBox = new System.Windows.Forms.CheckBox();
+            this.AutomatedRestartGroupBox = new System.Windows.Forms.GroupBox();
+            this.RestartEveryCheckBox = new System.Windows.Forms.CheckBox();
+            this.RestartEveryTextBox = new System.Windows.Forms.TextBox();
+            this.RestartAtCheckBox = new System.Windows.Forms.CheckBox();
+            this.RestartAtTextBox = new System.Windows.Forms.TextBox();
+            this.RestartEveryButton = new System.Windows.Forms.Button();
+            this.RestartAtButton = new System.Windows.Forms.Button();
             this.BuildsGroup.SuspendLayout();
             this.DataGroup.SuspendLayout();
             this.TopStrip.SuspendLayout();
@@ -70,6 +77,7 @@
             this.APIsGroupBox.SuspendLayout();
             this.LicenseGroupBox.SuspendLayout();
             this.RuntimeGroupBox.SuspendLayout();
+            this.AutomatedRestartGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // BuildsGroup
@@ -223,6 +231,7 @@
             // 
             // SettingsTab
             // 
+            this.SettingsTab.Controls.Add(this.AutomatedRestartGroupBox);
             this.SettingsTab.Controls.Add(this.RuntimeGroupBox);
             this.SettingsTab.Controls.Add(this.FolderCreationGroupBox);
             this.SettingsTab.Controls.Add(this.APIsGroupBox);
@@ -394,7 +403,7 @@
             this.RuntimeGroupBox.Controls.Add(this.AutoRestartCheckBox);
             this.RuntimeGroupBox.Location = new System.Drawing.Point(391, 137);
             this.RuntimeGroupBox.Name = "RuntimeGroupBox";
-            this.RuntimeGroupBox.Size = new System.Drawing.Size(370, 100);
+            this.RuntimeGroupBox.Size = new System.Drawing.Size(370, 66);
             this.RuntimeGroupBox.TabIndex = 3;
             this.RuntimeGroupBox.TabStop = false;
             this.RuntimeGroupBox.Text = "Runtime";
@@ -420,6 +429,79 @@
             this.ClearCacheCheckBox.Text = "Clear the cache prior to starting the server";
             this.ClearCacheCheckBox.UseVisualStyleBackColor = true;
             this.ClearCacheCheckBox.CheckedChanged += new System.EventHandler(this.ClearCacheCheckBox_CheckedChanged);
+            // 
+            // AutomatedRestartGroupBox
+            // 
+            this.AutomatedRestartGroupBox.Controls.Add(this.RestartAtButton);
+            this.AutomatedRestartGroupBox.Controls.Add(this.RestartEveryButton);
+            this.AutomatedRestartGroupBox.Controls.Add(this.RestartAtTextBox);
+            this.AutomatedRestartGroupBox.Controls.Add(this.RestartAtCheckBox);
+            this.AutomatedRestartGroupBox.Controls.Add(this.RestartEveryTextBox);
+            this.AutomatedRestartGroupBox.Controls.Add(this.RestartEveryCheckBox);
+            this.AutomatedRestartGroupBox.Location = new System.Drawing.Point(6, 160);
+            this.AutomatedRestartGroupBox.Name = "AutomatedRestartGroupBox";
+            this.AutomatedRestartGroupBox.Size = new System.Drawing.Size(370, 75);
+            this.AutomatedRestartGroupBox.TabIndex = 4;
+            this.AutomatedRestartGroupBox.TabStop = false;
+            this.AutomatedRestartGroupBox.Text = "Automated Restarts";
+            // 
+            // RestartEveryCheckBox
+            // 
+            this.RestartEveryCheckBox.AutoSize = true;
+            this.RestartEveryCheckBox.Location = new System.Drawing.Point(6, 19);
+            this.RestartEveryCheckBox.Name = "RestartEveryCheckBox";
+            this.RestartEveryCheckBox.Size = new System.Drawing.Size(89, 17);
+            this.RestartEveryCheckBox.TabIndex = 0;
+            this.RestartEveryCheckBox.Text = "Restart every";
+            this.RestartEveryCheckBox.UseVisualStyleBackColor = true;
+            this.RestartEveryCheckBox.CheckedChanged += new System.EventHandler(this.RestartEveryCheckBox_CheckedChanged);
+            // 
+            // RestartEveryTextBox
+            // 
+            this.RestartEveryTextBox.Location = new System.Drawing.Point(183, 17);
+            this.RestartEveryTextBox.Name = "RestartEveryTextBox";
+            this.RestartEveryTextBox.Size = new System.Drawing.Size(100, 20);
+            this.RestartEveryTextBox.TabIndex = 1;
+            this.RestartEveryTextBox.Text = "00:00:00";
+            // 
+            // RestartAtCheckBox
+            // 
+            this.RestartAtCheckBox.AutoSize = true;
+            this.RestartAtCheckBox.Location = new System.Drawing.Point(6, 44);
+            this.RestartAtCheckBox.Name = "RestartAtCheckBox";
+            this.RestartAtCheckBox.Size = new System.Drawing.Size(96, 17);
+            this.RestartAtCheckBox.TabIndex = 2;
+            this.RestartAtCheckBox.Text = "Restart daily at";
+            this.RestartAtCheckBox.UseVisualStyleBackColor = true;
+            this.RestartAtCheckBox.CheckedChanged += new System.EventHandler(this.RestartAtCheckBox_CheckedChanged);
+            // 
+            // RestartAtTextBox
+            // 
+            this.RestartAtTextBox.Location = new System.Drawing.Point(183, 42);
+            this.RestartAtTextBox.Name = "RestartAtTextBox";
+            this.RestartAtTextBox.Size = new System.Drawing.Size(100, 20);
+            this.RestartAtTextBox.TabIndex = 3;
+            this.RestartAtTextBox.Text = "00:00:00";
+            // 
+            // RestartEveryButton
+            // 
+            this.RestartEveryButton.Location = new System.Drawing.Point(289, 15);
+            this.RestartEveryButton.Name = "RestartEveryButton";
+            this.RestartEveryButton.Size = new System.Drawing.Size(75, 23);
+            this.RestartEveryButton.TabIndex = 4;
+            this.RestartEveryButton.Text = "Save";
+            this.RestartEveryButton.UseVisualStyleBackColor = true;
+            this.RestartEveryButton.Click += new System.EventHandler(this.RestartEveryButton_Click);
+            // 
+            // RestartAtButton
+            // 
+            this.RestartAtButton.Location = new System.Drawing.Point(289, 42);
+            this.RestartAtButton.Name = "RestartAtButton";
+            this.RestartAtButton.Size = new System.Drawing.Size(75, 23);
+            this.RestartAtButton.TabIndex = 5;
+            this.RestartAtButton.Text = "Save";
+            this.RestartAtButton.UseVisualStyleBackColor = true;
+            this.RestartAtButton.Click += new System.EventHandler(this.RestartAtButton_Click);
             // 
             // Landing
             // 
@@ -452,6 +534,8 @@
             this.LicenseGroupBox.PerformLayout();
             this.RuntimeGroupBox.ResumeLayout(false);
             this.RuntimeGroupBox.PerformLayout();
+            this.AutomatedRestartGroupBox.ResumeLayout(false);
+            this.AutomatedRestartGroupBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -491,6 +575,13 @@
         private System.Windows.Forms.GroupBox RuntimeGroupBox;
         private System.Windows.Forms.CheckBox AutoRestartCheckBox;
         private System.Windows.Forms.CheckBox ClearCacheCheckBox;
+        private System.Windows.Forms.GroupBox AutomatedRestartGroupBox;
+        private System.Windows.Forms.CheckBox RestartEveryCheckBox;
+        private System.Windows.Forms.CheckBox RestartAtCheckBox;
+        private System.Windows.Forms.TextBox RestartEveryTextBox;
+        private System.Windows.Forms.TextBox RestartAtTextBox;
+        private System.Windows.Forms.Button RestartEveryButton;
+        private System.Windows.Forms.Button RestartAtButton;
     }
 }
 

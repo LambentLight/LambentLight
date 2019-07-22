@@ -68,6 +68,10 @@ namespace LambentLight
             CreateConfigCheckBox.Checked = Properties.Settings.Default.CreateConfig;
             AutoRestartCheckBox.Checked = Properties.Settings.Default.AutoRestart;
             ClearCacheCheckBox.Checked = Properties.Settings.Default.ClearCache;
+            RestartEveryCheckBox.Checked = Properties.Settings.Default.RestartEvery;
+            RestartAtCheckBox.Checked = Properties.Settings.Default.RestartAt;
+            RestartEveryTextBox.Text = Properties.Settings.Default.RestartEveryTime.ToString();
+            RestartAtTextBox.Text = Properties.Settings.Default.RestartAtTime.ToString();
         }
 
         private async void StartItem_Click(object sender, EventArgs e)
@@ -200,6 +204,54 @@ namespace LambentLight
         {
             // Save the curent status on the settings
             Properties.Settings.Default.ClearCache = ClearCacheCheckBox.Checked;
+            Properties.Settings.Default.Save();
+        }
+
+        private void RestartEveryCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            // Save the curent status on the settings
+            Properties.Settings.Default.RestartEvery = RestartEveryCheckBox.Checked;
+            Properties.Settings.Default.Save();
+        }
+
+        private void RestartAtCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            // Save the curent status on the settings
+            Properties.Settings.Default.RestartAt = RestartAtCheckBox.Checked;
+            Properties.Settings.Default.Save();
+        }
+
+        private void RestartEveryButton_Click(object sender, EventArgs e)
+        {
+            // Try to parse the text box contents
+            try
+            {
+                Properties.Settings.Default.RestartEveryTime = TimeSpan.Parse(RestartEveryTextBox.Text);
+            }
+            // If we have failed
+            catch (FormatException)
+            {
+                MessageBox.Show("The format for the 'Restart every' time is invalid.");
+                return;
+            }
+            // If we succeeded, save it
+            Properties.Settings.Default.Save();
+        }
+
+        private void RestartAtButton_Click(object sender, EventArgs e)
+        {
+            // Try to parse the text box contents
+            try
+            {
+                Properties.Settings.Default.RestartAtTime = TimeSpan.Parse(RestartAtTextBox.Text);
+            }
+            // If we have failed
+            catch (FormatException)
+            {
+                MessageBox.Show("The format for the 'Restart daily at' time is invalid.");
+                return;
+            }
+            // If we succeeded, save it
             Properties.Settings.Default.Save();
         }
     }

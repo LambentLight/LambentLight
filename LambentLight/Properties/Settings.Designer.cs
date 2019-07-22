@@ -106,5 +106,53 @@ namespace LambentLight.Properties {
                 this["ClearCache"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool RestartEvery {
+            get {
+                return ((bool)(this["RestartEvery"]));
+            }
+            set {
+                this["RestartEvery"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool RestartAt {
+            get {
+                return ((bool)(this["RestartAt"]));
+            }
+            set {
+                this["RestartAt"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("00:00:00")]
+        public global::System.TimeSpan RestartEveryTime {
+            get {
+                return ((global::System.TimeSpan)(this["RestartEveryTime"]));
+            }
+            set {
+                this["RestartEveryTime"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("00:00:00")]
+        public global::System.TimeSpan RestartAtTime {
+            get {
+                return ((global::System.TimeSpan)(this["RestartAtTime"]));
+            }
+            set {
+                this["RestartAtTime"] = value;
+            }
+        }
     }
 }
