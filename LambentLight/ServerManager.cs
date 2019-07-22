@@ -1,4 +1,4 @@
-using NLog;
+﻿using NLog;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -48,9 +48,13 @@ namespace LambentLight
         /// </summary>
         public static Timer AutoRestart = new Timer();
         /// <summary>
-        /// Timer that restarts the specified
+        /// Timer that restarts the server every few hours/minutes/seconds.
         /// </summary>
         public static Timer RestartEvery = new Timer();
+        /// <summary>
+        /// Timer that restarts the server at specific times of the day.
+        /// </summary>
+        public static Timer RestartAt = new Timer();
 
         private static ServerInformation GenerateClass(Build build, DataFolder data)
         {
@@ -132,6 +136,13 @@ namespace LambentLight
                 RestartEvery.Tick += RestartEveryEvent;
                 RestartEvery.Enabled = true;
             }
+            // If the user wants automated restarts at specific times of the day
+            if (Properties.Settings.Default.RestartAt)
+            {
+                RestartAt.Interval = 1000;
+                RestartAt.Tick += RestartAtEvent;
+                RestartAt.Enabled = true;
+            }
 
             return true;
         }
@@ -150,6 +161,17 @@ namespace LambentLight
         {
             // Just restart the server
             Restart();
+        }
+
+        private static void RestartAtEvent(object sender, EventArgs args)
+        {
+            // If the hour, minute and second matches, restart the server
+            if (DateTime.Now.Hour == Properties.Settings.Default.RestartAtTime.Hours &&
+                DateTime.Now.Minute == Properties.Settings.Default.RestartAtTime.Minutes &&
+                DateTime.Now.Second == Properties.Settings.Default.RestartAtTime.Seconds)
+            {
+                Restart();
+            }
         }
 
         public static void Restart()
@@ -195,8 +217,10 @@ namespace LambentLight
                 {
                     // Do nothing
                 }
-                // Disable the auto restart
+                // Disable the auto restarts
                 AutoRestart.Enabled = false;
+                RestartEvery.Enabled = false;
+                RestartAt.Enabled = false;
                 // Remove the server information
                 Server = null;
                 // And notify the user
