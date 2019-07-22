@@ -66,6 +66,9 @@ namespace LambentLight
             NewServer.Process.Start();
             NewServer.Process.BeginOutputReadLine();
             NewServer.Process.BeginErrorReadLine();
+            // Save the build and data folder
+            NewServer.Build = build;
+            NewServer.Folder = data;
             // Finally, return the new class
             return NewServer;
         }
