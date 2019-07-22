@@ -10,15 +10,6 @@ using System.Threading.Tasks;
 namespace LambentLight
 {
     /// <summary>
-    /// The current status of the server executable.
-    /// </summary>
-    public enum ServerStatus
-    {
-        Stopped = -1,
-        Running = 0
-    }
-
-    /// <summary>
     /// Manages the start, stop and restart of the CFX server.
     /// </summary>
     public static class ServerManager
@@ -31,6 +22,10 @@ namespace LambentLight
         /// The server process that is currently running.
         /// </summary>
         public static Process Server { get; private set; } = null;
+        /// <summary>
+        /// If the FiveM server is running or not.
+        /// </summary>
+        public static bool IsServerRunning => Server != null && Server.IsRunning();
 
         /// <summary>
         /// Starts the CFX server process.
