@@ -32,6 +32,10 @@ namespace LambentLight
                 StopItem.Enabled = value;
                 CreateItem.Enabled = !value;
                 ExitItem.Enabled = !value;
+                BuildsBox.Enabled = !value;
+                BuildRefreshButton.Enabled = !value;
+                DataBox.Enabled = !value;
+                FolderRefreshButton.Enabled = !value;
             }
         }
 
