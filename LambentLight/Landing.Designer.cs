@@ -44,6 +44,7 @@
             this.Tabs = new System.Windows.Forms.TabControl();
             this.SettingsTab = new System.Windows.Forms.TabPage();
             this.FolderCreationGroupBox = new System.Windows.Forms.GroupBox();
+            this.CreateConfigCheckBox = new System.Windows.Forms.CheckBox();
             this.DownloadScriptsCheckBox = new System.Windows.Forms.CheckBox();
             this.APIsGroupBox = new System.Windows.Forms.GroupBox();
             this.SaveAPIsButton = new System.Windows.Forms.Button();
@@ -56,7 +57,8 @@
             this.SaveLicenseButton = new System.Windows.Forms.Button();
             this.VisibleCheckBox = new System.Windows.Forms.CheckBox();
             this.LicenseTextBox = new System.Windows.Forms.TextBox();
-            this.CreateConfigCheckBox = new System.Windows.Forms.CheckBox();
+            this.RuntimeGroupBox = new System.Windows.Forms.GroupBox();
+            this.AutoRestartCheckBox = new System.Windows.Forms.CheckBox();
             this.BuildsGroup.SuspendLayout();
             this.DataGroup.SuspendLayout();
             this.TopStrip.SuspendLayout();
@@ -66,6 +68,7 @@
             this.FolderCreationGroupBox.SuspendLayout();
             this.APIsGroupBox.SuspendLayout();
             this.LicenseGroupBox.SuspendLayout();
+            this.RuntimeGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // BuildsGroup
@@ -219,6 +222,7 @@
             // 
             // SettingsTab
             // 
+            this.SettingsTab.Controls.Add(this.RuntimeGroupBox);
             this.SettingsTab.Controls.Add(this.FolderCreationGroupBox);
             this.SettingsTab.Controls.Add(this.APIsGroupBox);
             this.SettingsTab.Controls.Add(this.LicenseGroupBox);
@@ -240,6 +244,17 @@
             this.FolderCreationGroupBox.TabIndex = 2;
             this.FolderCreationGroupBox.TabStop = false;
             this.FolderCreationGroupBox.Text = "Data Folder Creation";
+            // 
+            // CreateConfigCheckBox
+            // 
+            this.CreateConfigCheckBox.AutoSize = true;
+            this.CreateConfigCheckBox.Location = new System.Drawing.Point(6, 42);
+            this.CreateConfigCheckBox.Name = "CreateConfigCheckBox";
+            this.CreateConfigCheckBox.Size = new System.Drawing.Size(276, 17);
+            this.CreateConfigCheckBox.TabIndex = 1;
+            this.CreateConfigCheckBox.Text = "Generate Configuration after creating the Data Folder";
+            this.CreateConfigCheckBox.UseVisualStyleBackColor = true;
+            this.CreateConfigCheckBox.CheckedChanged += new System.EventHandler(this.CreateConfigCheckBox_CheckedChanged);
             // 
             // DownloadScriptsCheckBox
             // 
@@ -372,16 +387,26 @@
             this.LicenseTextBox.Size = new System.Drawing.Size(358, 20);
             this.LicenseTextBox.TabIndex = 0;
             // 
-            // CreateConfigCheckBox
+            // RuntimeGroupBox
             // 
-            this.CreateConfigCheckBox.AutoSize = true;
-            this.CreateConfigCheckBox.Location = new System.Drawing.Point(6, 42);
-            this.CreateConfigCheckBox.Name = "CreateConfigCheckBox";
-            this.CreateConfigCheckBox.Size = new System.Drawing.Size(276, 17);
-            this.CreateConfigCheckBox.TabIndex = 1;
-            this.CreateConfigCheckBox.Text = "Generate Configuration after creating the Data Folder";
-            this.CreateConfigCheckBox.UseVisualStyleBackColor = true;
-            this.CreateConfigCheckBox.CheckedChanged += new System.EventHandler(this.CreateConfigCheckBox_CheckedChanged);
+            this.RuntimeGroupBox.Controls.Add(this.AutoRestartCheckBox);
+            this.RuntimeGroupBox.Location = new System.Drawing.Point(391, 137);
+            this.RuntimeGroupBox.Name = "RuntimeGroupBox";
+            this.RuntimeGroupBox.Size = new System.Drawing.Size(370, 100);
+            this.RuntimeGroupBox.TabIndex = 3;
+            this.RuntimeGroupBox.TabStop = false;
+            this.RuntimeGroupBox.Text = "Runtime";
+            // 
+            // AutoRestartCheckBox
+            // 
+            this.AutoRestartCheckBox.AutoSize = true;
+            this.AutoRestartCheckBox.Location = new System.Drawing.Point(6, 19);
+            this.AutoRestartCheckBox.Name = "AutoRestartCheckBox";
+            this.AutoRestartCheckBox.Size = new System.Drawing.Size(226, 17);
+            this.AutoRestartCheckBox.TabIndex = 0;
+            this.AutoRestartCheckBox.Text = "Automatically restart the server if it crashes";
+            this.AutoRestartCheckBox.UseVisualStyleBackColor = true;
+            this.AutoRestartCheckBox.CheckedChanged += new System.EventHandler(this.AutoRestartCheckBox_CheckedChanged);
             // 
             // Landing
             // 
@@ -412,6 +437,8 @@
             this.APIsGroupBox.PerformLayout();
             this.LicenseGroupBox.ResumeLayout(false);
             this.LicenseGroupBox.PerformLayout();
+            this.RuntimeGroupBox.ResumeLayout(false);
+            this.RuntimeGroupBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -448,6 +475,8 @@
         private System.Windows.Forms.GroupBox FolderCreationGroupBox;
         private System.Windows.Forms.CheckBox DownloadScriptsCheckBox;
         private System.Windows.Forms.CheckBox CreateConfigCheckBox;
+        private System.Windows.Forms.GroupBox RuntimeGroupBox;
+        private System.Windows.Forms.CheckBox AutoRestartCheckBox;
     }
 }
 

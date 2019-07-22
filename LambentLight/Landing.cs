@@ -186,5 +186,12 @@ namespace LambentLight
             Properties.Settings.Default.CreateConfig = CreateConfigCheckBox.Checked;
             Properties.Settings.Default.Save();
         }
+
+        private void AutoRestartCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            // Save the curent status on the settings
+            Properties.Settings.Default.AutoRestart = AutoRestartCheckBox.Checked;
+            Properties.Settings.Default.Save();
+        }
     }
 }

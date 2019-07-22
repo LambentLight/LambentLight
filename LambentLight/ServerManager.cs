@@ -112,7 +112,7 @@ namespace LambentLight
             Server = GenerateClass(build, data);
 
             // If the user wants to keep the server running even after crashing
-            if (Properties.Settings.Default.KeepAlive)
+            if (Properties.Settings.Default.AutoRestart)
             {
                 // Subscribe our event
                 AutoRestart.Tick += EnsureServerRunning;

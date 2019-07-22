@@ -86,12 +86,12 @@ namespace LambentLight.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool KeepAlive {
+        public bool AutoRestart {
             get {
-                return ((bool)(this["KeepAlive"]));
+                return ((bool)(this["AutoRestart"]));
             }
             set {
-                this["KeepAlive"] = value;
+                this["AutoRestart"] = value;
             }
         }
     }
