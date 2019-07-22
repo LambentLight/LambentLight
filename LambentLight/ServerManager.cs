@@ -1,4 +1,4 @@
-using NLog;
+﻿using NLog;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace LambentLight
 {
@@ -45,6 +46,13 @@ namespace LambentLight
         /// If the FiveM server is running or not.
         /// </summary>
         public static bool IsServerRunning => Server != null && Server.Process.IsRunning();
+        /// <summary>
+        /// Timer that keeps the server running even after crashes.
+        /// </summary>
+        public static Timer AutoRestart = new Timer()
+        {
+            Interval = 100
+        };
 
         private static ServerInformation GenerateClass(Build build, DataFolder data)
         {
@@ -103,17 +111,24 @@ namespace LambentLight
             // Create and save the new class that contains the information that we need
             Server = GenerateClass(build, data);
 
+            // If the user wants to keep the server running even after crashing
+            if (Properties.Settings.Default.KeepAlive)
+            {
+                // Subscribe our event
+                AutoRestart.Tick += EnsureServerRunning;
+                AutoRestart.Enabled = true;
+            }
+
             return true;
         }
 
-        private static void ProcessExited(object sender, EventArgs args)
+        private static void EnsureServerRunning(object sender, EventArgs args)
         {
             // If the code is not zero, start it again
-            if (Server.ExitCode != 0)
+            if (!Server.Process.IsRunning() && Server.Process.ExitCode != 0)
             {
-                Server.Start();
-                Server.BeginOutputReadLine();
-                Server.BeginErrorReadLine();
+                Server = GenerateClass(Server.Build, Server.Folder);
+                Server.Process.Start();
             }
         }
 
@@ -128,13 +143,27 @@ namespace LambentLight
                 Logger.Warn("The FiveM server is not running");
             }
 
-            // If the server process is running, kill it
+            // If the server process is running
             if (Server.Process.IsRunning())
             {
+                // Kill it
                 Server.Process.Kill();
-                Server.Process.CancelOutputRead();
-                Server.Process.CancelErrorRead();
+                // Try to cancel the STDOUT and STDERR background reads
+                try
+                {
+                    Server.Process.CancelOutputRead();
+                    Server.Process.CancelErrorRead();
+                }
+                // If they are not available
+                catch (InvalidOperationException)
+                {
+                    // Do nothing
+                }
+                // Disable the auto restart
+                AutoRestart.Enabled = false;
+                // Remove the server information
                 Server = null;
+                // And notify the user
                 Logger.Info("The FiveM server has been stopped");
             }
         }
