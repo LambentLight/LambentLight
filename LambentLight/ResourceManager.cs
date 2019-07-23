@@ -1,5 +1,4 @@
-using Newtonsoft.Json;
-using System;
+﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -46,10 +45,62 @@ namespace LambentLight
     }
 
     /// <summary>
+    /// The specific version information of a resource.
+    /// </summary>
+    public class Version
+    {
+        /// <summary>
+        /// The readable version. This can be either semantic versioning or the git commit.
+        /// </summary>
+        [JsonProperty("version")]
+        public string ReadableVersion { get; set; }
+        /// <summary>
+        /// The place where we can download the resource with the specific version.
+        /// </summary>
+        [JsonProperty("download")]
+        public string Download { get; set; }
+        /// <summary>
+        /// The compression used for the download.
+        /// </summary>
+        [JsonProperty("compression")]
+        public CompressionType Compression { get; set; }
+    }
+
+    /// <summary>
     /// Class that contains the informatioon of a specific downloadable resource.
     /// </summary>
     public class Resource
     {
+        /// <summary>
+        /// The readable name of the resource.
+        /// </summary>
+        [JsonProperty("name")]
+        public string Name { get; set; }
+        /// <summary>
+        /// The creator of the resource.
+        /// </summary>
+        [JsonProperty("author")]
+        public string Author { get; set; }
+        /// <summary>
+        /// The name of the folder of the resource.
+        /// </summary>
+        [JsonProperty("folder")]
+        public string Folder { get; set; }
+        /// <summary>
+        /// The type of resource. Only used for the UI.
+        /// </summary>
+        [JsonProperty("type")]
+        public ResourceType Type { get; set; }
+        /// <summary>
+        /// The URL of the license page.
+        /// </summary>
+        [JsonProperty("license")]
+        public string License { get; set; }
+        /// <summary>
+        /// A list with the versions of the resource.
+        /// </summary>
+        [JsonProperty("versions")]
+        public List<Version> Versions { get; set; }
     }
 
     /// <summary>
