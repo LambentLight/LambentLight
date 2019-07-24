@@ -1,8 +1,8 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
+using NLog;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Net;
+using System.Windows.Forms;
 
 namespace LambentLight
 {
@@ -101,6 +101,11 @@ namespace LambentLight
         /// </summary>
         [JsonProperty("versions")]
         public List<Version> Versions { get; set; }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 
     /// <summary>
