@@ -103,33 +103,6 @@ namespace LambentLight
         }
 
         /// <summary>
-        /// Fills the specified ComboBox with 
-        /// </summary>
-        /// <param name="box"></param>
-        public static void Fill(ComboBox box)
-        {
-            // Refresh the list of folders first
-            Refresh();
-
-            // Remove all of the items
-            box.Items.Clear();
-
-            // For every folder
-            foreach (DataFolder Folder in Folders)
-            {
-                // Add it to the combo box
-                box.Items.Add(Folder);
-            }
-
-            // If the number of items is higher than zero
-            if (box.Items.Count > 0)
-            {
-                // Select the first item
-                box.SelectedIndex = 0;
-            }
-        }
-
-        /// <summary>
         /// Creates a new server data folder.
         /// </summary>
         /// <param name="name">The name of the folder.</param>

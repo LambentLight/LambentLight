@@ -1,4 +1,5 @@
-﻿using NLog;
+﻿using LambentLight.Extensions;
+using NLog;
 using NLog.Config;
 using System;
 using System.Collections.Generic;
@@ -53,10 +54,14 @@ namespace LambentLight
             NewConfig.AddRule(LogLevel.Info, LogLevel.Fatal, new TextBoxTarget() { Box = LogTextBox, Layout = "[${date}] [${level}] ${message}" });
             // Set the already created configuration
             LogManager.Configuration = NewConfig;
+            // Update the list of builds, folders and resources
+            BuildManager.Refresh();
+            DataFolderManager.Refresh();
+            ResourceManager.Refresh();
             // And filll the Builds and Data folders
-            BuildManager.Fill(BuildsBox);
-            DataFolderManager.Fill(DataBox);
-            ResourceManager.Fill(ResourcesListBox);
+            BuildsBox.Fill(BuildManager.Builds, true);
+            DataBox.Fill(DataFolderManager.Folders, true);
+            ResourcesListBox.Fill(ResourceManager.Resources);
             // Set the elements to unlocked
             Locked = false;
 
@@ -116,7 +121,8 @@ namespace LambentLight
             if (NewFolder != null)
             {
                 // Update the fields
-                DataFolderManager.Fill(DataBox);
+                DataFolderManager.Refresh();
+                DataBox.Fill(DataFolderManager.Folders);
                 // And select the new item
                 DataBox.SelectedItem = NewFolder;
             }
@@ -133,13 +139,15 @@ namespace LambentLight
         private void BuildRefreshButton_Click(object sender, EventArgs e)
         {
             // Refresh the list of builds
-            BuildManager.Fill(BuildsBox);
+            BuildManager.Refresh();
+            BuildsBox.Fill(BuildManager.Builds, true);
         }
 
         private void FolderRefreshButton_Click(object sender, EventArgs e)
         {
             // Refresh the folders of data
-            DataFolderManager.Fill(DataBox);
+            DataFolderManager.Refresh();
+            DataBox.Fill(DataFolderManager.Folders);
         }
 
         #region Resource Installer
@@ -150,7 +158,7 @@ namespace LambentLight
             if (ResourcesListBox.SelectedItem != null)
             {
                 // Add the builds to our version ListBox
-                ((Resource)ResourcesListBox.SelectedItem).Fill(VersionsListBox);
+                VersionsListBox.Fill(((Resource)ResourcesListBox.SelectedItem).Versions);
             }
             // Otherwise
             else
@@ -172,10 +180,9 @@ namespace LambentLight
         {
             // Disable the install button
             InstallButton.Enabled = false;
-            // Remove the items of the versions ListBox
-            VersionsListBox.Items.Clear();
-            // And fill them again
-            ResourceManager.Fill(ResourcesListBox);
+            // And add the updated set of resource
+            ResourceManager.Refresh();
+            ResourcesListBox.Fill(ResourceManager.Resources);
         }
 
         private void InstallButton_Click(object sender, EventArgs e)

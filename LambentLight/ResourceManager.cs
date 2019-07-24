@@ -107,17 +107,6 @@ namespace LambentLight
         [JsonProperty("versions")]
         public List<Version> Versions { get; set; }
 
-        public void Fill(ListBox box)
-        {
-            // Wipe the ListBox
-            box.Items.Clear();
-            // Add all of our versions to the list box
-            foreach (Version Ver in Versions)
-            {
-                box.Items.Add(Ver);
-            }
-        }
-
         public override string ToString()
         {
             return Name;
@@ -170,26 +159,6 @@ namespace LambentLight
 
             // Log what we have just done
             Logger.Info("The list of resources has been updated");
-        }
-
-        /// <summary>
-        /// Fills the specified ListBox with our class items.
-        /// </summary>
-        /// <param name="box">The ListBox to fill.</param>
-        public static void Fill(ListBox box)
-        {
-            // Refresh the list first
-            Refresh();
-
-            // Remove all of the items
-            box.Items.Clear();
-
-            // For every item
-            foreach (Resource Res in Resources)
-            {
-                // Add it to the ListBox
-                box.Items.Add(Res);
-            }
         }
     }
 }

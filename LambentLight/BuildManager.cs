@@ -121,33 +121,6 @@ namespace LambentLight
         }
 
         /// <summary>
-        /// Fills the specified ComboBox with the list of builds.
-        /// </summary>
-        /// <param name="box">The ComboBox to fill.</param>
-        public static void Fill(ComboBox box)
-        {
-            // Start by updating the list of builds
-            Refresh();
-
-            // Remove all of the items
-            box.Items.Clear();
-
-            // Iterate over the items
-            foreach (Build StoredBuild in Builds)
-            {
-                // And add the build
-                box.Items.Add(StoredBuild);
-            }
-
-            // If the number of items is higher than zero
-            if (box.Items.Count > 0)
-            {
-                // Select the first item
-                box.SelectedIndex = 0;
-            }
-        }
-
-        /// <summary>
         /// Downloads the specified build.
         /// </summary>
         /// <param name="build">The build to download.</param>
