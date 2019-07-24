@@ -146,18 +146,19 @@ namespace LambentLight
 
         private void ResourcesListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // If there is nothing selected
-            if (ResourcesListBox.SelectedIndex == -1)
+            // If there is something selected
+            if (ResourcesListBox.SelectedItem != null)
+            {
+                // Add the builds to our version ListBox
+                ((Resource)ResourcesListBox.SelectedItem).Fill(VersionsListBox);
+            }
+            // Otherwise
+            else
             {
                 // Wipe the Versions
                 VersionsListBox.Items.Clear();
                 // And disable the install button
                 InstallButton.Enabled = false;
-            }
-            // Otherwise
-            {
-                // Add the builds to our version ListBox
-                ((Resource)ResourcesListBox.SelectedItem).Fill(VersionsListBox);
             }
         }
 
