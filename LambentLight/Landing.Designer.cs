@@ -42,7 +42,19 @@
             this.LogsTab = new System.Windows.Forms.TabPage();
             this.LogTextBox = new System.Windows.Forms.TextBox();
             this.Tabs = new System.Windows.Forms.TabControl();
+            this.ResourcesTab = new System.Windows.Forms.TabPage();
+            this.ResourceListGroup = new System.Windows.Forms.GroupBox();
             this.SettingsTab = new System.Windows.Forms.TabPage();
+            this.AutomatedRestartGroupBox = new System.Windows.Forms.GroupBox();
+            this.RestartAtButton = new System.Windows.Forms.Button();
+            this.RestartEveryButton = new System.Windows.Forms.Button();
+            this.RestartAtTextBox = new System.Windows.Forms.TextBox();
+            this.RestartAtCheckBox = new System.Windows.Forms.CheckBox();
+            this.RestartEveryTextBox = new System.Windows.Forms.TextBox();
+            this.RestartEveryCheckBox = new System.Windows.Forms.CheckBox();
+            this.RuntimeGroupBox = new System.Windows.Forms.GroupBox();
+            this.ClearCacheCheckBox = new System.Windows.Forms.CheckBox();
+            this.AutoRestartCheckBox = new System.Windows.Forms.CheckBox();
             this.FolderCreationGroupBox = new System.Windows.Forms.GroupBox();
             this.CreateConfigCheckBox = new System.Windows.Forms.CheckBox();
             this.DownloadScriptsCheckBox = new System.Windows.Forms.CheckBox();
@@ -57,27 +69,24 @@
             this.SaveLicenseButton = new System.Windows.Forms.Button();
             this.VisibleCheckBox = new System.Windows.Forms.CheckBox();
             this.LicenseTextBox = new System.Windows.Forms.TextBox();
-            this.RuntimeGroupBox = new System.Windows.Forms.GroupBox();
-            this.AutoRestartCheckBox = new System.Windows.Forms.CheckBox();
-            this.ClearCacheCheckBox = new System.Windows.Forms.CheckBox();
-            this.AutomatedRestartGroupBox = new System.Windows.Forms.GroupBox();
-            this.RestartEveryCheckBox = new System.Windows.Forms.CheckBox();
-            this.RestartEveryTextBox = new System.Windows.Forms.TextBox();
-            this.RestartAtCheckBox = new System.Windows.Forms.CheckBox();
-            this.RestartAtTextBox = new System.Windows.Forms.TextBox();
-            this.RestartEveryButton = new System.Windows.Forms.Button();
-            this.RestartAtButton = new System.Windows.Forms.Button();
+            this.VersionListGroup = new System.Windows.Forms.GroupBox();
+            this.InstallButton = new System.Windows.Forms.Button();
+            this.ResourcesListBox = new System.Windows.Forms.ListBox();
+            this.VersionsListBox = new System.Windows.Forms.ListBox();
             this.BuildsGroup.SuspendLayout();
             this.DataGroup.SuspendLayout();
             this.TopStrip.SuspendLayout();
             this.LogsTab.SuspendLayout();
             this.Tabs.SuspendLayout();
+            this.ResourcesTab.SuspendLayout();
+            this.ResourceListGroup.SuspendLayout();
             this.SettingsTab.SuspendLayout();
+            this.AutomatedRestartGroupBox.SuspendLayout();
+            this.RuntimeGroupBox.SuspendLayout();
             this.FolderCreationGroupBox.SuspendLayout();
             this.APIsGroupBox.SuspendLayout();
             this.LicenseGroupBox.SuspendLayout();
-            this.RuntimeGroupBox.SuspendLayout();
-            this.AutomatedRestartGroupBox.SuspendLayout();
+            this.VersionListGroup.SuspendLayout();
             this.SuspendLayout();
             // 
             // BuildsGroup
@@ -222,12 +231,38 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Tabs.Controls.Add(this.LogsTab);
+            this.Tabs.Controls.Add(this.ResourcesTab);
             this.Tabs.Controls.Add(this.SettingsTab);
             this.Tabs.Location = new System.Drawing.Point(12, 85);
             this.Tabs.Name = "Tabs";
             this.Tabs.SelectedIndex = 0;
             this.Tabs.Size = new System.Drawing.Size(775, 339);
             this.Tabs.TabIndex = 3;
+            // 
+            // ResourcesTab
+            // 
+            this.ResourcesTab.Controls.Add(this.VersionListGroup);
+            this.ResourcesTab.Controls.Add(this.ResourceListGroup);
+            this.ResourcesTab.Location = new System.Drawing.Point(4, 22);
+            this.ResourcesTab.Name = "ResourcesTab";
+            this.ResourcesTab.Padding = new System.Windows.Forms.Padding(3);
+            this.ResourcesTab.Size = new System.Drawing.Size(767, 313);
+            this.ResourcesTab.TabIndex = 2;
+            this.ResourcesTab.Text = "Resources";
+            this.ResourcesTab.UseVisualStyleBackColor = true;
+            // 
+            // ResourceListGroup
+            // 
+            this.ResourceListGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ResourceListGroup.Controls.Add(this.ResourcesListBox);
+            this.ResourceListGroup.Location = new System.Drawing.Point(6, 6);
+            this.ResourceListGroup.Name = "ResourceListGroup";
+            this.ResourceListGroup.Size = new System.Drawing.Size(370, 301);
+            this.ResourceListGroup.TabIndex = 0;
+            this.ResourceListGroup.TabStop = false;
+            this.ResourceListGroup.Text = "Resources Available";
             // 
             // SettingsTab
             // 
@@ -243,6 +278,112 @@
             this.SettingsTab.TabIndex = 1;
             this.SettingsTab.Text = "Settings";
             this.SettingsTab.UseVisualStyleBackColor = true;
+            // 
+            // AutomatedRestartGroupBox
+            // 
+            this.AutomatedRestartGroupBox.Controls.Add(this.RestartAtButton);
+            this.AutomatedRestartGroupBox.Controls.Add(this.RestartEveryButton);
+            this.AutomatedRestartGroupBox.Controls.Add(this.RestartAtTextBox);
+            this.AutomatedRestartGroupBox.Controls.Add(this.RestartAtCheckBox);
+            this.AutomatedRestartGroupBox.Controls.Add(this.RestartEveryTextBox);
+            this.AutomatedRestartGroupBox.Controls.Add(this.RestartEveryCheckBox);
+            this.AutomatedRestartGroupBox.Location = new System.Drawing.Point(6, 160);
+            this.AutomatedRestartGroupBox.Name = "AutomatedRestartGroupBox";
+            this.AutomatedRestartGroupBox.Size = new System.Drawing.Size(370, 75);
+            this.AutomatedRestartGroupBox.TabIndex = 4;
+            this.AutomatedRestartGroupBox.TabStop = false;
+            this.AutomatedRestartGroupBox.Text = "Automated Restarts";
+            // 
+            // RestartAtButton
+            // 
+            this.RestartAtButton.Location = new System.Drawing.Point(289, 42);
+            this.RestartAtButton.Name = "RestartAtButton";
+            this.RestartAtButton.Size = new System.Drawing.Size(75, 23);
+            this.RestartAtButton.TabIndex = 5;
+            this.RestartAtButton.Text = "Save";
+            this.RestartAtButton.UseVisualStyleBackColor = true;
+            this.RestartAtButton.Click += new System.EventHandler(this.RestartAtButton_Click);
+            // 
+            // RestartEveryButton
+            // 
+            this.RestartEveryButton.Location = new System.Drawing.Point(289, 15);
+            this.RestartEveryButton.Name = "RestartEveryButton";
+            this.RestartEveryButton.Size = new System.Drawing.Size(75, 23);
+            this.RestartEveryButton.TabIndex = 4;
+            this.RestartEveryButton.Text = "Save";
+            this.RestartEveryButton.UseVisualStyleBackColor = true;
+            this.RestartEveryButton.Click += new System.EventHandler(this.RestartEveryButton_Click);
+            // 
+            // RestartAtTextBox
+            // 
+            this.RestartAtTextBox.Location = new System.Drawing.Point(183, 42);
+            this.RestartAtTextBox.Name = "RestartAtTextBox";
+            this.RestartAtTextBox.Size = new System.Drawing.Size(100, 20);
+            this.RestartAtTextBox.TabIndex = 3;
+            this.RestartAtTextBox.Text = "00:00:00";
+            // 
+            // RestartAtCheckBox
+            // 
+            this.RestartAtCheckBox.AutoSize = true;
+            this.RestartAtCheckBox.Location = new System.Drawing.Point(6, 44);
+            this.RestartAtCheckBox.Name = "RestartAtCheckBox";
+            this.RestartAtCheckBox.Size = new System.Drawing.Size(96, 17);
+            this.RestartAtCheckBox.TabIndex = 2;
+            this.RestartAtCheckBox.Text = "Restart daily at";
+            this.RestartAtCheckBox.UseVisualStyleBackColor = true;
+            this.RestartAtCheckBox.CheckedChanged += new System.EventHandler(this.RestartAtCheckBox_CheckedChanged);
+            // 
+            // RestartEveryTextBox
+            // 
+            this.RestartEveryTextBox.Location = new System.Drawing.Point(183, 17);
+            this.RestartEveryTextBox.Name = "RestartEveryTextBox";
+            this.RestartEveryTextBox.Size = new System.Drawing.Size(100, 20);
+            this.RestartEveryTextBox.TabIndex = 1;
+            this.RestartEveryTextBox.Text = "00:00:00";
+            // 
+            // RestartEveryCheckBox
+            // 
+            this.RestartEveryCheckBox.AutoSize = true;
+            this.RestartEveryCheckBox.Location = new System.Drawing.Point(6, 19);
+            this.RestartEveryCheckBox.Name = "RestartEveryCheckBox";
+            this.RestartEveryCheckBox.Size = new System.Drawing.Size(89, 17);
+            this.RestartEveryCheckBox.TabIndex = 0;
+            this.RestartEveryCheckBox.Text = "Restart every";
+            this.RestartEveryCheckBox.UseVisualStyleBackColor = true;
+            this.RestartEveryCheckBox.CheckedChanged += new System.EventHandler(this.RestartEveryCheckBox_CheckedChanged);
+            // 
+            // RuntimeGroupBox
+            // 
+            this.RuntimeGroupBox.Controls.Add(this.ClearCacheCheckBox);
+            this.RuntimeGroupBox.Controls.Add(this.AutoRestartCheckBox);
+            this.RuntimeGroupBox.Location = new System.Drawing.Point(391, 137);
+            this.RuntimeGroupBox.Name = "RuntimeGroupBox";
+            this.RuntimeGroupBox.Size = new System.Drawing.Size(370, 66);
+            this.RuntimeGroupBox.TabIndex = 3;
+            this.RuntimeGroupBox.TabStop = false;
+            this.RuntimeGroupBox.Text = "Runtime";
+            // 
+            // ClearCacheCheckBox
+            // 
+            this.ClearCacheCheckBox.AutoSize = true;
+            this.ClearCacheCheckBox.Location = new System.Drawing.Point(6, 42);
+            this.ClearCacheCheckBox.Name = "ClearCacheCheckBox";
+            this.ClearCacheCheckBox.Size = new System.Drawing.Size(223, 17);
+            this.ClearCacheCheckBox.TabIndex = 1;
+            this.ClearCacheCheckBox.Text = "Clear the cache prior to starting the server";
+            this.ClearCacheCheckBox.UseVisualStyleBackColor = true;
+            this.ClearCacheCheckBox.CheckedChanged += new System.EventHandler(this.ClearCacheCheckBox_CheckedChanged);
+            // 
+            // AutoRestartCheckBox
+            // 
+            this.AutoRestartCheckBox.AutoSize = true;
+            this.AutoRestartCheckBox.Location = new System.Drawing.Point(6, 19);
+            this.AutoRestartCheckBox.Name = "AutoRestartCheckBox";
+            this.AutoRestartCheckBox.Size = new System.Drawing.Size(226, 17);
+            this.AutoRestartCheckBox.TabIndex = 0;
+            this.AutoRestartCheckBox.Text = "Automatically restart the server if it crashes";
+            this.AutoRestartCheckBox.UseVisualStyleBackColor = true;
+            this.AutoRestartCheckBox.CheckedChanged += new System.EventHandler(this.AutoRestartCheckBox_CheckedChanged);
             // 
             // FolderCreationGroupBox
             // 
@@ -397,111 +538,52 @@
             this.LicenseTextBox.Size = new System.Drawing.Size(358, 20);
             this.LicenseTextBox.TabIndex = 0;
             // 
-            // RuntimeGroupBox
+            // VersionListGroup
             // 
-            this.RuntimeGroupBox.Controls.Add(this.ClearCacheCheckBox);
-            this.RuntimeGroupBox.Controls.Add(this.AutoRestartCheckBox);
-            this.RuntimeGroupBox.Location = new System.Drawing.Point(391, 137);
-            this.RuntimeGroupBox.Name = "RuntimeGroupBox";
-            this.RuntimeGroupBox.Size = new System.Drawing.Size(370, 66);
-            this.RuntimeGroupBox.TabIndex = 3;
-            this.RuntimeGroupBox.TabStop = false;
-            this.RuntimeGroupBox.Text = "Runtime";
+            this.VersionListGroup.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.VersionListGroup.Controls.Add(this.VersionsListBox);
+            this.VersionListGroup.Controls.Add(this.InstallButton);
+            this.VersionListGroup.Location = new System.Drawing.Point(391, 6);
+            this.VersionListGroup.Name = "VersionListGroup";
+            this.VersionListGroup.Size = new System.Drawing.Size(370, 301);
+            this.VersionListGroup.TabIndex = 1;
+            this.VersionListGroup.TabStop = false;
+            this.VersionListGroup.Text = "Versions";
             // 
-            // AutoRestartCheckBox
+            // InstallButton
             // 
-            this.AutoRestartCheckBox.AutoSize = true;
-            this.AutoRestartCheckBox.Location = new System.Drawing.Point(6, 19);
-            this.AutoRestartCheckBox.Name = "AutoRestartCheckBox";
-            this.AutoRestartCheckBox.Size = new System.Drawing.Size(226, 17);
-            this.AutoRestartCheckBox.TabIndex = 0;
-            this.AutoRestartCheckBox.Text = "Automatically restart the server if it crashes";
-            this.AutoRestartCheckBox.UseVisualStyleBackColor = true;
-            this.AutoRestartCheckBox.CheckedChanged += new System.EventHandler(this.AutoRestartCheckBox_CheckedChanged);
+            this.InstallButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.InstallButton.Enabled = false;
+            this.InstallButton.Location = new System.Drawing.Point(6, 272);
+            this.InstallButton.Name = "InstallButton";
+            this.InstallButton.Size = new System.Drawing.Size(358, 23);
+            this.InstallButton.TabIndex = 0;
+            this.InstallButton.Text = "Install";
+            this.InstallButton.UseVisualStyleBackColor = true;
             // 
-            // ClearCacheCheckBox
+            // ResourcesListBox
             // 
-            this.ClearCacheCheckBox.AutoSize = true;
-            this.ClearCacheCheckBox.Location = new System.Drawing.Point(6, 42);
-            this.ClearCacheCheckBox.Name = "ClearCacheCheckBox";
-            this.ClearCacheCheckBox.Size = new System.Drawing.Size(223, 17);
-            this.ClearCacheCheckBox.TabIndex = 1;
-            this.ClearCacheCheckBox.Text = "Clear the cache prior to starting the server";
-            this.ClearCacheCheckBox.UseVisualStyleBackColor = true;
-            this.ClearCacheCheckBox.CheckedChanged += new System.EventHandler(this.ClearCacheCheckBox_CheckedChanged);
+            this.ResourcesListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ResourcesListBox.FormattingEnabled = true;
+            this.ResourcesListBox.Location = new System.Drawing.Point(6, 19);
+            this.ResourcesListBox.Name = "ResourcesListBox";
+            this.ResourcesListBox.Size = new System.Drawing.Size(358, 277);
+            this.ResourcesListBox.TabIndex = 0;
             // 
-            // AutomatedRestartGroupBox
+            // VersionsListBox
             // 
-            this.AutomatedRestartGroupBox.Controls.Add(this.RestartAtButton);
-            this.AutomatedRestartGroupBox.Controls.Add(this.RestartEveryButton);
-            this.AutomatedRestartGroupBox.Controls.Add(this.RestartAtTextBox);
-            this.AutomatedRestartGroupBox.Controls.Add(this.RestartAtCheckBox);
-            this.AutomatedRestartGroupBox.Controls.Add(this.RestartEveryTextBox);
-            this.AutomatedRestartGroupBox.Controls.Add(this.RestartEveryCheckBox);
-            this.AutomatedRestartGroupBox.Location = new System.Drawing.Point(6, 160);
-            this.AutomatedRestartGroupBox.Name = "AutomatedRestartGroupBox";
-            this.AutomatedRestartGroupBox.Size = new System.Drawing.Size(370, 75);
-            this.AutomatedRestartGroupBox.TabIndex = 4;
-            this.AutomatedRestartGroupBox.TabStop = false;
-            this.AutomatedRestartGroupBox.Text = "Automated Restarts";
-            // 
-            // RestartEveryCheckBox
-            // 
-            this.RestartEveryCheckBox.AutoSize = true;
-            this.RestartEveryCheckBox.Location = new System.Drawing.Point(6, 19);
-            this.RestartEveryCheckBox.Name = "RestartEveryCheckBox";
-            this.RestartEveryCheckBox.Size = new System.Drawing.Size(89, 17);
-            this.RestartEveryCheckBox.TabIndex = 0;
-            this.RestartEveryCheckBox.Text = "Restart every";
-            this.RestartEveryCheckBox.UseVisualStyleBackColor = true;
-            this.RestartEveryCheckBox.CheckedChanged += new System.EventHandler(this.RestartEveryCheckBox_CheckedChanged);
-            // 
-            // RestartEveryTextBox
-            // 
-            this.RestartEveryTextBox.Location = new System.Drawing.Point(183, 17);
-            this.RestartEveryTextBox.Name = "RestartEveryTextBox";
-            this.RestartEveryTextBox.Size = new System.Drawing.Size(100, 20);
-            this.RestartEveryTextBox.TabIndex = 1;
-            this.RestartEveryTextBox.Text = "00:00:00";
-            // 
-            // RestartAtCheckBox
-            // 
-            this.RestartAtCheckBox.AutoSize = true;
-            this.RestartAtCheckBox.Location = new System.Drawing.Point(6, 44);
-            this.RestartAtCheckBox.Name = "RestartAtCheckBox";
-            this.RestartAtCheckBox.Size = new System.Drawing.Size(96, 17);
-            this.RestartAtCheckBox.TabIndex = 2;
-            this.RestartAtCheckBox.Text = "Restart daily at";
-            this.RestartAtCheckBox.UseVisualStyleBackColor = true;
-            this.RestartAtCheckBox.CheckedChanged += new System.EventHandler(this.RestartAtCheckBox_CheckedChanged);
-            // 
-            // RestartAtTextBox
-            // 
-            this.RestartAtTextBox.Location = new System.Drawing.Point(183, 42);
-            this.RestartAtTextBox.Name = "RestartAtTextBox";
-            this.RestartAtTextBox.Size = new System.Drawing.Size(100, 20);
-            this.RestartAtTextBox.TabIndex = 3;
-            this.RestartAtTextBox.Text = "00:00:00";
-            // 
-            // RestartEveryButton
-            // 
-            this.RestartEveryButton.Location = new System.Drawing.Point(289, 15);
-            this.RestartEveryButton.Name = "RestartEveryButton";
-            this.RestartEveryButton.Size = new System.Drawing.Size(75, 23);
-            this.RestartEveryButton.TabIndex = 4;
-            this.RestartEveryButton.Text = "Save";
-            this.RestartEveryButton.UseVisualStyleBackColor = true;
-            this.RestartEveryButton.Click += new System.EventHandler(this.RestartEveryButton_Click);
-            // 
-            // RestartAtButton
-            // 
-            this.RestartAtButton.Location = new System.Drawing.Point(289, 42);
-            this.RestartAtButton.Name = "RestartAtButton";
-            this.RestartAtButton.Size = new System.Drawing.Size(75, 23);
-            this.RestartAtButton.TabIndex = 5;
-            this.RestartAtButton.Text = "Save";
-            this.RestartAtButton.UseVisualStyleBackColor = true;
-            this.RestartAtButton.Click += new System.EventHandler(this.RestartAtButton_Click);
+            this.VersionsListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.VersionsListBox.FormattingEnabled = true;
+            this.VersionsListBox.Location = new System.Drawing.Point(6, 19);
+            this.VersionsListBox.Name = "VersionsListBox";
+            this.VersionsListBox.Size = new System.Drawing.Size(358, 251);
+            this.VersionsListBox.TabIndex = 1;
             // 
             // Landing
             // 
@@ -525,17 +607,20 @@
             this.LogsTab.ResumeLayout(false);
             this.LogsTab.PerformLayout();
             this.Tabs.ResumeLayout(false);
+            this.ResourcesTab.ResumeLayout(false);
+            this.ResourceListGroup.ResumeLayout(false);
             this.SettingsTab.ResumeLayout(false);
+            this.AutomatedRestartGroupBox.ResumeLayout(false);
+            this.AutomatedRestartGroupBox.PerformLayout();
+            this.RuntimeGroupBox.ResumeLayout(false);
+            this.RuntimeGroupBox.PerformLayout();
             this.FolderCreationGroupBox.ResumeLayout(false);
             this.FolderCreationGroupBox.PerformLayout();
             this.APIsGroupBox.ResumeLayout(false);
             this.APIsGroupBox.PerformLayout();
             this.LicenseGroupBox.ResumeLayout(false);
             this.LicenseGroupBox.PerformLayout();
-            this.RuntimeGroupBox.ResumeLayout(false);
-            this.RuntimeGroupBox.PerformLayout();
-            this.AutomatedRestartGroupBox.ResumeLayout(false);
-            this.AutomatedRestartGroupBox.PerformLayout();
+            this.VersionListGroup.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -582,6 +667,12 @@
         private System.Windows.Forms.TextBox RestartAtTextBox;
         private System.Windows.Forms.Button RestartEveryButton;
         private System.Windows.Forms.Button RestartAtButton;
+        private System.Windows.Forms.TabPage ResourcesTab;
+        private System.Windows.Forms.GroupBox ResourceListGroup;
+        private System.Windows.Forms.GroupBox VersionListGroup;
+        private System.Windows.Forms.Button InstallButton;
+        private System.Windows.Forms.ListBox VersionsListBox;
+        private System.Windows.Forms.ListBox ResourcesListBox;
     }
 }
 
