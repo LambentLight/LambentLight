@@ -1,4 +1,4 @@
-﻿using NLog;
+using NLog;
 using NLog.Config;
 using System;
 using System.Collections.Generic;
@@ -64,6 +64,7 @@ namespace LambentLight
 
             // Load the settings
             BuildsTextBox.Text = Properties.Settings.Default.Builds;
+            ResourcesTextBox.Text = Properties.Settings.Default.Resources;
             DownloadScriptsCheckBox.Checked = Properties.Settings.Default.DownloadScripts;
             CreateConfigCheckBox.Checked = Properties.Settings.Default.CreateConfig;
             AutoRestartCheckBox.Checked = Properties.Settings.Default.AutoRestart;

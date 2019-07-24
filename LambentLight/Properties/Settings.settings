@@ -35,5 +35,8 @@
     <Setting Name="RestartAtTime" Type="System.TimeSpan" Scope="User">
       <Value Profile="(Default)">00:00:00</Value>
     </Setting>
+    <Setting Name="Resources" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://raw.githubusercontent.com/LambentLight/Metadata/master/resources.json</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

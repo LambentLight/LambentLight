@@ -154,5 +154,17 @@ namespace LambentLight.Properties {
                 this["RestartAtTime"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://raw.githubusercontent.com/LambentLight/Metadata/master/resources.json")]
+        public string Resources {
+            get {
+                return ((string)(this["Resources"]));
+            }
+            set {
+                this["Resources"] = value;
+            }
+        }
     }
 }
