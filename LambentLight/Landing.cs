@@ -1,4 +1,4 @@
-using NLog;
+﻿using NLog;
 using NLog.Config;
 using System;
 using System.Collections.Generic;
@@ -56,6 +56,7 @@ namespace LambentLight
             // And filll the Builds and Data folders
             BuildManager.Fill(BuildsBox);
             DataFolderManager.Fill(DataBox);
+            ResourceManager.Fill(ResourcesListBox);
             // Set the elements to unlocked
             Locked = false;
 

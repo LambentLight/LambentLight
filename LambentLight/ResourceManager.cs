@@ -1,4 +1,4 @@
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using NLog;
 using System.Collections.Generic;
 using System.Net;
@@ -114,8 +114,66 @@ namespace LambentLight
     public static class ResourceManager
     {
         /// <summary>
+        /// The logger for our current class.
+        /// </summary>
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+        /// <summary>
+        /// The web client for REST calls.
+        /// </summary>
+        private static WebClient Client = new WebClient();
+        /// <summary>
         /// All of the resources that are available for installing.
         /// </summary>
         public static List<Resource> Resources = new List<Resource>();
+
+        /// <summary>
+        /// Refreshes the list of resources.
+        /// </summary>
+        public static void Refresh()
+        {
+            // Let's store the fetched resources here
+            string RawResources = "";
+
+            // Try to request the list of resources
+            try
+            {
+                RawResources = Client.DownloadString(Properties.Settings.Default.Resources);
+            }
+            // If we have failed (4XX-5XX codes)
+            catch (WebException e)
+            {
+                // Set the resource list to empty
+                Resources = new List<Resource>();
+                // Notify the user
+                Logger.Error("Unable to fetch the new FiveM builds: Code {0} ({1})", (int)e.Status, e.Status);
+                return;
+            }
+
+            // Create a temporary list of resources
+            Resources = JsonConvert.DeserializeObject<List<Resource>>(RawResources, new BuildConverter());
+
+            // Log what we have just done
+            Logger.Info("The list of resources has been updated");
+        }
+
+        /// <summary>
+        /// Fills the specified ListBox with our class items.
+        /// </summary>
+        /// <param name="box">The ListBox to fill.</param>
+        public static void Fill(ListBox box)
+        {
+            // Refresh the list first
+            Refresh();
+
+            // Remove all of the items
+            box.Items.Clear();
+
+            // For every item
+            foreach (Resource Res in Resources)
+            {
+                // Add it to the ListBox
+                box.Items.Add(Res);
+            }
+        }
     }
 }
