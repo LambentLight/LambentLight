@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using NLog;
 using System.Collections.Generic;
 using System.Net;
@@ -64,6 +64,11 @@ namespace LambentLight
         /// </summary>
         [JsonProperty("compression")]
         public CompressionType Compression { get; set; }
+
+        public override string ToString()
+        {
+            return ReadableVersion;
+        }
     }
 
     /// <summary>
