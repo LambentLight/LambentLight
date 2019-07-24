@@ -73,6 +73,7 @@
             this.InstallButton = new System.Windows.Forms.Button();
             this.ResourcesListBox = new System.Windows.Forms.ListBox();
             this.VersionsListBox = new System.Windows.Forms.ListBox();
+            this.RefreshButton = new System.Windows.Forms.Button();
             this.BuildsGroup.SuspendLayout();
             this.DataGroup.SuspendLayout();
             this.TopStrip.SuspendLayout();
@@ -256,6 +257,7 @@
             this.ResourceListGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.ResourceListGroup.Controls.Add(this.RefreshButton);
             this.ResourceListGroup.Controls.Add(this.ResourcesListBox);
             this.ResourceListGroup.Location = new System.Drawing.Point(6, 6);
             this.ResourceListGroup.Name = "ResourceListGroup";
@@ -562,6 +564,7 @@
             this.InstallButton.TabIndex = 0;
             this.InstallButton.Text = "Install";
             this.InstallButton.UseVisualStyleBackColor = true;
+            this.InstallButton.Click += new System.EventHandler(this.InstallButton_Click);
             // 
             // ResourcesListBox
             // 
@@ -571,8 +574,9 @@
             this.ResourcesListBox.FormattingEnabled = true;
             this.ResourcesListBox.Location = new System.Drawing.Point(6, 19);
             this.ResourcesListBox.Name = "ResourcesListBox";
-            this.ResourcesListBox.Size = new System.Drawing.Size(358, 277);
+            this.ResourcesListBox.Size = new System.Drawing.Size(358, 251);
             this.ResourcesListBox.TabIndex = 0;
+            this.ResourcesListBox.SelectedIndexChanged += new System.EventHandler(this.ResourcesListBox_SelectedIndexChanged);
             // 
             // VersionsListBox
             // 
@@ -584,6 +588,19 @@
             this.VersionsListBox.Name = "VersionsListBox";
             this.VersionsListBox.Size = new System.Drawing.Size(358, 251);
             this.VersionsListBox.TabIndex = 1;
+            this.VersionsListBox.SelectedIndexChanged += new System.EventHandler(this.VersionsListBox_SelectedIndexChanged);
+            // 
+            // RefreshButton
+            // 
+            this.RefreshButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.RefreshButton.Location = new System.Drawing.Point(6, 272);
+            this.RefreshButton.Name = "RefreshButton";
+            this.RefreshButton.Size = new System.Drawing.Size(358, 23);
+            this.RefreshButton.TabIndex = 2;
+            this.RefreshButton.Text = "Refresh";
+            this.RefreshButton.UseVisualStyleBackColor = true;
+            this.RefreshButton.Click += new System.EventHandler(this.RefreshButton_Click);
             // 
             // Landing
             // 
@@ -673,6 +690,7 @@
         private System.Windows.Forms.Button InstallButton;
         private System.Windows.Forms.ListBox VersionsListBox;
         private System.Windows.Forms.ListBox ResourcesListBox;
+        private System.Windows.Forms.Button RefreshButton;
     }
 }
 

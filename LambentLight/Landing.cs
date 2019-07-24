@@ -142,6 +142,48 @@ namespace LambentLight
             DataFolderManager.Fill(DataBox);
         }
 
+        #region Resource Installer
+
+        private void ResourcesListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // If there is nothing selected
+            if (ResourcesListBox.SelectedIndex == -1)
+            {
+                // Wipe the Versions
+                VersionsListBox.Items.Clear();
+                // And disable the install button
+                InstallButton.Enabled = false;
+            }
+            // Otherwise
+            {
+                // Add the builds to our version ListBox
+                ((Resource)ResourcesListBox.SelectedItem).Fill(VersionsListBox);
+            }
+        }
+
+        private void VersionsListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // If there is a version to install, enable the button
+            InstallButton.Enabled = VersionsListBox.SelectedItem != null;
+        }
+
+        private void RefreshButton_Click(object sender, EventArgs e)
+        {
+            // Disable the install button
+            InstallButton.Enabled = false;
+            // Remove the items of the versions ListBox
+            VersionsListBox.Items.Clear();
+            // And fill them again
+            ResourceManager.Fill(ResourcesListBox);
+        }
+
+        private void InstallButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        #endregion
+
         private void VisibleTextBox_CheckedChanged(object sender, EventArgs e)
         {
             // Change the enabled status of the License TextBox
