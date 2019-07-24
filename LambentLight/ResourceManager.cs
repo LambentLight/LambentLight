@@ -1,4 +1,4 @@
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using NLog;
 using System.Collections.Generic;
 using System.Net;
@@ -106,6 +106,17 @@ namespace LambentLight
         /// </summary>
         [JsonProperty("versions")]
         public List<Version> Versions { get; set; }
+
+        public void Fill(ListBox box)
+        {
+            // Wipe the ListBox
+            box.Items.Clear();
+            // Add all of our versions to the list box
+            foreach (Version Ver in Versions)
+            {
+                box.Items.Add(Ver);
+            }
+        }
 
         public override string ToString()
         {
