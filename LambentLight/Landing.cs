@@ -1,16 +1,10 @@
 ﻿using LambentLight.Extensions;
+using LambentLight.Managers;
 using NLog;
 using NLog.Config;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace LambentLight
@@ -99,13 +93,13 @@ namespace LambentLight
             }
 
             // Start the build with the selected options
-            Locked = await ServerManager.Start((Build)BuildsBox.SelectedItem, (DataFolder)DataBox.SelectedItem);
+            Locked = await ProcessManager.Start((Build)BuildsBox.SelectedItem, (DataFolder)DataBox.SelectedItem);
         }
 
         private void StopItem_Click(object sender, EventArgs e)
         {
             // Stop the server if is present and unlock the controls
-            ServerManager.Stop();
+            ProcessManager.Stop();
             Locked = false;
         }
 

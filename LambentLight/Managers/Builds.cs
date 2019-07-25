@@ -6,9 +6,8 @@ using System.IO;
 using System.IO.Compression;
 using System.Net;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
-namespace LambentLight
+namespace LambentLight.Managers
 {
     /// <summary>
     /// Class that contains the information of a specific FiveM build.

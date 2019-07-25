@@ -5,12 +5,12 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace LambentLight
+namespace LambentLight.Managers
 {
     /// <summary>
     /// Class for storing some values for the launch of the server.
     /// </summary>
-    public class ServerInformation
+    public class RuntimeInformation
     {
         /// <summary>
         /// The FiveM build used to launch the process.
@@ -29,7 +29,7 @@ namespace LambentLight
     /// <summary>
     /// Manages the start, stop and restart of the CFX server.
     /// </summary>
-    public static class ServerManager
+    public static class ProcessManager
     {
         /// <summary>
         /// The logger for our current class.
@@ -38,7 +38,7 @@ namespace LambentLight
         /// <summary>
         /// The server process that is currently running.
         /// </summary>
-        public static ServerInformation Server { get; private set; } = null;
+        public static RuntimeInformation Server { get; private set; } = null;
         /// <summary>
         /// If the FiveM server is running or not.
         /// </summary>
@@ -56,12 +56,12 @@ namespace LambentLight
         /// </summary>
         public static Timer RestartAt = new Timer();
 
-        private static ServerInformation GenerateClass(Build build, DataFolder data)
+        private static RuntimeInformation GenerateClass(Build build, DataFolder data)
         {
             // Store the absolute path of the folder
             string AbsPath = Path.GetFullPath(build.Folder);
             // Create a new Server object
-            ServerInformation NewServer = new ServerInformation();
+            RuntimeInformation NewServer = new RuntimeInformation();
             // Create a new server object and set the correct properties
             NewServer.Process = new Process();
             NewServer.Process.StartInfo.FileName = Path.Combine(AbsPath, "FXServer.exe");
@@ -156,7 +156,7 @@ namespace LambentLight
             if (Server != null && Server.Process.IsRunning())
             {
                 // Create a new instance of the server
-                ServerInformation NewServer = GenerateClass(Server.Build, Server.Folder);
+                RuntimeInformation NewServer = GenerateClass(Server.Build, Server.Folder);
                 // Stop the existing server
                 Stop();
                 // Set the new server

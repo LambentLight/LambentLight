@@ -7,9 +7,8 @@ using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
-namespace LambentLight
+namespace LambentLight.Managers
 {
     /// <summary>
     /// A class that represents a folder with FiveM server data.

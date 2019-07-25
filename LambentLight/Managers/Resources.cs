@@ -2,9 +2,8 @@
 using NLog;
 using System.Collections.Generic;
 using System.Net;
-using System.Windows.Forms;
 
-namespace LambentLight
+namespace LambentLight.Managers
 {
     /// <summary>
     /// Identifies the type of a resource.
