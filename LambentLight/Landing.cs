@@ -11,6 +11,8 @@ namespace LambentLight
 {
     public partial class Landing : Form
     {
+        #region Properties
+
         /// <summary>
         /// The logger for our current class.
         /// </summary>
@@ -33,6 +35,10 @@ namespace LambentLight
                 FolderRefreshButton.Enabled = !value;
             }
         }
+
+        #endregion
+
+        #region Constructor and Loading
 
         public Landing()
         {
@@ -74,6 +80,10 @@ namespace LambentLight
             RestartEveryTextBox.Text = Properties.Settings.Default.RestartEveryTime.ToString();
             RestartAtTextBox.Text = Properties.Settings.Default.RestartAtTime.ToString();
         }
+
+        #endregion
+
+        #region Top Strip
 
         private async void StartItem_Click(object sender, EventArgs e)
         {
@@ -130,6 +140,10 @@ namespace LambentLight
             Close();
         }
 
+        #endregion
+
+        #region Builds and Data Folders
+
         private void BuildRefreshButton_Click(object sender, EventArgs e)
         {
             // Refresh the list of builds
@@ -143,6 +157,8 @@ namespace LambentLight
             DataFolderManager.Refresh();
             DataBox.Fill(DataFolderManager.Folders);
         }
+
+        #endregion
 
         #region Resource Installer
 
@@ -185,6 +201,8 @@ namespace LambentLight
         }
 
         #endregion
+
+        #region Settings
 
         private void VisibleTextBox_CheckedChanged(object sender, EventArgs e)
         {
@@ -300,5 +318,7 @@ namespace LambentLight
             // If we succeeded, save it
             Properties.Settings.Default.Save();
         }
+
+        #endregion
     }
 }
