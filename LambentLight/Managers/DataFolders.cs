@@ -20,6 +20,10 @@ namespace LambentLight.Managers
         /// </summary>
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         /// <summary>
+        /// The web client for REST calls.
+        /// </summary>
+        private static WebClient Client = new WebClient();
+        /// <summary>
         /// The name of the folder.
         /// </summary>
         public string Name { get; private set; }
