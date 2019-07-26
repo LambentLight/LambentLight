@@ -67,6 +67,15 @@ namespace LambentLight.Managers
                 // Create it
                 Directory.CreateDirectory("Resources");
             }
+
+            // Format a path for the output file
+            string TempPath = Path.Combine("Resources", $"{resource.Name}-{version.ReadableVersion}{version.GetExtension()}");
+            // If the temp file exists
+            if (File.Exists(TempPath))
+            {
+                // Yeet it
+                File.Delete(TempPath);
+            }
         }
 
         /// <summary>
