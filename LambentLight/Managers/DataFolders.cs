@@ -70,6 +70,9 @@ namespace LambentLight.Managers
 
             // Format a path for the output file
             string TempPath = Path.Combine("Resources", $"{resource.Name}-{version.ReadableVersion}{version.GetExtension()}");
+            // Notify that we are starting the download
+            Logger.Info("Starting the download of {0} from '{1}' to '{2}'", resource.Name, version.Download, TempPath);
+
             // If the temp file exists
             if (File.Exists(TempPath))
             {
