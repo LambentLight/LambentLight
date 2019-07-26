@@ -1,4 +1,4 @@
-﻿using NLog;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,6 +15,10 @@ namespace LambentLight.Managers
     /// </summary>
     public class DataFolder
     {
+        /// <summary>
+        /// The logger for our current class.
+        /// </summary>
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         /// <summary>
         /// The name of the folder.
         /// </summary>
