@@ -1,4 +1,4 @@
-﻿using LambentLight.Extensions;
+using LambentLight.Extensions;
 using LambentLight.Managers;
 using NLog;
 using NLog.Config;
@@ -195,7 +195,7 @@ namespace LambentLight
             ResourcesListBox.Fill(ResourceManager.Resources);
         }
 
-        private void InstallButton_Click(object sender, EventArgs e)
+        private async void InstallButton_Click(object sender, EventArgs e)
         {
 
         }
