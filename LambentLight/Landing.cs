@@ -1,4 +1,4 @@
-using LambentLight.Extensions;
+﻿using LambentLight.Extensions;
 using LambentLight.Managers;
 using NLog;
 using NLog.Config;
@@ -204,6 +204,8 @@ namespace LambentLight
                 return;
             }
 
+            // Install the selected resource and version
+            await ((DataFolder)DataBox.SelectedItem).InstallResource((Resource)ResourcesListBox.SelectedItem, (Managers.Version)VersionsListBox.SelectedItem);
         }
 
         #endregion
