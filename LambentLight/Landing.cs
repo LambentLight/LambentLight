@@ -197,6 +197,12 @@ namespace LambentLight
 
         private async void InstallButton_Click(object sender, EventArgs e)
         {
+            // If there is no data folder selected, notify the user and return
+            if (DataBox.SelectedItem == null)
+            {
+                Logger.Error("You need to select a Server Data folder!");
+                return;
+            }
 
         }
 
