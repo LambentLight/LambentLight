@@ -61,6 +61,12 @@ namespace LambentLight.Managers
         /// <returns>true if the installation succeded, false otherwise.</returns>
         public async Task<bool> InstallResource(Resource resource, Version version)
         {
+            // If the temporary folder does not exists
+            if (!Directory.Exists("Resources"))
+            {
+                // Create it
+                Directory.CreateDirectory("Resources");
+            }
         }
 
         /// <summary>
