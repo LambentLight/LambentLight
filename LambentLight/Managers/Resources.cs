@@ -64,6 +64,25 @@ namespace LambentLight.Managers
         [JsonProperty("compression")]
         public CompressionType Compression { get; set; }
 
+        /// <summary>
+        /// Gets the extension for the compression type.
+        /// </summary>
+        /// <returns>The .ext extension.</returns>
+        public string GetExtension()
+        {
+            switch (Compression)
+            {
+                case CompressionType.Zip:
+                    return ".zip";
+                case CompressionType.SevenZip:
+                    return ".7z";
+                case CompressionType.Rar:
+                    return ".rar";
+                default:
+                    throw new System.InvalidOperationException($"{(int)Compression} is not a valid compression type");
+            }
+        }
+
         public override string ToString()
         {
             return ReadableVersion;
