@@ -54,6 +54,16 @@ namespace LambentLight.Managers
         }
 
         /// <summary>
+        /// Installs the specified resource and version on the data folder.
+        /// </summary>
+        /// <param name="resource">The resource information.</param>
+        /// <param name="version">The version to install.</param>
+        /// <returns>true if the installation succeded, false otherwise.</returns>
+        public async Task<bool> InstallResource(Resource resource, Version version)
+        {
+        }
+
+        /// <summary>
         /// Gets the directory name.
         /// </summary>
         /// <returns>The name of the directory.</returns>
