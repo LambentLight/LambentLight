@@ -1,4 +1,4 @@
-using NLog;
+﻿using NLog;
 using SharpCompress.Archives;
 using SharpCompress.Archives.Rar;
 using SharpCompress.Archives.SevenZip;
@@ -121,6 +121,8 @@ namespace LambentLight.Managers
             // Create the temporary extraction directory
             Directory.CreateDirectory(ExtractionPath);
 
+            // Notify that we are starting the extraction of the file
+            Logger.Info("Extracting {0} {1} to '{2}'", resource.Name, version.ReadableVersion, ExtractionPath);
             // Extract the file by using the correct extraction format
             switch (version.Compression)
             {
@@ -150,7 +152,20 @@ namespace LambentLight.Managers
                     return false;
             }
 
-            // Finally, return true
+            // Notify that we have finished with the extraction and we have started moving stuff
+            Logger.Info("Moving the folder of {0} {1} to resources...", resource.Name, version.ReadableVersion);
+
+            // Select the correct path inside of the extraction folder
+            // In order: Version Path, Resource Path or an Empty String
+            string CompressedPath = version.Path ?? resource.Path ?? "";
+            // Create the path for the folder that we need to move
+            string ChoosenFolder = Path.Combine(ExtractionPath, CompressedPath);
+            // Create the destination directory (aka the path inside of the resources directory)
+            string DestinationFolder = Path.Combine(Absolute, "resources", resource.Folder);
+
+            // Finally, move the folder and notify the user
+            Directory.Move(ChoosenFolder, DestinationFolder);
+            Logger.Info("Success! {0} {1} has been installed", resource.Name, version.ReadableVersion);
             return true;
         }
 
