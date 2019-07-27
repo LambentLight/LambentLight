@@ -1,4 +1,4 @@
-using NLog;
+﻿using NLog;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -100,6 +100,9 @@ namespace LambentLight.Managers
                 // And remove the folder
                 Directory.Delete(Dir, true);
             }
+
+            // Finally, return true
+            return true;
         }
 
         /// <summary>
