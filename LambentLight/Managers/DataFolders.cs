@@ -69,22 +69,23 @@ namespace LambentLight.Managers
             }
 
             // Format a path for the output file
-            string TempPath = Path.Combine("Resources", $"{resource.Name}-{version.ReadableVersion}{version.GetExtension()}");
+            string ExtrPath = Path.Combine("Resources", $"{resource.Name}-{version.ReadableVersion}");
+            string FilePath = ExtrPath + version.GetExtension();
             // Notify that we are starting the download
-            Logger.Info("Starting the download of {0} from '{1}' to '{2}'", resource.Name, version.Download, TempPath);
+            Logger.Info("Starting the download of {0} from '{1}' to '{2}'", resource.Name, version.Download, FilePath);
 
             // If the temp file exists
-            if (File.Exists(TempPath))
+            if (File.Exists(FilePath))
             {
                 // Yeet it
-                File.Delete(TempPath);
+                File.Delete(FilePath);
             }
 
             // Let's try to download the file
             try
             {
                 // Start downloading the file
-                await Client.DownloadFileTaskAsync(version.Download, TempPath);
+                await Client.DownloadFileTaskAsync(version.Download, FilePath);
             }
             catch (WebException e)
             {
@@ -100,6 +101,16 @@ namespace LambentLight.Managers
                 // And remove the folder
                 Directory.Delete(Dir, true);
             }
+
+            // If the output directory exists
+            if (Directory.Exists(ExtrPath))
+            {
+                // Remove it
+                Directory.Delete(ExtrPath, true);
+            }
+
+            // Create the temporary extraction directory
+            Directory.CreateDirectory(ExtrPath);
 
             // Finally, return true
             return true;
