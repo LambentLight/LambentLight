@@ -1,8 +1,13 @@
 ﻿using NLog;
+using SharpCompress.Archives;
+using SharpCompress.Archives.Rar;
+using SharpCompress.Archives.SevenZip;
+using SharpCompress.Common;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
+using System.Linq;
 using System.Net;
 using System.Security.Cryptography;
 using System.Text;
@@ -43,6 +48,10 @@ namespace LambentLight.Managers
         /// The absolute path of the data folder.
         /// </summary>
         public string Absolute => Path.GetFullPath(Location);
+        /// <summary>
+        /// Extraction options to use with SharpCompress.
+        /// </summary>
+        private readonly ExtractionOptions ExtractOpts = new ExtractionOptions() { ExtractFullPath = true };
 
         /// <summary>
         /// Creates a new instance of the data folder.
@@ -111,6 +120,35 @@ namespace LambentLight.Managers
 
             // Create the temporary extraction directory
             Directory.CreateDirectory(ExtrPath);
+
+            // Extract the file by using the correct extraction format
+            switch (version.Compression)
+            {
+                case CompressionType.Zip:
+                    await Task.Run(() => ZipFile.ExtractToDirectory(FilePath, ExtrPath));
+                    break;
+                case CompressionType.SevenZip:
+                    using (SevenZipArchive SevenZip = SevenZipArchive.Open(ExtrPath))
+                    {
+                        foreach (SevenZipArchiveEntry Entry in SevenZip.Entries.Where(X => !X.IsDirectory))
+                        {
+                            Entry.WriteToDirectory(ExtrPath, ExtractOpts);
+                        }
+                    }
+                    break;
+                case CompressionType.Rar:
+                    using (RarArchive Rar = RarArchive.Open(ExtrPath))
+                    {
+                        foreach (RarArchiveEntry Entry in Rar.Entries.Where(X => !X.IsDirectory))
+                        {
+                            Entry.WriteToDirectory(ExtrPath, ExtractOpts);
+                        }
+                    }
+                    break;
+                default:
+                    Logger.Error("The file '{0}' has an unsuported compression type ({1} - {2})", version.Download, version.Compression, (int)version.Compression);
+                    return false;
+            }
 
             // Finally, return true
             return true;
