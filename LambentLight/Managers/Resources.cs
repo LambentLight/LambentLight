@@ -58,6 +58,13 @@ namespace LambentLight.Managers
         /// </summary>
         [JsonProperty("download")]
         public string Download { get; set; }
+
+        /// <summary>
+        /// The Path of the resource inside of the compressed files.
+        /// This take precedence over the Resource Path.
+        /// </summary>
+        [JsonProperty("path")]
+        public string Path { get; set; }
         /// <summary>
         /// The compression used for the download.
         /// </summary>
@@ -109,6 +116,11 @@ namespace LambentLight.Managers
         /// </summary>
         [JsonProperty("folder")]
         public string Folder { get; set; }
+        /// <summary>
+        /// The Path of the resource inside of the compressed files.
+        /// </summary>
+        [JsonProperty("path")]
+        public string Path { get; set; }
         /// <summary>
         /// The type of resource. Only used for the UI.
         /// </summary>
