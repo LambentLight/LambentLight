@@ -1,4 +1,4 @@
-﻿using NLog;
+using NLog;
 using SharpCompress.Archives;
 using SharpCompress.Archives.Rar;
 using SharpCompress.Archives.SevenZip;
@@ -78,23 +78,23 @@ namespace LambentLight.Managers
             }
 
             // Format a path for the output file
-            string ExtrPath = Path.Combine("Resources", $"{resource.Name}-{version.ReadableVersion}");
-            string FilePath = ExtrPath + version.GetExtension();
+            string ExtractionPath = Path.Combine("Resources", $"{resource.Name}-{version.ReadableVersion}");
+            string TempFilePath = ExtractionPath + version.GetExtension();
             // Notify that we are starting the download
-            Logger.Info("Starting the download of {0} from '{1}' to '{2}'", resource.Name, version.Download, FilePath);
+            Logger.Info("Starting the download of {0} from '{1}' to '{2}'", resource.Name, version.Download, TempFilePath);
 
             // If the temp file exists
-            if (File.Exists(FilePath))
+            if (File.Exists(TempFilePath))
             {
                 // Yeet it
-                File.Delete(FilePath);
+                File.Delete(TempFilePath);
             }
 
             // Let's try to download the file
             try
             {
                 // Start downloading the file
-                await Client.DownloadFileTaskAsync(version.Download, FilePath);
+                await Client.DownloadFileTaskAsync(version.Download, TempFilePath);
             }
             catch (WebException e)
             {
@@ -112,36 +112,36 @@ namespace LambentLight.Managers
             }
 
             // If the output directory exists
-            if (Directory.Exists(ExtrPath))
+            if (Directory.Exists(ExtractionPath))
             {
                 // Remove it
-                Directory.Delete(ExtrPath, true);
+                Directory.Delete(ExtractionPath, true);
             }
 
             // Create the temporary extraction directory
-            Directory.CreateDirectory(ExtrPath);
+            Directory.CreateDirectory(ExtractionPath);
 
             // Extract the file by using the correct extraction format
             switch (version.Compression)
             {
                 case CompressionType.Zip:
-                    await Task.Run(() => ZipFile.ExtractToDirectory(FilePath, ExtrPath));
+                    await Task.Run(() => ZipFile.ExtractToDirectory(TempFilePath, ExtractionPath));
                     break;
                 case CompressionType.SevenZip:
-                    using (SevenZipArchive SevenZip = SevenZipArchive.Open(ExtrPath))
+                    using (SevenZipArchive SevenZip = SevenZipArchive.Open(ExtractionPath))
                     {
                         foreach (SevenZipArchiveEntry Entry in SevenZip.Entries.Where(X => !X.IsDirectory))
                         {
-                            Entry.WriteToDirectory(ExtrPath, ExtractOpts);
+                            Entry.WriteToDirectory(ExtractionPath, ExtractOpts);
                         }
                     }
                     break;
                 case CompressionType.Rar:
-                    using (RarArchive Rar = RarArchive.Open(ExtrPath))
+                    using (RarArchive Rar = RarArchive.Open(ExtractionPath))
                     {
                         foreach (RarArchiveEntry Entry in Rar.Entries.Where(X => !X.IsDirectory))
                         {
-                            Entry.WriteToDirectory(ExtrPath, ExtractOpts);
+                            Entry.WriteToDirectory(ExtractionPath, ExtractOpts);
                         }
                     }
                     break;
