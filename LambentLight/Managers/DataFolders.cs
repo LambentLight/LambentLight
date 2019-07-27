@@ -91,6 +91,15 @@ namespace LambentLight.Managers
                 Logger.Error("Error while downloading {0}: {1}", version.Download, e.Message);
                 return false;
             }
+
+            // Get all of the folders that match the resource folder name
+            foreach (string Dir in Directory.EnumerateDirectories(Path.Combine(Absolute, "resources"), resource.Folder, SearchOption.AllDirectories))
+            {
+                // Notify the user
+                Logger.Warn("Removing existing version of {0}: '{1}'", resource.Folder, Dir);
+                // And remove the folder
+                Directory.Delete(Dir, true);
+            }
         }
 
         /// <summary>
