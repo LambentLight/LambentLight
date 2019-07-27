@@ -79,6 +79,18 @@ namespace LambentLight.Managers
                 // Yeet it
                 File.Delete(TempPath);
             }
+
+            // Let's try to download the file
+            try
+            {
+                // Start downloading the file
+                await Client.DownloadFileTaskAsync(version.Download, TempPath);
+            }
+            catch (WebException e)
+            {
+                Logger.Error("Error while downloading {0}: {1}", version.Download, e.Message);
+                return false;
+            }
         }
 
         /// <summary>
