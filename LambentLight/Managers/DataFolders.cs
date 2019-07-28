@@ -1,4 +1,4 @@
-using NLog;
+﻿using NLog;
 using SharpCompress.Archives;
 using SharpCompress.Archives.Rar;
 using SharpCompress.Archives.SevenZip;
@@ -104,6 +104,13 @@ namespace LambentLight.Managers
             {
                 Logger.Error("Error while downloading {0}: {1}", version.Download, e.Message);
                 return false;
+            }
+
+            // If the resources folder does not exists
+            if (!Directory.Exists(Resources))
+            {
+                // Create it
+                Directory.CreateDirectory(Resources);
             }
 
             // Get all of the folders that match the resource folder name
