@@ -1,4 +1,4 @@
-﻿using NLog;
+using NLog;
 using SharpCompress.Archives;
 using SharpCompress.Archives.Rar;
 using SharpCompress.Archives.SevenZip;
@@ -48,6 +48,10 @@ namespace LambentLight.Managers
         /// The absolute path of the data folder.
         /// </summary>
         public string Absolute => Path.GetFullPath(Location);
+        /// <summary>
+        /// The location of the resources folder.
+        /// </summary>
+        public string Resources => Path.Combine(Absolute, "resources");
         /// <summary>
         /// Extraction options to use with SharpCompress.
         /// </summary>
@@ -161,7 +165,7 @@ namespace LambentLight.Managers
             // Create the path for the folder that we need to move
             string ChoosenFolder = Path.Combine(ExtractionPath, CompressedPath);
             // Create the destination directory (aka the path inside of the resources directory)
-            string DestinationFolder = Path.Combine(Absolute, "resources", resource.Folder);
+            string DestinationFolder = Path.Combine(Resources, resource.Folder);
 
             // Finally, move the folder and notify the user
             Directory.Move(ChoosenFolder, DestinationFolder);
