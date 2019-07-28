@@ -1,4 +1,4 @@
-﻿using NLog;
+using NLog;
 using SharpCompress.Archives;
 using SharpCompress.Archives.Rar;
 using SharpCompress.Archives.SevenZip;
@@ -162,6 +162,9 @@ namespace LambentLight.Managers
                     Logger.Error("The file '{0}' has an unsuported compression type ({1} - {2})", version.Download, version.Compression, (int)version.Compression);
                     return false;
             }
+
+            // Remove the temporary compressed file
+            File.Delete(TempFilePath);
 
             // Notify that we have finished with the extraction and we have started moving stuff
             Logger.Info("Moving the folder of {0} {1} to resources...", resource.Name, version.ReadableVersion);
