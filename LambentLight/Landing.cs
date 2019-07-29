@@ -1,5 +1,6 @@
 ﻿using LambentLight.Extensions;
 using LambentLight.Managers;
+using LambentLight.Targets;
 using NLog;
 using NLog.Config;
 using System;

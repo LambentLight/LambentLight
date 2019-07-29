@@ -76,7 +76,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Managers\Resources.cs" />
     <Compile Include="Managers\Processes.cs" />
-    <Compile Include="TextBoxTarget.cs" />
+    <Compile Include="Targets\TextBoxTarget.cs" />
     <EmbeddedResource Include="Landing.resx">
       <DependentUpon>Landing.cs</DependentUpon>
     </EmbeddedResource>

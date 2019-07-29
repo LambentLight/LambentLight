@@ -2,7 +2,7 @@
 using NLog.Targets;
 using System;
 
-namespace LambentLight
+namespace LambentLight.Targets
 {
     [Target("TextBox")]
     public class TextBoxTarget : TargetWithContext
