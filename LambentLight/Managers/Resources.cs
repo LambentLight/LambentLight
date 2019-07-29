@@ -188,7 +188,7 @@ namespace LambentLight.Managers
             Resources = JsonConvert.DeserializeObject<List<Resource>>(RawResources, new BuildConverter());
 
             // Log what we have just done
-            Logger.Info("The list of resources has been updated");
+            Logger.Debug("The list of resources has been updated");
         }
     }
 }

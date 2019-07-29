@@ -242,7 +242,7 @@ namespace LambentLight.Managers
             }
 
             // Log what we have just done
-            Logger.Info("The list of server data folders has been updated");
+            Logger.Debug("The list of server data folders has been updated");
         }
 
         /// <summary>

@@ -116,7 +116,7 @@ namespace LambentLight.Managers
             Builds = JsonConvert.DeserializeObject<List<Build>>(RawBuilds, new BuildConverter());
 
             // Log what we have just done
-            Logger.Info("The list of builds has been updated");
+            Logger.Debug("The list of builds has been updated");
         }
 
         /// <summary>
