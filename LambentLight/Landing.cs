@@ -212,6 +212,20 @@ namespace LambentLight
 
         #endregion
 
+        #region Server Configuration
+
+        private void Tabs_Selected(object sender, TabControlEventArgs e)
+        {
+            // If the user selected the Server Configuration tab and there is a data folder selected
+            if (e.TabPage == ConfigurationTab && DataBox.SelectedItem != null)
+            {
+                // Set the text to the configuration of the server
+                ConfigTextBox.Text = ((DataFolder)DataBox.SelectedItem).Configuration;
+            }
+        }
+
+        #endregion
+
         #region Settings
 
         private void VisibleTextBox_CheckedChanged(object sender, EventArgs e)

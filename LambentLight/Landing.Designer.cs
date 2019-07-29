@@ -1,4 +1,4 @@
-namespace LambentLight
+﻿namespace LambentLight
 {
     partial class Landing
     {
@@ -250,6 +250,7 @@ namespace LambentLight
             this.Tabs.SelectedIndex = 0;
             this.Tabs.Size = new System.Drawing.Size(775, 297);
             this.Tabs.TabIndex = 3;
+            this.Tabs.Selected += new System.Windows.Forms.TabControlEventHandler(this.Tabs_Selected);
             // 
             // ResourcesTab
             // 
