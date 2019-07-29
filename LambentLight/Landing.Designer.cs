@@ -43,7 +43,12 @@
             this.LogTextBox = new System.Windows.Forms.TextBox();
             this.Tabs = new System.Windows.Forms.TabControl();
             this.ResourcesTab = new System.Windows.Forms.TabPage();
+            this.VersionListGroup = new System.Windows.Forms.GroupBox();
+            this.VersionsListBox = new System.Windows.Forms.ListBox();
+            this.InstallButton = new System.Windows.Forms.Button();
             this.ResourceListGroup = new System.Windows.Forms.GroupBox();
+            this.RefreshButton = new System.Windows.Forms.Button();
+            this.ResourcesListBox = new System.Windows.Forms.ListBox();
             this.SettingsTab = new System.Windows.Forms.TabPage();
             this.AutomatedRestartGroupBox = new System.Windows.Forms.GroupBox();
             this.RestartAtButton = new System.Windows.Forms.Button();
@@ -69,17 +74,14 @@
             this.SaveLicenseButton = new System.Windows.Forms.Button();
             this.VisibleCheckBox = new System.Windows.Forms.CheckBox();
             this.LicenseTextBox = new System.Windows.Forms.TextBox();
-            this.VersionListGroup = new System.Windows.Forms.GroupBox();
-            this.InstallButton = new System.Windows.Forms.Button();
-            this.ResourcesListBox = new System.Windows.Forms.ListBox();
-            this.VersionsListBox = new System.Windows.Forms.ListBox();
-            this.RefreshButton = new System.Windows.Forms.Button();
+            this.MainProgressBar = new System.Windows.Forms.ProgressBar();
             this.BuildsGroup.SuspendLayout();
             this.DataGroup.SuspendLayout();
             this.TopStrip.SuspendLayout();
             this.LogsTab.SuspendLayout();
             this.Tabs.SuspendLayout();
             this.ResourcesTab.SuspendLayout();
+            this.VersionListGroup.SuspendLayout();
             this.ResourceListGroup.SuspendLayout();
             this.SettingsTab.SuspendLayout();
             this.AutomatedRestartGroupBox.SuspendLayout();
@@ -87,7 +89,6 @@
             this.FolderCreationGroupBox.SuspendLayout();
             this.APIsGroupBox.SuspendLayout();
             this.LicenseGroupBox.SuspendLayout();
-            this.VersionListGroup.SuspendLayout();
             this.SuspendLayout();
             // 
             // BuildsGroup
@@ -208,7 +209,7 @@
             this.LogsTab.Location = new System.Drawing.Point(4, 22);
             this.LogsTab.Name = "LogsTab";
             this.LogsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.LogsTab.Size = new System.Drawing.Size(767, 313);
+            this.LogsTab.Size = new System.Drawing.Size(767, 284);
             this.LogsTab.TabIndex = 0;
             this.LogsTab.Text = "Logs";
             this.LogsTab.UseVisualStyleBackColor = true;
@@ -223,7 +224,7 @@
             this.LogTextBox.Name = "LogTextBox";
             this.LogTextBox.ReadOnly = true;
             this.LogTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.LogTextBox.Size = new System.Drawing.Size(755, 301);
+            this.LogTextBox.Size = new System.Drawing.Size(755, 272);
             this.LogTextBox.TabIndex = 0;
             // 
             // Tabs
@@ -237,7 +238,7 @@
             this.Tabs.Location = new System.Drawing.Point(12, 85);
             this.Tabs.Name = "Tabs";
             this.Tabs.SelectedIndex = 0;
-            this.Tabs.Size = new System.Drawing.Size(775, 339);
+            this.Tabs.Size = new System.Drawing.Size(775, 310);
             this.Tabs.TabIndex = 3;
             // 
             // ResourcesTab
@@ -247,10 +248,48 @@
             this.ResourcesTab.Location = new System.Drawing.Point(4, 22);
             this.ResourcesTab.Name = "ResourcesTab";
             this.ResourcesTab.Padding = new System.Windows.Forms.Padding(3);
-            this.ResourcesTab.Size = new System.Drawing.Size(767, 313);
+            this.ResourcesTab.Size = new System.Drawing.Size(767, 284);
             this.ResourcesTab.TabIndex = 2;
             this.ResourcesTab.Text = "Resources";
             this.ResourcesTab.UseVisualStyleBackColor = true;
+            // 
+            // VersionListGroup
+            // 
+            this.VersionListGroup.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.VersionListGroup.Controls.Add(this.VersionsListBox);
+            this.VersionListGroup.Controls.Add(this.InstallButton);
+            this.VersionListGroup.Location = new System.Drawing.Point(391, 6);
+            this.VersionListGroup.Name = "VersionListGroup";
+            this.VersionListGroup.Size = new System.Drawing.Size(370, 272);
+            this.VersionListGroup.TabIndex = 1;
+            this.VersionListGroup.TabStop = false;
+            this.VersionListGroup.Text = "Versions";
+            // 
+            // VersionsListBox
+            // 
+            this.VersionsListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.VersionsListBox.FormattingEnabled = true;
+            this.VersionsListBox.Location = new System.Drawing.Point(6, 19);
+            this.VersionsListBox.Name = "VersionsListBox";
+            this.VersionsListBox.Size = new System.Drawing.Size(358, 212);
+            this.VersionsListBox.TabIndex = 1;
+            this.VersionsListBox.SelectedIndexChanged += new System.EventHandler(this.VersionsListBox_SelectedIndexChanged);
+            // 
+            // InstallButton
+            // 
+            this.InstallButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.InstallButton.Enabled = false;
+            this.InstallButton.Location = new System.Drawing.Point(6, 243);
+            this.InstallButton.Name = "InstallButton";
+            this.InstallButton.Size = new System.Drawing.Size(358, 23);
+            this.InstallButton.TabIndex = 0;
+            this.InstallButton.Text = "Install";
+            this.InstallButton.UseVisualStyleBackColor = true;
+            this.InstallButton.Click += new System.EventHandler(this.InstallButton_Click);
             // 
             // ResourceListGroup
             // 
@@ -261,10 +300,34 @@
             this.ResourceListGroup.Controls.Add(this.ResourcesListBox);
             this.ResourceListGroup.Location = new System.Drawing.Point(6, 6);
             this.ResourceListGroup.Name = "ResourceListGroup";
-            this.ResourceListGroup.Size = new System.Drawing.Size(370, 301);
+            this.ResourceListGroup.Size = new System.Drawing.Size(370, 272);
             this.ResourceListGroup.TabIndex = 0;
             this.ResourceListGroup.TabStop = false;
             this.ResourceListGroup.Text = "Resources Available";
+            // 
+            // RefreshButton
+            // 
+            this.RefreshButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.RefreshButton.Location = new System.Drawing.Point(6, 243);
+            this.RefreshButton.Name = "RefreshButton";
+            this.RefreshButton.Size = new System.Drawing.Size(358, 23);
+            this.RefreshButton.TabIndex = 2;
+            this.RefreshButton.Text = "Refresh";
+            this.RefreshButton.UseVisualStyleBackColor = true;
+            this.RefreshButton.Click += new System.EventHandler(this.RefreshButton_Click);
+            // 
+            // ResourcesListBox
+            // 
+            this.ResourcesListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ResourcesListBox.FormattingEnabled = true;
+            this.ResourcesListBox.Location = new System.Drawing.Point(6, 19);
+            this.ResourcesListBox.Name = "ResourcesListBox";
+            this.ResourcesListBox.Size = new System.Drawing.Size(358, 212);
+            this.ResourcesListBox.TabIndex = 0;
+            this.ResourcesListBox.SelectedIndexChanged += new System.EventHandler(this.ResourcesListBox_SelectedIndexChanged);
             // 
             // SettingsTab
             // 
@@ -276,7 +339,7 @@
             this.SettingsTab.Location = new System.Drawing.Point(4, 22);
             this.SettingsTab.Name = "SettingsTab";
             this.SettingsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.SettingsTab.Size = new System.Drawing.Size(767, 313);
+            this.SettingsTab.Size = new System.Drawing.Size(767, 284);
             this.SettingsTab.TabIndex = 1;
             this.SettingsTab.Text = "Settings";
             this.SettingsTab.UseVisualStyleBackColor = true;
@@ -540,73 +603,21 @@
             this.LicenseTextBox.Size = new System.Drawing.Size(358, 20);
             this.LicenseTextBox.TabIndex = 0;
             // 
-            // VersionListGroup
+            // MainProgressBar
             // 
-            this.VersionListGroup.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.MainProgressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.VersionListGroup.Controls.Add(this.VersionsListBox);
-            this.VersionListGroup.Controls.Add(this.InstallButton);
-            this.VersionListGroup.Location = new System.Drawing.Point(391, 6);
-            this.VersionListGroup.Name = "VersionListGroup";
-            this.VersionListGroup.Size = new System.Drawing.Size(370, 301);
-            this.VersionListGroup.TabIndex = 1;
-            this.VersionListGroup.TabStop = false;
-            this.VersionListGroup.Text = "Versions";
-            // 
-            // InstallButton
-            // 
-            this.InstallButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.InstallButton.Enabled = false;
-            this.InstallButton.Location = new System.Drawing.Point(6, 272);
-            this.InstallButton.Name = "InstallButton";
-            this.InstallButton.Size = new System.Drawing.Size(358, 23);
-            this.InstallButton.TabIndex = 0;
-            this.InstallButton.Text = "Install";
-            this.InstallButton.UseVisualStyleBackColor = true;
-            this.InstallButton.Click += new System.EventHandler(this.InstallButton_Click);
-            // 
-            // ResourcesListBox
-            // 
-            this.ResourcesListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ResourcesListBox.FormattingEnabled = true;
-            this.ResourcesListBox.Location = new System.Drawing.Point(6, 19);
-            this.ResourcesListBox.Name = "ResourcesListBox";
-            this.ResourcesListBox.Size = new System.Drawing.Size(358, 251);
-            this.ResourcesListBox.TabIndex = 0;
-            this.ResourcesListBox.SelectedIndexChanged += new System.EventHandler(this.ResourcesListBox_SelectedIndexChanged);
-            // 
-            // VersionsListBox
-            // 
-            this.VersionsListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.VersionsListBox.FormattingEnabled = true;
-            this.VersionsListBox.Location = new System.Drawing.Point(6, 19);
-            this.VersionsListBox.Name = "VersionsListBox";
-            this.VersionsListBox.Size = new System.Drawing.Size(358, 251);
-            this.VersionsListBox.TabIndex = 1;
-            this.VersionsListBox.SelectedIndexChanged += new System.EventHandler(this.VersionsListBox_SelectedIndexChanged);
-            // 
-            // RefreshButton
-            // 
-            this.RefreshButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.RefreshButton.Location = new System.Drawing.Point(6, 272);
-            this.RefreshButton.Name = "RefreshButton";
-            this.RefreshButton.Size = new System.Drawing.Size(358, 23);
-            this.RefreshButton.TabIndex = 2;
-            this.RefreshButton.Text = "Refresh";
-            this.RefreshButton.UseVisualStyleBackColor = true;
-            this.RefreshButton.Click += new System.EventHandler(this.RefreshButton_Click);
+            this.MainProgressBar.Location = new System.Drawing.Point(12, 401);
+            this.MainProgressBar.Name = "MainProgressBar";
+            this.MainProgressBar.Size = new System.Drawing.Size(775, 23);
+            this.MainProgressBar.TabIndex = 4;
             // 
             // Landing
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(799, 436);
+            this.Controls.Add(this.MainProgressBar);
             this.Controls.Add(this.Tabs);
             this.Controls.Add(this.DataGroup);
             this.Controls.Add(this.BuildsGroup);
@@ -625,6 +636,7 @@
             this.LogsTab.PerformLayout();
             this.Tabs.ResumeLayout(false);
             this.ResourcesTab.ResumeLayout(false);
+            this.VersionListGroup.ResumeLayout(false);
             this.ResourceListGroup.ResumeLayout(false);
             this.SettingsTab.ResumeLayout(false);
             this.AutomatedRestartGroupBox.ResumeLayout(false);
@@ -637,7 +649,6 @@
             this.APIsGroupBox.PerformLayout();
             this.LicenseGroupBox.ResumeLayout(false);
             this.LicenseGroupBox.PerformLayout();
-            this.VersionListGroup.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -655,7 +666,6 @@
         private System.Windows.Forms.TabPage LogsTab;
         private System.Windows.Forms.TabControl Tabs;
         private System.Windows.Forms.ToolStripMenuItem CreateItem;
-        private System.Windows.Forms.TextBox LogTextBox;
         private System.Windows.Forms.ToolStripMenuItem ExitItem;
         private System.Windows.Forms.TabPage SettingsTab;
         private System.Windows.Forms.GroupBox LicenseGroupBox;
@@ -691,6 +701,8 @@
         private System.Windows.Forms.ListBox VersionsListBox;
         private System.Windows.Forms.ListBox ResourcesListBox;
         private System.Windows.Forms.Button RefreshButton;
+        private System.Windows.Forms.ProgressBar MainProgressBar;
+        public System.Windows.Forms.TextBox LogTextBox;
     }
 }
 
