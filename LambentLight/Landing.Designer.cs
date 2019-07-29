@@ -658,6 +658,7 @@ namespace LambentLight
             this.ConfigTextBox.Location = new System.Drawing.Point(2, 3);
             this.ConfigTextBox.Multiline = true;
             this.ConfigTextBox.Name = "ConfigTextBox";
+            this.ConfigTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.ConfigTextBox.Size = new System.Drawing.Size(681, 265);
             this.ConfigTextBox.TabIndex = 0;
             // 
