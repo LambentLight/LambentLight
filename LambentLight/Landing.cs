@@ -226,17 +226,39 @@ namespace LambentLight
 
         private void LoadButton_Click(object sender, EventArgs e)
         {
-
+            // If there is a data folder selected
+            if (DataBox.SelectedItem != null)
+            {
+                // Set the text to the configuration of the server
+                ConfigTextBox.Text = ((DataFolder)DataBox.SelectedItem).Configuration;
+            }
         }
 
         private void GenerateButton_Click(object sender, EventArgs e)
         {
+            // If there is a data folder selected
+            if (DataBox.SelectedItem != null)
+            {
+                // Ask the user if he is sure about this
+                DialogResult Response = MessageBox.Show("Are you sure that you want to replace the existing configuration?", "Replace Configuration", MessageBoxButtons.YesNo);
 
+                // If the response was yes
+                if (Response == DialogResult.Yes)
+                {
+                    // Set the text of the configuration
+                    ConfigTextBox.Text = ((DataFolder)DataBox.SelectedItem).GenerateConfig();
+                }
+            }
         }
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
-
+            // If there is a data folder selected
+            if (DataBox.SelectedItem != null)
+            {
+                // Set the text of the configuration
+                ((DataFolder)DataBox.SelectedItem).Configuration = ConfigTextBox.Text;
+            }
         }
 
         #endregion
