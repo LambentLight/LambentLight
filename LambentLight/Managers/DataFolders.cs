@@ -55,6 +55,8 @@ namespace LambentLight.Managers
         {
             get
             {
+                // Log that we are loading the server configuration
+                Logger.Info("The configuration of {0} has been loaded", Name);
                 // If there is a server configuration file
                 if (HasConfiguration)
                 {
@@ -62,6 +64,13 @@ namespace LambentLight.Managers
                 }
                 // Otherwise, return a generic string
                 return "# This server data folder does not has a configuration file";
+            }
+            set
+            {
+                // Write the string to the file
+                File.WriteAllText(Path.Combine(Absolute, "server.cfg"), value);
+                // Log that we just saved the configuration
+                Logger.Info("The configuration of {0} has been saved", Name);
             }
         }
         /// <summary>
