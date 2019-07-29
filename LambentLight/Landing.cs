@@ -51,7 +51,7 @@ namespace LambentLight
             // Create a new configuration for NLog
             LoggingConfiguration NewConfig = new LoggingConfiguration();
             // Add a rule for logging to the TextBox
-            NewConfig.AddRule(LogLevel.Info, LogLevel.Fatal, new TextBoxTarget() { Box = LogTextBox, Layout = "[${date}] [${level}] ${message}" });
+            NewConfig.AddRule(LogLevel.Info, LogLevel.Fatal, new TextBoxTarget() { Layout = "[${date}] [${level}] ${message}" });
             // Set the already created configuration
             LogManager.Configuration = NewConfig;
             // Update the list of builds, folders and resources
