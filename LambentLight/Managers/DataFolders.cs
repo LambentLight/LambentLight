@@ -271,7 +271,14 @@ namespace LambentLight.Managers
                 Logger.Info("Downloading Default Scripts for the Data Folder '{0}', please wait...", name);
 
                 // Create the path for the temporary zip file
-                string ZipPath = Path.Combine(Properties.Settings.Default.FolderData, "cfx-server-data.zip");
+                string ZipPath = Path.Combine(Properties.Settings.Default.FolderTemp, "cfx-server-data.zip");
+
+                // If the temporary folder does not exists
+                if (!Directory.Exists(Properties.Settings.Default.FolderTemp))
+                {
+                    // Create it
+                    Directory.CreateDirectory(Properties.Settings.Default.FolderTemp);
+                }
 
                 // Use a context manager
                 using (WebClient Client = new WebClient())
@@ -287,9 +294,9 @@ namespace LambentLight.Managers
                 }
 
                 // After the zip file has been downloaded, extract it
-                await Task.Run(() => ZipFile.ExtractToDirectory(ZipPath, Properties.Settings.Default.FolderData));
+                await Task.Run(() => ZipFile.ExtractToDirectory(ZipPath, Properties.Settings.Default.FolderTemp));
                 // Then, rename it to the name specified by the user
-                Directory.Move(Path.Combine(Properties.Settings.Default.FolderData, "cfx-server-data-master"), NewPath);
+                Directory.Move(Path.Combine(Properties.Settings.Default.FolderTemp, "cfx-server-data-master"), NewPath);
                 // Finally, delete the temporary file
                 File.Delete(ZipPath);
             }

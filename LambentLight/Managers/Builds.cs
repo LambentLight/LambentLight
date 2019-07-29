@@ -135,7 +135,7 @@ namespace LambentLight.Managers
             }
 
             // Create the Uri and destination location
-            string Destination = Path.Combine(Properties.Settings.Default.FolderBuilds, build.ID + ".zip");
+            string Destination = Path.Combine(Properties.Settings.Default.FolderTemp, build.ID + ".zip");
 
             // Use a context manager
             using (WebClient Client = new WebClient())
