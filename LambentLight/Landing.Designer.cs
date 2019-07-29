@@ -49,6 +49,11 @@
             this.ResourceListGroup = new System.Windows.Forms.GroupBox();
             this.RefreshButton = new System.Windows.Forms.Button();
             this.ResourcesListBox = new System.Windows.Forms.ListBox();
+            this.ConfigurationTab = new System.Windows.Forms.TabPage();
+            this.SaveButton = new System.Windows.Forms.Button();
+            this.GenerateButton = new System.Windows.Forms.Button();
+            this.LoadButton = new System.Windows.Forms.Button();
+            this.ConfigTextBox = new System.Windows.Forms.TextBox();
             this.SettingsTab = new System.Windows.Forms.TabPage();
             this.AutomatedRestartGroupBox = new System.Windows.Forms.GroupBox();
             this.RestartAtButton = new System.Windows.Forms.Button();
@@ -77,11 +82,6 @@
             this.MainProgressBar = new System.Windows.Forms.ProgressBar();
             this.BottomStrip = new System.Windows.Forms.StatusStrip();
             this.BottomStripLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.ConfigurationTab = new System.Windows.Forms.TabPage();
-            this.ConfigTextBox = new System.Windows.Forms.TextBox();
-            this.LoadButton = new System.Windows.Forms.Button();
-            this.GenerateButton = new System.Windows.Forms.Button();
-            this.SaveButton = new System.Windows.Forms.Button();
             this.BuildsGroup.SuspendLayout();
             this.DataGroup.SuspendLayout();
             this.TopStrip.SuspendLayout();
@@ -90,6 +90,7 @@
             this.ResourcesTab.SuspendLayout();
             this.VersionListGroup.SuspendLayout();
             this.ResourceListGroup.SuspendLayout();
+            this.ConfigurationTab.SuspendLayout();
             this.SettingsTab.SuspendLayout();
             this.AutomatedRestartGroupBox.SuspendLayout();
             this.RuntimeGroupBox.SuspendLayout();
@@ -97,7 +98,6 @@
             this.APIsGroupBox.SuspendLayout();
             this.LicenseGroupBox.SuspendLayout();
             this.BottomStrip.SuspendLayout();
-            this.ConfigurationTab.SuspendLayout();
             this.SuspendLayout();
             // 
             // BuildsGroup
@@ -339,6 +339,64 @@
             this.ResourcesListBox.Size = new System.Drawing.Size(358, 199);
             this.ResourcesListBox.TabIndex = 0;
             this.ResourcesListBox.SelectedIndexChanged += new System.EventHandler(this.ResourcesListBox_SelectedIndexChanged);
+            // 
+            // ConfigurationTab
+            // 
+            this.ConfigurationTab.Controls.Add(this.SaveButton);
+            this.ConfigurationTab.Controls.Add(this.GenerateButton);
+            this.ConfigurationTab.Controls.Add(this.LoadButton);
+            this.ConfigurationTab.Controls.Add(this.ConfigTextBox);
+            this.ConfigurationTab.Location = new System.Drawing.Point(4, 22);
+            this.ConfigurationTab.Name = "ConfigurationTab";
+            this.ConfigurationTab.Size = new System.Drawing.Size(767, 271);
+            this.ConfigurationTab.TabIndex = 3;
+            this.ConfigurationTab.Text = "Server Configuration";
+            this.ConfigurationTab.UseVisualStyleBackColor = true;
+            // 
+            // SaveButton
+            // 
+            this.SaveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.SaveButton.Location = new System.Drawing.Point(689, 61);
+            this.SaveButton.Name = "SaveButton";
+            this.SaveButton.Size = new System.Drawing.Size(75, 23);
+            this.SaveButton.TabIndex = 3;
+            this.SaveButton.Text = "Save";
+            this.SaveButton.UseVisualStyleBackColor = true;
+            this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
+            // 
+            // GenerateButton
+            // 
+            this.GenerateButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.GenerateButton.Location = new System.Drawing.Point(689, 32);
+            this.GenerateButton.Name = "GenerateButton";
+            this.GenerateButton.Size = new System.Drawing.Size(75, 23);
+            this.GenerateButton.TabIndex = 2;
+            this.GenerateButton.Text = "Generate";
+            this.GenerateButton.UseVisualStyleBackColor = true;
+            this.GenerateButton.Click += new System.EventHandler(this.GenerateButton_Click);
+            // 
+            // LoadButton
+            // 
+            this.LoadButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.LoadButton.Location = new System.Drawing.Point(689, 3);
+            this.LoadButton.Name = "LoadButton";
+            this.LoadButton.Size = new System.Drawing.Size(75, 23);
+            this.LoadButton.TabIndex = 1;
+            this.LoadButton.Text = "Load";
+            this.LoadButton.UseVisualStyleBackColor = true;
+            this.LoadButton.Click += new System.EventHandler(this.LoadButton_Click);
+            // 
+            // ConfigTextBox
+            // 
+            this.ConfigTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ConfigTextBox.Location = new System.Drawing.Point(2, 3);
+            this.ConfigTextBox.Multiline = true;
+            this.ConfigTextBox.Name = "ConfigTextBox";
+            this.ConfigTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.ConfigTextBox.Size = new System.Drawing.Size(681, 265);
+            this.ConfigTextBox.TabIndex = 0;
             // 
             // SettingsTab
             // 
@@ -638,61 +696,6 @@
             this.BottomStripLabel.Size = new System.Drawing.Size(151, 17);
             this.BottomStripLabel.Text = "Welcome to LambentLight!";
             // 
-            // ConfigurationTab
-            // 
-            this.ConfigurationTab.Controls.Add(this.SaveButton);
-            this.ConfigurationTab.Controls.Add(this.GenerateButton);
-            this.ConfigurationTab.Controls.Add(this.LoadButton);
-            this.ConfigurationTab.Controls.Add(this.ConfigTextBox);
-            this.ConfigurationTab.Location = new System.Drawing.Point(4, 22);
-            this.ConfigurationTab.Name = "ConfigurationTab";
-            this.ConfigurationTab.Size = new System.Drawing.Size(767, 271);
-            this.ConfigurationTab.TabIndex = 3;
-            this.ConfigurationTab.Text = "Server Configuration";
-            this.ConfigurationTab.UseVisualStyleBackColor = true;
-            // 
-            // ConfigTextBox
-            // 
-            this.ConfigTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ConfigTextBox.Location = new System.Drawing.Point(2, 3);
-            this.ConfigTextBox.Multiline = true;
-            this.ConfigTextBox.Name = "ConfigTextBox";
-            this.ConfigTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.ConfigTextBox.Size = new System.Drawing.Size(681, 265);
-            this.ConfigTextBox.TabIndex = 0;
-            // 
-            // LoadButton
-            // 
-            this.LoadButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.LoadButton.Location = new System.Drawing.Point(689, 3);
-            this.LoadButton.Name = "LoadButton";
-            this.LoadButton.Size = new System.Drawing.Size(75, 23);
-            this.LoadButton.TabIndex = 1;
-            this.LoadButton.Text = "Load";
-            this.LoadButton.UseVisualStyleBackColor = true;
-            // 
-            // GenerateButton
-            // 
-            this.GenerateButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.GenerateButton.Location = new System.Drawing.Point(689, 32);
-            this.GenerateButton.Name = "GenerateButton";
-            this.GenerateButton.Size = new System.Drawing.Size(75, 23);
-            this.GenerateButton.TabIndex = 2;
-            this.GenerateButton.Text = "Generate";
-            this.GenerateButton.UseVisualStyleBackColor = true;
-            // 
-            // SaveButton
-            // 
-            this.SaveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.SaveButton.Location = new System.Drawing.Point(689, 61);
-            this.SaveButton.Name = "SaveButton";
-            this.SaveButton.Size = new System.Drawing.Size(75, 23);
-            this.SaveButton.TabIndex = 3;
-            this.SaveButton.Text = "Save";
-            this.SaveButton.UseVisualStyleBackColor = true;
-            // 
             // Landing
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -720,6 +723,8 @@
             this.ResourcesTab.ResumeLayout(false);
             this.VersionListGroup.ResumeLayout(false);
             this.ResourceListGroup.ResumeLayout(false);
+            this.ConfigurationTab.ResumeLayout(false);
+            this.ConfigurationTab.PerformLayout();
             this.SettingsTab.ResumeLayout(false);
             this.AutomatedRestartGroupBox.ResumeLayout(false);
             this.AutomatedRestartGroupBox.PerformLayout();
@@ -733,8 +738,6 @@
             this.LicenseGroupBox.PerformLayout();
             this.BottomStrip.ResumeLayout(false);
             this.BottomStrip.PerformLayout();
-            this.ConfigurationTab.ResumeLayout(false);
-            this.ConfigurationTab.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 

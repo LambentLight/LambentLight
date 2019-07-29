@@ -224,6 +224,21 @@ namespace LambentLight
             }
         }
 
+        private void LoadButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void GenerateButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SaveButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
         #endregion
 
         #region Settings
