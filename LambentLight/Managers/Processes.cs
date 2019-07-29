@@ -72,7 +72,8 @@ namespace LambentLight.Managers
             NewServer.Process.StartInfo.RedirectStandardInput = true;
             NewServer.Process.StartInfo.RedirectStandardOutput = true;
             NewServer.Process.StartInfo.CreateNoWindow = true;
-            NewServer.Process.OutputDataReceived += (S, A) => { if (!string.IsNullOrWhiteSpace(A.Data)) Logger.Info(A.Data); };
+            NewServer.Process.OutputDataReceived += (S, A) => { if (!string.IsNullOrWhiteSpace(A.Data)) { Logger.Info(A.Data); } };
+            NewServer.Process.ErrorDataReceived += (S, A) => { if (!string.IsNullOrWhiteSpace(A.Data)) { Logger.Error(A.Data); } };
             NewServer.Process.Start();
             NewServer.Process.BeginOutputReadLine();
             NewServer.Process.BeginErrorReadLine();
