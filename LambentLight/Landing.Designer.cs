@@ -77,6 +77,11 @@
             this.MainProgressBar = new System.Windows.Forms.ProgressBar();
             this.BottomStrip = new System.Windows.Forms.StatusStrip();
             this.BottomStripLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.ConfigurationTab = new System.Windows.Forms.TabPage();
+            this.ConfigTextBox = new System.Windows.Forms.TextBox();
+            this.LoadButton = new System.Windows.Forms.Button();
+            this.GenerateButton = new System.Windows.Forms.Button();
+            this.SaveButton = new System.Windows.Forms.Button();
             this.BuildsGroup.SuspendLayout();
             this.DataGroup.SuspendLayout();
             this.TopStrip.SuspendLayout();
@@ -92,6 +97,7 @@
             this.APIsGroupBox.SuspendLayout();
             this.LicenseGroupBox.SuspendLayout();
             this.BottomStrip.SuspendLayout();
+            this.ConfigurationTab.SuspendLayout();
             this.SuspendLayout();
             // 
             // BuildsGroup
@@ -237,6 +243,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Tabs.Controls.Add(this.LogsTab);
             this.Tabs.Controls.Add(this.ResourcesTab);
+            this.Tabs.Controls.Add(this.ConfigurationTab);
             this.Tabs.Controls.Add(this.SettingsTab);
             this.Tabs.Location = new System.Drawing.Point(12, 85);
             this.Tabs.Name = "Tabs";
@@ -344,7 +351,7 @@
             this.SettingsTab.Padding = new System.Windows.Forms.Padding(3);
             this.SettingsTab.Size = new System.Drawing.Size(767, 271);
             this.SettingsTab.TabIndex = 1;
-            this.SettingsTab.Text = "Settings";
+            this.SettingsTab.Text = "Application Settings";
             this.SettingsTab.UseVisualStyleBackColor = true;
             // 
             // AutomatedRestartGroupBox
@@ -630,6 +637,55 @@
             this.BottomStripLabel.Size = new System.Drawing.Size(151, 17);
             this.BottomStripLabel.Text = "Welcome to LambentLight!";
             // 
+            // ConfigurationTab
+            // 
+            this.ConfigurationTab.Controls.Add(this.SaveButton);
+            this.ConfigurationTab.Controls.Add(this.GenerateButton);
+            this.ConfigurationTab.Controls.Add(this.LoadButton);
+            this.ConfigurationTab.Controls.Add(this.ConfigTextBox);
+            this.ConfigurationTab.Location = new System.Drawing.Point(4, 22);
+            this.ConfigurationTab.Name = "ConfigurationTab";
+            this.ConfigurationTab.Size = new System.Drawing.Size(767, 271);
+            this.ConfigurationTab.TabIndex = 3;
+            this.ConfigurationTab.Text = "Server Configuration";
+            this.ConfigurationTab.UseVisualStyleBackColor = true;
+            // 
+            // ConfigTextBox
+            // 
+            this.ConfigTextBox.Location = new System.Drawing.Point(2, 3);
+            this.ConfigTextBox.Multiline = true;
+            this.ConfigTextBox.Name = "ConfigTextBox";
+            this.ConfigTextBox.Size = new System.Drawing.Size(681, 265);
+            this.ConfigTextBox.TabIndex = 0;
+            // 
+            // LoadButton
+            // 
+            this.LoadButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.LoadButton.Location = new System.Drawing.Point(689, 3);
+            this.LoadButton.Name = "LoadButton";
+            this.LoadButton.Size = new System.Drawing.Size(75, 23);
+            this.LoadButton.TabIndex = 1;
+            this.LoadButton.Text = "Load";
+            this.LoadButton.UseVisualStyleBackColor = true;
+            // 
+            // GenerateButton
+            // 
+            this.GenerateButton.Location = new System.Drawing.Point(689, 32);
+            this.GenerateButton.Name = "GenerateButton";
+            this.GenerateButton.Size = new System.Drawing.Size(75, 23);
+            this.GenerateButton.TabIndex = 2;
+            this.GenerateButton.Text = "Generate";
+            this.GenerateButton.UseVisualStyleBackColor = true;
+            // 
+            // SaveButton
+            // 
+            this.SaveButton.Location = new System.Drawing.Point(689, 61);
+            this.SaveButton.Name = "SaveButton";
+            this.SaveButton.Size = new System.Drawing.Size(75, 23);
+            this.SaveButton.TabIndex = 3;
+            this.SaveButton.Text = "Save";
+            this.SaveButton.UseVisualStyleBackColor = true;
+            // 
             // Landing
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -670,6 +726,8 @@
             this.LicenseGroupBox.PerformLayout();
             this.BottomStrip.ResumeLayout(false);
             this.BottomStrip.PerformLayout();
+            this.ConfigurationTab.ResumeLayout(false);
+            this.ConfigurationTab.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -726,6 +784,11 @@
         public System.Windows.Forms.ProgressBar MainProgressBar;
         private System.Windows.Forms.StatusStrip BottomStrip;
         public System.Windows.Forms.ToolStripStatusLabel BottomStripLabel;
+        private System.Windows.Forms.TabPage ConfigurationTab;
+        private System.Windows.Forms.Button LoadButton;
+        private System.Windows.Forms.TextBox ConfigTextBox;
+        private System.Windows.Forms.Button GenerateButton;
+        private System.Windows.Forms.Button SaveButton;
     }
 }
 
