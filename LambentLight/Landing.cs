@@ -30,10 +30,14 @@ namespace LambentLight
                 StopItem.Enabled = value;
                 CreateItem.Enabled = !value;
                 ExitItem.Enabled = !value;
+
                 BuildsBox.Enabled = !value;
                 BuildRefreshButton.Enabled = !value;
                 DataBox.Enabled = !value;
                 FolderRefreshButton.Enabled = !value;
+
+                ConsoleTextBox.Enabled = value;
+                ConsoleButton.Enabled = value;
             }
         }
 
@@ -140,6 +144,29 @@ namespace LambentLight
         {
             // Close the current form
             Close();
+        }
+
+        #endregion
+
+        #region Server Console
+
+        private void ConsoleButton_Click(object sender, EventArgs e)
+        {
+            // If the server is running
+            if (ProcessManager.IsServerRunning)
+            {
+                // Write the text from the text box and flush it
+                ProcessManager.Server.Process.StandardInput.WriteLine(ConsoleTextBox.Text);
+                ProcessManager.Server.Process.StandardInput.Flush();
+                // Finally, set the text to empty on the box
+                ConsoleTextBox.Text = string.Empty;
+            }
+            // If is not
+            else
+            {
+                // Log an error
+                Logger.Error("Attempted to send text into the console but the server is not running");
+            }
         }
 
         #endregion
