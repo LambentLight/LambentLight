@@ -122,14 +122,11 @@ namespace LambentLight.Managers
             // Create and save the new class that contains the information that we need
             Server = GenerateClass(build, data);
 
-            // If the user wants to keep the server running even after crashing
-            if (Properties.Settings.Default.AutoRestart)
-            {
-                // Subscribe our event
-                AutoRestart.Interval = 100;
-                AutoRestart.Tick += RestartOnBadExitEvent;
-                AutoRestart.Enabled = true;
-            }
+
+            // Add the event to check if the server has exited
+            AutoRestart.Interval = 100;
+            AutoRestart.Tick += RestartOnBadExitEvent;
+            AutoRestart.Enabled = true;
             // If the user wants automated restarts every few hours/minutes/seconds
             if (Properties.Settings.Default.RestartEvery)
             {
@@ -210,11 +207,30 @@ namespace LambentLight.Managers
         /// </summary>
         private static void RestartOnBadExitEvent(object sender, EventArgs args)
         {
-            // If the code is not zero, start it again
+            // If the server exists, is not running and has an exit code of not zero
             if (Server != null && !Server.Process.IsRunning() && Server.Process.ExitCode != 0)
             {
-                Server = GenerateClass(Server.Build, Server.Folder);
-                Server.Process.Start();
+                // If the user wants to restart
+                if (Properties.Settings.Default.AutoRestart)
+                {
+                    // Log a message
+                    Logger.Warn("Server exited with a code {0}, restarting...", Server.Process.ExitCode);
+                    // And start the server again
+                    Server = GenerateClass(Server.Build, Server.Folder);
+                    Server.Process.Start();
+                }
+                // Otherwise
+                else
+                {
+                    // Disable this event
+                    AutoRestart.Enabled = false;
+                    // Unlock the controls
+                    Program.Form.Locked = false;
+                    // Set the Server information to null
+                    Server = null;
+                    // And log a message
+                    Logger.Warn("The FiveM server has exited with a code {0}", Server.Process.ExitCode);
+                }
             }
         }
 
