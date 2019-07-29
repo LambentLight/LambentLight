@@ -725,7 +725,7 @@
         public System.Windows.Forms.TextBox LogTextBox;
         public System.Windows.Forms.ProgressBar MainProgressBar;
         private System.Windows.Forms.StatusStrip BottomStrip;
-        private System.Windows.Forms.ToolStripStatusLabel BottomStripLabel;
+        public System.Windows.Forms.ToolStripStatusLabel BottomStripLabel;
     }
 }
 
