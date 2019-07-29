@@ -88,6 +88,39 @@ namespace LambentLight.Managers
         }
 
         /// <summary>
+        /// Creates a secure string via RNGCryptoServiceProvider.
+        /// </summary>
+        /// <param name="Length">The desired lenght of the string.</param>
+        /// <returns>The secure string with the specified length.</returns>
+        private static string GenerateSecureString(int Length)
+        {
+            // Create a new instance of RNGCryptoServiceProvider
+            RNGCryptoServiceProvider RNG = new RNGCryptoServiceProvider();
+            // Create a place to store the output
+            byte[] Output = new byte[Length];
+            // Create the random string as bytes
+            RNG.GetBytes(Output);
+            // And then, return that byte array as a string
+            return Convert.ToBase64String(Output);
+        }
+
+        /// <summary>
+        /// Generates a new configuration for the current data folder.
+        /// </summary>
+        /// <returns>The new configuration as a string.</returns>
+        public string GenerateConfig()
+        {
+            // Get the base configuration
+            string BaseConfig = Encoding.UTF8.GetString(Properties.Resources.server_cfg);
+            // Generate the new configuration
+            string NewConfig = string.Format(BaseConfig, GenerateSecureString(32));
+            // Set the configuration
+            Configuration = NewConfig;
+            // Finally, return the new configuration
+            return NewConfig;
+        }
+
+        /// <summary>
         /// Installs the specified resource and version on the data folder.
         /// </summary>
         /// <param name="resource">The resource information.</param>
@@ -346,36 +379,21 @@ namespace LambentLight.Managers
                 Directory.CreateDirectory(NewPath);
             }
 
+            // Create the object for the new data folder
+            DataFolder NewFolder = new DataFolder(name);
+
+            // Notify the user that we have finished with the creation of the folder
+            Logger.Info("The Data Folder '{0}' has been created", name);
+
             // If the user wants to generate the configuration
             if (Properties.Settings.Default.CreateConfig)
             {
-                // Notify the user that we have finished with the creation of the folder
-                Logger.Info("The Data Folder '{0}' has been created", name);
-
-                // Get the string and add a random RCON password to it
-                string Config = string.Format(Encoding.UTF8.GetString(Properties.Resources.server_cfg), GenerateSecureString(32));
-                File.WriteAllText(Path.Combine(NewPath, "server.cfg"), Config);
+                // Generate the new configuration for the folder
+                NewFolder.GenerateConfig();
             }
 
             // Finally, return the data object
-            return new DataFolder(name);
-        }
-
-        /// <summary>
-        /// Creates a secure string via RNGCryptoServiceProvider.
-        /// </summary>
-        /// <param name="Length">The desired lenght of the string.</param>
-        /// <returns>The secure string with the specified length.</returns>
-        private static string GenerateSecureString(int Length)
-        {
-            // Create a new instance of RNGCryptoServiceProvider
-            RNGCryptoServiceProvider RNG = new RNGCryptoServiceProvider();
-            // Create a place to store the output
-            byte[] Output = new byte[Length];
-            // Create the random string as bytes
-            RNG.GetBytes(Output);
-            // And then, return that byte array as a string
-            return Convert.ToBase64String(Output);
+            return NewFolder;
         }
     }
 }
