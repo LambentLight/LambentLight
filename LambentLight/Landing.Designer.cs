@@ -701,8 +701,8 @@
         private System.Windows.Forms.ListBox VersionsListBox;
         private System.Windows.Forms.ListBox ResourcesListBox;
         private System.Windows.Forms.Button RefreshButton;
-        private System.Windows.Forms.ProgressBar MainProgressBar;
         public System.Windows.Forms.TextBox LogTextBox;
+        public System.Windows.Forms.ProgressBar MainProgressBar;
     }
 }
 

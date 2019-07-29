@@ -140,6 +140,9 @@ namespace LambentLight.Managers
             // Use a context manager
             using (WebClient Client = new WebClient())
             {
+                // Set the event to refresh the progress bar
+                Client.DownloadProgressChanged += Program.OnDownloadProgressChanged;
+
                 // Start downloading the file
                 await Client.DownloadFileTaskAsync(string.Format(DownloadUri, build.ID), Destination);
 
@@ -148,6 +151,9 @@ namespace LambentLight.Managers
                 {
                     await Task.Delay(0);
                 }
+
+                // Log that we have finished the download
+                Logger.Info("The download of build {0} has finished, starting extraction...", build.ID);
             }
 
             // If the current build folder exists, delete it
@@ -161,11 +167,14 @@ namespace LambentLight.Managers
             // Finally, extract the values
             await Task.Run(() => ZipFile.ExtractToDirectory(Destination, build.Folder));
 
+            // Log that we have finished the extraction
+            Logger.Info("Build {0} has been extracted successfully", build.ID);
+
+            // Reset the value of the progress bar
+            Program.Form.MainProgressBar.Value = 0;
+
             // Delete the temporary ZIP file
             File.Delete(Destination);
-
-            // Log that we have finished the download
-            Logger.Info("The download of build {0} has finished", build.ID);
         }
     }
 }

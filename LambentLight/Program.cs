@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Windows.Forms;
 
 namespace LambentLight
@@ -34,6 +35,22 @@ namespace LambentLight
             Form = new Landing();
             // And run the application with our main form
             Application.Run(Form);
+        }
+
+        /// <summary>
+        /// Event that gets triggered when the download progress of a file changes.
+        /// </summary>
+        public static void OnDownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        {
+            // Calculate the percentage of the download
+            int Percentage = (int)((float)e.BytesReceived / e.TotalBytesToReceive * 100f);
+
+            // Make a sanity check to ensure that the percentage is on the correct location
+            if (Percentage >= Form.MainProgressBar.Minimum && Percentage <= Form.MainProgressBar.Maximum)
+            {
+                // And set the value of the progress bar
+                Form.MainProgressBar.Value = Percentage;
+            }
         }
     }
 }

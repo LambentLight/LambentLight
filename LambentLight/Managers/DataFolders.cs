@@ -96,13 +96,20 @@ namespace LambentLight.Managers
                 // Use a context manager
                 using (WebClient Client = new WebClient())
                 {
+                    // Set the event to refresh the progress bar
+                    Client.DownloadProgressChanged += Program.OnDownloadProgressChanged;
+
                     // Start downloading the file
                     await Client.DownloadFileTaskAsync(version.Download, TempFilePath);
                 }
             }
             catch (WebException e)
             {
+                // Log the error
                 Logger.Error("Error while downloading {0}: {1}", version.Download, e.Message);
+                // Reset the progress bar value
+                Program.Form.MainProgressBar.Value = 0;
+                // And return
                 return false;
             }
 
@@ -177,9 +184,12 @@ namespace LambentLight.Managers
             // Create the destination directory (aka the path inside of the resources directory)
             string DestinationFolder = Path.Combine(Resources, resource.Folder);
 
-            // Finally, move the folder and notify the user
+            // Move the folder and notify the user
             Directory.Move(ChoosenFolder, DestinationFolder);
             Logger.Info("Success! {0} {1} has been installed", resource.Name, version.ReadableVersion);
+
+            // Finally, reset the progress bar value and return
+            Program.Form.MainProgressBar.Value = 0;
             return true;
         }
 
@@ -283,6 +293,9 @@ namespace LambentLight.Managers
                 // Use a context manager
                 using (WebClient Client = new WebClient())
                 {
+                    // Set the event to refresh the progress bar
+                    Client.DownloadProgressChanged += Program.OnDownloadProgressChanged;
+
                     // Start downloading the file
                     await Client.DownloadFileTaskAsync("https://github.com/citizenfx/cfx-server-data/archive/master.zip", ZipPath);
 
@@ -297,8 +310,10 @@ namespace LambentLight.Managers
                 await Task.Run(() => ZipFile.ExtractToDirectory(ZipPath, Properties.Settings.Default.FolderTemp));
                 // Then, rename it to the name specified by the user
                 Directory.Move(Path.Combine(Properties.Settings.Default.FolderTemp, "cfx-server-data-master"), NewPath);
-                // Finally, delete the temporary file
+                // Delete the temporary file
                 File.Delete(ZipPath);
+                // And finally reset the progress bar value
+                Program.Form.MainProgressBar.Value = 0;
             }
             else
             {
