@@ -166,5 +166,32 @@ namespace LambentLight.Properties {
                 this["Resources"] = value;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("builds")]
+        public string FolderBuilds {
+            get {
+                return ((string)(this["FolderBuilds"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("data")]
+        public string FolderData {
+            get {
+                return ((string)(this["FolderData"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("temp")]
+        public string FolderTemp {
+            get {
+                return ((string)(this["FolderTemp"]));
+            }
+        }
     }
 }

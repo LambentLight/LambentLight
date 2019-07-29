@@ -31,7 +31,7 @@ namespace LambentLight.Managers
         /// <summary>
         /// The location of the server data folder
         /// </summary>
-        public string Location => Path.Combine("Data", Name);
+        public string Location => Path.Combine(Properties.Settings.Default.FolderData, Name);
         /// <summary>
         /// If the data folder exists.
         /// </summary>
@@ -71,14 +71,14 @@ namespace LambentLight.Managers
         public async Task<bool> InstallResource(Resource resource, Version version)
         {
             // If the temporary folder does not exists
-            if (!Directory.Exists("Resources"))
+            if (!Directory.Exists(Properties.Settings.Default.FolderTemp))
             {
                 // Create it
-                Directory.CreateDirectory("Resources");
+                Directory.CreateDirectory(Properties.Settings.Default.FolderTemp);
             }
 
             // Format a path for the output file
-            string ExtractionPath = Path.Combine("Resources", $"{resource.Name}-{version.ReadableVersion}");
+            string ExtractionPath = Path.Combine(Properties.Settings.Default.FolderTemp, $"{resource.Name}-{version.ReadableVersion}");
             string TempFilePath = ExtractionPath + version.GetExtension();
             // Notify that we are starting the download
             Logger.Info("Starting the download of {0} from '{1}' to '{2}'", resource.Name, version.Download, TempFilePath);
@@ -218,14 +218,14 @@ namespace LambentLight.Managers
             Folders = new List<DataFolder>();
 
             // If the data folder does not exists
-            if (!Directory.Exists("Data"))
+            if (!Directory.Exists(Properties.Settings.Default.FolderData))
             {
                 // Create it
-                Directory.CreateDirectory("Data");
+                Directory.CreateDirectory(Properties.Settings.Default.FolderData);
             }
 
             // Iterate over the folders on our Data folder
-            foreach (string Dir in Directory.GetDirectories("Data"))
+            foreach (string Dir in Directory.GetDirectories(Properties.Settings.Default.FolderData))
             {
                 // And add our data folder
                 Folders.Add(new DataFolder(Path.GetFileName(Dir)));
@@ -242,9 +242,9 @@ namespace LambentLight.Managers
         public static async Task<DataFolder> Create(string name)
         {
             // Create the Data folder if it does not exists
-            if (Directory.Exists("Data"))
+            if (Directory.Exists(Properties.Settings.Default.FolderData))
             {
-                Directory.CreateDirectory("Data");
+                Directory.CreateDirectory(Properties.Settings.Default.FolderData);
             }
 
             // If the text is whitespaces or null, notify the user and return
@@ -255,7 +255,7 @@ namespace LambentLight.Managers
             }
 
             // Generate the destination path
-            string NewPath = Path.Combine("Data", name);
+            string NewPath = Path.Combine(Properties.Settings.Default.FolderData, name);
 
             // If the folder specified already exists, warn the user and return
             if (Directory.Exists(NewPath))
@@ -271,7 +271,7 @@ namespace LambentLight.Managers
                 Logger.Info("Downloading Default Scripts for the Data Folder '{0}', please wait...", name);
 
                 // Create the path for the temporary zip file
-                string ZipPath = Path.Combine("Data", "cfx-server-data.zip");
+                string ZipPath = Path.Combine(Properties.Settings.Default.FolderData, "cfx-server-data.zip");
 
                 // Use a context manager
                 using (WebClient Client = new WebClient())
@@ -287,9 +287,9 @@ namespace LambentLight.Managers
                 }
 
                 // After the zip file has been downloaded, extract it
-                await Task.Run(() => ZipFile.ExtractToDirectory(ZipPath, "Data"));
+                await Task.Run(() => ZipFile.ExtractToDirectory(ZipPath, Properties.Settings.Default.FolderData));
                 // Then, rename it to the name specified by the user
-                Directory.Move(Path.Combine("Data", "cfx-server-data-master"), NewPath);
+                Directory.Move(Path.Combine(Properties.Settings.Default.FolderData, "cfx-server-data-master"), NewPath);
                 // Finally, delete the temporary file
                 File.Delete(ZipPath);
             }

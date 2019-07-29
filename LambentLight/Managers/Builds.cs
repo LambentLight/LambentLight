@@ -25,7 +25,7 @@ namespace LambentLight.Managers
         /// <summary>
         /// The local folder where the build can be located.
         /// </summary>
-        public string Folder => Path.Combine("Builds", ID);
+        public string Folder => Path.Combine(Properties.Settings.Default.FolderBuilds, ID);
 
         /// <summary>
         /// Creates a Build to use with LambentLight
@@ -129,14 +129,14 @@ namespace LambentLight.Managers
             Logger.Info("Build {0} is not available, attempting download...", build.ID);
 
             // If the builds folder does not exists, create it
-            if (!Directory.Exists("Builds"))
+            if (!Directory.Exists(Properties.Settings.Default.FolderBuilds))
             {
-                Directory.CreateDirectory("Builds");
+                Directory.CreateDirectory(Properties.Settings.Default.FolderBuilds);
             }
 
             // Create the Uri and destination location
             Uri URL = new Uri(string.Format(DownloadUri, build.ID));
-            string Destination = Path.Combine("Builds", build.ID + ".zip");
+            string Destination = Path.Combine(Properties.Settings.Default.FolderBuilds, build.ID + ".zip");
 
             // Use a context manager
             using (WebClient Client = new WebClient())
