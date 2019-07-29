@@ -1,4 +1,4 @@
-﻿namespace LambentLight
+namespace LambentLight
 {
     partial class Landing
     {
@@ -652,6 +652,9 @@
             // 
             // ConfigTextBox
             // 
+            this.ConfigTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ConfigTextBox.Location = new System.Drawing.Point(2, 3);
             this.ConfigTextBox.Multiline = true;
             this.ConfigTextBox.Name = "ConfigTextBox";
@@ -670,6 +673,7 @@
             // 
             // GenerateButton
             // 
+            this.GenerateButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.GenerateButton.Location = new System.Drawing.Point(689, 32);
             this.GenerateButton.Name = "GenerateButton";
             this.GenerateButton.Size = new System.Drawing.Size(75, 23);
@@ -679,6 +683,7 @@
             // 
             // SaveButton
             // 
+            this.SaveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.SaveButton.Location = new System.Drawing.Point(689, 61);
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size(75, 23);
