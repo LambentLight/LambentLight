@@ -25,10 +25,6 @@ namespace LambentLight.Managers
         /// </summary>
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         /// <summary>
-        /// The web client for REST calls.
-        /// </summary>
-        private static WebClient Client = new WebClient();
-        /// <summary>
         /// The name of the folder.
         /// </summary>
         public string Name { get; private set; }
@@ -97,8 +93,12 @@ namespace LambentLight.Managers
             // Let's try to download the file
             try
             {
-                // Start downloading the file
-                await Client.DownloadFileTaskAsync(version.Download, TempFilePath);
+                // Use a context manager
+                using (WebClient Client = new WebClient())
+                {
+                    // Start downloading the file
+                    await Client.DownloadFileTaskAsync(version.Download, TempFilePath);
+                }
             }
             catch (WebException e)
             {
@@ -205,10 +205,6 @@ namespace LambentLight.Managers
         /// </summary>
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         /// <summary>
-        /// The web client for REST calls.
-        /// </summary>
-        private static WebClient Client = new WebClient();
-        /// <summary>
         /// Our current set of data folders.
         /// </summary>
         public static List<DataFolder> Folders = new List<DataFolder>();
@@ -276,13 +272,18 @@ namespace LambentLight.Managers
 
                 // Create the path for the temporary zip file
                 string ZipPath = Path.Combine("Data", "cfx-server-data.zip");
-                // Start downloading the file
-                await Client.DownloadFileTaskAsync("https://github.com/citizenfx/cfx-server-data/archive/master.zip", ZipPath);
 
-                // Wait until the file has been downloaded
-                while (Client.IsBusy)
+                // Use a context manager
+                using (WebClient Client = new WebClient())
                 {
-                    await Task.Delay(0);
+                    // Start downloading the file
+                    await Client.DownloadFileTaskAsync("https://github.com/citizenfx/cfx-server-data/archive/master.zip", ZipPath);
+
+                    // Wait until the file has been downloaded
+                    while (Client.IsBusy)
+                    {
+                        await Task.Delay(0);
+                    }
                 }
 
                 // After the zip file has been downloaded, extract it

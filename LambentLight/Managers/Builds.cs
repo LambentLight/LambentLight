@@ -81,10 +81,6 @@ namespace LambentLight.Managers
         /// </summary>
         public const string DownloadUri = "https://runtime.fivem.net/artifacts/fivem/build_server_windows/master/{0}/server.zip";
         /// <summary>
-        /// The web client for REST calls.
-        /// </summary>
-        private static WebClient Client = new WebClient();
-        /// <summary>
         /// The updated list of builds.
         /// </summary>
         public static List<Build> Builds = new List<Build>();
@@ -100,7 +96,11 @@ namespace LambentLight.Managers
             // Try to request the list of builds
             try
             {
-                RawBuilds = Client.DownloadString(Properties.Settings.Default.Builds);
+                // Use a context manager
+                using (WebClient Client = new WebClient())
+                {
+                    RawBuilds = Client.DownloadString(Properties.Settings.Default.Builds);
+                }
             }
             // If we have failed (4XX-5XX codes)
             catch (WebException e)
@@ -138,13 +138,17 @@ namespace LambentLight.Managers
             Uri URL = new Uri(string.Format(DownloadUri, build.ID));
             string Destination = Path.Combine("Builds", build.ID + ".zip");
 
-            // Start downloading the file
-            await Client.DownloadFileTaskAsync(URL, Destination);
-
-            // While the client is bussy, wait
-            while (Client.IsBusy)
+            // Use a context manager
+            using (WebClient Client = new WebClient())
             {
-                await Task.Delay(0);
+                // Start downloading the file
+                await Client.DownloadFileTaskAsync(URL, Destination);
+
+                // While the client is bussy, wait
+                while (Client.IsBusy)
+                {
+                    await Task.Delay(0);
+                }
             }
 
             // If the current build folder exists, delete it

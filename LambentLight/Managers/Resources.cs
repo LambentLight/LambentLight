@@ -153,10 +153,6 @@ namespace LambentLight.Managers
         /// </summary>
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         /// <summary>
-        /// The web client for REST calls.
-        /// </summary>
-        private static WebClient Client = new WebClient();
-        /// <summary>
         /// All of the resources that are available for installing.
         /// </summary>
         public static List<Resource> Resources = new List<Resource>();
@@ -172,7 +168,11 @@ namespace LambentLight.Managers
             // Try to request the list of resources
             try
             {
-                RawResources = Client.DownloadString(Properties.Settings.Default.Resources);
+                // Use a context manager
+                using (WebClient Client = new WebClient())
+                {
+                    RawResources = Client.DownloadString(Properties.Settings.Default.Resources);
+                }
             }
             // If we have failed (4XX-5XX codes)
             catch (WebException e)
