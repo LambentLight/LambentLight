@@ -627,8 +627,8 @@
             // BottomStripLabel
             // 
             this.BottomStripLabel.Name = "BottomStripLabel";
-            this.BottomStripLabel.Size = new System.Drawing.Size(69, 17);
-            this.BottomStripLabel.Text = "Placeholder";
+            this.BottomStripLabel.Size = new System.Drawing.Size(151, 17);
+            this.BottomStripLabel.Text = "Welcome to LambentLight!";
             // 
             // Landing
             // 
