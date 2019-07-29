@@ -49,6 +49,22 @@ namespace LambentLight.Managers
         /// </summary>
         public string Resources => Path.Combine(Absolute, "resources");
         /// <summary>
+        /// The server configuration for the data folder.
+        /// </summary>
+        public string Configuration
+        {
+            get
+            {
+                // If there is a server configuration file
+                if (HasConfiguration)
+                {
+                    return string.Join(Environment.NewLine, File.ReadAllLines(Path.Combine(Absolute, "server.cfg")));
+                }
+                // Otherwise, return a generic string
+                return "# This server data folder does not has a configuration file";
+            }
+        }
+        /// <summary>
         /// Extraction options to use with SharpCompress.
         /// </summary>
         private readonly ExtractionOptions ExtractOpts = new ExtractionOptions() { ExtractFullPath = true };
