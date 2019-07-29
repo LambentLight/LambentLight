@@ -6,6 +6,11 @@ namespace LambentLight
     public static class Program
     {
         /// <summary>
+        /// The main form of our application.
+        /// </summary>
+        public static Landing Form;
+
+        /// <summary>
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
@@ -25,8 +30,10 @@ namespace LambentLight
             Application.EnableVisualStyles();
             // Use the classic rendering for compatibility
             Application.SetCompatibleTextRenderingDefault(false);
+            // Create our main form
+            Form = new Landing();
             // And run the application with our main form
-            Application.Run(new Landing());
+            Application.Run(Form);
         }
     }
 }
