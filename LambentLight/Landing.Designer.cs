@@ -1,4 +1,4 @@
-namespace LambentLight
+﻿namespace LambentLight
 {
     partial class Landing
     {
@@ -360,6 +360,8 @@ namespace LambentLight
             // 
             // ConfigTextBox
             // 
+            this.ConfigTextBox.AcceptsReturn = true;
+            this.ConfigTextBox.AcceptsTab = true;
             this.ConfigTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
