@@ -226,10 +226,10 @@ namespace LambentLight.Managers
                     AutoRestart.Enabled = false;
                     // Unlock the controls
                     Program.Form.Locked = false;
-                    // Set the Server information to null
-                    Server = null;
                     // And log a message
                     Logger.Warn("The FiveM server has exited with a code {0}", Server.Process.ExitCode);
+                    // Set the Server information to null
+                    Server = null;
                 }
             }
         }
