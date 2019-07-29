@@ -369,6 +369,7 @@ namespace LambentLight
             this.ConfigTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.ConfigTextBox.Size = new System.Drawing.Size(681, 265);
             this.ConfigTextBox.TabIndex = 0;
+            this.ConfigTextBox.WordWrap = false;
             // 
             // SettingsTab
             // 
