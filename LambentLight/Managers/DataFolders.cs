@@ -81,7 +81,7 @@ namespace LambentLight.Managers
             string ExtractionPath = Path.Combine(Properties.Settings.Default.FolderTemp, $"{resource.Name}-{version.ReadableVersion}");
             string TempFilePath = ExtractionPath + version.GetExtension();
             // Notify that we are starting the download
-            Logger.Info("Starting the download of {0} from '{1}' to '{2}'", resource.Name, version.Download, TempFilePath);
+            Logger.Info("Starting the download of {0} {1}", resource.Name, version.ReadableVersion);
 
             // If the temp file exists
             if (File.Exists(TempFilePath))
