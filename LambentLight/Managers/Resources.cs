@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using NLog;
 using System.Collections.Generic;
 using System.Net;
@@ -136,6 +136,19 @@ namespace LambentLight.Managers
         /// </summary>
         [JsonProperty("versions")]
         public List<Version> Versions { get; set; }
+
+        /// <summary>
+        /// Checks if a specific resource is installed on a Data Folder.
+        /// </summary>
+        /// <param name="folder">The folder to check against to.</param>
+        /// <returns>true if the resource is installed, false otherwise.</returns>
+        public bool IsInstalledIn(DataFolder folder)
+        {
+            // Format the path of the folder
+            string Location = System.IO.Path.Combine(folder.Resources, Folder);
+            // Return if the folder exists
+            return Directory.Exists(Location);
+        }
 
         public override string ToString()
         {
