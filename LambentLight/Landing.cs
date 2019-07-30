@@ -327,6 +327,7 @@ namespace LambentLight
         private void SaveAPIsButton_Click(object sender, EventArgs e)
         {
             // Save the URLs on the configuration
+            Properties.Settings.Default.Resources = ResourcesTextBox.Text;
             Properties.Settings.Default.Builds = BuildsTextBox.Text;
             Properties.Settings.Default.Save();
         }
