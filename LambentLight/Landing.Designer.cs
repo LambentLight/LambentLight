@@ -35,7 +35,13 @@
             this.FolderRefreshButton = new System.Windows.Forms.Button();
             this.DataBox = new System.Windows.Forms.ComboBox();
             this.TopStrip = new System.Windows.Forms.MenuStrip();
+            this.StartItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.StopItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.CreateItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ExitItem = new System.Windows.Forms.ToolStripMenuItem();
             this.LogsTab = new System.Windows.Forms.TabPage();
+            this.ConsoleButton = new System.Windows.Forms.Button();
+            this.ConsoleTextBox = new System.Windows.Forms.TextBox();
             this.LogTextBox = new System.Windows.Forms.TextBox();
             this.Tabs = new System.Windows.Forms.TabControl();
             this.ResourcesTab = new System.Windows.Forms.TabPage();
@@ -78,12 +84,6 @@
             this.MainProgressBar = new System.Windows.Forms.ProgressBar();
             this.BottomStrip = new System.Windows.Forms.StatusStrip();
             this.BottomStripLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.ConsoleTextBox = new System.Windows.Forms.TextBox();
-            this.ConsoleButton = new System.Windows.Forms.Button();
-            this.StartItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.StopItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.CreateItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ExitItem = new System.Windows.Forms.ToolStripMenuItem();
             this.BuildsGroup.SuspendLayout();
             this.DataGroup.SuspendLayout();
             this.TopStrip.SuspendLayout();
@@ -182,6 +182,38 @@
             this.TopStrip.TabIndex = 2;
             this.TopStrip.Text = "menuStrip1";
             // 
+            // StartItem
+            // 
+            this.StartItem.Image = global::LambentLight.Properties.Resources.Play;
+            this.StartItem.Name = "StartItem";
+            this.StartItem.Size = new System.Drawing.Size(94, 20);
+            this.StartItem.Text = "Start Server";
+            this.StartItem.Click += new System.EventHandler(this.StartItem_Click);
+            // 
+            // StopItem
+            // 
+            this.StopItem.Image = global::LambentLight.Properties.Resources.Stop;
+            this.StopItem.Name = "StopItem";
+            this.StopItem.Size = new System.Drawing.Size(94, 20);
+            this.StopItem.Text = "Stop Server";
+            this.StopItem.Click += new System.EventHandler(this.StopItem_Click);
+            // 
+            // CreateItem
+            // 
+            this.CreateItem.Image = global::LambentLight.Properties.Resources.Add;
+            this.CreateItem.Name = "CreateItem";
+            this.CreateItem.Size = new System.Drawing.Size(132, 20);
+            this.CreateItem.Text = "Create Data Folder";
+            this.CreateItem.Click += new System.EventHandler(this.CreateItem_Click);
+            // 
+            // ExitItem
+            // 
+            this.ExitItem.Image = global::LambentLight.Properties.Resources.Exit;
+            this.ExitItem.Name = "ExitItem";
+            this.ExitItem.Size = new System.Drawing.Size(54, 20);
+            this.ExitItem.Text = "Exit";
+            this.ExitItem.Click += new System.EventHandler(this.ExitItem_Click);
+            // 
             // LogsTab
             // 
             this.LogsTab.Controls.Add(this.ConsoleButton);
@@ -194,6 +226,26 @@
             this.LogsTab.TabIndex = 0;
             this.LogsTab.Text = "Logs";
             this.LogsTab.UseVisualStyleBackColor = true;
+            // 
+            // ConsoleButton
+            // 
+            this.ConsoleButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.ConsoleButton.Location = new System.Drawing.Point(686, 246);
+            this.ConsoleButton.Name = "ConsoleButton";
+            this.ConsoleButton.Size = new System.Drawing.Size(75, 23);
+            this.ConsoleButton.TabIndex = 2;
+            this.ConsoleButton.Text = "Send";
+            this.ConsoleButton.UseVisualStyleBackColor = true;
+            this.ConsoleButton.Click += new System.EventHandler(this.ConsoleButton_Click);
+            // 
+            // ConsoleTextBox
+            // 
+            this.ConsoleTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ConsoleTextBox.Location = new System.Drawing.Point(6, 248);
+            this.ConsoleTextBox.Name = "ConsoleTextBox";
+            this.ConsoleTextBox.Size = new System.Drawing.Size(674, 20);
+            this.ConsoleTextBox.TabIndex = 1;
             // 
             // LogTextBox
             // 
@@ -670,55 +722,6 @@
             this.BottomStripLabel.Name = "BottomStripLabel";
             this.BottomStripLabel.Size = new System.Drawing.Size(151, 17);
             this.BottomStripLabel.Text = "Welcome to LambentLight!";
-            // 
-            // ConsoleTextBox
-            // 
-            this.ConsoleTextBox.Location = new System.Drawing.Point(6, 248);
-            this.ConsoleTextBox.Name = "ConsoleTextBox";
-            this.ConsoleTextBox.Size = new System.Drawing.Size(674, 20);
-            this.ConsoleTextBox.TabIndex = 1;
-            // 
-            // ConsoleButton
-            // 
-            this.ConsoleButton.Location = new System.Drawing.Point(686, 246);
-            this.ConsoleButton.Name = "ConsoleButton";
-            this.ConsoleButton.Size = new System.Drawing.Size(75, 23);
-            this.ConsoleButton.TabIndex = 2;
-            this.ConsoleButton.Text = "Send";
-            this.ConsoleButton.UseVisualStyleBackColor = true;
-            this.ConsoleButton.Click += new System.EventHandler(this.ConsoleButton_Click);
-            // 
-            // StartItem
-            // 
-            this.StartItem.Image = global::LambentLight.Properties.Resources.Play;
-            this.StartItem.Name = "StartItem";
-            this.StartItem.Size = new System.Drawing.Size(94, 20);
-            this.StartItem.Text = "Start Server";
-            this.StartItem.Click += new System.EventHandler(this.StartItem_Click);
-            // 
-            // StopItem
-            // 
-            this.StopItem.Image = global::LambentLight.Properties.Resources.Stop;
-            this.StopItem.Name = "StopItem";
-            this.StopItem.Size = new System.Drawing.Size(94, 20);
-            this.StopItem.Text = "Stop Server";
-            this.StopItem.Click += new System.EventHandler(this.StopItem_Click);
-            // 
-            // CreateItem
-            // 
-            this.CreateItem.Image = global::LambentLight.Properties.Resources.Add;
-            this.CreateItem.Name = "CreateItem";
-            this.CreateItem.Size = new System.Drawing.Size(132, 20);
-            this.CreateItem.Text = "Create Data Folder";
-            this.CreateItem.Click += new System.EventHandler(this.CreateItem_Click);
-            // 
-            // ExitItem
-            // 
-            this.ExitItem.Image = global::LambentLight.Properties.Resources.Exit;
-            this.ExitItem.Name = "ExitItem";
-            this.ExitItem.Size = new System.Drawing.Size(54, 20);
-            this.ExitItem.Text = "Exit";
-            this.ExitItem.Click += new System.EventHandler(this.ExitItem_Click);
             // 
             // Landing
             // 
