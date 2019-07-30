@@ -1,6 +1,7 @@
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using NLog;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 
 namespace LambentLight.Managers
@@ -131,6 +132,11 @@ namespace LambentLight.Managers
         /// </summary>
         [JsonProperty("license")]
         public string License { get; set; }
+        /// <summary>
+        /// The list of requirements of the resource.
+        /// </summary>
+        [JsonProperty("requires")]
+        public List<string> Requires { get; set; }
         /// <summary>
         /// A list with the versions of the resource.
         /// </summary>

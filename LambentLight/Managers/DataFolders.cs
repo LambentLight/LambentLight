@@ -125,14 +125,54 @@ namespace LambentLight.Managers
         /// </summary>
         /// <param name="resource">The resource information.</param>
         /// <param name="version">The version to install.</param>
+        /// <param name="installRequirements">If the resource requirements should be installed.</param>
         /// <returns>true if the installation succeded, false otherwise.</returns>
-        public async Task<bool> InstallResource(Resource resource, Version version)
+        public async Task<bool> InstallResource(Resource resource, Version version, bool installRequirements = true)
         {
             // If the temporary folder does not exists
             if (!Directory.Exists(Properties.Settings.Default.FolderTemp))
             {
                 // Create it
                 Directory.CreateDirectory(Properties.Settings.Default.FolderTemp);
+            }
+
+            // If the resource has requirements and it was requested to install them
+            if (resource.Requires != null && installRequirements)
+            {
+                // Update the list of resources just in case
+                ResourceManager.Refresh();
+
+                // Iterate over the requirements
+                foreach (string Requirement in resource.Requires)
+                {
+                    // Try to find the correct resource
+                    Resource Found = ResourceManager.Resources.Where(res => res.Name == Requirement).FirstOrDefault();
+
+                    // If there is a resource found
+                    if (Found != null)
+                    {
+                        // If the resource is already installed
+                        if (resource.IsInstalledIn(this))
+                        {
+                            // Notify that it is
+                            Logger.Info("The resource {0} required by {1} is already installed, skipping...", Found.Name, resource.Name);
+                        }
+                        // Otherwise
+                        else
+                        {
+                            // Notify the user
+                            Logger.Info("Installing requirement {0} by {1}", resource.Name, Found.Name);
+                            // Install the resource
+                            await InstallResource(Found, Found.Versions[0], false);
+                        }
+                    }
+                    // Otherwise
+                    else
+                    {
+                        // Notify the user with an error
+                        Logger.Error("The resource {0} requires {1} but it was not found", resource.Name, Requirement);
+                    }
+                }
             }
 
             // Format a path for the output file
