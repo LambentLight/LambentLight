@@ -2,11 +2,11 @@ using NLog;
 using SharpCompress.Archives;
 using SharpCompress.Archives.Rar;
 using SharpCompress.Archives.SevenZip;
+using SharpCompress.Archives.Zip;
 using SharpCompress.Common;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Security.Cryptography;
@@ -203,10 +203,16 @@ namespace LambentLight.Managers
             switch (version.Compression)
             {
                 case CompressionType.Zip:
-                    await Task.Run(() => ZipFile.ExtractToDirectory(TempFilePath, ExtractionPath));
+                    using (ZipArchive SevenZip = ZipArchive.Open(TempFilePath))
+                    {
+                        foreach (ZipArchiveEntry Entry in SevenZip.Entries.Where(X => !X.IsDirectory))
+                        {
+                            Entry.WriteToDirectory(ExtractionPath, ExtractOpts);
+                        }
+                    }
                     break;
                 case CompressionType.SevenZip:
-                    using (SevenZipArchive SevenZip = SevenZipArchive.Open(ExtractionPath))
+                    using (SevenZipArchive SevenZip = SevenZipArchive.Open(TempFilePath))
                     {
                         foreach (SevenZipArchiveEntry Entry in SevenZip.Entries.Where(X => !X.IsDirectory))
                         {
@@ -215,7 +221,7 @@ namespace LambentLight.Managers
                     }
                     break;
                 case CompressionType.Rar:
-                    using (RarArchive Rar = RarArchive.Open(ExtractionPath))
+                    using (RarArchive Rar = RarArchive.Open(TempFilePath))
                     {
                         foreach (RarArchiveEntry Entry in Rar.Entries.Where(X => !X.IsDirectory))
                         {
@@ -365,7 +371,7 @@ namespace LambentLight.Managers
                 }
 
                 // After the zip file has been downloaded, extract it
-                await Task.Run(() => ZipFile.ExtractToDirectory(ZipPath, Properties.Settings.Default.FolderTemp));
+                await Task.Run(() => System.IO.Compression.ZipFile.ExtractToDirectory(ZipPath, Properties.Settings.Default.FolderTemp));
                 // Then, rename it to the name specified by the user
                 Directory.Move(Path.Combine(Properties.Settings.Default.FolderTemp, "cfx-server-data-master"), NewPath);
                 // Delete the temporary file
