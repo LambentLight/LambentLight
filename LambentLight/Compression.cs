@@ -5,6 +5,7 @@ using SharpCompress.Archives.Zip;
 using SharpCompress.Common;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace LambentLight
 {
@@ -43,18 +44,18 @@ namespace LambentLight
         /// <param name="file">The file to extract.</param>
         /// <param name="output">Where the files should be extracted.</param>
         /// <exception cref="InvalidOperationException">Thrown when the compression type is unsuported.</exception>
-        public static void Extract(string file, string output, CompressionType type)
+        public static async Task Extract(string file, string output, CompressionType type)
         {
             switch (type)
             {
                 case CompressionType.Zip:
-                    ExtractZip(file, output);
+                    await ExtractZip(file, output);
                     break;
                 case CompressionType.SevenZip:
-                    Extract7zip(file, output);
+                    await Extract7zip(file, output);
                     break;
                 case CompressionType.Rar:
-                    ExtractRar(file, output);
+                    await ExtractRar(file, output);
                     break;
                 default:
                     throw new InvalidOperationException($"{(int)type} is an invalid compression type for file {file}.");
@@ -66,7 +67,7 @@ namespace LambentLight
         /// </summary>
         /// <param name="file">The file to extract.</param>
         /// <param name="output">Where the files should be extracted.</param>
-        public static void ExtractZip(string file, string output)
+        public static async Task ExtractZip(string file, string output)
         {
             using (ZipArchive SevenZip = ZipArchive.Open(file))
             {
@@ -82,7 +83,7 @@ namespace LambentLight
         /// </summary>
         /// <param name="file">The file to extract.</param>
         /// <param name="output">Where the files should be extracted.</param>
-        public static void Extract7zip(string file, string output)
+        public static async Task Extract7zip(string file, string output)
         {
             using (SevenZipArchive SevenZip = SevenZipArchive.Open(file))
             {
@@ -98,7 +99,7 @@ namespace LambentLight
         /// </summary>
         /// <param name="file">The file to extract.</param>
         /// <param name="output">Where the files should be extracted.</param>
-        public static void ExtractRar(string file, string output)
+        public static async Task ExtractRar(string file, string output)
         {
             using (RarArchive Rar = RarArchive.Open(file))
             {

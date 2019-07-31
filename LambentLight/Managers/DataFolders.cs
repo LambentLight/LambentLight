@@ -235,7 +235,7 @@ namespace LambentLight.Managers
             // Try to extract the file
             try
             {
-                Compression.Extract(TempFilePath, ExtractionPath, version.Compression);
+                await Compression.Extract(TempFilePath, ExtractionPath, version.Compression);
             }
             // If we fail, log the error message and return
             catch (InvalidOperationException e)
