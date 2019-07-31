@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using NLog;
 using System;
 using System.Collections.Generic;
@@ -25,7 +25,7 @@ namespace LambentLight.Managers
         /// <summary>
         /// The local folder where the build can be located.
         /// </summary>
-        public string Folder => Path.Combine(Properties.Settings.Default.FolderBuilds, ID);
+        public string Folder => Path.GetFullPath(Path.Combine(Properties.Settings.Default.FolderBuilds, ID));
 
         /// <summary>
         /// Creates a Build to use with LambentLight
