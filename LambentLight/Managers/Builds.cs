@@ -1,4 +1,4 @@
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using NLog;
 using System;
 using System.Collections.Generic;
@@ -77,10 +77,6 @@ namespace LambentLight.Managers
         /// </summary>
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         /// <summary>
-        /// The Uri or URL for downloading the builds from the FiveM servers.
-        /// </summary>
-        public const string DownloadUri = "https://runtime.fivem.net/artifacts/fivem/build_server_windows/master/{0}/server.zip";
-        /// <summary>
         /// The updated list of builds.
         /// </summary>
         public static List<Build> Builds = new List<Build>();
@@ -138,7 +134,7 @@ namespace LambentLight.Managers
             string Destination = Path.Combine(Properties.Settings.Default.FolderTemp, build.ID + ".zip");
 
             // If we didn't managed to download the file
-            if (!await Downloader.DownloadFile(string.Format(DownloadUri, build.ID), Destination))
+            if (!await Downloader.DownloadFile($"https://runtime.fivem.net/artifacts/fivem/build_server_windows/master/{build.ID}/server.zip", Destination))
             {
                 return;
             }
