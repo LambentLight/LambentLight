@@ -398,7 +398,7 @@ namespace LambentLight.Managers
                 }
 
                 // After the zip file has been downloaded, extract it
-                await Task.Run(() => System.IO.Compression.ZipFile.ExtractToDirectory(ZipPath, Properties.Settings.Default.FolderTemp));
+                Compression.ExtractZip(ZipPath, Properties.Settings.Default.FolderTemp);
                 // Then, rename it to the name specified by the user
                 Directory.Move(Path.Combine(Properties.Settings.Default.FolderTemp, "cfx-server-data-master"), NewPath);
                 // Delete the temporary file
