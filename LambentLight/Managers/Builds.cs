@@ -3,7 +3,6 @@ using NLog;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.IO.Compression;
 using System.Threading.Tasks;
 
 namespace LambentLight.Managers
@@ -98,7 +97,7 @@ namespace LambentLight.Managers
         public static async Task Download(Build build)
         {
             // Log that we are starting the download
-            Logger.Info("Build {0} is not available, attempting download...", build.ID);
+            Logger.Info("Build {0} is not available, downloading...", build.ID);
 
             // If the builds folder does not exists, create it
             if (!Directory.Exists(Properties.Settings.Default.FolderBuilds))
@@ -127,10 +126,10 @@ namespace LambentLight.Managers
             Directory.CreateDirectory(build.Folder);
 
             // Finally, extract the values
-            await Task.Run(() => ZipFile.ExtractToDirectory(Destination, build.Folder));
+            await Compression.ExtractZip(Destination, build.Folder);
 
             // Log that we have finished the extraction
-            Logger.Info("Build {0} has been extracted successfully", build.ID);
+            Logger.Info("Build {0} is now available for the server", build.ID);
 
             // Delete the temporary ZIP file
             File.Delete(Destination);
