@@ -121,6 +121,26 @@ namespace LambentLight.Managers
         }
 
         /// <summary>
+        /// Removes the existing versions of a resource.
+        /// </summary>
+        /// <param name="resource">The resource to uninstall.</param>
+        public void Remove(Resource resource)
+        {
+            // If the resources folder exists
+            if (Directory.Exists(Resources))
+            {
+                // Get all of the folders that match the resource folder name
+                foreach (string Dir in Directory.EnumerateDirectories(Resources, resource.Folder, SearchOption.AllDirectories))
+                {
+                    // Notify the user
+                    Logger.Warn("Removing existing version of {0} at '{1}'", resource.Name, Dir);
+                    // And remove the folder
+                    Directory.Delete(Dir, true);
+                }
+            }
+        }
+
+        /// <summary>
         /// Installs the specified resource and version on the data folder.
         /// </summary>
         /// <param name="resource">The resource information.</param>
@@ -218,14 +238,8 @@ namespace LambentLight.Managers
                 Directory.CreateDirectory(Resources);
             }
 
-            // Get all of the folders that match the resource folder name
-            foreach (string Dir in Directory.EnumerateDirectories(Path.Combine(Absolute, "resources"), resource.Folder, SearchOption.AllDirectories))
-            {
-                // Notify the user
-                Logger.Warn("Removing existing version of {0}: '{1}'", resource.Name, Dir);
-                // And remove the folder
-                Directory.Delete(Dir, true);
-            }
+            // Remove the existing versions of the resource
+            Remove(resource);
 
             // If the output directory exists
             if (Directory.Exists(ExtractionPath))
