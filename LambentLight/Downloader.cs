@@ -1,4 +1,4 @@
-﻿using NLog;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +26,11 @@ namespace LambentLight
         {
             // Set the event to refresh the progress bar
             Client.DownloadProgressChanged += OnDownloadProgressChanged;
+
+            // Get the name and version of the current program
+            string Name = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name;
+            string Version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            Client.Headers["User-Agent"] = $"{Name}/{Version} (+https://github.com/LambentLight/LambentLight)";
         }
 
         /// <summary>
