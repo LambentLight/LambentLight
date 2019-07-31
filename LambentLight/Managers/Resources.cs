@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using NLog;
 using System.Collections.Generic;
 using System.IO;
@@ -73,7 +73,7 @@ namespace LambentLight.Managers
         public CompressionType Compression { get; set; }
 
         /// <summary>
-        /// Gets the extension for the compression type.
+        /// Gets the file extension based on the compression type.
         /// </summary>
         /// <returns>The .ext extension.</returns>
         public string GetExtension()
