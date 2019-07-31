@@ -71,6 +71,16 @@ namespace LambentLight.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] ConfigurationTemplate {
+            get {
+                object obj = ResourceManager.GetObject("ConfigurationTemplate", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap Exit {
@@ -87,16 +97,6 @@ namespace LambentLight.Properties {
             get {
                 object obj = ResourceManager.GetObject("Play", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] server_cfg {
-            get {
-                object obj = ResourceManager.GetObject("server.cfg", resourceCulture);
-                return ((byte[])(obj));
             }
         }
         

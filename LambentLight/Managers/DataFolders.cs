@@ -99,7 +99,7 @@ namespace LambentLight.Managers
         public string GenerateConfig()
         {
             // Get the base configuration
-            string BaseConfig = Encoding.UTF8.GetString(Properties.Resources.server_cfg);
+            string BaseConfig = Encoding.UTF8.GetString(Properties.Resources.ConfigurationTemplate);
             // Generate the new configuration
             string NewConfig = string.Format(BaseConfig, GenerateSecureString(32));
             // Set the configuration
