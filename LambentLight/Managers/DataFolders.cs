@@ -193,7 +193,7 @@ namespace LambentLight.Managers
 
             // Format a path for the output file
             string ExtractionPath = Path.Combine(Properties.Settings.Default.FolderTemp, $"{resource.Name}-{version.ReadableVersion}");
-            string TempFilePath = ExtractionPath + version.GetExtension();
+            string TempFilePath = ExtractionPath + version.Extension;
             // Notify that we are starting the download
             Logger.Info("Starting the download of {0} {1}", resource.Name, version.ReadableVersion);
 

@@ -40,7 +40,6 @@ namespace LambentLight.Managers
         /// </summary>
         [JsonProperty("download")]
         public string Download { get; set; }
-
         /// <summary>
         /// The Path of the resource inside of the compressed files.
         /// This take precedence over the Resource Path.
@@ -52,23 +51,24 @@ namespace LambentLight.Managers
         /// </summary>
         [JsonProperty("compression")]
         public CompressionType Compression { get; set; }
-
         /// <summary>
-        /// Gets the file extension based on the compression type.
+        /// The extension of the file based on the compression type.
         /// </summary>
-        /// <returns>The .ext extension.</returns>
-        public string GetExtension()
+        public string Extension
         {
-            switch (Compression)
+            get
             {
-                case CompressionType.Zip:
-                    return ".zip";
-                case CompressionType.SevenZip:
-                    return ".7z";
-                case CompressionType.Rar:
-                    return ".rar";
-                default:
-                    throw new System.InvalidOperationException($"{(int)Compression} is not a valid compression type");
+                switch (Compression)
+                {
+                    case CompressionType.Zip:
+                        return ".zip";
+                    case CompressionType.SevenZip:
+                        return ".7z";
+                    case CompressionType.Rar:
+                        return ".rar";
+                    default:
+                        return string.Empty;
+                }
             }
         }
 
