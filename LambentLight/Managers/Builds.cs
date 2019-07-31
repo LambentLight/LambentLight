@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
-using System.Net;
 using System.Threading.Tasks;
 
 namespace LambentLight.Managers
@@ -86,31 +85,8 @@ namespace LambentLight.Managers
         /// </summary>
         public static void Refresh()
         {
-            // Let's store the fetched builds here
-            string RawBuilds = "";
-
-            // Try to request the list of builds
-            try
-            {
-                // Use a context manager
-                using (WebClient Client = new WebClient())
-                {
-                    RawBuilds = Client.DownloadString(Properties.Settings.Default.Builds);
-                }
-            }
-            // If we have failed (4XX-5XX codes)
-            catch (WebException e)
-            {
-                // Set the build list to empty
-                Builds = new List<Build>();
-                // Notify the user
-                Logger.Error("Unable to fetch the new FiveM builds: Code {0} ({1})", (int)e.Status, e.Status);
-                return;
-            }
-
             // Create a temporary list of builds
-            Builds = JsonConvert.DeserializeObject<List<Build>>(RawBuilds, new BuildConverter());
-
+            Builds = Downloader.DownloadJSON<List<Build>>(Properties.Settings.Default.Builds, new BuildConverter());
             // Log what we have just done
             Logger.Debug("The list of builds has been updated");
         }
