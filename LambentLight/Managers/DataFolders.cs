@@ -135,7 +135,7 @@ namespace LambentLight.Managers
         /// <param name="version">The version to install.</param>
         /// <param name="installRequirements">If the resource requirements should be installed.</param>
         /// <returns>true if the installation succeded, false otherwise.</returns>
-        public async Task<bool> InstallResource(Resource resource, Version version, bool installRequirements = true)
+        public async Task InstallResource(Resource resource, Version version, bool installRequirements = true)
         {
             // If the temporary folder does not exists
             if (!Directory.Exists(Properties.Settings.Default.FolderTemp))
@@ -199,7 +199,7 @@ namespace LambentLight.Managers
             // If the download ended up failing
             if (!await Downloader.DownloadFile(version.Download, TempFilePath))
             {
-                return false;
+                return;
             }
 
             // If the resources folder does not exists
@@ -233,7 +233,7 @@ namespace LambentLight.Managers
             catch (InvalidOperationException e)
             {
                 Logger.Error(e.Message);
-                return false;
+                return;
             }
 
             // Remove the temporary compressed file
@@ -253,7 +253,7 @@ namespace LambentLight.Managers
             // Move the folder and notify the user
             Directory.Move(ChoosenFolder, DestinationFolder);
             Logger.Info("Success! {0} {1} has been installed", resource.Name, version.ReadableVersion);
-            return true;
+            return;
         }
 
         /// <summary>
