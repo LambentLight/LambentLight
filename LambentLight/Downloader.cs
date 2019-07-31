@@ -73,5 +73,30 @@ namespace LambentLight
             // Return that we have succeeded
             return true;
         }
+
+        /// <summary>
+        /// Requests a URL as a string.
+        /// </summary>
+        /// <param name="from">The URL to fetch.</param>
+        /// <returns>The contents of the response if the request succeeded, null otherwise.</returns>
+        public static async Task<string> DownloadString(string from)
+        {
+            // Try to download the string
+            try
+            {
+                // Use the asynchronous method
+                string Output = await Client.DownloadStringTaskAsync(from);
+                // Reset the progress bar
+                Program.Form.MainProgressBar.Value = 0;
+                // And return our string
+                return Output;
+            }
+            // If we got a HTTP exception
+            catch (WebException e)
+            {
+                Logger.Error("Error while fetching '{0}': {1}", from, e.Message);
+                return null;
+            }
+        }
     }
 }
