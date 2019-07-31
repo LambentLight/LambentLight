@@ -137,24 +137,14 @@ namespace LambentLight.Managers
             // Create the Uri and destination location
             string Destination = Path.Combine(Properties.Settings.Default.FolderTemp, build.ID + ".zip");
 
-            // Use a context manager
-            using (WebClient Client = new WebClient())
+            // If we didn't managed to download the file
+            if (!await Downloader.DownloadFile(string.Format(DownloadUri, build.ID), Destination))
             {
-                // Set the event to refresh the progress bar
-                Client.DownloadProgressChanged += Program.OnDownloadProgressChanged;
-
-                // Start downloading the file
-                await Client.DownloadFileTaskAsync(string.Format(DownloadUri, build.ID), Destination);
-
-                // While the client is bussy, wait
-                while (Client.IsBusy)
-                {
-                    await Task.Delay(0);
-                }
-
-                // Log that we have finished the download
-                Logger.Info("The download of build {0} has finished, starting extraction...", build.ID);
+                return;
             }
+
+            // Log that we have finished the download
+            Logger.Info("The download of build {0} has finished, starting extraction...", build.ID);
 
             // If the current build folder exists, delete it
             if (build.IsAvailable)

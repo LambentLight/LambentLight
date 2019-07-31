@@ -204,26 +204,9 @@ namespace LambentLight.Managers
                 File.Delete(TempFilePath);
             }
 
-            // Let's try to download the file
-            try
+            // If the download ended up failing
+            if (!await Downloader.DownloadFile(version.Download, TempFilePath))
             {
-                // Use a context manager
-                using (WebClient Client = new WebClient())
-                {
-                    // Set the event to refresh the progress bar
-                    Client.DownloadProgressChanged += Program.OnDownloadProgressChanged;
-
-                    // Start downloading the file
-                    await Client.DownloadFileTaskAsync(version.Download, TempFilePath);
-                }
-            }
-            catch (WebException e)
-            {
-                // Log the error
-                Logger.Error("Error while downloading {0}: {1}", version.Download, e.Message);
-                // Reset the progress bar value
-                Program.Form.MainProgressBar.Value = 0;
-                // And return
                 return false;
             }
 
@@ -381,20 +364,10 @@ namespace LambentLight.Managers
                     Directory.CreateDirectory(Properties.Settings.Default.FolderTemp);
                 }
 
-                // Use a context manager
-                using (WebClient Client = new WebClient())
+                // If we didn't managed to download the file, just return
+                if (!await Downloader.DownloadFile("https://github.com/citizenfx/cfx-server-data/archive/master.zip", ZipPath))
                 {
-                    // Set the event to refresh the progress bar
-                    Client.DownloadProgressChanged += Program.OnDownloadProgressChanged;
-
-                    // Start downloading the file
-                    await Client.DownloadFileTaskAsync("https://github.com/citizenfx/cfx-server-data/archive/master.zip", ZipPath);
-
-                    // Wait until the file has been downloaded
-                    while (Client.IsBusy)
-                    {
-                        await Task.Delay(0);
-                    }
+                    return null;
                 }
 
                 // After the zip file has been downloaded, extract it
@@ -403,8 +376,6 @@ namespace LambentLight.Managers
                 Directory.Move(Path.Combine(Properties.Settings.Default.FolderTemp, "cfx-server-data-master"), NewPath);
                 // Delete the temporary file
                 File.Delete(ZipPath);
-                // And finally reset the progress bar value
-                Program.Form.MainProgressBar.Value = 0;
             }
             else
             {
