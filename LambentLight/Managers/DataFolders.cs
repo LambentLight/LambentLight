@@ -261,9 +261,6 @@ namespace LambentLight.Managers
             // Move the folder and notify the user
             Directory.Move(ChoosenFolder, DestinationFolder);
             Logger.Info("Success! {0} {1} has been installed", resource.Name, version.ReadableVersion);
-
-            // Finally, reset the progress bar value and return
-            Program.Form.MainProgressBar.Value = 0;
             return true;
         }
 

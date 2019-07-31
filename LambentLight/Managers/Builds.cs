@@ -160,9 +160,6 @@ namespace LambentLight.Managers
             // Log that we have finished the extraction
             Logger.Info("Build {0} has been extracted successfully", build.ID);
 
-            // Reset the value of the progress bar
-            Program.Form.MainProgressBar.Value = 0;
-
             // Delete the temporary ZIP file
             File.Delete(Destination);
         }
