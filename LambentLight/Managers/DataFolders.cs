@@ -147,9 +147,6 @@ namespace LambentLight.Managers
             // If the resource has requirements and it was requested to install them
             if (resource.Requires != null && installRequirements)
             {
-                // Update the list of resources just in case
-                ResourceManager.Refresh();
-
                 // Iterate over the requirements
                 foreach (string Requirement in resource.Requires)
                 {
