@@ -318,7 +318,7 @@ namespace LambentLight.Managers
             // If the text is whitespaces or null, notify the user and return
             if (string.IsNullOrWhiteSpace(name))
             {
-                Logger.Warn("The path that you have entered is null or consists only of whitespaces");
+                Logger.Warn("The path that you have entered is empty or consists only of whitespaces");
                 return null;
             }
 
