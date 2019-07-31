@@ -72,10 +72,11 @@ namespace LambentLight.Managers
             }
         }
 
-        public override string ToString()
-        {
-            return ReadableVersion;
-        }
+        /// <summary>
+        /// Gets the readable version of the resource.
+        /// </summary>
+        /// <returns>The readable version of the resource.</returns>
+        public override string ToString() => ReadableVersion;
     }
 
     /// <summary>
