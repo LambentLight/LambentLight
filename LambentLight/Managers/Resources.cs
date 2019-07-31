@@ -1,4 +1,4 @@
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using NLog;
 using System.Collections.Generic;
 using System.IO;
@@ -23,25 +23,6 @@ namespace LambentLight.Managers
         /// A new loading screen.
         /// </summary>
         LoadingScreen = 2
-    }
-
-    /// <summary>
-    /// The type of compression used for the 
-    /// </summary>
-    public enum CompressionType
-    {
-        /// <summary>
-        /// The classic ZIP file.
-        /// </summary>
-        Zip = 0,
-        /// <summary>
-        /// 7zip or Seven ZIP.
-        /// </summary>
-        SevenZip = 1,
-        /// <summary>
-        /// RAR from WinRAR.
-        /// </summary>
-        Rar = 2
     }
 
     /// <summary>

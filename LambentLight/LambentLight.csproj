@@ -63,6 +63,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Compression.cs" />
     <Compile Include="Managers\Builds.cs" />
     <Compile Include="Managers\DataFolders.cs" />
     <Compile Include="Extensions\ListControlExtensions.cs" />
