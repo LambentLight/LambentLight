@@ -126,7 +126,7 @@ namespace LambentLight
                 }
             }
             // If the HTTP request failed, return null
-            return default;
+            return default(T); // NOTE: AppVeyor does not likes VS 2019 so C# 7.1 is not available
         }
     }
 }
