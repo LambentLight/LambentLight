@@ -80,13 +80,13 @@ namespace LambentLight
         /// </summary>
         /// <param name="from">The URL to fetch.</param>
         /// <returns>The contents of the response if the request succeeded, null otherwise.</returns>
-        public static async Task<string> DownloadString(string from)
+        public static string DownloadString(string from)
         {
             // Try to download the string
             try
             {
                 // Use the asynchronous method
-                string Output = await Client.DownloadStringTaskAsync(from);
+                string Output = Client.DownloadString(from);
                 // Reset the progress bar
                 Program.Form.MainProgressBar.Value = 0;
                 // And return our string
@@ -107,10 +107,10 @@ namespace LambentLight
         /// <param name="from">The URL to fetch.</param>
         /// <param name="converters">Aditional JSON converters to use.</param>
         /// <returns>The parsed contents if the request and parsing succeeds, default(T) otherwise.</returns>
-        public static async Task<T> DownloadJSON<T>(string from, params JsonConverter[] converters)
+        public static T DownloadJSON<T>(string from, params JsonConverter[] converters)
         {
             // Request the string as usual
-            string Contents = await DownloadString(from);
+            string Contents = DownloadString(from);
             // If the content is not null
             if (Contents != null)
             {
