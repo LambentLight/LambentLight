@@ -109,6 +109,8 @@ namespace LambentLight
         /// <returns>The parsed contents if the request and parsing succeeds, default(T) otherwise.</returns>
         public static T DownloadJSON<T>(string from, params JsonConverter[] converters)
         {
+            // NOTE: This solution can't be built on AppVeyor under the VS 2019 image, so use default(T) for the time being
+
             // Request the string as usual
             string Contents = DownloadString(from);
             // If the content is not null
@@ -122,11 +124,11 @@ namespace LambentLight
                 // If we have failed, return the default value
                 catch (EntryPointNotFoundException)
                 {
-                    return default;
+                    return default(T);
                 }
             }
             // If the HTTP request failed, return null
-            return default(T); // NOTE: AppVeyor does not likes VS 2019 so C# 7.1 is not available
+            return default(T);
         }
     }
 }
