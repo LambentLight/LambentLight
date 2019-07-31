@@ -137,6 +137,9 @@ namespace LambentLight.Managers
         /// <returns>true if the installation succeded, false otherwise.</returns>
         public async Task InstallResource(Resource resource, Version version, bool installRequirements = true)
         {
+            // Notify that we are starting the install of there resource
+            Logger.Info("Installing resource {0} {1}", resource.Name, version.ReadableVersion);
+
             // If the temporary folder does not exists
             if (!Directory.Exists(Properties.Settings.Default.FolderTemp))
             {
@@ -166,7 +169,7 @@ namespace LambentLight.Managers
                         else
                         {
                             // Notify the user
-                            Logger.Info("Installing requirement {0} by {1}", resource.Name, Found.Name);
+                            Logger.Info("{0} requires {1}, please wait...", resource.Name, Found.Name);
                             // Install the resource
                             await InstallResource(Found, Found.Versions[0], false);
                         }
@@ -183,8 +186,6 @@ namespace LambentLight.Managers
             // Format a path for the output file
             string ExtractionPath = Path.Combine(Properties.Settings.Default.FolderTemp, $"{resource.Name}-{version.ReadableVersion}");
             string TempFilePath = ExtractionPath + version.Extension;
-            // Notify that we are starting the download
-            Logger.Info("Starting the download of {0} {1}", resource.Name, version.ReadableVersion);
 
             // If the temp file exists
             if (File.Exists(TempFilePath))
@@ -193,7 +194,7 @@ namespace LambentLight.Managers
                 File.Delete(TempFilePath);
             }
 
-            // If the download ended up failing
+            // If the we tried to download the file and we ended up failing, return
             if (!await Downloader.DownloadFile(version.Download, TempFilePath))
             {
                 return;
@@ -220,7 +221,7 @@ namespace LambentLight.Managers
             Directory.CreateDirectory(ExtractionPath);
 
             // Notify that we are starting the extraction of the file
-            Logger.Info("Extracting {0} {1} to '{2}'", resource.Name, version.ReadableVersion, ExtractionPath);
+            Logger.Info("Extracting {0} {1}...", resource.Name, version.ReadableVersion);
             // Try to extract the file
             try
             {
@@ -236,9 +237,6 @@ namespace LambentLight.Managers
             // Remove the temporary compressed file
             File.Delete(TempFilePath);
 
-            // Notify that we have finished with the extraction and we have started moving stuff
-            Logger.Info("Moving the folder of {0} {1} to resources...", resource.Name, version.ReadableVersion);
-
             // Select the correct path inside of the extraction folder
             // In order: Version Path, Resource Path or an Empty String
             string CompressedPath = version.Path ?? resource.Path ?? "";
@@ -249,7 +247,7 @@ namespace LambentLight.Managers
 
             // Move the folder and notify the user
             Directory.Move(ChoosenFolder, DestinationFolder);
-            Logger.Info("Success! {0} {1} has been installed", resource.Name, version.ReadableVersion);
+            Logger.Info("Done! {0} {1} has been installed", resource.Name, version.ReadableVersion);
             return;
         }
 
