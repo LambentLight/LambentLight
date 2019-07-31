@@ -49,8 +49,6 @@ namespace LambentLight.Managers
         {
             get
             {
-                // Log that we are loading the server configuration
-                Logger.Info("The configuration of {0} has been loaded", Name);
                 // If there is a server configuration file
                 if (HasConfiguration)
                 {
