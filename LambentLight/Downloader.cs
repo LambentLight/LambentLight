@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using NLog;
 using System;
 using System.Collections.Generic;
@@ -97,6 +98,35 @@ namespace LambentLight
                 Logger.Error("Error while fetching '{0}': {1}", from, e.Message);
                 return null;
             }
+        }
+
+        /// <summary>
+        /// Requests the JSON from the URL and parses it.
+        /// </summary>
+        /// <typeparam name="T">The output type to parse.</typeparam>
+        /// <param name="from">The URL to fetch.</param>
+        /// <param name="converters">Aditional JSON converters to use.</param>
+        /// <returns>The parsed contents if the request and parsing succeeds, default(T) otherwise.</returns>
+        public static async Task<T> DownloadJSON<T>(string from, params JsonConverter[] converters)
+        {
+            // Request the string as usual
+            string Contents = await DownloadString(from);
+            // If the content is not null
+            if (Contents != null)
+            {
+                // Try to parse the JSON
+                try
+                {
+                    return JsonConvert.DeserializeObject<T>(Contents, converters);
+                }
+                // If we have failed, return the default value
+                catch (EntryPointNotFoundException)
+                {
+                    return default;
+                }
+            }
+            // If the HTTP request failed, return null
+            return default;
         }
     }
 }
