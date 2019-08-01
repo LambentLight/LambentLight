@@ -2,7 +2,6 @@
 using NLog;
 using System.Collections.Generic;
 using System.IO;
-using System.Net;
 
 namespace LambentLight.Managers
 {
@@ -163,31 +162,8 @@ namespace LambentLight.Managers
         /// </summary>
         public static void Refresh()
         {
-            // Let's store the fetched resources here
-            string RawResources = "";
-
-            // Try to request the list of resources
-            try
-            {
-                // Use a context manager
-                using (WebClient Client = new WebClient())
-                {
-                    RawResources = Client.DownloadString(Properties.Settings.Default.Resources);
-                }
-            }
-            // If we have failed (4XX-5XX codes)
-            catch (WebException e)
-            {
-                // Set the resource list to empty
-                Resources = new List<Resource>();
-                // Notify the user
-                Logger.Error("Unable to fetch the new FiveM builds: Code {0} ({1})", (int)e.Status, e.Status);
-                return;
-            }
-
             // Create a temporary list of resources
-            Resources = JsonConvert.DeserializeObject<List<Resource>>(RawResources, new BuildConverter());
-
+            Resources = Downloader.DownloadJSON<List<Resource>>(Properties.Settings.Default.Resources, new BuildConverter());
             // Log what we have just done
             Logger.Debug("The list of resources has been updated");
         }
