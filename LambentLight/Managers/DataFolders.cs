@@ -1,11 +1,13 @@
 using NLog;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace LambentLight.Managers
 {
@@ -244,6 +246,20 @@ namespace LambentLight.Managers
             string ChoosenFolder = Path.Combine(ExtractionPath, CompressedPath);
             // Create the destination directory (aka the path inside of the resources directory)
             string DestinationFolder = Path.Combine(Resources, resource.Folder);
+
+            // If the resource has aditional configuration instructions
+            if (resource.ConfigInstructions != null)
+            {
+                // Ask the user if he wants to open the configuration instructions
+                DialogResult Result = MessageBox.Show($"The resource {resource.Name} requires aditional configuration\nDo you want to open the configuration instructions in your browser?", "Configuration required", MessageBoxButtons.YesNo);
+
+                // If it does
+                if (Result == DialogResult.Yes)
+                {
+                    // Open it up
+                    Process.Start(resource.ConfigInstructions);
+                }
+            }
 
             // Move the folder and notify the user
             Directory.Move(ChoosenFolder, DestinationFolder);

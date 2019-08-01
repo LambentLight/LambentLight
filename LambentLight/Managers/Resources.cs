@@ -119,6 +119,11 @@ namespace LambentLight.Managers
         [JsonProperty("requires")]
         public List<string> Requires { get; set; }
         /// <summary>
+        /// The resource configuration instructions by the author.
+        /// </summary>
+        [JsonProperty("instructions")]
+        public string ConfigInstructions { get; set; }
+        /// <summary>
         /// A list with the versions of the resource.
         /// </summary>
         [JsonProperty("versions")]
