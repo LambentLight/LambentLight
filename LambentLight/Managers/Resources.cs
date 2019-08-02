@@ -142,10 +142,7 @@ namespace LambentLight.Managers
             return Directory.Exists(Location);
         }
 
-        public override string ToString()
-        {
-            return Name;
-        }
+        public override string ToString() => $"{Name} by {Author}";
     }
 
     /// <summary>
