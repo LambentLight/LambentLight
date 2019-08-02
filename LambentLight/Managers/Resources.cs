@@ -2,6 +2,7 @@
 using NLog;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace LambentLight.Managers
 {
@@ -165,7 +166,9 @@ namespace LambentLight.Managers
         public static void Refresh()
         {
             // Create a temporary list of resources
-            Resources = Downloader.DownloadJSON<List<Resource>>(Properties.Settings.Default.Resources, new BuildConverter());
+            List<Resource> Output = Downloader.DownloadJSON<List<Resource>>(Properties.Settings.Default.Resources, new BuildConverter());
+            // Store the resources in alphabetical order
+            Resources = Output.OrderBy(x => x.Name).ToList();
             // Log what we have just done
             Logger.Debug("The list of resources has been updated");
         }
