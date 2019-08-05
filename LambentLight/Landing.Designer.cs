@@ -515,6 +515,8 @@
             // 
             // RuntimeGroupBox
             // 
+            this.RuntimeGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.RuntimeGroupBox.Controls.Add(this.ClearCacheCheckBox);
             this.RuntimeGroupBox.Controls.Add(this.AutoRestartCheckBox);
             this.RuntimeGroupBox.Location = new System.Drawing.Point(391, 137);
@@ -581,7 +583,8 @@
             // 
             // APIsGroupBox
             // 
-            this.APIsGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.APIsGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.APIsGroupBox.Controls.Add(this.SaveAPIsButton);
             this.APIsGroupBox.Controls.Add(this.BuildsTextBox);
             this.APIsGroupBox.Controls.Add(this.BuildsLabel);
