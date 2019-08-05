@@ -1,4 +1,4 @@
-﻿using LambentLight.Extensions;
+using LambentLight.Extensions;
 using LambentLight.Managers;
 using LambentLight.Targets;
 using NLog;
@@ -75,16 +75,7 @@ namespace LambentLight
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
             // Load the settings
-            BuildsTextBox.Text = Properties.Settings.Default.Builds;
-            ResourcesTextBox.Text = Properties.Settings.Default.Resources;
-            DownloadScriptsCheckBox.Checked = Properties.Settings.Default.DownloadScripts;
-            CreateConfigCheckBox.Checked = Properties.Settings.Default.CreateConfig;
-            AutoRestartCheckBox.Checked = Properties.Settings.Default.AutoRestart;
-            ClearCacheCheckBox.Checked = Properties.Settings.Default.ClearCache;
-            RestartEveryCheckBox.Checked = Properties.Settings.Default.RestartEvery;
-            RestartAtCheckBox.Checked = Properties.Settings.Default.RestartAt;
-            RestartEveryTextBox.Text = Properties.Settings.Default.RestartEveryTime.ToString();
-            RestartAtTextBox.Text = Properties.Settings.Default.RestartAtTime.ToString();
+            ReloadSettings();
         }
 
         #endregion
@@ -291,6 +282,27 @@ namespace LambentLight
         #endregion
 
         #region Settings
+
+        private void ReloadSettings()
+        {
+            // Disable the license check box
+            VisibleCheckBox.Checked = false;
+
+            // And load all of the settings
+            DownloadScriptsCheckBox.Checked = Properties.Settings.Default.DownloadScripts;
+            CreateConfigCheckBox.Checked = Properties.Settings.Default.CreateConfig;
+
+            RestartEveryCheckBox.Checked = Properties.Settings.Default.RestartEvery;
+            RestartAtCheckBox.Checked = Properties.Settings.Default.RestartAt;
+            RestartEveryTextBox.Text = Properties.Settings.Default.RestartEveryTime.ToString();
+            RestartAtTextBox.Text = Properties.Settings.Default.RestartAtTime.ToString();
+
+            BuildsTextBox.Text = Properties.Settings.Default.Builds;
+            ResourcesTextBox.Text = Properties.Settings.Default.Resources;
+
+            AutoRestartCheckBox.Checked = Properties.Settings.Default.AutoRestart;
+            ClearCacheCheckBox.Checked = Properties.Settings.Default.ClearCache;
+        }
 
         private void VisibleTextBox_CheckedChanged(object sender, EventArgs e)
         {
