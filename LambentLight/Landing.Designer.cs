@@ -84,6 +84,7 @@
             this.MainProgressBar = new System.Windows.Forms.ProgressBar();
             this.BottomStrip = new System.Windows.Forms.StatusStrip();
             this.BottomStripLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.ResetSettingsButton = new System.Windows.Forms.Button();
             this.BuildsGroup.SuspendLayout();
             this.DataGroup.SuspendLayout();
             this.TopStrip.SuspendLayout();
@@ -427,6 +428,7 @@
             // 
             // SettingsTab
             // 
+            this.SettingsTab.Controls.Add(this.ResetSettingsButton);
             this.SettingsTab.Controls.Add(this.AutomatedRestartGroupBox);
             this.SettingsTab.Controls.Add(this.RuntimeGroupBox);
             this.SettingsTab.Controls.Add(this.FolderCreationGroupBox);
@@ -726,6 +728,18 @@
             this.BottomStripLabel.Size = new System.Drawing.Size(151, 17);
             this.BottomStripLabel.Text = "Welcome to LambentLight!";
             // 
+            // ResetSettingsButton
+            // 
+            this.ResetSettingsButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ResetSettingsButton.Location = new System.Drawing.Point(6, 241);
+            this.ResetSettingsButton.Name = "ResetSettingsButton";
+            this.ResetSettingsButton.Size = new System.Drawing.Size(755, 23);
+            this.ResetSettingsButton.TabIndex = 5;
+            this.ResetSettingsButton.Text = "Reset Settings to their Default Values";
+            this.ResetSettingsButton.UseVisualStyleBackColor = true;
+            this.ResetSettingsButton.Click += new System.EventHandler(this.ResetSettingsButton_Click);
+            // 
             // Landing
             // 
             this.AcceptButton = this.ConsoleButton;
@@ -832,6 +846,7 @@
         private System.Windows.Forms.Button SaveButton;
         private System.Windows.Forms.Button ConsoleButton;
         private System.Windows.Forms.TextBox ConsoleTextBox;
+        private System.Windows.Forms.Button ResetSettingsButton;
     }
 }
 

@@ -1,4 +1,4 @@
-using LambentLight.Extensions;
+﻿using LambentLight.Extensions;
 using LambentLight.Managers;
 using LambentLight.Targets;
 using NLog;
@@ -418,6 +418,21 @@ namespace LambentLight
             }
             // If we succeeded, save it
             Properties.Settings.Default.Save();
+        }
+
+        private void ResetSettingsButton_Click(object sender, EventArgs e)
+        {
+            // Ask the user if he is sure
+            DialogResult Result = MessageBox.Show("Are you sure that you want to reset the settings?", "Resetting Settings", MessageBoxButtons.YesNo);
+
+            // If the user is sure
+            if (Result == DialogResult.Yes)
+            {
+                // Reset the settings
+                Properties.Settings.Default.Reset();
+                // And reload them
+                ReloadSettings();
+            }
         }
 
         #endregion
