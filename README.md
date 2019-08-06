@@ -21,10 +21,10 @@ LambentLight is an application for managing dedicated FiveM servers. It helps yo
 # Usage
 
 1. First, go to `Application Settings` and add a FiveM License
-  1. Click `Generate` to open the FiveM License page on your browser
-  2. Follow the steps on the FiveM license page
-  3. Once you have the License, go back to the program and click `Make License Visible`
-  4. Paste the license on the text box and click `Save`
+   1. Click `Generate` to open the FiveM License page on your browser
+   2. Follow the steps on the FiveM license page
+   3. Once you have the License, go back to the program and click `Make License Visible`
+   4. Paste the license on the text box and click `Save`
 2. On the top bar, click `Create Data Folder` and follow the instructions
 3. Click `Start Server` to launch your own FiveM server
 
