@@ -16,7 +16,7 @@ LambentLight is an application for managing dedicated FiveM servers. It helps yo
 # Installation
 
 1. Download the compressed file from [GitHub Releases][releases-url] or [5mods][5mods-url]
-2. Extract the files inside of a compressed file and run `LambentLight.exe`
+2. Extract the files inside of the 7zip and run `LambentLight.exe`
 
 # Usage
 
