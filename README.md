@@ -4,7 +4,7 @@ LambentLight is an application for managing dedicated FiveM servers. It helps yo
 
 * Keeping your server safe by using the latest available build, no more manual updating of builds
 * Integrated resource installer, so you no longer need to browse the FiveM forums for installing every dependency manually
-* Ability to change your server settings from inside of the application, so you no longer need to find and open the file manually
+* Ability to change your server settings from inside of the application
 * The server is restarted automatically if it crashes, no need to worry for a 24/7 operation
 * Automatic scheduled restarts, so you can update builds and resources at specific times of the day
 * Is 100% Free and Open Source under the MIT License
