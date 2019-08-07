@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using NLog;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 
@@ -33,23 +34,23 @@ namespace LambentLight.Managers
         /// <summary>
         /// The readable version. This can be either semantic versioning or the git commit.
         /// </summary>
-        [JsonProperty("version")]
+        [JsonProperty("version", Required = Required.Always)]
         public string ReadableVersion { get; set; }
         /// <summary>
         /// The place where we can download the resource with the specific version.
         /// </summary>
-        [JsonProperty("download")]
+        [JsonProperty("download", Required = Required.Always)]
         public string Download { get; set; }
         /// <summary>
         /// The Path of the resource inside of the compressed files.
         /// This take precedence over the Resource Path.
         /// </summary>
-        [JsonProperty("path")]
+        [JsonProperty("path", Required = Required.Default)]
         public string Path { get; set; }
         /// <summary>
         /// The compression used for the download.
         /// </summary>
-        [JsonProperty("compression")]
+        [JsonProperty("compression", Required = Required.Default)]
         public CompressionType Compression { get; set; }
         /// <summary>
         /// The extension of the file based on the compression type.
@@ -87,47 +88,48 @@ namespace LambentLight.Managers
         /// <summary>
         /// The readable name of the resource.
         /// </summary>
-        [JsonProperty("name")]
+        [JsonProperty("name", Required = Required.Always)]
         public string Name { get; set; }
         /// <summary>
         /// The creator of the resource.
         /// </summary>
-        [JsonProperty("author")]
+        [JsonProperty("author", Required = Required.Always)]
         public string Author { get; set; }
         /// <summary>
         /// The name of the folder of the resource.
         /// </summary>
-        [JsonProperty("folder")]
+        [JsonProperty("folder", Required = Required.Always)]
         public string Folder { get; set; }
         /// <summary>
         /// The Path of the resource inside of the compressed files.
         /// </summary>
-        [JsonProperty("path")]
+        [JsonProperty("path", Required = Required.Default)]
         public string Path { get; set; }
         /// <summary>
         /// The type of resource. Only used for the UI.
         /// </summary>
-        [JsonProperty("type")]
+        [DefaultValue(ResourceType.Script)]
+        [JsonProperty("type", DefaultValueHandling = DefaultValueHandling.Populate)]
         public ResourceType Type { get; set; }
         /// <summary>
         /// The URL of the license page.
         /// </summary>
-        [JsonProperty("license")]
+        [JsonProperty("license", Required = Required.Default)]
         public string License { get; set; }
         /// <summary>
         /// The list of requirements of the resource.
         /// </summary>
-        [JsonProperty("requires")]
+        [JsonProperty("requires", Required = Required.Default)]
         public List<string> Requires { get; set; }
         /// <summary>
         /// The resource configuration instructions by the author.
         /// </summary>
-        [JsonProperty("instructions")]
+        [JsonProperty("instructions", Required = Required.Default)]
         public string ConfigInstructions { get; set; }
         /// <summary>
         /// A list with the versions of the resource.
         /// </summary>
-        [JsonProperty("versions")]
+        [JsonProperty("versions", Required = Required.Default)]
         public List<Version> Versions { get; set; }
 
         /// <summary>
