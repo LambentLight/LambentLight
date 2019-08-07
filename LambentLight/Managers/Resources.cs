@@ -188,7 +188,7 @@ namespace LambentLight.Managers
                     if (Found != null && !TempList.ContainsKey(Found))
                     {
                         // Collect their requirements
-                        Dictionary<Resource, Version> NewReqs = Collect(Found, Found.Versions[0]);
+                        Dictionary<Resource, Version> NewReqs = GetRequirements(Found, Found.Versions[0]);
 
                         // For every new requirement found
                         foreach (KeyValuePair<Resource, Version> NewReq in NewReqs)
