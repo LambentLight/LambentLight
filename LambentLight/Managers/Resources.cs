@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using NLog;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -50,7 +50,8 @@ namespace LambentLight.Managers
         /// <summary>
         /// The compression used for the download.
         /// </summary>
-        [JsonProperty("compression", Required = Required.Default)]
+        [DefaultValue(CompressionType.Zip)]
+        [JsonProperty("compression", DefaultValueHandling = DefaultValueHandling.Populate)]
         public CompressionType Compression { get; set; }
         /// <summary>
         /// The extension of the file based on the compression type.
