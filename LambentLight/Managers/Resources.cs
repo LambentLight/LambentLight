@@ -164,6 +164,49 @@ namespace LambentLight.Managers
         public static List<Resource> Resources = new List<Resource>();
 
         /// <summary>
+        /// Collects all resources required for an install.
+        /// </summary>
+        /// <param name="resource"></param>
+        /// <returns></returns>
+        public static Dictionary<Resource, Version> GetRequirements(Resource resource, Version version)
+        {
+            // Create a dictionary of resources and versions
+            Dictionary<Resource, Version> TempList = new Dictionary<Resource, Version>();
+            // Add our base resource and version
+            TempList.Add(resource, version);
+
+            // If we have dependencies
+            if (resource.Requires != null)
+            {
+                // For every requirement
+                foreach (string Requirement in resource.Requires)
+                {
+                    // Try to find a resource with that name
+                    Resource Found = Resources.Where(res => res.Name == Requirement).FirstOrDefault();
+
+                    // If the resource exists and is not on the list
+                    if (Found != null && !TempList.ContainsKey(Found))
+                    {
+                        // Collect their requirements
+                        Dictionary<Resource, Version> NewReqs = Collect(Found, Found.Versions[0]);
+
+                        // For every new requirement found
+                        foreach (KeyValuePair<Resource, Version> NewReq in NewReqs)
+                        {
+                            // If is not on the list, add it
+                            if (!TempList.ContainsKey(NewReq.Key))
+                            {
+                                TempList.Add(NewReq.Key, NewReq.Value);
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Finally, return the list
+            return TempList;
+        }
+        /// <summary>
         /// Refreshes the list of resources.
         /// </summary>
         public static void Refresh()

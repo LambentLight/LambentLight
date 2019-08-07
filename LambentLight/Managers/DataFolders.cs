@@ -149,42 +149,6 @@ namespace LambentLight.Managers
                 Directory.CreateDirectory(Properties.Settings.Default.FolderTemp);
             }
 
-            // If the resource has requirements and it was requested to install them
-            if (resource.Requires != null && installRequirements)
-            {
-                // Iterate over the requirements
-                foreach (string Requirement in resource.Requires)
-                {
-                    // Try to find the correct resource
-                    Resource Found = ResourceManager.Resources.Where(res => res.Name == Requirement).FirstOrDefault();
-
-                    // If there is a resource found
-                    if (Found != null)
-                    {
-                        // If the resource is already installed
-                        if (resource.IsInstalledIn(this))
-                        {
-                            // Notify that it is
-                            Logger.Info("The resource {0} required by {1} is already installed, skipping...", Found.Name, resource.Name);
-                        }
-                        // Otherwise
-                        else
-                        {
-                            // Notify the user
-                            Logger.Info("{0} requires {1}, please wait...", resource.Name, Found.Name);
-                            // Install the resource
-                            await InstallResource(Found, Found.Versions[0], false);
-                        }
-                    }
-                    // Otherwise
-                    else
-                    {
-                        // Notify the user with an error
-                        Logger.Error("The resource {0} requires {1} but it was not found", resource.Name, Requirement);
-                    }
-                }
-            }
-
             // Format a path for the output file
             string ExtractionPath = Path.Combine(Properties.Settings.Default.FolderTemp, $"{resource.Folder}-{version.ReadableVersion}");
             string TempFilePath = ExtractionPath + version.Extension;
