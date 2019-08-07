@@ -1,4 +1,4 @@
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using NLog;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -171,7 +171,7 @@ namespace LambentLight.Managers
             // Create a temporary list of resources
             List<Resource> Output = Downloader.DownloadJSON<List<Resource>>(Properties.Settings.Default.Resources, new BuildConverter());
             // Store the resources in alphabetical order
-            Resources = Output.OrderBy(x => x.Name).ToList();
+            Resources = (Output ?? new List<Resource>()).OrderBy(x => x.Name).ToList();
             // Log what we have just done
             Logger.Debug("The list of resources has been updated");
         }
