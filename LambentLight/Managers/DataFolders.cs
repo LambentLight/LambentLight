@@ -261,8 +261,17 @@ namespace LambentLight.Managers
                 }
             }
 
-            // Move the folder with the resource
-            Directory.Move(ChoosenFolder, DestinationFolder);
+            // Try to move the folder with the resource
+            try
+            {
+                Directory.Move(ChoosenFolder, DestinationFolder);
+            }
+            // If the directory was not found, notify the user and return
+            catch (DirectoryNotFoundException)
+            {
+                Logger.Error("Unable to find '{0}' inside of the file", CompressedPath);
+            }
+
             // And delete the temporary folder if it exists
             if (Directory.Exists(ExtractionPath))
             {
