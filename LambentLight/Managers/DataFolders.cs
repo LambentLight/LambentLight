@@ -261,10 +261,16 @@ namespace LambentLight.Managers
                 }
             }
 
-            // Move the folder and notify the user
+            // Move the folder with the resource
             Directory.Move(ChoosenFolder, DestinationFolder);
+            // And delete the temporary folder if it exists
+            if (Directory.Exists(ExtractionPath))
+            {
+                Directory.Delete(ExtractionPath, true);
+            }
+
+            // Finally, notify that we have finished
             Logger.Info("Done! {0} {1} has been installed", resource.Name, version.ReadableVersion);
-            return;
         }
 
         /// <summary>
