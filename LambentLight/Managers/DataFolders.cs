@@ -186,7 +186,7 @@ namespace LambentLight.Managers
             }
 
             // Format a path for the output file
-            string ExtractionPath = Path.Combine(Properties.Settings.Default.FolderTemp, $"{resource.Name}-{version.ReadableVersion}");
+            string ExtractionPath = Path.Combine(Properties.Settings.Default.FolderTemp, $"{resource.Folder}-{version.ReadableVersion}");
             string TempFilePath = ExtractionPath + version.Extension;
 
             // If the temp file exists
