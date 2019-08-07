@@ -4,7 +4,9 @@ using LambentLight.Targets;
 using NLog;
 using NLog.Config;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Net;
 using System.Windows.Forms;
 
@@ -223,9 +225,24 @@ namespace LambentLight
                 Logger.Error("You need to select a Server Data folder!");
                 return;
             }
+            
+            // Get all of the requirements by the selected resource
+            Dictionary<Resource, Managers.Version> Collected = ResourceManager.GetRequirements((Resource)ResourcesListBox.SelectedItem, (Managers.Version)VersionsListBox.SelectedItem);
+            // Create the readable list of resources
+            string ReadableResources = string.Join(" ", Collected.Select(x => $"{x.Key.Name}-{x.Value.ReadableVersion}"));
 
-            // Install the selected resource and version
-            await ((DataFolder)DataBox.SelectedItem).InstallResource((Resource)ResourcesListBox.SelectedItem, (Managers.Version)VersionsListBox.SelectedItem);
+            // Notify the user that we are going to install the keys
+            Logger.Info("Installing requirements {0} for {1}", ReadableResources, ResourcesListBox.SelectedItem);
+
+            // Iterate over the list of required resources
+            foreach (KeyValuePair<Resource, Managers.Version> Requirement in Collected)
+            {
+                // And install it
+                await ((DataFolder)DataBox.SelectedItem).InstallResource(Requirement.Key, Requirement.Value);
+            }
+
+            // Notify that we have installed all of the resources
+            Logger.Info("Successfully installed {0}", ReadableResources);
         }
 
         #endregion
