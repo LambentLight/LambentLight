@@ -31,7 +31,7 @@ namespace LambentLight
             Application.EnableVisualStyles();
             // Use the classic rendering for compatibility
             Application.SetCompatibleTextRenderingDefault(false);
-            MessageBox.Show(Locations.Absolute);
+
             // If the program is running on macOS, notify the user and exit
             if (Checks.IsMacOS)
             {
