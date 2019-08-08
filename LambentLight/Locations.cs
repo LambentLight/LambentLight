@@ -1,3 +1,4 @@
+using LambentLight.Properties;
 using System.IO;
 using System.Reflection;
 
@@ -19,7 +20,7 @@ namespace LambentLight
         /// <summary>
         /// Absolute path of the builds folder.
         /// </summary>
-        public static readonly string BuildsBase = Path.Combine(Absolute, Properties.Settings.Default.FolderBuilds);
+        public static readonly string BuildsBase = Path.Combine(Absolute, Settings.Default.FolderBuilds);
         /// <summary>
         /// Absolute path of the builds folder for the current operating system (Windows or Linux).
         /// </summary>
@@ -27,11 +28,11 @@ namespace LambentLight
         /// <summary>
         /// Absolute path of the server data folder.
         /// </summary>
-        public static readonly string Data = Path.Combine(Absolute, Properties.Settings.Default.FolderData);
+        public static readonly string Data = Path.Combine(Absolute, Settings.Default.FolderData);
         /// <summary>
         /// Absolute path of the temporary files folder.
         /// </summary>
-        public static readonly string Temp = Path.Combine(Absolute, Properties.Settings.Default.FolderTemp);
+        public static readonly string Temp = Path.Combine(Absolute, Settings.Default.FolderTemp);
 
         /// <summary>
         /// Ensures that the builds folder is present.

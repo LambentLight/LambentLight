@@ -1,4 +1,5 @@
-﻿using NLog;
+﻿using LambentLight.Properties;
+using NLog;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -65,7 +66,7 @@ namespace LambentLight.Managers
             // Create a new server object and set the correct properties
             NewServer.Process = new Process();
             NewServer.Process.StartInfo.FileName = Path.Combine(AbsPath, "FXServer.exe");
-            NewServer.Process.StartInfo.Arguments = string.Format("+set citizen_dir \"{0}\" +set sv_licenseKey {1} +exec server.cfg", Path.Combine(AbsPath, "citizen"), Properties.Settings.Default.License);
+            NewServer.Process.StartInfo.Arguments = string.Format("+set citizen_dir \"{0}\" +set sv_licenseKey {1} +exec server.cfg", Path.Combine(AbsPath, "citizen"), Settings.Default.License);
             NewServer.Process.StartInfo.WorkingDirectory = data.Absolute;
             NewServer.Process.StartInfo.UseShellExecute = false;
             NewServer.Process.StartInfo.RedirectStandardError = true;
@@ -99,7 +100,7 @@ namespace LambentLight.Managers
             }
 
             // If there is no license set up, notify it and return
-            if (string.IsNullOrWhiteSpace(Properties.Settings.Default.License))
+            if (string.IsNullOrWhiteSpace(Settings.Default.License))
             {
                 Logger.Error("There is no valid FiveM license set up!");
                 return false;
@@ -114,7 +115,7 @@ namespace LambentLight.Managers
             // Format the path for the cache folder
             string Cache = Path.Combine(data.Location, "cache");
             // If there is a cache folder and the user wants them gone, remove it
-            if (Properties.Settings.Default.ClearCache && Directory.Exists(Cache))
+            if (Settings.Default.ClearCache && Directory.Exists(Cache))
             {
                 Directory.Delete(Cache, true);
                 Logger.Info("The cache folder was present on '{0}'", data.Name);
@@ -128,14 +129,14 @@ namespace LambentLight.Managers
             AutoRestart.Tick += RestartOnBadExitEvent;
             AutoRestart.Enabled = true;
             // If the user wants automated restarts every few hours/minutes/seconds
-            if (Properties.Settings.Default.RestartEvery)
+            if (Settings.Default.RestartEvery)
             {
-                RestartEvery.Interval = (int)Properties.Settings.Default.RestartEveryTime.TotalMilliseconds;
+                RestartEvery.Interval = (int)Settings.Default.RestartEveryTime.TotalMilliseconds;
                 RestartEvery.Tick += RestartEveryEvent;
                 RestartEvery.Enabled = true;
             }
             // If the user wants automated restarts at specific times of the day
-            if (Properties.Settings.Default.RestartAt)
+            if (Settings.Default.RestartAt)
             {
                 RestartAt.Interval = 1000;
                 RestartAt.Tick += RestartAtEvent;
@@ -211,7 +212,7 @@ namespace LambentLight.Managers
             if (Server != null && !Server.Process.IsRunning() && Server.Process.ExitCode != 0)
             {
                 // If the user wants to restart
-                if (Properties.Settings.Default.AutoRestart)
+                if (Settings.Default.AutoRestart)
                 {
                     // Log a message
                     Logger.Warn("Server exited with a code {0}, restarting...", Server.Process.ExitCode);
@@ -249,9 +250,9 @@ namespace LambentLight.Managers
         private static void RestartAtEvent(object sender, EventArgs args)
         {
             // If the hour, minute and second matches, restart the server
-            if (DateTime.Now.Hour == Properties.Settings.Default.RestartAtTime.Hours &&
-                DateTime.Now.Minute == Properties.Settings.Default.RestartAtTime.Minutes &&
-                DateTime.Now.Second == Properties.Settings.Default.RestartAtTime.Seconds)
+            if (DateTime.Now.Hour == Settings.Default.RestartAtTime.Hours &&
+                DateTime.Now.Minute == Settings.Default.RestartAtTime.Minutes &&
+                DateTime.Now.Second == Settings.Default.RestartAtTime.Seconds)
             {
                 Restart();
             }

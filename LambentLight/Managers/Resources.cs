@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using LambentLight.Properties;
+using Newtonsoft.Json;
 using NLog;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -212,7 +213,7 @@ namespace LambentLight.Managers
         public static void Refresh()
         {
             // Create a temporary list of resources
-            List<Resource> Output = Downloader.DownloadJSON<List<Resource>>(Properties.Settings.Default.Resources, new BuildConverter());
+            List<Resource> Output = Downloader.DownloadJSON<List<Resource>>(Settings.Default.Resources, new BuildConverter());
             // Store the resources in alphabetical order
             Resources = (Output ?? new List<Resource>()).OrderBy(x => x.Name).ToList();
             // Log what we have just done

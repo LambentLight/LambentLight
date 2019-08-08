@@ -1,3 +1,4 @@
+using LambentLight.Properties;
 using NLog;
 using System;
 using System.Collections.Generic;
@@ -317,7 +318,7 @@ namespace LambentLight.Managers
             }
 
             // If the user wants to download the scripts
-            if (Properties.Settings.Default.DownloadScripts)
+            if (Settings.Default.DownloadScripts)
             {
                 // Notify the user that we are downloading the repository
                 Logger.Info("Downloading Default Scripts for the Data Folder '{0}', please wait...", name);
@@ -354,7 +355,7 @@ namespace LambentLight.Managers
             Logger.Info("The Data Folder '{0}' has been created", name);
 
             // If the user wants to generate the configuration
-            if (Properties.Settings.Default.CreateConfig)
+            if (Settings.Default.CreateConfig)
             {
                 // Generate the new configuration for the folder
                 NewFolder.GenerateConfig();

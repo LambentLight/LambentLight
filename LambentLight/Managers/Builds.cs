@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using LambentLight.Properties;
+using Newtonsoft.Json;
 using NLog;
 using System;
 using System.Collections.Generic;
@@ -85,7 +86,7 @@ namespace LambentLight.Managers
         public static void Refresh()
         {
             // Create a temporary list of builds
-            List<Build> NewBuilds = Downloader.DownloadJSON<List<Build>>(Properties.Settings.Default.BuildsWindows, new BuildConverter()) ?? new List<Build>();
+            List<Build> NewBuilds = Downloader.DownloadJSON<List<Build>>(Settings.Default.BuildsWindows, new BuildConverter()) ?? new List<Build>();
             // Ensure that the builds folder is present
             Locations.EnsureBuildsFolder();
 

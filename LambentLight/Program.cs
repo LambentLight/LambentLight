@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LambentLight.Properties;
+using System;
 using System.Net;
 using System.Windows.Forms;
 
@@ -18,14 +19,14 @@ namespace LambentLight
         private static int Main()
         {
             // If a settings upgrade is required
-            if (Properties.Settings.Default.UpgradeRequired)
+            if (Settings.Default.UpgradeRequired)
             {
                 // Upgrade the settings
-                Properties.Settings.Default.Upgrade();
+                Settings.Default.Upgrade();
                 // Store a bool so we know that we have upgraded
-                Properties.Settings.Default.UpgradeRequired = false;
+                Settings.Default.UpgradeRequired = false;
                 // And save the new settings
-                Properties.Settings.Default.Save();
+                Settings.Default.Save();
             }
             // Enable the visual styles for the application
             Application.EnableVisualStyles();

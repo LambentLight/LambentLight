@@ -1,5 +1,6 @@
 ﻿using LambentLight.Extensions;
 using LambentLight.Managers;
+using LambentLight.Properties;
 using LambentLight.Targets;
 using NLog;
 using NLog.Config;
@@ -306,20 +307,20 @@ namespace LambentLight
             VisibleCheckBox.Checked = false;
 
             // And load all of the settings
-            DownloadScriptsCheckBox.Checked = Properties.Settings.Default.DownloadScripts;
-            CreateConfigCheckBox.Checked = Properties.Settings.Default.CreateConfig;
+            DownloadScriptsCheckBox.Checked = Settings.Default.DownloadScripts;
+            CreateConfigCheckBox.Checked = Settings.Default.CreateConfig;
 
-            RestartEveryCheckBox.Checked = Properties.Settings.Default.RestartEvery;
-            RestartAtCheckBox.Checked = Properties.Settings.Default.RestartAt;
-            RestartEveryTextBox.Text = Properties.Settings.Default.RestartEveryTime.ToString();
-            RestartAtTextBox.Text = Properties.Settings.Default.RestartAtTime.ToString();
+            RestartEveryCheckBox.Checked = Settings.Default.RestartEvery;
+            RestartAtCheckBox.Checked = Settings.Default.RestartAt;
+            RestartEveryTextBox.Text = Settings.Default.RestartEveryTime.ToString();
+            RestartAtTextBox.Text = Settings.Default.RestartAtTime.ToString();
 
-            BuildsWinTextBox.Text = Properties.Settings.Default.BuildsWindows;
-            BuildsLinTextBox.Text = Properties.Settings.Default.BuildsLinux;
-            ResourcesTextBox.Text = Properties.Settings.Default.Resources;
+            BuildsWinTextBox.Text = Settings.Default.BuildsWindows;
+            BuildsLinTextBox.Text = Settings.Default.BuildsLinux;
+            ResourcesTextBox.Text = Settings.Default.Resources;
 
-            AutoRestartCheckBox.Checked = Properties.Settings.Default.AutoRestart;
-            ClearCacheCheckBox.Checked = Properties.Settings.Default.ClearCache;
+            AutoRestartCheckBox.Checked = Settings.Default.AutoRestart;
+            ClearCacheCheckBox.Checked = Settings.Default.ClearCache;
         }
 
         private void VisibleTextBox_CheckedChanged(object sender, EventArgs e)
@@ -331,7 +332,7 @@ namespace LambentLight
             if (VisibleCheckBox.Checked)
             {
                 // Fill the text box with the license
-                LicenseTextBox.Text = Properties.Settings.Default.License;
+                LicenseTextBox.Text = Settings.Default.License;
             }
             // Otherwise
             else
@@ -350,59 +351,59 @@ namespace LambentLight
         private void SaveLicenseButton_Click(object sender, EventArgs e)
         {
             // Save the license on the text box
-            Properties.Settings.Default.License = LicenseTextBox.Text;
-            Properties.Settings.Default.Save();
+            Settings.Default.License = LicenseTextBox.Text;
+            Settings.Default.Save();
         }
 
         private void SaveAPIsButton_Click(object sender, EventArgs e)
         {
             // Save the URLs on the configuration
-            Properties.Settings.Default.Resources = ResourcesTextBox.Text;
-            Properties.Settings.Default.BuildsWindows = BuildsWinTextBox.Text;
-            Properties.Settings.Default.BuildsLinux = BuildsLinTextBox.Text;
-            Properties.Settings.Default.Save();
+            Settings.Default.Resources = ResourcesTextBox.Text;
+            Settings.Default.BuildsWindows = BuildsWinTextBox.Text;
+            Settings.Default.BuildsLinux = BuildsLinTextBox.Text;
+            Settings.Default.Save();
         }
 
         private void DownloadScriptsCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             // Save the curent status on the settings
-            Properties.Settings.Default.DownloadScripts = DownloadScriptsCheckBox.Checked;
-            Properties.Settings.Default.Save();
+            Settings.Default.DownloadScripts = DownloadScriptsCheckBox.Checked;
+            Settings.Default.Save();
         }
 
         private void CreateConfigCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             // Save the curent status on the settings
-            Properties.Settings.Default.CreateConfig = CreateConfigCheckBox.Checked;
-            Properties.Settings.Default.Save();
+            Settings.Default.CreateConfig = CreateConfigCheckBox.Checked;
+            Settings.Default.Save();
         }
 
         private void AutoRestartCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             // Save the curent status on the settings
-            Properties.Settings.Default.AutoRestart = AutoRestartCheckBox.Checked;
-            Properties.Settings.Default.Save();
+            Settings.Default.AutoRestart = AutoRestartCheckBox.Checked;
+            Settings.Default.Save();
         }
 
         private void ClearCacheCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             // Save the curent status on the settings
-            Properties.Settings.Default.ClearCache = ClearCacheCheckBox.Checked;
-            Properties.Settings.Default.Save();
+            Settings.Default.ClearCache = ClearCacheCheckBox.Checked;
+            Settings.Default.Save();
         }
 
         private void RestartEveryCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             // Save the curent status on the settings
-            Properties.Settings.Default.RestartEvery = RestartEveryCheckBox.Checked;
-            Properties.Settings.Default.Save();
+            Settings.Default.RestartEvery = RestartEveryCheckBox.Checked;
+            Settings.Default.Save();
         }
 
         private void RestartAtCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             // Save the curent status on the settings
-            Properties.Settings.Default.RestartAt = RestartAtCheckBox.Checked;
-            Properties.Settings.Default.Save();
+            Settings.Default.RestartAt = RestartAtCheckBox.Checked;
+            Settings.Default.Save();
         }
 
         private void RestartEveryButton_Click(object sender, EventArgs e)
@@ -410,7 +411,7 @@ namespace LambentLight
             // Try to parse the text box contents
             try
             {
-                Properties.Settings.Default.RestartEveryTime = TimeSpan.Parse(RestartEveryTextBox.Text);
+                Settings.Default.RestartEveryTime = TimeSpan.Parse(RestartEveryTextBox.Text);
             }
             // If we have failed
             catch (FormatException)
@@ -419,7 +420,7 @@ namespace LambentLight
                 return;
             }
             // If we succeeded, save it
-            Properties.Settings.Default.Save();
+            Settings.Default.Save();
         }
 
         private void RestartAtButton_Click(object sender, EventArgs e)
@@ -427,7 +428,7 @@ namespace LambentLight
             // Try to parse the text box contents
             try
             {
-                Properties.Settings.Default.RestartAtTime = TimeSpan.Parse(RestartAtTextBox.Text);
+                Settings.Default.RestartAtTime = TimeSpan.Parse(RestartAtTextBox.Text);
             }
             // If we have failed
             catch (FormatException)
@@ -436,7 +437,7 @@ namespace LambentLight
                 return;
             }
             // If we succeeded, save it
-            Properties.Settings.Default.Save();
+            Settings.Default.Save();
         }
 
         private void ResetSettingsButton_Click(object sender, EventArgs e)
@@ -448,7 +449,7 @@ namespace LambentLight
             if (Result == DialogResult.Yes)
             {
                 // Reset the settings
-                Properties.Settings.Default.Reset();
+                Settings.Default.Reset();
                 // And reload them
                 ReloadSettings();
             }
