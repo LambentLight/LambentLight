@@ -27,7 +27,7 @@ namespace LambentLight.Managers
         /// <summary>
         /// The location of the server data folder
         /// </summary>
-        public string Location => Path.Combine(Properties.Settings.Default.FolderData, Name);
+        public string Location => Path.Combine(Locations.Data, Name);
         /// <summary>
         /// If the data folder exists.
         /// </summary>
@@ -143,14 +143,10 @@ namespace LambentLight.Managers
             Logger.Info("Installing resource {0} {1}", resource.Name, version.ReadableVersion);
 
             // If the temporary folder does not exists
-            if (!Directory.Exists(Properties.Settings.Default.FolderTemp))
-            {
-                // Create it
-                Directory.CreateDirectory(Properties.Settings.Default.FolderTemp);
-            }
+            Locations.EnsureTempFolder();
 
             // Format a path for the output file
-            string ExtractionPath = Path.Combine(Properties.Settings.Default.FolderTemp, $"{resource.Folder}-{version.ReadableVersion}");
+            string ExtractionPath = Path.Combine(Locations.Temp, $"{resource.Folder}-{version.ReadableVersion}");
             string TempFilePath = ExtractionPath + version.Extension;
 
             // If the temp file exists
@@ -281,14 +277,10 @@ namespace LambentLight.Managers
             Folders = new List<DataFolder>();
 
             // If the data folder does not exists
-            if (!Directory.Exists(Properties.Settings.Default.FolderData))
-            {
-                // Create it
-                Directory.CreateDirectory(Properties.Settings.Default.FolderData);
-            }
+            Locations.EnsureDataFolder();
 
             // Iterate over the folders on our Data folder
-            foreach (string Dir in Directory.GetDirectories(Properties.Settings.Default.FolderData))
+            foreach (string Dir in Directory.GetDirectories(Locations.Data))
             {
                 // And add our data folder
                 Folders.Add(new DataFolder(Path.GetFileName(Dir)));
@@ -305,10 +297,7 @@ namespace LambentLight.Managers
         public static async Task<DataFolder> Create(string name)
         {
             // Create the Data folder if it does not exists
-            if (Directory.Exists(Properties.Settings.Default.FolderData))
-            {
-                Directory.CreateDirectory(Properties.Settings.Default.FolderData);
-            }
+            Locations.EnsureDataFolder();
 
             // If the text is whitespaces or null, notify the user and return
             if (string.IsNullOrWhiteSpace(name))
@@ -318,7 +307,7 @@ namespace LambentLight.Managers
             }
 
             // Generate the destination path
-            string NewPath = Path.Combine(Properties.Settings.Default.FolderData, name);
+            string NewPath = Path.Combine(Locations.Data, name);
 
             // If the folder specified already exists, warn the user and return
             if (Directory.Exists(NewPath))
@@ -334,14 +323,10 @@ namespace LambentLight.Managers
                 Logger.Info("Downloading Default Scripts for the Data Folder '{0}', please wait...", name);
 
                 // Create the path for the temporary zip file
-                string ZipPath = Path.Combine(Properties.Settings.Default.FolderTemp, "cfx-server-data.zip");
+                string ZipPath = Path.Combine(Locations.Temp, "cfx-server-data.zip");
 
                 // If the temporary folder does not exists
-                if (!Directory.Exists(Properties.Settings.Default.FolderTemp))
-                {
-                    // Create it
-                    Directory.CreateDirectory(Properties.Settings.Default.FolderTemp);
-                }
+                Locations.EnsureTempFolder();
 
                 // If we didn't managed to download the file, just return
                 if (!await Downloader.DownloadFile("https://github.com/citizenfx/cfx-server-data/archive/master.zip", ZipPath))
@@ -350,9 +335,9 @@ namespace LambentLight.Managers
                 }
 
                 // After the zip file has been downloaded, extract it
-                await Compression.ExtractZip(ZipPath, Properties.Settings.Default.FolderTemp);
+                await Compression.ExtractZip(ZipPath, Locations.Temp);
                 // Then, rename it to the name specified by the user
-                Directory.Move(Path.Combine(Properties.Settings.Default.FolderTemp, "cfx-server-data-master"), NewPath);
+                Directory.Move(Path.Combine(Locations.Temp, "cfx-server-data-master"), NewPath);
                 // Delete the temporary file
                 File.Delete(ZipPath);
             }

@@ -23,7 +23,7 @@ namespace LambentLight.Managers
         /// <summary>
         /// The local folder where the build can be located.
         /// </summary>
-        public string Folder => Path.GetFullPath(Path.Combine(Properties.Settings.Default.FolderBuilds, ID));
+        public string Folder => Path.Combine(Locations.Builds, ID);
 
         /// <summary>
         /// Creates a Build to use with LambentLight
@@ -86,21 +86,20 @@ namespace LambentLight.Managers
         {
             // Create a temporary list of builds
             List<Build> NewBuilds = Downloader.DownloadJSON<List<Build>>(Properties.Settings.Default.Builds, new BuildConverter()) ?? new List<Build>();
-            // If the builds folder exists
-            if (Directory.Exists(Properties.Settings.Default.FolderBuilds))
-            {
-                // Iterate over the existing builds
-                foreach (string Found in Directory.EnumerateDirectories(Properties.Settings.Default.FolderBuilds))
-                {
-                    // Create a new build object
-                    Build NewBuild = new Build(Path.GetFileName(Found));
+            // Ensure that the builds folder is present
+            Locations.EnsureBuildsFolder();
 
-                    // If the build is not there
-                    if (!NewBuilds.Contains(NewBuild))
-                    {
-                        // Add the new build
-                        NewBuilds.Add(NewBuild);
-                    }
+            // Iterate over the existing builds
+            foreach (string Found in Directory.EnumerateDirectories(Locations.Builds))
+            {
+                // Create a new build object
+                Build NewBuild = new Build(Path.GetFileName(Found));
+
+                // If the build is not there
+                if (!NewBuilds.Contains(NewBuild))
+                {
+                    // Add the new build
+                    NewBuilds.Add(NewBuild);
                 }
             }
 
@@ -120,13 +119,10 @@ namespace LambentLight.Managers
             Logger.Info("Build {0} is not available, downloading...", build.ID);
 
             // If the builds folder does not exists, create it
-            if (!Directory.Exists(Properties.Settings.Default.FolderBuilds))
-            {
-                Directory.CreateDirectory(Properties.Settings.Default.FolderBuilds);
-            }
+            Locations.EnsureBuildsFolder();
 
             // Create the Uri and destination location
-            string Destination = Path.Combine(Properties.Settings.Default.FolderTemp, build.ID + ".zip");
+            string Destination = Path.Combine(Locations.Temp, build.ID + ".zip");
 
             // If we didn't managed to download the file
             if (!await Downloader.DownloadFile($"https://runtime.fivem.net/artifacts/fivem/build_server_windows/master/{build.ID}/server.zip", Destination))
