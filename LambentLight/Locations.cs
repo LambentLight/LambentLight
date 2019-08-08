@@ -41,7 +41,6 @@ namespace LambentLight
             EnsureFolder(BuildsBase);
             EnsureFolder(BuildsForOS);
         }
-
         /// <summary>
         /// Ensures that the server data folder is present.
         /// </summary>
