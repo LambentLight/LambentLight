@@ -81,6 +81,10 @@ namespace LambentLight.Managers
         /// The updated list of builds.
         /// </summary>
         public static List<Build> Builds = new List<Build>();
+        /// <summary>
+        /// The download URL for the current operating system.
+        /// </summary>
+        private static readonly string DownloadURL = Checks.IsWindows ? Settings.Default.BuildsWindows : Settings.Default.BuildsLinux;
 
         /// <summary>
         /// Refreshes the list of builds.
@@ -88,7 +92,7 @@ namespace LambentLight.Managers
         public static void Refresh()
         {
             // Create a temporary list of builds
-            List<Build> NewBuilds = Downloader.DownloadJSON<List<Build>>(Settings.Default.BuildsWindows, new BuildConverter()) ?? new List<Build>();
+            List<Build> NewBuilds = Downloader.DownloadJSON<List<Build>>(DownloadURL, new BuildConverter()) ?? new List<Build>();
             // Ensure that the builds folder is present
             Locations.EnsureBuildsFolder();
 
