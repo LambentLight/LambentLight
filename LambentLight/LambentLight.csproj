@@ -63,6 +63,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Checks.cs" />
     <Compile Include="Compression.cs" />
     <Compile Include="Downloader.cs" />
     <Compile Include="Locations.cs" />
