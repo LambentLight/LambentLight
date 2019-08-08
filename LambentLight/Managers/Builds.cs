@@ -85,6 +85,10 @@ namespace LambentLight.Managers
         /// The download URL for the current operating system.
         /// </summary>
         private static readonly string DownloadURL = Checks.IsWindows ? Settings.Default.BuildsWindows : Settings.Default.BuildsLinux;
+        /// <summary>
+        /// The download URL for a specific operating system.
+        /// </summary>
+        private static readonly string DownloadBuild = Checks.IsWindows ? "https://runtime.fivem.net/artifacts/fivem/build_server_windows/master/{0}/server.zip" : "https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/{0}/fx.tar.xz";
 
         /// <summary>
         /// Refreshes the list of builds.
@@ -129,10 +133,10 @@ namespace LambentLight.Managers
             Locations.EnsureBuildsFolder();
 
             // Create the Uri and destination location
-            string Destination = Path.Combine(Locations.Temp, build.ID + ".zip");
+            string Destination = Path.Combine(Locations.Temp, build.ID + (Checks.IsWindows ? ".zip" : ".tar.xz"));
 
             // If we didn't managed to download the file
-            if (!await Downloader.DownloadFile($"https://runtime.fivem.net/artifacts/fivem/build_server_windows/master/{build.ID}/server.zip", Destination))
+            if (!await Downloader.DownloadFile(string.Format(DownloadBuild, build.ID), Destination))
             {
                 return;
             }
@@ -149,7 +153,7 @@ namespace LambentLight.Managers
             Directory.CreateDirectory(build.Folder);
 
             // Finally, extract the values
-            await Compression.ExtractZip(Destination, build.Folder);
+            await Compression.Extract(Destination, build.Folder);
 
             // Log that we have finished the extraction
             Logger.Info("Build {0} is now available for the server", build.ID);
