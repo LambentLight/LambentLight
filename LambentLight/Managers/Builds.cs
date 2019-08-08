@@ -23,7 +23,7 @@ namespace LambentLight.Managers
         /// <summary>
         /// The local folder where the build can be located.
         /// </summary>
-        public string Folder => Path.Combine(Locations.Builds, ID);
+        public string Folder => Path.Combine(Locations.BuildsForOS, ID);
 
         /// <summary>
         /// Creates a Build to use with LambentLight
@@ -90,7 +90,7 @@ namespace LambentLight.Managers
             Locations.EnsureBuildsFolder();
 
             // Iterate over the existing builds
-            foreach (string Found in Directory.EnumerateDirectories(Locations.Builds))
+            foreach (string Found in Directory.EnumerateDirectories(Locations.BuildsForOS))
             {
                 // Create a new build object
                 Build NewBuild = new Build(Path.GetFileName(Found));
