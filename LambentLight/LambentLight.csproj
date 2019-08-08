@@ -65,6 +65,7 @@
   <ItemGroup>
     <Compile Include="Compression.cs" />
     <Compile Include="Downloader.cs" />
+    <Compile Include="Locations.cs" />
     <Compile Include="Managers\Builds.cs" />
     <Compile Include="Managers\DataFolders.cs" />
     <Compile Include="Extensions\ListControlExtensions.cs" />
