@@ -48,32 +48,6 @@ namespace LambentLight.Managers
         /// </summary>
         [JsonProperty("path", Required = Required.Default)]
         public string Path { get; set; }
-        /// <summary>
-        /// The compression used for the download.
-        /// </summary>
-        [DefaultValue(CompressionType.Zip)]
-        [JsonProperty("compression", DefaultValueHandling = DefaultValueHandling.Populate)]
-        public CompressionType Compression { get; set; }
-        /// <summary>
-        /// The extension of the file based on the compression type.
-        /// </summary>
-        public string Extension
-        {
-            get
-            {
-                switch (Compression)
-                {
-                    case CompressionType.Zip:
-                        return ".zip";
-                    case CompressionType.SevenZip:
-                        return ".7z";
-                    case CompressionType.Rar:
-                        return ".rar";
-                    default:
-                        return string.Empty;
-                }
-            }
-        }
 
         /// <summary>
         /// Gets the readable version of the resource.

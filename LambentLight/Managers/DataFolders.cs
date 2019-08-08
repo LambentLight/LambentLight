@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -148,7 +147,7 @@ namespace LambentLight.Managers
 
             // Format a path for the output file
             string ExtractionPath = Path.Combine(Locations.Temp, $"{resource.Folder}-{version.ReadableVersion}");
-            string TempFilePath = ExtractionPath + version.Extension;
+            string TempFilePath = ExtractionPath + Path.GetExtension(version.Download);
 
             // If the temp file exists
             if (File.Exists(TempFilePath))
@@ -188,7 +187,7 @@ namespace LambentLight.Managers
             // Try to extract the file
             try
             {
-                await Compression.Extract(TempFilePath, ExtractionPath, version.Compression);
+                await Compression.Extract(TempFilePath, ExtractionPath);
             }
             // If we fail, log the error message and return
             catch (InvalidOperationException e)
@@ -339,7 +338,7 @@ namespace LambentLight.Managers
                 }
 
                 // After the zip file has been downloaded, extract it
-                await Compression.ExtractZip(ZipPath, Locations.Temp);
+                await Compression.Extract(ZipPath, Locations.Temp);
                 // Then, rename it to the name specified by the user
                 Directory.Move(Path.Combine(Locations.Temp, "cfx-server-data-master"), NewPath);
                 // Delete the temporary file
