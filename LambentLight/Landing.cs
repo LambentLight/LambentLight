@@ -314,7 +314,8 @@ namespace LambentLight
             RestartEveryTextBox.Text = Properties.Settings.Default.RestartEveryTime.ToString();
             RestartAtTextBox.Text = Properties.Settings.Default.RestartAtTime.ToString();
 
-            BuildsTextBox.Text = Properties.Settings.Default.BuildsWindows;
+            BuildsWinTextBox.Text = Properties.Settings.Default.BuildsWindows;
+            BuildsLinTextBox.Text = Properties.Settings.Default.BuildsLinux;
             ResourcesTextBox.Text = Properties.Settings.Default.Resources;
 
             AutoRestartCheckBox.Checked = Properties.Settings.Default.AutoRestart;
@@ -357,7 +358,8 @@ namespace LambentLight
         {
             // Save the URLs on the configuration
             Properties.Settings.Default.Resources = ResourcesTextBox.Text;
-            Properties.Settings.Default.BuildsWindows = BuildsTextBox.Text;
+            Properties.Settings.Default.BuildsWindows = BuildsWinTextBox.Text;
+            Properties.Settings.Default.BuildsLinux = BuildsLinTextBox.Text;
             Properties.Settings.Default.Save();
         }
 

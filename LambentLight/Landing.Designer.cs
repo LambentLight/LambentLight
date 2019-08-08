@@ -57,6 +57,7 @@
             this.LoadButton = new System.Windows.Forms.Button();
             this.ConfigTextBox = new System.Windows.Forms.TextBox();
             this.SettingsTab = new System.Windows.Forms.TabPage();
+            this.ResetSettingsButton = new System.Windows.Forms.Button();
             this.AutomatedRestartGroupBox = new System.Windows.Forms.GroupBox();
             this.RestartAtButton = new System.Windows.Forms.Button();
             this.RestartEveryButton = new System.Windows.Forms.Button();
@@ -72,8 +73,8 @@
             this.DownloadScriptsCheckBox = new System.Windows.Forms.CheckBox();
             this.APIsGroupBox = new System.Windows.Forms.GroupBox();
             this.SaveAPIsButton = new System.Windows.Forms.Button();
-            this.BuildsTextBox = new System.Windows.Forms.TextBox();
-            this.BuildsLabel = new System.Windows.Forms.Label();
+            this.BuildsWinTextBox = new System.Windows.Forms.TextBox();
+            this.BuildsWinLabel = new System.Windows.Forms.Label();
             this.ResourcesTextBox = new System.Windows.Forms.TextBox();
             this.ResourcesLabel = new System.Windows.Forms.Label();
             this.LicenseGroupBox = new System.Windows.Forms.GroupBox();
@@ -84,7 +85,8 @@
             this.MainProgressBar = new System.Windows.Forms.ProgressBar();
             this.BottomStrip = new System.Windows.Forms.StatusStrip();
             this.BottomStripLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.ResetSettingsButton = new System.Windows.Forms.Button();
+            this.BuildsLinLabel = new System.Windows.Forms.Label();
+            this.BuildsLinTextBox = new System.Windows.Forms.TextBox();
             this.BuildsGroup.SuspendLayout();
             this.DataGroup.SuspendLayout();
             this.TopStrip.SuspendLayout();
@@ -273,7 +275,7 @@
             this.Tabs.Location = new System.Drawing.Point(12, 85);
             this.Tabs.Name = "Tabs";
             this.Tabs.SelectedIndex = 0;
-            this.Tabs.Size = new System.Drawing.Size(775, 297);
+            this.Tabs.Size = new System.Drawing.Size(775, 305);
             this.Tabs.TabIndex = 3;
             this.Tabs.Selected += new System.Windows.Forms.TabControlEventHandler(this.Tabs_Selected);
             // 
@@ -437,10 +439,22 @@
             this.SettingsTab.Location = new System.Drawing.Point(4, 22);
             this.SettingsTab.Name = "SettingsTab";
             this.SettingsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.SettingsTab.Size = new System.Drawing.Size(767, 271);
+            this.SettingsTab.Size = new System.Drawing.Size(767, 279);
             this.SettingsTab.TabIndex = 1;
             this.SettingsTab.Text = "Application Settings";
             this.SettingsTab.UseVisualStyleBackColor = true;
+            // 
+            // ResetSettingsButton
+            // 
+            this.ResetSettingsButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ResetSettingsButton.Location = new System.Drawing.Point(6, 249);
+            this.ResetSettingsButton.Name = "ResetSettingsButton";
+            this.ResetSettingsButton.Size = new System.Drawing.Size(755, 23);
+            this.ResetSettingsButton.TabIndex = 5;
+            this.ResetSettingsButton.Text = "Reset Settings to their Default Values";
+            this.ResetSettingsButton.UseVisualStyleBackColor = true;
+            this.ResetSettingsButton.Click += new System.EventHandler(this.ResetSettingsButton_Click);
             // 
             // AutomatedRestartGroupBox
             // 
@@ -521,7 +535,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.RuntimeGroupBox.Controls.Add(this.ClearCacheCheckBox);
             this.RuntimeGroupBox.Controls.Add(this.AutoRestartCheckBox);
-            this.RuntimeGroupBox.Location = new System.Drawing.Point(391, 137);
+            this.RuntimeGroupBox.Location = new System.Drawing.Point(391, 177);
             this.RuntimeGroupBox.Name = "RuntimeGroupBox";
             this.RuntimeGroupBox.Size = new System.Drawing.Size(370, 66);
             this.RuntimeGroupBox.TabIndex = 3;
@@ -587,14 +601,16 @@
             // 
             this.APIsGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.APIsGroupBox.Controls.Add(this.BuildsLinTextBox);
+            this.APIsGroupBox.Controls.Add(this.BuildsLinLabel);
             this.APIsGroupBox.Controls.Add(this.SaveAPIsButton);
-            this.APIsGroupBox.Controls.Add(this.BuildsTextBox);
-            this.APIsGroupBox.Controls.Add(this.BuildsLabel);
+            this.APIsGroupBox.Controls.Add(this.BuildsWinTextBox);
+            this.APIsGroupBox.Controls.Add(this.BuildsWinLabel);
             this.APIsGroupBox.Controls.Add(this.ResourcesTextBox);
             this.APIsGroupBox.Controls.Add(this.ResourcesLabel);
             this.APIsGroupBox.Location = new System.Drawing.Point(391, 6);
             this.APIsGroupBox.Name = "APIsGroupBox";
-            this.APIsGroupBox.Size = new System.Drawing.Size(370, 125);
+            this.APIsGroupBox.Size = new System.Drawing.Size(370, 165);
             this.APIsGroupBox.TabIndex = 1;
             this.APIsGroupBox.TabStop = false;
             this.APIsGroupBox.Text = "API URLs";
@@ -602,7 +618,7 @@
             // SaveAPIsButton
             // 
             this.SaveAPIsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.SaveAPIsButton.Location = new System.Drawing.Point(289, 97);
+            this.SaveAPIsButton.Location = new System.Drawing.Point(289, 137);
             this.SaveAPIsButton.Name = "SaveAPIsButton";
             this.SaveAPIsButton.Size = new System.Drawing.Size(75, 23);
             this.SaveAPIsButton.TabIndex = 4;
@@ -610,23 +626,23 @@
             this.SaveAPIsButton.UseVisualStyleBackColor = true;
             this.SaveAPIsButton.Click += new System.EventHandler(this.SaveAPIsButton_Click);
             // 
-            // BuildsTextBox
+            // BuildsWinTextBox
             // 
-            this.BuildsTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.BuildsWinTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.BuildsTextBox.Location = new System.Drawing.Point(6, 71);
-            this.BuildsTextBox.Name = "BuildsTextBox";
-            this.BuildsTextBox.Size = new System.Drawing.Size(358, 20);
-            this.BuildsTextBox.TabIndex = 3;
+            this.BuildsWinTextBox.Location = new System.Drawing.Point(6, 71);
+            this.BuildsWinTextBox.Name = "BuildsWinTextBox";
+            this.BuildsWinTextBox.Size = new System.Drawing.Size(358, 20);
+            this.BuildsWinTextBox.TabIndex = 3;
             // 
-            // BuildsLabel
+            // BuildsWinLabel
             // 
-            this.BuildsLabel.AutoSize = true;
-            this.BuildsLabel.Location = new System.Drawing.Point(6, 55);
-            this.BuildsLabel.Name = "BuildsLabel";
-            this.BuildsLabel.Size = new System.Drawing.Size(35, 13);
-            this.BuildsLabel.TabIndex = 2;
-            this.BuildsLabel.Text = "Builds";
+            this.BuildsWinLabel.AutoSize = true;
+            this.BuildsWinLabel.Location = new System.Drawing.Point(6, 55);
+            this.BuildsWinLabel.Name = "BuildsWinLabel";
+            this.BuildsWinLabel.Size = new System.Drawing.Size(97, 13);
+            this.BuildsWinLabel.TabIndex = 2;
+            this.BuildsWinLabel.Text = "Builds for Windows";
             // 
             // ResourcesTextBox
             // 
@@ -708,7 +724,7 @@
             // 
             this.MainProgressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.MainProgressBar.Location = new System.Drawing.Point(12, 388);
+            this.MainProgressBar.Location = new System.Drawing.Point(12, 396);
             this.MainProgressBar.Name = "MainProgressBar";
             this.MainProgressBar.Size = new System.Drawing.Size(775, 23);
             this.MainProgressBar.TabIndex = 4;
@@ -717,7 +733,7 @@
             // 
             this.BottomStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.BottomStripLabel});
-            this.BottomStrip.Location = new System.Drawing.Point(0, 414);
+            this.BottomStrip.Location = new System.Drawing.Point(0, 422);
             this.BottomStrip.Name = "BottomStrip";
             this.BottomStrip.Size = new System.Drawing.Size(799, 22);
             this.BottomStrip.TabIndex = 5;
@@ -728,24 +744,30 @@
             this.BottomStripLabel.Size = new System.Drawing.Size(151, 17);
             this.BottomStripLabel.Text = "Welcome to LambentLight!";
             // 
-            // ResetSettingsButton
+            // BuildsLinLabel
             // 
-            this.ResetSettingsButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.BuildsLinLabel.AutoSize = true;
+            this.BuildsLinLabel.Location = new System.Drawing.Point(6, 94);
+            this.BuildsLinLabel.Name = "BuildsLinLabel";
+            this.BuildsLinLabel.Size = new System.Drawing.Size(78, 13);
+            this.BuildsLinLabel.TabIndex = 5;
+            this.BuildsLinLabel.Text = "Builds for Linux";
+            // 
+            // BuildsLinTextBox
+            // 
+            this.BuildsLinTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ResetSettingsButton.Location = new System.Drawing.Point(6, 241);
-            this.ResetSettingsButton.Name = "ResetSettingsButton";
-            this.ResetSettingsButton.Size = new System.Drawing.Size(755, 23);
-            this.ResetSettingsButton.TabIndex = 5;
-            this.ResetSettingsButton.Text = "Reset Settings to their Default Values";
-            this.ResetSettingsButton.UseVisualStyleBackColor = true;
-            this.ResetSettingsButton.Click += new System.EventHandler(this.ResetSettingsButton_Click);
+            this.BuildsLinTextBox.Location = new System.Drawing.Point(6, 110);
+            this.BuildsLinTextBox.Name = "BuildsLinTextBox";
+            this.BuildsLinTextBox.Size = new System.Drawing.Size(358, 20);
+            this.BuildsLinTextBox.TabIndex = 6;
             // 
             // Landing
             // 
             this.AcceptButton = this.ConsoleButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(799, 436);
+            this.ClientSize = new System.Drawing.Size(799, 444);
             this.Controls.Add(this.BottomStrip);
             this.Controls.Add(this.MainProgressBar);
             this.Controls.Add(this.Tabs);
@@ -753,7 +775,7 @@
             this.Controls.Add(this.BuildsGroup);
             this.Controls.Add(this.TopStrip);
             this.MainMenuStrip = this.TopStrip;
-            this.MinimumSize = new System.Drawing.Size(815, 475);
+            this.MinimumSize = new System.Drawing.Size(815, 483);
             this.Name = "Landing";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LambentLight: A FiveM Server Manager";
@@ -810,8 +832,8 @@
         private System.Windows.Forms.GroupBox APIsGroupBox;
         private System.Windows.Forms.Label ResourcesLabel;
         private System.Windows.Forms.TextBox ResourcesTextBox;
-        private System.Windows.Forms.Label BuildsLabel;
-        private System.Windows.Forms.TextBox BuildsTextBox;
+        private System.Windows.Forms.Label BuildsWinLabel;
+        private System.Windows.Forms.TextBox BuildsWinTextBox;
         private System.Windows.Forms.Button SaveAPIsButton;
         private System.Windows.Forms.Button BuildRefreshButton;
         private System.Windows.Forms.Button FolderRefreshButton;
@@ -847,6 +869,8 @@
         private System.Windows.Forms.Button ConsoleButton;
         private System.Windows.Forms.TextBox ConsoleTextBox;
         private System.Windows.Forms.Button ResetSettingsButton;
+        private System.Windows.Forms.Label BuildsLinLabel;
+        private System.Windows.Forms.TextBox BuildsLinTextBox;
     }
 }
 
