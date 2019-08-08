@@ -12,7 +12,7 @@ namespace LambentLight.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.1.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.2.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -26,12 +26,12 @@ namespace LambentLight.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("https://raw.githubusercontent.com/LambentLight/Metadata/master/builds.json")]
-        public string Builds {
+        public string BuildsWindows {
             get {
-                return ((string)(this["Builds"]));
+                return ((string)(this["BuildsWindows"]));
             }
             set {
-                this["Builds"] = value;
+                this["BuildsWindows"] = value;
             }
         }
         
@@ -191,6 +191,18 @@ namespace LambentLight.Properties {
         public string FolderTemp {
             get {
                 return ((string)(this["FolderTemp"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://raw.githubusercontent.com/LambentLight/Metadata/master/builds.linux.json")]
+        public string BuildsLinux {
+            get {
+                return ((string)(this["BuildsLinux"]));
+            }
+            set {
+                this["BuildsLinux"] = value;
             }
         }
     }

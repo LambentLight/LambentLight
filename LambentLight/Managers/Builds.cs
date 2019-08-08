@@ -85,7 +85,7 @@ namespace LambentLight.Managers
         public static void Refresh()
         {
             // Create a temporary list of builds
-            List<Build> NewBuilds = Downloader.DownloadJSON<List<Build>>(Properties.Settings.Default.Builds, new BuildConverter()) ?? new List<Build>();
+            List<Build> NewBuilds = Downloader.DownloadJSON<List<Build>>(Properties.Settings.Default.BuildsWindows, new BuildConverter()) ?? new List<Build>();
             // Ensure that the builds folder is present
             Locations.EnsureBuildsFolder();
 

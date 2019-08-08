@@ -2,7 +2,7 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="LambentLight.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="Builds" Type="System.String" Scope="User">
+    <Setting Name="BuildsWindows" Type="System.String" Scope="User">
       <Value Profile="(Default)">https://raw.githubusercontent.com/LambentLight/Metadata/master/builds.json</Value>
     </Setting>
     <Setting Name="License" Type="System.String" Scope="User">
@@ -46,6 +46,9 @@
     </Setting>
     <Setting Name="FolderTemp" Type="System.String" Scope="Application">
       <Value Profile="(Default)">temp</Value>
+    </Setting>
+    <Setting Name="BuildsLinux" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://raw.githubusercontent.com/LambentLight/Metadata/master/builds.linux.json</Value>
     </Setting>
   </Settings>
 </SettingsFile>
