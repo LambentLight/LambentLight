@@ -47,7 +47,7 @@ namespace LambentLight
         private static void EnsureFolder(string folder)
         {
             // If the folder does not exists
-            if (Directory.Exists(folder))
+            if (!Directory.Exists(folder))
             {
                 // Create it
                 Directory.CreateDirectory(folder);
