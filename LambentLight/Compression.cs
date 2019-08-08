@@ -1,4 +1,5 @@
-﻿using SharpCompress.Common;
+﻿using NLog;
+using SharpCompress.Common;
 using SharpCompress.Readers;
 using System.IO;
 using System.Threading.Tasks;
@@ -10,6 +11,10 @@ namespace LambentLight
     /// </summary>
     public static class Compression
     {
+        /// <summary>
+        /// The logger for our current class.
+        /// </summary>
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         /// <summary>
         /// The extraction options for SharpCompress.
         /// </summary>
@@ -32,6 +37,11 @@ namespace LambentLight
                     // If the entry is not a directory
                     if (!Reader.Entry.IsDirectory)
                     {
+                        // If we are on a debug build
+                        #if DEBUG
+                        Logger.Debug("Currently extracting: {0}", Reader.Entry.Key);
+                        #endif
+
                         // Write it to our output directory
                         Reader.WriteEntryToDirectory(output, ExtractOpts);
                     }
