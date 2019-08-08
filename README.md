@@ -15,8 +15,17 @@ LambentLight is an application for managing dedicated FiveM servers. It helps yo
 
 # Installation
 
+## Windows
+
 1. Download the compressed file from [GitHub Releases][releases-url] or [5mods][5mods-url]
 2. Extract the files inside of the 7zip and run `LambentLight.exe`
+
+## Linux
+
+1. Add the [Mono Repositories](https://www.mono-project.com/download/stable/#download-lin-ubuntu) and update your apt cache
+2. Install the Mono Runtime and Visual Basic libraries (`sudo apt install mono-runtime mono-vbnc`)
+3. Download the compressed file from [GitHub Releases][releases-url]
+4. Extract the files inside of the 7zip and run `mono LambentLight.exe`
 
 # Usage
 
