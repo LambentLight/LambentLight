@@ -39,9 +39,11 @@ namespace LambentLight.Managers
         /// <summary>
         /// Gets the string representation of a build.
         /// </summary>
-        /// <returns>The ID of the build.</returns>
         public override string ToString() => ID;
-
+        /// <summary>
+        /// Gets the Hash of the Build Identifier.
+        /// </summary>
+        public override int GetHashCode() => ID.GetHashCode();
         /// <summary>
         /// Checks if the compared object has the same ID as the current one.
         /// </summary>

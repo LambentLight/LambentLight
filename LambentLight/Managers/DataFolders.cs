@@ -248,7 +248,10 @@ namespace LambentLight.Managers
         /// </summary>
         /// <returns>The name of the directory.</returns>
         public override string ToString() => Name;
-
+        /// <summary>
+        /// Gets the Hash of the Build Identifier.
+        /// </summary>
+        public override int GetHashCode() => Name.GetHashCode();
         /// <summary>
         /// Checks if the compared object has the same name as the current one.
         /// </summary>
