@@ -27,6 +27,9 @@ namespace LambentLight
         /// <param name="output">Where the files should be extracted.</param>
         public static async Task Extract(string file, string output)
         {
+            // Wait just to shut the fucking compiler
+            await Task.Delay(0);
+
             // Open the file as a streamer and feed it into the Compression reader
             using (Stream FileStream = File.OpenRead(file))
             using (IReader Reader = ReaderFactory.Open(FileStream))
