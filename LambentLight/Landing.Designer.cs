@@ -84,9 +84,11 @@
             this.SaveLicenseButton = new System.Windows.Forms.Button();
             this.VisibleCheckBox = new System.Windows.Forms.CheckBox();
             this.LicenseTextBox = new System.Windows.Forms.TextBox();
+            this.AboutTab = new System.Windows.Forms.TabPage();
             this.MainProgressBar = new System.Windows.Forms.ProgressBar();
             this.BottomStrip = new System.Windows.Forms.StatusStrip();
             this.BottomStripLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.AboutRichTextBox = new System.Windows.Forms.RichTextBox();
             this.BuildsGroup.SuspendLayout();
             this.DataGroup.SuspendLayout();
             this.TopStrip.SuspendLayout();
@@ -102,6 +104,7 @@
             this.FolderCreationGroupBox.SuspendLayout();
             this.APIsGroupBox.SuspendLayout();
             this.LicenseGroupBox.SuspendLayout();
+            this.AboutTab.SuspendLayout();
             this.BottomStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -272,6 +275,7 @@
             this.Tabs.Controls.Add(this.InstallerTab);
             this.Tabs.Controls.Add(this.ConfigurationTab);
             this.Tabs.Controls.Add(this.SettingsTab);
+            this.Tabs.Controls.Add(this.AboutTab);
             this.Tabs.Location = new System.Drawing.Point(12, 85);
             this.Tabs.Name = "Tabs";
             this.Tabs.SelectedIndex = 0;
@@ -738,6 +742,17 @@
             this.LicenseTextBox.Size = new System.Drawing.Size(358, 20);
             this.LicenseTextBox.TabIndex = 0;
             // 
+            // AboutTab
+            // 
+            this.AboutTab.Controls.Add(this.AboutRichTextBox);
+            this.AboutTab.Location = new System.Drawing.Point(4, 22);
+            this.AboutTab.Name = "AboutTab";
+            this.AboutTab.Padding = new System.Windows.Forms.Padding(3);
+            this.AboutTab.Size = new System.Drawing.Size(767, 279);
+            this.AboutTab.TabIndex = 4;
+            this.AboutTab.Text = "About";
+            this.AboutTab.UseVisualStyleBackColor = true;
+            // 
             // MainProgressBar
             // 
             this.MainProgressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -761,6 +776,15 @@
             this.BottomStripLabel.Name = "BottomStripLabel";
             this.BottomStripLabel.Size = new System.Drawing.Size(151, 17);
             this.BottomStripLabel.Text = "Welcome to LambentLight!";
+            // 
+            // AboutRichTextBox
+            // 
+            this.AboutRichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.AboutRichTextBox.Location = new System.Drawing.Point(3, 3);
+            this.AboutRichTextBox.Name = "AboutRichTextBox";
+            this.AboutRichTextBox.Size = new System.Drawing.Size(761, 273);
+            this.AboutRichTextBox.TabIndex = 0;
+            this.AboutRichTextBox.Text = "";
             // 
             // Landing
             // 
@@ -803,6 +827,7 @@
             this.APIsGroupBox.PerformLayout();
             this.LicenseGroupBox.ResumeLayout(false);
             this.LicenseGroupBox.PerformLayout();
+            this.AboutTab.ResumeLayout(false);
             this.BottomStrip.ResumeLayout(false);
             this.BottomStrip.PerformLayout();
             this.ResumeLayout(false);
@@ -871,6 +896,8 @@
         private System.Windows.Forms.Button ResetSettingsButton;
         private System.Windows.Forms.Label BuildsLinLabel;
         private System.Windows.Forms.TextBox BuildsLinTextBox;
+        private System.Windows.Forms.TabPage AboutTab;
+        private System.Windows.Forms.RichTextBox AboutRichTextBox;
     }
 }
 
