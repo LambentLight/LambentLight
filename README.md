@@ -15,6 +15,8 @@ LambentLight is an application for managing dedicated FiveM servers. It helps yo
 
 # Installation
 
+The [.NET Framework 4.5.2 Runtime](https://dotnet.microsoft.com/download/dotnet-framework/net452) is required on Windows.
+
 ## Windows
 
 1. Download the compressed file from [GitHub Releases][releases-url] or [5mods][5mods-url]
