@@ -110,6 +110,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\About.rtf" />
     <None Include="Resources\Play.png" />
   </ItemGroup>
   <ItemGroup>
