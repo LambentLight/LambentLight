@@ -73,6 +73,8 @@ namespace LambentLight
             ResourcesListBox.Fill(ResourceManager.Resources);
             // Set the elements to unlocked
             Locked = false;
+            // Load the RTF text
+            AboutRichTextBox.Rtf = Resources.About;
 
             // Tell the Web Clients to use TLS 1.2 instead of SSL3
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;

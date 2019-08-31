@@ -85,10 +85,10 @@
             this.VisibleCheckBox = new System.Windows.Forms.CheckBox();
             this.LicenseTextBox = new System.Windows.Forms.TextBox();
             this.AboutTab = new System.Windows.Forms.TabPage();
+            this.AboutRichTextBox = new System.Windows.Forms.RichTextBox();
             this.MainProgressBar = new System.Windows.Forms.ProgressBar();
             this.BottomStrip = new System.Windows.Forms.StatusStrip();
             this.BottomStripLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.AboutRichTextBox = new System.Windows.Forms.RichTextBox();
             this.BuildsGroup.SuspendLayout();
             this.DataGroup.SuspendLayout();
             this.TopStrip.SuspendLayout();
@@ -753,6 +753,20 @@
             this.AboutTab.Text = "About";
             this.AboutTab.UseVisualStyleBackColor = true;
             // 
+            // AboutRichTextBox
+            // 
+            this.AboutRichTextBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.AboutRichTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.AboutRichTextBox.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.AboutRichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.AboutRichTextBox.Location = new System.Drawing.Point(3, 3);
+            this.AboutRichTextBox.Name = "AboutRichTextBox";
+            this.AboutRichTextBox.ReadOnly = true;
+            this.AboutRichTextBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
+            this.AboutRichTextBox.Size = new System.Drawing.Size(761, 273);
+            this.AboutRichTextBox.TabIndex = 0;
+            this.AboutRichTextBox.Text = "";
+            // 
             // MainProgressBar
             // 
             this.MainProgressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -776,15 +790,6 @@
             this.BottomStripLabel.Name = "BottomStripLabel";
             this.BottomStripLabel.Size = new System.Drawing.Size(151, 17);
             this.BottomStripLabel.Text = "Welcome to LambentLight!";
-            // 
-            // AboutRichTextBox
-            // 
-            this.AboutRichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.AboutRichTextBox.Location = new System.Drawing.Point(3, 3);
-            this.AboutRichTextBox.Name = "AboutRichTextBox";
-            this.AboutRichTextBox.Size = new System.Drawing.Size(761, 273);
-            this.AboutRichTextBox.TabIndex = 0;
-            this.AboutRichTextBox.Text = "";
             // 
             // Landing
             // 
