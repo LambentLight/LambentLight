@@ -3,8 +3,10 @@ using Newtonsoft.Json;
 using NLog;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace LambentLight.Managers
 {
@@ -126,6 +128,19 @@ namespace LambentLight.Managers
         /// <param name="build">The build to download.</param>
         public static async Task Download(Build build)
         {
+            // If we are running on Linux
+            if (Checks.IsLinux)
+            {
+                // Say that we do not support the automatic download of builds
+                DialogResult Result = MessageBox.Show("Sorry, but we can't download builds right now due to a decompression problem.\nDo you want to open the build on your browser so it can be installed manually?", "Impossible to download", MessageBoxButtons.YesNo);
+                // If the user wants download the build manually
+                if (Result == DialogResult.Yes)
+                {
+                    // Open it up on the browser
+                    Process.Start(string.Format(DownloadBuild, build.ID));
+                }
+            }
+
             // Log that we are starting the download
             Logger.Info("Build {0} is not available, downloading...", build.ID);
 
