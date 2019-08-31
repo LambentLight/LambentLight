@@ -326,13 +326,13 @@ namespace LambentLight.Managers
                 Logger.Info("Downloading Default Scripts for the Data Folder '{0}', please wait...", name);
 
                 // Create the path for the temporary zip file
-                string ZipPath = Path.Combine(Locations.Temp, "cfx-server-data.zip");
+                string ZipPath = Path.Combine(Locations.Temp, "ServerData.zip");
 
                 // If the temporary folder does not exists
                 Locations.EnsureTempFolder();
 
                 // If we didn't managed to download the file, just return
-                if (!await Downloader.DownloadFile("https://github.com/citizenfx/cfx-server-data/archive/master.zip", ZipPath))
+                if (!await Downloader.DownloadFile("https://github.com/LambentLight/ServerData/archive/master.zip", ZipPath))
                 {
                     return null;
                 }
@@ -340,7 +340,7 @@ namespace LambentLight.Managers
                 // After the zip file has been downloaded, extract it
                 await Compression.Extract(ZipPath, Locations.Temp);
                 // Then, rename it to the name specified by the user
-                Directory.Move(Path.Combine(Locations.Temp, "cfx-server-data-master"), NewPath);
+                Directory.Move(Path.Combine(Locations.Temp, "ServerData-master"), NewPath);
                 // Delete the temporary file
                 File.Delete(ZipPath);
             }
