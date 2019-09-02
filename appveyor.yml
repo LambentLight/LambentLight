@@ -1,7 +1,7 @@
 # AppVeyor template for GTA IV/EFLC/V C# Mods
 
 # This should be changed after every major release
-version: "0.1.0.{build}"
+version: "1.0.0.{build}"
 # The AppVeyor image to use, usually the most up-to-date
 image: Visual Studio 2017
 
