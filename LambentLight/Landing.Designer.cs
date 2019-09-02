@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Landing));
             this.BuildsGroup = new System.Windows.Forms.GroupBox();
             this.BuildRefreshButton = new System.Windows.Forms.Button();
             this.BuildsBox = new System.Windows.Forms.ComboBox();
@@ -803,6 +804,7 @@
             this.Controls.Add(this.DataGroup);
             this.Controls.Add(this.BuildsGroup);
             this.Controls.Add(this.TopStrip);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.TopStrip;
             this.MinimumSize = new System.Drawing.Size(815, 483);
             this.Name = "Landing";
