@@ -1,4 +1,4 @@
-﻿namespace LambentLight
+namespace LambentLight
 {
     partial class Landing
     {
@@ -325,6 +325,7 @@
             this.UninstallerListBox.Name = "UninstallerListBox";
             this.UninstallerListBox.Size = new System.Drawing.Size(250, 212);
             this.UninstallerListBox.TabIndex = 1;
+            this.UninstallerListBox.SelectedIndexChanged += new System.EventHandler(this.UninstallerListBox_SelectedIndexChanged);
             // 
             // UninstallButton
             // 

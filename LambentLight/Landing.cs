@@ -211,6 +211,12 @@ namespace LambentLight
             InstallButton.Enabled = VersionsListBox.SelectedItem != null;
         }
 
+        private void UninstallerListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // If there is a resource to uninstall, enable the button
+            UninstallButton.Enabled = UninstallerListBox.SelectedItem != null;
+        }
+
         private void RefreshUninstallerButton_Click(object sender, EventArgs e)
         {
             // Disable the uninstall button
