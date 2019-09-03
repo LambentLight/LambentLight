@@ -114,7 +114,7 @@ namespace LambentLight.Managers
                 List<InstalledResource> TempResources = new List<InstalledResource>();
 
                 // Iterate over the directories in the resources folder
-                foreach (string Folder in Directory.EnumerateDirectories(Resources))
+                foreach (string Folder in Directory.EnumerateDirectories(Resources, "*", SearchOption.AllDirectories))
                 {
                     // Get the literal directory name
                     string Name = Path.GetFileNameWithoutExtension(Folder);
