@@ -46,10 +46,13 @@
             this.LogTextBox = new System.Windows.Forms.TextBox();
             this.Tabs = new System.Windows.Forms.TabControl();
             this.ResourcesTab = new System.Windows.Forms.TabPage();
-            this.VersionsListBox = new System.Windows.Forms.ListBox();
-            this.InstallButton = new System.Windows.Forms.Button();
+            this.UninstallerGroupBox = new System.Windows.Forms.GroupBox();
+            this.UninstallerListBox = new System.Windows.Forms.ListBox();
+            this.UninstallButton = new System.Windows.Forms.Button();
             this.InstallerListGroup = new System.Windows.Forms.GroupBox();
-            this.RefreshButton = new System.Windows.Forms.Button();
+            this.InstallButton = new System.Windows.Forms.Button();
+            this.RefreshInstallButton = new System.Windows.Forms.Button();
+            this.VersionsListBox = new System.Windows.Forms.ListBox();
             this.InstallerListBox = new System.Windows.Forms.ListBox();
             this.ConfigurationTab = new System.Windows.Forms.TabPage();
             this.SaveButton = new System.Windows.Forms.Button();
@@ -69,6 +72,8 @@
             this.ClearCacheCheckBox = new System.Windows.Forms.CheckBox();
             this.AutoRestartCheckBox = new System.Windows.Forms.CheckBox();
             this.FolderCreationGroupBox = new System.Windows.Forms.GroupBox();
+            this.RemoveFromConfigCheckBox = new System.Windows.Forms.CheckBox();
+            this.AddToConfigCheckBox = new System.Windows.Forms.CheckBox();
             this.CreateConfigCheckBox = new System.Windows.Forms.CheckBox();
             this.DownloadScriptsCheckBox = new System.Windows.Forms.CheckBox();
             this.APIsGroupBox = new System.Windows.Forms.GroupBox();
@@ -89,17 +94,14 @@
             this.MainProgressBar = new System.Windows.Forms.ProgressBar();
             this.BottomStrip = new System.Windows.Forms.StatusStrip();
             this.BottomStripLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.UninstallerGroupBox = new System.Windows.Forms.GroupBox();
-            this.UninstallButton = new System.Windows.Forms.Button();
-            this.UninstallerListBox = new System.Windows.Forms.ListBox();
-            this.AddToConfigCheckBox = new System.Windows.Forms.CheckBox();
-            this.RemoveFromConfigCheckBox = new System.Windows.Forms.CheckBox();
+            this.RefreshUninstallerButton = new System.Windows.Forms.Button();
             this.BuildsGroup.SuspendLayout();
             this.DataGroup.SuspendLayout();
             this.TopStrip.SuspendLayout();
             this.LogsTab.SuspendLayout();
             this.Tabs.SuspendLayout();
             this.ResourcesTab.SuspendLayout();
+            this.UninstallerGroupBox.SuspendLayout();
             this.InstallerListGroup.SuspendLayout();
             this.ConfigurationTab.SuspendLayout();
             this.SettingsTab.SuspendLayout();
@@ -110,7 +112,6 @@
             this.LicenseGroupBox.SuspendLayout();
             this.AboutTab.SuspendLayout();
             this.BottomStrip.SuspendLayout();
-            this.UninstallerGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // BuildsGroup
@@ -300,16 +301,56 @@
             this.ResourcesTab.Text = "Resources";
             this.ResourcesTab.UseVisualStyleBackColor = true;
             // 
-            // VersionsListBox
+            // UninstallerGroupBox
             // 
-            this.VersionsListBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.UninstallerGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.UninstallerGroupBox.Controls.Add(this.RefreshUninstallerButton);
+            this.UninstallerGroupBox.Controls.Add(this.UninstallerListBox);
+            this.UninstallerGroupBox.Controls.Add(this.UninstallButton);
+            this.UninstallerGroupBox.Location = new System.Drawing.Point(6, 6);
+            this.UninstallerGroupBox.Name = "UninstallerGroupBox";
+            this.UninstallerGroupBox.Size = new System.Drawing.Size(262, 267);
+            this.UninstallerGroupBox.TabIndex = 2;
+            this.UninstallerGroupBox.TabStop = false;
+            this.UninstallerGroupBox.Text = "To be Uninstalled";
+            // 
+            // UninstallerListBox
+            // 
+            this.UninstallerListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.VersionsListBox.FormattingEnabled = true;
-            this.VersionsListBox.Location = new System.Drawing.Point(262, 19);
-            this.VersionsListBox.Name = "VersionsListBox";
-            this.VersionsListBox.Size = new System.Drawing.Size(188, 212);
-            this.VersionsListBox.TabIndex = 1;
-            this.VersionsListBox.SelectedIndexChanged += new System.EventHandler(this.VersionsListBox_SelectedIndexChanged);
+            this.UninstallerListBox.FormattingEnabled = true;
+            this.UninstallerListBox.Location = new System.Drawing.Point(6, 19);
+            this.UninstallerListBox.Name = "UninstallerListBox";
+            this.UninstallerListBox.Size = new System.Drawing.Size(250, 212);
+            this.UninstallerListBox.TabIndex = 1;
+            // 
+            // UninstallButton
+            // 
+            this.UninstallButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.UninstallButton.Location = new System.Drawing.Point(134, 238);
+            this.UninstallButton.Name = "UninstallButton";
+            this.UninstallButton.Size = new System.Drawing.Size(122, 23);
+            this.UninstallButton.TabIndex = 0;
+            this.UninstallButton.Text = "Uninstall";
+            this.UninstallButton.UseVisualStyleBackColor = true;
+            // 
+            // InstallerListGroup
+            // 
+            this.InstallerListGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.InstallerListGroup.Controls.Add(this.InstallButton);
+            this.InstallerListGroup.Controls.Add(this.RefreshInstallButton);
+            this.InstallerListGroup.Controls.Add(this.VersionsListBox);
+            this.InstallerListGroup.Controls.Add(this.InstallerListBox);
+            this.InstallerListGroup.Location = new System.Drawing.Point(305, 6);
+            this.InstallerListGroup.Name = "InstallerListGroup";
+            this.InstallerListGroup.Size = new System.Drawing.Size(456, 267);
+            this.InstallerListGroup.TabIndex = 0;
+            this.InstallerListGroup.TabStop = false;
+            this.InstallerListGroup.Text = "To Be Installed";
             // 
             // InstallButton
             // 
@@ -323,33 +364,28 @@
             this.InstallButton.UseVisualStyleBackColor = true;
             this.InstallButton.Click += new System.EventHandler(this.InstallButton_Click);
             // 
-            // InstallerListGroup
+            // RefreshInstallButton
             // 
-            this.InstallerListGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.RefreshInstallButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.InstallerListGroup.Controls.Add(this.InstallButton);
-            this.InstallerListGroup.Controls.Add(this.RefreshButton);
-            this.InstallerListGroup.Controls.Add(this.VersionsListBox);
-            this.InstallerListGroup.Controls.Add(this.InstallerListBox);
-            this.InstallerListGroup.Location = new System.Drawing.Point(305, 6);
-            this.InstallerListGroup.Name = "InstallerListGroup";
-            this.InstallerListGroup.Size = new System.Drawing.Size(456, 267);
-            this.InstallerListGroup.TabIndex = 0;
-            this.InstallerListGroup.TabStop = false;
-            this.InstallerListGroup.Text = "To Be Installed";
+            this.RefreshInstallButton.Location = new System.Drawing.Point(6, 238);
+            this.RefreshInstallButton.Name = "RefreshInstallButton";
+            this.RefreshInstallButton.Size = new System.Drawing.Size(250, 23);
+            this.RefreshInstallButton.TabIndex = 2;
+            this.RefreshInstallButton.Text = "Refresh";
+            this.RefreshInstallButton.UseVisualStyleBackColor = true;
+            this.RefreshInstallButton.Click += new System.EventHandler(this.RefreshButton_Click);
             // 
-            // RefreshButton
+            // VersionsListBox
             // 
-            this.RefreshButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.VersionsListBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.RefreshButton.Location = new System.Drawing.Point(6, 238);
-            this.RefreshButton.Name = "RefreshButton";
-            this.RefreshButton.Size = new System.Drawing.Size(250, 23);
-            this.RefreshButton.TabIndex = 2;
-            this.RefreshButton.Text = "Refresh";
-            this.RefreshButton.UseVisualStyleBackColor = true;
-            this.RefreshButton.Click += new System.EventHandler(this.RefreshButton_Click);
+            this.VersionsListBox.FormattingEnabled = true;
+            this.VersionsListBox.Location = new System.Drawing.Point(262, 19);
+            this.VersionsListBox.Name = "VersionsListBox";
+            this.VersionsListBox.Size = new System.Drawing.Size(188, 212);
+            this.VersionsListBox.TabIndex = 1;
+            this.VersionsListBox.SelectedIndexChanged += new System.EventHandler(this.VersionsListBox_SelectedIndexChanged);
             // 
             // InstallerListBox
             // 
@@ -573,6 +609,28 @@
             this.FolderCreationGroupBox.TabStop = false;
             this.FolderCreationGroupBox.Text = "Data Folders and Resources";
             // 
+            // RemoveFromConfigCheckBox
+            // 
+            this.RemoveFromConfigCheckBox.AutoSize = true;
+            this.RemoveFromConfigCheckBox.Location = new System.Drawing.Point(6, 85);
+            this.RemoveFromConfigCheckBox.Name = "RemoveFromConfigCheckBox";
+            this.RemoveFromConfigCheckBox.Size = new System.Drawing.Size(324, 17);
+            this.RemoveFromConfigCheckBox.TabIndex = 3;
+            this.RemoveFromConfigCheckBox.Text = "After uninstalling the Resource, remove it from the configuration";
+            this.RemoveFromConfigCheckBox.UseVisualStyleBackColor = true;
+            this.RemoveFromConfigCheckBox.CheckedChanged += new System.EventHandler(this.RemoveFromConfigCheckBox_CheckedChanged);
+            // 
+            // AddToConfigCheckBox
+            // 
+            this.AddToConfigCheckBox.AutoSize = true;
+            this.AddToConfigCheckBox.Location = new System.Drawing.Point(6, 63);
+            this.AddToConfigCheckBox.Name = "AddToConfigCheckBox";
+            this.AddToConfigCheckBox.Size = new System.Drawing.Size(319, 17);
+            this.AddToConfigCheckBox.TabIndex = 2;
+            this.AddToConfigCheckBox.Text = "Set the Installed Resource to auto start in the configuration file";
+            this.AddToConfigCheckBox.UseVisualStyleBackColor = true;
+            this.AddToConfigCheckBox.CheckedChanged += new System.EventHandler(this.AddToConfigCheckBox_CheckedChanged);
+            // 
             // CreateConfigCheckBox
             // 
             this.CreateConfigCheckBox.AutoSize = true;
@@ -785,62 +843,16 @@
             this.BottomStripLabel.Size = new System.Drawing.Size(151, 17);
             this.BottomStripLabel.Text = "Welcome to LambentLight!";
             // 
-            // UninstallerGroupBox
+            // RefreshUninstallerButton
             // 
-            this.UninstallerGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.UninstallerGroupBox.Controls.Add(this.UninstallerListBox);
-            this.UninstallerGroupBox.Controls.Add(this.UninstallButton);
-            this.UninstallerGroupBox.Location = new System.Drawing.Point(6, 6);
-            this.UninstallerGroupBox.Name = "UninstallerGroupBox";
-            this.UninstallerGroupBox.Size = new System.Drawing.Size(262, 267);
-            this.UninstallerGroupBox.TabIndex = 2;
-            this.UninstallerGroupBox.TabStop = false;
-            this.UninstallerGroupBox.Text = "To be Uninstalled";
-            // 
-            // UninstallButton
-            // 
-            this.UninstallButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.UninstallButton.Location = new System.Drawing.Point(6, 238);
-            this.UninstallButton.Name = "UninstallButton";
-            this.UninstallButton.Size = new System.Drawing.Size(250, 23);
-            this.UninstallButton.TabIndex = 0;
-            this.UninstallButton.Text = "Uninstall";
-            this.UninstallButton.UseVisualStyleBackColor = true;
-            // 
-            // UninstallerListBox
-            // 
-            this.UninstallerListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.UninstallerListBox.FormattingEnabled = true;
-            this.UninstallerListBox.Location = new System.Drawing.Point(6, 19);
-            this.UninstallerListBox.Name = "UninstallerListBox";
-            this.UninstallerListBox.Size = new System.Drawing.Size(250, 212);
-            this.UninstallerListBox.TabIndex = 1;
-            // 
-            // AddToConfigCheckBox
-            // 
-            this.AddToConfigCheckBox.AutoSize = true;
-            this.AddToConfigCheckBox.Location = new System.Drawing.Point(6, 63);
-            this.AddToConfigCheckBox.Name = "AddToConfigCheckBox";
-            this.AddToConfigCheckBox.Size = new System.Drawing.Size(319, 17);
-            this.AddToConfigCheckBox.TabIndex = 2;
-            this.AddToConfigCheckBox.Text = "Set the Installed Resource to auto start in the configuration file";
-            this.AddToConfigCheckBox.UseVisualStyleBackColor = true;
-            this.AddToConfigCheckBox.CheckedChanged += new System.EventHandler(this.AddToConfigCheckBox_CheckedChanged);
-            // 
-            // RemoveFromConfigCheckBox
-            // 
-            this.RemoveFromConfigCheckBox.AutoSize = true;
-            this.RemoveFromConfigCheckBox.Location = new System.Drawing.Point(6, 85);
-            this.RemoveFromConfigCheckBox.Name = "RemoveFromConfigCheckBox";
-            this.RemoveFromConfigCheckBox.Size = new System.Drawing.Size(324, 17);
-            this.RemoveFromConfigCheckBox.TabIndex = 3;
-            this.RemoveFromConfigCheckBox.Text = "After uninstalling the Resource, remove it from the configuration";
-            this.RemoveFromConfigCheckBox.UseVisualStyleBackColor = true;
-            this.RemoveFromConfigCheckBox.CheckedChanged += new System.EventHandler(this.RemoveFromConfigCheckBox_CheckedChanged);
+            this.RefreshUninstallerButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.RefreshUninstallerButton.Location = new System.Drawing.Point(6, 238);
+            this.RefreshUninstallerButton.Name = "RefreshUninstallerButton";
+            this.RefreshUninstallerButton.Size = new System.Drawing.Size(122, 23);
+            this.RefreshUninstallerButton.TabIndex = 2;
+            this.RefreshUninstallerButton.Text = "Refresh";
+            this.RefreshUninstallerButton.UseVisualStyleBackColor = true;
+            this.RefreshUninstallerButton.Click += new System.EventHandler(this.RefreshUninstallerButton_Click);
             // 
             // Landing
             // 
@@ -869,6 +881,7 @@
             this.LogsTab.PerformLayout();
             this.Tabs.ResumeLayout(false);
             this.ResourcesTab.ResumeLayout(false);
+            this.UninstallerGroupBox.ResumeLayout(false);
             this.InstallerListGroup.ResumeLayout(false);
             this.ConfigurationTab.ResumeLayout(false);
             this.ConfigurationTab.PerformLayout();
@@ -886,7 +899,6 @@
             this.AboutTab.ResumeLayout(false);
             this.BottomStrip.ResumeLayout(false);
             this.BottomStrip.PerformLayout();
-            this.UninstallerGroupBox.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -937,7 +949,7 @@
         private System.Windows.Forms.Button InstallButton;
         private System.Windows.Forms.ListBox VersionsListBox;
         private System.Windows.Forms.ListBox InstallerListBox;
-        private System.Windows.Forms.Button RefreshButton;
+        private System.Windows.Forms.Button RefreshInstallButton;
         public System.Windows.Forms.TextBox LogTextBox;
         public System.Windows.Forms.ProgressBar MainProgressBar;
         private System.Windows.Forms.StatusStrip BottomStrip;
@@ -959,6 +971,7 @@
         private System.Windows.Forms.ListBox UninstallerListBox;
         private System.Windows.Forms.CheckBox AddToConfigCheckBox;
         private System.Windows.Forms.CheckBox RemoveFromConfigCheckBox;
+        private System.Windows.Forms.Button RefreshUninstallerButton;
     }
 }
 
