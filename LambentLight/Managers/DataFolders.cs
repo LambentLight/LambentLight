@@ -25,12 +25,17 @@ namespace LambentLight.Managers
         /// </summary>
         public string Location { get; }
         /// <summary>
+        /// The Data Folder where this resource is located.
+        /// </summary>
+        public DataFolder Source { get; }
+        /// <summary>
         /// Checks if a resource is present on the specified folder.
         /// </summary>
         public bool IsPresent => Directory.Exists(Location);
 
-        public InstalledResource(string location)
+        public InstalledResource(DataFolder source, string location)
         {
+            Source = source;
             Location = location;
         }
 
@@ -106,7 +111,7 @@ namespace LambentLight.Managers
                     if (!Name.StartsWith("[") && !Name.EndsWith("]"))
                     {
                         // Add it
-                        TempResources.Add(new InstalledResource(Folder));
+                        TempResources.Add(new InstalledResource(this, Folder));
                     }
                 }
 
