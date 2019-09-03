@@ -17,6 +17,10 @@ namespace LambentLight.Managers
     public class InstalledResource : IDisposable
     {
         /// <summary>
+        /// The logger for our current class.
+        /// </summary>
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+        /// <summary>
         /// The name of the resource.
         /// </summary>
         public string Name => Path.GetFileNameWithoutExtension(Location);
@@ -49,6 +53,8 @@ namespace LambentLight.Managers
             {
                 // Remove it
                 Directory.Delete(Location, true);
+                // And notify the user
+                Logger.Warn("Removing existing version of {0} at '{1}' (from Data Folder '{2}')", Name, Location, Source.Name);
             }
         }
 
@@ -186,26 +192,6 @@ namespace LambentLight.Managers
         }
 
         /// <summary>
-        /// Removes the existing versions of a resource.
-        /// </summary>
-        /// <param name="resource">The resource to uninstall.</param>
-        public void Remove(Resource resource)
-        {
-            // If the resources folder exists
-            if (Directory.Exists(Resources))
-            {
-                // Get all of the folders that match the resource folder name
-                foreach (string Dir in Directory.EnumerateDirectories(Resources, resource.Folder, SearchOption.AllDirectories))
-                {
-                    // Notify the user
-                    Logger.Warn("Removing existing version of {0} at '{1}'", resource.Name, Dir);
-                    // And remove the folder
-                    Directory.Delete(Dir, true);
-                }
-            }
-        }
-
-        /// <summary>
         /// Installs the specified resource and version on the data folder.
         /// </summary>
         /// <param name="resource">The resource information.</param>
@@ -244,8 +230,16 @@ namespace LambentLight.Managers
                 Directory.CreateDirectory(Resources);
             }
 
-            // Remove the existing versions of the resource
-            Remove(resource);
+            // For every installed resource
+            foreach (InstalledResource Installed in InstalledResources)
+            {
+                // If the name matches the resource that we are going to install
+                if (Installed.Name == resource.Folder)
+                {
+                    // Delete/Dispose it
+                    Installed.Dispose();
+                }
+            }
 
             // If the output directory exists
             if (Directory.Exists(ExtractionPath))
