@@ -1,4 +1,4 @@
-namespace LambentLight
+﻿namespace LambentLight
 {
     partial class Landing
     {
@@ -47,6 +47,7 @@ namespace LambentLight
             this.Tabs = new System.Windows.Forms.TabControl();
             this.ResourcesTab = new System.Windows.Forms.TabPage();
             this.UninstallerGroupBox = new System.Windows.Forms.GroupBox();
+            this.RefreshUninstallerButton = new System.Windows.Forms.Button();
             this.UninstallerListBox = new System.Windows.Forms.ListBox();
             this.UninstallButton = new System.Windows.Forms.Button();
             this.InstallerListGroup = new System.Windows.Forms.GroupBox();
@@ -94,7 +95,6 @@ namespace LambentLight
             this.MainProgressBar = new System.Windows.Forms.ProgressBar();
             this.BottomStrip = new System.Windows.Forms.StatusStrip();
             this.BottomStripLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.RefreshUninstallerButton = new System.Windows.Forms.Button();
             this.BuildsGroup.SuspendLayout();
             this.DataGroup.SuspendLayout();
             this.TopStrip.SuspendLayout();
@@ -315,6 +315,17 @@ namespace LambentLight
             this.UninstallerGroupBox.TabStop = false;
             this.UninstallerGroupBox.Text = "To be Uninstalled";
             // 
+            // RefreshUninstallerButton
+            // 
+            this.RefreshUninstallerButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.RefreshUninstallerButton.Location = new System.Drawing.Point(6, 238);
+            this.RefreshUninstallerButton.Name = "RefreshUninstallerButton";
+            this.RefreshUninstallerButton.Size = new System.Drawing.Size(122, 23);
+            this.RefreshUninstallerButton.TabIndex = 2;
+            this.RefreshUninstallerButton.Text = "Refresh";
+            this.RefreshUninstallerButton.UseVisualStyleBackColor = true;
+            this.RefreshUninstallerButton.Click += new System.EventHandler(this.RefreshUninstallerButton_Click);
+            // 
             // UninstallerListBox
             // 
             this.UninstallerListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -330,6 +341,7 @@ namespace LambentLight
             // UninstallButton
             // 
             this.UninstallButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.UninstallButton.Enabled = false;
             this.UninstallButton.Location = new System.Drawing.Point(134, 238);
             this.UninstallButton.Name = "UninstallButton";
             this.UninstallButton.Size = new System.Drawing.Size(122, 23);
@@ -843,17 +855,6 @@ namespace LambentLight
             this.BottomStripLabel.Name = "BottomStripLabel";
             this.BottomStripLabel.Size = new System.Drawing.Size(151, 17);
             this.BottomStripLabel.Text = "Welcome to LambentLight!";
-            // 
-            // RefreshUninstallerButton
-            // 
-            this.RefreshUninstallerButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.RefreshUninstallerButton.Location = new System.Drawing.Point(6, 238);
-            this.RefreshUninstallerButton.Name = "RefreshUninstallerButton";
-            this.RefreshUninstallerButton.Size = new System.Drawing.Size(122, 23);
-            this.RefreshUninstallerButton.TabIndex = 2;
-            this.RefreshUninstallerButton.Text = "Refresh";
-            this.RefreshUninstallerButton.UseVisualStyleBackColor = true;
-            this.RefreshUninstallerButton.Click += new System.EventHandler(this.RefreshUninstallerButton_Click);
             // 
             // Landing
             // 
