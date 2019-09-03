@@ -211,6 +211,21 @@ namespace LambentLight
             InstallButton.Enabled = VersionsListBox.SelectedItem != null;
         }
 
+        private void RefreshUninstallerButton_Click(object sender, EventArgs e)
+        {
+            // Disable the uninstall button
+            UninstallButton.Enabled = false;
+
+            // Return if there is no server data folder selected
+            if (DataBox.SelectedItem == null)
+            {
+                return;
+            }
+
+            // And add the updated set of resource
+            UninstallerListBox.Fill(((DataFolder)DataBox.SelectedItem).InstalledResources);
+        }
+
         private void RefreshButton_Click(object sender, EventArgs e)
         {
             // Disable the install button
