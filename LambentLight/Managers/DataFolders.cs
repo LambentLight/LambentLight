@@ -12,6 +12,48 @@ using System.Windows.Forms;
 namespace LambentLight.Managers
 {
     /// <summary>
+    /// Class that handles a
+    /// </summary>
+    public class InstalledResource : IDisposable
+    {
+        /// <summary>
+        /// The name of the resource.
+        /// </summary>
+        public string Name => Path.GetFileNameWithoutExtension(Location);
+        /// <summary>
+        /// Where the resource is located.
+        /// </summary>
+        public string Location { get; }
+        /// <summary>
+        /// Checks if a resource is present on the specified folder.
+        /// </summary>
+        public bool IsPresent => Directory.Exists(Location);
+
+        public InstalledResource(string location)
+        {
+            Location = location;
+        }
+
+        /// <summary>
+        /// Removes the resource if is present.
+        /// </summary>
+        public void Dispose()
+        {
+            // If the resource exists and is present
+            if (IsPresent)
+            {
+                // Remove it
+                Directory.Delete(Location, true);
+            }
+        }
+
+        public override string ToString()
+        {
+            return Name;
+        }
+    }
+
+    /// <summary>
     /// A class that represents a folder with FiveM server data.
     /// </summary>
     public class DataFolder
@@ -44,6 +86,34 @@ namespace LambentLight.Managers
         /// The location of the resources folder.
         /// </summary>
         public string Resources => Path.Combine(Absolute, "resources");
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<InstalledResource> InstalledResources
+        {
+            get
+            {
+                // Create a temp list of resources
+                List<InstalledResource> TempResources = new List<InstalledResource>();
+
+                // Iterate over the directories in the resources folder
+                foreach (string Folder in Directory.EnumerateDirectories(Resources))
+                {
+                    // Get the literal directory name
+                    string Name = Path.GetFileNameWithoutExtension(Folder);
+
+                    // If the folder name does not starts with [ and ]
+                    if (!Name.StartsWith("[") && !Name.EndsWith("]"))
+                    {
+                        // Add it
+                        TempResources.Add(new InstalledResource(Folder));
+                    }
+                }
+
+                // Finally, return the installed resources
+                return TempResources;
+            }
+        }
         /// <summary>
         /// The server configuration for the data folder.
         /// </summary>
