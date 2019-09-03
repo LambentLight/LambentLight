@@ -70,7 +70,7 @@ namespace LambentLight
             // And filll the Builds and Data folders
             BuildsBox.Fill(BuildManager.Builds, true);
             DataBox.Fill(DataFolderManager.Folders, true);
-            ResourcesListBox.Fill(ResourceManager.Resources);
+            InstallerListBox.Fill(ResourceManager.Resources);
             // Set the elements to unlocked
             Locked = false;
             // Load the RTF text
@@ -190,10 +190,10 @@ namespace LambentLight
         private void ResourcesListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             // If there is something selected
-            if (ResourcesListBox.SelectedItem != null)
+            if (InstallerListBox.SelectedItem != null)
             {
                 // Add the builds to our version ListBox
-                VersionsListBox.Fill(((Resource)ResourcesListBox.SelectedItem).Versions);
+                VersionsListBox.Fill(((Resource)InstallerListBox.SelectedItem).Versions);
             }
             // Otherwise
             else
@@ -217,7 +217,7 @@ namespace LambentLight
             InstallButton.Enabled = false;
             // And add the updated set of resource
             ResourceManager.Refresh();
-            ResourcesListBox.Fill(ResourceManager.Resources);
+            InstallerListBox.Fill(ResourceManager.Resources);
         }
 
         private async void InstallButton_Click(object sender, EventArgs e)
@@ -230,12 +230,12 @@ namespace LambentLight
             }
             
             // Get all of the requirements by the selected resource
-            Dictionary<Resource, Managers.Version> Collected = ResourceManager.GetRequirements((Resource)ResourcesListBox.SelectedItem, (Managers.Version)VersionsListBox.SelectedItem);
+            Dictionary<Resource, Managers.Version> Collected = ResourceManager.GetRequirements((Resource)InstallerListBox.SelectedItem, (Managers.Version)VersionsListBox.SelectedItem);
             // Create the readable list of resources
             string ReadableResources = string.Join(" ", Collected.Select(x => $"{x.Key.Name}-{x.Value.ReadableVersion}"));
 
             // Notify the user that we are going to install the keys
-            Logger.Info("Installing requirements {0} for {1}", ReadableResources, ResourcesListBox.SelectedItem);
+            Logger.Info("Installing requirements {0} for {1}", ReadableResources, InstallerListBox.SelectedItem);
 
             // Iterate over the list of required resources
             foreach (KeyValuePair<Resource, Managers.Version> Requirement in Collected)
