@@ -56,6 +56,12 @@ namespace LambentLight.Managers
                 // And notify the user
                 Logger.Warn("Removing existing version of {0} at '{1}' (from Data Folder '{2}')", Name, Location, Source.Name);
             }
+            // If not
+            else
+            {
+                // Notify the user
+                Logger.Error("The resource {0} could not be found in '{1}' (from Data Folder '{2}')", Name, Location, Source.Name);
+            }
         }
 
         public override string ToString()
