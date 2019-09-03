@@ -50,5 +50,8 @@
     <Setting Name="BuildsLinux" Type="System.String" Scope="User">
       <Value Profile="(Default)">https://raw.githubusercontent.com/LambentLight/Metadata/master/builds.linux.json</Value>
     </Setting>
+    <Setting Name="AddToConfig" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -205,5 +205,17 @@ namespace LambentLight.Properties {
                 this["BuildsLinux"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool AddToConfig {
+            get {
+                return ((bool)(this["AddToConfig"]));
+            }
+            set {
+                this["AddToConfig"] = value;
+            }
+        }
     }
 }

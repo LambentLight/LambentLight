@@ -92,6 +92,7 @@
             this.UninstallerGroupBox = new System.Windows.Forms.GroupBox();
             this.UninstallButton = new System.Windows.Forms.Button();
             this.UninstallerListBox = new System.Windows.Forms.ListBox();
+            this.AddToConfigCheckBox = new System.Windows.Forms.CheckBox();
             this.BuildsGroup.SuspendLayout();
             this.DataGroup.SuspendLayout();
             this.TopStrip.SuspendLayout();
@@ -442,9 +443,9 @@
             // 
             this.ResetSettingsButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ResetSettingsButton.Location = new System.Drawing.Point(6, 249);
+            this.ResetSettingsButton.Location = new System.Drawing.Point(391, 249);
             this.ResetSettingsButton.Name = "ResetSettingsButton";
-            this.ResetSettingsButton.Size = new System.Drawing.Size(755, 23);
+            this.ResetSettingsButton.Size = new System.Drawing.Size(370, 23);
             this.ResetSettingsButton.TabIndex = 5;
             this.ResetSettingsButton.Text = "Reset Settings to their Default Values";
             this.ResetSettingsButton.UseVisualStyleBackColor = true;
@@ -458,7 +459,7 @@
             this.AutomatedRestartGroupBox.Controls.Add(this.RestartAtCheckBox);
             this.AutomatedRestartGroupBox.Controls.Add(this.RestartEveryTextBox);
             this.AutomatedRestartGroupBox.Controls.Add(this.RestartEveryCheckBox);
-            this.AutomatedRestartGroupBox.Location = new System.Drawing.Point(6, 160);
+            this.AutomatedRestartGroupBox.Location = new System.Drawing.Point(6, 198);
             this.AutomatedRestartGroupBox.Name = "AutomatedRestartGroupBox";
             this.AutomatedRestartGroupBox.Size = new System.Drawing.Size(370, 75);
             this.AutomatedRestartGroupBox.TabIndex = 4;
@@ -560,14 +561,15 @@
             // 
             // FolderCreationGroupBox
             // 
+            this.FolderCreationGroupBox.Controls.Add(this.AddToConfigCheckBox);
             this.FolderCreationGroupBox.Controls.Add(this.CreateConfigCheckBox);
             this.FolderCreationGroupBox.Controls.Add(this.DownloadScriptsCheckBox);
             this.FolderCreationGroupBox.Location = new System.Drawing.Point(6, 86);
             this.FolderCreationGroupBox.Name = "FolderCreationGroupBox";
-            this.FolderCreationGroupBox.Size = new System.Drawing.Size(370, 68);
+            this.FolderCreationGroupBox.Size = new System.Drawing.Size(370, 106);
             this.FolderCreationGroupBox.TabIndex = 2;
             this.FolderCreationGroupBox.TabStop = false;
-            this.FolderCreationGroupBox.Text = "Data Folder Creation";
+            this.FolderCreationGroupBox.Text = "Data Folders and Resources";
             // 
             // CreateConfigCheckBox
             // 
@@ -816,6 +818,17 @@
             this.UninstallerListBox.Size = new System.Drawing.Size(250, 212);
             this.UninstallerListBox.TabIndex = 1;
             // 
+            // AddToConfigCheckBox
+            // 
+            this.AddToConfigCheckBox.AutoSize = true;
+            this.AddToConfigCheckBox.Location = new System.Drawing.Point(6, 65);
+            this.AddToConfigCheckBox.Name = "AddToConfigCheckBox";
+            this.AddToConfigCheckBox.Size = new System.Drawing.Size(319, 17);
+            this.AddToConfigCheckBox.TabIndex = 2;
+            this.AddToConfigCheckBox.Text = "Set the Installed Resource to auto start in the configuration file";
+            this.AddToConfigCheckBox.UseVisualStyleBackColor = true;
+            this.AddToConfigCheckBox.CheckedChanged += new System.EventHandler(this.AddToConfigCheckBox_CheckedChanged);
+            // 
             // Landing
             // 
             this.AcceptButton = this.ConsoleButton;
@@ -931,6 +944,7 @@
         private System.Windows.Forms.GroupBox UninstallerGroupBox;
         private System.Windows.Forms.Button UninstallButton;
         private System.Windows.Forms.ListBox UninstallerListBox;
+        private System.Windows.Forms.CheckBox AddToConfigCheckBox;
     }
 }
 

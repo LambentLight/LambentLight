@@ -311,6 +311,7 @@ namespace LambentLight
             // And load all of the settings
             DownloadScriptsCheckBox.Checked = Settings.Default.DownloadScripts;
             CreateConfigCheckBox.Checked = Settings.Default.CreateConfig;
+            AddToConfigCheckBox.Checked = Settings.Default.AddToConfig;
 
             RestartEveryCheckBox.Checked = Settings.Default.RestartEvery;
             RestartAtCheckBox.Checked = Settings.Default.RestartAt;
@@ -377,6 +378,13 @@ namespace LambentLight
         {
             // Save the curent status on the settings
             Settings.Default.CreateConfig = CreateConfigCheckBox.Checked;
+            Settings.Default.Save();
+        }
+
+        private void AddToConfigCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            // Save the curent status on the settings
+            Settings.Default.AddToConfig = AddToConfigCheckBox.Checked;
             Settings.Default.Save();
         }
 
