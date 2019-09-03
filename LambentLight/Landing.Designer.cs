@@ -91,6 +91,7 @@
             this.BottomStripLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.UninstallerGroupBox = new System.Windows.Forms.GroupBox();
             this.UninstallButton = new System.Windows.Forms.Button();
+            this.UninstallerListBox = new System.Windows.Forms.ListBox();
             this.BuildsGroup.SuspendLayout();
             this.DataGroup.SuspendLayout();
             this.TopStrip.SuspendLayout();
@@ -784,10 +785,11 @@
             // 
             this.UninstallerGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.UninstallerGroupBox.Controls.Add(this.UninstallerListBox);
             this.UninstallerGroupBox.Controls.Add(this.UninstallButton);
             this.UninstallerGroupBox.Location = new System.Drawing.Point(6, 6);
             this.UninstallerGroupBox.Name = "UninstallerGroupBox";
-            this.UninstallerGroupBox.Size = new System.Drawing.Size(250, 267);
+            this.UninstallerGroupBox.Size = new System.Drawing.Size(262, 267);
             this.UninstallerGroupBox.TabIndex = 2;
             this.UninstallerGroupBox.TabStop = false;
             this.UninstallerGroupBox.Text = "To be Uninstalled";
@@ -798,10 +800,21 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.UninstallButton.Location = new System.Drawing.Point(6, 238);
             this.UninstallButton.Name = "UninstallButton";
-            this.UninstallButton.Size = new System.Drawing.Size(238, 23);
+            this.UninstallButton.Size = new System.Drawing.Size(250, 23);
             this.UninstallButton.TabIndex = 0;
             this.UninstallButton.Text = "Uninstall";
             this.UninstallButton.UseVisualStyleBackColor = true;
+            // 
+            // UninstallerListBox
+            // 
+            this.UninstallerListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.UninstallerListBox.FormattingEnabled = true;
+            this.UninstallerListBox.Location = new System.Drawing.Point(6, 19);
+            this.UninstallerListBox.Name = "UninstallerListBox";
+            this.UninstallerListBox.Size = new System.Drawing.Size(250, 212);
+            this.UninstallerListBox.TabIndex = 1;
             // 
             // Landing
             // 
@@ -917,6 +930,7 @@
         private System.Windows.Forms.RichTextBox AboutRichTextBox;
         private System.Windows.Forms.GroupBox UninstallerGroupBox;
         private System.Windows.Forms.Button UninstallButton;
+        private System.Windows.Forms.ListBox UninstallerListBox;
     }
 }
 
