@@ -232,6 +232,14 @@ namespace LambentLight
             UninstallerListBox.Fill(((DataFolder)DataBox.SelectedItem).InstalledResources);
         }
 
+        private void UninstallButton_Click(object sender, EventArgs e)
+        {
+            // Remove the selected resource
+            ((InstalledResource)UninstallerListBox.SelectedItem).Dispose();
+            // And update the list of installed resources
+            UninstallerListBox.Fill(((DataFolder)DataBox.SelectedItem).InstalledResources);
+        }
+
         private void RefreshButton_Click(object sender, EventArgs e)
         {
             // Disable the install button

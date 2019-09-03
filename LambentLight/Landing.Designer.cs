@@ -348,6 +348,7 @@
             this.UninstallButton.TabIndex = 0;
             this.UninstallButton.Text = "Uninstall";
             this.UninstallButton.UseVisualStyleBackColor = true;
+            this.UninstallButton.Click += new System.EventHandler(this.UninstallButton_Click);
             // 
             // InstallerListGroup
             // 
