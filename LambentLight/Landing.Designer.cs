@@ -93,6 +93,7 @@
             this.UninstallButton = new System.Windows.Forms.Button();
             this.UninstallerListBox = new System.Windows.Forms.ListBox();
             this.AddToConfigCheckBox = new System.Windows.Forms.CheckBox();
+            this.RemoveFromConfigCheckBox = new System.Windows.Forms.CheckBox();
             this.BuildsGroup.SuspendLayout();
             this.DataGroup.SuspendLayout();
             this.TopStrip.SuspendLayout();
@@ -561,6 +562,7 @@
             // 
             // FolderCreationGroupBox
             // 
+            this.FolderCreationGroupBox.Controls.Add(this.RemoveFromConfigCheckBox);
             this.FolderCreationGroupBox.Controls.Add(this.AddToConfigCheckBox);
             this.FolderCreationGroupBox.Controls.Add(this.CreateConfigCheckBox);
             this.FolderCreationGroupBox.Controls.Add(this.DownloadScriptsCheckBox);
@@ -574,7 +576,7 @@
             // CreateConfigCheckBox
             // 
             this.CreateConfigCheckBox.AutoSize = true;
-            this.CreateConfigCheckBox.Location = new System.Drawing.Point(6, 42);
+            this.CreateConfigCheckBox.Location = new System.Drawing.Point(6, 41);
             this.CreateConfigCheckBox.Name = "CreateConfigCheckBox";
             this.CreateConfigCheckBox.Size = new System.Drawing.Size(276, 17);
             this.CreateConfigCheckBox.TabIndex = 1;
@@ -821,13 +823,24 @@
             // AddToConfigCheckBox
             // 
             this.AddToConfigCheckBox.AutoSize = true;
-            this.AddToConfigCheckBox.Location = new System.Drawing.Point(6, 65);
+            this.AddToConfigCheckBox.Location = new System.Drawing.Point(6, 63);
             this.AddToConfigCheckBox.Name = "AddToConfigCheckBox";
             this.AddToConfigCheckBox.Size = new System.Drawing.Size(319, 17);
             this.AddToConfigCheckBox.TabIndex = 2;
             this.AddToConfigCheckBox.Text = "Set the Installed Resource to auto start in the configuration file";
             this.AddToConfigCheckBox.UseVisualStyleBackColor = true;
             this.AddToConfigCheckBox.CheckedChanged += new System.EventHandler(this.AddToConfigCheckBox_CheckedChanged);
+            // 
+            // RemoveFromConfigCheckBox
+            // 
+            this.RemoveFromConfigCheckBox.AutoSize = true;
+            this.RemoveFromConfigCheckBox.Location = new System.Drawing.Point(6, 85);
+            this.RemoveFromConfigCheckBox.Name = "RemoveFromConfigCheckBox";
+            this.RemoveFromConfigCheckBox.Size = new System.Drawing.Size(324, 17);
+            this.RemoveFromConfigCheckBox.TabIndex = 3;
+            this.RemoveFromConfigCheckBox.Text = "After uninstalling the Resource, remove it from the configuration";
+            this.RemoveFromConfigCheckBox.UseVisualStyleBackColor = true;
+            this.RemoveFromConfigCheckBox.CheckedChanged += new System.EventHandler(this.RemoveFromConfigCheckBox_CheckedChanged);
             // 
             // Landing
             // 
@@ -945,6 +958,7 @@
         private System.Windows.Forms.Button UninstallButton;
         private System.Windows.Forms.ListBox UninstallerListBox;
         private System.Windows.Forms.CheckBox AddToConfigCheckBox;
+        private System.Windows.Forms.CheckBox RemoveFromConfigCheckBox;
     }
 }
 

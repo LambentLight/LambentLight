@@ -217,5 +217,17 @@ namespace LambentLight.Properties {
                 this["AddToConfig"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool RemoveFromConfig {
+            get {
+                return ((bool)(this["RemoveFromConfig"]));
+            }
+            set {
+                this["RemoveFromConfig"] = value;
+            }
+        }
     }
 }

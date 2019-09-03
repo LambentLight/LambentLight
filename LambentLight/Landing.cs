@@ -312,6 +312,7 @@ namespace LambentLight
             DownloadScriptsCheckBox.Checked = Settings.Default.DownloadScripts;
             CreateConfigCheckBox.Checked = Settings.Default.CreateConfig;
             AddToConfigCheckBox.Checked = Settings.Default.AddToConfig;
+            RemoveFromConfigCheckBox.Checked = Settings.Default.RemoveFromConfig;
 
             RestartEveryCheckBox.Checked = Settings.Default.RestartEvery;
             RestartAtCheckBox.Checked = Settings.Default.RestartAt;
@@ -385,6 +386,13 @@ namespace LambentLight
         {
             // Save the curent status on the settings
             Settings.Default.AddToConfig = AddToConfigCheckBox.Checked;
+            Settings.Default.Save();
+        }
+
+        private void RemoveFromConfigCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            // Save the curent status on the settings
+            Settings.Default.RemoveFromConfig = RemoveFromConfigCheckBox.Checked;
             Settings.Default.Save();
         }
 
