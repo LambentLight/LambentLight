@@ -185,31 +185,7 @@ namespace LambentLight
 
         #endregion
 
-        #region Resource Installer
-
-        private void ResourcesListBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            // If there is something selected
-            if (InstallerListBox.SelectedItem != null)
-            {
-                // Add the builds to our version ListBox
-                VersionsListBox.Fill(((Resource)InstallerListBox.SelectedItem).Versions);
-            }
-            // Otherwise
-            else
-            {
-                // Wipe the Versions
-                VersionsListBox.Items.Clear();
-                // And disable the install button
-                InstallButton.Enabled = false;
-            }
-        }
-
-        private void VersionsListBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            // If there is a version to install, enable the button
-            InstallButton.Enabled = VersionsListBox.SelectedItem != null;
-        }
+        #region Resources - Uninstaller
 
         private void UninstallerListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -240,7 +216,35 @@ namespace LambentLight
             UninstallerListBox.Fill(((DataFolder)DataBox.SelectedItem).InstalledResources);
         }
 
-        private void RefreshButton_Click(object sender, EventArgs e)
+        #endregion
+
+        #region Resources - Installer
+
+        private void InstallerListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // If there is something selected
+            if (InstallerListBox.SelectedItem != null)
+            {
+                // Add the builds to our version ListBox
+                VersionsListBox.Fill(((Resource)InstallerListBox.SelectedItem).Versions);
+            }
+            // Otherwise
+            else
+            {
+                // Wipe the Versions
+                VersionsListBox.Items.Clear();
+                // And disable the install button
+                InstallButton.Enabled = false;
+            }
+        }
+
+        private void VersionsListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // If there is a version to install, enable the button
+            InstallButton.Enabled = VersionsListBox.SelectedItem != null;
+        }
+
+        private void RefreshInstallerButton_Click(object sender, EventArgs e)
         {
             // Disable the install button
             InstallButton.Enabled = false;

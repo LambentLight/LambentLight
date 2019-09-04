@@ -388,7 +388,7 @@
             this.RefreshInstallButton.TabIndex = 2;
             this.RefreshInstallButton.Text = "Refresh";
             this.RefreshInstallButton.UseVisualStyleBackColor = true;
-            this.RefreshInstallButton.Click += new System.EventHandler(this.RefreshButton_Click);
+            this.RefreshInstallButton.Click += new System.EventHandler(this.RefreshInstallerButton_Click);
             // 
             // VersionsListBox
             // 
@@ -411,7 +411,7 @@
             this.InstallerListBox.Name = "InstallerListBox";
             this.InstallerListBox.Size = new System.Drawing.Size(250, 212);
             this.InstallerListBox.TabIndex = 0;
-            this.InstallerListBox.SelectedIndexChanged += new System.EventHandler(this.ResourcesListBox_SelectedIndexChanged);
+            this.InstallerListBox.SelectedIndexChanged += new System.EventHandler(this.InstallerListBox_SelectedIndexChanged);
             // 
             // ConfigurationTab
             // 
