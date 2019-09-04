@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace LambentLight
@@ -295,9 +296,13 @@ namespace LambentLight
                 Logger.Error("You need to select a Server Data folder!");
                 return;
             }
-            
+
+            // Cast the data folder and resource to their real values
+            DataFolder Folder = (DataFolder)DataBox.SelectedItem;
+            Resource NewResource = (Resource)InstallerListBox.SelectedItem;
+
             // Get all of the requirements by the selected resource
-            Dictionary<Resource, Managers.Version> Collected = ResourceManager.GetRequirements((Resource)InstallerListBox.SelectedItem, (Managers.Version)VersionsListBox.SelectedItem);
+            Dictionary<Resource, Managers.Version> Collected = ResourceManager.GetRequirements(NewResource, (Managers.Version)VersionsListBox.SelectedItem);
             // Create the readable list of resources
             string ReadableResources = string.Join(" ", Collected.Select(x => $"{x.Key.Name}-{x.Value.ReadableVersion}"));
 
@@ -308,7 +313,24 @@ namespace LambentLight
             foreach (KeyValuePair<Resource, Managers.Version> Requirement in Collected)
             {
                 // And install it
-                await ((DataFolder)DataBox.SelectedItem).InstallResource(Requirement.Key, Requirement.Value);
+                await Folder.InstallResource(Requirement.Key, Requirement.Value);
+            }
+
+            // If the user wants to auto-start the resource
+            if (Settings.Default.AddToConfig)
+            {
+                // If the resource is already set to auto start
+                if (Regex.IsMatch(Folder.Configuration, string.Format(Patterns.Resource, NewResource.Folder)))
+                {
+                    // Notify the user
+                    Logger.Warn("The resource '{0}' is already on the configuration set to auto start", ((Resource)InstallerListBox.SelectedItem).Folder);
+                }
+                // Otherwise
+                else
+                {
+                    // Set the new installed resourced to auto start
+                    Folder.Configuration = Folder.Configuration + $"start {NewResource.Folder}" + Environment.NewLine;
+                }
             }
 
             // Notify that we have installed all of the resources

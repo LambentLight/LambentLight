@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -51,7 +52,20 @@ namespace LambentLight.Managers
             // If the resource exists and is present
             if (IsPresent)
             {
-                // Remove it
+                // If the user wants to remove the configuration value during the uninstall process
+                if (Settings.Default.RemoveFromConfig)
+                {
+                    // Create the RegEx pattern for this specific resource
+                    string Pattern = string.Format(Patterns.Resource, Name);
+                    // If there is a match inside of the configuration
+                    if (Regex.IsMatch(Source.Configuration, Pattern))
+                    {
+                        // Remove it
+                        Source.Configuration = Regex.Replace(Source.Configuration, Pattern, string.Empty);
+                    }
+                }
+
+                // Delete the resource
                 Directory.Delete(Location, true);
                 // And notify the user
                 Logger.Warn("Removing existing version of {0} at '{1}' (from Data Folder '{2}')", Name, Location, Source.Name);
