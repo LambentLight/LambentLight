@@ -8,6 +8,6 @@
         /// <summary>
         /// Pattern for finding a resource inside a configuration file.
         /// </summary>
-        public static string Resource = "start {0}*\n";
+        public static string Resource = "(\n|\r|\r\n)start {0}";
     }
 }
