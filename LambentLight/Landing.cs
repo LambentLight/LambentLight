@@ -226,10 +226,24 @@ namespace LambentLight
 
         private void UninstallButton_Click(object sender, EventArgs e)
         {
-            // Remove the selected resource
-            ((InstalledResource)UninstallerListBox.SelectedItem).Dispose();
-            // And update the list of installed resources
-            UninstallerListBox.Fill(((DataFolder)DataBox.SelectedItem).InstalledResources);
+            // Get the resource that we are trying to uninstall
+            InstalledResource Installed = ((InstalledResource)UninstallerListBox.SelectedItem);
+            // Try to find the resource with the same folder as the one to be installed
+            Resource Found = ResourceManager.Resources.Where(x => x.Folder.ToLower() == Installed.Name.ToLower()).FirstOrDefault();
+            // Select the correct name for the resource
+            string Name = Found == null ? Installed.Name : Found.Name;
+
+            // Ask the user if he really wants to remove the resource
+            DialogResult Result = MessageBox.Show($"Are you sure that you want to uninstall {Name}?", "Uninstall Confirmation", MessageBoxButtons.YesNo);
+
+            // If the user really wants to remove the game
+            if (Result == DialogResult.Yes)
+            {
+                // Remove the selected resource
+                Installed.Dispose();
+                // And update the list of installed resources
+                UninstallerListBox.Fill(((DataFolder)DataBox.SelectedItem).InstalledResources);
+            }
         }
 
         #endregion
