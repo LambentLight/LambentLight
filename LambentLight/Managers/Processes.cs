@@ -123,7 +123,6 @@ namespace LambentLight.Managers
             // Create and save the new class that contains the information that we need
             Server = GenerateClass(build, data);
 
-
             // Add the event to check if the server has exited
             AutoRestart.Interval = 100;
             AutoRestart.Tick += RestartOnBadExitEvent;
