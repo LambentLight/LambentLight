@@ -44,7 +44,7 @@ The [.NET Framework 4.5.2 Runtime](https://dotnet.microsoft.com/download/dotnet-
 [appveyor-img]: https://img.shields.io/appveyor/ci/justalemon/lambentlight.svg?label=appveyor
 [appveyor-url]: https://ci.appveyor.com/project/justalemon/lambentlight
 [codefactor-img]: https://www.codefactor.io/repository/github/lambentlight/lambentlight/badge
-[codefactor-url]: https://discord.gg/Cf6sspj
+[codefactor-url]: https://www.codefactor.io/repository/github/justalemon/lambentlight
 [discord-img]: https://img.shields.io/badge/discord-join-7289DA.svg
-[discord-url]: https://www.codefactor.io/repository/github/justalemon/lambentlight
+[discord-url]: https://discord.gg/Cf6sspj
 [releases-url]: https://github.com/LambentLight/LambentLight/releases
