@@ -80,6 +80,10 @@ namespace LambentLight.Managers
         /// </summary>
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
         /// <summary>
+        /// The secure Random Number Generator for RCON passwords.
+        /// </summary>
+        private static readonly RNGCryptoServiceProvider RNG = new RNGCryptoServiceProvider();
+        /// <summary>
         /// The name of the folder.
         /// </summary>
         public string Name { get; private set; }
@@ -171,8 +175,6 @@ namespace LambentLight.Managers
         /// <returns>The secure string with the specified length.</returns>
         private static string GenerateSecureString(int Length)
         {
-            // Create a new instance of RNGCryptoServiceProvider
-            RNGCryptoServiceProvider RNG = new RNGCryptoServiceProvider();
             // Create a place to store the output
             byte[] Output = new byte[Length];
             // Create the random string as bytes
