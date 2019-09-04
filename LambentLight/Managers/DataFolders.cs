@@ -142,7 +142,7 @@ namespace LambentLight.Managers
                 // If there is a server configuration file
                 if (HasConfiguration)
                 {
-                    return string.Join(Environment.NewLine, File.ReadAllLines(Path.Combine(Absolute, "server.cfg")));
+                    return string.Join(Environment.NewLine, File.ReadAllLines(Path.Combine(Absolute, "server.cfg"))) + Environment.NewLine;
                 }
                 // Otherwise, return a generic string
                 return "# This server data folder does not has a configuration file";
