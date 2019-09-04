@@ -120,11 +120,8 @@ namespace LambentLight.Managers
                 // Iterate over the directories in the resources folder
                 foreach (string Folder in Directory.EnumerateDirectories(Resources, "*", SearchOption.AllDirectories))
                 {
-                    // Get the literal directory name
-                    string Name = Path.GetFileNameWithoutExtension(Folder);
-
-                    // If the folder name does not starts with [ and ]
-                    if (!Name.StartsWith("[") && !Name.EndsWith("]"))
+                    // If the folder contains a resource metadata (__resource.lua)
+                    if (File.Exists(Path.Combine(Folder, "__resource.lua")))
                     {
                         // Add it
                         TempResources.Add(new InstalledResource(this, Folder));
