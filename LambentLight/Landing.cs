@@ -95,7 +95,7 @@ namespace LambentLight
             else if (e.TabPage == ResourcesTab && DataBox.SelectedItem != null && ((DataFolder)DataBox.SelectedItem).Exists)
             {
                 // Update the list of installed resources
-                UninstallerListBox.Fill(((DataFolder)DataBox.SelectedItem).InstalledResources);
+                RefreshInstalledResources();
             }
         }
 
@@ -192,6 +192,8 @@ namespace LambentLight
             BuildsBox.Fill(BuildManager.Builds, true);
         }
 
+        private void DataBox_SelectedIndexChanged(object sender, EventArgs e) => RefreshInstalledResources();
+
         private void FolderRefreshButton_Click(object sender, EventArgs e)
         {
             // Refresh the folders of data
@@ -214,14 +216,16 @@ namespace LambentLight
             // Disable the uninstall button
             UninstallButton.Enabled = false;
 
-            // Return if there is no server data folder selected
+            // If there is no server data folder selected
             if (DataBox.SelectedItem == null)
             {
+                // Wipe all of the items and return
+                UninstallerListBox.Items.Clear();
                 return;
             }
 
             // And add the updated set of resource
-            UninstallerListBox.Fill(((DataFolder)DataBox.SelectedItem).InstalledResources);
+            RefreshInstalledResources();
         }
 
         private void UninstallButton_Click(object sender, EventArgs e)
@@ -524,6 +528,24 @@ namespace LambentLight
                 // And reload them
                 ReloadSettings();
             }
+        }
+
+        #endregion
+
+        #region Tools
+
+        private void RefreshInstalledResources()
+        {
+            // If there is no server data folder selected
+            if (DataBox.SelectedItem == null)
+            {
+                // Wipe all of the items and return
+                UninstallerListBox.Items.Clear();
+                return;
+            }
+
+            // Update the list of installed resources
+            UninstallerListBox.Fill(((DataFolder)DataBox.SelectedItem).InstalledResources);
         }
 
         #endregion

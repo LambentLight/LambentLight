@@ -180,6 +180,7 @@
             this.DataBox.Name = "DataBox";
             this.DataBox.Size = new System.Drawing.Size(287, 21);
             this.DataBox.TabIndex = 0;
+            this.DataBox.SelectedIndexChanged += new System.EventHandler(this.DataBox_SelectedIndexChanged);
             // 
             // TopStrip
             // 
