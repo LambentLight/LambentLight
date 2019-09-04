@@ -83,6 +83,22 @@ namespace LambentLight
             ReloadSettings();
         }
 
+        private void Tabs_Selected(object sender, TabControlEventArgs e)
+        {
+            // If the user selected the Server Configuration tab and there is a data folder selected
+            if (e.TabPage == ConfigurationTab && DataBox.SelectedItem != null)
+            {
+                // Set the text to the configuration of the server
+                ConfigTextBox.Text = ((DataFolder)DataBox.SelectedItem).Configuration;
+            }
+            // If the user selected the Resources tab and there is a data folder selected and it exists
+            else if (e.TabPage == ResourcesTab && DataBox.SelectedItem != null && ((DataFolder)DataBox.SelectedItem).Exists)
+            {
+                // Update the list of installed resources
+                UninstallerListBox.Fill(((DataFolder)DataBox.SelectedItem).InstalledResources);
+            }
+        }
+
         #endregion
 
         #region Top Strip
@@ -284,16 +300,6 @@ namespace LambentLight
         #endregion
 
         #region Server Configuration
-
-        private void Tabs_Selected(object sender, TabControlEventArgs e)
-        {
-            // If the user selected the Server Configuration tab and there is a data folder selected
-            if (e.TabPage == ConfigurationTab && DataBox.SelectedItem != null)
-            {
-                // Set the text to the configuration of the server
-                ConfigTextBox.Text = ((DataFolder)DataBox.SelectedItem).Configuration;
-            }
-        }
 
         private void LoadButton_Click(object sender, EventArgs e)
         {
