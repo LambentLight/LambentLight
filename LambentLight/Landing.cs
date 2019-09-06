@@ -1,4 +1,4 @@
-using LambentLight.Extensions;
+﻿using LambentLight.Extensions;
 using LambentLight.Managers;
 using LambentLight.Properties;
 using LambentLight.Targets;
@@ -93,7 +93,7 @@ namespace LambentLight
                 ConfigTextBox.Text = ((DataFolder)DataBox.SelectedItem).Configuration;
             }
             // If the user selected the Resources tab and there is a data folder selected and it exists
-            else if (e.TabPage == ResourcesTab && DataBox.SelectedItem != null && ((DataFolder)DataBox.SelectedItem).Exists)
+            else if (e.TabPage == ResourcesTab && DataBox.SelectedItem != null)
             {
                 // Update the list of installed resources
                 RefreshInstalledResources();
@@ -212,22 +212,7 @@ namespace LambentLight
             UninstallButton.Enabled = UninstallerListBox.SelectedItem != null;
         }
 
-        private void RefreshUninstallerButton_Click(object sender, EventArgs e)
-        {
-            // Disable the uninstall button
-            UninstallButton.Enabled = false;
-
-            // If there is no server data folder selected
-            if (DataBox.SelectedItem == null)
-            {
-                // Wipe all of the items and return
-                UninstallerListBox.Items.Clear();
-                return;
-            }
-
-            // And add the updated set of resource
-            RefreshInstalledResources();
-        }
+        private void RefreshUninstallerButton_Click(object sender, EventArgs e) => RefreshInstalledResources();
 
         private void UninstallButton_Click(object sender, EventArgs e)
         {
@@ -247,7 +232,7 @@ namespace LambentLight
                 // Remove the selected resource
                 Installed.Dispose();
                 // And update the list of installed resources
-                UninstallerListBox.Fill(((DataFolder)DataBox.SelectedItem).InstalledResources);
+                RefreshInstalledResources();
             }
         }
 
