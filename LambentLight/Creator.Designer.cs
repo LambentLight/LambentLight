@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Creator));
             this.CreatorTabControl = new System.Windows.Forms.TabControl();
-            this.IntroductionTabPage = new System.Windows.Forms.TabPage();
+            this.BasicsTabPage = new System.Windows.Forms.TabPage();
             this.DownloadGroupBox = new System.Windows.Forms.GroupBox();
             this.DownloadCheckBox = new System.Windows.Forms.CheckBox();
             this.NameGroupBox = new System.Windows.Forms.GroupBox();
@@ -47,7 +47,7 @@
             this.SHVGroupBox = new System.Windows.Forms.GroupBox();
             this.SHVCheckBox = new System.Windows.Forms.CheckBox();
             this.CreatorTabControl.SuspendLayout();
-            this.IntroductionTabPage.SuspendLayout();
+            this.BasicsTabPage.SuspendLayout();
             this.DownloadGroupBox.SuspendLayout();
             this.NameGroupBox.SuspendLayout();
             this.SecurityTabPage.SuspendLayout();
@@ -57,7 +57,7 @@
             // 
             // CreatorTabControl
             // 
-            this.CreatorTabControl.Controls.Add(this.IntroductionTabPage);
+            this.CreatorTabControl.Controls.Add(this.BasicsTabPage);
             this.CreatorTabControl.Controls.Add(this.SecurityTabPage);
             this.CreatorTabControl.Dock = System.Windows.Forms.DockStyle.Top;
             this.CreatorTabControl.Location = new System.Drawing.Point(0, 0);
@@ -67,18 +67,18 @@
             this.CreatorTabControl.TabIndex = 0;
             this.CreatorTabControl.SelectedIndexChanged += new System.EventHandler(this.CreatorTabControl_SelectedIndexChanged);
             // 
-            // IntroductionTabPage
+            // BasicsTabPage
             // 
-            this.IntroductionTabPage.Controls.Add(this.DownloadGroupBox);
-            this.IntroductionTabPage.Controls.Add(this.NameGroupBox);
-            this.IntroductionTabPage.Controls.Add(this.IntroductionLabel);
-            this.IntroductionTabPage.Location = new System.Drawing.Point(4, 22);
-            this.IntroductionTabPage.Name = "IntroductionTabPage";
-            this.IntroductionTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.IntroductionTabPage.Size = new System.Drawing.Size(424, 310);
-            this.IntroductionTabPage.TabIndex = 0;
-            this.IntroductionTabPage.Text = "Introduction";
-            this.IntroductionTabPage.UseVisualStyleBackColor = true;
+            this.BasicsTabPage.Controls.Add(this.DownloadGroupBox);
+            this.BasicsTabPage.Controls.Add(this.NameGroupBox);
+            this.BasicsTabPage.Controls.Add(this.IntroductionLabel);
+            this.BasicsTabPage.Location = new System.Drawing.Point(4, 22);
+            this.BasicsTabPage.Name = "BasicsTabPage";
+            this.BasicsTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.BasicsTabPage.Size = new System.Drawing.Size(424, 310);
+            this.BasicsTabPage.TabIndex = 0;
+            this.BasicsTabPage.Text = "Basics";
+            this.BasicsTabPage.UseVisualStyleBackColor = true;
             // 
             // DownloadGroupBox
             // 
@@ -258,7 +258,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Data Folder Creator";
             this.CreatorTabControl.ResumeLayout(false);
-            this.IntroductionTabPage.ResumeLayout(false);
+            this.BasicsTabPage.ResumeLayout(false);
             this.DownloadGroupBox.ResumeLayout(false);
             this.DownloadGroupBox.PerformLayout();
             this.NameGroupBox.ResumeLayout(false);
@@ -275,7 +275,7 @@
         #endregion
 
         private System.Windows.Forms.TabControl CreatorTabControl;
-        private System.Windows.Forms.TabPage IntroductionTabPage;
+        private System.Windows.Forms.TabPage BasicsTabPage;
         private System.Windows.Forms.Label IntroductionLabel;
         private System.Windows.Forms.Button SaveButton;
         private System.Windows.Forms.Button CreateButton;
