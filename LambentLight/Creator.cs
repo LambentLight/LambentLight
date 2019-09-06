@@ -16,5 +16,30 @@ namespace LambentLight
         {
             InitializeComponent();
         }
+
+        private void CreateButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void SaveButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CloseButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void PreviousButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void NextButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
