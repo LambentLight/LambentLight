@@ -1,4 +1,4 @@
-namespace LambentLight
+﻿namespace LambentLight
 {
     partial class Creator
     {
@@ -35,6 +35,8 @@ namespace LambentLight
             this.SaveButton = new System.Windows.Forms.Button();
             this.CreateButton = new System.Windows.Forms.Button();
             this.CloseButton = new System.Windows.Forms.Button();
+            this.NextButton = new System.Windows.Forms.Button();
+            this.PreviousButton = new System.Windows.Forms.Button();
             this.CreatorTabControl.SuspendLayout();
             this.IntroductionTabPage.SuspendLayout();
             this.SuspendLayout();
@@ -97,11 +99,31 @@ namespace LambentLight
             this.CloseButton.Text = "Close";
             this.CloseButton.UseVisualStyleBackColor = true;
             // 
+            // NextButton
+            // 
+            this.NextButton.Location = new System.Drawing.Point(388, 342);
+            this.NextButton.Name = "NextButton";
+            this.NextButton.Size = new System.Drawing.Size(75, 23);
+            this.NextButton.TabIndex = 4;
+            this.NextButton.Text = "Next";
+            this.NextButton.UseVisualStyleBackColor = true;
+            // 
+            // PreviousButton
+            // 
+            this.PreviousButton.Location = new System.Drawing.Point(307, 342);
+            this.PreviousButton.Name = "PreviousButton";
+            this.PreviousButton.Size = new System.Drawing.Size(75, 23);
+            this.PreviousButton.TabIndex = 5;
+            this.PreviousButton.Text = "Previous";
+            this.PreviousButton.UseVisualStyleBackColor = true;
+            // 
             // Creator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(475, 376);
+            this.Controls.Add(this.PreviousButton);
+            this.Controls.Add(this.NextButton);
             this.Controls.Add(this.CloseButton);
             this.Controls.Add(this.CreateButton);
             this.Controls.Add(this.SaveButton);
@@ -127,5 +149,7 @@ namespace LambentLight
         private System.Windows.Forms.Button SaveButton;
         private System.Windows.Forms.Button CreateButton;
         private System.Windows.Forms.Button CloseButton;
+        private System.Windows.Forms.Button NextButton;
+        private System.Windows.Forms.Button PreviousButton;
     }
 }
