@@ -1,4 +1,4 @@
-﻿namespace LambentLight
+namespace LambentLight
 {
     partial class Creator
     {
@@ -46,7 +46,7 @@
             this.CreatorTabControl.Location = new System.Drawing.Point(0, 0);
             this.CreatorTabControl.Name = "CreatorTabControl";
             this.CreatorTabControl.SelectedIndex = 0;
-            this.CreatorTabControl.Size = new System.Drawing.Size(259, 336);
+            this.CreatorTabControl.Size = new System.Drawing.Size(475, 336);
             this.CreatorTabControl.TabIndex = 0;
             // 
             // IntroductionTabPage
@@ -55,7 +55,7 @@
             this.IntroductionTabPage.Location = new System.Drawing.Point(4, 22);
             this.IntroductionTabPage.Name = "IntroductionTabPage";
             this.IntroductionTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.IntroductionTabPage.Size = new System.Drawing.Size(251, 310);
+            this.IntroductionTabPage.Size = new System.Drawing.Size(467, 310);
             this.IntroductionTabPage.TabIndex = 0;
             this.IntroductionTabPage.Text = "Introduction";
             this.IntroductionTabPage.UseVisualStyleBackColor = true;
@@ -65,7 +65,7 @@
             this.IntroductionLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.IntroductionLabel.Location = new System.Drawing.Point(3, 3);
             this.IntroductionLabel.Name = "IntroductionLabel";
-            this.IntroductionLabel.Size = new System.Drawing.Size(245, 304);
+            this.IntroductionLabel.Size = new System.Drawing.Size(461, 304);
             this.IntroductionLabel.TabIndex = 0;
             this.IntroductionLabel.Text = resources.GetString("IntroductionLabel.Text");
             this.IntroductionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -101,7 +101,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(259, 376);
+            this.ClientSize = new System.Drawing.Size(475, 376);
             this.Controls.Add(this.CloseButton);
             this.Controls.Add(this.CreateButton);
             this.Controls.Add(this.SaveButton);
