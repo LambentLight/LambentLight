@@ -1,4 +1,4 @@
-﻿namespace LambentLight
+namespace LambentLight
 {
     partial class Creator
     {
@@ -34,9 +34,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(254, 376);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Creator";
-            this.Text = "Creator";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Data Folder Creator";
+            this.CreatorTabControl.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
