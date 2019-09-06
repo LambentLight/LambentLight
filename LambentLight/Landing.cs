@@ -1,4 +1,4 @@
-﻿using LambentLight.Extensions;
+using LambentLight.Extensions;
 using LambentLight.Managers;
 using LambentLight.Properties;
 using LambentLight.Targets;
@@ -560,8 +560,8 @@ namespace LambentLight
 
         private void RefreshInstalledResources()
         {
-            // If there is no server data folder selected
-            if (DataBox.SelectedItem == null)
+            // If there is no server data folder selected or it does not exists
+            if (DataBox.SelectedItem == null || !((DataFolder)DataBox.SelectedItem).Exists)
             {
                 // Wipe all of the items and return
                 UninstallerListBox.Items.Clear();
