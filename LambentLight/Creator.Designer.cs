@@ -1,4 +1,4 @@
-namespace LambentLight
+﻿namespace LambentLight
 {
     partial class Creator
     {
@@ -32,6 +32,9 @@ namespace LambentLight
             this.CreatorTabControl = new System.Windows.Forms.TabControl();
             this.IntroductionTabPage = new System.Windows.Forms.TabPage();
             this.IntroductionLabel = new System.Windows.Forms.Label();
+            this.SaveButton = new System.Windows.Forms.Button();
+            this.CreateButton = new System.Windows.Forms.Button();
+            this.CloseButton = new System.Windows.Forms.Button();
             this.CreatorTabControl.SuspendLayout();
             this.IntroductionTabPage.SuspendLayout();
             this.SuspendLayout();
@@ -67,11 +70,41 @@ namespace LambentLight
             this.IntroductionLabel.Text = resources.GetString("IntroductionLabel.Text");
             this.IntroductionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // SaveButton
+            // 
+            this.SaveButton.Location = new System.Drawing.Point(93, 342);
+            this.SaveButton.Name = "SaveButton";
+            this.SaveButton.Size = new System.Drawing.Size(75, 23);
+            this.SaveButton.TabIndex = 1;
+            this.SaveButton.Text = "Save";
+            this.SaveButton.UseVisualStyleBackColor = true;
+            // 
+            // CreateButton
+            // 
+            this.CreateButton.Location = new System.Drawing.Point(12, 342);
+            this.CreateButton.Name = "CreateButton";
+            this.CreateButton.Size = new System.Drawing.Size(75, 23);
+            this.CreateButton.TabIndex = 2;
+            this.CreateButton.Text = "Create";
+            this.CreateButton.UseVisualStyleBackColor = true;
+            // 
+            // CloseButton
+            // 
+            this.CloseButton.Location = new System.Drawing.Point(174, 342);
+            this.CloseButton.Name = "CloseButton";
+            this.CloseButton.Size = new System.Drawing.Size(75, 23);
+            this.CloseButton.TabIndex = 3;
+            this.CloseButton.Text = "Close";
+            this.CloseButton.UseVisualStyleBackColor = true;
+            // 
             // Creator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(259, 376);
+            this.Controls.Add(this.CloseButton);
+            this.Controls.Add(this.CreateButton);
+            this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.CreatorTabControl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -91,5 +124,8 @@ namespace LambentLight
         private System.Windows.Forms.TabControl CreatorTabControl;
         private System.Windows.Forms.TabPage IntroductionTabPage;
         private System.Windows.Forms.Label IntroductionLabel;
+        private System.Windows.Forms.Button SaveButton;
+        private System.Windows.Forms.Button CreateButton;
+        private System.Windows.Forms.Button CloseButton;
     }
 }
