@@ -68,6 +68,12 @@
   <ItemGroup>
     <Compile Include="Checks.cs" />
     <Compile Include="Compression.cs" />
+    <Compile Include="Creator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Creator.Designer.cs">
+      <DependentUpon>Creator.cs</DependentUpon>
+    </Compile>
     <Compile Include="Downloader.cs" />
     <Compile Include="Locations.cs" />
     <Compile Include="Managers\Builds.cs" />
@@ -86,6 +92,9 @@
     <Compile Include="Managers\Processes.cs" />
     <Compile Include="Targets\BottomStripTarget.cs" />
     <Compile Include="Targets\TextBoxTarget.cs" />
+    <EmbeddedResource Include="Creator.resx">
+      <DependentUpon>Creator.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Landing.resx">
       <DependentUpon>Landing.cs</DependentUpon>
     </EmbeddedResource>
