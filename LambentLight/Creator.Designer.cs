@@ -1,4 +1,4 @@
-namespace LambentLight
+﻿namespace LambentLight
 {
     partial class Creator
     {
@@ -38,8 +38,14 @@ namespace LambentLight
             this.NextButton = new System.Windows.Forms.Button();
             this.PreviousButton = new System.Windows.Forms.Button();
             this.BasicsTabPage = new System.Windows.Forms.TabPage();
+            this.NameGroupBox = new System.Windows.Forms.GroupBox();
+            this.NameTextBox = new System.Windows.Forms.TextBox();
+            this.DownloadGroupBox = new System.Windows.Forms.GroupBox();
+            this.DownloadCheckBox = new System.Windows.Forms.CheckBox();
             this.CreatorTabControl.SuspendLayout();
             this.IntroductionTabPage.SuspendLayout();
+            this.NameGroupBox.SuspendLayout();
+            this.DownloadGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // CreatorTabControl
@@ -56,21 +62,23 @@ namespace LambentLight
             // 
             // IntroductionTabPage
             // 
+            this.IntroductionTabPage.Controls.Add(this.DownloadGroupBox);
+            this.IntroductionTabPage.Controls.Add(this.NameGroupBox);
             this.IntroductionTabPage.Controls.Add(this.IntroductionLabel);
             this.IntroductionTabPage.Location = new System.Drawing.Point(4, 22);
             this.IntroductionTabPage.Name = "IntroductionTabPage";
             this.IntroductionTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.IntroductionTabPage.Size = new System.Drawing.Size(467, 310);
+            this.IntroductionTabPage.Size = new System.Drawing.Size(424, 310);
             this.IntroductionTabPage.TabIndex = 0;
             this.IntroductionTabPage.Text = "Introduction";
             this.IntroductionTabPage.UseVisualStyleBackColor = true;
             // 
             // IntroductionLabel
             // 
-            this.IntroductionLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.IntroductionLabel.Dock = System.Windows.Forms.DockStyle.Top;
             this.IntroductionLabel.Location = new System.Drawing.Point(3, 3);
             this.IntroductionLabel.Name = "IntroductionLabel";
-            this.IntroductionLabel.Size = new System.Drawing.Size(461, 304);
+            this.IntroductionLabel.Size = new System.Drawing.Size(418, 198);
             this.IntroductionLabel.TabIndex = 0;
             this.IntroductionLabel.Text = resources.GetString("IntroductionLabel.Text");
             this.IntroductionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -142,6 +150,47 @@ namespace LambentLight
             this.BasicsTabPage.Text = "Basics";
             this.BasicsTabPage.UseVisualStyleBackColor = true;
             // 
+            // NameGroupBox
+            // 
+            this.NameGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.NameGroupBox.Controls.Add(this.NameTextBox);
+            this.NameGroupBox.Location = new System.Drawing.Point(6, 204);
+            this.NameGroupBox.Name = "NameGroupBox";
+            this.NameGroupBox.Size = new System.Drawing.Size(412, 49);
+            this.NameGroupBox.TabIndex = 1;
+            this.NameGroupBox.TabStop = false;
+            this.NameGroupBox.Text = "Name of your Data Folder (Required)";
+            // 
+            // NameTextBox
+            // 
+            this.NameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.NameTextBox.Location = new System.Drawing.Point(6, 19);
+            this.NameTextBox.Name = "NameTextBox";
+            this.NameTextBox.Size = new System.Drawing.Size(400, 20);
+            this.NameTextBox.TabIndex = 0;
+            // 
+            // DownloadGroupBox
+            // 
+            this.DownloadGroupBox.Controls.Add(this.DownloadCheckBox);
+            this.DownloadGroupBox.Location = new System.Drawing.Point(6, 259);
+            this.DownloadGroupBox.Name = "DownloadGroupBox";
+            this.DownloadGroupBox.Size = new System.Drawing.Size(412, 45);
+            this.DownloadGroupBox.TabIndex = 2;
+            this.DownloadGroupBox.TabStop = false;
+            this.DownloadGroupBox.Text = "Download Required Scripts (Recommended)";
+            // 
+            // DownloadCheckBox
+            // 
+            this.DownloadCheckBox.AutoSize = true;
+            this.DownloadCheckBox.Location = new System.Drawing.Point(6, 19);
+            this.DownloadCheckBox.Name = "DownloadCheckBox";
+            this.DownloadCheckBox.Size = new System.Drawing.Size(308, 17);
+            this.DownloadCheckBox.TabIndex = 0;
+            this.DownloadCheckBox.Text = "Download Vanilla FiveM scripts required for running a server";
+            this.DownloadCheckBox.UseVisualStyleBackColor = true;
+            // 
             // Creator
             // 
             this.AcceptButton = this.CreateButton;
@@ -164,6 +213,10 @@ namespace LambentLight
             this.Text = "Data Folder Creator";
             this.CreatorTabControl.ResumeLayout(false);
             this.IntroductionTabPage.ResumeLayout(false);
+            this.NameGroupBox.ResumeLayout(false);
+            this.NameGroupBox.PerformLayout();
+            this.DownloadGroupBox.ResumeLayout(false);
+            this.DownloadGroupBox.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -179,5 +232,9 @@ namespace LambentLight
         private System.Windows.Forms.Button NextButton;
         private System.Windows.Forms.Button PreviousButton;
         private System.Windows.Forms.TabPage BasicsTabPage;
+        private System.Windows.Forms.GroupBox NameGroupBox;
+        private System.Windows.Forms.TextBox NameTextBox;
+        private System.Windows.Forms.GroupBox DownloadGroupBox;
+        private System.Windows.Forms.CheckBox DownloadCheckBox;
     }
 }
