@@ -134,6 +134,14 @@ namespace LambentLight
 
         private async void CreateItem_Click(object sender, EventArgs e)
         {
+            // Create the new form
+            Creator CreatorForm = new Creator();
+            // Show the form as a dialog
+            CreatorForm.ShowDialog();
+            // Finally, dispose the dialog
+            CreatorForm.Dispose();
+
+            /*
             // Ask the user for inputing a server data folder name
             string FolderName = Microsoft.VisualBasic.Interaction.InputBox("Please insert a name for the new Server Data Folder:", "New Server Data Folder");
             // Lock the fields
@@ -151,6 +159,7 @@ namespace LambentLight
             }
             // Then unlock the fields
             Locked = false;
+            */
         }
 
         private void ExitItem_Click(object sender, EventArgs e)
