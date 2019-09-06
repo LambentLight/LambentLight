@@ -1,4 +1,4 @@
-﻿namespace LambentLight
+namespace LambentLight
 {
     partial class Creator
     {
@@ -50,7 +50,7 @@
             this.CreatorTabControl.Location = new System.Drawing.Point(0, 0);
             this.CreatorTabControl.Name = "CreatorTabControl";
             this.CreatorTabControl.SelectedIndex = 0;
-            this.CreatorTabControl.Size = new System.Drawing.Size(475, 336);
+            this.CreatorTabControl.Size = new System.Drawing.Size(432, 336);
             this.CreatorTabControl.TabIndex = 0;
             this.CreatorTabControl.SelectedIndexChanged += new System.EventHandler(this.CreatorTabControl_SelectedIndexChanged);
             // 
@@ -77,6 +77,7 @@
             // 
             // SaveButton
             // 
+            this.SaveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.SaveButton.Location = new System.Drawing.Point(93, 342);
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size(75, 23);
@@ -87,6 +88,7 @@
             // 
             // CreateButton
             // 
+            this.CreateButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.CreateButton.Location = new System.Drawing.Point(12, 342);
             this.CreateButton.Name = "CreateButton";
             this.CreateButton.Size = new System.Drawing.Size(75, 23);
@@ -97,6 +99,7 @@
             // 
             // CloseButton
             // 
+            this.CloseButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.CloseButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.CloseButton.Location = new System.Drawing.Point(174, 342);
             this.CloseButton.Name = "CloseButton";
@@ -108,7 +111,8 @@
             // 
             // NextButton
             // 
-            this.NextButton.Location = new System.Drawing.Point(388, 342);
+            this.NextButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.NextButton.Location = new System.Drawing.Point(345, 342);
             this.NextButton.Name = "NextButton";
             this.NextButton.Size = new System.Drawing.Size(75, 23);
             this.NextButton.TabIndex = 4;
@@ -118,8 +122,9 @@
             // 
             // PreviousButton
             // 
+            this.PreviousButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.PreviousButton.Enabled = false;
-            this.PreviousButton.Location = new System.Drawing.Point(307, 342);
+            this.PreviousButton.Location = new System.Drawing.Point(264, 342);
             this.PreviousButton.Name = "PreviousButton";
             this.PreviousButton.Size = new System.Drawing.Size(75, 23);
             this.PreviousButton.TabIndex = 5;
@@ -132,7 +137,7 @@
             this.BasicsTabPage.Location = new System.Drawing.Point(4, 22);
             this.BasicsTabPage.Name = "BasicsTabPage";
             this.BasicsTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.BasicsTabPage.Size = new System.Drawing.Size(467, 310);
+            this.BasicsTabPage.Size = new System.Drawing.Size(424, 310);
             this.BasicsTabPage.TabIndex = 1;
             this.BasicsTabPage.Text = "Basics";
             this.BasicsTabPage.UseVisualStyleBackColor = true;
@@ -143,7 +148,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.CloseButton;
-            this.ClientSize = new System.Drawing.Size(475, 376);
+            this.ClientSize = new System.Drawing.Size(432, 376);
             this.Controls.Add(this.PreviousButton);
             this.Controls.Add(this.NextButton);
             this.Controls.Add(this.CloseButton);
