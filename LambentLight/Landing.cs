@@ -335,6 +335,8 @@ namespace LambentLight
 
             // Notify that we have installed all of the resources
             Logger.Info("Successfully installed {0}", ReadableResources);
+            // And finally, update the list of installed resources
+            RefreshInstalledResources();
         }
 
         #endregion
