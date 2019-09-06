@@ -31,27 +31,34 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Creator));
             this.CreatorTabControl = new System.Windows.Forms.TabControl();
             this.IntroductionTabPage = new System.Windows.Forms.TabPage();
+            this.DownloadGroupBox = new System.Windows.Forms.GroupBox();
+            this.DownloadCheckBox = new System.Windows.Forms.CheckBox();
+            this.NameGroupBox = new System.Windows.Forms.GroupBox();
+            this.NameTextBox = new System.Windows.Forms.TextBox();
             this.IntroductionLabel = new System.Windows.Forms.Label();
+            this.SecurityTabPage = new System.Windows.Forms.TabPage();
             this.SaveButton = new System.Windows.Forms.Button();
             this.CreateButton = new System.Windows.Forms.Button();
             this.CloseButton = new System.Windows.Forms.Button();
             this.NextButton = new System.Windows.Forms.Button();
             this.PreviousButton = new System.Windows.Forms.Button();
-            this.BasicsTabPage = new System.Windows.Forms.TabPage();
-            this.NameGroupBox = new System.Windows.Forms.GroupBox();
-            this.NameTextBox = new System.Windows.Forms.TextBox();
-            this.DownloadGroupBox = new System.Windows.Forms.GroupBox();
-            this.DownloadCheckBox = new System.Windows.Forms.CheckBox();
+            this.RCONGroupBox = new System.Windows.Forms.GroupBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.SHVGroupBox = new System.Windows.Forms.GroupBox();
+            this.SHVCheckBox = new System.Windows.Forms.CheckBox();
             this.CreatorTabControl.SuspendLayout();
             this.IntroductionTabPage.SuspendLayout();
-            this.NameGroupBox.SuspendLayout();
             this.DownloadGroupBox.SuspendLayout();
+            this.NameGroupBox.SuspendLayout();
+            this.SecurityTabPage.SuspendLayout();
+            this.RCONGroupBox.SuspendLayout();
+            this.SHVGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // CreatorTabControl
             // 
             this.CreatorTabControl.Controls.Add(this.IntroductionTabPage);
-            this.CreatorTabControl.Controls.Add(this.BasicsTabPage);
+            this.CreatorTabControl.Controls.Add(this.SecurityTabPage);
             this.CreatorTabControl.Dock = System.Windows.Forms.DockStyle.Top;
             this.CreatorTabControl.Location = new System.Drawing.Point(0, 0);
             this.CreatorTabControl.Name = "CreatorTabControl";
@@ -73,6 +80,47 @@
             this.IntroductionTabPage.Text = "Introduction";
             this.IntroductionTabPage.UseVisualStyleBackColor = true;
             // 
+            // DownloadGroupBox
+            // 
+            this.DownloadGroupBox.Controls.Add(this.DownloadCheckBox);
+            this.DownloadGroupBox.Location = new System.Drawing.Point(6, 259);
+            this.DownloadGroupBox.Name = "DownloadGroupBox";
+            this.DownloadGroupBox.Size = new System.Drawing.Size(412, 45);
+            this.DownloadGroupBox.TabIndex = 2;
+            this.DownloadGroupBox.TabStop = false;
+            this.DownloadGroupBox.Text = "Download Required Scripts (Recommended)";
+            // 
+            // DownloadCheckBox
+            // 
+            this.DownloadCheckBox.AutoSize = true;
+            this.DownloadCheckBox.Location = new System.Drawing.Point(6, 19);
+            this.DownloadCheckBox.Name = "DownloadCheckBox";
+            this.DownloadCheckBox.Size = new System.Drawing.Size(308, 17);
+            this.DownloadCheckBox.TabIndex = 0;
+            this.DownloadCheckBox.Text = "Download Vanilla FiveM scripts required for running a server";
+            this.DownloadCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // NameGroupBox
+            // 
+            this.NameGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.NameGroupBox.Controls.Add(this.NameTextBox);
+            this.NameGroupBox.Location = new System.Drawing.Point(6, 204);
+            this.NameGroupBox.Name = "NameGroupBox";
+            this.NameGroupBox.Size = new System.Drawing.Size(412, 49);
+            this.NameGroupBox.TabIndex = 1;
+            this.NameGroupBox.TabStop = false;
+            this.NameGroupBox.Text = "Name of your Data Folder (Required)";
+            // 
+            // NameTextBox
+            // 
+            this.NameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.NameTextBox.Location = new System.Drawing.Point(6, 19);
+            this.NameTextBox.Name = "NameTextBox";
+            this.NameTextBox.Size = new System.Drawing.Size(400, 20);
+            this.NameTextBox.TabIndex = 0;
+            // 
             // IntroductionLabel
             // 
             this.IntroductionLabel.Dock = System.Windows.Forms.DockStyle.Top;
@@ -82,6 +130,18 @@
             this.IntroductionLabel.TabIndex = 0;
             this.IntroductionLabel.Text = resources.GetString("IntroductionLabel.Text");
             this.IntroductionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // SecurityTabPage
+            // 
+            this.SecurityTabPage.Controls.Add(this.SHVGroupBox);
+            this.SecurityTabPage.Controls.Add(this.RCONGroupBox);
+            this.SecurityTabPage.Location = new System.Drawing.Point(4, 22);
+            this.SecurityTabPage.Name = "SecurityTabPage";
+            this.SecurityTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.SecurityTabPage.Size = new System.Drawing.Size(424, 310);
+            this.SecurityTabPage.TabIndex = 1;
+            this.SecurityTabPage.Text = "Security";
+            this.SecurityTabPage.UseVisualStyleBackColor = true;
             // 
             // SaveButton
             // 
@@ -140,56 +200,42 @@
             this.PreviousButton.UseVisualStyleBackColor = true;
             this.PreviousButton.Click += new System.EventHandler(this.PreviousButton_Click);
             // 
-            // BasicsTabPage
+            // RCONGroupBox
             // 
-            this.BasicsTabPage.Location = new System.Drawing.Point(4, 22);
-            this.BasicsTabPage.Name = "BasicsTabPage";
-            this.BasicsTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.BasicsTabPage.Size = new System.Drawing.Size(424, 310);
-            this.BasicsTabPage.TabIndex = 1;
-            this.BasicsTabPage.Text = "Basics";
-            this.BasicsTabPage.UseVisualStyleBackColor = true;
+            this.RCONGroupBox.Controls.Add(this.textBox1);
+            this.RCONGroupBox.Location = new System.Drawing.Point(6, 6);
+            this.RCONGroupBox.Name = "RCONGroupBox";
+            this.RCONGroupBox.Size = new System.Drawing.Size(412, 50);
+            this.RCONGroupBox.TabIndex = 0;
+            this.RCONGroupBox.TabStop = false;
+            this.RCONGroupBox.Text = "RCON Password (Leave Empty to generate one)";
             // 
-            // NameGroupBox
+            // textBox1
             // 
-            this.NameGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.NameGroupBox.Controls.Add(this.NameTextBox);
-            this.NameGroupBox.Location = new System.Drawing.Point(6, 204);
-            this.NameGroupBox.Name = "NameGroupBox";
-            this.NameGroupBox.Size = new System.Drawing.Size(412, 49);
-            this.NameGroupBox.TabIndex = 1;
-            this.NameGroupBox.TabStop = false;
-            this.NameGroupBox.Text = "Name of your Data Folder (Required)";
+            this.textBox1.Location = new System.Drawing.Point(6, 19);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(400, 20);
+            this.textBox1.TabIndex = 0;
             // 
-            // NameTextBox
+            // SHVGroupBox
             // 
-            this.NameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.NameTextBox.Location = new System.Drawing.Point(6, 19);
-            this.NameTextBox.Name = "NameTextBox";
-            this.NameTextBox.Size = new System.Drawing.Size(400, 20);
-            this.NameTextBox.TabIndex = 0;
+            this.SHVGroupBox.Controls.Add(this.SHVCheckBox);
+            this.SHVGroupBox.Location = new System.Drawing.Point(6, 62);
+            this.SHVGroupBox.Name = "SHVGroupBox";
+            this.SHVGroupBox.Size = new System.Drawing.Size(412, 45);
+            this.SHVGroupBox.TabIndex = 1;
+            this.SHVGroupBox.TabStop = false;
+            this.SHVGroupBox.Text = "ScriptHookV Scripts";
             // 
-            // DownloadGroupBox
+            // SHVCheckBox
             // 
-            this.DownloadGroupBox.Controls.Add(this.DownloadCheckBox);
-            this.DownloadGroupBox.Location = new System.Drawing.Point(6, 259);
-            this.DownloadGroupBox.Name = "DownloadGroupBox";
-            this.DownloadGroupBox.Size = new System.Drawing.Size(412, 45);
-            this.DownloadGroupBox.TabIndex = 2;
-            this.DownloadGroupBox.TabStop = false;
-            this.DownloadGroupBox.Text = "Download Required Scripts (Recommended)";
-            // 
-            // DownloadCheckBox
-            // 
-            this.DownloadCheckBox.AutoSize = true;
-            this.DownloadCheckBox.Location = new System.Drawing.Point(6, 19);
-            this.DownloadCheckBox.Name = "DownloadCheckBox";
-            this.DownloadCheckBox.Size = new System.Drawing.Size(308, 17);
-            this.DownloadCheckBox.TabIndex = 0;
-            this.DownloadCheckBox.Text = "Download Vanilla FiveM scripts required for running a server";
-            this.DownloadCheckBox.UseVisualStyleBackColor = true;
+            this.SHVCheckBox.AutoSize = true;
+            this.SHVCheckBox.Location = new System.Drawing.Point(6, 19);
+            this.SHVCheckBox.Name = "SHVCheckBox";
+            this.SHVCheckBox.Size = new System.Drawing.Size(251, 17);
+            this.SHVCheckBox.TabIndex = 0;
+            this.SHVCheckBox.Text = "Allow ScriptHookV Scripts to be used on Clients";
+            this.SHVCheckBox.UseVisualStyleBackColor = true;
             // 
             // Creator
             // 
@@ -213,10 +259,15 @@
             this.Text = "Data Folder Creator";
             this.CreatorTabControl.ResumeLayout(false);
             this.IntroductionTabPage.ResumeLayout(false);
-            this.NameGroupBox.ResumeLayout(false);
-            this.NameGroupBox.PerformLayout();
             this.DownloadGroupBox.ResumeLayout(false);
             this.DownloadGroupBox.PerformLayout();
+            this.NameGroupBox.ResumeLayout(false);
+            this.NameGroupBox.PerformLayout();
+            this.SecurityTabPage.ResumeLayout(false);
+            this.RCONGroupBox.ResumeLayout(false);
+            this.RCONGroupBox.PerformLayout();
+            this.SHVGroupBox.ResumeLayout(false);
+            this.SHVGroupBox.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -231,10 +282,14 @@
         private System.Windows.Forms.Button CloseButton;
         private System.Windows.Forms.Button NextButton;
         private System.Windows.Forms.Button PreviousButton;
-        private System.Windows.Forms.TabPage BasicsTabPage;
+        private System.Windows.Forms.TabPage SecurityTabPage;
         private System.Windows.Forms.GroupBox NameGroupBox;
         private System.Windows.Forms.TextBox NameTextBox;
         private System.Windows.Forms.GroupBox DownloadGroupBox;
         private System.Windows.Forms.CheckBox DownloadCheckBox;
+        private System.Windows.Forms.GroupBox RCONGroupBox;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.GroupBox SHVGroupBox;
+        private System.Windows.Forms.CheckBox SHVCheckBox;
     }
 }
