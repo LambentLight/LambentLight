@@ -31,7 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Creator));
             this.CreatorTabControl = new System.Windows.Forms.TabControl();
             this.IntroductionTabPage = new System.Windows.Forms.TabPage();
+            this.IntroductionLabel = new System.Windows.Forms.Label();
             this.CreatorTabControl.SuspendLayout();
+            this.IntroductionTabPage.SuspendLayout();
             this.SuspendLayout();
             // 
             // CreatorTabControl
@@ -46,6 +48,7 @@
             // 
             // IntroductionTabPage
             // 
+            this.IntroductionTabPage.Controls.Add(this.IntroductionLabel);
             this.IntroductionTabPage.Location = new System.Drawing.Point(4, 22);
             this.IntroductionTabPage.Name = "IntroductionTabPage";
             this.IntroductionTabPage.Padding = new System.Windows.Forms.Padding(3);
@@ -53,6 +56,16 @@
             this.IntroductionTabPage.TabIndex = 0;
             this.IntroductionTabPage.Text = "Introduction";
             this.IntroductionTabPage.UseVisualStyleBackColor = true;
+            // 
+            // IntroductionLabel
+            // 
+            this.IntroductionLabel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.IntroductionLabel.Location = new System.Drawing.Point(3, 3);
+            this.IntroductionLabel.Name = "IntroductionLabel";
+            this.IntroductionLabel.Size = new System.Drawing.Size(240, 304);
+            this.IntroductionLabel.TabIndex = 0;
+            this.IntroductionLabel.Text = resources.GetString("IntroductionLabel.Text");
+            this.IntroductionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Creator
             // 
@@ -68,6 +81,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Data Folder Creator";
             this.CreatorTabControl.ResumeLayout(false);
+            this.IntroductionTabPage.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -76,5 +90,6 @@
 
         private System.Windows.Forms.TabControl CreatorTabControl;
         private System.Windows.Forms.TabPage IntroductionTabPage;
+        private System.Windows.Forms.Label IntroductionLabel;
     }
 }
