@@ -14,6 +14,7 @@ namespace LambentLight
     {
         public Creator()
         {
+            // Initialize the UI elements
             InitializeComponent();
         }
 
@@ -29,7 +30,8 @@ namespace LambentLight
 
         private void CloseButton_Click(object sender, EventArgs e)
         {
-
+            // Self Explanatory, don't you think?
+            Close();
         }
 
         private void PreviousButton_Click(object sender, EventArgs e)
