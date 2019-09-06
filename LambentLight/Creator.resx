@@ -120,9 +120,11 @@
   <data name="IntroductionLabel.Text" xml:space="preserve">
     <value>Welcome to the Data Folder Creator!
 
-Over here, you can create a custom Server Data Folder to store your Scripts, Configuration, Maps and more!
+Over here, you can create a custom Data Folder to store your Scripts, Configuration, Maps and more!
 
-To change the settings, click Next or change the tabs at the top.
+To see what options you can change for your Data Folder, click Previous/Next or change the tabs at the top.
+
+If you plan to create folders with the same options in the future, click save so you can load them when you create the next Data Folder.
 
 Once you are pleased with the settings, click Create at the bottom.</value>
   </data>
