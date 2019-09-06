@@ -37,6 +37,7 @@
             this.CloseButton = new System.Windows.Forms.Button();
             this.NextButton = new System.Windows.Forms.Button();
             this.PreviousButton = new System.Windows.Forms.Button();
+            this.BasicsTabPage = new System.Windows.Forms.TabPage();
             this.CreatorTabControl.SuspendLayout();
             this.IntroductionTabPage.SuspendLayout();
             this.SuspendLayout();
@@ -44,6 +45,7 @@
             // CreatorTabControl
             // 
             this.CreatorTabControl.Controls.Add(this.IntroductionTabPage);
+            this.CreatorTabControl.Controls.Add(this.BasicsTabPage);
             this.CreatorTabControl.Dock = System.Windows.Forms.DockStyle.Top;
             this.CreatorTabControl.Location = new System.Drawing.Point(0, 0);
             this.CreatorTabControl.Name = "CreatorTabControl";
@@ -94,6 +96,7 @@
             // 
             // CloseButton
             // 
+            this.CloseButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.CloseButton.Location = new System.Drawing.Point(174, 342);
             this.CloseButton.Name = "CloseButton";
             this.CloseButton.Size = new System.Drawing.Size(75, 23);
@@ -121,6 +124,16 @@
             this.PreviousButton.Text = "Previous";
             this.PreviousButton.UseVisualStyleBackColor = true;
             this.PreviousButton.Click += new System.EventHandler(this.PreviousButton_Click);
+            // 
+            // BasicsTabPage
+            // 
+            this.BasicsTabPage.Location = new System.Drawing.Point(4, 22);
+            this.BasicsTabPage.Name = "BasicsTabPage";
+            this.BasicsTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.BasicsTabPage.Size = new System.Drawing.Size(467, 310);
+            this.BasicsTabPage.TabIndex = 1;
+            this.BasicsTabPage.Text = "Basics";
+            this.BasicsTabPage.UseVisualStyleBackColor = true;
             // 
             // Creator
             // 
@@ -158,5 +171,6 @@
         private System.Windows.Forms.Button CloseButton;
         private System.Windows.Forms.Button NextButton;
         private System.Windows.Forms.Button PreviousButton;
+        private System.Windows.Forms.TabPage BasicsTabPage;
     }
 }
