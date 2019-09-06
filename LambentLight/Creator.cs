@@ -44,12 +44,28 @@ namespace LambentLight
 
         private void PreviousButton_Click(object sender, EventArgs e)
         {
-
+            // If the selected tab is not zero, set the previous tab
+            if (CreatorTabControl.SelectedIndex != 0)
+            {
+                CreatorTabControl.SelectedIndex -= 1;
+            }
         }
 
         private void NextButton_Click(object sender, EventArgs e)
         {
+            // If the selected tab is not over the max, set the next tab
+            if (CreatorTabControl.SelectedIndex != CreatorTabControl.TabCount -1)
+            {
+                CreatorTabControl.SelectedIndex += 1;
+            }
+        }
 
+        private void CreatorTabControl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Enable the previous button if the tab is not the first one
+            PreviousButton.Enabled = CreatorTabControl.SelectedIndex != 0;
+            // Enable the last button if the tab is not the last one
+            NextButton.Enabled = CreatorTabControl.SelectedIndex != CreatorTabControl.TabCount - 1;
         }
     }
 }

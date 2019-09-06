@@ -52,6 +52,7 @@
             this.CreatorTabControl.SelectedIndex = 0;
             this.CreatorTabControl.Size = new System.Drawing.Size(475, 336);
             this.CreatorTabControl.TabIndex = 0;
+            this.CreatorTabControl.SelectedIndexChanged += new System.EventHandler(this.CreatorTabControl_SelectedIndexChanged);
             // 
             // IntroductionTabPage
             // 
@@ -117,6 +118,7 @@
             // 
             // PreviousButton
             // 
+            this.PreviousButton.Enabled = false;
             this.PreviousButton.Location = new System.Drawing.Point(307, 342);
             this.PreviousButton.Name = "PreviousButton";
             this.PreviousButton.Size = new System.Drawing.Size(75, 23);
