@@ -560,6 +560,9 @@ namespace LambentLight
 
         private void RefreshInstalledResources()
         {
+            // Disable the uninstall button
+            UninstallButton.Enabled = false;
+
             // If there is no server data folder selected or it does not exists
             if (DataBox.SelectedItem == null || !((DataFolder)DataBox.SelectedItem).Exists)
             {
