@@ -25,6 +25,14 @@ namespace LambentLight
 
         private void CreateButton_Click(object sender, EventArgs e)
         {
+            // If the name is null or empty
+            if (string.IsNullOrWhiteSpace(NameTextBox.Text))
+            {
+                // Notify the user and return
+                MessageBox.Show("Looks like the Folder Name is empty, please check that the name is valid and try again.", "Invalid Name", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             // Save that the Data Folder should be created
             ShouldBeCreated = true;
             // And close the form
