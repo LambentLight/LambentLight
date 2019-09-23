@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -23,6 +23,26 @@ namespace LambentLight
             InitializeComponent();
         }
 
+        private void SaveOptions()
+        {
+            // Just save the settings
+            Settings.Default.DownloadScripts = DownloadCheckBox.Checked;
+            Settings.Default.SHVEnabled = SHVCheckBox.Checked;
+            Settings.Default.Save();
+        }
+
+        private void LoadOptions()
+        {
+            // Oposite to the function above
+            DownloadCheckBox.Checked = Settings.Default.DownloadScripts;
+            SHVCheckBox.Checked = Settings.Default.SHVEnabled;
+        }
+
+        private void Creator_Load(object sender, EventArgs e)
+        {
+            LoadOptions();
+        }
+
         private void CreateButton_Click(object sender, EventArgs e)
         {
             // If the name is null or empty
@@ -41,7 +61,8 @@ namespace LambentLight
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
-
+            // Call the existing function to save the settings
+            SaveOptions();
         }
 
         private void CloseButton_Click(object sender, EventArgs e)

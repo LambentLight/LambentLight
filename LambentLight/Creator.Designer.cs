@@ -257,6 +257,7 @@
             this.Name = "Creator";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Data Folder Creator";
+            this.Load += new System.EventHandler(this.Creator_Load);
             this.CreatorTabControl.ResumeLayout(false);
             this.BasicsTabPage.ResumeLayout(false);
             this.DownloadGroupBox.ResumeLayout(false);
