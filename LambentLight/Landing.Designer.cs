@@ -67,6 +67,7 @@
             this.BottomStripLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.BuildsTabPage = new System.Windows.Forms.TabPage();
             this.BuildsListBox = new System.Windows.Forms.ListBox();
+            this.BrowseButton = new System.Windows.Forms.Button();
             this.BuildsGroup.SuspendLayout();
             this.DataGroup.SuspendLayout();
             this.TopStrip.SuspendLayout();
@@ -107,6 +108,7 @@
             // DataGroup
             // 
             this.DataGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.DataGroup.Controls.Add(this.BrowseButton);
             this.DataGroup.Controls.Add(this.FolderRefreshButton);
             this.DataGroup.Controls.Add(this.DataBox);
             this.DataGroup.Location = new System.Drawing.Point(12, 27);
@@ -135,7 +137,7 @@
             this.DataBox.FormattingEnabled = true;
             this.DataBox.Location = new System.Drawing.Point(6, 19);
             this.DataBox.Name = "DataBox";
-            this.DataBox.Size = new System.Drawing.Size(682, 21);
+            this.DataBox.Size = new System.Drawing.Size(601, 21);
             this.DataBox.TabIndex = 0;
             this.DataBox.SelectedIndexChanged += new System.EventHandler(this.DataBox_SelectedIndexChanged);
             // 
@@ -512,6 +514,16 @@
             this.BuildsListBox.Size = new System.Drawing.Size(338, 212);
             this.BuildsListBox.TabIndex = 2;
             // 
+            // BrowseButton
+            // 
+            this.BrowseButton.Location = new System.Drawing.Point(613, 18);
+            this.BrowseButton.Name = "BrowseButton";
+            this.BrowseButton.Size = new System.Drawing.Size(75, 23);
+            this.BrowseButton.TabIndex = 2;
+            this.BrowseButton.Text = "Browse";
+            this.BrowseButton.UseVisualStyleBackColor = true;
+            this.BrowseButton.Click += new System.EventHandler(this.BrowseButton_Click);
+            // 
             // Landing
             // 
             this.AcceptButton = this.ConsoleButton;
@@ -591,6 +603,7 @@
         private System.Windows.Forms.ToolStripMenuItem SettingsToolStripMenuItem;
         private System.Windows.Forms.TabPage BuildsTabPage;
         private System.Windows.Forms.ListBox BuildsListBox;
+        private System.Windows.Forms.Button BrowseButton;
     }
 }
 

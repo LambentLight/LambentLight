@@ -212,6 +212,16 @@ namespace LambentLight
             DataBox.Fill(DataFolderManager.Folders);
         }
 
+        private void BrowseButton_Click(object sender, EventArgs e)
+        {
+            // If there is something selected
+            if (DataBox.SelectedItem != null)
+            {
+                // Open the folder
+                Process.Start(((DataFolder)DataBox.SelectedItem).Absolute);
+            }
+        }
+
         #endregion
 
         #region Resources - Uninstaller
