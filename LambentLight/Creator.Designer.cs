@@ -37,22 +37,22 @@
             this.NameTextBox = new System.Windows.Forms.TextBox();
             this.IntroductionLabel = new System.Windows.Forms.Label();
             this.SecurityTabPage = new System.Windows.Forms.TabPage();
+            this.SHVGroupBox = new System.Windows.Forms.GroupBox();
+            this.SHVCheckBox = new System.Windows.Forms.CheckBox();
+            this.RCONGroupBox = new System.Windows.Forms.GroupBox();
+            this.RCONTextBox = new System.Windows.Forms.TextBox();
             this.SaveButton = new System.Windows.Forms.Button();
             this.CreateButton = new System.Windows.Forms.Button();
             this.CloseButton = new System.Windows.Forms.Button();
             this.NextButton = new System.Windows.Forms.Button();
             this.PreviousButton = new System.Windows.Forms.Button();
-            this.RCONGroupBox = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.SHVGroupBox = new System.Windows.Forms.GroupBox();
-            this.SHVCheckBox = new System.Windows.Forms.CheckBox();
             this.CreatorTabControl.SuspendLayout();
             this.BasicsTabPage.SuspendLayout();
             this.DownloadGroupBox.SuspendLayout();
             this.NameGroupBox.SuspendLayout();
             this.SecurityTabPage.SuspendLayout();
-            this.RCONGroupBox.SuspendLayout();
             this.SHVGroupBox.SuspendLayout();
+            this.RCONGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // CreatorTabControl
@@ -143,6 +143,43 @@
             this.SecurityTabPage.Text = "Security";
             this.SecurityTabPage.UseVisualStyleBackColor = true;
             // 
+            // SHVGroupBox
+            // 
+            this.SHVGroupBox.Controls.Add(this.SHVCheckBox);
+            this.SHVGroupBox.Location = new System.Drawing.Point(6, 62);
+            this.SHVGroupBox.Name = "SHVGroupBox";
+            this.SHVGroupBox.Size = new System.Drawing.Size(412, 45);
+            this.SHVGroupBox.TabIndex = 1;
+            this.SHVGroupBox.TabStop = false;
+            this.SHVGroupBox.Text = "ScriptHookV Scripts";
+            // 
+            // SHVCheckBox
+            // 
+            this.SHVCheckBox.AutoSize = true;
+            this.SHVCheckBox.Location = new System.Drawing.Point(6, 19);
+            this.SHVCheckBox.Name = "SHVCheckBox";
+            this.SHVCheckBox.Size = new System.Drawing.Size(251, 17);
+            this.SHVCheckBox.TabIndex = 0;
+            this.SHVCheckBox.Text = "Allow ScriptHookV Scripts to be used on Clients";
+            this.SHVCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // RCONGroupBox
+            // 
+            this.RCONGroupBox.Controls.Add(this.RCONTextBox);
+            this.RCONGroupBox.Location = new System.Drawing.Point(6, 6);
+            this.RCONGroupBox.Name = "RCONGroupBox";
+            this.RCONGroupBox.Size = new System.Drawing.Size(412, 50);
+            this.RCONGroupBox.TabIndex = 0;
+            this.RCONGroupBox.TabStop = false;
+            this.RCONGroupBox.Text = "RCON Password (Leave Empty to generate one)";
+            // 
+            // RCONTextBox
+            // 
+            this.RCONTextBox.Location = new System.Drawing.Point(6, 19);
+            this.RCONTextBox.Name = "RCONTextBox";
+            this.RCONTextBox.Size = new System.Drawing.Size(400, 20);
+            this.RCONTextBox.TabIndex = 0;
+            // 
             // SaveButton
             // 
             this.SaveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -200,43 +237,6 @@
             this.PreviousButton.UseVisualStyleBackColor = true;
             this.PreviousButton.Click += new System.EventHandler(this.PreviousButton_Click);
             // 
-            // RCONGroupBox
-            // 
-            this.RCONGroupBox.Controls.Add(this.textBox1);
-            this.RCONGroupBox.Location = new System.Drawing.Point(6, 6);
-            this.RCONGroupBox.Name = "RCONGroupBox";
-            this.RCONGroupBox.Size = new System.Drawing.Size(412, 50);
-            this.RCONGroupBox.TabIndex = 0;
-            this.RCONGroupBox.TabStop = false;
-            this.RCONGroupBox.Text = "RCON Password (Leave Empty to generate one)";
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(6, 19);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(400, 20);
-            this.textBox1.TabIndex = 0;
-            // 
-            // SHVGroupBox
-            // 
-            this.SHVGroupBox.Controls.Add(this.SHVCheckBox);
-            this.SHVGroupBox.Location = new System.Drawing.Point(6, 62);
-            this.SHVGroupBox.Name = "SHVGroupBox";
-            this.SHVGroupBox.Size = new System.Drawing.Size(412, 45);
-            this.SHVGroupBox.TabIndex = 1;
-            this.SHVGroupBox.TabStop = false;
-            this.SHVGroupBox.Text = "ScriptHookV Scripts";
-            // 
-            // SHVCheckBox
-            // 
-            this.SHVCheckBox.AutoSize = true;
-            this.SHVCheckBox.Location = new System.Drawing.Point(6, 19);
-            this.SHVCheckBox.Name = "SHVCheckBox";
-            this.SHVCheckBox.Size = new System.Drawing.Size(251, 17);
-            this.SHVCheckBox.TabIndex = 0;
-            this.SHVCheckBox.Text = "Allow ScriptHookV Scripts to be used on Clients";
-            this.SHVCheckBox.UseVisualStyleBackColor = true;
-            // 
             // Creator
             // 
             this.AcceptButton = this.CreateButton;
@@ -264,10 +264,10 @@
             this.NameGroupBox.ResumeLayout(false);
             this.NameGroupBox.PerformLayout();
             this.SecurityTabPage.ResumeLayout(false);
-            this.RCONGroupBox.ResumeLayout(false);
-            this.RCONGroupBox.PerformLayout();
             this.SHVGroupBox.ResumeLayout(false);
             this.SHVGroupBox.PerformLayout();
+            this.RCONGroupBox.ResumeLayout(false);
+            this.RCONGroupBox.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -284,12 +284,12 @@
         private System.Windows.Forms.Button PreviousButton;
         private System.Windows.Forms.TabPage SecurityTabPage;
         private System.Windows.Forms.GroupBox NameGroupBox;
-        private System.Windows.Forms.TextBox NameTextBox;
         private System.Windows.Forms.GroupBox DownloadGroupBox;
         private System.Windows.Forms.CheckBox DownloadCheckBox;
         private System.Windows.Forms.GroupBox RCONGroupBox;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox RCONTextBox;
         private System.Windows.Forms.GroupBox SHVGroupBox;
         private System.Windows.Forms.CheckBox SHVCheckBox;
+        public System.Windows.Forms.TextBox NameTextBox;
     }
 }
