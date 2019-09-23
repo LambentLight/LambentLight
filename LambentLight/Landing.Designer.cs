@@ -30,8 +30,10 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Landing));
             this.BuildsGroup = new System.Windows.Forms.GroupBox();
+            this.BuildsListBox = new System.Windows.Forms.ListBox();
             this.BuildRefreshButton = new System.Windows.Forms.Button();
             this.DataGroup = new System.Windows.Forms.GroupBox();
+            this.BrowseButton = new System.Windows.Forms.Button();
             this.FolderRefreshButton = new System.Windows.Forms.Button();
             this.DataBox = new System.Windows.Forms.ComboBox();
             this.TopStrip = new System.Windows.Forms.MenuStrip();
@@ -60,14 +62,12 @@
             this.GenerateButton = new System.Windows.Forms.Button();
             this.LoadButton = new System.Windows.Forms.Button();
             this.ConfigTextBox = new System.Windows.Forms.TextBox();
+            this.BuildsTabPage = new System.Windows.Forms.TabPage();
             this.AboutTab = new System.Windows.Forms.TabPage();
             this.AboutRichTextBox = new System.Windows.Forms.RichTextBox();
             this.MainProgressBar = new System.Windows.Forms.ProgressBar();
             this.BottomStrip = new System.Windows.Forms.StatusStrip();
             this.BottomStripLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.BuildsTabPage = new System.Windows.Forms.TabPage();
-            this.BuildsListBox = new System.Windows.Forms.ListBox();
-            this.BrowseButton = new System.Windows.Forms.Button();
             this.BuildsGroup.SuspendLayout();
             this.DataGroup.SuspendLayout();
             this.TopStrip.SuspendLayout();
@@ -77,29 +77,41 @@
             this.UninstallerGroupBox.SuspendLayout();
             this.InstallerListGroup.SuspendLayout();
             this.ConfigurationTab.SuspendLayout();
+            this.BuildsTabPage.SuspendLayout();
             this.AboutTab.SuspendLayout();
             this.BottomStrip.SuspendLayout();
-            this.BuildsTabPage.SuspendLayout();
             this.SuspendLayout();
             // 
             // BuildsGroup
             // 
+            this.BuildsGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.BuildsGroup.Controls.Add(this.BuildsListBox);
-            this.BuildsGroup.Controls.Add(this.BuildRefreshButton);
             this.BuildsGroup.Location = new System.Drawing.Point(6, 6);
             this.BuildsGroup.Name = "BuildsGroup";
-            this.BuildsGroup.Size = new System.Drawing.Size(350, 267);
+            this.BuildsGroup.Size = new System.Drawing.Size(599, 267);
             this.BuildsGroup.TabIndex = 0;
             this.BuildsGroup.TabStop = false;
-            this.BuildsGroup.Text = "Build";
+            this.BuildsGroup.Text = "Builds Available";
+            // 
+            // BuildsListBox
+            // 
+            this.BuildsListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.BuildsListBox.FormattingEnabled = true;
+            this.BuildsListBox.Location = new System.Drawing.Point(6, 19);
+            this.BuildsListBox.Name = "BuildsListBox";
+            this.BuildsListBox.Size = new System.Drawing.Size(587, 238);
+            this.BuildsListBox.TabIndex = 2;
             // 
             // BuildRefreshButton
             // 
-            this.BuildRefreshButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.BuildRefreshButton.Location = new System.Drawing.Point(6, 238);
+            this.BuildRefreshButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BuildRefreshButton.Location = new System.Drawing.Point(611, 6);
             this.BuildRefreshButton.Name = "BuildRefreshButton";
-            this.BuildRefreshButton.Size = new System.Drawing.Size(338, 23);
+            this.BuildRefreshButton.Size = new System.Drawing.Size(150, 23);
             this.BuildRefreshButton.TabIndex = 1;
             this.BuildRefreshButton.Text = "Refresh";
             this.BuildRefreshButton.UseVisualStyleBackColor = true;
@@ -117,6 +129,16 @@
             this.DataGroup.TabIndex = 1;
             this.DataGroup.TabStop = false;
             this.DataGroup.Text = "Data Folder";
+            // 
+            // BrowseButton
+            // 
+            this.BrowseButton.Location = new System.Drawing.Point(613, 18);
+            this.BrowseButton.Name = "BrowseButton";
+            this.BrowseButton.Size = new System.Drawing.Size(75, 23);
+            this.BrowseButton.TabIndex = 2;
+            this.BrowseButton.Text = "Browse";
+            this.BrowseButton.UseVisualStyleBackColor = true;
+            this.BrowseButton.Click += new System.EventHandler(this.BrowseButton_Click);
             // 
             // FolderRefreshButton
             // 
@@ -443,6 +465,18 @@
             this.ConfigTextBox.TabIndex = 0;
             this.ConfigTextBox.WordWrap = false;
             // 
+            // BuildsTabPage
+            // 
+            this.BuildsTabPage.Controls.Add(this.BuildRefreshButton);
+            this.BuildsTabPage.Controls.Add(this.BuildsGroup);
+            this.BuildsTabPage.Location = new System.Drawing.Point(4, 22);
+            this.BuildsTabPage.Name = "BuildsTabPage";
+            this.BuildsTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.BuildsTabPage.Size = new System.Drawing.Size(767, 279);
+            this.BuildsTabPage.TabIndex = 5;
+            this.BuildsTabPage.Text = "Build Selector";
+            this.BuildsTabPage.UseVisualStyleBackColor = true;
+            // 
             // AboutTab
             // 
             this.AboutTab.Controls.Add(this.AboutRichTextBox);
@@ -492,38 +526,6 @@
             this.BottomStripLabel.Size = new System.Drawing.Size(151, 17);
             this.BottomStripLabel.Text = "Welcome to LambentLight!";
             // 
-            // BuildsTabPage
-            // 
-            this.BuildsTabPage.Controls.Add(this.BuildsGroup);
-            this.BuildsTabPage.Location = new System.Drawing.Point(4, 22);
-            this.BuildsTabPage.Name = "BuildsTabPage";
-            this.BuildsTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.BuildsTabPage.Size = new System.Drawing.Size(767, 279);
-            this.BuildsTabPage.TabIndex = 5;
-            this.BuildsTabPage.Text = "Build Selector";
-            this.BuildsTabPage.UseVisualStyleBackColor = true;
-            // 
-            // BuildsListBox
-            // 
-            this.BuildsListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.BuildsListBox.FormattingEnabled = true;
-            this.BuildsListBox.Location = new System.Drawing.Point(6, 19);
-            this.BuildsListBox.Name = "BuildsListBox";
-            this.BuildsListBox.Size = new System.Drawing.Size(338, 212);
-            this.BuildsListBox.TabIndex = 2;
-            // 
-            // BrowseButton
-            // 
-            this.BrowseButton.Location = new System.Drawing.Point(613, 18);
-            this.BrowseButton.Name = "BrowseButton";
-            this.BrowseButton.Size = new System.Drawing.Size(75, 23);
-            this.BrowseButton.TabIndex = 2;
-            this.BrowseButton.Text = "Browse";
-            this.BrowseButton.UseVisualStyleBackColor = true;
-            this.BrowseButton.Click += new System.EventHandler(this.BrowseButton_Click);
-            // 
             // Landing
             // 
             this.AcceptButton = this.ConsoleButton;
@@ -554,10 +556,10 @@
             this.InstallerListGroup.ResumeLayout(false);
             this.ConfigurationTab.ResumeLayout(false);
             this.ConfigurationTab.PerformLayout();
+            this.BuildsTabPage.ResumeLayout(false);
             this.AboutTab.ResumeLayout(false);
             this.BottomStrip.ResumeLayout(false);
             this.BottomStrip.PerformLayout();
-            this.BuildsTabPage.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
