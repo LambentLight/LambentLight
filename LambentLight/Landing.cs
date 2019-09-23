@@ -141,13 +141,10 @@ namespace LambentLight
             // Finally, dispose the dialog
             CreatorForm.Dispose();
 
-            /*
-            // Ask the user for inputing a server data folder name
-            string FolderName = Microsoft.VisualBasic.Interaction.InputBox("Please insert a name for the new Server Data Folder:", "New Server Data Folder");
             // Lock the fields
             Locked = true;
             // Create a server data folder
-            DataFolder NewFolder = await DataFolderManager.Create(FolderName);
+            DataFolder NewFolder = await DataFolderManager.Create(CreatorForm.NameTextBox.Text, CreatorForm.RCONTextBox.Text, CreatorForm.SHVCheckBox.Checked);
             // If the creation of the new folder succeded
             if (NewFolder != null)
             {
@@ -159,7 +156,6 @@ namespace LambentLight
             }
             // Then unlock the fields
             Locked = false;
-            */
         }
 
         private void ExitItem_Click(object sender, EventArgs e)
