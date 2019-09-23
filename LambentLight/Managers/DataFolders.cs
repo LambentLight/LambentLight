@@ -87,7 +87,7 @@ namespace LambentLight.Managers
     /// <summary>
     /// A class that represents a folder with FiveM server data.
     /// </summary>
-    public class DataFolder
+    public class DataFolder : IDisposable
     {
         /// <summary>
         /// The logger for our current class.
@@ -198,16 +198,19 @@ namespace LambentLight.Managers
         /// Generates a new configuration for the current data folder.
         /// </summary>
         /// <returns>The new configuration as a string.</returns>
-        public string GenerateConfig()
+        public string GenerateConfig(string rconPassword = null, bool allowScriptHook = false)
         {
             // Get the base configuration
-            string BaseConfig = Encoding.UTF8.GetString(Properties.Resources.ConfigurationTemplate);
-            // Generate the new configuration
-            string NewConfig = string.Format(BaseConfig, GenerateSecureString(32));
+            string baseConfig = Encoding.UTF8.GetString(Properties.Resources.ConfigurationTemplate);
+            // Generate the new configuration formatted with the RCON Password
+            // If the RCON Password sent is whitespaces or null, generate one with the "safe" function
+            string password = string.IsNullOrWhiteSpace(rconPassword) ? GenerateSecureString(32) : rconPassword;
+            string scriptHook = allowScriptHook ? "1" : "0";
+            string newConfig = string.Format(baseConfig, password, scriptHook);
             // Set the configuration
-            Configuration = NewConfig;
+            Configuration = newConfig;
             // Finally, return the new configuration
-            return NewConfig;
+            return newConfig;
         }
 
         /// <summary>
@@ -331,6 +334,30 @@ namespace LambentLight.Managers
         }
 
         /// <summary>
+        /// Deletes the existing folder and creates it again.
+        /// </summary>
+        public async Task Recreate(string rconPassword = null, bool allowScriptHook = false)
+        {
+            // Literally dispose the existing folder
+            Dispose();
+            // Then call the create data folder again
+            await DataFolderManager.Create(Name, rconPassword, allowScriptHook);
+        }
+
+        /// <summary>
+        /// Deletes the folder.
+        /// </summary>
+        public void Dispose()
+        {
+            // If the folder exists
+            if (Exists)
+            {
+                // Delete it
+                Directory.Delete(Location, true);
+            }
+        }
+
+        /// <summary>
         /// Gets the directory name.
         /// </summary>
         /// <returns>The name of the directory.</returns>
@@ -385,7 +412,7 @@ namespace LambentLight.Managers
         /// Creates a new server data folder.
         /// </summary>
         /// <param name="name">The name of the folder.</param>
-        public static async Task<DataFolder> Create(string name)
+        public static async Task<DataFolder> Create(string name, string rconPassword = null, bool allowScriptHook = false)
         {
             // Create the Data folder if it does not exists
             Locations.EnsureDataFolder();
@@ -448,7 +475,7 @@ namespace LambentLight.Managers
             if (Settings.Default.CreateConfig)
             {
                 // Generate the new configuration for the folder
-                NewFolder.GenerateConfig();
+                NewFolder.GenerateConfig(rconPassword, allowScriptHook);
             }
 
             // Finally, return the data object

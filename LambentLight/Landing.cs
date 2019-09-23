@@ -134,23 +134,28 @@ namespace LambentLight
 
         private async void CreateItem_Click(object sender, EventArgs e)
         {
-            // Ask the user for inputing a server data folder name
-            string FolderName = Microsoft.VisualBasic.Interaction.InputBox("Please insert a name for the new Server Data Folder:", "New Server Data Folder");
-            // Lock the fields
-            Locked = true;
-            // Create a server data folder
-            DataFolder NewFolder = await DataFolderManager.Create(FolderName);
-            // If the creation of the new folder succeded
-            if (NewFolder != null)
+            // Create the new form
+            Creator CreatorForm = new Creator();
+            // Show the form as a dialog
+            CreatorForm.ShowDialog();
+            // Finally, dispose the dialog
+            CreatorForm.Dispose();
+
+            // If there is a valid server data folder
+            if (CreatorForm.NewDataFolder != null)
             {
+                // Lock the fields
+                Locked = true;
+                // Task the Data Folder to recreate itself
+                await CreatorForm.NewDataFolder.Recreate(CreatorForm.RCONTextBox.Text, CreatorForm.SHVCheckBox.Checked);
                 // Update the fields
                 DataFolderManager.Refresh();
                 DataBox.Fill(DataFolderManager.Folders);
                 // And select the new item
-                DataBox.SelectedItem = NewFolder;
+                DataBox.SelectedItem = CreatorForm.NewDataFolder;
+                // Then unlock the fields
+                Locked = false;
             }
-            // Then unlock the fields
-            Locked = false;
         }
 
         private void ExitItem_Click(object sender, EventArgs e)

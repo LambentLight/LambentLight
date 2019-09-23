@@ -229,5 +229,17 @@ namespace LambentLight.Properties {
                 this["RemoveFromConfig"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool SHVEnabled {
+            get {
+                return ((bool)(this["SHVEnabled"]));
+            }
+            set {
+                this["SHVEnabled"] = value;
+            }
+        }
     }
 }
