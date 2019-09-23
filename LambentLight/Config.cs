@@ -1,4 +1,4 @@
-﻿using LambentLight.Properties;
+using LambentLight.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -195,6 +195,12 @@ namespace LambentLight
                 // And reload them
                 ReloadSettings();
             }
+        }
+
+        private void CloseButton_Click(object sender, EventArgs e)
+        {
+            // Just close the form
+            Close();
         }
     }
 }
