@@ -1,4 +1,4 @@
-﻿using LambentLight.Properties;
+using LambentLight.Properties;
 using NLog;
 using System;
 using System.Diagnostics;
@@ -61,6 +61,14 @@ namespace LambentLight.Managers
         {
             // Store the absolute path of the folder
             string AbsPath = Path.GetFullPath(build.Folder);
+
+            // If the file being part of the build does not exists
+            if (!File.Exists(Path.Combine(AbsPath, "FXServer.exe")))
+            {
+                Logger.Error($"The installed build {build.ID} does not contains the server executable.");
+                return null;
+            }
+
             // Create a new Server object
             RuntimeInformation NewServer = new RuntimeInformation();
             // Create a new server object and set the correct properties
@@ -122,6 +130,11 @@ namespace LambentLight.Managers
             }
             // Create and save the new class that contains the information that we need
             Server = GenerateClass(build, data);
+            // If there was an error while launching the server, just return
+            if (Server == null)
+            {
+                return false;
+            }
 
             // Add the event to check if the server has exited
             AutoRestart.Interval = 100;
