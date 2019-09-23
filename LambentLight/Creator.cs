@@ -1,11 +1,6 @@
+﻿using LambentLight.Managers;
+using LambentLight.Properties;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace LambentLight
@@ -13,9 +8,9 @@ namespace LambentLight
     public partial class Creator : Form
     {
         /// <summary>
-        /// If the Data Folder should be created after exiting the form.
+        /// The new data folder that should be created.
         /// </summary>
-        public bool ShouldBeCreated { get; set; } = false;
+        public DataFolder NewDataFolder { get; set; } = null;
 
         public Creator()
         {
@@ -53,9 +48,26 @@ namespace LambentLight
                 return;
             }
 
-            // Save that the Data Folder should be created
-            ShouldBeCreated = true;
-            // And close the form
+            // Create a new server data folder
+            DataFolder folder = new DataFolder(NameTextBox.Text);
+            // If the folder does not exists
+            if (folder.Exists)
+            {
+                // Ask the user if he wants to replace it
+                if (MessageBox.Show("This Data Folder already exists, do you want to replace it?", "Folder Already Exists", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    // If he does, delete it
+                    folder.Dispose();
+                }
+                // Otherwise, return
+                else
+                {
+                    return;
+                }
+            }
+
+            // Save it and close the form
+            NewDataFolder = folder;
             Close();
         }
 
