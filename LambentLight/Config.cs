@@ -1,4 +1,4 @@
-using LambentLight.Properties;
+﻿using LambentLight.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -25,7 +25,7 @@ namespace LambentLight
         {
             // Disable the license check box
             VisibleCheckBox.Checked = false;
-            /*
+            
             // And load all of the settings
             DownloadScriptsCheckBox.Checked = Settings.Default.DownloadScripts;
             CreateConfigCheckBox.Checked = Settings.Default.CreateConfig;
@@ -42,7 +42,7 @@ namespace LambentLight
             ResourcesTextBox.Text = Settings.Default.Resources;
 
             AutoRestartCheckBox.Checked = Settings.Default.AutoRestart;
-            ClearCacheCheckBox.Checked = Settings.Default.ClearCache;*/
+            ClearCacheCheckBox.Checked = Settings.Default.ClearCache;
         }
 
         private void Config_Load(object sender, EventArgs e)
