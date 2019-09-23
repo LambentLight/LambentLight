@@ -287,9 +287,9 @@
         private System.Windows.Forms.GroupBox DownloadGroupBox;
         private System.Windows.Forms.CheckBox DownloadCheckBox;
         private System.Windows.Forms.GroupBox RCONGroupBox;
-        private System.Windows.Forms.TextBox RCONTextBox;
         private System.Windows.Forms.GroupBox SHVGroupBox;
         private System.Windows.Forms.CheckBox SHVCheckBox;
         public System.Windows.Forms.TextBox NameTextBox;
+        public System.Windows.Forms.TextBox RCONTextBox;
     }
 }
