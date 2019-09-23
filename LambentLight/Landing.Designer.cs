@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Landing));
             this.BuildsGroup = new System.Windows.Forms.GroupBox();
             this.BuildRefreshButton = new System.Windows.Forms.Button();
-            this.BuildsBox = new System.Windows.Forms.ComboBox();
             this.DataGroup = new System.Windows.Forms.GroupBox();
             this.FolderRefreshButton = new System.Windows.Forms.Button();
             this.DataBox = new System.Windows.Forms.ComboBox();
@@ -66,6 +65,8 @@
             this.MainProgressBar = new System.Windows.Forms.ProgressBar();
             this.BottomStrip = new System.Windows.Forms.StatusStrip();
             this.BottomStripLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.BuildsTabPage = new System.Windows.Forms.TabPage();
+            this.BuildsListBox = new System.Windows.Forms.ListBox();
             this.BuildsGroup.SuspendLayout();
             this.DataGroup.SuspendLayout();
             this.TopStrip.SuspendLayout();
@@ -77,49 +78,40 @@
             this.ConfigurationTab.SuspendLayout();
             this.AboutTab.SuspendLayout();
             this.BottomStrip.SuspendLayout();
+            this.BuildsTabPage.SuspendLayout();
             this.SuspendLayout();
             // 
             // BuildsGroup
             // 
+            this.BuildsGroup.Controls.Add(this.BuildsListBox);
             this.BuildsGroup.Controls.Add(this.BuildRefreshButton);
-            this.BuildsGroup.Controls.Add(this.BuildsBox);
-            this.BuildsGroup.Location = new System.Drawing.Point(12, 27);
+            this.BuildsGroup.Location = new System.Drawing.Point(6, 6);
             this.BuildsGroup.Name = "BuildsGroup";
-            this.BuildsGroup.Size = new System.Drawing.Size(380, 52);
+            this.BuildsGroup.Size = new System.Drawing.Size(350, 267);
             this.BuildsGroup.TabIndex = 0;
             this.BuildsGroup.TabStop = false;
             this.BuildsGroup.Text = "Build";
             // 
             // BuildRefreshButton
             // 
-            this.BuildRefreshButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BuildRefreshButton.Location = new System.Drawing.Point(299, 18);
+            this.BuildRefreshButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.BuildRefreshButton.Location = new System.Drawing.Point(6, 238);
             this.BuildRefreshButton.Name = "BuildRefreshButton";
-            this.BuildRefreshButton.Size = new System.Drawing.Size(75, 23);
+            this.BuildRefreshButton.Size = new System.Drawing.Size(338, 23);
             this.BuildRefreshButton.TabIndex = 1;
             this.BuildRefreshButton.Text = "Refresh";
             this.BuildRefreshButton.UseVisualStyleBackColor = true;
             this.BuildRefreshButton.Click += new System.EventHandler(this.BuildRefreshButton_Click);
-            // 
-            // BuildsBox
-            // 
-            this.BuildsBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.BuildsBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.BuildsBox.FormattingEnabled = true;
-            this.BuildsBox.Location = new System.Drawing.Point(6, 19);
-            this.BuildsBox.Name = "BuildsBox";
-            this.BuildsBox.Size = new System.Drawing.Size(287, 21);
-            this.BuildsBox.TabIndex = 0;
             // 
             // DataGroup
             // 
             this.DataGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.DataGroup.Controls.Add(this.FolderRefreshButton);
             this.DataGroup.Controls.Add(this.DataBox);
-            this.DataGroup.Location = new System.Drawing.Point(407, 27);
+            this.DataGroup.Location = new System.Drawing.Point(12, 27);
             this.DataGroup.Name = "DataGroup";
-            this.DataGroup.Size = new System.Drawing.Size(380, 52);
+            this.DataGroup.Size = new System.Drawing.Size(775, 52);
             this.DataGroup.TabIndex = 1;
             this.DataGroup.TabStop = false;
             this.DataGroup.Text = "Data Folder";
@@ -127,7 +119,7 @@
             // FolderRefreshButton
             // 
             this.FolderRefreshButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.FolderRefreshButton.Location = new System.Drawing.Point(299, 18);
+            this.FolderRefreshButton.Location = new System.Drawing.Point(694, 18);
             this.FolderRefreshButton.Name = "FolderRefreshButton";
             this.FolderRefreshButton.Size = new System.Drawing.Size(75, 23);
             this.FolderRefreshButton.TabIndex = 1;
@@ -143,7 +135,7 @@
             this.DataBox.FormattingEnabled = true;
             this.DataBox.Location = new System.Drawing.Point(6, 19);
             this.DataBox.Name = "DataBox";
-            this.DataBox.Size = new System.Drawing.Size(287, 21);
+            this.DataBox.Size = new System.Drawing.Size(682, 21);
             this.DataBox.TabIndex = 0;
             this.DataBox.SelectedIndexChanged += new System.EventHandler(this.DataBox_SelectedIndexChanged);
             // 
@@ -255,6 +247,7 @@
             this.Tabs.Controls.Add(this.LogsTab);
             this.Tabs.Controls.Add(this.ResourcesTab);
             this.Tabs.Controls.Add(this.ConfigurationTab);
+            this.Tabs.Controls.Add(this.BuildsTabPage);
             this.Tabs.Controls.Add(this.AboutTab);
             this.Tabs.Location = new System.Drawing.Point(12, 85);
             this.Tabs.Name = "Tabs";
@@ -497,6 +490,28 @@
             this.BottomStripLabel.Size = new System.Drawing.Size(151, 17);
             this.BottomStripLabel.Text = "Welcome to LambentLight!";
             // 
+            // BuildsTabPage
+            // 
+            this.BuildsTabPage.Controls.Add(this.BuildsGroup);
+            this.BuildsTabPage.Location = new System.Drawing.Point(4, 22);
+            this.BuildsTabPage.Name = "BuildsTabPage";
+            this.BuildsTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.BuildsTabPage.Size = new System.Drawing.Size(767, 279);
+            this.BuildsTabPage.TabIndex = 5;
+            this.BuildsTabPage.Text = "Build Selector";
+            this.BuildsTabPage.UseVisualStyleBackColor = true;
+            // 
+            // BuildsListBox
+            // 
+            this.BuildsListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.BuildsListBox.FormattingEnabled = true;
+            this.BuildsListBox.Location = new System.Drawing.Point(6, 19);
+            this.BuildsListBox.Name = "BuildsListBox";
+            this.BuildsListBox.Size = new System.Drawing.Size(338, 212);
+            this.BuildsListBox.TabIndex = 2;
+            // 
             // Landing
             // 
             this.AcceptButton = this.ConsoleButton;
@@ -507,7 +522,6 @@
             this.Controls.Add(this.MainProgressBar);
             this.Controls.Add(this.Tabs);
             this.Controls.Add(this.DataGroup);
-            this.Controls.Add(this.BuildsGroup);
             this.Controls.Add(this.TopStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.TopStrip;
@@ -531,6 +545,7 @@
             this.AboutTab.ResumeLayout(false);
             this.BottomStrip.ResumeLayout(false);
             this.BottomStrip.PerformLayout();
+            this.BuildsTabPage.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -539,7 +554,6 @@
         #endregion
 
         private System.Windows.Forms.GroupBox BuildsGroup;
-        private System.Windows.Forms.ComboBox BuildsBox;
         private System.Windows.Forms.GroupBox DataGroup;
         private System.Windows.Forms.ComboBox DataBox;
         private System.Windows.Forms.MenuStrip TopStrip;
@@ -575,6 +589,8 @@
         private System.Windows.Forms.ListBox UninstallerListBox;
         private System.Windows.Forms.Button RefreshUninstallerButton;
         private System.Windows.Forms.ToolStripMenuItem SettingsToolStripMenuItem;
+        private System.Windows.Forms.TabPage BuildsTabPage;
+        private System.Windows.Forms.ListBox BuildsListBox;
     }
 }
 

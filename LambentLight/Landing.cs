@@ -35,7 +35,7 @@ namespace LambentLight
                 CreateItem.Enabled = !value;
                 ExitItem.Enabled = !value;
 
-                BuildsBox.Enabled = !value;
+                BuildsListBox.Enabled = !value;
                 BuildRefreshButton.Enabled = !value;
                 DataBox.Enabled = !value;
                 FolderRefreshButton.Enabled = !value;
@@ -69,7 +69,7 @@ namespace LambentLight
             DataFolderManager.Refresh();
             ResourceManager.Refresh();
             // And filll the Builds and Data folders
-            BuildsBox.Fill(BuildManager.Builds, true);
+            BuildsListBox.Fill(BuildManager.Builds, true);
             DataBox.Fill(DataFolderManager.Folders, true);
             InstallerListBox.Fill(ResourceManager.Resources);
             // Set the elements to unlocked
@@ -104,7 +104,7 @@ namespace LambentLight
         private async void StartItem_Click(object sender, EventArgs e)
         {
             // Ensure that we have an item available
-            if (BuildsBox.SelectedItem == null)
+            if (BuildsListBox.SelectedItem == null)
             {
                 // If not, notify the user and return
                 Logger.Info("You have not selected a FiveM/CitizenFX server build");
@@ -119,7 +119,7 @@ namespace LambentLight
             }
 
             // Start the build with the selected options
-            Locked = await ProcessManager.Start((Build)BuildsBox.SelectedItem, (DataFolder)DataBox.SelectedItem);
+            Locked = await ProcessManager.Start((Build)BuildsListBox.SelectedItem, (DataFolder)DataBox.SelectedItem);
         }
 
         private void StopItem_Click(object sender, EventArgs e)
@@ -200,7 +200,7 @@ namespace LambentLight
         {
             // Refresh the list of builds
             BuildManager.Refresh();
-            BuildsBox.Fill(BuildManager.Builds, true);
+            BuildsListBox.Fill(BuildManager.Builds, true);
         }
 
         private void DataBox_SelectedIndexChanged(object sender, EventArgs e) => RefreshInstalledResources();
