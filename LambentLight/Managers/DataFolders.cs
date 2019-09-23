@@ -198,16 +198,18 @@ namespace LambentLight.Managers
         /// Generates a new configuration for the current data folder.
         /// </summary>
         /// <returns>The new configuration as a string.</returns>
-        public string GenerateConfig()
+        public string GenerateConfig(string rconPassword = null)
         {
             // Get the base configuration
-            string BaseConfig = Encoding.UTF8.GetString(Properties.Resources.ConfigurationTemplate);
-            // Generate the new configuration
-            string NewConfig = string.Format(BaseConfig, GenerateSecureString(32));
+            string baseConfig = Encoding.UTF8.GetString(Properties.Resources.ConfigurationTemplate);
+            // Generate the new configuration formatted with the RCON Password
+            // If the RCON Password sent is whitespaces or null, generate one with the "safe" function
+            string password = string.IsNullOrWhiteSpace(rconPassword) ? GenerateSecureString(32) : rconPassword;
+            string newConfig = string.Format(baseConfig, password);
             // Set the configuration
-            Configuration = NewConfig;
+            Configuration = newConfig;
             // Finally, return the new configuration
-            return NewConfig;
+            return newConfig;
         }
 
         /// <summary>
@@ -385,7 +387,7 @@ namespace LambentLight.Managers
         /// Creates a new server data folder.
         /// </summary>
         /// <param name="name">The name of the folder.</param>
-        public static async Task<DataFolder> Create(string name)
+        public static async Task<DataFolder> Create(string name, string rconPassword = null)
         {
             // Create the Data folder if it does not exists
             Locations.EnsureDataFolder();
@@ -448,7 +450,7 @@ namespace LambentLight.Managers
             if (Settings.Default.CreateConfig)
             {
                 // Generate the new configuration for the folder
-                NewFolder.GenerateConfig();
+                NewFolder.GenerateConfig(rconPassword);
             }
 
             // Finally, return the data object
