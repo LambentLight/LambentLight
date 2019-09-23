@@ -282,7 +282,7 @@
             this.UninstallerGroupBox.Size = new System.Drawing.Size(262, 267);
             this.UninstallerGroupBox.TabIndex = 2;
             this.UninstallerGroupBox.TabStop = false;
-            this.UninstallerGroupBox.Text = "To be Uninstalled";
+            this.UninstallerGroupBox.Text = "Installed";
             // 
             // RefreshUninstallerButton
             // 
@@ -333,7 +333,7 @@
             this.InstallerListGroup.Size = new System.Drawing.Size(456, 267);
             this.InstallerListGroup.TabIndex = 0;
             this.InstallerListGroup.TabStop = false;
-            this.InstallerListGroup.Text = "To Be Installed";
+            this.InstallerListGroup.Text = "Available for Installation";
             // 
             // InstallButton
             // 
