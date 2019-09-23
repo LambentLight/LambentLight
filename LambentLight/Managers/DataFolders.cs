@@ -87,7 +87,7 @@ namespace LambentLight.Managers
     /// <summary>
     /// A class that represents a folder with FiveM server data.
     /// </summary>
-    public class DataFolder
+    public class DataFolder : IDisposable
     {
         /// <summary>
         /// The logger for our current class.
@@ -331,6 +331,30 @@ namespace LambentLight.Managers
 
             // Finally, notify that we have finished
             Logger.Info("Done! {0} {1} has been installed", resource.Name, version.ReadableVersion);
+        }
+
+        /// <summary>
+        /// Deletes the existing folder and creates it again.
+        /// </summary>
+        public async Task Recreate(string rconPassword = null, bool allowScriptHook = false)
+        {
+            // Literally dispose the existing folder
+            Dispose();
+            // Then call the create data folder again
+            await DataFolderManager.Create(Name, rconPassword, allowScriptHook);
+        }
+
+        /// <summary>
+        /// Deletes the folder.
+        /// </summary>
+        public void Dispose()
+        {
+            // If the folder exists
+            if (Exists)
+            {
+                // Delete it
+                Directory.Delete(Location, true);
+            }
         }
 
         /// <summary>
