@@ -40,6 +40,7 @@
             this.StopItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CreateItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExitItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.SettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.LogsTab = new System.Windows.Forms.TabPage();
             this.ConsoleButton = new System.Windows.Forms.Button();
             this.ConsoleTextBox = new System.Windows.Forms.TextBox();
@@ -188,6 +189,7 @@
             this.StartItem,
             this.StopItem,
             this.CreateItem,
+            this.SettingsToolStripMenuItem,
             this.ExitItem});
             this.TopStrip.Location = new System.Drawing.Point(0, 0);
             this.TopStrip.Name = "TopStrip";
@@ -226,6 +228,14 @@
             this.ExitItem.Size = new System.Drawing.Size(54, 20);
             this.ExitItem.Text = "Exit";
             this.ExitItem.Click += new System.EventHandler(this.ExitItem_Click);
+            // 
+            // SettingsToolStripMenuItem
+            // 
+            this.SettingsToolStripMenuItem.Image = global::LambentLight.Properties.Resources.Settings;
+            this.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem";
+            this.SettingsToolStripMenuItem.Size = new System.Drawing.Size(141, 20);
+            this.SettingsToolStripMenuItem.Text = "Application Settings";
+            this.SettingsToolStripMenuItem.Click += new System.EventHandler(this.SettingsToolStripMenuItem_Click);
             // 
             // LogsTab
             // 
@@ -976,6 +986,7 @@
         private System.Windows.Forms.CheckBox AddToConfigCheckBox;
         private System.Windows.Forms.CheckBox RemoveFromConfigCheckBox;
         private System.Windows.Forms.Button RefreshUninstallerButton;
+        private System.Windows.Forms.ToolStripMenuItem SettingsToolStripMenuItem;
     }
 }
 
