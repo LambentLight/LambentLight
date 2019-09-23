@@ -35,7 +35,7 @@ namespace LambentLight
                 CreateItem.Enabled = !value;
                 ExitItem.Enabled = !value;
 
-                BuildsBox.Enabled = !value;
+                BuildsListBox.Enabled = !value;
                 BuildRefreshButton.Enabled = !value;
                 DataBox.Enabled = !value;
                 FolderRefreshButton.Enabled = !value;
@@ -69,7 +69,7 @@ namespace LambentLight
             DataFolderManager.Refresh();
             ResourceManager.Refresh();
             // And filll the Builds and Data folders
-            BuildsBox.Fill(BuildManager.Builds, true);
+            BuildsListBox.Fill(BuildManager.Builds, true);
             DataBox.Fill(DataFolderManager.Folders, true);
             InstallerListBox.Fill(ResourceManager.Resources);
             // Set the elements to unlocked
@@ -79,9 +79,6 @@ namespace LambentLight
 
             // Tell the Web Clients to use TLS 1.2 instead of SSL3
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-
-            // Load the settings
-            ReloadSettings();
         }
 
         private void Tabs_Selected(object sender, TabControlEventArgs e)
@@ -107,7 +104,7 @@ namespace LambentLight
         private async void StartItem_Click(object sender, EventArgs e)
         {
             // Ensure that we have an item available
-            if (BuildsBox.SelectedItem == null)
+            if (BuildsListBox.SelectedItem == null)
             {
                 // If not, notify the user and return
                 Logger.Info("You have not selected a FiveM/CitizenFX server build");
@@ -122,7 +119,7 @@ namespace LambentLight
             }
 
             // Start the build with the selected options
-            Locked = await ProcessManager.Start((Build)BuildsBox.SelectedItem, (DataFolder)DataBox.SelectedItem);
+            Locked = await ProcessManager.Start((Build)BuildsListBox.SelectedItem, (DataFolder)DataBox.SelectedItem);
         }
 
         private void StopItem_Click(object sender, EventArgs e)
@@ -156,6 +153,14 @@ namespace LambentLight
                 // Then unlock the fields
                 Locked = false;
             }
+        }
+
+        private void SettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Create a new settings window and open it up
+            Config config = new Config();
+            config.ShowDialog();
+            config.Dispose();
         }
 
         private void ExitItem_Click(object sender, EventArgs e)
@@ -195,7 +200,7 @@ namespace LambentLight
         {
             // Refresh the list of builds
             BuildManager.Refresh();
-            BuildsBox.Fill(BuildManager.Builds, true);
+            BuildsListBox.Fill(BuildManager.Builds, true);
         }
 
         private void DataBox_SelectedIndexChanged(object sender, EventArgs e) => RefreshInstalledResources();
@@ -205,6 +210,16 @@ namespace LambentLight
             // Refresh the folders of data
             DataFolderManager.Refresh();
             DataBox.Fill(DataFolderManager.Folders);
+        }
+
+        private void BrowseButton_Click(object sender, EventArgs e)
+        {
+            // If there is something selected
+            if (DataBox.SelectedItem != null)
+            {
+                // Open the folder
+                Process.Start(((DataFolder)DataBox.SelectedItem).Absolute);
+            }
         }
 
         #endregion
@@ -371,181 +386,7 @@ namespace LambentLight
         }
 
         #endregion
-
-        #region Settings
-
-        private void ReloadSettings()
-        {
-            // Disable the license check box
-            VisibleCheckBox.Checked = false;
-
-            // And load all of the settings
-            DownloadScriptsCheckBox.Checked = Settings.Default.DownloadScripts;
-            CreateConfigCheckBox.Checked = Settings.Default.CreateConfig;
-            AddToConfigCheckBox.Checked = Settings.Default.AddToConfig;
-            RemoveFromConfigCheckBox.Checked = Settings.Default.RemoveFromConfig;
-
-            RestartEveryCheckBox.Checked = Settings.Default.RestartEvery;
-            RestartAtCheckBox.Checked = Settings.Default.RestartAt;
-            RestartEveryTextBox.Text = Settings.Default.RestartEveryTime.ToString();
-            RestartAtTextBox.Text = Settings.Default.RestartAtTime.ToString();
-
-            BuildsWinTextBox.Text = Settings.Default.BuildsWindows;
-            BuildsLinTextBox.Text = Settings.Default.BuildsLinux;
-            ResourcesTextBox.Text = Settings.Default.Resources;
-
-            AutoRestartCheckBox.Checked = Settings.Default.AutoRestart;
-            ClearCacheCheckBox.Checked = Settings.Default.ClearCache;
-        }
-
-        private void VisibleTextBox_CheckedChanged(object sender, EventArgs e)
-        {
-            // Change the enabled status of the License TextBox
-            LicenseTextBox.Enabled = VisibleCheckBox.Checked;
-            SaveLicenseButton.Enabled = VisibleCheckBox.Checked;
-            // If the CheckBox is enabled
-            if (VisibleCheckBox.Checked)
-            {
-                // Fill the text box with the license
-                LicenseTextBox.Text = Settings.Default.License;
-            }
-            // Otherwise
-            else
-            {
-                // Delete it
-                LicenseTextBox.Text = string.Empty;
-            }
-        }
-
-        private void GenerateLicenseButton_Click(object sender, EventArgs e)
-        {
-            // Open the FiveM Keymaster page
-            Process.Start("https://keymaster.fivem.net");
-        }
-
-        private void SaveLicenseButton_Click(object sender, EventArgs e)
-        {
-            // Save the license on the text box
-            Settings.Default.License = LicenseTextBox.Text;
-            Settings.Default.Save();
-        }
-
-        private void SaveAPIsButton_Click(object sender, EventArgs e)
-        {
-            // Save the URLs on the configuration
-            Settings.Default.Resources = ResourcesTextBox.Text;
-            Settings.Default.BuildsWindows = BuildsWinTextBox.Text;
-            Settings.Default.BuildsLinux = BuildsLinTextBox.Text;
-            Settings.Default.Save();
-        }
-
-        private void DownloadScriptsCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            // Save the curent status on the settings
-            Settings.Default.DownloadScripts = DownloadScriptsCheckBox.Checked;
-            Settings.Default.Save();
-        }
-
-        private void CreateConfigCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            // Save the curent status on the settings
-            Settings.Default.CreateConfig = CreateConfigCheckBox.Checked;
-            Settings.Default.Save();
-        }
-
-        private void AddToConfigCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            // Save the curent status on the settings
-            Settings.Default.AddToConfig = AddToConfigCheckBox.Checked;
-            Settings.Default.Save();
-        }
-
-        private void RemoveFromConfigCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            // Save the curent status on the settings
-            Settings.Default.RemoveFromConfig = RemoveFromConfigCheckBox.Checked;
-            Settings.Default.Save();
-        }
-
-        private void AutoRestartCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            // Save the curent status on the settings
-            Settings.Default.AutoRestart = AutoRestartCheckBox.Checked;
-            Settings.Default.Save();
-        }
-
-        private void ClearCacheCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            // Save the curent status on the settings
-            Settings.Default.ClearCache = ClearCacheCheckBox.Checked;
-            Settings.Default.Save();
-        }
-
-        private void RestartEveryCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            // Save the curent status on the settings
-            Settings.Default.RestartEvery = RestartEveryCheckBox.Checked;
-            Settings.Default.Save();
-        }
-
-        private void RestartAtCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            // Save the curent status on the settings
-            Settings.Default.RestartAt = RestartAtCheckBox.Checked;
-            Settings.Default.Save();
-        }
-
-        private void RestartEveryButton_Click(object sender, EventArgs e)
-        {
-            // Try to parse the text box contents
-            try
-            {
-                Settings.Default.RestartEveryTime = TimeSpan.Parse(RestartEveryTextBox.Text);
-            }
-            // If we have failed
-            catch (FormatException)
-            {
-                MessageBox.Show("The format for the 'Restart every' time is invalid.");
-                return;
-            }
-            // If we succeeded, save it
-            Settings.Default.Save();
-        }
-
-        private void RestartAtButton_Click(object sender, EventArgs e)
-        {
-            // Try to parse the text box contents
-            try
-            {
-                Settings.Default.RestartAtTime = TimeSpan.Parse(RestartAtTextBox.Text);
-            }
-            // If we have failed
-            catch (FormatException)
-            {
-                MessageBox.Show("The format for the 'Restart daily at' time is invalid.");
-                return;
-            }
-            // If we succeeded, save it
-            Settings.Default.Save();
-        }
-
-        private void ResetSettingsButton_Click(object sender, EventArgs e)
-        {
-            // Ask the user if he is sure
-            DialogResult Result = MessageBox.Show("Are you sure that you want to reset the settings?", "Resetting Settings", MessageBoxButtons.YesNo);
-
-            // If the user is sure
-            if (Result == DialogResult.Yes)
-            {
-                // Reset the settings
-                Settings.Default.Reset();
-                // And reload them
-                ReloadSettings();
-            }
-        }
-
-        #endregion
-
+        
         #region Tools
 
         private void RefreshInstalledResources()

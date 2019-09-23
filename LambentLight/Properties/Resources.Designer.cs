@@ -61,12 +61,12 @@ namespace LambentLight.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Arial;}{\f1\fnil\fcharset0 Calibri;}}
+        ///   Looks up a localized string similar to {\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Microsoft Sans Serif;}}
         ///{\colortbl ;\red0\green0\blue255;}
         ///{\*\generator Riched20 10.0.18362}\viewkind4\uc1 
-        ///\pard\sa200\sl276\slmult1\qc\b\fs22\lang9 LambentLight (Previously ServerManager)\par
+        ///\pard\sa200\sl276\slmult1\qc\b\f0\fs20\lang9 LambentLight (Previously ServerManager)\par
         ///\b0 Thank you for using LambentLight!\par
-        ///LambentLight is my little Server Manager for FiveM that I&apos;ve created to make the life of new users easy, so they can play with their friends in custom servers without long hou [rest of string was truncated]&quot;;.
+        ///LambentLight is my little Server Manager for FiveM that I&apos;ve created to make the life of new users easy, so they can play with their friends in custom servers without long hours of confi [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string About {
             get {
@@ -110,6 +110,16 @@ namespace LambentLight.Properties {
         internal static System.Drawing.Bitmap Play {
             get {
                 object obj = ResourceManager.GetObject("Play", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Settings {
+            get {
+                object obj = ResourceManager.GetObject("Settings", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
