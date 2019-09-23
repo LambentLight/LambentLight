@@ -198,14 +198,15 @@ namespace LambentLight.Managers
         /// Generates a new configuration for the current data folder.
         /// </summary>
         /// <returns>The new configuration as a string.</returns>
-        public string GenerateConfig(string rconPassword = null)
+        public string GenerateConfig(string rconPassword = null, bool allowScriptHook = false)
         {
             // Get the base configuration
             string baseConfig = Encoding.UTF8.GetString(Properties.Resources.ConfigurationTemplate);
             // Generate the new configuration formatted with the RCON Password
             // If the RCON Password sent is whitespaces or null, generate one with the "safe" function
             string password = string.IsNullOrWhiteSpace(rconPassword) ? GenerateSecureString(32) : rconPassword;
-            string newConfig = string.Format(baseConfig, password);
+            string scriptHook = allowScriptHook ? "1" : "0";
+            string newConfig = string.Format(baseConfig, password, scriptHook);
             // Set the configuration
             Configuration = newConfig;
             // Finally, return the new configuration
@@ -387,7 +388,7 @@ namespace LambentLight.Managers
         /// Creates a new server data folder.
         /// </summary>
         /// <param name="name">The name of the folder.</param>
-        public static async Task<DataFolder> Create(string name, string rconPassword = null)
+        public static async Task<DataFolder> Create(string name, string rconPassword = null, bool allowScriptHook = false)
         {
             // Create the Data folder if it does not exists
             Locations.EnsureDataFolder();
@@ -450,7 +451,7 @@ namespace LambentLight.Managers
             if (Settings.Default.CreateConfig)
             {
                 // Generate the new configuration for the folder
-                NewFolder.GenerateConfig(rconPassword);
+                NewFolder.GenerateConfig(rconPassword, allowScriptHook);
             }
 
             // Finally, return the data object
