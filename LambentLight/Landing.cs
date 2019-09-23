@@ -163,6 +163,7 @@ namespace LambentLight
             // Create a new settings window and open it up
             Config config = new Config();
             config.ShowDialog();
+            config.Dispose();
         }
 
         private void ExitItem_Click(object sender, EventArgs e)
