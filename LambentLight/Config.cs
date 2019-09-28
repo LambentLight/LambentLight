@@ -18,13 +18,12 @@ namespace LambentLight
         {
             InitializeComponent();
         }
-
-
-
+               
         private void ReloadSettings()
         {
             // Disable the license check box
             VisibleCheckBox.Checked = false;
+            VisibleCheckBox2.Checked = false;
             
             // And load all of the settings
             DownloadScriptsCheckBox.Checked = Settings.Default.DownloadScripts;
@@ -70,6 +69,24 @@ namespace LambentLight
             }
         }
 
+        private void VisibleCheckBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            SteamTextBox.Enabled = VisibleCheckBox2.Checked;
+            SaveSteamButton.Enabled = VisibleCheckBox2.Checked;
+            // If the CheckBox is enabled
+            if (VisibleCheckBox2.Checked)
+            {
+                // Fill the text box with the license
+                SteamTextBox.Text = Settings.Default.SteamAPI;
+            }
+            // Otherwise
+            else
+            {
+                // Delete it
+                SteamTextBox.Text = string.Empty;
+            }
+        }
+
         private void GenerateLicenseButton_Click(object sender, EventArgs e)
         {
             // Open the FiveM Keymaster page
@@ -80,6 +97,13 @@ namespace LambentLight
         {
             // Save the license on the text box
             Settings.Default.License = LicenseTextBox.Text;
+            Settings.Default.Save();
+        }
+
+        private void SaveSteamButton_Click(object sender, EventArgs e)
+        {
+            // Save the Steam API on the text box
+            Settings.Default.SteamAPI = SteamTextBox.Text;
             Settings.Default.Save();
         }
 

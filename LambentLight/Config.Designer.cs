@@ -31,6 +31,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Config));
             this.ConfigTabControl = new System.Windows.Forms.TabControl();
             this.BasicTabPage = new System.Windows.Forms.TabPage();
+            this.SteamGroupBox1 = new System.Windows.Forms.GroupBox();
+            this.VisibleCheckBox2 = new System.Windows.Forms.CheckBox();
+            this.SteamTextBox = new System.Windows.Forms.TextBox();
             this.RuntimeGroupBox = new System.Windows.Forms.GroupBox();
             this.ClearCacheCheckBox = new System.Windows.Forms.CheckBox();
             this.AutoRestartCheckBox = new System.Windows.Forms.CheckBox();
@@ -63,8 +66,10 @@
             this.ResourcesLabel = new System.Windows.Forms.Label();
             this.CloseButton = new System.Windows.Forms.Button();
             this.ResetSettingsButton = new System.Windows.Forms.Button();
+            this.SaveSteamButton = new System.Windows.Forms.Button();
             this.ConfigTabControl.SuspendLayout();
             this.BasicTabPage.SuspendLayout();
+            this.SteamGroupBox1.SuspendLayout();
             this.RuntimeGroupBox.SuspendLayout();
             this.FolderCreationGroupBox.SuspendLayout();
             this.LicenseGroupBox.SuspendLayout();
@@ -88,6 +93,7 @@
             // 
             // BasicTabPage
             // 
+            this.BasicTabPage.Controls.Add(this.SteamGroupBox1);
             this.BasicTabPage.Controls.Add(this.RuntimeGroupBox);
             this.BasicTabPage.Controls.Add(this.FolderCreationGroupBox);
             this.BasicTabPage.Controls.Add(this.LicenseGroupBox);
@@ -99,13 +105,45 @@
             this.BasicTabPage.Text = "Basic";
             this.BasicTabPage.UseVisualStyleBackColor = true;
             // 
+            // SteamGroupBox1
+            // 
+            this.SteamGroupBox1.Controls.Add(this.SaveSteamButton);
+            this.SteamGroupBox1.Controls.Add(this.VisibleCheckBox2);
+            this.SteamGroupBox1.Controls.Add(this.SteamTextBox);
+            this.SteamGroupBox1.Location = new System.Drawing.Point(6, 87);
+            this.SteamGroupBox1.Name = "SteamGroupBox1";
+            this.SteamGroupBox1.Size = new System.Drawing.Size(364, 74);
+            this.SteamGroupBox1.TabIndex = 5;
+            this.SteamGroupBox1.TabStop = false;
+            this.SteamGroupBox1.Text = "Steam API";
+            // 
+            // VisibleCheckBox2
+            // 
+            this.VisibleCheckBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.VisibleCheckBox2.AutoSize = true;
+            this.VisibleCheckBox2.Location = new System.Drawing.Point(6, 49);
+            this.VisibleCheckBox2.Name = "VisibleCheckBox2";
+            this.VisibleCheckBox2.Size = new System.Drawing.Size(136, 17);
+            this.VisibleCheckBox2.TabIndex = 2;
+            this.VisibleCheckBox2.Text = "Make SteamAPI Visible";
+            this.VisibleCheckBox2.UseVisualStyleBackColor = true;
+            this.VisibleCheckBox2.CheckedChanged += new System.EventHandler(this.VisibleCheckBox2_CheckedChanged);
+            // 
+            // SteamTextBox
+            // 
+            this.SteamTextBox.Enabled = false;
+            this.SteamTextBox.Location = new System.Drawing.Point(6, 19);
+            this.SteamTextBox.Name = "SteamTextBox";
+            this.SteamTextBox.Size = new System.Drawing.Size(351, 20);
+            this.SteamTextBox.TabIndex = 0;
+            // 
             // RuntimeGroupBox
             // 
             this.RuntimeGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.RuntimeGroupBox.Controls.Add(this.ClearCacheCheckBox);
             this.RuntimeGroupBox.Controls.Add(this.AutoRestartCheckBox);
-            this.RuntimeGroupBox.Location = new System.Drawing.Point(6, 206);
+            this.RuntimeGroupBox.Location = new System.Drawing.Point(8, 287);
             this.RuntimeGroupBox.Name = "RuntimeGroupBox";
             this.RuntimeGroupBox.Size = new System.Drawing.Size(364, 66);
             this.RuntimeGroupBox.TabIndex = 4;
@@ -140,7 +178,7 @@
             this.FolderCreationGroupBox.Controls.Add(this.AddToConfigCheckBox);
             this.FolderCreationGroupBox.Controls.Add(this.CreateConfigCheckBox);
             this.FolderCreationGroupBox.Controls.Add(this.DownloadScriptsCheckBox);
-            this.FolderCreationGroupBox.Location = new System.Drawing.Point(6, 86);
+            this.FolderCreationGroupBox.Location = new System.Drawing.Point(6, 167);
             this.FolderCreationGroupBox.Name = "FolderCreationGroupBox";
             this.FolderCreationGroupBox.Size = new System.Drawing.Size(364, 114);
             this.FolderCreationGroupBox.TabIndex = 3;
@@ -452,6 +490,18 @@
             this.ResetSettingsButton.UseVisualStyleBackColor = true;
             this.ResetSettingsButton.Click += new System.EventHandler(this.ResetSettingsButton_Click);
             // 
+            // SaveSteamButton
+            // 
+            this.SaveSteamButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.SaveSteamButton.Enabled = false;
+            this.SaveSteamButton.Location = new System.Drawing.Point(282, 45);
+            this.SaveSteamButton.Name = "SaveSteamButton";
+            this.SaveSteamButton.Size = new System.Drawing.Size(75, 23);
+            this.SaveSteamButton.TabIndex = 3;
+            this.SaveSteamButton.Text = "Save";
+            this.SaveSteamButton.UseVisualStyleBackColor = true;
+            this.SaveSteamButton.Click += new System.EventHandler(this.SaveSteamButton_Click);
+            // 
             // Config
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -471,6 +521,8 @@
             this.Load += new System.EventHandler(this.Config_Load);
             this.ConfigTabControl.ResumeLayout(false);
             this.BasicTabPage.ResumeLayout(false);
+            this.SteamGroupBox1.ResumeLayout(false);
+            this.SteamGroupBox1.PerformLayout();
             this.RuntimeGroupBox.ResumeLayout(false);
             this.RuntimeGroupBox.PerformLayout();
             this.FolderCreationGroupBox.ResumeLayout(false);
@@ -523,5 +575,9 @@
         private System.Windows.Forms.TextBox RestartEveryTextBox;
         private System.Windows.Forms.CheckBox RestartEveryCheckBox;
         private System.Windows.Forms.Button ResetSettingsButton;
+        private System.Windows.Forms.GroupBox SteamGroupBox1;
+        private System.Windows.Forms.TextBox SteamTextBox;
+        private System.Windows.Forms.CheckBox VisibleCheckBox2;
+        private System.Windows.Forms.Button SaveSteamButton;
     }
 }
