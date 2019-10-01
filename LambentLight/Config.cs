@@ -22,8 +22,8 @@ namespace LambentLight
         private void ReloadSettings()
         {
             // Disable the license check box
-            VisibleCheckBox.Checked = false;
-            VisibleCheckBox2.Checked = false;
+            LicenseVisibleCheckBox.Checked = false;
+            SteamVisibleCheckBox.Checked = false;
             
             // And load all of the settings
             DownloadScriptsCheckBox.Checked = Settings.Default.DownloadScripts;
@@ -53,10 +53,10 @@ namespace LambentLight
         private void VisibleCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             // Change the enabled status of the License TextBox
-            LicenseTextBox.Enabled = VisibleCheckBox.Checked;
-            SaveLicenseButton.Enabled = VisibleCheckBox.Checked;
+            LicenseTextBox.Enabled = LicenseVisibleCheckBox.Checked;
+            LicenseSaveButton.Enabled = LicenseVisibleCheckBox.Checked;
             // If the CheckBox is enabled
-            if (VisibleCheckBox.Checked)
+            if (LicenseVisibleCheckBox.Checked)
             {
                 // Fill the text box with the license
                 LicenseTextBox.Text = Settings.Default.License;
@@ -71,10 +71,10 @@ namespace LambentLight
 
         private void VisibleCheckBox2_CheckedChanged(object sender, EventArgs e)
         {
-            SteamTextBox.Enabled = VisibleCheckBox2.Checked;
-            SaveSteamButton.Enabled = VisibleCheckBox2.Checked;
+            SteamTextBox.Enabled = SteamVisibleCheckBox.Checked;
+            SteamSaveButton.Enabled = SteamVisibleCheckBox.Checked;
             // If the CheckBox is enabled
-            if (VisibleCheckBox2.Checked)
+            if (SteamVisibleCheckBox.Checked)
             {
                 // Fill the text box with the license
                 SteamTextBox.Text = Settings.Default.SteamAPI;
