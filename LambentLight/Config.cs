@@ -1,4 +1,4 @@
-using LambentLight.Properties;
+﻿using LambentLight.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -52,39 +52,20 @@ namespace LambentLight
 
         private void LicenseVisibleCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            // Change the enabled status of the License TextBox
+            // Change the enabled status of the License TextBox and Button
             LicenseTextBox.Enabled = LicenseVisibleCheckBox.Checked;
             LicenseSaveButton.Enabled = LicenseVisibleCheckBox.Checked;
-            // If the CheckBox is enabled
-            if (LicenseVisibleCheckBox.Checked)
-            {
-                // Fill the text box with the license
-                LicenseTextBox.Text = Settings.Default.License;
-            }
-            // Otherwise
-            else
-            {
-                // Delete it
-                LicenseTextBox.Text = string.Empty;
-            }
+            // And populate the License correctly
+            LicenseTextBox.Text = LicenseVisibleCheckBox.Checked ? Settings.Default.License : string.Empty;
         }
 
         private void SteamVisibleCheckBox_CheckedChanged(object sender, EventArgs e)
         {
+            // Change the enabled status of the Steam TextBox and Button
             SteamTextBox.Enabled = SteamVisibleCheckBox.Checked;
             SteamSaveButton.Enabled = SteamVisibleCheckBox.Checked;
-            // If the CheckBox is enabled
-            if (SteamVisibleCheckBox.Checked)
-            {
-                // Fill the text box with the license
-                SteamTextBox.Text = Settings.Default.SteamAPI;
-            }
-            // Otherwise
-            else
-            {
-                // Delete it
-                SteamTextBox.Text = string.Empty;
-            }
+            // And populate the API Key correctly
+            SteamTextBox.Text = SteamVisibleCheckBox.Checked ? Settings.Default.SteamAPI : string.Empty;
         }
 
         private void LicenseGenerateButton_Click(object sender, EventArgs e)
