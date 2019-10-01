@@ -70,6 +70,7 @@
             this.BottomStrip = new System.Windows.Forms.StatusStrip();
             this.BottomStripLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.BuildImportButton = new System.Windows.Forms.Button();
+            this.BuildFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.BuildsGroup.SuspendLayout();
             this.DataGroup.SuspendLayout();
             this.TopStrip.SuspendLayout();
@@ -550,6 +551,11 @@
             this.BuildImportButton.TabIndex = 2;
             this.BuildImportButton.Text = "Import Build";
             this.BuildImportButton.UseVisualStyleBackColor = true;
+            this.BuildImportButton.Click += new System.EventHandler(this.BuildImportButton_Click);
+            // 
+            // BuildFileDialog
+            // 
+            this.BuildFileDialog.Filter = "All Supported Compressed Files|*.zip";
             // 
             // Landing
             // 
@@ -633,6 +639,7 @@
         private System.Windows.Forms.Button BrowseButton;
         private System.Windows.Forms.Button ClearLogButton;
         private System.Windows.Forms.Button BuildImportButton;
+        private System.Windows.Forms.OpenFileDialog BuildFileDialog;
     }
 }
 

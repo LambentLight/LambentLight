@@ -209,6 +209,16 @@ namespace LambentLight
             BuildsListBox.Fill(BuildManager.Builds, true);
         }
 
+        private void BuildImportButton_Click(object sender, EventArgs e)
+        {
+            // Open the file dialog
+            // If the user canceled the operation, return
+            if (BuildFileDialog.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+        }
+
         private void DataBox_SelectedIndexChanged(object sender, EventArgs e) => RefreshInstalledResources();
 
         private void FolderRefreshButton_Click(object sender, EventArgs e)
