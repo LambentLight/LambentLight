@@ -173,6 +173,12 @@ namespace LambentLight
 
         #region Server Console
 
+        private void ClearLogButton_Click(object sender, EventArgs e)
+        {
+            // Just wipe everything on the LogTextBox
+            LogTextBox.Text = string.Empty;
+        }
+
         private void ConsoleButton_Click(object sender, EventArgs e)
         {
             // If the server is running
