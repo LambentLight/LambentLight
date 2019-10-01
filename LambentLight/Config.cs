@@ -1,4 +1,4 @@
-﻿using LambentLight.Properties;
+using LambentLight.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -50,7 +50,7 @@ namespace LambentLight
             ReloadSettings();
         }
 
-        private void VisibleCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void LicenseVisibleCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             // Change the enabled status of the License TextBox
             LicenseTextBox.Enabled = LicenseVisibleCheckBox.Checked;
@@ -69,7 +69,7 @@ namespace LambentLight
             }
         }
 
-        private void VisibleCheckBox2_CheckedChanged(object sender, EventArgs e)
+        private void SteamVisibleCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             SteamTextBox.Enabled = SteamVisibleCheckBox.Checked;
             SteamSaveButton.Enabled = SteamVisibleCheckBox.Checked;
@@ -87,13 +87,13 @@ namespace LambentLight
             }
         }
 
-        private void GenerateLicenseButton_Click(object sender, EventArgs e)
+        private void LicenseGenerateButton_Click(object sender, EventArgs e)
         {
             // Open the FiveM Keymaster page
             Process.Start("https://keymaster.fivem.net");
         }
 
-        private void SaveLicenseButton_Click(object sender, EventArgs e)
+        private void LicenseSaveButton_Click(object sender, EventArgs e)
         {
             // Save the license on the text box
             Settings.Default.License = LicenseTextBox.Text;

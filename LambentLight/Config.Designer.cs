@@ -139,7 +139,7 @@
             this.SteamVisibleCheckBox.TabIndex = 2;
             this.SteamVisibleCheckBox.Text = "Make API Key Visible";
             this.SteamVisibleCheckBox.UseVisualStyleBackColor = true;
-            this.SteamVisibleCheckBox.CheckedChanged += new System.EventHandler(this.VisibleCheckBox2_CheckedChanged);
+            this.SteamVisibleCheckBox.CheckedChanged += new System.EventHandler(this.SteamVisibleCheckBox_CheckedChanged);
             // 
             // SteamTextBox
             // 
@@ -263,7 +263,7 @@
             this.LicenseGenerateButton.TabIndex = 3;
             this.LicenseGenerateButton.Text = "Generate";
             this.LicenseGenerateButton.UseVisualStyleBackColor = true;
-            this.LicenseGenerateButton.Click += new System.EventHandler(this.GenerateLicenseButton_Click);
+            this.LicenseGenerateButton.Click += new System.EventHandler(this.LicenseGenerateButton_Click);
             // 
             // LicenseSaveButton
             // 
@@ -275,7 +275,7 @@
             this.LicenseSaveButton.TabIndex = 2;
             this.LicenseSaveButton.Text = "Save";
             this.LicenseSaveButton.UseVisualStyleBackColor = true;
-            this.LicenseSaveButton.Click += new System.EventHandler(this.SaveLicenseButton_Click);
+            this.LicenseSaveButton.Click += new System.EventHandler(this.LicenseSaveButton_Click);
             // 
             // LicenseVisibleCheckBox
             // 
@@ -287,7 +287,7 @@
             this.LicenseVisibleCheckBox.TabIndex = 1;
             this.LicenseVisibleCheckBox.Text = "Make License Visible";
             this.LicenseVisibleCheckBox.UseVisualStyleBackColor = true;
-            this.LicenseVisibleCheckBox.CheckedChanged += new System.EventHandler(this.VisibleCheckBox_CheckedChanged);
+            this.LicenseVisibleCheckBox.CheckedChanged += new System.EventHandler(this.LicenseVisibleCheckBox_CheckedChanged);
             // 
             // LicenseTextBox
             // 
