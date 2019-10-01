@@ -74,7 +74,11 @@ namespace LambentLight.Managers
             // Create a new server object and set the correct properties
             NewServer.Process = new Process();
             NewServer.Process.StartInfo.FileName = Path.Combine(AbsPath, "FXServer.exe");
-            NewServer.Process.StartInfo.Arguments = string.Format("+set citizen_dir \"{0}\" +set sv_licenseKey {1} +set steam_webApiKey \"{2}\" +exec server.cfg", Path.Combine(AbsPath, "citizen"), Settings.Default.License, Settings.Default.SteamAPI);
+            NewServer.Process.StartInfo.Arguments = $"+set citizen_dir \"{Path.Combine(AbsPath, "citizen")}\" +set sv_licenseKey {Settings.Default.License} +exec server.cfg";
+            if (!string.IsNullOrWhiteSpace(Settings.Default.SteamAPI))
+            {
+                NewServer.Process.StartInfo.Arguments += $" +set steam_webApiKey \"{Settings.Default.SteamAPI}\"";
+            }
             NewServer.Process.StartInfo.WorkingDirectory = data.Absolute;
             NewServer.Process.StartInfo.UseShellExecute = false;
             NewServer.Process.StartInfo.RedirectStandardError = true;
