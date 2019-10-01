@@ -43,6 +43,7 @@
             this.SettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExitItem = new System.Windows.Forms.ToolStripMenuItem();
             this.LogsTab = new System.Windows.Forms.TabPage();
+            this.ClearLogButton = new System.Windows.Forms.Button();
             this.ConsoleButton = new System.Windows.Forms.Button();
             this.ConsoleTextBox = new System.Windows.Forms.TextBox();
             this.LogTextBox = new System.Windows.Forms.TextBox();
@@ -68,7 +69,7 @@
             this.MainProgressBar = new System.Windows.Forms.ProgressBar();
             this.BottomStrip = new System.Windows.Forms.StatusStrip();
             this.BottomStripLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.ClearLogButton = new System.Windows.Forms.Button();
+            this.BuildImportButton = new System.Windows.Forms.Button();
             this.BuildsGroup.SuspendLayout();
             this.DataGroup.SuspendLayout();
             this.TopStrip.SuspendLayout();
@@ -231,6 +232,17 @@
             this.LogsTab.TabIndex = 0;
             this.LogsTab.Text = "Logs";
             this.LogsTab.UseVisualStyleBackColor = true;
+            // 
+            // ClearLogButton
+            // 
+            this.ClearLogButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.ClearLogButton.Location = new System.Drawing.Point(6, 246);
+            this.ClearLogButton.Name = "ClearLogButton";
+            this.ClearLogButton.Size = new System.Drawing.Size(75, 23);
+            this.ClearLogButton.TabIndex = 3;
+            this.ClearLogButton.Text = "Clear Log";
+            this.ClearLogButton.UseVisualStyleBackColor = true;
+            this.ClearLogButton.Click += new System.EventHandler(this.ClearLogButton_Click);
             // 
             // ConsoleButton
             // 
@@ -469,6 +481,7 @@
             // 
             // BuildsTabPage
             // 
+            this.BuildsTabPage.Controls.Add(this.BuildImportButton);
             this.BuildsTabPage.Controls.Add(this.BuildRefreshButton);
             this.BuildsTabPage.Controls.Add(this.BuildsGroup);
             this.BuildsTabPage.Location = new System.Drawing.Point(4, 22);
@@ -528,16 +541,15 @@
             this.BottomStripLabel.Size = new System.Drawing.Size(151, 17);
             this.BottomStripLabel.Text = "Welcome to LambentLight!";
             // 
-            // ClearLogButton
+            // BuildImportButton
             // 
-            this.ClearLogButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.ClearLogButton.Location = new System.Drawing.Point(6, 246);
-            this.ClearLogButton.Name = "ClearLogButton";
-            this.ClearLogButton.Size = new System.Drawing.Size(75, 23);
-            this.ClearLogButton.TabIndex = 3;
-            this.ClearLogButton.Text = "Clear Log";
-            this.ClearLogButton.UseVisualStyleBackColor = true;
-            this.ClearLogButton.Click += new System.EventHandler(this.ClearLogButton_Click);
+            this.BuildImportButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BuildImportButton.Location = new System.Drawing.Point(611, 35);
+            this.BuildImportButton.Name = "BuildImportButton";
+            this.BuildImportButton.Size = new System.Drawing.Size(150, 23);
+            this.BuildImportButton.TabIndex = 2;
+            this.BuildImportButton.Text = "Import Build";
+            this.BuildImportButton.UseVisualStyleBackColor = true;
             // 
             // Landing
             // 
@@ -620,6 +632,7 @@
         private System.Windows.Forms.ListBox BuildsListBox;
         private System.Windows.Forms.Button BrowseButton;
         private System.Windows.Forms.Button ClearLogButton;
+        private System.Windows.Forms.Button BuildImportButton;
     }
 }
 
