@@ -422,6 +422,31 @@ namespace LambentLight
             UninstallerListBox.Fill(((DataFolder)DataBox.SelectedItem).InstalledResources);
         }
 
+
         #endregion
+
+        private async void RestartServer_Click(object sender, EventArgs e)
+        {
+            ProcessManager.Stop();
+            Locked = false;
+
+            // Ensure that we have an item available
+            if (BuildsListBox.SelectedItem == null)
+            {
+                // If not, notify the user and return
+                Logger.Info("You have not selected a FiveM/CitizenFX server build");
+                return;
+            }
+            // Do the same with server data folders
+            if (DataBox.SelectedItem == null)
+            {
+                // Notify and return
+                Logger.Info("You have not selected a Server Data folder");
+                return;
+            }
+
+            // Start the build with the selected options
+            Locked = await ProcessManager.Start((Build)BuildsListBox.SelectedItem, (DataFolder)DataBox.SelectedItem);
+        }
     }
 }
