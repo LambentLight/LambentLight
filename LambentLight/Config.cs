@@ -18,13 +18,12 @@ namespace LambentLight
         {
             InitializeComponent();
         }
-
-
-
+               
         private void ReloadSettings()
         {
             // Disable the license check box
-            VisibleCheckBox.Checked = false;
+            LicenseVisibleCheckBox.Checked = false;
+            SteamVisibleCheckBox.Checked = false;
             
             // And load all of the settings
             DownloadScriptsCheckBox.Checked = Settings.Default.DownloadScripts;
@@ -51,35 +50,47 @@ namespace LambentLight
             ReloadSettings();
         }
 
-        private void VisibleCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void LicenseVisibleCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            // Change the enabled status of the License TextBox
-            LicenseTextBox.Enabled = VisibleCheckBox.Checked;
-            SaveLicenseButton.Enabled = VisibleCheckBox.Checked;
-            // If the CheckBox is enabled
-            if (VisibleCheckBox.Checked)
-            {
-                // Fill the text box with the license
-                LicenseTextBox.Text = Settings.Default.License;
-            }
-            // Otherwise
-            else
-            {
-                // Delete it
-                LicenseTextBox.Text = string.Empty;
-            }
+            // Change the enabled status of the License TextBox and Button
+            LicenseTextBox.Enabled = LicenseVisibleCheckBox.Checked;
+            LicenseSaveButton.Enabled = LicenseVisibleCheckBox.Checked;
+            // And populate the License correctly
+            LicenseTextBox.Text = LicenseVisibleCheckBox.Checked ? Settings.Default.License : string.Empty;
         }
 
-        private void GenerateLicenseButton_Click(object sender, EventArgs e)
+        private void SteamVisibleCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            // Change the enabled status of the Steam TextBox and Button
+            SteamTextBox.Enabled = SteamVisibleCheckBox.Checked;
+            SteamSaveButton.Enabled = SteamVisibleCheckBox.Checked;
+            // And populate the API Key correctly
+            SteamTextBox.Text = SteamVisibleCheckBox.Checked ? Settings.Default.SteamAPI : string.Empty;
+        }
+
+        private void LicenseGenerateButton_Click(object sender, EventArgs e)
         {
             // Open the FiveM Keymaster page
             Process.Start("https://keymaster.fivem.net");
         }
 
-        private void SaveLicenseButton_Click(object sender, EventArgs e)
+        private void LicenseSaveButton_Click(object sender, EventArgs e)
         {
             // Save the license on the text box
             Settings.Default.License = LicenseTextBox.Text;
+            Settings.Default.Save();
+        }
+
+        private void SteamGenerateButton_Click(object sender, EventArgs e)
+        {
+            // Open the Steam API Key Registration form
+            Process.Start("https://steamcommunity.com/dev/apikey");
+        }
+
+        private void SaveSteamButton_Click(object sender, EventArgs e)
+        {
+            // Save the Steam API on the text box
+            Settings.Default.SteamAPI = SteamTextBox.Text;
             Settings.Default.Save();
         }
 

@@ -31,6 +31,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Config));
             this.ConfigTabControl = new System.Windows.Forms.TabControl();
             this.BasicTabPage = new System.Windows.Forms.TabPage();
+            this.SteamGroupBox = new System.Windows.Forms.GroupBox();
+            this.SteamSaveButton = new System.Windows.Forms.Button();
+            this.SteamVisibleCheckBox = new System.Windows.Forms.CheckBox();
+            this.SteamTextBox = new System.Windows.Forms.TextBox();
             this.RuntimeGroupBox = new System.Windows.Forms.GroupBox();
             this.ClearCacheCheckBox = new System.Windows.Forms.CheckBox();
             this.AutoRestartCheckBox = new System.Windows.Forms.CheckBox();
@@ -40,9 +44,9 @@
             this.CreateConfigCheckBox = new System.Windows.Forms.CheckBox();
             this.DownloadScriptsCheckBox = new System.Windows.Forms.CheckBox();
             this.LicenseGroupBox = new System.Windows.Forms.GroupBox();
-            this.GenerateLicenseButton = new System.Windows.Forms.Button();
-            this.SaveLicenseButton = new System.Windows.Forms.Button();
-            this.VisibleCheckBox = new System.Windows.Forms.CheckBox();
+            this.LicenseGenerateButton = new System.Windows.Forms.Button();
+            this.LicenseSaveButton = new System.Windows.Forms.Button();
+            this.LicenseVisibleCheckBox = new System.Windows.Forms.CheckBox();
             this.LicenseTextBox = new System.Windows.Forms.TextBox();
             this.ScheduleTabPage = new System.Windows.Forms.TabPage();
             this.AutomatedRestartGroupBox = new System.Windows.Forms.GroupBox();
@@ -63,8 +67,10 @@
             this.ResourcesLabel = new System.Windows.Forms.Label();
             this.CloseButton = new System.Windows.Forms.Button();
             this.ResetSettingsButton = new System.Windows.Forms.Button();
+            this.SteamGenerateButton = new System.Windows.Forms.Button();
             this.ConfigTabControl.SuspendLayout();
             this.BasicTabPage.SuspendLayout();
+            this.SteamGroupBox.SuspendLayout();
             this.RuntimeGroupBox.SuspendLayout();
             this.FolderCreationGroupBox.SuspendLayout();
             this.LicenseGroupBox.SuspendLayout();
@@ -88,6 +94,7 @@
             // 
             // BasicTabPage
             // 
+            this.BasicTabPage.Controls.Add(this.SteamGroupBox);
             this.BasicTabPage.Controls.Add(this.RuntimeGroupBox);
             this.BasicTabPage.Controls.Add(this.FolderCreationGroupBox);
             this.BasicTabPage.Controls.Add(this.LicenseGroupBox);
@@ -99,13 +106,58 @@
             this.BasicTabPage.Text = "Basic";
             this.BasicTabPage.UseVisualStyleBackColor = true;
             // 
+            // SteamGroupBox
+            // 
+            this.SteamGroupBox.Controls.Add(this.SteamGenerateButton);
+            this.SteamGroupBox.Controls.Add(this.SteamSaveButton);
+            this.SteamGroupBox.Controls.Add(this.SteamVisibleCheckBox);
+            this.SteamGroupBox.Controls.Add(this.SteamTextBox);
+            this.SteamGroupBox.Location = new System.Drawing.Point(6, 87);
+            this.SteamGroupBox.Name = "SteamGroupBox";
+            this.SteamGroupBox.Size = new System.Drawing.Size(364, 74);
+            this.SteamGroupBox.TabIndex = 5;
+            this.SteamGroupBox.TabStop = false;
+            this.SteamGroupBox.Text = "Steam Web API Key";
+            // 
+            // SteamSaveButton
+            // 
+            this.SteamSaveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.SteamSaveButton.Enabled = false;
+            this.SteamSaveButton.Location = new System.Drawing.Point(282, 45);
+            this.SteamSaveButton.Name = "SteamSaveButton";
+            this.SteamSaveButton.Size = new System.Drawing.Size(75, 23);
+            this.SteamSaveButton.TabIndex = 3;
+            this.SteamSaveButton.Text = "Save";
+            this.SteamSaveButton.UseVisualStyleBackColor = true;
+            this.SteamSaveButton.Click += new System.EventHandler(this.SaveSteamButton_Click);
+            // 
+            // SteamVisibleCheckBox
+            // 
+            this.SteamVisibleCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.SteamVisibleCheckBox.AutoSize = true;
+            this.SteamVisibleCheckBox.Location = new System.Drawing.Point(6, 49);
+            this.SteamVisibleCheckBox.Name = "SteamVisibleCheckBox";
+            this.SteamVisibleCheckBox.Size = new System.Drawing.Size(127, 17);
+            this.SteamVisibleCheckBox.TabIndex = 2;
+            this.SteamVisibleCheckBox.Text = "Make API Key Visible";
+            this.SteamVisibleCheckBox.UseVisualStyleBackColor = true;
+            this.SteamVisibleCheckBox.CheckedChanged += new System.EventHandler(this.SteamVisibleCheckBox_CheckedChanged);
+            // 
+            // SteamTextBox
+            // 
+            this.SteamTextBox.Enabled = false;
+            this.SteamTextBox.Location = new System.Drawing.Point(6, 19);
+            this.SteamTextBox.Name = "SteamTextBox";
+            this.SteamTextBox.Size = new System.Drawing.Size(351, 20);
+            this.SteamTextBox.TabIndex = 0;
+            // 
             // RuntimeGroupBox
             // 
             this.RuntimeGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.RuntimeGroupBox.Controls.Add(this.ClearCacheCheckBox);
             this.RuntimeGroupBox.Controls.Add(this.AutoRestartCheckBox);
-            this.RuntimeGroupBox.Location = new System.Drawing.Point(6, 206);
+            this.RuntimeGroupBox.Location = new System.Drawing.Point(8, 287);
             this.RuntimeGroupBox.Name = "RuntimeGroupBox";
             this.RuntimeGroupBox.Size = new System.Drawing.Size(364, 66);
             this.RuntimeGroupBox.TabIndex = 4;
@@ -140,7 +192,7 @@
             this.FolderCreationGroupBox.Controls.Add(this.AddToConfigCheckBox);
             this.FolderCreationGroupBox.Controls.Add(this.CreateConfigCheckBox);
             this.FolderCreationGroupBox.Controls.Add(this.DownloadScriptsCheckBox);
-            this.FolderCreationGroupBox.Location = new System.Drawing.Point(6, 86);
+            this.FolderCreationGroupBox.Location = new System.Drawing.Point(6, 167);
             this.FolderCreationGroupBox.Name = "FolderCreationGroupBox";
             this.FolderCreationGroupBox.Size = new System.Drawing.Size(364, 114);
             this.FolderCreationGroupBox.TabIndex = 3;
@@ -193,9 +245,9 @@
             // 
             // LicenseGroupBox
             // 
-            this.LicenseGroupBox.Controls.Add(this.GenerateLicenseButton);
-            this.LicenseGroupBox.Controls.Add(this.SaveLicenseButton);
-            this.LicenseGroupBox.Controls.Add(this.VisibleCheckBox);
+            this.LicenseGroupBox.Controls.Add(this.LicenseGenerateButton);
+            this.LicenseGroupBox.Controls.Add(this.LicenseSaveButton);
+            this.LicenseGroupBox.Controls.Add(this.LicenseVisibleCheckBox);
             this.LicenseGroupBox.Controls.Add(this.LicenseTextBox);
             this.LicenseGroupBox.Location = new System.Drawing.Point(6, 6);
             this.LicenseGroupBox.Name = "LicenseGroupBox";
@@ -204,40 +256,40 @@
             this.LicenseGroupBox.TabStop = false;
             this.LicenseGroupBox.Text = "FiveM License";
             // 
-            // GenerateLicenseButton
+            // LicenseGenerateButton
             // 
-            this.GenerateLicenseButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.GenerateLicenseButton.Location = new System.Drawing.Point(202, 45);
-            this.GenerateLicenseButton.Name = "GenerateLicenseButton";
-            this.GenerateLicenseButton.Size = new System.Drawing.Size(75, 23);
-            this.GenerateLicenseButton.TabIndex = 3;
-            this.GenerateLicenseButton.Text = "Generate";
-            this.GenerateLicenseButton.UseVisualStyleBackColor = true;
-            this.GenerateLicenseButton.Click += new System.EventHandler(this.GenerateLicenseButton_Click);
+            this.LicenseGenerateButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.LicenseGenerateButton.Location = new System.Drawing.Point(202, 45);
+            this.LicenseGenerateButton.Name = "LicenseGenerateButton";
+            this.LicenseGenerateButton.Size = new System.Drawing.Size(75, 23);
+            this.LicenseGenerateButton.TabIndex = 3;
+            this.LicenseGenerateButton.Text = "Generate";
+            this.LicenseGenerateButton.UseVisualStyleBackColor = true;
+            this.LicenseGenerateButton.Click += new System.EventHandler(this.LicenseGenerateButton_Click);
             // 
-            // SaveLicenseButton
+            // LicenseSaveButton
             // 
-            this.SaveLicenseButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.SaveLicenseButton.Enabled = false;
-            this.SaveLicenseButton.Location = new System.Drawing.Point(283, 45);
-            this.SaveLicenseButton.Name = "SaveLicenseButton";
-            this.SaveLicenseButton.Size = new System.Drawing.Size(75, 23);
-            this.SaveLicenseButton.TabIndex = 2;
-            this.SaveLicenseButton.Text = "Save";
-            this.SaveLicenseButton.UseVisualStyleBackColor = true;
-            this.SaveLicenseButton.Click += new System.EventHandler(this.SaveLicenseButton_Click);
+            this.LicenseSaveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.LicenseSaveButton.Enabled = false;
+            this.LicenseSaveButton.Location = new System.Drawing.Point(283, 45);
+            this.LicenseSaveButton.Name = "LicenseSaveButton";
+            this.LicenseSaveButton.Size = new System.Drawing.Size(75, 23);
+            this.LicenseSaveButton.TabIndex = 2;
+            this.LicenseSaveButton.Text = "Save";
+            this.LicenseSaveButton.UseVisualStyleBackColor = true;
+            this.LicenseSaveButton.Click += new System.EventHandler(this.LicenseSaveButton_Click);
             // 
-            // VisibleCheckBox
+            // LicenseVisibleCheckBox
             // 
-            this.VisibleCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.VisibleCheckBox.AutoSize = true;
-            this.VisibleCheckBox.Location = new System.Drawing.Point(6, 49);
-            this.VisibleCheckBox.Name = "VisibleCheckBox";
-            this.VisibleCheckBox.Size = new System.Drawing.Size(126, 17);
-            this.VisibleCheckBox.TabIndex = 1;
-            this.VisibleCheckBox.Text = "Make License Visible";
-            this.VisibleCheckBox.UseVisualStyleBackColor = true;
-            this.VisibleCheckBox.CheckedChanged += new System.EventHandler(this.VisibleCheckBox_CheckedChanged);
+            this.LicenseVisibleCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.LicenseVisibleCheckBox.AutoSize = true;
+            this.LicenseVisibleCheckBox.Location = new System.Drawing.Point(6, 49);
+            this.LicenseVisibleCheckBox.Name = "LicenseVisibleCheckBox";
+            this.LicenseVisibleCheckBox.Size = new System.Drawing.Size(126, 17);
+            this.LicenseVisibleCheckBox.TabIndex = 1;
+            this.LicenseVisibleCheckBox.Text = "Make License Visible";
+            this.LicenseVisibleCheckBox.UseVisualStyleBackColor = true;
+            this.LicenseVisibleCheckBox.CheckedChanged += new System.EventHandler(this.LicenseVisibleCheckBox_CheckedChanged);
             // 
             // LicenseTextBox
             // 
@@ -452,6 +504,17 @@
             this.ResetSettingsButton.UseVisualStyleBackColor = true;
             this.ResetSettingsButton.Click += new System.EventHandler(this.ResetSettingsButton_Click);
             // 
+            // SteamGenerateButton
+            // 
+            this.SteamGenerateButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.SteamGenerateButton.Location = new System.Drawing.Point(201, 45);
+            this.SteamGenerateButton.Name = "SteamGenerateButton";
+            this.SteamGenerateButton.Size = new System.Drawing.Size(75, 23);
+            this.SteamGenerateButton.TabIndex = 4;
+            this.SteamGenerateButton.Text = "Generate";
+            this.SteamGenerateButton.UseVisualStyleBackColor = true;
+            this.SteamGenerateButton.Click += new System.EventHandler(this.SteamGenerateButton_Click);
+            // 
             // Config
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -471,6 +534,8 @@
             this.Load += new System.EventHandler(this.Config_Load);
             this.ConfigTabControl.ResumeLayout(false);
             this.BasicTabPage.ResumeLayout(false);
+            this.SteamGroupBox.ResumeLayout(false);
+            this.SteamGroupBox.PerformLayout();
             this.RuntimeGroupBox.ResumeLayout(false);
             this.RuntimeGroupBox.PerformLayout();
             this.FolderCreationGroupBox.ResumeLayout(false);
@@ -493,9 +558,9 @@
         private System.Windows.Forms.TabPage BasicTabPage;
         private System.Windows.Forms.Button CloseButton;
         private System.Windows.Forms.GroupBox LicenseGroupBox;
-        private System.Windows.Forms.Button GenerateLicenseButton;
-        private System.Windows.Forms.Button SaveLicenseButton;
-        private System.Windows.Forms.CheckBox VisibleCheckBox;
+        private System.Windows.Forms.Button LicenseGenerateButton;
+        private System.Windows.Forms.Button LicenseSaveButton;
+        private System.Windows.Forms.CheckBox LicenseVisibleCheckBox;
         private System.Windows.Forms.TextBox LicenseTextBox;
         private System.Windows.Forms.TabPage APITabPage;
         private System.Windows.Forms.GroupBox APIsGroupBox;
@@ -523,5 +588,10 @@
         private System.Windows.Forms.TextBox RestartEveryTextBox;
         private System.Windows.Forms.CheckBox RestartEveryCheckBox;
         private System.Windows.Forms.Button ResetSettingsButton;
+        private System.Windows.Forms.GroupBox SteamGroupBox;
+        private System.Windows.Forms.TextBox SteamTextBox;
+        private System.Windows.Forms.CheckBox SteamVisibleCheckBox;
+        private System.Windows.Forms.Button SteamSaveButton;
+        private System.Windows.Forms.Button SteamGenerateButton;
     }
 }
