@@ -67,6 +67,7 @@
             this.ResourcesLabel = new System.Windows.Forms.Label();
             this.CloseButton = new System.Windows.Forms.Button();
             this.ResetSettingsButton = new System.Windows.Forms.Button();
+            this.SteamGenerateButton = new System.Windows.Forms.Button();
             this.ConfigTabControl.SuspendLayout();
             this.BasicTabPage.SuspendLayout();
             this.SteamGroupBox.SuspendLayout();
@@ -107,6 +108,7 @@
             // 
             // SteamGroupBox
             // 
+            this.SteamGroupBox.Controls.Add(this.SteamGenerateButton);
             this.SteamGroupBox.Controls.Add(this.SteamSaveButton);
             this.SteamGroupBox.Controls.Add(this.SteamVisibleCheckBox);
             this.SteamGroupBox.Controls.Add(this.SteamTextBox);
@@ -502,6 +504,17 @@
             this.ResetSettingsButton.UseVisualStyleBackColor = true;
             this.ResetSettingsButton.Click += new System.EventHandler(this.ResetSettingsButton_Click);
             // 
+            // SteamGenerateButton
+            // 
+            this.SteamGenerateButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.SteamGenerateButton.Location = new System.Drawing.Point(201, 45);
+            this.SteamGenerateButton.Name = "SteamGenerateButton";
+            this.SteamGenerateButton.Size = new System.Drawing.Size(75, 23);
+            this.SteamGenerateButton.TabIndex = 4;
+            this.SteamGenerateButton.Text = "Generate";
+            this.SteamGenerateButton.UseVisualStyleBackColor = true;
+            this.SteamGenerateButton.Click += new System.EventHandler(this.SteamGenerateButton_Click);
+            // 
             // Config
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -579,5 +592,6 @@
         private System.Windows.Forms.TextBox SteamTextBox;
         private System.Windows.Forms.CheckBox SteamVisibleCheckBox;
         private System.Windows.Forms.Button SteamSaveButton;
+        private System.Windows.Forms.Button SteamGenerateButton;
     }
 }

@@ -81,6 +81,12 @@ namespace LambentLight
             Settings.Default.Save();
         }
 
+        private void SteamGenerateButton_Click(object sender, EventArgs e)
+        {
+            // Open the Steam API Key Registration form
+            Process.Start("https://steamcommunity.com/dev/apikey");
+        }
+
         private void SaveSteamButton_Click(object sender, EventArgs e)
         {
             // Save the Steam API on the text box
