@@ -135,9 +135,9 @@
             this.SteamVisibleCheckBox.AutoSize = true;
             this.SteamVisibleCheckBox.Location = new System.Drawing.Point(6, 49);
             this.SteamVisibleCheckBox.Name = "SteamVisibleCheckBox";
-            this.SteamVisibleCheckBox.Size = new System.Drawing.Size(186, 17);
+            this.SteamVisibleCheckBox.Size = new System.Drawing.Size(127, 17);
             this.SteamVisibleCheckBox.TabIndex = 2;
-            this.SteamVisibleCheckBox.Text = "Make Steam Web API Key Visible";
+            this.SteamVisibleCheckBox.Text = "Make API Key Visible";
             this.SteamVisibleCheckBox.UseVisualStyleBackColor = true;
             this.SteamVisibleCheckBox.CheckedChanged += new System.EventHandler(this.VisibleCheckBox2_CheckedChanged);
             // 
