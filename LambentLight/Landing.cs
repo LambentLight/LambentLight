@@ -32,6 +32,7 @@ namespace LambentLight
             {
                 StartItem.Enabled = !value;
                 StopItem.Enabled = value;
+                RestartServer.Enabled = value;
                 CreateItem.Enabled = !value;
                 ExitItem.Enabled = !value;
 
@@ -127,6 +128,12 @@ namespace LambentLight
             // Stop the server if is present and unlock the controls
             ProcessManager.Stop();
             Locked = false;
+        }
+
+        private void RestartServer_Click(object sender, EventArgs e)
+        {
+            // Tell the process manager to restart the existing server
+            ProcessManager.Restart();
         }
 
         private async void CreateItem_Click(object sender, EventArgs e)
@@ -422,10 +429,6 @@ namespace LambentLight
             UninstallerListBox.Fill(((DataFolder)DataBox.SelectedItem).InstalledResources);
         }
 
-        private void RestartServer_Click(object sender, EventArgs e)
-        {
-            ProcessManager.Restart();
-        }
         #endregion
     }
 }
