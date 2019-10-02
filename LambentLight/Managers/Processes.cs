@@ -186,36 +186,43 @@ namespace LambentLight.Managers
         /// </summary>
         public static void Stop()
         {
-            // If there is no server running, notify the user and return
-            if (Server == null)
+            try
             {
-                Logger.Warn("The FiveM server is not running");
-            }
+                // If there is no server running, notify the user and return
+                if (Server == null)
+                {
+                    Logger.Warn("The FiveM server is not running");
+                }
 
-            // If the server process is running
-            if (Server.Process.IsRunning())
+                // If the server process is running
+                if (Server.Process.IsRunning())
+                {
+                    // Kill it
+                    Server.Process.Kill();
+                    // Try to cancel the STDOUT and STDERR background reads
+                    try
+                    {
+                        Server.Process.CancelOutputRead();
+                        Server.Process.CancelErrorRead();
+                    }
+                    // If they are not available
+                    catch (InvalidOperationException)
+                    {
+                        // Do nothing
+                    }
+                    // Disable the auto restarts
+                    AutoRestart.Enabled = false;
+                    RestartEvery.Enabled = false;
+                    RestartAt.Enabled = false;
+                    // Remove the server information
+                    Server = null;
+                    // And notify the user
+                    Logger.Info("The FiveM server has been stopped");
+                }
+            }
+            catch
             {
-                // Kill it
-                Server.Process.Kill();
-                // Try to cancel the STDOUT and STDERR background reads
-                try
-                {
-                    Server.Process.CancelOutputRead();
-                    Server.Process.CancelErrorRead();
-                }
-                // If they are not available
-                catch (InvalidOperationException)
-                {
-                    // Do nothing
-                }
-                // Disable the auto restarts
-                AutoRestart.Enabled = false;
-                RestartEvery.Enabled = false;
-                RestartAt.Enabled = false;
-                // Remove the server information
-                Server = null;
-                // And notify the user
-                Logger.Info("The FiveM server has been stopped");
+                MessageBox.Show("No running servers found to restart", "No running servers", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 

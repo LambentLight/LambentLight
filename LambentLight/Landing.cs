@@ -1,16 +1,17 @@
-﻿using LambentLight.Extensions;
-using LambentLight.Managers;
-using LambentLight.Properties;
-using LambentLight.Targets;
-using NLog;
-using NLog.Config;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows.Forms;
+using LambentLight.Extensions;
+using LambentLight.Managers;
+using LambentLight.Properties;
+using LambentLight.Targets;
+using NLog;
+using NLog.Config;
 
 namespace LambentLight
 {
@@ -103,31 +104,55 @@ namespace LambentLight
 
         private async void StartItem_Click(object sender, EventArgs e)
         {
-            // Ensure that we have an item available
-            if (BuildsListBox.SelectedItem == null)
-            {
-                // If not, notify the user and return
-                Logger.Info("You have not selected a FiveM/CitizenFX server build");
-                return;
-            }
-            // Do the same with server data folders
-            if (DataBox.SelectedItem == null)
-            {
-                // Notify and return
-                Logger.Info("You have not selected a Server Data folder");
-                return;
-            }
-
-            // Start the build with the selected options
-            Locked = await ProcessManager.Start((Build)BuildsListBox.SelectedItem, (DataFolder)DataBox.SelectedItem);
+            await StartServerAsync();
         }
 
         private void StopItem_Click(object sender, EventArgs e)
+        {
+            StopServer();
+        }
+
+        private async void RestartItem_Click(object sender, EventArgs e)
+        {
+            StopServer();
+            await StartServerAsync();
+        }
+
+        private async Task StartServerAsync()
+        {
+            try
+            {
+                // Ensure that we have an item available
+                if (BuildsListBox.SelectedItem == null)
+                {
+                    // If not, notify the user and return
+                    Logger.Info("You have not selected a FiveM/CitizenFX server build");
+                    return;
+                }
+                // Do the same with server data folders
+                if (DataBox.SelectedItem == null)
+                {
+                    // Notify and return
+                    Logger.Info("You have not selected a Server Data folder");
+                    return;
+                }
+
+                // Start the build with the selected options
+                Locked = await ProcessManager.Start((Build)BuildsListBox.SelectedItem, (DataFolder)DataBox.SelectedItem);
+            }
+            catch
+            {
+                MessageBox.Show("No running servers were found running", "No running servers", MessageBoxButtons.OK);
+            }
+        }
+
+        private void StopServer()
         {
             // Stop the server if is present and unlock the controls
             ProcessManager.Stop();
             Locked = false;
         }
+
 
         private async void CreateItem_Click(object sender, EventArgs e)
         {
@@ -402,7 +427,7 @@ namespace LambentLight
         }
 
         #endregion
-        
+
         #region Tools
 
         private void RefreshInstalledResources()

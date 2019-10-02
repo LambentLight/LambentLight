@@ -64,13 +64,14 @@
             this.LoadButton = new System.Windows.Forms.Button();
             this.ConfigTextBox = new System.Windows.Forms.TextBox();
             this.BuildsTabPage = new System.Windows.Forms.TabPage();
+            this.BuildImportButton = new System.Windows.Forms.Button();
             this.AboutTab = new System.Windows.Forms.TabPage();
             this.AboutRichTextBox = new System.Windows.Forms.RichTextBox();
             this.MainProgressBar = new System.Windows.Forms.ProgressBar();
             this.BottomStrip = new System.Windows.Forms.StatusStrip();
             this.BottomStripLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.BuildImportButton = new System.Windows.Forms.Button();
             this.BuildFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.RestartItem = new System.Windows.Forms.ToolStripMenuItem();
             this.BuildsGroup.SuspendLayout();
             this.DataGroup.SuspendLayout();
             this.TopStrip.SuspendLayout();
@@ -171,6 +172,7 @@
             this.TopStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.StartItem,
             this.StopItem,
+            this.RestartItem,
             this.CreateItem,
             this.SettingsToolStripMenuItem,
             this.ExitItem});
@@ -195,6 +197,14 @@
             this.StopItem.Size = new System.Drawing.Size(94, 20);
             this.StopItem.Text = "Stop Server";
             this.StopItem.Click += new System.EventHandler(this.StopItem_Click);
+            // 
+            // RestartItem
+            // 
+            this.RestartItem.Image = global::LambentLight.Properties.Resources.Play;
+            this.RestartItem.Name = "RestartItem";
+            this.RestartItem.Size = new System.Drawing.Size(106, 20);
+            this.RestartItem.Text = "Restart Server";
+            this.RestartItem.Click += new System.EventHandler(this.RestartItem_Click);
             // 
             // CreateItem
             // 
@@ -493,6 +503,17 @@
             this.BuildsTabPage.Text = "Build Selector";
             this.BuildsTabPage.UseVisualStyleBackColor = true;
             // 
+            // BuildImportButton
+            // 
+            this.BuildImportButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BuildImportButton.Location = new System.Drawing.Point(611, 35);
+            this.BuildImportButton.Name = "BuildImportButton";
+            this.BuildImportButton.Size = new System.Drawing.Size(150, 23);
+            this.BuildImportButton.TabIndex = 2;
+            this.BuildImportButton.Text = "Import Build";
+            this.BuildImportButton.UseVisualStyleBackColor = true;
+            this.BuildImportButton.Click += new System.EventHandler(this.BuildImportButton_Click);
+            // 
             // AboutTab
             // 
             this.AboutTab.Controls.Add(this.AboutRichTextBox);
@@ -541,17 +562,6 @@
             this.BottomStripLabel.Name = "BottomStripLabel";
             this.BottomStripLabel.Size = new System.Drawing.Size(151, 17);
             this.BottomStripLabel.Text = "Welcome to LambentLight!";
-            // 
-            // BuildImportButton
-            // 
-            this.BuildImportButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BuildImportButton.Location = new System.Drawing.Point(611, 35);
-            this.BuildImportButton.Name = "BuildImportButton";
-            this.BuildImportButton.Size = new System.Drawing.Size(150, 23);
-            this.BuildImportButton.TabIndex = 2;
-            this.BuildImportButton.Text = "Import Build";
-            this.BuildImportButton.UseVisualStyleBackColor = true;
-            this.BuildImportButton.Click += new System.EventHandler(this.BuildImportButton_Click);
             // 
             // BuildFileDialog
             // 
@@ -604,6 +614,7 @@
         private System.Windows.Forms.MenuStrip TopStrip;
         private System.Windows.Forms.ToolStripMenuItem StartItem;
         private System.Windows.Forms.ToolStripMenuItem StopItem;
+        private System.Windows.Forms.ToolStripMenuItem RestartItem;
         private System.Windows.Forms.TabPage LogsTab;
         private System.Windows.Forms.TabControl Tabs;
         private System.Windows.Forms.ToolStripMenuItem CreateItem;
