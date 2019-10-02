@@ -422,12 +422,10 @@ namespace LambentLight
             UninstallerListBox.Fill(((DataFolder)DataBox.SelectedItem).InstalledResources);
         }
 
-
-        #endregion
-
         private void RestartServer_Click(object sender, EventArgs e)
         {
             ProcessManager.Restart();
         }
+        #endregion
     }
 }
