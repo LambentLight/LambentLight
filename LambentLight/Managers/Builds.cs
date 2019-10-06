@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -159,22 +160,46 @@ namespace LambentLight.Managers
             // Log that we have finished the download
             Logger.Info("The download of build {0} has finished, starting extraction...", build.ID);
 
-            // If the current build folder exists, delete it
-            if (build.IsAvailable)
-            {
-                Directory.Delete(build.Folder, true);
-            }
-            // Create the folder for the files
-            Directory.CreateDirectory(build.Folder);
-
-            // Finally, extract the values
-            await Compression.Extract(Destination, build.Folder);
-
-            // Log that we have finished the extraction
-            Logger.Info("Build {0} is now available for the server", build.ID);
+            // Install the build from the ZIP file
+            await Install(Destination, build.ID);
 
             // Delete the temporary ZIP file
             File.Delete(Destination);
+        }
+
+        public static async Task Install(string file, string name = null)
+        {
+            // If the name is null or whitespaces
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                // Hash the file and use that as the name
+                using (FileStream stream = File.OpenRead(file))
+                using (BufferedStream buffered = new BufferedStream(stream))
+                using (SHA1Managed sha = new SHA1Managed())
+                {
+                    byte[] checksum = sha.ComputeHash(buffered);
+                    string hash = BitConverter.ToString(checksum).Replace("-", "").ToLowerInvariant();
+
+                    name = $"custom-{hash}";
+                }
+            }
+
+            // Create the path of the folder
+            string path = Path.Combine(Locations.BuildsForOS, name);
+
+            // If the current build folder exists, delete it
+            if (Directory.Exists(path))
+            {
+                Directory.Delete(path, true);
+            }
+            // Create the folder for the files
+            Directory.CreateDirectory(path);
+
+            // Finally, extract the values
+            await Compression.Extract(file, path);
+
+            // Log that we have finished the extraction
+            Logger.Info("Build {0} is now available for the server", name);
         }
     }
 }
