@@ -216,7 +216,7 @@ namespace LambentLight
             BuildsListBox.Fill(BuildManager.Builds, true);
         }
 
-        private void BuildImportButton_Click(object sender, EventArgs e)
+        private async void BuildImportButton_Click(object sender, EventArgs e)
         {
             // Open the file dialog
             // If the user canceled the operation, return
@@ -224,6 +224,9 @@ namespace LambentLight
             {
                 return;
             }
+
+            // Then, install the build from the dialog
+            await BuildManager.Install(BuildFileDialog.FileName);
         }
 
         private void DataBox_SelectedIndexChanged(object sender, EventArgs e) => RefreshInstalledResources();

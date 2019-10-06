@@ -178,7 +178,7 @@
             this.ExitItem});
             this.TopStrip.Location = new System.Drawing.Point(0, 0);
             this.TopStrip.Name = "TopStrip";
-            this.TopStrip.Size = new System.Drawing.Size(799, 25);
+            this.TopStrip.Size = new System.Drawing.Size(799, 24);
             this.TopStrip.TabIndex = 2;
             this.TopStrip.Text = "menuStrip1";
             // 
@@ -186,7 +186,7 @@
             // 
             this.StartItem.Image = global::LambentLight.Properties.Resources.Play;
             this.StartItem.Name = "StartItem";
-            this.StartItem.Size = new System.Drawing.Size(114, 21);
+            this.StartItem.Size = new System.Drawing.Size(94, 20);
             this.StartItem.Text = "Start Server";
             this.StartItem.Click += new System.EventHandler(this.StartItem_Click);
             // 
@@ -194,14 +194,14 @@
             // 
             this.StopItem.Image = global::LambentLight.Properties.Resources.Stop;
             this.StopItem.Name = "StopItem";
-            this.StopItem.Size = new System.Drawing.Size(113, 21);
+            this.StopItem.Size = new System.Drawing.Size(94, 20);
             this.StopItem.Text = "Stop Server";
             this.StopItem.Click += new System.EventHandler(this.StopItem_Click);
             // 
             // RestartServer
             // 
             this.RestartServer.Name = "RestartServer";
-            this.RestartServer.Size = new System.Drawing.Size(115, 21);
+            this.RestartServer.Size = new System.Drawing.Size(90, 20);
             this.RestartServer.Text = "Restart Server";
             this.RestartServer.Click += new System.EventHandler(this.RestartServer_Click);
             // 
@@ -209,7 +209,7 @@
             // 
             this.CreateItem.Image = global::LambentLight.Properties.Resources.Add;
             this.CreateItem.Name = "CreateItem";
-            this.CreateItem.Size = new System.Drawing.Size(160, 21);
+            this.CreateItem.Size = new System.Drawing.Size(132, 20);
             this.CreateItem.Text = "Create Data Folder";
             this.CreateItem.Click += new System.EventHandler(this.CreateItem_Click);
             // 
@@ -217,7 +217,7 @@
             // 
             this.SettingsToolStripMenuItem.Image = global::LambentLight.Properties.Resources.Settings;
             this.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem";
-            this.SettingsToolStripMenuItem.Size = new System.Drawing.Size(163, 21);
+            this.SettingsToolStripMenuItem.Size = new System.Drawing.Size(141, 20);
             this.SettingsToolStripMenuItem.Text = "Application Settings";
             this.SettingsToolStripMenuItem.Click += new System.EventHandler(this.SettingsToolStripMenuItem_Click);
             // 
@@ -225,7 +225,7 @@
             // 
             this.ExitItem.Image = global::LambentLight.Properties.Resources.Exit;
             this.ExitItem.Name = "ExitItem";
-            this.ExitItem.Size = new System.Drawing.Size(60, 21);
+            this.ExitItem.Size = new System.Drawing.Size(54, 20);
             this.ExitItem.Text = "Exit";
             this.ExitItem.Click += new System.EventHandler(this.ExitItem_Click);
             // 
@@ -509,7 +509,7 @@
             this.BuildImportButton.Name = "BuildImportButton";
             this.BuildImportButton.Size = new System.Drawing.Size(150, 23);
             this.BuildImportButton.TabIndex = 2;
-            this.BuildImportButton.Text = "Import Build";
+            this.BuildImportButton.Text = "Import Build from ZIP";
             this.BuildImportButton.UseVisualStyleBackColor = true;
             this.BuildImportButton.Click += new System.EventHandler(this.BuildImportButton_Click);
             // 
@@ -559,7 +559,7 @@
             // BottomStripLabel
             // 
             this.BottomStripLabel.Name = "BottomStripLabel";
-            this.BottomStripLabel.Size = new System.Drawing.Size(184, 17);
+            this.BottomStripLabel.Size = new System.Drawing.Size(151, 17);
             this.BottomStripLabel.Text = "Welcome to LambentLight!";
             // 
             // BuildFileDialog
