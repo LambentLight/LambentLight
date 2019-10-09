@@ -200,7 +200,7 @@
             // 
             // RestartServer
             // 
-            this.StopItem.Image = global::LambentLight.Properties.Resources.Restart;
+            this.RestartServer.Image = global::LambentLight.Properties.Resources.Restart;
             this.RestartServer.Name = "RestartServer";
             this.RestartServer.Size = new System.Drawing.Size(90, 20);
             this.RestartServer.Text = "Restart Server";
