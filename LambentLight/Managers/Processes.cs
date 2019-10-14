@@ -197,6 +197,12 @@ namespace LambentLight.Managers
             {
                 // Kill it
                 Server.Process.Kill();
+                // And terminate any orphan processes just in case
+                foreach (Process process in Process.GetProcessesByName("FXServer"))
+                {
+                    process.Kill();
+                }
+
                 // Try to cancel the STDOUT and STDERR background reads
                 try
                 {
