@@ -118,10 +118,18 @@ namespace LambentLight.Managers
                 return false;
             }
 
-            // If the build is not available
-            if (!build.IsExecutablePresent)
+            // If the build folder is not there or the executable is missing
+            if (!build.IsFolderPresent || !build.IsExecutablePresent)
             {
-                await BuildManager.Download(build);
+                // Try to download the build the build
+                bool success = await BuildManager.Download(build);
+
+                // If we failed, notify the user that is not possible and return
+                if (!success)
+                {
+                    Logger.Error("The server cannot be started because the selected build does not works.");
+                    return false;
+                }
             }
 
             // Format the path for the cache folder
