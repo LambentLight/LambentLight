@@ -131,7 +131,7 @@ namespace LambentLight.Managers
         /// Downloads the specified build.
         /// </summary>
         /// <param name="build">The build to download.</param>
-        public static async Task Download(Build build)
+        public static async Task<bool> Download(Build build)
         {
             // If we are running on Linux
             if (Checks.IsLinux)
@@ -155,20 +155,24 @@ namespace LambentLight.Managers
             // Create the Uri and destination location
             string Destination = Path.Combine(Locations.Temp, build.ID + (Checks.IsWindows ? ".zip" : ".tar.xz"));
 
-            // If we didn't managed to download the file
-            if (!await Downloader.DownloadFile(string.Format(DownloadBuild, build.ID), Destination))
+            // Try to download the file, and save if we succeeded
+            bool success = await Downloader.DownloadFile(string.Format(DownloadBuild, build.ID), Destination);
+
+            // If we didn't completed the download, return failure
+            if (!success)
             {
-                return;
+                return false;
             }
 
             // Log that we have finished the download
             Logger.Info("The download of build {0} has finished, starting extraction...", build.ID);
-
             // Install the build from the ZIP file
             await Install(Destination, build.ID);
-
             // Delete the temporary ZIP file
             File.Delete(Destination);
+
+            // At this point, return success
+            return true;
         }
 
         public static async Task Install(string file, string name = null)
