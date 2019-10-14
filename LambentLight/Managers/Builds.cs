@@ -21,9 +21,13 @@ namespace LambentLight.Managers
         /// </summary>
         public string ID { get; private set; }
         /// <summary>
-        /// If the build is available locally.
+        /// If the server executable is present.
         /// </summary>
-        public bool IsAvailable => Directory.Exists(Folder);
+        public bool IsExecutablePresent => File.Exists(Path.Combine(Folder, "FXServer.exe"));
+        /// <summary>
+        /// If the folder for the build exists.
+        /// </summary>
+        public bool IsFolderPresent => File.Exists(Folder);
         /// <summary>
         /// The local folder where the build can be located.
         /// </summary>
@@ -42,7 +46,7 @@ namespace LambentLight.Managers
         /// <summary>
         /// Gets the string representation of a build.
         /// </summary>
-        public override string ToString() => ID + " " + (IsAvailable ? "(Ready to Use)" : "(Requires Download)");
+        public override string ToString() => ID + " " + (IsExecutablePresent ? "(Ready to Use)" : "(Requires Download)");
         /// <summary>
         /// Gets the Hash of the Build Identifier.
         /// </summary>

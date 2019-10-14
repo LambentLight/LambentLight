@@ -119,7 +119,7 @@ namespace LambentLight.Managers
             }
 
             // If the build is not available
-            if (!build.IsAvailable)
+            if (!build.IsExecutablePresent)
             {
                 await BuildManager.Download(build);
             }
