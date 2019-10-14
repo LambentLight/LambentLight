@@ -42,7 +42,7 @@ namespace LambentLight.Managers
         /// <summary>
         /// Gets the string representation of a build.
         /// </summary>
-        public override string ToString() => ID;
+        public override string ToString() => ID + " " + (IsAvailable ? "(Ready to Use)" : "(Requires Download)");
         /// <summary>
         /// Gets the Hash of the Build Identifier.
         /// </summary>
