@@ -199,6 +199,7 @@ namespace LambentLight.Managers
             if (Server == null)
             {
                 Logger.Warn("The FiveM server is not running");
+                return;
             }
 
             // If the server process is running
