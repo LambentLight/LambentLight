@@ -173,20 +173,21 @@ namespace LambentLight.Managers
         /// <summary>
         /// Restarts the server if is running.
         /// </summary>
-        public static void Restart()
+        public static async Task<bool> Restart()
         {
             // If the server is running
             if (Server != null && Server.Process.IsRunning())
             {
-                // Create a new instance of the server
-                RuntimeInformation NewServer = GenerateClass(Server.Build, Server.Folder);
+                // Get the server folder and build
+                Build build = Server.Build;
+                DataFolder folder = Server.Folder;
                 // Stop the existing server
                 Stop();
                 // Set the new server
-                Server = NewServer;
-                // And start it
-                Server.Process.Start();
+                return await Start(build, folder);
             }
+            // Otherwise, there is no need for a restart
+            return false;
         }
 
         /// <summary>
