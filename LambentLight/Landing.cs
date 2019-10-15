@@ -34,7 +34,6 @@ namespace LambentLight
                 StopItem.Enabled = value;
                 RestartServer.Enabled = value;
                 CreateItem.Enabled = !value;
-                ExitItem.Enabled = !value;
 
                 BuildsListBox.Enabled = !value;
                 BuildRefreshButton.Enabled = !value;
@@ -172,6 +171,21 @@ namespace LambentLight
 
         private void ExitItem_Click(object sender, EventArgs e)
         {
+            // If the server is running
+            if (ProcessManager.IsServerRunning)
+            {
+                // Ask the user if he wants to close the server
+                DialogResult result = MessageBox.Show("This will stop the FiveM server.\nAre you sure that you want to Exit?", "Server is Running", MessageBoxButtons.YesNo);
+
+                // If the result is not yes, return
+                if (result != DialogResult.Yes)
+                {
+                    return;
+                }
+                // Otherwise, stop the server
+                ProcessManager.Stop();
+            }
+
             // Close the current form
             Close();
         }
