@@ -202,7 +202,7 @@
             // 
             this.RestartServer.Image = global::LambentLight.Properties.Resources.Restart;
             this.RestartServer.Name = "RestartServer";
-            this.RestartServer.Size = new System.Drawing.Size(90, 20);
+            this.RestartServer.Size = new System.Drawing.Size(106, 20);
             this.RestartServer.Text = "Restart Server";
             this.RestartServer.Click += new System.EventHandler(this.RestartServer_Click);
             // 
@@ -584,6 +584,7 @@
             this.Name = "Landing";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LambentLight: A FiveM Server Manager";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Landing_FormClosing);
             this.Load += new System.EventHandler(this.Landing_Load);
             this.BuildsGroup.ResumeLayout(false);
             this.DataGroup.ResumeLayout(false);

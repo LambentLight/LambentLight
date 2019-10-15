@@ -81,6 +81,15 @@ namespace LambentLight
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
         }
 
+        private void Landing_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Stop the server if is running
+            if (ProcessManager.IsServerRunning)
+            {
+                ProcessManager.Stop();
+            }
+        }
+
         private void Tabs_Selected(object sender, TabControlEventArgs e)
         {
             // If the user selected the Server Configuration tab and there is a data folder selected
