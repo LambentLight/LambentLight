@@ -130,10 +130,10 @@ namespace LambentLight
             Locked = false;
         }
 
-        private void RestartServer_Click(object sender, EventArgs e)
+        private async void RestartServer_Click(object sender, EventArgs e)
         {
             // Tell the process manager to restart the existing server
-            ProcessManager.Restart();
+            await ProcessManager.Restart();
         }
 
         private async void CreateItem_Click(object sender, EventArgs e)

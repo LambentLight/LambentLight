@@ -272,23 +272,23 @@ namespace LambentLight.Managers
         /// <summary>
         /// Event that restarts the server every few hours/minutes/seconds.
         /// </summary>
-        private static void RestartEveryEvent(object sender, EventArgs args)
+        private static async void RestartEveryEvent(object sender, EventArgs args)
         {
             // Just restart the server
-            Restart();
+            await Restart();
         }
 
         /// <summary>
         /// Event that restarts the server at specific times of the day.
         /// </summary>
-        private static void RestartAtEvent(object sender, EventArgs args)
+        private static async void RestartAtEvent(object sender, EventArgs args)
         {
             // If the hour, minute and second matches, restart the server
             if (DateTime.Now.Hour == Settings.Default.RestartAtTime.Hours &&
                 DateTime.Now.Minute == Settings.Default.RestartAtTime.Minutes &&
                 DateTime.Now.Second == Settings.Default.RestartAtTime.Seconds)
             {
-                Restart();
+                await Restart();
             }
         }
 
