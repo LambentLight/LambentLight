@@ -207,10 +207,13 @@ namespace LambentLight.Managers
                 // Kill it
                 Server.Process.Kill();
                 // And terminate any orphan processes just in case
-                foreach (Process process in Process.GetProcessesByName("FXServer"))
-                {
-                    process.Kill();
-                }
+                Process process = new Process();
+                process.StartInfo.FileName = "taskkill.exe";
+                process.StartInfo.Arguments = "/f /im FXServer.exe";
+                process.StartInfo.UseShellExecute = false;
+                process.StartInfo.CreateNoWindow = true;
+                process.Start();
+                process.WaitForExit();
 
                 // Try to cancel the STDOUT and STDERR background reads
                 try
