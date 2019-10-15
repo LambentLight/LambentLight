@@ -119,7 +119,7 @@ namespace LambentLight.Managers
             }
 
             // If the build folder is not there or the executable is missing
-            if (!build.IsFolderPresent || !build.IsExecutablePresent)
+            if (!build.IsFolderPresent && !build.IsExecutablePresent)
             {
                 // Try to download the build the build
                 bool success = await BuildManager.Download(build);
