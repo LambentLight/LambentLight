@@ -13,7 +13,7 @@ namespace LambentLight.Targets
         /// <param name="LogEvent">The log information.</param>
         protected override void Write(LogEventInfo LogEvent)
         {
-            Program.Form.Invoke(new Action(() => Program.Form.BottomStripLabel.Text = Layout.Render(LogEvent)));
+            Program.Form.Invoke(new Action(() => Program.Form.BottomToolStripStatusLabel.Text = Layout.Render(LogEvent)));
         }
     }
 }
