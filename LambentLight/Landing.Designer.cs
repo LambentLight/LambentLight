@@ -181,8 +181,8 @@
             this.ExitToolStripMenuItem});
             this.TopMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.TopMenuStrip.Name = "TopMenuStrip";
-            this.TopMenuStrip.Padding = new System.Windows.Forms.Padding(0, 2, 0, 2);
-            this.TopMenuStrip.Size = new System.Drawing.Size(33, 444);
+            this.TopMenuStrip.Padding = new System.Windows.Forms.Padding(2);
+            this.TopMenuStrip.Size = new System.Drawing.Size(124, 444);
             this.TopMenuStrip.TabIndex = 2;
             this.TopMenuStrip.Text = "menuStrip1";
             // 
@@ -192,7 +192,7 @@
             this.StartToolStripMenuItem.Image = global::LambentLight.Properties.Resources.Play;
             this.StartToolStripMenuItem.Name = "StartToolStripMenuItem";
             this.StartToolStripMenuItem.Padding = new System.Windows.Forms.Padding(2);
-            this.StartToolStripMenuItem.Size = new System.Drawing.Size(32, 33);
+            this.StartToolStripMenuItem.Size = new System.Drawing.Size(115, 33);
             this.StartToolStripMenuItem.Text = "Start Server";
             this.StartToolStripMenuItem.Click += new System.EventHandler(this.StartToolStripMenuItem_Click);
             // 
@@ -202,7 +202,7 @@
             this.StopToolStripMenuItem.Image = global::LambentLight.Properties.Resources.Stop;
             this.StopToolStripMenuItem.Name = "StopToolStripMenuItem";
             this.StopToolStripMenuItem.Padding = new System.Windows.Forms.Padding(2);
-            this.StopToolStripMenuItem.Size = new System.Drawing.Size(32, 33);
+            this.StopToolStripMenuItem.Size = new System.Drawing.Size(115, 33);
             this.StopToolStripMenuItem.Text = "Stop Server";
             this.StopToolStripMenuItem.Click += new System.EventHandler(this.StopToolStripMenuItem_Click);
             // 
@@ -212,7 +212,7 @@
             this.RestartToolStripMenuItem.Image = global::LambentLight.Properties.Resources.Restart;
             this.RestartToolStripMenuItem.Name = "RestartToolStripMenuItem";
             this.RestartToolStripMenuItem.Padding = new System.Windows.Forms.Padding(2);
-            this.RestartToolStripMenuItem.Size = new System.Drawing.Size(32, 33);
+            this.RestartToolStripMenuItem.Size = new System.Drawing.Size(115, 33);
             this.RestartToolStripMenuItem.Text = "Restart Server";
             this.RestartToolStripMenuItem.Click += new System.EventHandler(this.RestartToolStripMenuItem_Click);
             // 
@@ -222,7 +222,7 @@
             this.CreateToolStripMenuItem.Image = global::LambentLight.Properties.Resources.Add;
             this.CreateToolStripMenuItem.Name = "CreateToolStripMenuItem";
             this.CreateToolStripMenuItem.Padding = new System.Windows.Forms.Padding(2);
-            this.CreateToolStripMenuItem.Size = new System.Drawing.Size(32, 33);
+            this.CreateToolStripMenuItem.Size = new System.Drawing.Size(115, 33);
             this.CreateToolStripMenuItem.Text = "Create Data Folder";
             this.CreateToolStripMenuItem.Click += new System.EventHandler(this.CreateToolStripMenuItem_Click);
             // 
@@ -232,7 +232,7 @@
             this.SettingsToolStripMenuItem.Image = global::LambentLight.Properties.Resources.Settings;
             this.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem";
             this.SettingsToolStripMenuItem.Padding = new System.Windows.Forms.Padding(2);
-            this.SettingsToolStripMenuItem.Size = new System.Drawing.Size(32, 33);
+            this.SettingsToolStripMenuItem.Size = new System.Drawing.Size(115, 33);
             this.SettingsToolStripMenuItem.Text = "Application Settings";
             this.SettingsToolStripMenuItem.Click += new System.EventHandler(this.SettingsToolStripMenuItem_Click);
             // 
@@ -242,7 +242,7 @@
             this.ExitToolStripMenuItem.Image = global::LambentLight.Properties.Resources.Exit;
             this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
             this.ExitToolStripMenuItem.Padding = new System.Windows.Forms.Padding(2);
-            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(32, 33);
+            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(115, 33);
             this.ExitToolStripMenuItem.Text = "Exit";
             this.ExitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
@@ -568,9 +568,9 @@
             // 
             this.BottomStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.BottomToolStripStatusLabel});
-            this.BottomStrip.Location = new System.Drawing.Point(33, 422);
+            this.BottomStrip.Location = new System.Drawing.Point(124, 422);
             this.BottomStrip.Name = "BottomStrip";
-            this.BottomStrip.Size = new System.Drawing.Size(766, 22);
+            this.BottomStrip.Size = new System.Drawing.Size(675, 22);
             this.BottomStrip.TabIndex = 5;
             // 
             // BottomToolStripStatusLabel
