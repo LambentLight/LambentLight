@@ -179,6 +179,7 @@
             this.ExitItem});
             this.TopStrip.Location = new System.Drawing.Point(0, 0);
             this.TopStrip.Name = "TopStrip";
+            this.TopStrip.Padding = new System.Windows.Forms.Padding(0, 2, 0, 2);
             this.TopStrip.Size = new System.Drawing.Size(799, 37);
             this.TopStrip.TabIndex = 2;
             this.TopStrip.Text = "menuStrip1";
