@@ -127,7 +127,7 @@
             this.DataGroup.Controls.Add(this.BrowseButton);
             this.DataGroup.Controls.Add(this.FolderRefreshButton);
             this.DataGroup.Controls.Add(this.DataBox);
-            this.DataGroup.Location = new System.Drawing.Point(12, 27);
+            this.DataGroup.Location = new System.Drawing.Point(12, 40);
             this.DataGroup.Name = "DataGroup";
             this.DataGroup.Size = new System.Drawing.Size(775, 52);
             this.DataGroup.TabIndex = 1;
@@ -169,6 +169,7 @@
             // 
             // TopStrip
             // 
+            this.TopStrip.ImageScalingSize = new System.Drawing.Size(25, 25);
             this.TopStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.StartItem,
             this.StopItem,
@@ -178,55 +179,67 @@
             this.ExitItem});
             this.TopStrip.Location = new System.Drawing.Point(0, 0);
             this.TopStrip.Name = "TopStrip";
-            this.TopStrip.Size = new System.Drawing.Size(799, 24);
+            this.TopStrip.Size = new System.Drawing.Size(799, 37);
             this.TopStrip.TabIndex = 2;
             this.TopStrip.Text = "menuStrip1";
             // 
             // StartItem
             // 
+            this.StartItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.StartItem.Image = global::LambentLight.Properties.Resources.Play;
             this.StartItem.Name = "StartItem";
-            this.StartItem.Size = new System.Drawing.Size(94, 20);
+            this.StartItem.Padding = new System.Windows.Forms.Padding(2);
+            this.StartItem.Size = new System.Drawing.Size(33, 33);
             this.StartItem.Text = "Start Server";
             this.StartItem.Click += new System.EventHandler(this.StartItem_Click);
             // 
             // StopItem
             // 
+            this.StopItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.StopItem.Image = global::LambentLight.Properties.Resources.Stop;
             this.StopItem.Name = "StopItem";
-            this.StopItem.Size = new System.Drawing.Size(94, 20);
+            this.StopItem.Padding = new System.Windows.Forms.Padding(2);
+            this.StopItem.Size = new System.Drawing.Size(33, 33);
             this.StopItem.Text = "Stop Server";
             this.StopItem.Click += new System.EventHandler(this.StopItem_Click);
             // 
             // RestartServer
             // 
+            this.RestartServer.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.RestartServer.Image = global::LambentLight.Properties.Resources.Restart;
             this.RestartServer.Name = "RestartServer";
-            this.RestartServer.Size = new System.Drawing.Size(106, 20);
+            this.RestartServer.Padding = new System.Windows.Forms.Padding(2);
+            this.RestartServer.Size = new System.Drawing.Size(33, 33);
             this.RestartServer.Text = "Restart Server";
             this.RestartServer.Click += new System.EventHandler(this.RestartServer_Click);
             // 
             // CreateItem
             // 
+            this.CreateItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.CreateItem.Image = global::LambentLight.Properties.Resources.Add;
             this.CreateItem.Name = "CreateItem";
-            this.CreateItem.Size = new System.Drawing.Size(132, 20);
+            this.CreateItem.Padding = new System.Windows.Forms.Padding(2);
+            this.CreateItem.Size = new System.Drawing.Size(33, 33);
             this.CreateItem.Text = "Create Data Folder";
             this.CreateItem.Click += new System.EventHandler(this.CreateItem_Click);
             // 
             // SettingsToolStripMenuItem
             // 
+            this.SettingsToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.SettingsToolStripMenuItem.Image = global::LambentLight.Properties.Resources.Settings;
             this.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem";
-            this.SettingsToolStripMenuItem.Size = new System.Drawing.Size(141, 20);
+            this.SettingsToolStripMenuItem.Padding = new System.Windows.Forms.Padding(2);
+            this.SettingsToolStripMenuItem.Size = new System.Drawing.Size(33, 33);
             this.SettingsToolStripMenuItem.Text = "Application Settings";
             this.SettingsToolStripMenuItem.Click += new System.EventHandler(this.SettingsToolStripMenuItem_Click);
             // 
             // ExitItem
             // 
+            this.ExitItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.ExitItem.Image = global::LambentLight.Properties.Resources.Exit;
             this.ExitItem.Name = "ExitItem";
-            this.ExitItem.Size = new System.Drawing.Size(54, 20);
+            this.ExitItem.Padding = new System.Windows.Forms.Padding(2);
+            this.ExitItem.Size = new System.Drawing.Size(33, 33);
             this.ExitItem.Text = "Exit";
             this.ExitItem.Click += new System.EventHandler(this.ExitItem_Click);
             // 
@@ -239,7 +252,7 @@
             this.LogsTab.Location = new System.Drawing.Point(4, 22);
             this.LogsTab.Name = "LogsTab";
             this.LogsTab.Padding = new System.Windows.Forms.Padding(3);
-            this.LogsTab.Size = new System.Drawing.Size(767, 279);
+            this.LogsTab.Size = new System.Drawing.Size(767, 266);
             this.LogsTab.TabIndex = 0;
             this.LogsTab.Text = "Logs";
             this.LogsTab.UseVisualStyleBackColor = true;
@@ -247,7 +260,7 @@
             // ClearLogButton
             // 
             this.ClearLogButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.ClearLogButton.Location = new System.Drawing.Point(6, 246);
+            this.ClearLogButton.Location = new System.Drawing.Point(6, 233);
             this.ClearLogButton.Name = "ClearLogButton";
             this.ClearLogButton.Size = new System.Drawing.Size(75, 23);
             this.ClearLogButton.TabIndex = 3;
@@ -258,7 +271,7 @@
             // ConsoleButton
             // 
             this.ConsoleButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ConsoleButton.Location = new System.Drawing.Point(686, 246);
+            this.ConsoleButton.Location = new System.Drawing.Point(686, 233);
             this.ConsoleButton.Name = "ConsoleButton";
             this.ConsoleButton.Size = new System.Drawing.Size(75, 23);
             this.ConsoleButton.TabIndex = 2;
@@ -270,7 +283,7 @@
             // 
             this.ConsoleTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ConsoleTextBox.Location = new System.Drawing.Point(87, 248);
+            this.ConsoleTextBox.Location = new System.Drawing.Point(87, 235);
             this.ConsoleTextBox.Name = "ConsoleTextBox";
             this.ConsoleTextBox.Size = new System.Drawing.Size(593, 20);
             this.ConsoleTextBox.TabIndex = 1;
@@ -285,7 +298,7 @@
             this.LogTextBox.Name = "LogTextBox";
             this.LogTextBox.ReadOnly = true;
             this.LogTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.LogTextBox.Size = new System.Drawing.Size(755, 236);
+            this.LogTextBox.Size = new System.Drawing.Size(755, 223);
             this.LogTextBox.TabIndex = 0;
             // 
             // Tabs
@@ -298,10 +311,10 @@
             this.Tabs.Controls.Add(this.ConfigurationTab);
             this.Tabs.Controls.Add(this.BuildsTabPage);
             this.Tabs.Controls.Add(this.AboutTab);
-            this.Tabs.Location = new System.Drawing.Point(12, 85);
+            this.Tabs.Location = new System.Drawing.Point(12, 98);
             this.Tabs.Name = "Tabs";
             this.Tabs.SelectedIndex = 0;
-            this.Tabs.Size = new System.Drawing.Size(775, 305);
+            this.Tabs.Size = new System.Drawing.Size(775, 292);
             this.Tabs.TabIndex = 3;
             this.Tabs.Selected += new System.Windows.Forms.TabControlEventHandler(this.Tabs_Selected);
             // 
