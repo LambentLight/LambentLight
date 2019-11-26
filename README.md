@@ -13,32 +13,6 @@ LambentLight is an application for managing dedicated FiveM servers. It helps yo
     <img src="preview.png"/>
 </div>
 
-# Installation
-
-The [.NET Framework 4.5.2 Runtime](https://dotnet.microsoft.com/download/dotnet-framework/net452) is required on Windows.
-
-## Windows
-
-1. Download the compressed file from [GitHub Releases][releases-url] or [5mods][5mods-url]
-2. Extract the files inside of the 7zip and run `LambentLight.exe`
-
-## Ubuntu
-
-1. Add the [Mono Repositories](https://www.mono-project.com/download/stable/#download-lin-ubuntu) and update your apt cache
-2. Install the Mono Runtime and Visual Basic libraries (`sudo apt install mono-runtime mono-vbnc`)
-3. Download the compressed file from [GitHub Releases][releases-url] or [5mods][5mods-url]
-4. Extract the files inside of the 7zip and run `mono LambentLight.exe`
-
-# Usage
-
-1. First, go to `Application Settings` and add a FiveM License
-   1. Click `Generate` to open the FiveM License page on your browser
-   2. Follow the steps on the FiveM license page
-   3. Once you have the License, go back to the program and click `Make License Visible`
-   4. Paste the license on the text box and click `Save`
-2. On the top bar, click `Create Data Folder` and follow the instructions
-3. Click `Start Server` to launch your own FiveM server
-
 [5mods-img]: https://img.shields.io/badge/5mods-download-20BA4E.svg
 [5mods-url]: https://www.gta5-mods.com/tools/servermanager
 [appveyor-img]: https://img.shields.io/appveyor/ci/justalemon/lambentlight.svg?label=appveyor
