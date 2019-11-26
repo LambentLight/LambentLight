@@ -133,17 +133,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\About.rtf" />
-    <None Include="Resources\Play.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\server.cfg" />
-    <None Include="Resources\Stop.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Add.png" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icon.ico" />
+    <None Include="Resources\Refresh.png" />
+    <None Include="Resources\SettingsApplications.png" />
+    <None Include="Resources\Build.png" />
+    <None Include="Resources\Stop.png" />
+    <None Include="Resources\Play.png" />
+    <None Include="Resources\Add.png" />
     <None Include="Resources\Restart.png" />
     <None Include="Resources\Settings.png" />
   </ItemGroup>

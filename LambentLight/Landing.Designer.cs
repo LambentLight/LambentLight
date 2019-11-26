@@ -207,7 +207,7 @@
             // RestartToolStripMenuItem
             // 
             this.RestartToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.RestartToolStripMenuItem.Image = global::LambentLight.Properties.Resources.Restart;
+            this.RestartToolStripMenuItem.Image = global::LambentLight.Properties.Resources.Refresh;
             this.RestartToolStripMenuItem.Name = "RestartToolStripMenuItem";
             this.RestartToolStripMenuItem.Padding = new System.Windows.Forms.Padding(2);
             this.RestartToolStripMenuItem.Size = new System.Drawing.Size(28, 33);
@@ -227,7 +227,7 @@
             // SettingsToolStripMenuItem
             // 
             this.SettingsToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.SettingsToolStripMenuItem.Image = global::LambentLight.Properties.Resources.Settings;
+            this.SettingsToolStripMenuItem.Image = global::LambentLight.Properties.Resources.SettingsApplications;
             this.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem";
             this.SettingsToolStripMenuItem.Padding = new System.Windows.Forms.Padding(2);
             this.SettingsToolStripMenuItem.Size = new System.Drawing.Size(28, 33);
