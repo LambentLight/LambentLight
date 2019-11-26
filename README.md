@@ -1,4 +1,6 @@
-# LambentLight [![5mods][5mods-img]][5mods-url] [![AppVeyor][appveyor-img]][appveyor-url] [![CodeFactor][codefactor-img]][codefactor-url] [![Discord][discord-img]][discord-url]
+# LambentLight <small>for FiveM</small>
+
+[![5mods][5mods-img]][5mods-url] [![AppVeyor][appveyor-img]][appveyor-url] [![CodeFactor][codefactor-img]][codefactor-url] [![Discord][discord-img]][discord-url]
 
 LambentLight is an application for managing dedicated FiveM servers. It helps you with a bunch of tedious tasks:
 
