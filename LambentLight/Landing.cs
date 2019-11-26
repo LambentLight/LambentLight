@@ -1,4 +1,4 @@
-﻿using LambentLight.Extensions;
+using LambentLight.Extensions;
 using LambentLight.Managers;
 using LambentLight.Properties;
 using LambentLight.Targets;
@@ -211,21 +211,10 @@ namespace LambentLight
 
         private void ConsoleButton_Click(object sender, EventArgs e)
         {
-            // If the server is running
-            if (ProcessManager.IsServerRunning)
-            {
-                // Write the text from the text box and flush it
-                ProcessManager.Server.Process.StandardInput.WriteLine(ConsoleInputTextBox.Text);
-                ProcessManager.Server.Process.StandardInput.Flush();
-                // Finally, set the text to empty on the box
-                ConsoleInputTextBox.Text = string.Empty;
-            }
-            // If is not
-            else
-            {
-                // Log an error
-                Logger.Error("Attempted to send text into the console but the server is not running");
-            }
+            // Send the command to the server
+            ProcessManager.SendCommand(ConsoleInputTextBox.Text);
+            // And clear the text
+            ConsoleInputTextBox.Text = string.Empty;
         }
 
         #endregion

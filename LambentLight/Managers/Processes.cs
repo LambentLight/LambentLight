@@ -237,6 +237,22 @@ namespace LambentLight.Managers
                 Logger.Info("The FiveM server has been stopped");
             }
         }
+        /// <summary>
+        /// Sends a command to the FiveM server.
+        /// </summary>
+        /// <param name="command">The command to send.</param>
+        public static void SendCommand(string command)
+        {
+            // If the server is not running, return
+            if (!IsServerRunning)
+            {
+                return;
+            }
+
+            // Write the command and flush it
+            Server.Process.StandardInput.WriteLine(command);
+            Server.Process.StandardInput.Flush();
+        }
 
         /// <summary>
         /// Event that gets triggered to check if the server has crashed.
