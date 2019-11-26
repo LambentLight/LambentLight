@@ -23,4 +23,3 @@ LambentLight is an application for managing dedicated FiveM servers. It helps yo
 [codefactor-url]: https://www.codefactor.io/repository/github/lambentlight/lambentlight
 [discord-img]: https://img.shields.io/badge/discord-join-7289DA.svg
 [discord-url]: https://discord.gg/Cf6sspj
-[releases-url]: https://github.com/LambentLight/LambentLight/releases
