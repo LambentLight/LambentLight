@@ -34,7 +34,7 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Icon.ico</ApplicationIcon>
+    <ApplicationIcon>LambentLight.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
@@ -138,7 +138,7 @@
     <None Include="Resources\server.cfg" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Icon.ico" />
+    <Content Include="LambentLight.ico" />
     <None Include="Resources\SettingsApplications.png" />
     <None Include="Resources\Refresh.png" />
     <None Include="Resources\Stop.png" />
