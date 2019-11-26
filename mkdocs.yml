@@ -1,0 +1,34 @@
+site_name: LambentLight
+
+nav:
+  - About: index.md
+  - Getting started: getting-started.md
+  - Software License: license.md
+
+repo_name: LambentLight/LambentLight
+repo_url: https://github.com/LambentLight/LambentLight
+
+markdown_extensions:
+  - markdown.extensions.admonition
+  - pymdownx.details
+
+theme:
+  name: material
+  palette:
+    primary: cyan
+    accent: cyan
+
+extra:
+  social:
+    - type: discord
+      link: https://discord.gg/Cf6sspj
+    - type: github
+      link: https://github.com/justalemon
+    - type: steam
+      link: https://steamcommunity.com/profiles/76561198118215221/
+    - type: twitter
+      link: https://twitter.com/justlemonades
+    - type: twitch
+      link: https://www.twitch.tv/justlemoncl
+    - type: gamepad
+      link: https://www.gta5-mods.com/users/justalemon
