@@ -136,6 +136,7 @@
             // 
             // BrowseButton
             // 
+            this.BrowseButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BrowseButton.Location = new System.Drawing.Point(613, 18);
             this.BrowseButton.Name = "BrowseButton";
             this.BrowseButton.Size = new System.Drawing.Size(75, 23);
