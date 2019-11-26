@@ -1,4 +1,4 @@
-using LambentLight.Extensions;
+﻿using LambentLight.Extensions;
 using LambentLight.Managers;
 using LambentLight.Properties;
 using LambentLight.Targets;
@@ -42,6 +42,10 @@ namespace LambentLight
 
                 ConsoleInputTextBox.Enabled = value;
                 ConsoleSendButton.Enabled = value;
+
+                ResourceStartButton.Enabled = !value;
+                ResourceRestartButton.Enabled = !value;
+                ResourceStopButton.Enabled = !value;
             }
         }
 
@@ -268,6 +272,24 @@ namespace LambentLight
         {
             // If there is a resource to uninstall, enable the button
             UninstallerRemoveButton.Enabled = UninstallerListBox.SelectedItem != null;
+            ResourceStartButton.Enabled = UninstallerListBox.SelectedItem != null && ProcessManager.IsServerRunning;
+            ResourceRestartButton.Enabled = UninstallerListBox.SelectedItem != null && ProcessManager.IsServerRunning;
+            ResourceStopButton.Enabled = UninstallerListBox.SelectedItem != null && ProcessManager.IsServerRunning;
+        }
+
+        private void ResourceStartButton_Click(object sender, EventArgs e)
+        {
+            ProcessManager.SendCommand($"start {UninstallerListBox.SelectedItem.ToString()}");
+        }
+
+        private void ResourceRestartButton_Click(object sender, EventArgs e)
+        {
+            ProcessManager.SendCommand($"restart {UninstallerListBox.SelectedItem.ToString()}");
+        }
+
+        private void ResourceStopButton_Click(object sender, EventArgs e)
+        {
+            ProcessManager.SendCommand($"stop {UninstallerListBox.SelectedItem.ToString()}");
         }
 
         private void UninstallerRefreshButton_Click(object sender, EventArgs e) => RefreshInstalledResources();
@@ -429,7 +451,10 @@ namespace LambentLight
 
         private void RefreshInstalledResources()
         {
-            // Disable the uninstall button
+            // Disable the start, restart, stop and remove buttons
+            ResourceStartButton.Enabled = false;
+            ResourceRestartButton.Enabled = false;
+            ResourceStopButton.Enabled = false;
             UninstallerRemoveButton.Enabled = false;
 
             // If there is no server data folder selected or it does not exists

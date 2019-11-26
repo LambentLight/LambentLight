@@ -50,6 +50,9 @@
             this.MainTabControl = new System.Windows.Forms.TabControl();
             this.ResourcesTabPage = new System.Windows.Forms.TabPage();
             this.UninstallerGroupBox = new System.Windows.Forms.GroupBox();
+            this.ResourceRestartButton = new System.Windows.Forms.Button();
+            this.ResourceStopButton = new System.Windows.Forms.Button();
+            this.ResourceStartButton = new System.Windows.Forms.Button();
             this.UninstallerRefreshButton = new System.Windows.Forms.Button();
             this.UninstallerListBox = new System.Windows.Forms.ListBox();
             this.UninstallerRemoveButton = new System.Windows.Forms.Button();
@@ -325,6 +328,9 @@
             // 
             this.UninstallerGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
+            this.UninstallerGroupBox.Controls.Add(this.ResourceRestartButton);
+            this.UninstallerGroupBox.Controls.Add(this.ResourceStopButton);
+            this.UninstallerGroupBox.Controls.Add(this.ResourceStartButton);
             this.UninstallerGroupBox.Controls.Add(this.UninstallerRefreshButton);
             this.UninstallerGroupBox.Controls.Add(this.UninstallerListBox);
             this.UninstallerGroupBox.Controls.Add(this.UninstallerRemoveButton);
@@ -334,6 +340,36 @@
             this.UninstallerGroupBox.TabIndex = 2;
             this.UninstallerGroupBox.TabStop = false;
             this.UninstallerGroupBox.Text = "Installed";
+            // 
+            // ResourceRestartButton
+            // 
+            this.ResourceRestartButton.Location = new System.Drawing.Point(89, 209);
+            this.ResourceRestartButton.Name = "ResourceRestartButton";
+            this.ResourceRestartButton.Size = new System.Drawing.Size(84, 23);
+            this.ResourceRestartButton.TabIndex = 5;
+            this.ResourceRestartButton.Text = "Restart";
+            this.ResourceRestartButton.UseVisualStyleBackColor = true;
+            this.ResourceRestartButton.Click += new System.EventHandler(this.ResourceRestartButton_Click);
+            // 
+            // ResourceStopButton
+            // 
+            this.ResourceStopButton.Location = new System.Drawing.Point(179, 209);
+            this.ResourceStopButton.Name = "ResourceStopButton";
+            this.ResourceStopButton.Size = new System.Drawing.Size(77, 23);
+            this.ResourceStopButton.TabIndex = 4;
+            this.ResourceStopButton.Text = "Stop";
+            this.ResourceStopButton.UseVisualStyleBackColor = true;
+            this.ResourceStopButton.Click += new System.EventHandler(this.ResourceStopButton_Click);
+            // 
+            // ResourceStartButton
+            // 
+            this.ResourceStartButton.Location = new System.Drawing.Point(6, 209);
+            this.ResourceStartButton.Name = "ResourceStartButton";
+            this.ResourceStartButton.Size = new System.Drawing.Size(77, 23);
+            this.ResourceStartButton.TabIndex = 3;
+            this.ResourceStartButton.Text = "Start";
+            this.ResourceStartButton.UseVisualStyleBackColor = true;
+            this.ResourceStartButton.Click += new System.EventHandler(this.ResourceStartButton_Click);
             // 
             // UninstallerRefreshButton
             // 
@@ -354,7 +390,7 @@
             this.UninstallerListBox.FormattingEnabled = true;
             this.UninstallerListBox.Location = new System.Drawing.Point(6, 19);
             this.UninstallerListBox.Name = "UninstallerListBox";
-            this.UninstallerListBox.Size = new System.Drawing.Size(250, 212);
+            this.UninstallerListBox.Size = new System.Drawing.Size(250, 186);
             this.UninstallerListBox.TabIndex = 1;
             this.UninstallerListBox.SelectedIndexChanged += new System.EventHandler(this.UninstallerListBox_SelectedIndexChanged);
             // 
@@ -655,6 +691,9 @@
         private System.Windows.Forms.Button BuildsImportButton;
         private System.Windows.Forms.OpenFileDialog BuildFileDialog;
         private System.Windows.Forms.ToolStripMenuItem RestartToolStripMenuItem;
+        private System.Windows.Forms.Button ResourceRestartButton;
+        private System.Windows.Forms.Button ResourceStopButton;
+        private System.Windows.Forms.Button ResourceStartButton;
     }
 }
 
