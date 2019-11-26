@@ -44,10 +44,10 @@
             this.SettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.LogsTabPage = new System.Windows.Forms.TabPage();
-            this.ClearLogButton = new System.Windows.Forms.Button();
-            this.ConsoleButton = new System.Windows.Forms.Button();
+            this.ConsoleClearButton = new System.Windows.Forms.Button();
+            this.ConsoleSendButton = new System.Windows.Forms.Button();
+            this.ConsoleInputTextBox = new System.Windows.Forms.TextBox();
             this.ConsoleTextBox = new System.Windows.Forms.TextBox();
-            this.LogsTextBox = new System.Windows.Forms.TextBox();
             this.MainTabControl = new System.Windows.Forms.TabControl();
             this.ResourcesTabPage = new System.Windows.Forms.TabPage();
             this.UninstallerGroupBox = new System.Windows.Forms.GroupBox();
@@ -182,7 +182,7 @@
             this.TopMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.TopMenuStrip.Name = "TopMenuStrip";
             this.TopMenuStrip.Padding = new System.Windows.Forms.Padding(0, 2, 0, 2);
-            this.TopMenuStrip.Size = new System.Drawing.Size(120, 444);
+            this.TopMenuStrip.Size = new System.Drawing.Size(33, 444);
             this.TopMenuStrip.TabIndex = 2;
             this.TopMenuStrip.Text = "menuStrip1";
             // 
@@ -192,7 +192,7 @@
             this.StartToolStripMenuItem.Image = global::LambentLight.Properties.Resources.Play;
             this.StartToolStripMenuItem.Name = "StartToolStripMenuItem";
             this.StartToolStripMenuItem.Padding = new System.Windows.Forms.Padding(2);
-            this.StartToolStripMenuItem.Size = new System.Drawing.Size(119, 33);
+            this.StartToolStripMenuItem.Size = new System.Drawing.Size(32, 33);
             this.StartToolStripMenuItem.Text = "Start Server";
             this.StartToolStripMenuItem.Click += new System.EventHandler(this.StartToolStripMenuItem_Click);
             // 
@@ -202,7 +202,7 @@
             this.StopToolStripMenuItem.Image = global::LambentLight.Properties.Resources.Stop;
             this.StopToolStripMenuItem.Name = "StopToolStripMenuItem";
             this.StopToolStripMenuItem.Padding = new System.Windows.Forms.Padding(2);
-            this.StopToolStripMenuItem.Size = new System.Drawing.Size(119, 33);
+            this.StopToolStripMenuItem.Size = new System.Drawing.Size(32, 33);
             this.StopToolStripMenuItem.Text = "Stop Server";
             this.StopToolStripMenuItem.Click += new System.EventHandler(this.StopToolStripMenuItem_Click);
             // 
@@ -212,7 +212,7 @@
             this.RestartToolStripMenuItem.Image = global::LambentLight.Properties.Resources.Restart;
             this.RestartToolStripMenuItem.Name = "RestartToolStripMenuItem";
             this.RestartToolStripMenuItem.Padding = new System.Windows.Forms.Padding(2);
-            this.RestartToolStripMenuItem.Size = new System.Drawing.Size(119, 33);
+            this.RestartToolStripMenuItem.Size = new System.Drawing.Size(32, 33);
             this.RestartToolStripMenuItem.Text = "Restart Server";
             this.RestartToolStripMenuItem.Click += new System.EventHandler(this.RestartToolStripMenuItem_Click);
             // 
@@ -222,7 +222,7 @@
             this.CreateToolStripMenuItem.Image = global::LambentLight.Properties.Resources.Add;
             this.CreateToolStripMenuItem.Name = "CreateToolStripMenuItem";
             this.CreateToolStripMenuItem.Padding = new System.Windows.Forms.Padding(2);
-            this.CreateToolStripMenuItem.Size = new System.Drawing.Size(119, 33);
+            this.CreateToolStripMenuItem.Size = new System.Drawing.Size(32, 33);
             this.CreateToolStripMenuItem.Text = "Create Data Folder";
             this.CreateToolStripMenuItem.Click += new System.EventHandler(this.CreateToolStripMenuItem_Click);
             // 
@@ -232,7 +232,7 @@
             this.SettingsToolStripMenuItem.Image = global::LambentLight.Properties.Resources.Settings;
             this.SettingsToolStripMenuItem.Name = "SettingsToolStripMenuItem";
             this.SettingsToolStripMenuItem.Padding = new System.Windows.Forms.Padding(2);
-            this.SettingsToolStripMenuItem.Size = new System.Drawing.Size(119, 33);
+            this.SettingsToolStripMenuItem.Size = new System.Drawing.Size(32, 33);
             this.SettingsToolStripMenuItem.Text = "Application Settings";
             this.SettingsToolStripMenuItem.Click += new System.EventHandler(this.SettingsToolStripMenuItem_Click);
             // 
@@ -242,67 +242,67 @@
             this.ExitToolStripMenuItem.Image = global::LambentLight.Properties.Resources.Exit;
             this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
             this.ExitToolStripMenuItem.Padding = new System.Windows.Forms.Padding(2);
-            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(119, 33);
+            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(32, 33);
             this.ExitToolStripMenuItem.Text = "Exit";
             this.ExitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
             // LogsTabPage
             // 
-            this.LogsTabPage.Controls.Add(this.ClearLogButton);
-            this.LogsTabPage.Controls.Add(this.ConsoleButton);
+            this.LogsTabPage.Controls.Add(this.ConsoleClearButton);
+            this.LogsTabPage.Controls.Add(this.ConsoleSendButton);
+            this.LogsTabPage.Controls.Add(this.ConsoleInputTextBox);
             this.LogsTabPage.Controls.Add(this.ConsoleTextBox);
-            this.LogsTabPage.Controls.Add(this.LogsTextBox);
             this.LogsTabPage.Location = new System.Drawing.Point(4, 22);
             this.LogsTabPage.Name = "LogsTabPage";
             this.LogsTabPage.Padding = new System.Windows.Forms.Padding(3);
             this.LogsTabPage.Size = new System.Drawing.Size(743, 294);
             this.LogsTabPage.TabIndex = 0;
-            this.LogsTabPage.Text = "Logs";
+            this.LogsTabPage.Text = "Console";
             this.LogsTabPage.UseVisualStyleBackColor = true;
             // 
-            // ClearLogButton
+            // ConsoleClearButton
             // 
-            this.ClearLogButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.ClearLogButton.Location = new System.Drawing.Point(6, 261);
-            this.ClearLogButton.Name = "ClearLogButton";
-            this.ClearLogButton.Size = new System.Drawing.Size(75, 23);
-            this.ClearLogButton.TabIndex = 3;
-            this.ClearLogButton.Text = "Clear Log";
-            this.ClearLogButton.UseVisualStyleBackColor = true;
-            this.ClearLogButton.Click += new System.EventHandler(this.ClearLogButton_Click);
+            this.ConsoleClearButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.ConsoleClearButton.Location = new System.Drawing.Point(6, 261);
+            this.ConsoleClearButton.Name = "ConsoleClearButton";
+            this.ConsoleClearButton.Size = new System.Drawing.Size(75, 23);
+            this.ConsoleClearButton.TabIndex = 3;
+            this.ConsoleClearButton.Text = "Clear";
+            this.ConsoleClearButton.UseVisualStyleBackColor = true;
+            this.ConsoleClearButton.Click += new System.EventHandler(this.ClearLogButton_Click);
             // 
-            // ConsoleButton
+            // ConsoleSendButton
             // 
-            this.ConsoleButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.ConsoleButton.Location = new System.Drawing.Point(662, 261);
-            this.ConsoleButton.Name = "ConsoleButton";
-            this.ConsoleButton.Size = new System.Drawing.Size(75, 23);
-            this.ConsoleButton.TabIndex = 2;
-            this.ConsoleButton.Text = "Send";
-            this.ConsoleButton.UseVisualStyleBackColor = true;
-            this.ConsoleButton.Click += new System.EventHandler(this.ConsoleButton_Click);
+            this.ConsoleSendButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.ConsoleSendButton.Location = new System.Drawing.Point(662, 261);
+            this.ConsoleSendButton.Name = "ConsoleSendButton";
+            this.ConsoleSendButton.Size = new System.Drawing.Size(75, 23);
+            this.ConsoleSendButton.TabIndex = 2;
+            this.ConsoleSendButton.Text = "Send";
+            this.ConsoleSendButton.UseVisualStyleBackColor = true;
+            this.ConsoleSendButton.Click += new System.EventHandler(this.ConsoleButton_Click);
+            // 
+            // ConsoleInputTextBox
+            // 
+            this.ConsoleInputTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ConsoleInputTextBox.Location = new System.Drawing.Point(87, 263);
+            this.ConsoleInputTextBox.Name = "ConsoleInputTextBox";
+            this.ConsoleInputTextBox.Size = new System.Drawing.Size(569, 20);
+            this.ConsoleInputTextBox.TabIndex = 1;
             // 
             // ConsoleTextBox
             // 
-            this.ConsoleTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ConsoleTextBox.Location = new System.Drawing.Point(87, 263);
-            this.ConsoleTextBox.Name = "ConsoleTextBox";
-            this.ConsoleTextBox.Size = new System.Drawing.Size(569, 20);
-            this.ConsoleTextBox.TabIndex = 1;
-            // 
-            // LogsTextBox
-            // 
-            this.LogsTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.ConsoleTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.LogsTextBox.Location = new System.Drawing.Point(6, 6);
-            this.LogsTextBox.Multiline = true;
-            this.LogsTextBox.Name = "LogsTextBox";
-            this.LogsTextBox.ReadOnly = true;
-            this.LogsTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.LogsTextBox.Size = new System.Drawing.Size(731, 251);
-            this.LogsTextBox.TabIndex = 0;
+            this.ConsoleTextBox.Location = new System.Drawing.Point(6, 6);
+            this.ConsoleTextBox.Multiline = true;
+            this.ConsoleTextBox.Name = "ConsoleTextBox";
+            this.ConsoleTextBox.ReadOnly = true;
+            this.ConsoleTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.ConsoleTextBox.Size = new System.Drawing.Size(731, 251);
+            this.ConsoleTextBox.TabIndex = 0;
             // 
             // MainTabControl
             // 
@@ -568,9 +568,9 @@
             // 
             this.BottomStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.BottomToolStripStatusLabel});
-            this.BottomStrip.Location = new System.Drawing.Point(120, 422);
+            this.BottomStrip.Location = new System.Drawing.Point(33, 422);
             this.BottomStrip.Name = "BottomStrip";
-            this.BottomStrip.Size = new System.Drawing.Size(679, 22);
+            this.BottomStrip.Size = new System.Drawing.Size(766, 22);
             this.BottomStrip.TabIndex = 5;
             // 
             // BottomToolStripStatusLabel
@@ -585,7 +585,7 @@
             // 
             // Landing
             // 
-            this.AcceptButton = this.ConsoleButton;
+            this.AcceptButton = this.ConsoleSendButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(799, 444);
@@ -643,7 +643,7 @@
         private System.Windows.Forms.ListBox InstallerVersionsListBox;
         private System.Windows.Forms.ListBox InstallerResourcesListBox;
         private System.Windows.Forms.Button InstallerRefreshButton;
-        public System.Windows.Forms.TextBox LogsTextBox;
+        public System.Windows.Forms.TextBox ConsoleTextBox;
         public System.Windows.Forms.ProgressBar MainProgressBar;
         private System.Windows.Forms.StatusStrip BottomStrip;
         public System.Windows.Forms.ToolStripStatusLabel BottomToolStripStatusLabel;
@@ -652,8 +652,8 @@
         private System.Windows.Forms.TextBox ConfigurationTextBox;
         private System.Windows.Forms.Button ConfigurationGenerateButton;
         private System.Windows.Forms.Button ConfigurationSaveButton;
-        private System.Windows.Forms.Button ConsoleButton;
-        private System.Windows.Forms.TextBox ConsoleTextBox;
+        private System.Windows.Forms.Button ConsoleSendButton;
+        private System.Windows.Forms.TextBox ConsoleInputTextBox;
         private System.Windows.Forms.TabPage AboutTabPage;
         private System.Windows.Forms.RichTextBox AboutRichTextBox;
         private System.Windows.Forms.GroupBox UninstallerGroupBox;
@@ -664,7 +664,7 @@
         private System.Windows.Forms.TabPage BuildsTabPage;
         private System.Windows.Forms.ListBox BuildsListBox;
         private System.Windows.Forms.Button DataFolderBrowseButton;
-        private System.Windows.Forms.Button ClearLogButton;
+        private System.Windows.Forms.Button ConsoleClearButton;
         private System.Windows.Forms.Button BuildsImportButton;
         private System.Windows.Forms.OpenFileDialog BuildFileDialog;
         private System.Windows.Forms.ToolStripMenuItem RestartToolStripMenuItem;

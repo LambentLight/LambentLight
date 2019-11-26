@@ -40,8 +40,8 @@ namespace LambentLight
                 DataFolderComboBox.Enabled = !value;
                 DataFolderRefreshButton.Enabled = !value;
 
-                ConsoleTextBox.Enabled = value;
-                ConsoleButton.Enabled = value;
+                ConsoleInputTextBox.Enabled = value;
+                ConsoleSendButton.Enabled = value;
             }
         }
 
@@ -206,7 +206,7 @@ namespace LambentLight
         private void ClearLogButton_Click(object sender, EventArgs e)
         {
             // Just wipe everything on the LogTextBox
-            LogsTextBox.Text = string.Empty;
+            ConsoleTextBox.Text = string.Empty;
         }
 
         private void ConsoleButton_Click(object sender, EventArgs e)
@@ -215,10 +215,10 @@ namespace LambentLight
             if (ProcessManager.IsServerRunning)
             {
                 // Write the text from the text box and flush it
-                ProcessManager.Server.Process.StandardInput.WriteLine(ConsoleTextBox.Text);
+                ProcessManager.Server.Process.StandardInput.WriteLine(ConsoleInputTextBox.Text);
                 ProcessManager.Server.Process.StandardInput.Flush();
                 // Finally, set the text to empty on the box
-                ConsoleTextBox.Text = string.Empty;
+                ConsoleInputTextBox.Text = string.Empty;
             }
             // If is not
             else
