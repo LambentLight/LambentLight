@@ -143,9 +143,6 @@
     <None Include="Resources\Add.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Exit.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Icon.ico" />
     <None Include="Resources\Restart.png" />
     <None Include="Resources\Settings.png" />
