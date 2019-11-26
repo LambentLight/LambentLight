@@ -139,14 +139,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icon.ico" />
-    <None Include="Resources\Refresh.png" />
     <None Include="Resources\SettingsApplications.png" />
-    <None Include="Resources\Build.png" />
+    <None Include="Resources\Refresh.png" />
     <None Include="Resources\Stop.png" />
     <None Include="Resources\Play.png" />
     <None Include="Resources\Add.png" />
-    <None Include="Resources\Restart.png" />
-    <None Include="Resources\Settings.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
