@@ -90,9 +90,15 @@ namespace LambentLight
                 return Output;
             }
             // If we got a HTTP exception
-            catch (WebException e)
+            catch (WebException er)
             {
-                Logger.Error("Error while fetching '{0}': {1}", from, e.Message);
+                Logger.Error("Error while fetching '{0}': {1}", from, er.Message);
+                return null;
+            }
+            // If one of the arguments is invalid
+            catch (ArgumentException er)
+            {
+                Logger.Error("Error while fetching '{0}': {1}", from, er.Message);
                 return null;
             }
         }
