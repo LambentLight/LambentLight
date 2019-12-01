@@ -1,12 +1,15 @@
-﻿using LambentLight.Properties;
+﻿using LambentLight.Config;
 using System;
-using System.Net;
 using System.Windows.Forms;
 
 namespace LambentLight
 {
     public static class Program
     {
+        /// <summary>
+        /// The mod configuration.
+        /// </summary>
+        internal static Configuration Config = Configuration.Load();
         /// <summary>
         /// The main form of our application.
         /// </summary>
@@ -18,16 +21,6 @@ namespace LambentLight
         [STAThread]
         private static int Main()
         {
-            // If a settings upgrade is required
-            if (Settings.Default.UpgradeRequired)
-            {
-                // Upgrade the settings
-                Settings.Default.Upgrade();
-                // Store a bool so we know that we have upgraded
-                Settings.Default.UpgradeRequired = false;
-                // And save the new settings
-                Settings.Default.Save();
-            }
             // Enable the visual styles for the application
             Application.EnableVisualStyles();
             // Use the classic rendering for compatibility

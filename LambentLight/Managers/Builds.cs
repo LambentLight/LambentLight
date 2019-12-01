@@ -91,7 +91,7 @@ namespace LambentLight.Managers
         /// <summary>
         /// The download URL for the current operating system.
         /// </summary>
-        private static readonly string DownloadURL = Checks.IsWindows ? Settings.Default.BuildsWindows : Settings.Default.BuildsLinux;
+        private static readonly string DownloadURL = Checks.IsWindows ? string.Empty : string.Empty;
         /// <summary>
         /// The download URL for a specific operating system.
         /// </summary>

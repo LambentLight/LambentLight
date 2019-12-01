@@ -53,7 +53,7 @@ namespace LambentLight.Managers
             if (IsPresent)
             {
                 // If the user wants to remove the configuration value during the uninstall process
-                if (Settings.Default.RemoveFromConfig)
+                if (Program.Config.RemoveAfterUninstalling)
                 {
                     // Create the RegEx pattern for this specific resource
                     string Pattern = string.Format(Patterns.Resource, Name);
@@ -435,7 +435,7 @@ namespace LambentLight.Managers
             }
 
             // If the user wants to download the scripts
-            if (Settings.Default.DownloadScripts)
+            if (Program.Config.Creator.DownloadScripts)
             {
                 // Notify the user that we are downloading the repository
                 Logger.Info("Downloading Default Scripts for the Data Folder '{0}', please wait...", name);
@@ -472,7 +472,7 @@ namespace LambentLight.Managers
             Logger.Info("The Data Folder '{0}' has been created", name);
 
             // If the user wants to generate the configuration
-            if (Settings.Default.CreateConfig)
+            if (Program.Config.Creator.CreateConfig)
             {
                 // Generate the new configuration for the folder
                 NewFolder.GenerateConfig(rconPassword, allowScriptHook);

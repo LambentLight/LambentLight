@@ -382,7 +382,7 @@ namespace LambentLight
             }
 
             // If the user wants to auto-start the resource
-            if (Settings.Default.AddToConfig)
+            if (Program.Config.AddAfterInstalling)
             {
                 // If the resource is already set to auto start
                 if (Regex.IsMatch(Folder.Configuration, string.Format(Patterns.Resource, NewResource.Folder)))

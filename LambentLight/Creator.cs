@@ -21,16 +21,16 @@ namespace LambentLight
         private void SaveOptions()
         {
             // Just save the settings
-            Settings.Default.DownloadScripts = DownloadCheckBox.Checked;
-            Settings.Default.SHVEnabled = SHVCheckBox.Checked;
-            Settings.Default.Save();
+            Program.Config.Creator.DownloadScripts = DownloadCheckBox.Checked;
+            Program.Config.Creator.SHVEnabled = SHVCheckBox.Checked;
+            Program.Config.Save();
         }
 
         private void LoadOptions()
         {
             // Oposite to the function above
-            DownloadCheckBox.Checked = Settings.Default.DownloadScripts;
-            SHVCheckBox.Checked = Settings.Default.SHVEnabled;
+            DownloadCheckBox.Checked = Program.Config.Creator.DownloadScripts;
+            SHVCheckBox.Checked = Program.Config.Creator.SHVEnabled;
         }
 
         private void Creator_Load(object sender, EventArgs e)

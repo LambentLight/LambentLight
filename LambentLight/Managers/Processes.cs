@@ -74,10 +74,10 @@ namespace LambentLight.Managers
             // Create a new server object and set the correct properties
             NewServer.Process = new Process();
             NewServer.Process.StartInfo.FileName = Path.Combine(AbsPath, "FXServer.exe");
-            NewServer.Process.StartInfo.Arguments = $"+set citizen_dir \"{Path.Combine(AbsPath, "citizen")}\" +set sv_licenseKey {Settings.Default.License} +exec server.cfg";
-            if (!string.IsNullOrWhiteSpace(Settings.Default.SteamAPI))
+            NewServer.Process.StartInfo.Arguments = $"+set citizen_dir \"{Path.Combine(AbsPath, "citizen")}\" +set sv_licenseKey {Program.Config.CFXToken} +exec server.cfg";
+            if (!string.IsNullOrWhiteSpace(Program.Config.SteamToken))
             {
-                NewServer.Process.StartInfo.Arguments += $" +set steam_webApiKey \"{Settings.Default.SteamAPI}\"";
+                NewServer.Process.StartInfo.Arguments += $" +set steam_webApiKey \"{Program.Config.SteamToken}\"";
             }
             NewServer.Process.StartInfo.WorkingDirectory = data.Absolute;
             NewServer.Process.StartInfo.UseShellExecute = false;
@@ -112,7 +112,7 @@ namespace LambentLight.Managers
             }
 
             // If there is no license set up, notify it and return
-            if (string.IsNullOrWhiteSpace(Settings.Default.License))
+            if (string.IsNullOrWhiteSpace(Program.Config.CFXToken))
             {
                 Logger.Error("There is no valid FiveM license set up!");
                 return false;
@@ -135,7 +135,7 @@ namespace LambentLight.Managers
             // Format the path for the cache folder
             string Cache = Path.Combine(data.Location, "cache");
             // If there is a cache folder and the user wants them gone, remove it
-            if (Settings.Default.ClearCache && Directory.Exists(Cache))
+            if (Program.Config.ClearCache && Directory.Exists(Cache))
             {
                 Directory.Delete(Cache, true);
                 Logger.Info("The cache folder was present on '{0}'", data.Name);
@@ -153,14 +153,14 @@ namespace LambentLight.Managers
             AutoRestart.Tick += RestartOnBadExitEvent;
             AutoRestart.Enabled = true;
             // If the user wants automated restarts every few hours/minutes/seconds
-            if (Settings.Default.RestartEvery)
+            if (Program.Config.AutoRestart.Cron)
             {
-                RestartEvery.Interval = (int)Settings.Default.RestartEveryTime.TotalMilliseconds;
+                RestartEvery.Interval = (int)Program.Config.AutoRestart.CronTime.TotalMilliseconds;
                 RestartEvery.Tick += RestartEveryEvent;
                 RestartEvery.Enabled = true;
             }
             // If the user wants automated restarts at specific times of the day
-            if (Settings.Default.RestartAt)
+            if (Program.Config.AutoRestart.Daily)
             {
                 RestartAt.Interval = 1000;
                 RestartAt.Tick += RestartAtEvent;
@@ -263,7 +263,7 @@ namespace LambentLight.Managers
             if (Server != null && !Server.Process.IsRunning() && Server.Process.ExitCode != 0)
             {
                 // If the user wants to restart
-                if (Settings.Default.AutoRestart)
+                if (Program.Config.RestartOnCrash)
                 {
                     // Log a message
                     Logger.Warn("Server exited with a code {0}, restarting...", Server.Process.ExitCode);
@@ -301,9 +301,9 @@ namespace LambentLight.Managers
         private static async void RestartAtEvent(object sender, EventArgs args)
         {
             // If the hour, minute and second matches, restart the server
-            if (DateTime.Now.Hour == Settings.Default.RestartAtTime.Hours &&
-                DateTime.Now.Minute == Settings.Default.RestartAtTime.Minutes &&
-                DateTime.Now.Second == Settings.Default.RestartAtTime.Seconds)
+            if (DateTime.Now.Hour == Program.Config.AutoRestart.DailyTime.Hours &&
+                DateTime.Now.Minute == Program.Config.AutoRestart.DailyTime.Minutes &&
+                DateTime.Now.Second == Program.Config.AutoRestart.DailyTime.Seconds)
             {
                 await Restart();
             }
