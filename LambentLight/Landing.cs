@@ -1,4 +1,4 @@
-using LambentLight.Extensions;
+﻿using LambentLight.Extensions;
 using LambentLight.Managers;
 using LambentLight.Properties;
 using LambentLight.Targets;
@@ -322,8 +322,18 @@ namespace LambentLight
 
         private void InstallerResourcesListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // If there is something selected
-            if (InstallerResourcesListBox.SelectedItem != null)
+            // Cast the selected resource
+            Resource resource = (Resource)InstallerResourcesListBox.SelectedItem;
+
+            // If the extended resource information is set to null
+            if (resource.More == null && resource.Repo != null)
+            {
+                // Request the object
+                resource.More = Downloader.DownloadJSON<ExtendedResource>($"{resource.Repo}/resources/metadata/{resource.Name}.json");
+            }
+
+            // If there is something selected and the extended information is not null
+            if (InstallerResourcesListBox.SelectedItem != null && resource.More != null)
             {
                 // Add the builds to our version ListBox
                 InstallerVersionsListBox.Fill(resource.More.Versions);
