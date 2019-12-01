@@ -1,32 +1,11 @@
-﻿using LambentLight.Properties;
 using Newtonsoft.Json;
 using NLog;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
 using System.Linq;
 
 namespace LambentLight.Managers
 {
-    /// <summary>
-    /// Identifies the type of a resource.
-    /// </summary>
-    public enum ResourceType
-    {
-        /// <summary>
-        /// A simple script.
-        /// </summary>
-        Script = 0,
-        /// <summary>
-        /// A completely different gamemode.
-        /// </summary>
-        GameMode = 1,
-        /// <summary>
-        /// A new loading screen.
-        /// </summary>
-        LoadingScreen = 2
-    }
-
     /// <summary>
     /// The specific version information of a resource.
     /// </summary>
@@ -81,12 +60,6 @@ namespace LambentLight.Managers
         /// </summary>
         [JsonProperty("path", Required = Required.Default)]
         public string Path { get; set; }
-        /// <summary>
-        /// The type of resource. Only used for the UI.
-        /// </summary>
-        [DefaultValue(ResourceType.Script)]
-        [JsonProperty("type", DefaultValueHandling = DefaultValueHandling.Populate)]
-        public ResourceType Type { get; set; }
         /// <summary>
         /// The URL of the license page.
         /// </summary>
