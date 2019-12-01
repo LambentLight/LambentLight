@@ -181,10 +181,35 @@ namespace LambentLight.Managers
         /// </summary>
         public static void Refresh()
         {
-            // Create a temporary list of resources
-            List<Resource> Output = Downloader.DownloadJSON<List<Resource>>(Settings.Default.Resources, new BuildConverter());
+            // Create a dummy list of resources
+            List<Resource> resources = new List<Resource>();
+
+            // For each resource repository
+            foreach (string repo in Program.Config.Repos)
+            {
+                // Combine the repo with the resource metadata
+                string url = $"{repo}/resources/list.json";
+                // Create a temporary list of resources
+                List<Resource> output = Downloader.DownloadJSON<List<Resource>>(url);
+
+                // Iterate over the list of resources
+                foreach (Resource resource in output)
+                {
+                    // Save the repo where they came from
+                    resource.Repo = repo;
+
+                    // If the big list of resources contains this one, skip it
+                    if (resources.Contains(resource))
+                    {
+                        continue;
+                    }
+                    // Otherwise, add it
+                    resources.Add(resource);
+                }
+            }
+
             // Store the resources in alphabetical order
-            Resources = (Output ?? new List<Resource>()).OrderBy(x => x.Name).ToList();
+            Resources = resources.OrderBy(x => x.Name).ToList();
             // Log what we have just done
             Logger.Debug("The list of resources has been updated");
         }
