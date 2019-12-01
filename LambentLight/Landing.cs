@@ -408,6 +408,8 @@ namespace LambentLight
                 }
             }
 
+            // Tell the server to refresh the list of installed resources
+            ProcessManager.SendCommand("refresh");
             // Notify that we have installed all of the resources
             Logger.Info("Successfully installed {0}", ReadableResources);
             // And finally, update the list of installed resources
