@@ -12,9 +12,9 @@ using System.Windows.Forms;
 
 namespace LambentLight
 {
-    public partial class Config : Form
+    public partial class Configurator : Form
     {
-        public Config()
+        public Configurator()
         {
             InitializeComponent();
         }

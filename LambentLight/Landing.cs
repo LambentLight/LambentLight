@@ -177,7 +177,7 @@ namespace LambentLight
         private void SettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Create a new settings window and open it up
-            Config config = new Config();
+            Configurator config = new Configurator();
             config.ShowDialog();
             config.Dispose();
         }
