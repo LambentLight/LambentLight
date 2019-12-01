@@ -25,7 +25,7 @@ namespace LambentLight.Managers
         /// The Path of the resource inside of the compressed files.
         /// This take precedence over the Resource Path.
         /// </summary>
-        [JsonProperty("path", Required = Required.Default)]
+        [JsonProperty("path")]
         public string Path { get; set; }
 
         /// <summary>
@@ -33,6 +33,40 @@ namespace LambentLight.Managers
         /// </summary>
         /// <returns>The readable version of the resource.</returns>
         public override string ToString() => ReadableVersion;
+    }
+
+    /// <summary>
+    /// The parameters used for installing the resource.
+    /// </summary>
+    public class InstallInfo
+    {
+        /// <summary>
+        /// The folder where the resource should be installed.
+        /// </summary>
+        [JsonProperty("destination", Required = Required.Always)]
+        public string Destination { get; set; }
+    }
+
+    /// <summary>
+    /// The extended information of a resource.
+    /// </summary>
+    public class ExtendedResource
+    {
+        /// <summary>
+        /// The list of resources that this one requires.
+        /// </summary>
+        [JsonProperty("requires")]
+        public List<string> Requires { get; set; } = new List<string>();
+        /// <summary>
+        /// Information used for installing the resource.
+        /// </summary>
+        [JsonProperty("install", Required = Required.Always)]
+        public InstallInfo Install { get; set; }
+        /// <summary>
+        /// The versions that this resource contains.
+        /// </summary>
+        [JsonProperty("versions", Required = Required.Always)]
+        public List<Version> Versions { get; set; }
     }
 
     /// <summary>
@@ -51,35 +85,15 @@ namespace LambentLight.Managers
         [JsonProperty("author", Required = Required.Always)]
         public string Author { get; set; }
         /// <summary>
-        /// The name of the folder of the resource.
+        /// The repo that has the information of this resource.
         /// </summary>
-        [JsonProperty("folder", Required = Required.Always)]
-        public string Folder { get; set; }
+        [JsonIgnore]
+        public string Repo { get; set; }
         /// <summary>
-        /// The Path of the resource inside of the compressed files.
+        /// The extended information for this resource.
         /// </summary>
-        [JsonProperty("path", Required = Required.Default)]
-        public string Path { get; set; }
-        /// <summary>
-        /// The URL of the license page.
-        /// </summary>
-        [JsonProperty("license", Required = Required.Default)]
-        public string License { get; set; }
-        /// <summary>
-        /// The list of requirements of the resource.
-        /// </summary>
-        [JsonProperty("requires", Required = Required.Default)]
-        public List<string> Requires { get; set; }
-        /// <summary>
-        /// The resource configuration instructions by the author.
-        /// </summary>
-        [JsonProperty("instructions", Required = Required.Default)]
-        public string ConfigInstructions { get; set; }
-        /// <summary>
-        /// A list with the versions of the resource.
-        /// </summary>
-        [JsonProperty("versions", Required = Required.Default)]
-        public List<Version> Versions { get; set; }
+        [JsonIgnore]
+        public ExtendedResource More { get; set; }
 
         /// <summary>
         /// Checks if a specific resource is installed on a Data Folder.
@@ -88,8 +102,14 @@ namespace LambentLight.Managers
         /// <returns>true if the resource is installed, false otherwise.</returns>
         public bool IsInstalledIn(DataFolder folder)
         {
+            // If there is no More parameter, return
+            if (More == null)
+            {
+                return false;
+            }
+
             // Format the path of the folder
-            string Location = System.IO.Path.Combine(folder.Resources, Folder);
+            string Location = Path.Combine(folder.Resources, More.Install.Destination);
             // Return if the folder exists
             return Directory.Exists(Location);
         }
@@ -123,6 +143,7 @@ namespace LambentLight.Managers
             // Add our base resource and version
             TempList.Add(resource, version);
 
+            /*
             // If we have dependencies
             if (resource.Requires != null)
             {
@@ -150,6 +171,7 @@ namespace LambentLight.Managers
                     }
                 }
             }
+            */
 
             // Finally, return the list
             return TempList;

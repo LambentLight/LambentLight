@@ -1,14 +1,11 @@
-using LambentLight.Properties;
 using NLog;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace LambentLight.Managers
 {
@@ -229,7 +226,7 @@ namespace LambentLight.Managers
             Locations.EnsureTempFolder();
 
             // Format a path for the output file
-            string ExtractionPath = Path.Combine(Locations.Temp, $"{resource.Folder}-{version.ReadableVersion}");
+            string ExtractionPath = Path.Combine(Locations.Temp, $"{resource.More.Install.Destination}-{version.ReadableVersion}");
             string TempFilePath = ExtractionPath + Path.GetExtension(version.Download);
 
             // If the temp file exists
@@ -256,7 +253,7 @@ namespace LambentLight.Managers
             foreach (InstalledResource Installed in InstalledResources)
             {
                 // If the name matches the resource that we are going to install
-                if (Installed.Name == resource.Folder)
+                if (Installed.Name == resource.More.Install.Destination)
                 {
                     // Delete/Dispose it
                     Installed.Dispose();
@@ -292,12 +289,13 @@ namespace LambentLight.Managers
 
             // Select the correct path inside of the extraction folder
             // In order: Version Path, Resource Path or an Empty String
-            string CompressedPath = version.Path ?? resource.Path ?? "";
+            string CompressedPath = version.Path ?? "";
             // Create the path for the folder that we need to move
             string ChoosenFolder = Path.Combine(ExtractionPath, CompressedPath);
             // Create the destination directory (aka the path inside of the resources directory)
-            string DestinationFolder = Path.Combine(Resources, resource.Folder);
+            string DestinationFolder = Path.Combine(Resources, resource.More.Install.Destination);
 
+            /*
             // If the resource has aditional configuration instructions
             if (resource.ConfigInstructions != null)
             {
@@ -311,6 +309,7 @@ namespace LambentLight.Managers
                     Process.Start(resource.ConfigInstructions);
                 }
             }
+            */
 
             // Try to move the folder with the resource
             try

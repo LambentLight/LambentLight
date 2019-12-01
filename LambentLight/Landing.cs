@@ -1,4 +1,4 @@
-﻿using LambentLight.Extensions;
+using LambentLight.Extensions;
 using LambentLight.Managers;
 using LambentLight.Properties;
 using LambentLight.Targets;
@@ -299,7 +299,7 @@ namespace LambentLight
             // Get the resource that we are trying to uninstall
             InstalledResource Installed = ((InstalledResource)UninstallerListBox.SelectedItem);
             // Try to find the resource with the same folder as the one to be installed
-            Resource Found = ResourceManager.Resources.Where(x => x.Folder.ToLower() == Installed.Name.ToLower()).FirstOrDefault();
+            Resource Found = ResourceManager.Resources.Where(x => x.More.Install.Destination.ToLower() == Installed.Name.ToLower()).FirstOrDefault();
             // Select the correct name for the resource
             string Name = Found == null ? Installed.Name : Found.Name;
 
@@ -326,7 +326,7 @@ namespace LambentLight
             if (InstallerResourcesListBox.SelectedItem != null)
             {
                 // Add the builds to our version ListBox
-                InstallerVersionsListBox.Fill(((Resource)InstallerResourcesListBox.SelectedItem).Versions);
+                InstallerVersionsListBox.Fill(resource.More.Versions);
             }
             // Otherwise
             else
@@ -385,16 +385,16 @@ namespace LambentLight
             if (Program.Config.AddAfterInstalling)
             {
                 // If the resource is already set to auto start
-                if (Regex.IsMatch(Folder.Configuration, string.Format(Patterns.Resource, NewResource.Folder)))
+                if (Regex.IsMatch(Folder.Configuration, string.Format(Patterns.Resource, NewResource.More.Install.Destination)))
                 {
                     // Notify the user
-                    Logger.Warn("The resource '{0}' is already on the configuration set to auto start", ((Resource)InstallerResourcesListBox.SelectedItem).Folder);
+                    Logger.Warn("The resource '{0}' is already on the configuration set to auto start", ((Resource)InstallerResourcesListBox.SelectedItem).More.Install.Destination);
                 }
                 // Otherwise
                 else
                 {
                     // Set the new installed resourced to auto start
-                    Folder.Configuration = Folder.Configuration + $"start {NewResource.Folder}" + Environment.NewLine;
+                    Folder.Configuration = Folder.Configuration + $"start {NewResource.More.Install.Destination}" + Environment.NewLine;
                 }
             }
 
