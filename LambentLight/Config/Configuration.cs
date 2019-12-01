@@ -27,7 +27,10 @@ namespace LambentLight.Config
         [JsonProperty("clear_cache")]
         public bool ClearCache { get; set; } = false;
         [JsonProperty("repos")]
-        public List<string> Repos { get; set; } = new List<string>();
+        public List<string> Repos { get; set; } = new List<string>()
+        {
+            "https://raw.githubusercontent.com/LambentLight/Metadata/master",
+        };
         [JsonProperty("add_after_installing")]
         public bool AddAfterInstalling { get; set; } = false;
         [JsonProperty("remove_after_uninstalling")]
