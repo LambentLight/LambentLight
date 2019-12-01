@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -30,6 +30,8 @@ namespace LambentLight.Config
         public List<string> Repos { get; set; } = new List<string>();
         [JsonProperty("add_after_installing")]
         public bool AddAfterInstalling { get; set; } = false;
+        [JsonProperty("remove_after_uninstalling")]
+        public bool RemoveAfterUninstalling { get; set; } = false;
         [JsonProperty("builds")]
         public Builds Builds { get; set; } = new Builds();
         [JsonProperty("creator")]
