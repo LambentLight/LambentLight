@@ -31,6 +31,13 @@ namespace LambentLight.Extensions
         {
             // Start by wiping the existing items
             control.Items.Clear();
+
+            // If the enumerable is null, return
+            if (items == null)
+            {
+                return;
+            }
+
             // Then, add all of the items
             foreach (T obj in items)
             {
