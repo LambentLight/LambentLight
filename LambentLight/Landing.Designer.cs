@@ -343,6 +343,8 @@
             // 
             // ResourceRestartButton
             // 
+            this.ResourceRestartButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ResourceRestartButton.Location = new System.Drawing.Point(89, 209);
             this.ResourceRestartButton.Name = "ResourceRestartButton";
             this.ResourceRestartButton.Size = new System.Drawing.Size(84, 23);
@@ -353,6 +355,7 @@
             // 
             // ResourceStopButton
             // 
+            this.ResourceStopButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.ResourceStopButton.Location = new System.Drawing.Point(179, 209);
             this.ResourceStopButton.Name = "ResourceStopButton";
             this.ResourceStopButton.Size = new System.Drawing.Size(77, 23);
@@ -363,6 +366,7 @@
             // 
             // ResourceStartButton
             // 
+            this.ResourceStartButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.ResourceStartButton.Location = new System.Drawing.Point(6, 209);
             this.ResourceStartButton.Name = "ResourceStartButton";
             this.ResourceStartButton.Size = new System.Drawing.Size(77, 23);
