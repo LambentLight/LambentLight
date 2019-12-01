@@ -62,7 +62,7 @@ namespace LambentLight.Config
                 // Get the contents of the file
                 string contents = File.ReadAllText(path);
                 // And return the parsed contents
-                return JsonConvert.DeserializeObject<Configuration>(contents);
+                return JsonConvert.DeserializeObject<Configuration>(contents, new JsonSerializerSettings() { ObjectCreationHandling = ObjectCreationHandling.Replace });
             }
             // If not
             else
