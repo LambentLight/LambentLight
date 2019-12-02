@@ -32,6 +32,7 @@
             this.ConfigTabControl = new System.Windows.Forms.TabControl();
             this.BasicTabPage = new System.Windows.Forms.TabPage();
             this.SteamGroupBox = new System.Windows.Forms.GroupBox();
+            this.SteamGenerateButton = new System.Windows.Forms.Button();
             this.SteamSaveButton = new System.Windows.Forms.Button();
             this.SteamVisibleCheckBox = new System.Windows.Forms.CheckBox();
             this.SteamTextBox = new System.Windows.Forms.TextBox();
@@ -57,17 +58,15 @@
             this.RestartEveryTextBox = new System.Windows.Forms.TextBox();
             this.RestartEveryCheckBox = new System.Windows.Forms.CheckBox();
             this.APITabPage = new System.Windows.Forms.TabPage();
-            this.APIsGroupBox = new System.Windows.Forms.GroupBox();
-            this.BuildsLinTextBox = new System.Windows.Forms.TextBox();
-            this.BuildsLinLabel = new System.Windows.Forms.Label();
-            this.SaveAPIsButton = new System.Windows.Forms.Button();
-            this.BuildsWinTextBox = new System.Windows.Forms.TextBox();
-            this.BuildsWinLabel = new System.Windows.Forms.Label();
-            this.ResourcesTextBox = new System.Windows.Forms.TextBox();
-            this.ResourcesLabel = new System.Windows.Forms.Label();
+            this.BuildsGroupBox = new System.Windows.Forms.GroupBox();
+            this.BuildsSaveButton = new System.Windows.Forms.Button();
+            this.BuildsTextBox = new System.Windows.Forms.TextBox();
             this.CloseButton = new System.Windows.Forms.Button();
             this.ResetSettingsButton = new System.Windows.Forms.Button();
-            this.SteamGenerateButton = new System.Windows.Forms.Button();
+            this.ResourcesGroupBox = new System.Windows.Forms.GroupBox();
+            this.ResourcesListBox = new System.Windows.Forms.ListBox();
+            this.RemoveButton = new System.Windows.Forms.Button();
+            this.AddButton = new System.Windows.Forms.Button();
             this.ConfigTabControl.SuspendLayout();
             this.BasicTabPage.SuspendLayout();
             this.SteamGroupBox.SuspendLayout();
@@ -77,7 +76,8 @@
             this.ScheduleTabPage.SuspendLayout();
             this.AutomatedRestartGroupBox.SuspendLayout();
             this.APITabPage.SuspendLayout();
-            this.APIsGroupBox.SuspendLayout();
+            this.BuildsGroupBox.SuspendLayout();
+            this.ResourcesGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // ConfigTabControl
@@ -118,6 +118,17 @@
             this.SteamGroupBox.TabIndex = 5;
             this.SteamGroupBox.TabStop = false;
             this.SteamGroupBox.Text = "Steam Web API Key";
+            // 
+            // SteamGenerateButton
+            // 
+            this.SteamGenerateButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.SteamGenerateButton.Location = new System.Drawing.Point(201, 45);
+            this.SteamGenerateButton.Name = "SteamGenerateButton";
+            this.SteamGenerateButton.Size = new System.Drawing.Size(75, 23);
+            this.SteamGenerateButton.TabIndex = 4;
+            this.SteamGenerateButton.Text = "Generate";
+            this.SteamGenerateButton.UseVisualStyleBackColor = true;
+            this.SteamGenerateButton.Click += new System.EventHandler(this.SteamGenerateButton_Click);
             // 
             // SteamSaveButton
             // 
@@ -390,7 +401,8 @@
             // 
             // APITabPage
             // 
-            this.APITabPage.Controls.Add(this.APIsGroupBox);
+            this.APITabPage.Controls.Add(this.ResourcesGroupBox);
+            this.APITabPage.Controls.Add(this.BuildsGroupBox);
             this.APITabPage.Location = new System.Drawing.Point(4, 22);
             this.APITabPage.Name = "APITabPage";
             this.APITabPage.Padding = new System.Windows.Forms.Padding(3);
@@ -399,88 +411,38 @@
             this.APITabPage.Text = "APIs";
             this.APITabPage.UseVisualStyleBackColor = true;
             // 
-            // APIsGroupBox
+            // BuildsGroupBox
             // 
-            this.APIsGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.BuildsGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.APIsGroupBox.Controls.Add(this.BuildsLinTextBox);
-            this.APIsGroupBox.Controls.Add(this.BuildsLinLabel);
-            this.APIsGroupBox.Controls.Add(this.SaveAPIsButton);
-            this.APIsGroupBox.Controls.Add(this.BuildsWinTextBox);
-            this.APIsGroupBox.Controls.Add(this.BuildsWinLabel);
-            this.APIsGroupBox.Controls.Add(this.ResourcesTextBox);
-            this.APIsGroupBox.Controls.Add(this.ResourcesLabel);
-            this.APIsGroupBox.Location = new System.Drawing.Point(6, 6);
-            this.APIsGroupBox.Name = "APIsGroupBox";
-            this.APIsGroupBox.Size = new System.Drawing.Size(364, 165);
-            this.APIsGroupBox.TabIndex = 2;
-            this.APIsGroupBox.TabStop = false;
-            this.APIsGroupBox.Text = "URLs";
+            this.BuildsGroupBox.Controls.Add(this.BuildsSaveButton);
+            this.BuildsGroupBox.Controls.Add(this.BuildsTextBox);
+            this.BuildsGroupBox.Location = new System.Drawing.Point(6, 6);
+            this.BuildsGroupBox.Name = "BuildsGroupBox";
+            this.BuildsGroupBox.Size = new System.Drawing.Size(364, 71);
+            this.BuildsGroupBox.TabIndex = 2;
+            this.BuildsGroupBox.TabStop = false;
+            this.BuildsGroupBox.Text = "Builds";
             // 
-            // BuildsLinTextBox
+            // BuildsSaveButton
             // 
-            this.BuildsLinTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.BuildsSaveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.BuildsSaveButton.Location = new System.Drawing.Point(283, 42);
+            this.BuildsSaveButton.Name = "BuildsSaveButton";
+            this.BuildsSaveButton.Size = new System.Drawing.Size(75, 23);
+            this.BuildsSaveButton.TabIndex = 4;
+            this.BuildsSaveButton.Text = "Save";
+            this.BuildsSaveButton.UseVisualStyleBackColor = true;
+            this.BuildsSaveButton.Click += new System.EventHandler(this.SaveAPIsButton_Click);
+            // 
+            // BuildsTextBox
+            // 
+            this.BuildsTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.BuildsLinTextBox.Location = new System.Drawing.Point(6, 110);
-            this.BuildsLinTextBox.Name = "BuildsLinTextBox";
-            this.BuildsLinTextBox.Size = new System.Drawing.Size(352, 20);
-            this.BuildsLinTextBox.TabIndex = 6;
-            // 
-            // BuildsLinLabel
-            // 
-            this.BuildsLinLabel.AutoSize = true;
-            this.BuildsLinLabel.Location = new System.Drawing.Point(6, 94);
-            this.BuildsLinLabel.Name = "BuildsLinLabel";
-            this.BuildsLinLabel.Size = new System.Drawing.Size(78, 13);
-            this.BuildsLinLabel.TabIndex = 5;
-            this.BuildsLinLabel.Text = "Builds for Linux";
-            // 
-            // SaveAPIsButton
-            // 
-            this.SaveAPIsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.SaveAPIsButton.Location = new System.Drawing.Point(283, 137);
-            this.SaveAPIsButton.Name = "SaveAPIsButton";
-            this.SaveAPIsButton.Size = new System.Drawing.Size(75, 23);
-            this.SaveAPIsButton.TabIndex = 4;
-            this.SaveAPIsButton.Text = "Save";
-            this.SaveAPIsButton.UseVisualStyleBackColor = true;
-            this.SaveAPIsButton.Click += new System.EventHandler(this.SaveAPIsButton_Click);
-            // 
-            // BuildsWinTextBox
-            // 
-            this.BuildsWinTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.BuildsWinTextBox.Location = new System.Drawing.Point(6, 71);
-            this.BuildsWinTextBox.Name = "BuildsWinTextBox";
-            this.BuildsWinTextBox.Size = new System.Drawing.Size(352, 20);
-            this.BuildsWinTextBox.TabIndex = 3;
-            // 
-            // BuildsWinLabel
-            // 
-            this.BuildsWinLabel.AutoSize = true;
-            this.BuildsWinLabel.Location = new System.Drawing.Point(6, 55);
-            this.BuildsWinLabel.Name = "BuildsWinLabel";
-            this.BuildsWinLabel.Size = new System.Drawing.Size(97, 13);
-            this.BuildsWinLabel.TabIndex = 2;
-            this.BuildsWinLabel.Text = "Builds for Windows";
-            // 
-            // ResourcesTextBox
-            // 
-            this.ResourcesTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ResourcesTextBox.Location = new System.Drawing.Point(6, 32);
-            this.ResourcesTextBox.Name = "ResourcesTextBox";
-            this.ResourcesTextBox.Size = new System.Drawing.Size(352, 20);
-            this.ResourcesTextBox.TabIndex = 1;
-            // 
-            // ResourcesLabel
-            // 
-            this.ResourcesLabel.AutoSize = true;
-            this.ResourcesLabel.Location = new System.Drawing.Point(6, 16);
-            this.ResourcesLabel.Name = "ResourcesLabel";
-            this.ResourcesLabel.Size = new System.Drawing.Size(58, 13);
-            this.ResourcesLabel.TabIndex = 0;
-            this.ResourcesLabel.Text = "Resources";
+            this.BuildsTextBox.Location = new System.Drawing.Point(6, 19);
+            this.BuildsTextBox.Name = "BuildsTextBox";
+            this.BuildsTextBox.Size = new System.Drawing.Size(352, 20);
+            this.BuildsTextBox.TabIndex = 1;
             // 
             // CloseButton
             // 
@@ -504,18 +466,45 @@
             this.ResetSettingsButton.UseVisualStyleBackColor = true;
             this.ResetSettingsButton.Click += new System.EventHandler(this.ResetSettingsButton_Click);
             // 
-            // SteamGenerateButton
+            // ResourcesGroupBox
             // 
-            this.SteamGenerateButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.SteamGenerateButton.Location = new System.Drawing.Point(201, 45);
-            this.SteamGenerateButton.Name = "SteamGenerateButton";
-            this.SteamGenerateButton.Size = new System.Drawing.Size(75, 23);
-            this.SteamGenerateButton.TabIndex = 4;
-            this.SteamGenerateButton.Text = "Generate";
-            this.SteamGenerateButton.UseVisualStyleBackColor = true;
-            this.SteamGenerateButton.Click += new System.EventHandler(this.SteamGenerateButton_Click);
+            this.ResourcesGroupBox.Controls.Add(this.AddButton);
+            this.ResourcesGroupBox.Controls.Add(this.RemoveButton);
+            this.ResourcesGroupBox.Controls.Add(this.ResourcesListBox);
+            this.ResourcesGroupBox.Location = new System.Drawing.Point(6, 83);
+            this.ResourcesGroupBox.Name = "ResourcesGroupBox";
+            this.ResourcesGroupBox.Size = new System.Drawing.Size(364, 305);
+            this.ResourcesGroupBox.TabIndex = 3;
+            this.ResourcesGroupBox.TabStop = false;
+            this.ResourcesGroupBox.Text = "Resources";
             // 
-            // Config
+            // ResourcesListBox
+            // 
+            this.ResourcesListBox.FormattingEnabled = true;
+            this.ResourcesListBox.Location = new System.Drawing.Point(6, 19);
+            this.ResourcesListBox.Name = "ResourcesListBox";
+            this.ResourcesListBox.Size = new System.Drawing.Size(352, 251);
+            this.ResourcesListBox.TabIndex = 0;
+            // 
+            // RemoveButton
+            // 
+            this.RemoveButton.Location = new System.Drawing.Point(283, 276);
+            this.RemoveButton.Name = "RemoveButton";
+            this.RemoveButton.Size = new System.Drawing.Size(75, 23);
+            this.RemoveButton.TabIndex = 1;
+            this.RemoveButton.Text = "Remove";
+            this.RemoveButton.UseVisualStyleBackColor = true;
+            // 
+            // AddButton
+            // 
+            this.AddButton.Location = new System.Drawing.Point(202, 276);
+            this.AddButton.Name = "AddButton";
+            this.AddButton.Size = new System.Drawing.Size(75, 23);
+            this.AddButton.TabIndex = 2;
+            this.AddButton.Text = "Add";
+            this.AddButton.UseVisualStyleBackColor = true;
+            // 
+            // Configurator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -528,7 +517,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "Config";
+            this.Name = "Configurator";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Settings";
             this.Load += new System.EventHandler(this.Config_Load);
@@ -546,8 +535,9 @@
             this.AutomatedRestartGroupBox.ResumeLayout(false);
             this.AutomatedRestartGroupBox.PerformLayout();
             this.APITabPage.ResumeLayout(false);
-            this.APIsGroupBox.ResumeLayout(false);
-            this.APIsGroupBox.PerformLayout();
+            this.BuildsGroupBox.ResumeLayout(false);
+            this.BuildsGroupBox.PerformLayout();
+            this.ResourcesGroupBox.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -563,14 +553,9 @@
         private System.Windows.Forms.CheckBox LicenseVisibleCheckBox;
         private System.Windows.Forms.TextBox LicenseTextBox;
         private System.Windows.Forms.TabPage APITabPage;
-        private System.Windows.Forms.GroupBox APIsGroupBox;
-        private System.Windows.Forms.TextBox BuildsLinTextBox;
-        private System.Windows.Forms.Label BuildsLinLabel;
-        private System.Windows.Forms.Button SaveAPIsButton;
-        private System.Windows.Forms.TextBox BuildsWinTextBox;
-        private System.Windows.Forms.Label BuildsWinLabel;
-        private System.Windows.Forms.TextBox ResourcesTextBox;
-        private System.Windows.Forms.Label ResourcesLabel;
+        private System.Windows.Forms.GroupBox BuildsGroupBox;
+        private System.Windows.Forms.Button BuildsSaveButton;
+        private System.Windows.Forms.TextBox BuildsTextBox;
         private System.Windows.Forms.GroupBox FolderCreationGroupBox;
         private System.Windows.Forms.CheckBox RemoveFromConfigCheckBox;
         private System.Windows.Forms.CheckBox AddToConfigCheckBox;
@@ -593,5 +578,9 @@
         private System.Windows.Forms.CheckBox SteamVisibleCheckBox;
         private System.Windows.Forms.Button SteamSaveButton;
         private System.Windows.Forms.Button SteamGenerateButton;
+        private System.Windows.Forms.GroupBox ResourcesGroupBox;
+        private System.Windows.Forms.ListBox ResourcesListBox;
+        private System.Windows.Forms.Button AddButton;
+        private System.Windows.Forms.Button RemoveButton;
     }
 }
