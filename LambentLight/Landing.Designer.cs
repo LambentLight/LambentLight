@@ -125,7 +125,8 @@
             // 
             // DataFolderGroupBox
             // 
-            this.DataFolderGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.DataFolderGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.DataFolderGroupBox.Controls.Add(this.DataFolderBrowseButton);
             this.DataFolderGroupBox.Controls.Add(this.DataFolderRefreshButton);
             this.DataFolderGroupBox.Controls.Add(this.DataFolderComboBox);
