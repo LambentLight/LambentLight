@@ -75,7 +75,6 @@
       <DependentUpon>Configurator.cs</DependentUpon>
     </Compile>
     <Compile Include="Config\AutoRestart.cs" />
-    <Compile Include="Config\Builds.cs" />
     <Compile Include="Config\Configuration.cs" />
     <Compile Include="Config\Creator.cs" />
     <Compile Include="Creator.cs">

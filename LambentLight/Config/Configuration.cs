@@ -36,7 +36,7 @@ namespace LambentLight.Config
         [JsonProperty("remove_after_uninstalling")]
         public bool RemoveAfterUninstalling { get; set; } = false;
         [JsonProperty("builds")]
-        public Builds Builds { get; set; } = new Builds();
+        public string Builds { get; set; } = "https://raw.githubusercontent.com/LambentLight/Metadata/master";
         [JsonProperty("creator")]
         public Creator Creator { get; set; } = new Creator();
         [JsonProperty("auto_restart")]
