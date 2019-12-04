@@ -193,14 +193,18 @@ namespace LambentLight.Managers
                 // Iterate over the list of resources
                 foreach (Resource resource in output)
                 {
-                    // Save the repo where they came from
-                    resource.Repo = repo;
+                    // Get the first resource matching the name
+                    Resource found = resources.Where(x => x.Name == resource.Name).FirstOrDefault();
 
                     // If the big list of resources contains this one, skip it
-                    if (resources.Contains(resource))
+                    if (found != null)
                     {
+                        Logger.Warn("Repository {0} already contains resource {1}, skipping...", found.Repo, found.Name);
                         continue;
                     }
+
+                    // Save the repo where they came from
+                    resource.Repo = repo;
                     // Otherwise, add it
                     resources.Add(resource);
                 }
