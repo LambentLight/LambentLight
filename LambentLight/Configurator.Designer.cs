@@ -58,15 +58,15 @@
             this.RestartEveryTextBox = new System.Windows.Forms.TextBox();
             this.RestartEveryCheckBox = new System.Windows.Forms.CheckBox();
             this.APITabPage = new System.Windows.Forms.TabPage();
+            this.ResourcesGroupBox = new System.Windows.Forms.GroupBox();
+            this.AddButton = new System.Windows.Forms.Button();
+            this.RemoveButton = new System.Windows.Forms.Button();
+            this.ResourcesListBox = new System.Windows.Forms.ListBox();
             this.BuildsGroupBox = new System.Windows.Forms.GroupBox();
             this.BuildsSaveButton = new System.Windows.Forms.Button();
             this.BuildsTextBox = new System.Windows.Forms.TextBox();
             this.CloseButton = new System.Windows.Forms.Button();
             this.ResetSettingsButton = new System.Windows.Forms.Button();
-            this.ResourcesGroupBox = new System.Windows.Forms.GroupBox();
-            this.ResourcesListBox = new System.Windows.Forms.ListBox();
-            this.RemoveButton = new System.Windows.Forms.Button();
-            this.AddButton = new System.Windows.Forms.Button();
             this.ConfigTabControl.SuspendLayout();
             this.BasicTabPage.SuspendLayout();
             this.SteamGroupBox.SuspendLayout();
@@ -76,8 +76,8 @@
             this.ScheduleTabPage.SuspendLayout();
             this.AutomatedRestartGroupBox.SuspendLayout();
             this.APITabPage.SuspendLayout();
-            this.BuildsGroupBox.SuspendLayout();
             this.ResourcesGroupBox.SuspendLayout();
+            this.BuildsGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // ConfigTabControl
@@ -411,6 +411,46 @@
             this.APITabPage.Text = "APIs";
             this.APITabPage.UseVisualStyleBackColor = true;
             // 
+            // ResourcesGroupBox
+            // 
+            this.ResourcesGroupBox.Controls.Add(this.AddButton);
+            this.ResourcesGroupBox.Controls.Add(this.RemoveButton);
+            this.ResourcesGroupBox.Controls.Add(this.ResourcesListBox);
+            this.ResourcesGroupBox.Location = new System.Drawing.Point(6, 83);
+            this.ResourcesGroupBox.Name = "ResourcesGroupBox";
+            this.ResourcesGroupBox.Size = new System.Drawing.Size(364, 305);
+            this.ResourcesGroupBox.TabIndex = 3;
+            this.ResourcesGroupBox.TabStop = false;
+            this.ResourcesGroupBox.Text = "Resources";
+            // 
+            // AddButton
+            // 
+            this.AddButton.Location = new System.Drawing.Point(202, 276);
+            this.AddButton.Name = "AddButton";
+            this.AddButton.Size = new System.Drawing.Size(75, 23);
+            this.AddButton.TabIndex = 2;
+            this.AddButton.Text = "Add";
+            this.AddButton.UseVisualStyleBackColor = true;
+            this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
+            // 
+            // RemoveButton
+            // 
+            this.RemoveButton.Location = new System.Drawing.Point(283, 276);
+            this.RemoveButton.Name = "RemoveButton";
+            this.RemoveButton.Size = new System.Drawing.Size(75, 23);
+            this.RemoveButton.TabIndex = 1;
+            this.RemoveButton.Text = "Remove";
+            this.RemoveButton.UseVisualStyleBackColor = true;
+            this.RemoveButton.Click += new System.EventHandler(this.RemoveButton_Click);
+            // 
+            // ResourcesListBox
+            // 
+            this.ResourcesListBox.FormattingEnabled = true;
+            this.ResourcesListBox.Location = new System.Drawing.Point(6, 19);
+            this.ResourcesListBox.Name = "ResourcesListBox";
+            this.ResourcesListBox.Size = new System.Drawing.Size(352, 251);
+            this.ResourcesListBox.TabIndex = 0;
+            // 
             // BuildsGroupBox
             // 
             this.BuildsGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -466,44 +506,6 @@
             this.ResetSettingsButton.UseVisualStyleBackColor = true;
             this.ResetSettingsButton.Click += new System.EventHandler(this.ResetSettingsButton_Click);
             // 
-            // ResourcesGroupBox
-            // 
-            this.ResourcesGroupBox.Controls.Add(this.AddButton);
-            this.ResourcesGroupBox.Controls.Add(this.RemoveButton);
-            this.ResourcesGroupBox.Controls.Add(this.ResourcesListBox);
-            this.ResourcesGroupBox.Location = new System.Drawing.Point(6, 83);
-            this.ResourcesGroupBox.Name = "ResourcesGroupBox";
-            this.ResourcesGroupBox.Size = new System.Drawing.Size(364, 305);
-            this.ResourcesGroupBox.TabIndex = 3;
-            this.ResourcesGroupBox.TabStop = false;
-            this.ResourcesGroupBox.Text = "Resources";
-            // 
-            // ResourcesListBox
-            // 
-            this.ResourcesListBox.FormattingEnabled = true;
-            this.ResourcesListBox.Location = new System.Drawing.Point(6, 19);
-            this.ResourcesListBox.Name = "ResourcesListBox";
-            this.ResourcesListBox.Size = new System.Drawing.Size(352, 251);
-            this.ResourcesListBox.TabIndex = 0;
-            // 
-            // RemoveButton
-            // 
-            this.RemoveButton.Location = new System.Drawing.Point(283, 276);
-            this.RemoveButton.Name = "RemoveButton";
-            this.RemoveButton.Size = new System.Drawing.Size(75, 23);
-            this.RemoveButton.TabIndex = 1;
-            this.RemoveButton.Text = "Remove";
-            this.RemoveButton.UseVisualStyleBackColor = true;
-            // 
-            // AddButton
-            // 
-            this.AddButton.Location = new System.Drawing.Point(202, 276);
-            this.AddButton.Name = "AddButton";
-            this.AddButton.Size = new System.Drawing.Size(75, 23);
-            this.AddButton.TabIndex = 2;
-            this.AddButton.Text = "Add";
-            this.AddButton.UseVisualStyleBackColor = true;
-            // 
             // Configurator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -535,9 +537,9 @@
             this.AutomatedRestartGroupBox.ResumeLayout(false);
             this.AutomatedRestartGroupBox.PerformLayout();
             this.APITabPage.ResumeLayout(false);
+            this.ResourcesGroupBox.ResumeLayout(false);
             this.BuildsGroupBox.ResumeLayout(false);
             this.BuildsGroupBox.PerformLayout();
-            this.ResourcesGroupBox.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

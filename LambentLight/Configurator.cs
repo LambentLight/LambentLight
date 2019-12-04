@@ -1,4 +1,6 @@
 ﻿using LambentLight.Config;
+using LambentLight.Extensions;
+using Microsoft.VisualBasic;
 using System;
 using System.Diagnostics;
 using System.Windows.Forms;
@@ -30,6 +32,8 @@ namespace LambentLight
             RestartAtTextBox.Text = Program.Config.AutoRestart.DailyTime.ToString();
 
             BuildsTextBox.Text = Program.Config.Builds;
+            ResourcesListBox.Items.Clear();
+            ResourcesListBox.Fill(Program.Config.Repos);
 
             AutoRestartCheckBox.Checked = Program.Config.RestartOnCrash;
             ClearCacheCheckBox.Checked = Program.Config.ClearCache;
@@ -180,6 +184,42 @@ namespace LambentLight
             }
             // If we succeeded, save it
             Program.Config.Save();
+        }
+
+        private void AddButton_Click(object sender, EventArgs e)
+        {
+            // Ask the user for the repository URL
+            string repo = Interaction.InputBox("Insert the path of the Remote or Local repository that you want to add.", "Add new Repository");
+
+            // If repo is null or empty, return
+            if (string.IsNullOrWhiteSpace(repo))
+            {
+                MessageBox.Show("The Repository is empty or only has whitespaces.", "Invalid Repository", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // If we got here, add the repository URL into the settings
+            Program.Config.Repos.Add(repo);
+            // Save the existing settings
+            Program.Config.Save();
+            // And update the list of repositories
+            ReloadSettings();
+        }
+
+        private void RemoveButton_Click(object sender, EventArgs e)
+        {
+            // If there is nothing selected, return
+            if (ResourcesListBox.SelectedItem == null)
+            {
+                return;
+            }
+
+            // Now, remove the selected item
+            Program.Config.Repos.RemoveAt(ResourcesListBox.SelectedIndex);
+            // Save the existing settings
+            Program.Config.Save();
+            // And reload the settings on the UI
+            ReloadSettings();
         }
 
         private void ResetSettingsButton_Click(object sender, EventArgs e)
