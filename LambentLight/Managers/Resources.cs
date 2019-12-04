@@ -143,12 +143,11 @@ namespace LambentLight.Managers
             // Add our base resource and version
             TempList.Add(resource, version);
 
-            /*
             // If we have dependencies
-            if (resource.Requires != null)
+            if (resource.More.Requires != null)
             {
                 // For every requirement
-                foreach (string Requirement in resource.Requires)
+                foreach (string Requirement in resource.More.Requires)
                 {
                     // Try to find a resource with that name
                     Resource Found = Resources.Where(res => res.Name == Requirement).FirstOrDefault();
@@ -157,7 +156,7 @@ namespace LambentLight.Managers
                     if (Found != null && !TempList.ContainsKey(Found))
                     {
                         // Collect their requirements
-                        Dictionary<Resource, Version> NewReqs = GetRequirements(Found, Found.Versions[0]);
+                        Dictionary<Resource, Version> NewReqs = GetRequirements(Found, Found.More.Versions[0]);
 
                         // For every new requirement found
                         foreach (KeyValuePair<Resource, Version> NewReq in NewReqs)
@@ -171,7 +170,6 @@ namespace LambentLight.Managers
                     }
                 }
             }
-            */
 
             // Finally, return the list
             return TempList;
