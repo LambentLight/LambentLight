@@ -322,6 +322,10 @@ namespace LambentLight
 
         private void InstallerResourcesListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // Disable the install button and clear the list of versions
+            InstallerInstallButton.Enabled = false;
+            InstallerVersionsListBox.Items.Clear();
+
             // Cast the selected resource
             Resource resource = (Resource)InstallerResourcesListBox.SelectedItem;
 
@@ -338,14 +342,6 @@ namespace LambentLight
                 // Add the builds to our version ListBox
                 InstallerVersionsListBox.Fill(resource.More.Versions);
             }
-            // Otherwise
-            else
-            {
-                // Wipe the Versions
-                InstallerVersionsListBox.Items.Clear();
-                // And disable the install button
-                InstallerInstallButton.Enabled = false;
-            }
         }
 
         private void InstallerVersionsListBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -356,8 +352,9 @@ namespace LambentLight
 
         private void InstallerRefreshButton_Click(object sender, EventArgs e)
         {
-            // Disable the install button
+            // Disable the install button and clear the list of versions
             InstallerInstallButton.Enabled = false;
+            InstallerVersionsListBox.Items.Clear();
             // And add the updated set of resource
             ResourceManager.Refresh();
             InstallerResourcesListBox.Fill(ResourceManager.Resources);
