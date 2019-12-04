@@ -29,11 +29,7 @@ namespace LambentLight
             RestartEveryTextBox.Text = Program.Config.AutoRestart.CronTime.ToString();
             RestartAtTextBox.Text = Program.Config.AutoRestart.DailyTime.ToString();
 
-            /*
-            BuildsWinTextBox.Text = Settings.Default.BuildsWindows;
-            BuildsLinTextBox.Text = Settings.Default.BuildsLinux;
-            ResourcesTextBox.Text = Settings.Default.Resources;
-            */
+            BuildsTextBox.Text = Program.Config.Builds;
 
             AutoRestartCheckBox.Checked = Program.Config.RestartOnCrash;
             ClearCacheCheckBox.Checked = Program.Config.ClearCache;
@@ -91,13 +87,9 @@ namespace LambentLight
 
         private void SaveAPIsButton_Click(object sender, EventArgs e)
         {
-            /*
-            // Save the URLs on the configuration
-            Settings.Default.Resources = ResourcesTextBox.Text;
-            Settings.Default.BuildsWindows = BuildsWinTextBox.Text;
-            Settings.Default.BuildsLinux = BuildsLinTextBox.Text;
-            Settings.Default.Save();
-            */
+            // Save the build URL on the configuration
+            Program.Config.Builds = BuildsTextBox.Text;
+            Program.Config.Save();
         }
 
         private void DownloadScriptsCheckBox_CheckedChanged(object sender, EventArgs e)
