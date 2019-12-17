@@ -91,6 +91,9 @@ namespace LambentLight
             // And select the correct game
             GameComboBox.SelectedIndex = (int)Program.Config.Game;
 
+            // Try to connect into the MySQL database
+            DatabaseManager.Connect();
+
             // Tell the Web Clients to use TLS 1.2 instead of SSL3
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
         }

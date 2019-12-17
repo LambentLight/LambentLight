@@ -1,5 +1,6 @@
 ﻿using LambentLight.Config;
 using LambentLight.Extensions;
+using LambentLight.Managers;
 using Microsoft.VisualBasic;
 using System;
 using System.Diagnostics;
@@ -199,6 +200,8 @@ namespace LambentLight
             // Just save it
             Program.Config.MySQL.Connection = ConnectionTextBox.Text;
             Program.Config.Save();
+            // And tell the database manager to reconnect
+            DatabaseManager.Connect();
         }
 
         private void ApplyCheckBox_CheckedChanged(object sender, EventArgs e)

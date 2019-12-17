@@ -103,6 +103,7 @@
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Locations.cs" />
     <Compile Include="Managers\Builds.cs" />
+    <Compile Include="Managers\Database.cs" />
     <Compile Include="Managers\DataFolders.cs" />
     <Compile Include="Extensions\ListControlExtensions.cs" />
     <Compile Include="Landing.cs">
