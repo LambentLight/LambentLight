@@ -84,6 +84,7 @@
       <DependentUpon>Creator.cs</DependentUpon>
     </Compile>
     <Compile Include="Downloader.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Locations.cs" />
     <Compile Include="Managers\Builds.cs" />
     <Compile Include="Managers\DataFolders.cs" />
