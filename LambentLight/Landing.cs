@@ -269,7 +269,18 @@ namespace LambentLight
             await BuildManager.Install(BuildFileDialog.FileName);
         }
 
-        private void DataFolderComboBox_SelectedIndexChanged(object sender, EventArgs e) => RefreshInstalledResources();
+        private void DataFolderComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Refresh the list of installed resources
+            RefreshInstalledResources();
+
+            // If the selected tab is the one with the configuration and something is selected
+            if (MainTabControl.SelectedTab == ConfigurationTabPage && DataFolderComboBox.SelectedItem != null)
+            {
+                // Set the text to the configuration of the server
+                ConfigurationTextBox.Text = ((DataFolder)DataFolderComboBox.SelectedItem).Configuration;
+            }
+        }
 
         private void DataFolderRefreshButton_Click(object sender, EventArgs e)
         {
