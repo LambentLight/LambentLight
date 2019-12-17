@@ -352,21 +352,13 @@ namespace LambentLight
 
             // Cast the selected resource
             Resource resource = (Resource)InstallerResourcesListBox.SelectedItem;
-
-            // If the extended resource information is set to null
-            if (resource.More == null && resource.Repo != null)
-            {
-                // Get the readable name of the game
-                string game = Program.Config.Game == Game.GrandTheftAutoV ? "gtav" : "rdr2";
-                // Request the object
-                resource.More = Downloader.DownloadJSON<ExtendedResource>($"{resource.Repo}/resources/{game}/{resource.Name}.json");
-            }
+            ExtendedResource more = resource.More;
 
             // If there is something selected and the extended information is not null
-            if (InstallerResourcesListBox.SelectedItem != null && resource.More != null)
+            if (InstallerResourcesListBox.SelectedItem != null && more != null)
             {
                 // Add the builds to our version ListBox
-                InstallerVersionsListBox.Fill(resource.More.Versions);
+                InstallerVersionsListBox.Fill(more.Versions);
             }
         }
 

@@ -76,6 +76,11 @@ namespace LambentLight.Managers
     public class Resource
     {
         /// <summary>
+        /// The private extended information.
+        /// </summary>
+        private ExtendedResource more = null;
+
+        /// <summary>
         /// The readable name of the resource.
         /// </summary>
         [JsonProperty("name", Required = Required.Always)]
@@ -99,7 +104,18 @@ namespace LambentLight.Managers
         /// The extended information for this resource.
         /// </summary>
         [JsonIgnore]
-        public ExtendedResource More { get; set; }
+        public ExtendedResource More
+        {
+            get
+            {
+                if (more == null)
+                {
+                    string game = Program.Config.Game == Game.GrandTheftAutoV ? "gtav" : "rdr2";
+                    more = Downloader.DownloadJSON<ExtendedResource>($"{Repo}/resources/{game}/{Name}.json");
+                }
+                return more;
+            }
+        }
 
         /// <summary>
         /// Checks if a specific resource is installed on a Data Folder.
