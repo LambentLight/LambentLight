@@ -91,7 +91,7 @@ namespace LambentLight.Managers
         /// <summary>
         /// The download URL for the current operating system.
         /// </summary>
-        private static readonly string DownloadURL = $"{Program.Config.Builds}/builds/fivem.json";
+        private static readonly string DownloadURL = $"{Program.Config.Builds}/builds.json";
         /// The download URL for a specific operating system.
         /// </summary>
         private static readonly string DownloadBuild = Checks.IsWindows ? "https://runtime.fivem.net/artifacts/fivem/build_server_windows/master/{0}/server.zip" : "https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/{0}/fx.tar.xz";
