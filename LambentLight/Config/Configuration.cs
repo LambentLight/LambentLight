@@ -7,6 +7,15 @@ using System.Reflection;
 namespace LambentLight.Config
 {
     /// <summary>
+    /// The currently choosen game.
+    /// </summary>
+    public enum Game
+    {
+        GrandTheftAutoV = 0,
+        RedDeadRedemption2 = 1
+    }
+
+    /// <summary>
     /// Object used for the configuration of LambentLight.
     /// </summary>
     public class Configuration
@@ -18,6 +27,8 @@ namespace LambentLight.Config
         [JsonIgnore]
         public const string FolderTemp = "temp";
 
+        [JsonProperty("game")]
+        public Game Game { get; set; } = Game.GrandTheftAutoV;
         [JsonProperty("cfx_token")]
         public string CFXToken { get; set; } = "";
         [JsonProperty("steam_token")]
