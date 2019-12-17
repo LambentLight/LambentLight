@@ -158,10 +158,17 @@ namespace LambentLight.Managers
         /// </summary>
         /// <param name="resource"></param>
         /// <returns></returns>
-        public static Dictionary<Resource, Version> GetRequirements(Resource resource, Version version)
+        public static Dictionary<Resource, Version> GetRequirements(Resource resource, Version version, int level = 0)
         {
             // Create a dictionary of resources and versions
             Dictionary<Resource, Version> TempList = new Dictionary<Resource, Version>();
+
+            // If the level is equal or higher to 3, return
+            if (level >= 3)
+            {
+                return TempList;
+            }
+
             // Add our base resource and version
             TempList.Add(resource, version);
 
@@ -178,7 +185,7 @@ namespace LambentLight.Managers
                     if (Found != null && !TempList.ContainsKey(Found))
                     {
                         // Collect their requirements
-                        Dictionary<Resource, Version> NewReqs = GetRequirements(Found, Found.More.Versions[0]);
+                        Dictionary<Resource, Version> NewReqs = GetRequirements(Found, Found.More.Versions[0], level + 1);
 
                         // For every new requirement found
                         foreach (KeyValuePair<Resource, Version> NewReq in NewReqs)
