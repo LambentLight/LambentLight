@@ -61,6 +61,7 @@ namespace LambentLight.Managers
         {
             // Store the absolute path of the folder
             string AbsPath = Path.GetFullPath(build.Folder);
+            string citizenPath = Path.Combine(AbsPath, "citizen");
 
             // If the file being part of the build does not exists
             if (!File.Exists(Path.Combine(AbsPath, "FXServer.exe")))
@@ -74,11 +75,11 @@ namespace LambentLight.Managers
             // Create a new server object and set the correct properties
             NewServer.Process = new Process();
             NewServer.Process.StartInfo.FileName = Path.Combine(AbsPath, "FXServer.exe");
-            NewServer.Process.StartInfo.Arguments = $"+set citizen_dir \"{Path.Combine(AbsPath, "citizen")}\" +set sv_licenseKey {Program.Config.CFXToken} +exec server.cfg";
-            if (!string.IsNullOrWhiteSpace(Program.Config.SteamToken))
-            {
-                NewServer.Process.StartInfo.Arguments += $" +set steam_webApiKey \"{Program.Config.SteamToken}\"";
-            }
+            NewServer.Process.StartInfo.Arguments += $"+set citizen_dir \"{citizenPath}\" ";
+            NewServer.Process.StartInfo.Arguments += $"+set sv_licenseKey {Program.Config.CFXToken} ";
+            NewServer.Process.StartInfo.Arguments += !string.IsNullOrWhiteSpace(Program.Config.SteamToken) ? "+set steam_webApiKey \"" + Program.Config.SteamToken + "\" " : "";
+            NewServer.Process.StartInfo.Arguments += Program.Config.Game == Config.Game.RedDeadRedemption2 ? "+set gamename rdr3 " : "";
+            NewServer.Process.StartInfo.Arguments += "+exec server.cfg";
             NewServer.Process.StartInfo.WorkingDirectory = data.Absolute;
             NewServer.Process.StartInfo.UseShellExecute = false;
             NewServer.Process.StartInfo.RedirectStandardError = true;
