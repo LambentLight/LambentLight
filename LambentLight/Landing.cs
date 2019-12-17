@@ -1,4 +1,5 @@
-﻿using LambentLight.Extensions;
+﻿using LambentLight.Config;
+using LambentLight.Extensions;
 using LambentLight.Managers;
 using LambentLight.Properties;
 using LambentLight.Targets;
@@ -80,6 +81,15 @@ namespace LambentLight
             Locked = false;
             // Load the RTF text
             AboutRichTextBox.Rtf = Resources.About;
+
+            // Iterate over the games supported
+            foreach (string value in Enum.GetNames(typeof(Game)))
+            {
+                // Add the item into the combo box
+                GameComboBox.Items.Add(value.SpaceOnUpperCase());
+            }
+            // And select the correct game
+            GameComboBox.SelectedIndex = (int)Program.Config.Game;
 
             // Tell the Web Clients to use TLS 1.2 instead of SSL3
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
