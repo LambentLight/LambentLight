@@ -92,6 +92,7 @@
     <Compile Include="Config\AutoRestart.cs" />
     <Compile Include="Config\Configuration.cs" />
     <Compile Include="Config\Creator.cs" />
+    <Compile Include="Config\MySQL.cs" />
     <Compile Include="Creator.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -16,10 +16,6 @@ namespace LambentLight
                
         private void ReloadSettings()
         {
-            // Disable the license check box
-            LicenseVisibleCheckBox.Checked = false;
-            SteamVisibleCheckBox.Checked = false;
-            
             // And load all of the settings
             DownloadScriptsCheckBox.Checked = Program.Config.Creator.DownloadScripts;
             CreateConfigCheckBox.Checked = Program.Config.Creator.CreateConfig;
@@ -34,6 +30,9 @@ namespace LambentLight
             BuildsTextBox.Text = Program.Config.Builds;
             ResourcesListBox.Items.Clear();
             ResourcesListBox.Fill(Program.Config.Repos);
+
+            ApplyCheckBox.Checked = Program.Config.MySQL.Apply;
+            ManuallyCheckBox.Checked = Program.Config.MySQL.Manually;
 
             AutoRestartCheckBox.Checked = Program.Config.RestartOnCrash;
             ClearCacheCheckBox.Checked = Program.Config.ClearCache;
@@ -183,6 +182,34 @@ namespace LambentLight
                 return;
             }
             // If we succeeded, save it
+            Program.Config.Save();
+        }
+
+        private void ConnectionCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            // Change the enabled status of the License TextBox and Button
+            ConnectionTextBox.Enabled = ConnectionCheckBox.Checked;
+            ConnectionButton.Enabled = ConnectionCheckBox.Checked;
+            // And populate the TextBox correctly
+            ConnectionTextBox.Text = ConnectionCheckBox.Checked ? Program.Config.MySQL.Connection : string.Empty;
+        }
+
+        private void ConnectionButton_Click(object sender, EventArgs e)
+        {
+            // Just save it
+            Program.Config.MySQL.Connection = ConnectionTextBox.Text;
+            Program.Config.Save();
+        }
+
+        private void ApplyCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.Config.MySQL.Apply = ApplyCheckBox.Checked;
+            Program.Config.Save();
+        }
+
+        private void ManuallyCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.Config.MySQL.Manually = ManuallyCheckBox.Checked;
             Program.Config.Save();
         }
 

@@ -48,6 +48,8 @@ namespace LambentLight.Config
         public bool RemoveAfterUninstalling { get; set; } = false;
         [JsonProperty("builds")]
         public string Builds { get; set; } = "https://raw.githubusercontent.com/LambentLight/Metadata/master";
+        [JsonProperty("mysql")]
+        public MySQL MySQL { get; set; } = new MySQL();
         [JsonProperty("creator")]
         public Creator Creator { get; set; } = new Creator();
         [JsonProperty("auto_restart")]

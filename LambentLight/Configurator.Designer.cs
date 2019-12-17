@@ -67,6 +67,14 @@
             this.BuildsTextBox = new System.Windows.Forms.TextBox();
             this.CloseButton = new System.Windows.Forms.Button();
             this.ResetSettingsButton = new System.Windows.Forms.Button();
+            this.MySQLTabPage = new System.Windows.Forms.TabPage();
+            this.ConnectionGroupBox = new System.Windows.Forms.GroupBox();
+            this.ConnectionTextBox = new System.Windows.Forms.TextBox();
+            this.ConnectionButton = new System.Windows.Forms.Button();
+            this.MySQLGroupBox = new System.Windows.Forms.GroupBox();
+            this.ApplyCheckBox = new System.Windows.Forms.CheckBox();
+            this.ManuallyCheckBox = new System.Windows.Forms.CheckBox();
+            this.ConnectionCheckBox = new System.Windows.Forms.CheckBox();
             this.ConfigTabControl.SuspendLayout();
             this.BasicTabPage.SuspendLayout();
             this.SteamGroupBox.SuspendLayout();
@@ -78,12 +86,16 @@
             this.APITabPage.SuspendLayout();
             this.ResourcesGroupBox.SuspendLayout();
             this.BuildsGroupBox.SuspendLayout();
+            this.MySQLTabPage.SuspendLayout();
+            this.ConnectionGroupBox.SuspendLayout();
+            this.MySQLGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // ConfigTabControl
             // 
             this.ConfigTabControl.Controls.Add(this.BasicTabPage);
             this.ConfigTabControl.Controls.Add(this.ScheduleTabPage);
+            this.ConfigTabControl.Controls.Add(this.MySQLTabPage);
             this.ConfigTabControl.Controls.Add(this.APITabPage);
             this.ConfigTabControl.Dock = System.Windows.Forms.DockStyle.Top;
             this.ConfigTabControl.Location = new System.Drawing.Point(0, 0);
@@ -506,6 +518,94 @@
             this.ResetSettingsButton.UseVisualStyleBackColor = true;
             this.ResetSettingsButton.Click += new System.EventHandler(this.ResetSettingsButton_Click);
             // 
+            // MySQLTabPage
+            // 
+            this.MySQLTabPage.Controls.Add(this.MySQLGroupBox);
+            this.MySQLTabPage.Controls.Add(this.ConnectionGroupBox);
+            this.MySQLTabPage.Location = new System.Drawing.Point(4, 22);
+            this.MySQLTabPage.Name = "MySQLTabPage";
+            this.MySQLTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.MySQLTabPage.Size = new System.Drawing.Size(376, 394);
+            this.MySQLTabPage.TabIndex = 3;
+            this.MySQLTabPage.Text = "MySQL";
+            this.MySQLTabPage.UseVisualStyleBackColor = true;
+            // 
+            // ConnectionGroupBox
+            // 
+            this.ConnectionGroupBox.Controls.Add(this.ConnectionCheckBox);
+            this.ConnectionGroupBox.Controls.Add(this.ConnectionButton);
+            this.ConnectionGroupBox.Controls.Add(this.ConnectionTextBox);
+            this.ConnectionGroupBox.Location = new System.Drawing.Point(6, 6);
+            this.ConnectionGroupBox.Name = "ConnectionGroupBox";
+            this.ConnectionGroupBox.Size = new System.Drawing.Size(364, 75);
+            this.ConnectionGroupBox.TabIndex = 0;
+            this.ConnectionGroupBox.TabStop = false;
+            this.ConnectionGroupBox.Text = "Connection URL";
+            // 
+            // ConnectionTextBox
+            // 
+            this.ConnectionTextBox.Enabled = false;
+            this.ConnectionTextBox.Location = new System.Drawing.Point(6, 19);
+            this.ConnectionTextBox.Name = "ConnectionTextBox";
+            this.ConnectionTextBox.Size = new System.Drawing.Size(352, 20);
+            this.ConnectionTextBox.TabIndex = 0;
+            // 
+            // ConnectionButton
+            // 
+            this.ConnectionButton.Enabled = false;
+            this.ConnectionButton.Location = new System.Drawing.Point(283, 45);
+            this.ConnectionButton.Name = "ConnectionButton";
+            this.ConnectionButton.Size = new System.Drawing.Size(75, 23);
+            this.ConnectionButton.TabIndex = 1;
+            this.ConnectionButton.Text = "Save";
+            this.ConnectionButton.UseVisualStyleBackColor = true;
+            this.ConnectionButton.Click += new System.EventHandler(this.ConnectionButton_Click);
+            // 
+            // MySQLGroupBox
+            // 
+            this.MySQLGroupBox.Controls.Add(this.ManuallyCheckBox);
+            this.MySQLGroupBox.Controls.Add(this.ApplyCheckBox);
+            this.MySQLGroupBox.Location = new System.Drawing.Point(6, 87);
+            this.MySQLGroupBox.Name = "MySQLGroupBox";
+            this.MySQLGroupBox.Size = new System.Drawing.Size(364, 69);
+            this.MySQLGroupBox.TabIndex = 1;
+            this.MySQLGroupBox.TabStop = false;
+            this.MySQLGroupBox.Text = "MySQL Settings";
+            // 
+            // ApplyCheckBox
+            // 
+            this.ApplyCheckBox.AutoSize = true;
+            this.ApplyCheckBox.Location = new System.Drawing.Point(6, 19);
+            this.ApplyCheckBox.Name = "ApplyCheckBox";
+            this.ApplyCheckBox.Size = new System.Drawing.Size(341, 17);
+            this.ApplyCheckBox.TabIndex = 0;
+            this.ApplyCheckBox.Text = "Apply .sql files into the MySQL database when installing Resources";
+            this.ApplyCheckBox.UseVisualStyleBackColor = true;
+            this.ApplyCheckBox.CheckedChanged += new System.EventHandler(this.ApplyCheckBox_CheckedChanged);
+            // 
+            // ManuallyCheckBox
+            // 
+            this.ManuallyCheckBox.AutoSize = true;
+            this.ManuallyCheckBox.Location = new System.Drawing.Point(6, 42);
+            this.ManuallyCheckBox.Name = "ManuallyCheckBox";
+            this.ManuallyCheckBox.Size = new System.Drawing.Size(174, 17);
+            this.ManuallyCheckBox.TabIndex = 1;
+            this.ManuallyCheckBox.Text = "Manually approve every .sql file";
+            this.ManuallyCheckBox.UseVisualStyleBackColor = true;
+            this.ManuallyCheckBox.CheckedChanged += new System.EventHandler(this.ManuallyCheckBox_CheckedChanged);
+            // 
+            // ConnectionCheckBox
+            // 
+            this.ConnectionCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.ConnectionCheckBox.AutoSize = true;
+            this.ConnectionCheckBox.Location = new System.Drawing.Point(6, 49);
+            this.ConnectionCheckBox.Name = "ConnectionCheckBox";
+            this.ConnectionCheckBox.Size = new System.Drawing.Size(111, 17);
+            this.ConnectionCheckBox.TabIndex = 2;
+            this.ConnectionCheckBox.Text = "Make URL Visible";
+            this.ConnectionCheckBox.UseVisualStyleBackColor = true;
+            this.ConnectionCheckBox.CheckedChanged += new System.EventHandler(this.ConnectionCheckBox_CheckedChanged);
+            // 
             // Configurator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -540,6 +640,11 @@
             this.ResourcesGroupBox.ResumeLayout(false);
             this.BuildsGroupBox.ResumeLayout(false);
             this.BuildsGroupBox.PerformLayout();
+            this.MySQLTabPage.ResumeLayout(false);
+            this.ConnectionGroupBox.ResumeLayout(false);
+            this.ConnectionGroupBox.PerformLayout();
+            this.MySQLGroupBox.ResumeLayout(false);
+            this.MySQLGroupBox.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -584,5 +689,13 @@
         private System.Windows.Forms.ListBox ResourcesListBox;
         private System.Windows.Forms.Button AddButton;
         private System.Windows.Forms.Button RemoveButton;
+        private System.Windows.Forms.TabPage MySQLTabPage;
+        private System.Windows.Forms.GroupBox ConnectionGroupBox;
+        private System.Windows.Forms.TextBox ConnectionTextBox;
+        private System.Windows.Forms.Button ConnectionButton;
+        private System.Windows.Forms.GroupBox MySQLGroupBox;
+        private System.Windows.Forms.CheckBox ApplyCheckBox;
+        private System.Windows.Forms.CheckBox ManuallyCheckBox;
+        private System.Windows.Forms.CheckBox ConnectionCheckBox;
     }
 }
