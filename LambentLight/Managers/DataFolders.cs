@@ -1,3 +1,4 @@
+using MySql.Data.MySqlClient;
 using NLog;
 using System;
 using System.Collections.Generic;
@@ -6,6 +7,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace LambentLight.Managers
 {
@@ -302,6 +304,38 @@ namespace LambentLight.Managers
 
             // Remove the temporary compressed file
             File.Delete(TempFilePath);
+
+            // If there is a database running and we want to apply the patches
+            if (DatabaseManager.Connection != null && Program.Config.MySQL.Apply)
+            {
+                // Get all of the SQL files
+                foreach (string file in Directory.EnumerateFiles(ExtractionPath, "**.sql", SearchOption.AllDirectories))
+                {
+                    // If we need a manual confirmation for the file
+                    if (Program.Config.MySQL.Manually)
+                    {
+                        // Get the name of the file
+                        string name = Path.GetFileName(file);
+                        // Ask the user if he wants to confirm the SQL patch
+                        DialogResult result = MessageBox.Show($"Do you want to apply the file {name} into the MySQL Database?", "SQL File Found", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                        // If he does not, continue to the next iteration
+                        if (result == DialogResult.No)
+                        {
+                            continue;
+                        }
+                    }
+
+                    // Get the contents of the file
+                    string sql = File.ReadAllText(file);
+                    // Create the MySQL Command
+                    using (MySqlCommand command = new MySqlCommand(sql, DatabaseManager.Connection))
+                    {
+                        // And execute it
+                        await command.ExecuteNonQueryAsync();
+                    }
+                }
+            }
 
             /*
             // If the resource has aditional configuration instructions
