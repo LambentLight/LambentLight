@@ -1,4 +1,4 @@
-﻿namespace LambentLight
+namespace LambentLight
 {
     partial class Landing
     {
@@ -133,9 +133,9 @@
             this.DataFolderGroupBox.Controls.Add(this.DataFolderBrowseButton);
             this.DataFolderGroupBox.Controls.Add(this.DataFolderRefreshButton);
             this.DataFolderGroupBox.Controls.Add(this.DataFolderComboBox);
-            this.DataFolderGroupBox.Location = new System.Drawing.Point(286, 12);
+            this.DataFolderGroupBox.Location = new System.Drawing.Point(193, 12);
             this.DataFolderGroupBox.Name = "DataFolderGroupBox";
-            this.DataFolderGroupBox.Size = new System.Drawing.Size(501, 52);
+            this.DataFolderGroupBox.Size = new System.Drawing.Size(594, 52);
             this.DataFolderGroupBox.TabIndex = 1;
             this.DataFolderGroupBox.TabStop = false;
             this.DataFolderGroupBox.Text = "Data Folder";
@@ -143,7 +143,7 @@
             // DataFolderBrowseButton
             // 
             this.DataFolderBrowseButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.DataFolderBrowseButton.Location = new System.Drawing.Point(339, 18);
+            this.DataFolderBrowseButton.Location = new System.Drawing.Point(432, 18);
             this.DataFolderBrowseButton.Name = "DataFolderBrowseButton";
             this.DataFolderBrowseButton.Size = new System.Drawing.Size(75, 23);
             this.DataFolderBrowseButton.TabIndex = 2;
@@ -154,7 +154,7 @@
             // DataFolderRefreshButton
             // 
             this.DataFolderRefreshButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.DataFolderRefreshButton.Location = new System.Drawing.Point(420, 18);
+            this.DataFolderRefreshButton.Location = new System.Drawing.Point(513, 18);
             this.DataFolderRefreshButton.Name = "DataFolderRefreshButton";
             this.DataFolderRefreshButton.Size = new System.Drawing.Size(75, 23);
             this.DataFolderRefreshButton.TabIndex = 1;
@@ -170,7 +170,7 @@
             this.DataFolderComboBox.FormattingEnabled = true;
             this.DataFolderComboBox.Location = new System.Drawing.Point(6, 19);
             this.DataFolderComboBox.Name = "DataFolderComboBox";
-            this.DataFolderComboBox.Size = new System.Drawing.Size(327, 21);
+            this.DataFolderComboBox.Size = new System.Drawing.Size(420, 21);
             this.DataFolderComboBox.TabIndex = 0;
             this.DataFolderComboBox.SelectedIndexChanged += new System.EventHandler(this.DataFolderComboBox_SelectedIndexChanged);
             // 
@@ -620,7 +620,7 @@
             this.GameGroupBox.Controls.Add(this.GameComboBox);
             this.GameGroupBox.Location = new System.Drawing.Point(36, 12);
             this.GameGroupBox.Name = "GameGroupBox";
-            this.GameGroupBox.Size = new System.Drawing.Size(244, 52);
+            this.GameGroupBox.Size = new System.Drawing.Size(151, 52);
             this.GameGroupBox.TabIndex = 6;
             this.GameGroupBox.TabStop = false;
             this.GameGroupBox.Text = "Game";
@@ -633,7 +633,7 @@
             this.GameComboBox.FormattingEnabled = true;
             this.GameComboBox.Location = new System.Drawing.Point(6, 20);
             this.GameComboBox.Name = "GameComboBox";
-            this.GameComboBox.Size = new System.Drawing.Size(232, 21);
+            this.GameComboBox.Size = new System.Drawing.Size(139, 21);
             this.GameComboBox.TabIndex = 0;
             // 
             // Landing
