@@ -373,6 +373,16 @@ namespace LambentLight
             DataFolder Folder = (DataFolder)DataFolderComboBox.SelectedItem;
             Resource NewResource = (Resource)InstallerResourcesListBox.SelectedItem;
 
+            // If the resource is deprecated, notify the user and ask him if he wants to continue
+            if (!string.IsNullOrWhiteSpace(NewResource.SupersededBy))
+            {
+                DialogResult result = MessageBox.Show($"This resource is no longer updated by it's developer.\nWe recommend that you install {NewResource.SupersededBy} instad of {NewResource.Name}.\nDo you want to continue?", "Resource Deprecated", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (result == DialogResult.No)
+                {
+                    return;
+                }
+            }
+
             // Get all of the requirements by the selected resource
             Dictionary<Resource, Managers.Version> Collected = ResourceManager.GetRequirements(NewResource, (Managers.Version)InstallerVersionsListBox.SelectedItem);
             // Create the readable list of resources

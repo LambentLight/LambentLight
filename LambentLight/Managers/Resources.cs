@@ -85,6 +85,11 @@ namespace LambentLight.Managers
         [JsonProperty("author", Required = Required.Always)]
         public string Author { get; set; }
         /// <summary>
+        /// If this resource is deprecated, the one that replaces it.
+        /// </summary>
+        [JsonProperty("superseded")]
+        public string SupersededBy { get; set; }
+        /// <summary>
         /// The repo that has the information of this resource.
         /// </summary>
         [JsonIgnore]
