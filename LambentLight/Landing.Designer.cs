@@ -1,4 +1,4 @@
-namespace LambentLight
+﻿namespace LambentLight
 {
     partial class Landing
     {
@@ -635,6 +635,7 @@ namespace LambentLight
             this.GameComboBox.Name = "GameComboBox";
             this.GameComboBox.Size = new System.Drawing.Size(139, 21);
             this.GameComboBox.TabIndex = 0;
+            this.GameComboBox.SelectedIndexChanged += new System.EventHandler(this.GameComboBox_SelectedIndexChanged);
             // 
             // Landing
             // 

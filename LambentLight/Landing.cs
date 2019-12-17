@@ -215,6 +215,20 @@ namespace LambentLight
 
         #endregion
 
+        #region Game Selector
+        
+        private void GameComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Save the index of the selected game
+            Program.Config.Game = (Game)GameComboBox.SelectedIndex;
+            Program.Config.Save();
+
+            // And refresh the resources on the installer
+            RefreshResourceInstaller();
+        }
+
+        #endregion
+
         #region Server Console
 
         private void ClearLogButton_Click(object sender, EventArgs e)
@@ -362,12 +376,7 @@ namespace LambentLight
 
         private void InstallerRefreshButton_Click(object sender, EventArgs e)
         {
-            // Disable the install button and clear the list of versions
-            InstallerInstallButton.Enabled = false;
-            InstallerVersionsListBox.Items.Clear();
-            // And add the updated set of resource
-            ResourceManager.Refresh();
-            InstallerResourcesListBox.Fill(ResourceManager.Resources);
+            RefreshResourceInstaller();
         }
 
         private async void InstallerInstallButton_Click(object sender, EventArgs e)
@@ -496,6 +505,15 @@ namespace LambentLight
 
             // Update the list of installed resources
             UninstallerListBox.Fill(((DataFolder)DataFolderComboBox.SelectedItem).InstalledResources);
+        }
+        private void RefreshResourceInstaller()
+        {
+            // Disable the install button and clear the list of versions
+            InstallerInstallButton.Enabled = false;
+            InstallerVersionsListBox.Items.Clear();
+            // And add the updated set of resource
+            ResourceManager.Refresh();
+            InstallerResourcesListBox.Fill(ResourceManager.Resources);
         }
 
         #endregion
