@@ -356,8 +356,10 @@ namespace LambentLight
             // If the extended resource information is set to null
             if (resource.More == null && resource.Repo != null)
             {
+                // Get the readable name of the game
+                string game = Program.Config.Game == Game.GrandTheftAutoV ? "gtav" : "rdr2";
                 // Request the object
-                resource.More = Downloader.DownloadJSON<ExtendedResource>($"{resource.Repo}/resources/gtav/{resource.Name}.json");
+                resource.More = Downloader.DownloadJSON<ExtendedResource>($"{resource.Repo}/resources/{game}/{resource.Name}.json");
             }
 
             // If there is something selected and the extended information is not null
