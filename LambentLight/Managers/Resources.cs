@@ -191,7 +191,7 @@ namespace LambentLight.Managers
             foreach (string repo in Program.Config.Repos)
             {
                 // Combine the repo with the resource metadata
-                string url = $"{repo}/resources/list.json";
+                string url = $"{repo}/resources/gtav.json";
                 // Create a temporary list of resources
                 List<Resource> output = Downloader.DownloadJSON<List<Resource>>(url);
 

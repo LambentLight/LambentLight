@@ -333,7 +333,7 @@ namespace LambentLight
             if (resource.More == null && resource.Repo != null)
             {
                 // Request the object
-                resource.More = Downloader.DownloadJSON<ExtendedResource>($"{resource.Repo}/resources/metadata/{resource.Name}.json");
+                resource.More = Downloader.DownloadJSON<ExtendedResource>($"{resource.Repo}/resources/gtav/{resource.Name}.json");
             }
 
             // If there is something selected and the extended information is not null
