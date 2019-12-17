@@ -222,13 +222,29 @@ namespace LambentLight.Managers
             // Notify that we are starting the install of there resource
             Logger.Info("Installing resource {0} {1}", resource.Name, version.ReadableVersion);
 
-            // If the temporary folder does not exists
-            Locations.EnsureTempFolder();
-
             // Format a path for the output file
             string ExtractionPath = Path.Combine(Locations.Temp, $"{resource.More.Install.Destination}-{version.ReadableVersion}");
             string TempFilePath = ExtractionPath + Path.GetExtension(version.Download);
 
+            // Select the correct path inside of the extraction folder
+            // In order: Version Path, Resource Path or an Empty String
+            string CompressedPath = version.Path ?? "";
+            // Create the path for the folder that we need to move
+            string ChoosenFolder = Path.Combine(ExtractionPath, CompressedPath);
+            // Create the destination directory (aka the path inside of the resources directory)
+            string DestinationFolder = Path.Combine(Resources, resource.More.Install.Destination);
+            // Format the path where the version can be located
+            string versionPath = Path.Combine(DestinationFolder, "version.lambentlight");
+
+            // If the version file exists and matches the version that we are trying to install, log it and return
+            if (File.Exists(versionPath) && File.ReadAllText(versionPath) == version.ReadableVersion)
+            {
+                Logger.Info("Resource {0} {1} is already installed", resource.Name, version.ReadableVersion);
+                return;
+            }
+
+            // If the temporary folder does not exists
+            Locations.EnsureTempFolder();
             // If the temp file exists
             if (File.Exists(TempFilePath))
             {
@@ -287,14 +303,6 @@ namespace LambentLight.Managers
             // Remove the temporary compressed file
             File.Delete(TempFilePath);
 
-            // Select the correct path inside of the extraction folder
-            // In order: Version Path, Resource Path or an Empty String
-            string CompressedPath = version.Path ?? "";
-            // Create the path for the folder that we need to move
-            string ChoosenFolder = Path.Combine(ExtractionPath, CompressedPath);
-            // Create the destination directory (aka the path inside of the resources directory)
-            string DestinationFolder = Path.Combine(Resources, resource.More.Install.Destination);
-
             /*
             // If the resource has aditional configuration instructions
             if (resource.ConfigInstructions != null)
@@ -327,6 +335,9 @@ namespace LambentLight.Managers
             {
                 Directory.Delete(ExtractionPath, true);
             }
+
+            // If we got here, write a file with the current version
+            File.WriteAllText(versionPath, version.ReadableVersion);
 
             // Finally, notify that we have finished
             Logger.Info("Done! {0} {1} has been installed", resource.Name, version.ReadableVersion);
