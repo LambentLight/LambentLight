@@ -41,6 +41,7 @@ namespace LambentLight.Managers
             try
             {
                 Connection = new MySqlConnection(Program.Config.MySQL.Connection);
+                Connection.Open();
                 Logger.Info("Connected to MySQL Database!");
                 return true;
             }
