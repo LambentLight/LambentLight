@@ -7,6 +7,7 @@ using NLog;
 using NLog.Config;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
@@ -100,10 +101,25 @@ namespace LambentLight
 
         private void Landing_FormClosing(object sender, FormClosingEventArgs e)
         {
-            // Stop the server if is running
+
+            // Ask the user if he wants to close the server
+            DialogResult result = MessageBox.Show("Closing LambentLight will stop the server and close the MySQL Connection.\nAre you sure that you want to exit LambentLight?", "Server is Running", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            // If the result is not yes, cancel the event and return
+            if (result != DialogResult.Yes)
+            {
+                e.Cancel = true;
+                return;
+            }
+
+            // If the server is running, stop it
             if (ProcessManager.IsServerRunning)
             {
                 ProcessManager.Stop();
+            }
+            // If the database is open, close it
+            if (DatabaseManager.Connection != null && DatabaseManager.Connection.State == ConnectionState.Open)
+            {
+                DatabaseManager.Connection.Close();
             }
         }
 
@@ -193,27 +209,6 @@ namespace LambentLight
             Configurator config = new Configurator();
             config.ShowDialog();
             config.Dispose();
-        }
-
-        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            // If the server is running
-            if (ProcessManager.IsServerRunning)
-            {
-                // Ask the user if he wants to close the server
-                DialogResult result = MessageBox.Show("This will stop the FiveM server.\nAre you sure that you want to Exit?", "Server is Running", MessageBoxButtons.YesNo);
-
-                // If the result is not yes, return
-                if (result != DialogResult.Yes)
-                {
-                    return;
-                }
-                // Otherwise, stop the server
-                ProcessManager.Stop();
-            }
-
-            // Close the current form
-            Close();
         }
 
         #endregion
