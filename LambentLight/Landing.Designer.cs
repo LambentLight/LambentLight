@@ -74,6 +74,8 @@
             this.BottomStrip = new System.Windows.Forms.StatusStrip();
             this.BottomToolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.BuildFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.GameGroupBox = new System.Windows.Forms.GroupBox();
+            this.GameComboBox = new System.Windows.Forms.ComboBox();
             this.BuildsGroupBox.SuspendLayout();
             this.DataFolderGroupBox.SuspendLayout();
             this.TopMenuStrip.SuspendLayout();
@@ -86,6 +88,7 @@
             this.BuildsTabPage.SuspendLayout();
             this.AboutTabPage.SuspendLayout();
             this.BottomStrip.SuspendLayout();
+            this.GameGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // BuildsGroupBox
@@ -130,9 +133,9 @@
             this.DataFolderGroupBox.Controls.Add(this.DataFolderBrowseButton);
             this.DataFolderGroupBox.Controls.Add(this.DataFolderRefreshButton);
             this.DataFolderGroupBox.Controls.Add(this.DataFolderComboBox);
-            this.DataFolderGroupBox.Location = new System.Drawing.Point(36, 12);
+            this.DataFolderGroupBox.Location = new System.Drawing.Point(286, 12);
             this.DataFolderGroupBox.Name = "DataFolderGroupBox";
-            this.DataFolderGroupBox.Size = new System.Drawing.Size(751, 52);
+            this.DataFolderGroupBox.Size = new System.Drawing.Size(501, 52);
             this.DataFolderGroupBox.TabIndex = 1;
             this.DataFolderGroupBox.TabStop = false;
             this.DataFolderGroupBox.Text = "Data Folder";
@@ -140,7 +143,7 @@
             // DataFolderBrowseButton
             // 
             this.DataFolderBrowseButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.DataFolderBrowseButton.Location = new System.Drawing.Point(589, 18);
+            this.DataFolderBrowseButton.Location = new System.Drawing.Point(339, 18);
             this.DataFolderBrowseButton.Name = "DataFolderBrowseButton";
             this.DataFolderBrowseButton.Size = new System.Drawing.Size(75, 23);
             this.DataFolderBrowseButton.TabIndex = 2;
@@ -151,7 +154,7 @@
             // DataFolderRefreshButton
             // 
             this.DataFolderRefreshButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.DataFolderRefreshButton.Location = new System.Drawing.Point(670, 18);
+            this.DataFolderRefreshButton.Location = new System.Drawing.Point(420, 18);
             this.DataFolderRefreshButton.Name = "DataFolderRefreshButton";
             this.DataFolderRefreshButton.Size = new System.Drawing.Size(75, 23);
             this.DataFolderRefreshButton.TabIndex = 1;
@@ -167,7 +170,7 @@
             this.DataFolderComboBox.FormattingEnabled = true;
             this.DataFolderComboBox.Location = new System.Drawing.Point(6, 19);
             this.DataFolderComboBox.Name = "DataFolderComboBox";
-            this.DataFolderComboBox.Size = new System.Drawing.Size(577, 21);
+            this.DataFolderComboBox.Size = new System.Drawing.Size(327, 21);
             this.DataFolderComboBox.TabIndex = 0;
             this.DataFolderComboBox.SelectedIndexChanged += new System.EventHandler(this.DataFolderComboBox_SelectedIndexChanged);
             // 
@@ -612,12 +615,34 @@
             // 
             this.BuildFileDialog.Filter = "All Supported Compressed Files|*.zip";
             // 
+            // GameGroupBox
+            // 
+            this.GameGroupBox.Controls.Add(this.GameComboBox);
+            this.GameGroupBox.Location = new System.Drawing.Point(36, 12);
+            this.GameGroupBox.Name = "GameGroupBox";
+            this.GameGroupBox.Size = new System.Drawing.Size(244, 52);
+            this.GameGroupBox.TabIndex = 6;
+            this.GameGroupBox.TabStop = false;
+            this.GameGroupBox.Text = "Game";
+            // 
+            // GameComboBox
+            // 
+            this.GameComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.GameComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.GameComboBox.FormattingEnabled = true;
+            this.GameComboBox.Location = new System.Drawing.Point(6, 20);
+            this.GameComboBox.Name = "GameComboBox";
+            this.GameComboBox.Size = new System.Drawing.Size(232, 21);
+            this.GameComboBox.TabIndex = 0;
+            // 
             // Landing
             // 
             this.AcceptButton = this.ConsoleSendButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(799, 444);
+            this.Controls.Add(this.GameGroupBox);
             this.Controls.Add(this.BottomStrip);
             this.Controls.Add(this.MainProgressBar);
             this.Controls.Add(this.MainTabControl);
@@ -647,6 +672,7 @@
             this.AboutTabPage.ResumeLayout(false);
             this.BottomStrip.ResumeLayout(false);
             this.BottomStrip.PerformLayout();
+            this.GameGroupBox.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -699,6 +725,8 @@
         private System.Windows.Forms.Button ResourceRestartButton;
         private System.Windows.Forms.Button ResourceStopButton;
         private System.Windows.Forms.Button ResourceStartButton;
+        private System.Windows.Forms.GroupBox GameGroupBox;
+        private System.Windows.Forms.ComboBox GameComboBox;
     }
 }
 
