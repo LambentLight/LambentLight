@@ -131,8 +131,8 @@ namespace LambentLight.Managers
                 // Iterate over the directories in the resources folder
                 foreach (string Folder in Directory.EnumerateDirectories(Resources, "*", SearchOption.AllDirectories))
                 {
-                    // If the folder contains a resource metadata (__resource.lua)
-                    if (File.Exists(Path.Combine(Folder, "__resource.lua")))
+                    // If the folder contains a resource metadata for v1 (__resource.lua) of v2 (fxmanifest.lua)
+                    if (File.Exists(Path.Combine(Folder, "__resource.lua")) || File.Exists(Path.Combine(Folder, "fxmanifest.lua")))
                     {
                         // Add it
                         TempResources.Add(new InstalledResource(this, Folder));
