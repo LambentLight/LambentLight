@@ -1,3 +1,4 @@
+using LambentLight.Config;
 using Newtonsoft.Json;
 using NLog;
 using System.Collections.Generic;
@@ -186,12 +187,14 @@ namespace LambentLight.Managers
         {
             // Create a dummy list of resources
             List<Resource> resources = new List<Resource>();
+            // Get the readable name of the game
+            string game = Program.Config.Game == Game.GrandTheftAutoV ? "gtav" : "rdr2";
 
             // For each resource repository
             foreach (string repo in Program.Config.Repos)
             {
                 // Combine the repo with the resource metadata
-                string url = $"{repo}/resources/gtav.json";
+                string url = $"{repo}/resources/{game}.json";
                 // Create a temporary list of resources
                 List<Resource> output = Downloader.DownloadJSON<List<Resource>>(url);
 
