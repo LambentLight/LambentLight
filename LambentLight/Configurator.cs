@@ -17,11 +17,23 @@ namespace LambentLight
                
         private void ReloadSettings()
         {
+            // Iterate over the time measurements
+            foreach (string value in Enum.GetNames(typeof(Time)))
+            {
+                // Add the item into the combo box
+                WaitComboBox.Items.Add(value);
+            }
+
             // And load all of the settings
             DownloadScriptsCheckBox.Checked = Program.Config.Creator.DownloadScripts;
             CreateConfigCheckBox.Checked = Program.Config.Creator.CreateConfig;
             AddToConfigCheckBox.Checked = Program.Config.AddAfterInstalling;
             RemoveFromConfigCheckBox.Checked = Program.Config.RemoveAfterUninstalling;
+
+            WaitCheckBox.Checked = Program.Config.Wait;
+            WaitTextBox.Text = Program.Config.WaitTime.ToString();
+            WaitComboBox.SelectedIndex = (int)Program.Config.WaitMeasurement;
+            KickCheckBox.Checked = Program.Config.KickEveryone;
 
             RestartEveryCheckBox.Checked = Program.Config.AutoRestart.Cron;
             RestartAtCheckBox.Checked = Program.Config.AutoRestart.Daily;
@@ -135,6 +147,41 @@ namespace LambentLight
         {
             // Save the curent status on the settings
             Program.Config.ClearCache = ClearCacheCheckBox.Checked;
+            Program.Config.Save();
+        }
+
+        private void WaitCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            // Save the curent status on the settings
+            Program.Config.Wait = WaitCheckBox.Checked;
+            Program.Config.Save();
+
+            // Set the enabled status of the respective items
+            WaitTextBox.Enabled = WaitCheckBox.Checked;
+            WaitComboBox.Enabled = WaitCheckBox.Checked;
+        }
+
+        private void WaitSaveButton_Click(object sender, EventArgs e)
+        {
+            // Try to parse the text box contents
+            try
+            {
+                Program.Config.WaitTime = int.Parse(WaitTextBox.Text);
+            }
+            // If we have failed
+            catch (FormatException)
+            {
+                MessageBox.Show("The format for the 'Wait' time is invalid.");
+                return;
+            }
+            // If we succeeded, save it
+            Program.Config.Save();
+        }
+
+        private void KickCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            // Save the curent status on the settings
+            Program.Config.KickEveryone = KickCheckBox.Checked;
             Program.Config.Save();
         }
 

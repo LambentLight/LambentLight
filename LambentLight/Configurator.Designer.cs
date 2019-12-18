@@ -31,6 +31,11 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Configurator));
             this.ConfigTabControl = new System.Windows.Forms.TabControl();
             this.BasicTabPage = new System.Windows.Forms.TabPage();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.KickCheckBox = new System.Windows.Forms.CheckBox();
+            this.WaitCheckBox = new System.Windows.Forms.CheckBox();
+            this.WaitComboBox = new System.Windows.Forms.ComboBox();
+            this.WaitTextBox = new System.Windows.Forms.TextBox();
             this.SteamGroupBox = new System.Windows.Forms.GroupBox();
             this.SteamGenerateButton = new System.Windows.Forms.Button();
             this.SteamSaveButton = new System.Windows.Forms.Button();
@@ -47,6 +52,10 @@
             this.LicenseSaveButton = new System.Windows.Forms.Button();
             this.LicenseVisibleCheckBox = new System.Windows.Forms.CheckBox();
             this.LicenseTextBox = new System.Windows.Forms.TextBox();
+            this.InstallerTabPage = new System.Windows.Forms.TabPage();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.RemoveFromConfigCheckBox = new System.Windows.Forms.CheckBox();
+            this.AddToConfigCheckBox = new System.Windows.Forms.CheckBox();
             this.ScheduleTabPage = new System.Windows.Forms.TabPage();
             this.AutomatedRestartGroupBox = new System.Windows.Forms.GroupBox();
             this.RestartAtButton = new System.Windows.Forms.Button();
@@ -73,16 +82,16 @@
             this.BuildsTextBox = new System.Windows.Forms.TextBox();
             this.CloseButton = new System.Windows.Forms.Button();
             this.ResetSettingsButton = new System.Windows.Forms.Button();
-            this.InstallerTabPage = new System.Windows.Forms.TabPage();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.RemoveFromConfigCheckBox = new System.Windows.Forms.CheckBox();
-            this.AddToConfigCheckBox = new System.Windows.Forms.CheckBox();
+            this.WaitSaveButton = new System.Windows.Forms.Button();
             this.ConfigTabControl.SuspendLayout();
             this.BasicTabPage.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SteamGroupBox.SuspendLayout();
             this.RuntimeGroupBox.SuspendLayout();
             this.FolderCreationGroupBox.SuspendLayout();
             this.LicenseGroupBox.SuspendLayout();
+            this.InstallerTabPage.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.ScheduleTabPage.SuspendLayout();
             this.AutomatedRestartGroupBox.SuspendLayout();
             this.MySQLTabPage.SuspendLayout();
@@ -91,8 +100,6 @@
             this.APITabPage.SuspendLayout();
             this.ResourcesGroupBox.SuspendLayout();
             this.BuildsGroupBox.SuspendLayout();
-            this.InstallerTabPage.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // ConfigTabControl
@@ -111,6 +118,7 @@
             // 
             // BasicTabPage
             // 
+            this.BasicTabPage.Controls.Add(this.groupBox2);
             this.BasicTabPage.Controls.Add(this.SteamGroupBox);
             this.BasicTabPage.Controls.Add(this.RuntimeGroupBox);
             this.BasicTabPage.Controls.Add(this.FolderCreationGroupBox);
@@ -122,6 +130,58 @@
             this.BasicTabPage.TabIndex = 0;
             this.BasicTabPage.Text = "Basic";
             this.BasicTabPage.UseVisualStyleBackColor = true;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.WaitSaveButton);
+            this.groupBox2.Controls.Add(this.KickCheckBox);
+            this.groupBox2.Controls.Add(this.WaitCheckBox);
+            this.groupBox2.Controls.Add(this.WaitComboBox);
+            this.groupBox2.Controls.Add(this.WaitTextBox);
+            this.groupBox2.Location = new System.Drawing.Point(6, 311);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(364, 68);
+            this.groupBox2.TabIndex = 7;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Stopping the Server";
+            // 
+            // KickCheckBox
+            // 
+            this.KickCheckBox.AutoSize = true;
+            this.KickCheckBox.Location = new System.Drawing.Point(6, 45);
+            this.KickCheckBox.Name = "KickCheckBox";
+            this.KickCheckBox.Size = new System.Drawing.Size(172, 17);
+            this.KickCheckBox.TabIndex = 4;
+            this.KickCheckBox.Text = "Kick everyone before Stopping";
+            this.KickCheckBox.UseVisualStyleBackColor = true;
+            this.KickCheckBox.CheckedChanged += new System.EventHandler(this.KickCheckBox_CheckedChanged);
+            // 
+            // WaitCheckBox
+            // 
+            this.WaitCheckBox.AutoSize = true;
+            this.WaitCheckBox.Location = new System.Drawing.Point(6, 21);
+            this.WaitCheckBox.Name = "WaitCheckBox";
+            this.WaitCheckBox.Size = new System.Drawing.Size(48, 17);
+            this.WaitCheckBox.TabIndex = 3;
+            this.WaitCheckBox.Text = "Wait";
+            this.WaitCheckBox.UseVisualStyleBackColor = true;
+            this.WaitCheckBox.CheckedChanged += new System.EventHandler(this.WaitCheckBox_CheckedChanged);
+            // 
+            // WaitComboBox
+            // 
+            this.WaitComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.WaitComboBox.FormattingEnabled = true;
+            this.WaitComboBox.Location = new System.Drawing.Point(120, 19);
+            this.WaitComboBox.Name = "WaitComboBox";
+            this.WaitComboBox.Size = new System.Drawing.Size(107, 21);
+            this.WaitComboBox.TabIndex = 2;
+            // 
+            // WaitTextBox
+            // 
+            this.WaitTextBox.Location = new System.Drawing.Point(60, 19);
+            this.WaitTextBox.Name = "WaitTextBox";
+            this.WaitTextBox.Size = new System.Drawing.Size(54, 20);
+            this.WaitTextBox.TabIndex = 0;
             // 
             // SteamGroupBox
             // 
@@ -304,6 +364,47 @@
             this.LicenseTextBox.Name = "LicenseTextBox";
             this.LicenseTextBox.Size = new System.Drawing.Size(352, 20);
             this.LicenseTextBox.TabIndex = 0;
+            // 
+            // InstallerTabPage
+            // 
+            this.InstallerTabPage.Controls.Add(this.groupBox1);
+            this.InstallerTabPage.Location = new System.Drawing.Point(4, 22);
+            this.InstallerTabPage.Name = "InstallerTabPage";
+            this.InstallerTabPage.Size = new System.Drawing.Size(376, 394);
+            this.InstallerTabPage.TabIndex = 4;
+            this.InstallerTabPage.Text = "Installer";
+            this.InstallerTabPage.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.RemoveFromConfigCheckBox);
+            this.groupBox1.Controls.Add(this.AddToConfigCheckBox);
+            this.groupBox1.Location = new System.Drawing.Point(6, 6);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(364, 67);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Configuration";
+            // 
+            // RemoveFromConfigCheckBox
+            // 
+            this.RemoveFromConfigCheckBox.AutoSize = true;
+            this.RemoveFromConfigCheckBox.Location = new System.Drawing.Point(6, 42);
+            this.RemoveFromConfigCheckBox.Name = "RemoveFromConfigCheckBox";
+            this.RemoveFromConfigCheckBox.Size = new System.Drawing.Size(230, 17);
+            this.RemoveFromConfigCheckBox.TabIndex = 5;
+            this.RemoveFromConfigCheckBox.Text = "Remove \"start {resource}\" after uninstalling";
+            this.RemoveFromConfigCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // AddToConfigCheckBox
+            // 
+            this.AddToConfigCheckBox.AutoSize = true;
+            this.AddToConfigCheckBox.Location = new System.Drawing.Point(6, 19);
+            this.AddToConfigCheckBox.Name = "AddToConfigCheckBox";
+            this.AddToConfigCheckBox.Size = new System.Drawing.Size(197, 17);
+            this.AddToConfigCheckBox.TabIndex = 4;
+            this.AddToConfigCheckBox.Text = "Add \"start {resource}\" after installing";
+            this.AddToConfigCheckBox.UseVisualStyleBackColor = true;
             // 
             // ScheduleTabPage
             // 
@@ -587,46 +688,15 @@
             this.ResetSettingsButton.UseVisualStyleBackColor = true;
             this.ResetSettingsButton.Click += new System.EventHandler(this.ResetSettingsButton_Click);
             // 
-            // InstallerTabPage
+            // WaitSaveButton
             // 
-            this.InstallerTabPage.Controls.Add(this.groupBox1);
-            this.InstallerTabPage.Location = new System.Drawing.Point(4, 22);
-            this.InstallerTabPage.Name = "InstallerTabPage";
-            this.InstallerTabPage.Size = new System.Drawing.Size(376, 394);
-            this.InstallerTabPage.TabIndex = 4;
-            this.InstallerTabPage.Text = "Installer";
-            this.InstallerTabPage.UseVisualStyleBackColor = true;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.RemoveFromConfigCheckBox);
-            this.groupBox1.Controls.Add(this.AddToConfigCheckBox);
-            this.groupBox1.Location = new System.Drawing.Point(6, 6);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(364, 67);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Configuration";
-            // 
-            // RemoveFromConfigCheckBox
-            // 
-            this.RemoveFromConfigCheckBox.AutoSize = true;
-            this.RemoveFromConfigCheckBox.Location = new System.Drawing.Point(6, 42);
-            this.RemoveFromConfigCheckBox.Name = "RemoveFromConfigCheckBox";
-            this.RemoveFromConfigCheckBox.Size = new System.Drawing.Size(230, 17);
-            this.RemoveFromConfigCheckBox.TabIndex = 5;
-            this.RemoveFromConfigCheckBox.Text = "Remove \"start {resource}\" after uninstalling";
-            this.RemoveFromConfigCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // AddToConfigCheckBox
-            // 
-            this.AddToConfigCheckBox.AutoSize = true;
-            this.AddToConfigCheckBox.Location = new System.Drawing.Point(6, 19);
-            this.AddToConfigCheckBox.Name = "AddToConfigCheckBox";
-            this.AddToConfigCheckBox.Size = new System.Drawing.Size(197, 17);
-            this.AddToConfigCheckBox.TabIndex = 4;
-            this.AddToConfigCheckBox.Text = "Add \"start {resource}\" after installing";
-            this.AddToConfigCheckBox.UseVisualStyleBackColor = true;
+            this.WaitSaveButton.Location = new System.Drawing.Point(282, 17);
+            this.WaitSaveButton.Name = "WaitSaveButton";
+            this.WaitSaveButton.Size = new System.Drawing.Size(75, 23);
+            this.WaitSaveButton.TabIndex = 5;
+            this.WaitSaveButton.Text = "Save";
+            this.WaitSaveButton.UseVisualStyleBackColor = true;
+            this.WaitSaveButton.Click += new System.EventHandler(this.WaitSaveButton_Click);
             // 
             // Configurator
             // 
@@ -647,6 +717,8 @@
             this.Load += new System.EventHandler(this.Config_Load);
             this.ConfigTabControl.ResumeLayout(false);
             this.BasicTabPage.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.SteamGroupBox.ResumeLayout(false);
             this.SteamGroupBox.PerformLayout();
             this.RuntimeGroupBox.ResumeLayout(false);
@@ -655,6 +727,9 @@
             this.FolderCreationGroupBox.PerformLayout();
             this.LicenseGroupBox.ResumeLayout(false);
             this.LicenseGroupBox.PerformLayout();
+            this.InstallerTabPage.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ScheduleTabPage.ResumeLayout(false);
             this.AutomatedRestartGroupBox.ResumeLayout(false);
             this.AutomatedRestartGroupBox.PerformLayout();
@@ -667,9 +742,6 @@
             this.ResourcesGroupBox.ResumeLayout(false);
             this.BuildsGroupBox.ResumeLayout(false);
             this.BuildsGroupBox.PerformLayout();
-            this.InstallerTabPage.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -724,5 +796,11 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.CheckBox RemoveFromConfigCheckBox;
         private System.Windows.Forms.CheckBox AddToConfigCheckBox;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.CheckBox KickCheckBox;
+        private System.Windows.Forms.CheckBox WaitCheckBox;
+        private System.Windows.Forms.ComboBox WaitComboBox;
+        private System.Windows.Forms.TextBox WaitTextBox;
+        private System.Windows.Forms.Button WaitSaveButton;
     }
 }
