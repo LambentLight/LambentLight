@@ -100,16 +100,18 @@
             // 
             // ConfigTabControl
             // 
+            this.ConfigTabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ConfigTabControl.Controls.Add(this.AuthTabPage);
             this.ConfigTabControl.Controls.Add(this.RuntimeTabPage);
             this.ConfigTabControl.Controls.Add(this.DataFolderTabPage);
             this.ConfigTabControl.Controls.Add(this.ScheduleTabPage);
             this.ConfigTabControl.Controls.Add(this.APITabPage);
-            this.ConfigTabControl.Dock = System.Windows.Forms.DockStyle.Top;
             this.ConfigTabControl.Location = new System.Drawing.Point(0, 0);
             this.ConfigTabControl.Name = "ConfigTabControl";
             this.ConfigTabControl.SelectedIndex = 0;
-            this.ConfigTabControl.Size = new System.Drawing.Size(384, 420);
+            this.ConfigTabControl.Size = new System.Drawing.Size(384, 276);
             this.ConfigTabControl.TabIndex = 0;
             // 
             // AuthTabPage
@@ -120,7 +122,7 @@
             this.AuthTabPage.Location = new System.Drawing.Point(4, 22);
             this.AuthTabPage.Name = "AuthTabPage";
             this.AuthTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.AuthTabPage.Size = new System.Drawing.Size(376, 394);
+            this.AuthTabPage.Size = new System.Drawing.Size(376, 250);
             this.AuthTabPage.TabIndex = 0;
             this.AuthTabPage.Text = "Authentication";
             this.AuthTabPage.UseVisualStyleBackColor = true;
@@ -245,7 +247,7 @@
             this.DataFolderTabPage.Controls.Add(this.InstallerGroupBox);
             this.DataFolderTabPage.Location = new System.Drawing.Point(4, 22);
             this.DataFolderTabPage.Name = "DataFolderTabPage";
-            this.DataFolderTabPage.Size = new System.Drawing.Size(376, 394);
+            this.DataFolderTabPage.Size = new System.Drawing.Size(376, 250);
             this.DataFolderTabPage.TabIndex = 4;
             this.DataFolderTabPage.Text = "Data Folders";
             this.DataFolderTabPage.UseVisualStyleBackColor = true;
@@ -289,7 +291,7 @@
             this.ScheduleTabPage.Location = new System.Drawing.Point(4, 22);
             this.ScheduleTabPage.Name = "ScheduleTabPage";
             this.ScheduleTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.ScheduleTabPage.Size = new System.Drawing.Size(376, 394);
+            this.ScheduleTabPage.Size = new System.Drawing.Size(376, 250);
             this.ScheduleTabPage.TabIndex = 2;
             this.ScheduleTabPage.Text = "Schedule";
             this.ScheduleTabPage.UseVisualStyleBackColor = true;
@@ -376,7 +378,7 @@
             this.RuntimeTabPage.Location = new System.Drawing.Point(4, 22);
             this.RuntimeTabPage.Name = "RuntimeTabPage";
             this.RuntimeTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.RuntimeTabPage.Size = new System.Drawing.Size(376, 394);
+            this.RuntimeTabPage.Size = new System.Drawing.Size(376, 250);
             this.RuntimeTabPage.TabIndex = 3;
             this.RuntimeTabPage.Text = "Runtime";
             this.RuntimeTabPage.UseVisualStyleBackColor = true;
@@ -388,26 +390,30 @@
             this.APITabPage.Location = new System.Drawing.Point(4, 22);
             this.APITabPage.Name = "APITabPage";
             this.APITabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.APITabPage.Size = new System.Drawing.Size(376, 394);
+            this.APITabPage.Size = new System.Drawing.Size(376, 250);
             this.APITabPage.TabIndex = 1;
             this.APITabPage.Text = "APIs";
             this.APITabPage.UseVisualStyleBackColor = true;
             // 
             // ResourcesGroupBox
             // 
+            this.ResourcesGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ResourcesGroupBox.Controls.Add(this.AddButton);
             this.ResourcesGroupBox.Controls.Add(this.RemoveButton);
             this.ResourcesGroupBox.Controls.Add(this.ResourcesListBox);
             this.ResourcesGroupBox.Location = new System.Drawing.Point(6, 83);
             this.ResourcesGroupBox.Name = "ResourcesGroupBox";
-            this.ResourcesGroupBox.Size = new System.Drawing.Size(364, 305);
+            this.ResourcesGroupBox.Size = new System.Drawing.Size(364, 161);
             this.ResourcesGroupBox.TabIndex = 3;
             this.ResourcesGroupBox.TabStop = false;
             this.ResourcesGroupBox.Text = "Resources";
             // 
             // AddButton
             // 
-            this.AddButton.Location = new System.Drawing.Point(202, 276);
+            this.AddButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.AddButton.Location = new System.Drawing.Point(202, 132);
             this.AddButton.Name = "AddButton";
             this.AddButton.Size = new System.Drawing.Size(75, 23);
             this.AddButton.TabIndex = 2;
@@ -417,7 +423,8 @@
             // 
             // RemoveButton
             // 
-            this.RemoveButton.Location = new System.Drawing.Point(283, 276);
+            this.RemoveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.RemoveButton.Location = new System.Drawing.Point(283, 132);
             this.RemoveButton.Name = "RemoveButton";
             this.RemoveButton.Size = new System.Drawing.Size(75, 23);
             this.RemoveButton.TabIndex = 1;
@@ -427,10 +434,13 @@
             // 
             // ResourcesListBox
             // 
+            this.ResourcesListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ResourcesListBox.FormattingEnabled = true;
             this.ResourcesListBox.Location = new System.Drawing.Point(6, 19);
             this.ResourcesListBox.Name = "ResourcesListBox";
-            this.ResourcesListBox.Size = new System.Drawing.Size(352, 251);
+            this.ResourcesListBox.Size = new System.Drawing.Size(352, 108);
             this.ResourcesListBox.TabIndex = 0;
             // 
             // BuildsGroupBox
@@ -468,7 +478,8 @@
             // 
             // CloseButton
             // 
-            this.CloseButton.Location = new System.Drawing.Point(297, 426);
+            this.CloseButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.CloseButton.Location = new System.Drawing.Point(297, 282);
             this.CloseButton.Name = "CloseButton";
             this.CloseButton.Size = new System.Drawing.Size(75, 23);
             this.CloseButton.TabIndex = 1;
@@ -480,7 +491,7 @@
             // 
             this.ResetSettingsButton.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ResetSettingsButton.Location = new System.Drawing.Point(12, 426);
+            this.ResetSettingsButton.Location = new System.Drawing.Point(12, 282);
             this.ResetSettingsButton.Name = "ResetSettingsButton";
             this.ResetSettingsButton.Size = new System.Drawing.Size(279, 23);
             this.ResetSettingsButton.TabIndex = 6;
@@ -667,7 +678,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(384, 461);
+            this.ClientSize = new System.Drawing.Size(384, 317);
             this.Controls.Add(this.ResetSettingsButton);
             this.Controls.Add(this.CloseButton);
             this.Controls.Add(this.ConfigTabControl);
