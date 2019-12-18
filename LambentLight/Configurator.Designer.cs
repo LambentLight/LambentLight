@@ -40,8 +40,6 @@
             this.ClearCacheCheckBox = new System.Windows.Forms.CheckBox();
             this.AutoRestartCheckBox = new System.Windows.Forms.CheckBox();
             this.FolderCreationGroupBox = new System.Windows.Forms.GroupBox();
-            this.RemoveFromConfigCheckBox = new System.Windows.Forms.CheckBox();
-            this.AddToConfigCheckBox = new System.Windows.Forms.CheckBox();
             this.CreateConfigCheckBox = new System.Windows.Forms.CheckBox();
             this.DownloadScriptsCheckBox = new System.Windows.Forms.CheckBox();
             this.LicenseGroupBox = new System.Windows.Forms.GroupBox();
@@ -57,6 +55,14 @@
             this.RestartAtCheckBox = new System.Windows.Forms.CheckBox();
             this.RestartEveryTextBox = new System.Windows.Forms.TextBox();
             this.RestartEveryCheckBox = new System.Windows.Forms.CheckBox();
+            this.MySQLTabPage = new System.Windows.Forms.TabPage();
+            this.MySQLGroupBox = new System.Windows.Forms.GroupBox();
+            this.ManuallyCheckBox = new System.Windows.Forms.CheckBox();
+            this.ApplyCheckBox = new System.Windows.Forms.CheckBox();
+            this.ConnectionGroupBox = new System.Windows.Forms.GroupBox();
+            this.ConnectionCheckBox = new System.Windows.Forms.CheckBox();
+            this.ConnectionButton = new System.Windows.Forms.Button();
+            this.ConnectionTextBox = new System.Windows.Forms.TextBox();
             this.APITabPage = new System.Windows.Forms.TabPage();
             this.ResourcesGroupBox = new System.Windows.Forms.GroupBox();
             this.AddButton = new System.Windows.Forms.Button();
@@ -67,14 +73,10 @@
             this.BuildsTextBox = new System.Windows.Forms.TextBox();
             this.CloseButton = new System.Windows.Forms.Button();
             this.ResetSettingsButton = new System.Windows.Forms.Button();
-            this.MySQLTabPage = new System.Windows.Forms.TabPage();
-            this.ConnectionGroupBox = new System.Windows.Forms.GroupBox();
-            this.ConnectionTextBox = new System.Windows.Forms.TextBox();
-            this.ConnectionButton = new System.Windows.Forms.Button();
-            this.MySQLGroupBox = new System.Windows.Forms.GroupBox();
-            this.ApplyCheckBox = new System.Windows.Forms.CheckBox();
-            this.ManuallyCheckBox = new System.Windows.Forms.CheckBox();
-            this.ConnectionCheckBox = new System.Windows.Forms.CheckBox();
+            this.InstallerTabPage = new System.Windows.Forms.TabPage();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.RemoveFromConfigCheckBox = new System.Windows.Forms.CheckBox();
+            this.AddToConfigCheckBox = new System.Windows.Forms.CheckBox();
             this.ConfigTabControl.SuspendLayout();
             this.BasicTabPage.SuspendLayout();
             this.SteamGroupBox.SuspendLayout();
@@ -83,17 +85,20 @@
             this.LicenseGroupBox.SuspendLayout();
             this.ScheduleTabPage.SuspendLayout();
             this.AutomatedRestartGroupBox.SuspendLayout();
+            this.MySQLTabPage.SuspendLayout();
+            this.MySQLGroupBox.SuspendLayout();
+            this.ConnectionGroupBox.SuspendLayout();
             this.APITabPage.SuspendLayout();
             this.ResourcesGroupBox.SuspendLayout();
             this.BuildsGroupBox.SuspendLayout();
-            this.MySQLTabPage.SuspendLayout();
-            this.ConnectionGroupBox.SuspendLayout();
-            this.MySQLGroupBox.SuspendLayout();
+            this.InstallerTabPage.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // ConfigTabControl
             // 
             this.ConfigTabControl.Controls.Add(this.BasicTabPage);
+            this.ConfigTabControl.Controls.Add(this.InstallerTabPage);
             this.ConfigTabControl.Controls.Add(this.ScheduleTabPage);
             this.ConfigTabControl.Controls.Add(this.MySQLTabPage);
             this.ConfigTabControl.Controls.Add(this.APITabPage);
@@ -180,7 +185,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.RuntimeGroupBox.Controls.Add(this.ClearCacheCheckBox);
             this.RuntimeGroupBox.Controls.Add(this.AutoRestartCheckBox);
-            this.RuntimeGroupBox.Location = new System.Drawing.Point(8, 287);
+            this.RuntimeGroupBox.Location = new System.Drawing.Point(6, 239);
             this.RuntimeGroupBox.Name = "RuntimeGroupBox";
             this.RuntimeGroupBox.Size = new System.Drawing.Size(364, 66);
             this.RuntimeGroupBox.TabIndex = 4;
@@ -211,47 +216,23 @@
             // 
             // FolderCreationGroupBox
             // 
-            this.FolderCreationGroupBox.Controls.Add(this.RemoveFromConfigCheckBox);
-            this.FolderCreationGroupBox.Controls.Add(this.AddToConfigCheckBox);
             this.FolderCreationGroupBox.Controls.Add(this.CreateConfigCheckBox);
             this.FolderCreationGroupBox.Controls.Add(this.DownloadScriptsCheckBox);
             this.FolderCreationGroupBox.Location = new System.Drawing.Point(6, 167);
             this.FolderCreationGroupBox.Name = "FolderCreationGroupBox";
-            this.FolderCreationGroupBox.Size = new System.Drawing.Size(364, 114);
+            this.FolderCreationGroupBox.Size = new System.Drawing.Size(364, 66);
             this.FolderCreationGroupBox.TabIndex = 3;
             this.FolderCreationGroupBox.TabStop = false;
-            this.FolderCreationGroupBox.Text = "Data Folders and Resources";
-            // 
-            // RemoveFromConfigCheckBox
-            // 
-            this.RemoveFromConfigCheckBox.AutoSize = true;
-            this.RemoveFromConfigCheckBox.Location = new System.Drawing.Point(6, 88);
-            this.RemoveFromConfigCheckBox.Name = "RemoveFromConfigCheckBox";
-            this.RemoveFromConfigCheckBox.Size = new System.Drawing.Size(324, 17);
-            this.RemoveFromConfigCheckBox.TabIndex = 3;
-            this.RemoveFromConfigCheckBox.Text = "After uninstalling the Resource, remove it from the configuration";
-            this.RemoveFromConfigCheckBox.UseVisualStyleBackColor = true;
-            this.RemoveFromConfigCheckBox.CheckedChanged += new System.EventHandler(this.RemoveFromConfigCheckBox_CheckedChanged);
-            // 
-            // AddToConfigCheckBox
-            // 
-            this.AddToConfigCheckBox.AutoSize = true;
-            this.AddToConfigCheckBox.Location = new System.Drawing.Point(6, 65);
-            this.AddToConfigCheckBox.Name = "AddToConfigCheckBox";
-            this.AddToConfigCheckBox.Size = new System.Drawing.Size(319, 17);
-            this.AddToConfigCheckBox.TabIndex = 2;
-            this.AddToConfigCheckBox.Text = "Set the Installed Resource to auto start in the configuration file";
-            this.AddToConfigCheckBox.UseVisualStyleBackColor = true;
-            this.AddToConfigCheckBox.CheckedChanged += new System.EventHandler(this.AddToConfigCheckBox_CheckedChanged);
+            this.FolderCreationGroupBox.Text = "Data Folder Creator";
             // 
             // CreateConfigCheckBox
             // 
             this.CreateConfigCheckBox.AutoSize = true;
             this.CreateConfigCheckBox.Location = new System.Drawing.Point(6, 42);
             this.CreateConfigCheckBox.Name = "CreateConfigCheckBox";
-            this.CreateConfigCheckBox.Size = new System.Drawing.Size(276, 17);
+            this.CreateConfigCheckBox.Size = new System.Drawing.Size(246, 17);
             this.CreateConfigCheckBox.TabIndex = 1;
-            this.CreateConfigCheckBox.Text = "Generate Configuration after creating the Data Folder";
+            this.CreateConfigCheckBox.Text = "Generate configuration after creating the folder";
             this.CreateConfigCheckBox.UseVisualStyleBackColor = true;
             this.CreateConfigCheckBox.CheckedChanged += new System.EventHandler(this.CreateConfigCheckBox_CheckedChanged);
             // 
@@ -260,9 +241,9 @@
             this.DownloadScriptsCheckBox.AutoSize = true;
             this.DownloadScriptsCheckBox.Location = new System.Drawing.Point(6, 19);
             this.DownloadScriptsCheckBox.Name = "DownloadScriptsCheckBox";
-            this.DownloadScriptsCheckBox.Size = new System.Drawing.Size(238, 17);
+            this.DownloadScriptsCheckBox.Size = new System.Drawing.Size(243, 17);
             this.DownloadScriptsCheckBox.TabIndex = 0;
-            this.DownloadScriptsCheckBox.Text = "Download Base Scripts from the FiveM Repo";
+            this.DownloadScriptsCheckBox.Text = "Download required scripts for the server to run";
             this.DownloadScriptsCheckBox.UseVisualStyleBackColor = true;
             this.DownloadScriptsCheckBox.CheckedChanged += new System.EventHandler(this.DownloadScriptsCheckBox_CheckedChanged);
             // 
@@ -411,6 +392,94 @@
             this.RestartEveryCheckBox.Text = "Restart every";
             this.RestartEveryCheckBox.UseVisualStyleBackColor = true;
             // 
+            // MySQLTabPage
+            // 
+            this.MySQLTabPage.Controls.Add(this.MySQLGroupBox);
+            this.MySQLTabPage.Controls.Add(this.ConnectionGroupBox);
+            this.MySQLTabPage.Location = new System.Drawing.Point(4, 22);
+            this.MySQLTabPage.Name = "MySQLTabPage";
+            this.MySQLTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.MySQLTabPage.Size = new System.Drawing.Size(376, 394);
+            this.MySQLTabPage.TabIndex = 3;
+            this.MySQLTabPage.Text = "MySQL";
+            this.MySQLTabPage.UseVisualStyleBackColor = true;
+            // 
+            // MySQLGroupBox
+            // 
+            this.MySQLGroupBox.Controls.Add(this.ManuallyCheckBox);
+            this.MySQLGroupBox.Controls.Add(this.ApplyCheckBox);
+            this.MySQLGroupBox.Location = new System.Drawing.Point(6, 87);
+            this.MySQLGroupBox.Name = "MySQLGroupBox";
+            this.MySQLGroupBox.Size = new System.Drawing.Size(364, 69);
+            this.MySQLGroupBox.TabIndex = 1;
+            this.MySQLGroupBox.TabStop = false;
+            this.MySQLGroupBox.Text = "MySQL Settings";
+            // 
+            // ManuallyCheckBox
+            // 
+            this.ManuallyCheckBox.AutoSize = true;
+            this.ManuallyCheckBox.Location = new System.Drawing.Point(6, 42);
+            this.ManuallyCheckBox.Name = "ManuallyCheckBox";
+            this.ManuallyCheckBox.Size = new System.Drawing.Size(174, 17);
+            this.ManuallyCheckBox.TabIndex = 1;
+            this.ManuallyCheckBox.Text = "Manually approve every .sql file";
+            this.ManuallyCheckBox.UseVisualStyleBackColor = true;
+            this.ManuallyCheckBox.CheckedChanged += new System.EventHandler(this.ManuallyCheckBox_CheckedChanged);
+            // 
+            // ApplyCheckBox
+            // 
+            this.ApplyCheckBox.AutoSize = true;
+            this.ApplyCheckBox.Location = new System.Drawing.Point(6, 19);
+            this.ApplyCheckBox.Name = "ApplyCheckBox";
+            this.ApplyCheckBox.Size = new System.Drawing.Size(341, 17);
+            this.ApplyCheckBox.TabIndex = 0;
+            this.ApplyCheckBox.Text = "Apply .sql files into the MySQL database when installing Resources";
+            this.ApplyCheckBox.UseVisualStyleBackColor = true;
+            this.ApplyCheckBox.CheckedChanged += new System.EventHandler(this.ApplyCheckBox_CheckedChanged);
+            // 
+            // ConnectionGroupBox
+            // 
+            this.ConnectionGroupBox.Controls.Add(this.ConnectionCheckBox);
+            this.ConnectionGroupBox.Controls.Add(this.ConnectionButton);
+            this.ConnectionGroupBox.Controls.Add(this.ConnectionTextBox);
+            this.ConnectionGroupBox.Location = new System.Drawing.Point(6, 6);
+            this.ConnectionGroupBox.Name = "ConnectionGroupBox";
+            this.ConnectionGroupBox.Size = new System.Drawing.Size(364, 75);
+            this.ConnectionGroupBox.TabIndex = 0;
+            this.ConnectionGroupBox.TabStop = false;
+            this.ConnectionGroupBox.Text = "Connection URL";
+            // 
+            // ConnectionCheckBox
+            // 
+            this.ConnectionCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.ConnectionCheckBox.AutoSize = true;
+            this.ConnectionCheckBox.Location = new System.Drawing.Point(6, 49);
+            this.ConnectionCheckBox.Name = "ConnectionCheckBox";
+            this.ConnectionCheckBox.Size = new System.Drawing.Size(111, 17);
+            this.ConnectionCheckBox.TabIndex = 2;
+            this.ConnectionCheckBox.Text = "Make URL Visible";
+            this.ConnectionCheckBox.UseVisualStyleBackColor = true;
+            this.ConnectionCheckBox.CheckedChanged += new System.EventHandler(this.ConnectionCheckBox_CheckedChanged);
+            // 
+            // ConnectionButton
+            // 
+            this.ConnectionButton.Enabled = false;
+            this.ConnectionButton.Location = new System.Drawing.Point(283, 45);
+            this.ConnectionButton.Name = "ConnectionButton";
+            this.ConnectionButton.Size = new System.Drawing.Size(75, 23);
+            this.ConnectionButton.TabIndex = 1;
+            this.ConnectionButton.Text = "Save";
+            this.ConnectionButton.UseVisualStyleBackColor = true;
+            this.ConnectionButton.Click += new System.EventHandler(this.ConnectionButton_Click);
+            // 
+            // ConnectionTextBox
+            // 
+            this.ConnectionTextBox.Enabled = false;
+            this.ConnectionTextBox.Location = new System.Drawing.Point(6, 19);
+            this.ConnectionTextBox.Name = "ConnectionTextBox";
+            this.ConnectionTextBox.Size = new System.Drawing.Size(352, 20);
+            this.ConnectionTextBox.TabIndex = 0;
+            // 
             // APITabPage
             // 
             this.APITabPage.Controls.Add(this.ResourcesGroupBox);
@@ -518,93 +587,46 @@
             this.ResetSettingsButton.UseVisualStyleBackColor = true;
             this.ResetSettingsButton.Click += new System.EventHandler(this.ResetSettingsButton_Click);
             // 
-            // MySQLTabPage
+            // InstallerTabPage
             // 
-            this.MySQLTabPage.Controls.Add(this.MySQLGroupBox);
-            this.MySQLTabPage.Controls.Add(this.ConnectionGroupBox);
-            this.MySQLTabPage.Location = new System.Drawing.Point(4, 22);
-            this.MySQLTabPage.Name = "MySQLTabPage";
-            this.MySQLTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.MySQLTabPage.Size = new System.Drawing.Size(376, 394);
-            this.MySQLTabPage.TabIndex = 3;
-            this.MySQLTabPage.Text = "MySQL";
-            this.MySQLTabPage.UseVisualStyleBackColor = true;
+            this.InstallerTabPage.Controls.Add(this.groupBox1);
+            this.InstallerTabPage.Location = new System.Drawing.Point(4, 22);
+            this.InstallerTabPage.Name = "InstallerTabPage";
+            this.InstallerTabPage.Size = new System.Drawing.Size(376, 394);
+            this.InstallerTabPage.TabIndex = 4;
+            this.InstallerTabPage.Text = "Installer";
+            this.InstallerTabPage.UseVisualStyleBackColor = true;
             // 
-            // ConnectionGroupBox
+            // groupBox1
             // 
-            this.ConnectionGroupBox.Controls.Add(this.ConnectionCheckBox);
-            this.ConnectionGroupBox.Controls.Add(this.ConnectionButton);
-            this.ConnectionGroupBox.Controls.Add(this.ConnectionTextBox);
-            this.ConnectionGroupBox.Location = new System.Drawing.Point(6, 6);
-            this.ConnectionGroupBox.Name = "ConnectionGroupBox";
-            this.ConnectionGroupBox.Size = new System.Drawing.Size(364, 75);
-            this.ConnectionGroupBox.TabIndex = 0;
-            this.ConnectionGroupBox.TabStop = false;
-            this.ConnectionGroupBox.Text = "Connection URL";
+            this.groupBox1.Controls.Add(this.RemoveFromConfigCheckBox);
+            this.groupBox1.Controls.Add(this.AddToConfigCheckBox);
+            this.groupBox1.Location = new System.Drawing.Point(6, 6);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(364, 67);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Configuration";
             // 
-            // ConnectionTextBox
+            // RemoveFromConfigCheckBox
             // 
-            this.ConnectionTextBox.Enabled = false;
-            this.ConnectionTextBox.Location = new System.Drawing.Point(6, 19);
-            this.ConnectionTextBox.Name = "ConnectionTextBox";
-            this.ConnectionTextBox.Size = new System.Drawing.Size(352, 20);
-            this.ConnectionTextBox.TabIndex = 0;
+            this.RemoveFromConfigCheckBox.AutoSize = true;
+            this.RemoveFromConfigCheckBox.Location = new System.Drawing.Point(6, 42);
+            this.RemoveFromConfigCheckBox.Name = "RemoveFromConfigCheckBox";
+            this.RemoveFromConfigCheckBox.Size = new System.Drawing.Size(230, 17);
+            this.RemoveFromConfigCheckBox.TabIndex = 5;
+            this.RemoveFromConfigCheckBox.Text = "Remove \"start {resource}\" after uninstalling";
+            this.RemoveFromConfigCheckBox.UseVisualStyleBackColor = true;
             // 
-            // ConnectionButton
+            // AddToConfigCheckBox
             // 
-            this.ConnectionButton.Enabled = false;
-            this.ConnectionButton.Location = new System.Drawing.Point(283, 45);
-            this.ConnectionButton.Name = "ConnectionButton";
-            this.ConnectionButton.Size = new System.Drawing.Size(75, 23);
-            this.ConnectionButton.TabIndex = 1;
-            this.ConnectionButton.Text = "Save";
-            this.ConnectionButton.UseVisualStyleBackColor = true;
-            this.ConnectionButton.Click += new System.EventHandler(this.ConnectionButton_Click);
-            // 
-            // MySQLGroupBox
-            // 
-            this.MySQLGroupBox.Controls.Add(this.ManuallyCheckBox);
-            this.MySQLGroupBox.Controls.Add(this.ApplyCheckBox);
-            this.MySQLGroupBox.Location = new System.Drawing.Point(6, 87);
-            this.MySQLGroupBox.Name = "MySQLGroupBox";
-            this.MySQLGroupBox.Size = new System.Drawing.Size(364, 69);
-            this.MySQLGroupBox.TabIndex = 1;
-            this.MySQLGroupBox.TabStop = false;
-            this.MySQLGroupBox.Text = "MySQL Settings";
-            // 
-            // ApplyCheckBox
-            // 
-            this.ApplyCheckBox.AutoSize = true;
-            this.ApplyCheckBox.Location = new System.Drawing.Point(6, 19);
-            this.ApplyCheckBox.Name = "ApplyCheckBox";
-            this.ApplyCheckBox.Size = new System.Drawing.Size(341, 17);
-            this.ApplyCheckBox.TabIndex = 0;
-            this.ApplyCheckBox.Text = "Apply .sql files into the MySQL database when installing Resources";
-            this.ApplyCheckBox.UseVisualStyleBackColor = true;
-            this.ApplyCheckBox.CheckedChanged += new System.EventHandler(this.ApplyCheckBox_CheckedChanged);
-            // 
-            // ManuallyCheckBox
-            // 
-            this.ManuallyCheckBox.AutoSize = true;
-            this.ManuallyCheckBox.Location = new System.Drawing.Point(6, 42);
-            this.ManuallyCheckBox.Name = "ManuallyCheckBox";
-            this.ManuallyCheckBox.Size = new System.Drawing.Size(174, 17);
-            this.ManuallyCheckBox.TabIndex = 1;
-            this.ManuallyCheckBox.Text = "Manually approve every .sql file";
-            this.ManuallyCheckBox.UseVisualStyleBackColor = true;
-            this.ManuallyCheckBox.CheckedChanged += new System.EventHandler(this.ManuallyCheckBox_CheckedChanged);
-            // 
-            // ConnectionCheckBox
-            // 
-            this.ConnectionCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.ConnectionCheckBox.AutoSize = true;
-            this.ConnectionCheckBox.Location = new System.Drawing.Point(6, 49);
-            this.ConnectionCheckBox.Name = "ConnectionCheckBox";
-            this.ConnectionCheckBox.Size = new System.Drawing.Size(111, 17);
-            this.ConnectionCheckBox.TabIndex = 2;
-            this.ConnectionCheckBox.Text = "Make URL Visible";
-            this.ConnectionCheckBox.UseVisualStyleBackColor = true;
-            this.ConnectionCheckBox.CheckedChanged += new System.EventHandler(this.ConnectionCheckBox_CheckedChanged);
+            this.AddToConfigCheckBox.AutoSize = true;
+            this.AddToConfigCheckBox.Location = new System.Drawing.Point(6, 19);
+            this.AddToConfigCheckBox.Name = "AddToConfigCheckBox";
+            this.AddToConfigCheckBox.Size = new System.Drawing.Size(197, 17);
+            this.AddToConfigCheckBox.TabIndex = 4;
+            this.AddToConfigCheckBox.Text = "Add \"start {resource}\" after installing";
+            this.AddToConfigCheckBox.UseVisualStyleBackColor = true;
             // 
             // Configurator
             // 
@@ -636,15 +658,18 @@
             this.ScheduleTabPage.ResumeLayout(false);
             this.AutomatedRestartGroupBox.ResumeLayout(false);
             this.AutomatedRestartGroupBox.PerformLayout();
+            this.MySQLTabPage.ResumeLayout(false);
+            this.MySQLGroupBox.ResumeLayout(false);
+            this.MySQLGroupBox.PerformLayout();
+            this.ConnectionGroupBox.ResumeLayout(false);
+            this.ConnectionGroupBox.PerformLayout();
             this.APITabPage.ResumeLayout(false);
             this.ResourcesGroupBox.ResumeLayout(false);
             this.BuildsGroupBox.ResumeLayout(false);
             this.BuildsGroupBox.PerformLayout();
-            this.MySQLTabPage.ResumeLayout(false);
-            this.ConnectionGroupBox.ResumeLayout(false);
-            this.ConnectionGroupBox.PerformLayout();
-            this.MySQLGroupBox.ResumeLayout(false);
-            this.MySQLGroupBox.PerformLayout();
+            this.InstallerTabPage.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -664,8 +689,6 @@
         private System.Windows.Forms.Button BuildsSaveButton;
         private System.Windows.Forms.TextBox BuildsTextBox;
         private System.Windows.Forms.GroupBox FolderCreationGroupBox;
-        private System.Windows.Forms.CheckBox RemoveFromConfigCheckBox;
-        private System.Windows.Forms.CheckBox AddToConfigCheckBox;
         private System.Windows.Forms.CheckBox CreateConfigCheckBox;
         private System.Windows.Forms.CheckBox DownloadScriptsCheckBox;
         private System.Windows.Forms.GroupBox RuntimeGroupBox;
@@ -697,5 +720,9 @@
         private System.Windows.Forms.CheckBox ApplyCheckBox;
         private System.Windows.Forms.CheckBox ManuallyCheckBox;
         private System.Windows.Forms.CheckBox ConnectionCheckBox;
+        private System.Windows.Forms.TabPage InstallerTabPage;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.CheckBox RemoveFromConfigCheckBox;
+        private System.Windows.Forms.CheckBox AddToConfigCheckBox;
     }
 }
