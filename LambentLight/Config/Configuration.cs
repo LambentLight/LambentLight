@@ -14,6 +14,15 @@ namespace LambentLight.Config
         GrandTheftAutoV = 0,
         RedDeadRedemption2 = 1
     }
+    /// <summary>
+    /// Different time things.
+    /// </summary>
+    public enum Time
+    {
+        Hours = 0,
+        Minutes = 1,
+        Seconds = 2
+    }
 
     /// <summary>
     /// Object used for the configuration of LambentLight.
@@ -37,6 +46,14 @@ namespace LambentLight.Config
         public bool RestartOnCrash { get; set; } = true;
         [JsonProperty("clear_cache")]
         public bool ClearCache { get; set; } = false;
+        [JsonProperty("wait")]
+        public bool Wait { get; set; } = true;
+        [JsonProperty("wait_meas")]
+        public Time WaitMeasurement { get; set; } = Time.Seconds;
+        [JsonProperty("wait_time")]
+        public int WaitTime { get; set; } = 60;
+        [JsonProperty("kick_everyone")]
+        public bool KickEveryone { get; set; } = true;
         [JsonProperty("repos")]
         public List<string> Repos { get; set; } = new List<string>()
         {
