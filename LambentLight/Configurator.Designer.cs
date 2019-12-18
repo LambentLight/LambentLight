@@ -44,16 +44,13 @@
             this.RuntimeGroupBox = new System.Windows.Forms.GroupBox();
             this.ClearCacheCheckBox = new System.Windows.Forms.CheckBox();
             this.AutoRestartCheckBox = new System.Windows.Forms.CheckBox();
-            this.FolderCreationGroupBox = new System.Windows.Forms.GroupBox();
-            this.CreateConfigCheckBox = new System.Windows.Forms.CheckBox();
-            this.DownloadScriptsCheckBox = new System.Windows.Forms.CheckBox();
             this.LicenseGroupBox = new System.Windows.Forms.GroupBox();
             this.LicenseGenerateButton = new System.Windows.Forms.Button();
             this.LicenseSaveButton = new System.Windows.Forms.Button();
             this.LicenseVisibleCheckBox = new System.Windows.Forms.CheckBox();
             this.LicenseTextBox = new System.Windows.Forms.TextBox();
-            this.InstallerTabPage = new System.Windows.Forms.TabPage();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.DataFolderTabPage = new System.Windows.Forms.TabPage();
+            this.InstallerGroupBox = new System.Windows.Forms.GroupBox();
             this.RemoveFromConfigCheckBox = new System.Windows.Forms.CheckBox();
             this.AddToConfigCheckBox = new System.Windows.Forms.CheckBox();
             this.ScheduleTabPage = new System.Windows.Forms.TabPage();
@@ -83,15 +80,17 @@
             this.CloseButton = new System.Windows.Forms.Button();
             this.ResetSettingsButton = new System.Windows.Forms.Button();
             this.WaitSaveButton = new System.Windows.Forms.Button();
+            this.CreatorGroupBox = new System.Windows.Forms.GroupBox();
+            this.CreateConfigCheckBox = new System.Windows.Forms.CheckBox();
+            this.DownloadScriptsCheckBox = new System.Windows.Forms.CheckBox();
             this.ConfigTabControl.SuspendLayout();
             this.BasicTabPage.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SteamGroupBox.SuspendLayout();
             this.RuntimeGroupBox.SuspendLayout();
-            this.FolderCreationGroupBox.SuspendLayout();
             this.LicenseGroupBox.SuspendLayout();
-            this.InstallerTabPage.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.DataFolderTabPage.SuspendLayout();
+            this.InstallerGroupBox.SuspendLayout();
             this.ScheduleTabPage.SuspendLayout();
             this.AutomatedRestartGroupBox.SuspendLayout();
             this.MySQLTabPage.SuspendLayout();
@@ -100,12 +99,13 @@
             this.APITabPage.SuspendLayout();
             this.ResourcesGroupBox.SuspendLayout();
             this.BuildsGroupBox.SuspendLayout();
+            this.CreatorGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // ConfigTabControl
             // 
             this.ConfigTabControl.Controls.Add(this.BasicTabPage);
-            this.ConfigTabControl.Controls.Add(this.InstallerTabPage);
+            this.ConfigTabControl.Controls.Add(this.DataFolderTabPage);
             this.ConfigTabControl.Controls.Add(this.ScheduleTabPage);
             this.ConfigTabControl.Controls.Add(this.MySQLTabPage);
             this.ConfigTabControl.Controls.Add(this.APITabPage);
@@ -121,7 +121,6 @@
             this.BasicTabPage.Controls.Add(this.groupBox2);
             this.BasicTabPage.Controls.Add(this.SteamGroupBox);
             this.BasicTabPage.Controls.Add(this.RuntimeGroupBox);
-            this.BasicTabPage.Controls.Add(this.FolderCreationGroupBox);
             this.BasicTabPage.Controls.Add(this.LicenseGroupBox);
             this.BasicTabPage.Location = new System.Drawing.Point(4, 22);
             this.BasicTabPage.Name = "BasicTabPage";
@@ -274,39 +273,6 @@
             this.AutoRestartCheckBox.UseVisualStyleBackColor = true;
             this.AutoRestartCheckBox.CheckedChanged += new System.EventHandler(this.AutoRestartCheckBox_CheckedChanged);
             // 
-            // FolderCreationGroupBox
-            // 
-            this.FolderCreationGroupBox.Controls.Add(this.CreateConfigCheckBox);
-            this.FolderCreationGroupBox.Controls.Add(this.DownloadScriptsCheckBox);
-            this.FolderCreationGroupBox.Location = new System.Drawing.Point(6, 167);
-            this.FolderCreationGroupBox.Name = "FolderCreationGroupBox";
-            this.FolderCreationGroupBox.Size = new System.Drawing.Size(364, 66);
-            this.FolderCreationGroupBox.TabIndex = 3;
-            this.FolderCreationGroupBox.TabStop = false;
-            this.FolderCreationGroupBox.Text = "Data Folder Creator";
-            // 
-            // CreateConfigCheckBox
-            // 
-            this.CreateConfigCheckBox.AutoSize = true;
-            this.CreateConfigCheckBox.Location = new System.Drawing.Point(6, 42);
-            this.CreateConfigCheckBox.Name = "CreateConfigCheckBox";
-            this.CreateConfigCheckBox.Size = new System.Drawing.Size(246, 17);
-            this.CreateConfigCheckBox.TabIndex = 1;
-            this.CreateConfigCheckBox.Text = "Generate configuration after creating the folder";
-            this.CreateConfigCheckBox.UseVisualStyleBackColor = true;
-            this.CreateConfigCheckBox.CheckedChanged += new System.EventHandler(this.CreateConfigCheckBox_CheckedChanged);
-            // 
-            // DownloadScriptsCheckBox
-            // 
-            this.DownloadScriptsCheckBox.AutoSize = true;
-            this.DownloadScriptsCheckBox.Location = new System.Drawing.Point(6, 19);
-            this.DownloadScriptsCheckBox.Name = "DownloadScriptsCheckBox";
-            this.DownloadScriptsCheckBox.Size = new System.Drawing.Size(243, 17);
-            this.DownloadScriptsCheckBox.TabIndex = 0;
-            this.DownloadScriptsCheckBox.Text = "Download required scripts for the server to run";
-            this.DownloadScriptsCheckBox.UseVisualStyleBackColor = true;
-            this.DownloadScriptsCheckBox.CheckedChanged += new System.EventHandler(this.DownloadScriptsCheckBox_CheckedChanged);
-            // 
             // LicenseGroupBox
             // 
             this.LicenseGroupBox.Controls.Add(this.LicenseGenerateButton);
@@ -365,26 +331,27 @@
             this.LicenseTextBox.Size = new System.Drawing.Size(352, 20);
             this.LicenseTextBox.TabIndex = 0;
             // 
-            // InstallerTabPage
+            // DataFolderTabPage
             // 
-            this.InstallerTabPage.Controls.Add(this.groupBox1);
-            this.InstallerTabPage.Location = new System.Drawing.Point(4, 22);
-            this.InstallerTabPage.Name = "InstallerTabPage";
-            this.InstallerTabPage.Size = new System.Drawing.Size(376, 394);
-            this.InstallerTabPage.TabIndex = 4;
-            this.InstallerTabPage.Text = "Installer";
-            this.InstallerTabPage.UseVisualStyleBackColor = true;
+            this.DataFolderTabPage.Controls.Add(this.CreatorGroupBox);
+            this.DataFolderTabPage.Controls.Add(this.InstallerGroupBox);
+            this.DataFolderTabPage.Location = new System.Drawing.Point(4, 22);
+            this.DataFolderTabPage.Name = "DataFolderTabPage";
+            this.DataFolderTabPage.Size = new System.Drawing.Size(376, 394);
+            this.DataFolderTabPage.TabIndex = 4;
+            this.DataFolderTabPage.Text = "Data Folders";
+            this.DataFolderTabPage.UseVisualStyleBackColor = true;
             // 
-            // groupBox1
+            // InstallerGroupBox
             // 
-            this.groupBox1.Controls.Add(this.RemoveFromConfigCheckBox);
-            this.groupBox1.Controls.Add(this.AddToConfigCheckBox);
-            this.groupBox1.Location = new System.Drawing.Point(6, 6);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(364, 67);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Configuration";
+            this.InstallerGroupBox.Controls.Add(this.RemoveFromConfigCheckBox);
+            this.InstallerGroupBox.Controls.Add(this.AddToConfigCheckBox);
+            this.InstallerGroupBox.Location = new System.Drawing.Point(6, 75);
+            this.InstallerGroupBox.Name = "InstallerGroupBox";
+            this.InstallerGroupBox.Size = new System.Drawing.Size(364, 67);
+            this.InstallerGroupBox.TabIndex = 0;
+            this.InstallerGroupBox.TabStop = false;
+            this.InstallerGroupBox.Text = "Resource Installer";
             // 
             // RemoveFromConfigCheckBox
             // 
@@ -698,6 +665,37 @@
             this.WaitSaveButton.UseVisualStyleBackColor = true;
             this.WaitSaveButton.Click += new System.EventHandler(this.WaitSaveButton_Click);
             // 
+            // CreatorGroupBox
+            // 
+            this.CreatorGroupBox.Controls.Add(this.CreateConfigCheckBox);
+            this.CreatorGroupBox.Controls.Add(this.DownloadScriptsCheckBox);
+            this.CreatorGroupBox.Location = new System.Drawing.Point(6, 3);
+            this.CreatorGroupBox.Name = "CreatorGroupBox";
+            this.CreatorGroupBox.Size = new System.Drawing.Size(364, 66);
+            this.CreatorGroupBox.TabIndex = 4;
+            this.CreatorGroupBox.TabStop = false;
+            this.CreatorGroupBox.Text = "Creator";
+            // 
+            // CreateConfigCheckBox
+            // 
+            this.CreateConfigCheckBox.AutoSize = true;
+            this.CreateConfigCheckBox.Location = new System.Drawing.Point(6, 42);
+            this.CreateConfigCheckBox.Name = "CreateConfigCheckBox";
+            this.CreateConfigCheckBox.Size = new System.Drawing.Size(246, 17);
+            this.CreateConfigCheckBox.TabIndex = 1;
+            this.CreateConfigCheckBox.Text = "Generate configuration after creating the folder";
+            this.CreateConfigCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // DownloadScriptsCheckBox
+            // 
+            this.DownloadScriptsCheckBox.AutoSize = true;
+            this.DownloadScriptsCheckBox.Location = new System.Drawing.Point(6, 19);
+            this.DownloadScriptsCheckBox.Name = "DownloadScriptsCheckBox";
+            this.DownloadScriptsCheckBox.Size = new System.Drawing.Size(243, 17);
+            this.DownloadScriptsCheckBox.TabIndex = 0;
+            this.DownloadScriptsCheckBox.Text = "Download required scripts for the server to run";
+            this.DownloadScriptsCheckBox.UseVisualStyleBackColor = true;
+            // 
             // Configurator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -723,13 +721,11 @@
             this.SteamGroupBox.PerformLayout();
             this.RuntimeGroupBox.ResumeLayout(false);
             this.RuntimeGroupBox.PerformLayout();
-            this.FolderCreationGroupBox.ResumeLayout(false);
-            this.FolderCreationGroupBox.PerformLayout();
             this.LicenseGroupBox.ResumeLayout(false);
             this.LicenseGroupBox.PerformLayout();
-            this.InstallerTabPage.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.DataFolderTabPage.ResumeLayout(false);
+            this.InstallerGroupBox.ResumeLayout(false);
+            this.InstallerGroupBox.PerformLayout();
             this.ScheduleTabPage.ResumeLayout(false);
             this.AutomatedRestartGroupBox.ResumeLayout(false);
             this.AutomatedRestartGroupBox.PerformLayout();
@@ -742,6 +738,8 @@
             this.ResourcesGroupBox.ResumeLayout(false);
             this.BuildsGroupBox.ResumeLayout(false);
             this.BuildsGroupBox.PerformLayout();
+            this.CreatorGroupBox.ResumeLayout(false);
+            this.CreatorGroupBox.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -760,9 +758,6 @@
         private System.Windows.Forms.GroupBox BuildsGroupBox;
         private System.Windows.Forms.Button BuildsSaveButton;
         private System.Windows.Forms.TextBox BuildsTextBox;
-        private System.Windows.Forms.GroupBox FolderCreationGroupBox;
-        private System.Windows.Forms.CheckBox CreateConfigCheckBox;
-        private System.Windows.Forms.CheckBox DownloadScriptsCheckBox;
         private System.Windows.Forms.GroupBox RuntimeGroupBox;
         private System.Windows.Forms.CheckBox ClearCacheCheckBox;
         private System.Windows.Forms.CheckBox AutoRestartCheckBox;
@@ -792,8 +787,8 @@
         private System.Windows.Forms.CheckBox ApplyCheckBox;
         private System.Windows.Forms.CheckBox ManuallyCheckBox;
         private System.Windows.Forms.CheckBox ConnectionCheckBox;
-        private System.Windows.Forms.TabPage InstallerTabPage;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.TabPage DataFolderTabPage;
+        private System.Windows.Forms.GroupBox InstallerGroupBox;
         private System.Windows.Forms.CheckBox RemoveFromConfigCheckBox;
         private System.Windows.Forms.CheckBox AddToConfigCheckBox;
         private System.Windows.Forms.GroupBox groupBox2;
@@ -802,5 +797,8 @@
         private System.Windows.Forms.ComboBox WaitComboBox;
         private System.Windows.Forms.TextBox WaitTextBox;
         private System.Windows.Forms.Button WaitSaveButton;
+        private System.Windows.Forms.GroupBox CreatorGroupBox;
+        private System.Windows.Forms.CheckBox CreateConfigCheckBox;
+        private System.Windows.Forms.CheckBox DownloadScriptsCheckBox;
     }
 }
