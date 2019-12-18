@@ -552,6 +552,7 @@
             this.ConnectionCheckBox.TabIndex = 2;
             this.ConnectionCheckBox.Text = "Make URL Visible";
             this.ConnectionCheckBox.UseVisualStyleBackColor = true;
+            this.ConnectionCheckBox.CheckedChanged += new System.EventHandler(this.ConnectionCheckBox_CheckedChanged);
             // 
             // ConnectionButton
             // 
