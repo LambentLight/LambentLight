@@ -73,11 +73,9 @@ namespace LambentLight
             // Update the list of builds, folders and resources
             BuildManager.Refresh();
             DataFolderManager.Refresh();
-            ResourceManager.Refresh();
             // And filll the Builds and Data folders
             BuildsListBox.Fill(BuildManager.Builds, true);
             DataFolderComboBox.Fill(DataFolderManager.Folders, true);
-            InstallerResourcesListBox.Fill(ResourceManager.Resources);
             // Set the elements to unlocked
             Locked = false;
             // Load the RTF text
