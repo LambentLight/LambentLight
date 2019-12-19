@@ -1,4 +1,5 @@
 ﻿using NLog;
+using SharpCompress.Archives;
 using SharpCompress.Common;
 using SharpCompress.Readers;
 using System.IO;
@@ -31,22 +32,25 @@ namespace LambentLight
             await Task.Delay(0);
 
             // Open the file as a streamer and feed it into the Compression reader
-            using (Stream FileStream = File.OpenRead(file))
-            using (IReader Reader = ReaderFactory.Open(FileStream))
+            using (Stream stream = File.OpenRead(file))
+            using (IArchive archive = ArchiveFactory.Open(stream))
             {
+                // Get the entries from the archive
+                IReader reader = archive.ExtractAllEntries();
+
                 // While there are entries available
-                while (Reader.MoveToNextEntry())
+                while (reader.MoveToNextEntry())
                 {
                     // If the entry is not a directory
-                    if (!Reader.Entry.IsDirectory)
+                    if (!reader.Entry.IsDirectory)
                     {
                         // If we are on a debug build
                         #if DEBUG
-                        Logger.Debug("Currently extracting: {0}", Reader.Entry.Key);
+                            Logger.Debug("Currently extracting: {0}", reader.Entry.Key);
                         #endif
 
                         // Write it to our output directory
-                        Reader.WriteEntryToDirectory(output, ExtractOpts);
+                        reader.WriteEntryToDirectory(output, ExtractOpts);
                     }
                 }
             }
