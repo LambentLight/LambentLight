@@ -10,10 +10,17 @@ namespace LambentLight.Runtime
 {
     public static class RuntimeManager
     {
+        #region Private Fields
+
         /// <summary>
         /// The logger for our current class.
         /// </summary>
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+        #endregion
+
+        #region Public Properties
+
         /// <summary>
         /// The server process that is currently running.
         /// </summary>
@@ -25,56 +32,19 @@ namespace LambentLight.Runtime
         /// <summary>
         /// Timer that keeps the server running even after crashes.
         /// </summary>
-        public static Timer AutoRestart = new Timer();
+        public static Timer KeepRunning { get; } = new Timer();
         /// <summary>
         /// Timer that restarts the server every few hours/minutes/seconds.
         /// </summary>
-        public static Timer RestartEvery = new Timer();
+        public static Timer RestartEvery { get; } = new Timer();
         /// <summary>
         /// Timer that restarts the server at specific times of the day.
         /// </summary>
-        public static Timer RestartAt = new Timer();
+        public static Timer RestartAt { get; } = new Timer();
 
-        private static RuntimeInformation GenerateClass(Build build, DataFolder data)
-        {
-            // Store the absolute path of the folder
-            string AbsPath = Path.GetFullPath(build.Folder);
-            string citizenPath = Path.Combine(AbsPath, "citizen");
+        #endregion
 
-            // If the file being part of the build does not exists
-            if (!File.Exists(Path.Combine(AbsPath, "FXServer.exe")))
-            {
-                Logger.Error($"The installed build {build.ID} does not contains the server executable.");
-                return null;
-            }
-
-            // Create a new Server object
-            RuntimeInformation NewServer = new RuntimeInformation();
-            // Create a new server object and set the correct properties
-            NewServer.Process = new Process();
-            NewServer.Process.StartInfo.FileName = Path.Combine(AbsPath, "FXServer.exe");
-            NewServer.Process.StartInfo.Arguments += $"+set citizen_dir \"{citizenPath}\" ";
-            NewServer.Process.StartInfo.Arguments += $"+set sv_licenseKey {Program.Config.CFXToken} ";
-            NewServer.Process.StartInfo.Arguments += !string.IsNullOrWhiteSpace(Program.Config.SteamToken) ? "+set steam_webApiKey \"" + Program.Config.SteamToken + "\" " : "";
-            NewServer.Process.StartInfo.Arguments += Program.Config.Game == Config.Game.RedDeadRedemption2 ? "+set gamename rdr3 " : "";
-            NewServer.Process.StartInfo.Arguments += "+exec server.cfg";
-            NewServer.Process.StartInfo.WorkingDirectory = data.Absolute;
-            NewServer.Process.StartInfo.UseShellExecute = false;
-            NewServer.Process.StartInfo.RedirectStandardError = true;
-            NewServer.Process.StartInfo.RedirectStandardInput = true;
-            NewServer.Process.StartInfo.RedirectStandardOutput = true;
-            NewServer.Process.StartInfo.CreateNoWindow = true;
-            NewServer.Process.OutputDataReceived += (S, A) => { if (!string.IsNullOrWhiteSpace(A.Data)) { Logger.Info(A.Data); } };
-            NewServer.Process.ErrorDataReceived += (S, A) => { if (!string.IsNullOrWhiteSpace(A.Data)) { Logger.Error(A.Data); } };
-            NewServer.Process.Start();
-            NewServer.Process.BeginOutputReadLine();
-            NewServer.Process.BeginErrorReadLine();
-            // Save the build and data folder
-            NewServer.Build = build;
-            NewServer.Folder = data;
-            // Finally, return the new class
-            return NewServer;
-        }
+        #region Basic Operations
 
         /// <summary>
         /// Starts the CFX server process.
@@ -128,9 +98,9 @@ namespace LambentLight.Runtime
             }
 
             // Add the event to check if the server has exited
-            AutoRestart.Interval = 100;
-            AutoRestart.Tick += RestartOnBadExitEvent;
-            AutoRestart.Enabled = true;
+            KeepRunning.Interval = 100;
+            KeepRunning.Tick += RestartOnBadExitEvent;
+            KeepRunning.Enabled = true;
             // If the user wants automated restarts every few hours/minutes/seconds
             if (Program.Config.AutoRestart.Cron)
             {
@@ -207,7 +177,7 @@ namespace LambentLight.Runtime
                     // Do nothing
                 }
                 // Disable the auto restarts
-                AutoRestart.Enabled = false;
+                KeepRunning.Enabled = false;
                 RestartEvery.Enabled = false;
                 RestartAt.Enabled = false;
                 // Remove the server information
@@ -233,6 +203,55 @@ namespace LambentLight.Runtime
             Server.Process.StandardInput.Flush();
         }
 
+        #endregion
+
+        #region Tools
+
+        private static RuntimeInformation GenerateClass(Build build, DataFolder data)
+        {
+            // Store the absolute path of the folder
+            string AbsPath = Path.GetFullPath(build.Folder);
+            string citizenPath = Path.Combine(AbsPath, "citizen");
+
+            // If the file being part of the build does not exists
+            if (!File.Exists(Path.Combine(AbsPath, "FXServer.exe")))
+            {
+                Logger.Error($"The installed build {build.ID} does not contains the server executable.");
+                return null;
+            }
+
+            // Create a new Server object
+            RuntimeInformation NewServer = new RuntimeInformation();
+            // Create a new server object and set the correct properties
+            NewServer.Process = new Process();
+            NewServer.Process.StartInfo.FileName = Path.Combine(AbsPath, "FXServer.exe");
+            NewServer.Process.StartInfo.Arguments += $"+set citizen_dir \"{citizenPath}\" ";
+            NewServer.Process.StartInfo.Arguments += $"+set sv_licenseKey {Program.Config.CFXToken} ";
+            NewServer.Process.StartInfo.Arguments += !string.IsNullOrWhiteSpace(Program.Config.SteamToken) ? "+set steam_webApiKey \"" + Program.Config.SteamToken + "\" " : "";
+            NewServer.Process.StartInfo.Arguments += Program.Config.Game == Config.Game.RedDeadRedemption2 ? "+set gamename rdr3 " : "";
+            NewServer.Process.StartInfo.Arguments += "+exec server.cfg";
+            NewServer.Process.StartInfo.WorkingDirectory = data.Absolute;
+            NewServer.Process.StartInfo.UseShellExecute = false;
+            NewServer.Process.StartInfo.RedirectStandardError = true;
+            NewServer.Process.StartInfo.RedirectStandardInput = true;
+            NewServer.Process.StartInfo.RedirectStandardOutput = true;
+            NewServer.Process.StartInfo.CreateNoWindow = true;
+            NewServer.Process.OutputDataReceived += (S, A) => { if (!string.IsNullOrWhiteSpace(A.Data)) { Logger.Info(A.Data); } };
+            NewServer.Process.ErrorDataReceived += (S, A) => { if (!string.IsNullOrWhiteSpace(A.Data)) { Logger.Error(A.Data); } };
+            NewServer.Process.Start();
+            NewServer.Process.BeginOutputReadLine();
+            NewServer.Process.BeginErrorReadLine();
+            // Save the build and data folder
+            NewServer.Build = build;
+            NewServer.Folder = data;
+            // Finally, return the new class
+            return NewServer;
+        }
+
+        #endregion
+
+        #region Events
+
         /// <summary>
         /// Event that gets triggered to check if the server has crashed.
         /// </summary>
@@ -254,7 +273,7 @@ namespace LambentLight.Runtime
                 else
                 {
                     // Disable this event
-                    AutoRestart.Enabled = false;
+                    KeepRunning.Enabled = false;
                     // Unlock the controls
                     Program.Form.Locked = false;
                     // And log a message
@@ -288,11 +307,15 @@ namespace LambentLight.Runtime
             }
         }
 
+        #endregion
+
+        #region Extensions
+
         /// <summary>
         /// Cheks if the current process is running.
         /// </summary>
         /// <returns>true if the process is running, false otherwise.</returns>
-        public static bool IsRunning(this Process Check)
+        private static bool IsRunning(this Process Check)
         {
             try
             {
@@ -308,5 +331,7 @@ namespace LambentLight.Runtime
             }
             return true;
         }
+
+        #endregion
     }
 }
