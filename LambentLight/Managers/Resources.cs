@@ -8,6 +8,16 @@ using System.Linq;
 namespace LambentLight.Managers
 {
     /// <summary>
+    /// The game compatibility of a resource.
+    /// </summary>
+    public enum Compatibility
+    {
+        Common = -1,
+        GrandTheftAutoV = 0,
+        RedDeadRedemption2 = 1
+    }
+
+    /// <summary>
     /// The specific version information of a resource.
     /// </summary>
     public class Version
@@ -101,6 +111,11 @@ namespace LambentLight.Managers
         [JsonIgnore]
         public string Repo { get; set; }
         /// <summary>
+        /// The compatibility of this resource.
+        /// </summary>
+        [JsonIgnore]
+        public Compatibility Compatibility { get; set; }
+        /// <summary>
         /// The extended information for this resource.
         /// </summary>
         [JsonIgnore]
@@ -110,7 +125,19 @@ namespace LambentLight.Managers
             {
                 if (more == null)
                 {
-                    string game = Program.Config.Game == Game.GrandTheftAutoV ? "gtav" : "rdr2";
+                    string game;
+                    switch (Compatibility)
+                    {
+                        case Compatibility.GrandTheftAutoV:
+                            game = "gtav";
+                            break;
+                        case Compatibility.RedDeadRedemption2:
+                            game = "rdr2";
+                            break;
+                        default:
+                            game = "common";
+                            break;
+                    }
                     more = Downloader.DownloadJSON<ExtendedResource>($"{Repo}/resources/{game}/{Name}.json");
                 }
                 return more;
@@ -204,45 +231,61 @@ namespace LambentLight.Managers
             return TempList;
         }
         /// <summary>
+        /// Adds the specified enumerator of resources into the list.
+        /// </summary>
+        /// <param name="resources"></param>
+        public static void Add(ref List<Resource> tempResources, List<Resource> newResources, Compatibility compatibility, string repo)
+        {
+            // If one of the lists is null, return
+            if (tempResources == null || newResources == null)
+            {
+                return;
+            }
+
+            // Iterate over the list of resources in the new one
+            foreach (Resource resource in newResources)
+            {
+                // Get the first resource matching the name
+                Resource found = tempResources.Where(x => x.Name == resource.Name).FirstOrDefault();
+
+                // If the big list of resources contains this one, skip it
+                if (found != null)
+                {
+                    Logger.Warn("Repository {0} already contains resource {1}, skipping...", found.Repo, found.Name);
+                    continue;
+                }
+
+                // Save the repo and game
+                resource.Repo = repo;
+                resource.Compatibility = compatibility;
+                // Otherwise, add it
+                tempResources.Add(resource);
+            }
+        }
+        /// <summary>
         /// Refreshes the list of resources.
         /// </summary>
         public static void Refresh()
         {
-            // Create a dummy list of resources
-            List<Resource> resources = new List<Resource>();
+            // Create a new list of resources
+            List<Resource> tempResources = new List<Resource>();
             // Get the readable name of the game
             string game = Program.Config.Game == Game.GrandTheftAutoV ? "gtav" : "rdr2";
 
             // For each resource repository
             foreach (string repo in Program.Config.Repos)
             {
-                // Combine the repo with the resource metadata
-                string url = $"{repo}/resources/{game}.json";
-                // Create a temporary list of resources
-                List<Resource> output = Downloader.DownloadJSON<List<Resource>>(url);
+                // Get the lists of resources
+                List<Resource> outputGeneric = Downloader.DownloadJSON<List<Resource>>($"{repo}/resources/common.json");
+                List<Resource> outputGame = Downloader.DownloadJSON<List<Resource>>($"{repo}/resources/{game}.json");
 
-                // Iterate over the list of resources
-                foreach (Resource resource in output)
-                {
-                    // Get the first resource matching the name
-                    Resource found = resources.Where(x => x.Name == resource.Name).FirstOrDefault();
-
-                    // If the big list of resources contains this one, skip it
-                    if (found != null)
-                    {
-                        Logger.Warn("Repository {0} already contains resource {1}, skipping...", found.Repo, found.Name);
-                        continue;
-                    }
-
-                    // Save the repo where they came from
-                    resource.Repo = repo;
-                    // Otherwise, add it
-                    resources.Add(resource);
-                }
+                // And add them
+                Add(ref tempResources, outputGeneric, Compatibility.Common, repo);
+                Add(ref tempResources, outputGame, (Compatibility)Program.Config.Game, repo);
             }
 
             // Store the resources in alphabetical order
-            Resources = resources.OrderBy(x => x.Name).ToList();
+            Resources = tempResources.OrderBy(x => x.Name).ToList();
             // Log what we have just done
             Logger.Debug("The list of resources has been updated");
         }
