@@ -1,4 +1,4 @@
-using LambentLight.Managers;
+﻿using LambentLight.Managers;
 using NLog;
 using System;
 using System.Diagnostics;
@@ -55,13 +55,13 @@ namespace LambentLight.Runtime
         #region Basic Operations
 
         /// <summary>
-        /// Starts the CFX server process.
+        /// Starts the CFX server process with the specified Build and Data Folder.
         /// </summary>
-        /// <param name="build">The build to use.</param>
-        /// <param name="data">The folder to use the data from.</param>
+        /// <param name="build">The CitizenFX Server Build.</param>
+        /// <param name="folder">The folder with the configuration and resources.</param>
         public static async Task<bool> Start(Build build, DataFolder folder)
         {
-            // If there is a server instance running, log it and return
+            // If the server is already running, log it and return
             if (IsServerRunning)
             {
                 Logger.Warn("There is already a server running");
@@ -78,10 +78,10 @@ namespace LambentLight.Runtime
             // If the build folder is not there or the executable is missing
             if (!build.IsFolderPresent || !build.IsExecutablePresent)
             {
-                // Try to download the build the build
+                // Try to download the CFX Build
                 bool success = await BuildManager.Download(build);
 
-                // If we failed, notify the user that is not possible and return
+                // If we failed, notify the user about it and return
                 if (!success)
                 {
                     Logger.Error("The server cannot be started because the selected build does not works.");
@@ -98,48 +98,60 @@ namespace LambentLight.Runtime
                 Logger.Info("The cache folder was present on '{0}'", folder.Name);
             }
 
-            // Store the absolute path of the folder
+            // Store the absolute path of the build and citizen folders
             string absolutePath = Path.GetFullPath(build.Folder);
             string citizenPath = Path.Combine(absolutePath, "citizen");
 
-            // Create a new server object and set the correct properties
+            // Create a new server object
             Process process = new Process();
+            // Set the executable of the server as the file to start
             process.StartInfo.FileName = Path.Combine(absolutePath, "FXServer.exe");
+            // Set the path of the CFX Scripting stuff (metadata?)
             process.StartInfo.Arguments += $"+set citizen_dir \"{citizenPath}\" ";
+            // Set the license from the configuration
             process.StartInfo.Arguments += $"+set sv_licenseKey {Program.Config.CFXToken} ";
+            // If there is a Steam token, use it to make Steam Identifiers available
             process.StartInfo.Arguments += !string.IsNullOrWhiteSpace(Program.Config.SteamToken) ? "+set steam_webApiKey \"" + Program.Config.SteamToken + "\" " : "";
+            // If the game is Red Dead Redemption 2, enable the respective flag
             process.StartInfo.Arguments += Program.Config.Game == Config.Game.RedDeadRedemption2 ? "+set gamename rdr3 " : "";
+            // And finally load the server configuration file
             process.StartInfo.Arguments += "+exec server.cfg";
+            // Then, set the working directory as the server data folder
             process.StartInfo.WorkingDirectory = folder.Absolute;
+            // Disable the usage of CMD to launch the process
             process.StartInfo.UseShellExecute = false;
+            // Intercept STDOUT, STDIN and STDERR to the program
             process.StartInfo.RedirectStandardError = true;
             process.StartInfo.RedirectStandardInput = true;
             process.StartInfo.RedirectStandardOutput = true;
+            // Don't create a command line window
             process.StartInfo.CreateNoWindow = true;
+            // Redirect STDOUT and STDERR to NLog
             process.OutputDataReceived += (S, A) => { if (!string.IsNullOrWhiteSpace(A.Data)) { Logger.Info(A.Data); } };
             process.ErrorDataReceived += (S, A) => { if (!string.IsNullOrWhiteSpace(A.Data)) { Logger.Error(A.Data); } };
+            // Start the process and start reading from STDOUT and STDERR
             process.Start();
             process.BeginOutputReadLine();
             process.BeginErrorReadLine();
 
-            // Add the event to check if the server has exited
+            // Add the event to check if the server has crashed
             KeepRunning.Tick += KeepRunning_Tick;
             KeepRunning.Enabled = true;
-            // If the user wants automated restarts every few hours/minutes/seconds
+            // If the user wants automated restarts every few hours/minutes/seconds, enable it
             if (Program.Config.AutoRestart.Cron)
             {
                 RestartEvery.Interval = (int)Program.Config.AutoRestart.CronTime.TotalMilliseconds;
                 RestartEvery.Tick += RestartEvery_Tick;
                 RestartEvery.Enabled = true;
             }
-            // If the user wants automated restarts at specific times of the day
+            // If the user wants automated restarts at specific times of the day, also enable it
             if (Program.Config.AutoRestart.Daily)
             {
                 RestartAt.Tick += RestartAt_Tick;
                 RestartAt.Enabled = true;
             }
 
-            // Save the current information
+            // Save the information for the server that we started
             Process = process;
             Build = build;
             Folder = folder;
@@ -153,15 +165,15 @@ namespace LambentLight.Runtime
         /// </summary>
         public static async Task<bool> Restart()
         {
-            // If the server is running
+            // If the server is already running
             if (IsServerRunning)
             {
-                // Get the server folder and build
+                // Copy the server folder and build
                 Build build = Build;
                 DataFolder folder = Folder;
                 // Stop the existing server
                 Stop();
-                // Set the new server
+                // And start a new one with the same build and data folder
                 return await Start(build, folder);
             }
             // Otherwise, there is no need for a restart
@@ -214,8 +226,9 @@ namespace LambentLight.Runtime
             // And notify the user
             Logger.Info("The FiveM server has been stopped");
         }
+
         /// <summary>
-        /// Sends a command to the FiveM server.
+        /// Sends a command to the CFX server.
         /// </summary>
         /// <param name="command">The command to send.</param>
         public static void SendCommand(string command)
@@ -258,12 +271,12 @@ namespace LambentLight.Runtime
                     KeepRunning.Enabled = false;
                     // Unlock the controls
                     Program.Form.Locked = false;
-                    // And log a message
-                    Logger.Warn("The FiveM server has exited with a code {0}", Process.ExitCode);
                     // Set the Server information to null
                     Process = null;
                     Build = null;
                     Folder = null;
+                    // And finally log a message
+                    Logger.Warn("The FiveM server has exited with a code {0}", Process.ExitCode);
                 }
             }
         }
@@ -282,7 +295,7 @@ namespace LambentLight.Runtime
         /// </summary>
         private static async void RestartAt_Tick(object sender, EventArgs args)
         {
-            // If the hour, minute and second matches, restart the server
+            // If the hour, minutes and seconds matches, restart the server
             if (DateTime.Now.Hour == Program.Config.AutoRestart.DailyTime.Hours &&
                 DateTime.Now.Minute == Program.Config.AutoRestart.DailyTime.Minutes &&
                 DateTime.Now.Second == Program.Config.AutoRestart.DailyTime.Seconds)
