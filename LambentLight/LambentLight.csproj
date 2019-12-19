@@ -119,7 +119,8 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Managers\Resources.cs" />
-    <Compile Include="Managers\Processes.cs" />
+    <Compile Include="Runtime\RuntimeInformation.cs" />
+    <Compile Include="Runtime\RuntimeManager.cs" />
     <Compile Include="Targets\BottomStripTarget.cs" />
     <Compile Include="Targets\TextBoxTarget.cs" />
     <EmbeddedResource Include="Configurator.resx">

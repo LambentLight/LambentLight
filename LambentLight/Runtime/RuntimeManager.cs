@@ -1,4 +1,4 @@
-using LambentLight.Properties;
+﻿using LambentLight.Managers;
 using NLog;
 using System;
 using System.Diagnostics;
@@ -6,31 +6,9 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace LambentLight.Managers
+namespace LambentLight.Runtime
 {
-    /// <summary>
-    /// Class for storing some values for the launch of the server.
-    /// </summary>
-    public class RuntimeInformation
-    {
-        /// <summary>
-        /// The FiveM build used to launch the process.
-        /// </summary>
-        public Build Build { get; set; }
-        /// <summary>
-        /// The Data Folder with the server information.
-        /// </summary>
-        public DataFolder Folder { get; set; }
-        /// <summary>
-        /// The server process.
-        /// </summary>
-        public Process Process { get; set; }
-    }
-
-    /// <summary>
-    /// Manages the start, stop and restart of the CFX server.
-    /// </summary>
-    public static class ProcessManager
+    public static class RuntimeManager
     {
         /// <summary>
         /// The logger for our current class.

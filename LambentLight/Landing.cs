@@ -2,6 +2,7 @@
 using LambentLight.Extensions;
 using LambentLight.Managers;
 using LambentLight.Properties;
+using LambentLight.Runtime;
 using LambentLight.Targets;
 using NLog;
 using NLog.Config;
@@ -110,9 +111,9 @@ namespace LambentLight
             }
 
             // If the server is running, stop it
-            if (ProcessManager.IsServerRunning)
+            if (RuntimeManager.IsServerRunning)
             {
-                ProcessManager.Stop();
+                RuntimeManager.Stop();
             }
             // If the database is open, close it
             if (DatabaseManager.Connection != null && DatabaseManager.Connection.State == ConnectionState.Open)
@@ -159,20 +160,20 @@ namespace LambentLight
             }
 
             // Start the build with the selected options
-            Locked = await ProcessManager.Start((Build)BuildsListBox.SelectedItem, (DataFolder)DataFolderComboBox.SelectedItem);
+            Locked = await RuntimeManager.Start((Build)BuildsListBox.SelectedItem, (DataFolder)DataFolderComboBox.SelectedItem);
         }
 
         private void StopToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Stop the server if is present and unlock the controls
-            ProcessManager.Stop();
+            RuntimeManager.Stop();
             Locked = false;
         }
 
         private async void RestartToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Tell the process manager to restart the existing server
-            await ProcessManager.Restart();
+            await RuntimeManager.Restart();
         }
 
         private async void CreateToolStripMenuItem_Click(object sender, EventArgs e)
@@ -236,7 +237,7 @@ namespace LambentLight
         private void ConsoleButton_Click(object sender, EventArgs e)
         {
             // Send the command to the server
-            ProcessManager.SendCommand(ConsoleInputTextBox.Text);
+            RuntimeManager.SendCommand(ConsoleInputTextBox.Text);
             // And clear the text
             ConsoleInputTextBox.Text = string.Empty;
         }
@@ -303,24 +304,24 @@ namespace LambentLight
         {
             // If there is a resource to uninstall, enable the button
             UninstallerRemoveButton.Enabled = UninstallerListBox.SelectedItem != null;
-            ResourceStartButton.Enabled = UninstallerListBox.SelectedItem != null && ProcessManager.IsServerRunning;
-            ResourceRestartButton.Enabled = UninstallerListBox.SelectedItem != null && ProcessManager.IsServerRunning;
-            ResourceStopButton.Enabled = UninstallerListBox.SelectedItem != null && ProcessManager.IsServerRunning;
+            ResourceStartButton.Enabled = UninstallerListBox.SelectedItem != null && RuntimeManager.IsServerRunning;
+            ResourceRestartButton.Enabled = UninstallerListBox.SelectedItem != null && RuntimeManager.IsServerRunning;
+            ResourceStopButton.Enabled = UninstallerListBox.SelectedItem != null && RuntimeManager.IsServerRunning;
         }
 
         private void ResourceStartButton_Click(object sender, EventArgs e)
         {
-            ProcessManager.SendCommand($"start {UninstallerListBox.SelectedItem.ToString()}");
+            RuntimeManager.SendCommand($"start {UninstallerListBox.SelectedItem.ToString()}");
         }
 
         private void ResourceRestartButton_Click(object sender, EventArgs e)
         {
-            ProcessManager.SendCommand($"restart {UninstallerListBox.SelectedItem.ToString()}");
+            RuntimeManager.SendCommand($"restart {UninstallerListBox.SelectedItem.ToString()}");
         }
 
         private void ResourceStopButton_Click(object sender, EventArgs e)
         {
-            ProcessManager.SendCommand($"stop {UninstallerListBox.SelectedItem.ToString()}");
+            RuntimeManager.SendCommand($"stop {UninstallerListBox.SelectedItem.ToString()}");
         }
 
         private void UninstallerRefreshButton_Click(object sender, EventArgs e) => RefreshInstalledResources();
@@ -436,7 +437,7 @@ namespace LambentLight
             }
 
             // Tell the server to refresh the list of installed resources
-            ProcessManager.SendCommand("refresh");
+            RuntimeManager.SendCommand("refresh");
             // Notify that we have installed all of the resources
             Logger.Info("Successfully installed {0}", ReadableResources);
             // And finally, update the list of installed resources
