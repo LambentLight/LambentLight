@@ -210,42 +210,42 @@ namespace LambentLight.Runtime
         private static RuntimeInformation GenerateClass(Build build, DataFolder data)
         {
             // Store the absolute path of the folder
-            string AbsPath = Path.GetFullPath(build.Folder);
-            string citizenPath = Path.Combine(AbsPath, "citizen");
+            string absolutePath = Path.GetFullPath(build.Folder);
+            string citizenPath = Path.Combine(absolutePath, "citizen");
 
             // If the file being part of the build does not exists
-            if (!File.Exists(Path.Combine(AbsPath, "FXServer.exe")))
+            if (!File.Exists(Path.Combine(absolutePath, "FXServer.exe")))
             {
                 Logger.Error($"The installed build {build.ID} does not contains the server executable.");
                 return null;
             }
 
             // Create a new Server object
-            RuntimeInformation NewServer = new RuntimeInformation();
+            RuntimeInformation newServer = new RuntimeInformation();
             // Create a new server object and set the correct properties
-            NewServer.Process = new Process();
-            NewServer.Process.StartInfo.FileName = Path.Combine(AbsPath, "FXServer.exe");
-            NewServer.Process.StartInfo.Arguments += $"+set citizen_dir \"{citizenPath}\" ";
-            NewServer.Process.StartInfo.Arguments += $"+set sv_licenseKey {Program.Config.CFXToken} ";
-            NewServer.Process.StartInfo.Arguments += !string.IsNullOrWhiteSpace(Program.Config.SteamToken) ? "+set steam_webApiKey \"" + Program.Config.SteamToken + "\" " : "";
-            NewServer.Process.StartInfo.Arguments += Program.Config.Game == Config.Game.RedDeadRedemption2 ? "+set gamename rdr3 " : "";
-            NewServer.Process.StartInfo.Arguments += "+exec server.cfg";
-            NewServer.Process.StartInfo.WorkingDirectory = data.Absolute;
-            NewServer.Process.StartInfo.UseShellExecute = false;
-            NewServer.Process.StartInfo.RedirectStandardError = true;
-            NewServer.Process.StartInfo.RedirectStandardInput = true;
-            NewServer.Process.StartInfo.RedirectStandardOutput = true;
-            NewServer.Process.StartInfo.CreateNoWindow = true;
-            NewServer.Process.OutputDataReceived += (S, A) => { if (!string.IsNullOrWhiteSpace(A.Data)) { Logger.Info(A.Data); } };
-            NewServer.Process.ErrorDataReceived += (S, A) => { if (!string.IsNullOrWhiteSpace(A.Data)) { Logger.Error(A.Data); } };
-            NewServer.Process.Start();
-            NewServer.Process.BeginOutputReadLine();
-            NewServer.Process.BeginErrorReadLine();
+            newServer.Process = new Process();
+            newServer.Process.StartInfo.FileName = Path.Combine(absolutePath, "FXServer.exe");
+            newServer.Process.StartInfo.Arguments += $"+set citizen_dir \"{citizenPath}\" ";
+            newServer.Process.StartInfo.Arguments += $"+set sv_licenseKey {Program.Config.CFXToken} ";
+            newServer.Process.StartInfo.Arguments += !string.IsNullOrWhiteSpace(Program.Config.SteamToken) ? "+set steam_webApiKey \"" + Program.Config.SteamToken + "\" " : "";
+            newServer.Process.StartInfo.Arguments += Program.Config.Game == Config.Game.RedDeadRedemption2 ? "+set gamename rdr3 " : "";
+            newServer.Process.StartInfo.Arguments += "+exec server.cfg";
+            newServer.Process.StartInfo.WorkingDirectory = data.Absolute;
+            newServer.Process.StartInfo.UseShellExecute = false;
+            newServer.Process.StartInfo.RedirectStandardError = true;
+            newServer.Process.StartInfo.RedirectStandardInput = true;
+            newServer.Process.StartInfo.RedirectStandardOutput = true;
+            newServer.Process.StartInfo.CreateNoWindow = true;
+            newServer.Process.OutputDataReceived += (S, A) => { if (!string.IsNullOrWhiteSpace(A.Data)) { Logger.Info(A.Data); } };
+            newServer.Process.ErrorDataReceived += (S, A) => { if (!string.IsNullOrWhiteSpace(A.Data)) { Logger.Error(A.Data); } };
+            newServer.Process.Start();
+            newServer.Process.BeginOutputReadLine();
+            newServer.Process.BeginErrorReadLine();
             // Save the build and data folder
-            NewServer.Build = build;
-            NewServer.Folder = data;
+            newServer.Build = build;
+            newServer.Folder = data;
             // Finally, return the new class
-            return NewServer;
+            return newServer;
         }
 
         #endregion
@@ -312,14 +312,14 @@ namespace LambentLight.Runtime
         #region Extensions
 
         /// <summary>
-        /// Cheks if the current process is running.
+        /// Checks if the process is running.
         /// </summary>
         /// <returns>true if the process is running, false otherwise.</returns>
-        private static bool IsRunning(this Process Check)
+        private static bool IsRunning(this Process process)
         {
             try
             {
-                Process.GetProcessById(Check.Id);
+                Process.GetProcessById(process.Id);
             }
             catch (ArgumentException)
             {
