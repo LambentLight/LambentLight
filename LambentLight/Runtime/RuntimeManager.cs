@@ -90,11 +90,11 @@ namespace LambentLight.Runtime
             }
 
             // Format the path for the cache folder
-            string Cache = Path.Combine(folder.Location, "cache");
+            string cachePath = Path.Combine(folder.Location, "cache");
             // If there is a cache folder and the user wants them gone, remove it
-            if (Program.Config.ClearCache && Directory.Exists(Cache))
+            if (Program.Config.ClearCache && Directory.Exists(cachePath))
             {
-                Directory.Delete(Cache, true);
+                Directory.Delete(cachePath, true);
                 Logger.Info("The cache folder was present on '{0}'", folder.Name);
             }
 
