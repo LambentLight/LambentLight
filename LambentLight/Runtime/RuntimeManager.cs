@@ -209,10 +209,6 @@ namespace LambentLight.Runtime
             {
                 // Do nothing
             }
-            // Disable the auto restarts
-            KeepRunning.Enabled = false;
-            RestartEvery.Enabled = false;
-            RestartAt.Enabled = false;
             // Remove the server information
             Process = null;
             Build = null;
