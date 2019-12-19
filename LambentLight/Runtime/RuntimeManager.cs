@@ -1,4 +1,4 @@
-﻿using LambentLight.Managers;
+using LambentLight.Managers;
 using NLog;
 using System;
 using System.Diagnostics;
@@ -40,7 +40,7 @@ namespace LambentLight.Runtime
         /// <summary>
         /// Timer that keeps the server running even after crashes.
         /// </summary>
-        public static Timer KeepRunning { get; } = new Timer();
+        public static Timer KeepRunning { get; } = new Timer() { Interval = 100 };
         /// <summary>
         /// Timer that restarts the server every few hours/minutes/seconds.
         /// </summary>
@@ -48,7 +48,7 @@ namespace LambentLight.Runtime
         /// <summary>
         /// Timer that restarts the server at specific times of the day.
         /// </summary>
-        public static Timer RestartAt { get; } = new Timer();
+        public static Timer RestartAt { get; } = new Timer() { Interval = 1000 };
 
         #endregion
 
@@ -123,7 +123,6 @@ namespace LambentLight.Runtime
             process.BeginErrorReadLine();
 
             // Add the event to check if the server has exited
-            KeepRunning.Interval = 100;
             KeepRunning.Tick += RestartOnBadExitEvent;
             KeepRunning.Enabled = true;
             // If the user wants automated restarts every few hours/minutes/seconds
@@ -136,7 +135,6 @@ namespace LambentLight.Runtime
             // If the user wants automated restarts at specific times of the day
             if (Program.Config.AutoRestart.Daily)
             {
-                RestartAt.Interval = 1000;
                 RestartAt.Tick += RestartAtEvent;
                 RestartAt.Enabled = true;
             }
