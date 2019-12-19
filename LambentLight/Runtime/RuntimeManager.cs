@@ -123,19 +123,19 @@ namespace LambentLight.Runtime
             process.BeginErrorReadLine();
 
             // Add the event to check if the server has exited
-            KeepRunning.Tick += RestartOnBadExitEvent;
+            KeepRunning.Tick += KeepRunning_Tick;
             KeepRunning.Enabled = true;
             // If the user wants automated restarts every few hours/minutes/seconds
             if (Program.Config.AutoRestart.Cron)
             {
                 RestartEvery.Interval = (int)Program.Config.AutoRestart.CronTime.TotalMilliseconds;
-                RestartEvery.Tick += RestartEveryEvent;
+                RestartEvery.Tick += RestartEvery_Tick;
                 RestartEvery.Enabled = true;
             }
             // If the user wants automated restarts at specific times of the day
             if (Program.Config.AutoRestart.Daily)
             {
-                RestartAt.Tick += RestartAtEvent;
+                RestartAt.Tick += RestartAt_Tick;
                 RestartAt.Enabled = true;
             }
 
@@ -238,7 +238,7 @@ namespace LambentLight.Runtime
         /// <summary>
         /// Event that gets triggered to check if the server has crashed.
         /// </summary>
-        private static async void RestartOnBadExitEvent(object sender, EventArgs args)
+        private static async void KeepRunning_Tick(object sender, EventArgs args)
         {
             // If the server exists, is not running and has an exit code of not zero
             if (Process != null && !Process.IsRunning() && Process.ExitCode != 0)
@@ -271,7 +271,7 @@ namespace LambentLight.Runtime
         /// <summary>
         /// Event that restarts the server every few hours/minutes/seconds.
         /// </summary>
-        private static async void RestartEveryEvent(object sender, EventArgs args)
+        private static async void RestartEvery_Tick(object sender, EventArgs args)
         {
             // Just restart the server
             await Restart();
@@ -280,7 +280,7 @@ namespace LambentLight.Runtime
         /// <summary>
         /// Event that restarts the server at specific times of the day.
         /// </summary>
-        private static async void RestartAtEvent(object sender, EventArgs args)
+        private static async void RestartAt_Tick(object sender, EventArgs args)
         {
             // If the hour, minute and second matches, restart the server
             if (DateTime.Now.Hour == Program.Config.AutoRestart.DailyTime.Hours &&
