@@ -22,13 +22,21 @@ namespace LambentLight.Runtime
         #region Public Properties
 
         /// <summary>
-        /// The server process that is currently running.
+        /// The process of the current CitizenFX Server.
         /// </summary>
-        public static RuntimeInformation Server { get; private set; } = null;
+        public static Process Process { get; set; } = null;
+        /// <summary>
+        /// The CFX build used to launch the process.
+        /// </summary>
+        public static Build Build { get; set; } = null;
+        /// <summary>
+        /// The Data Folder with the server information.
+        /// </summary>
+        public static DataFolder Folder { get; set; } = null;
         /// <summary>
         /// If the FiveM server is running or not.
         /// </summary>
-        public static bool IsServerRunning => Server != null && Server.Process.IsRunning();
+        public static bool IsServerRunning => Process != null && Process.IsRunning();
         /// <summary>
         /// Timer that keeps the server running even after crashes.
         /// </summary>
@@ -51,10 +59,10 @@ namespace LambentLight.Runtime
         /// </summary>
         /// <param name="build">The build to use.</param>
         /// <param name="data">The folder to use the data from.</param>
-        public static async Task<bool> Start(Build build, DataFolder data)
+        public static async Task<bool> Start(Build build, DataFolder folder)
         {
             // If there is a server instance running, log it and return
-            if (Server != null)
+            if (IsServerRunning)
             {
                 Logger.Warn("There is already a server running");
                 return false;
@@ -82,20 +90,37 @@ namespace LambentLight.Runtime
             }
 
             // Format the path for the cache folder
-            string Cache = Path.Combine(data.Location, "cache");
+            string Cache = Path.Combine(folder.Location, "cache");
             // If there is a cache folder and the user wants them gone, remove it
             if (Program.Config.ClearCache && Directory.Exists(Cache))
             {
                 Directory.Delete(Cache, true);
-                Logger.Info("The cache folder was present on '{0}'", data.Name);
+                Logger.Info("The cache folder was present on '{0}'", folder.Name);
             }
-            // Create and save the new class that contains the information that we need
-            Server = GenerateClass(build, data);
-            // If there was an error while launching the server, just return
-            if (Server == null)
-            {
-                return false;
-            }
+
+            // Store the absolute path of the folder
+            string absolutePath = Path.GetFullPath(build.Folder);
+            string citizenPath = Path.Combine(absolutePath, "citizen");
+
+            // Create a new server object and set the correct properties
+            Process process = new Process();
+            process.StartInfo.FileName = Path.Combine(absolutePath, "FXServer.exe");
+            process.StartInfo.Arguments += $"+set citizen_dir \"{citizenPath}\" ";
+            process.StartInfo.Arguments += $"+set sv_licenseKey {Program.Config.CFXToken} ";
+            process.StartInfo.Arguments += !string.IsNullOrWhiteSpace(Program.Config.SteamToken) ? "+set steam_webApiKey \"" + Program.Config.SteamToken + "\" " : "";
+            process.StartInfo.Arguments += Program.Config.Game == Config.Game.RedDeadRedemption2 ? "+set gamename rdr3 " : "";
+            process.StartInfo.Arguments += "+exec server.cfg";
+            process.StartInfo.WorkingDirectory = folder.Absolute;
+            process.StartInfo.UseShellExecute = false;
+            process.StartInfo.RedirectStandardError = true;
+            process.StartInfo.RedirectStandardInput = true;
+            process.StartInfo.RedirectStandardOutput = true;
+            process.StartInfo.CreateNoWindow = true;
+            process.OutputDataReceived += (S, A) => { if (!string.IsNullOrWhiteSpace(A.Data)) { Logger.Info(A.Data); } };
+            process.ErrorDataReceived += (S, A) => { if (!string.IsNullOrWhiteSpace(A.Data)) { Logger.Error(A.Data); } };
+            process.Start();
+            process.BeginOutputReadLine();
+            process.BeginErrorReadLine();
 
             // Add the event to check if the server has exited
             KeepRunning.Interval = 100;
@@ -116,6 +141,12 @@ namespace LambentLight.Runtime
                 RestartAt.Enabled = true;
             }
 
+            // Save the current information
+            Process = process;
+            Build = build;
+            Folder = folder;
+
+            // And return success
             return true;
         }
 
@@ -125,11 +156,11 @@ namespace LambentLight.Runtime
         public static async Task<bool> Restart()
         {
             // If the server is running
-            if (Server != null && Server.Process.IsRunning())
+            if (IsServerRunning)
             {
                 // Get the server folder and build
-                Build build = Server.Build;
-                DataFolder folder = Server.Folder;
+                Build build = Build;
+                DataFolder folder = Folder;
                 // Stop the existing server
                 Stop();
                 // Set the new server
@@ -145,46 +176,49 @@ namespace LambentLight.Runtime
         public static void Stop()
         {
             // If there is no server running, notify the user and return
-            if (Server == null)
+            if (!IsServerRunning)
             {
                 Logger.Warn("The FiveM server is not running");
                 return;
             }
 
-            // If the server process is running
-            if (Server.Process.IsRunning())
-            {
-                // Kill it
-                Server.Process.Kill();
-                // And terminate any orphan processes just in case
-                Process process = new Process();
-                process.StartInfo.FileName = "taskkill.exe";
-                process.StartInfo.Arguments = "/f /im FXServer.exe";
-                process.StartInfo.UseShellExecute = false;
-                process.StartInfo.CreateNoWindow = true;
-                process.Start();
-                process.WaitForExit();
+            // Stop the events if they are running
+            KeepRunning.Enabled = false;
+            RestartEvery.Enabled = false;
+            RestartAt.Enabled = false;
 
-                // Try to cancel the STDOUT and STDERR background reads
-                try
-                {
-                    Server.Process.CancelOutputRead();
-                    Server.Process.CancelErrorRead();
-                }
-                // If they are not available
-                catch (InvalidOperationException)
-                {
-                    // Do nothing
-                }
-                // Disable the auto restarts
-                KeepRunning.Enabled = false;
-                RestartEvery.Enabled = false;
-                RestartAt.Enabled = false;
-                // Remove the server information
-                Server = null;
-                // And notify the user
-                Logger.Info("The FiveM server has been stopped");
+            // Kill it
+            Process.Kill();
+            // And terminate any orphan processes just in case
+            Process process = new Process();
+            process.StartInfo.FileName = "taskkill.exe";
+            process.StartInfo.Arguments = "/f /im FXServer.exe";
+            process.StartInfo.UseShellExecute = false;
+            process.StartInfo.CreateNoWindow = true;
+            process.Start();
+            process.WaitForExit();
+
+            // Try to cancel the STDOUT and STDERR background reads
+            try
+            {
+                Process.CancelOutputRead();
+                Process.CancelErrorRead();
             }
+            // If they are not available
+            catch (InvalidOperationException)
+            {
+                // Do nothing
+            }
+            // Disable the auto restarts
+            KeepRunning.Enabled = false;
+            RestartEvery.Enabled = false;
+            RestartAt.Enabled = false;
+            // Remove the server information
+            Process = null;
+            Build = null;
+            Folder = null;
+            // And notify the user
+            Logger.Info("The FiveM server has been stopped");
         }
         /// <summary>
         /// Sends a command to the FiveM server.
@@ -199,53 +233,8 @@ namespace LambentLight.Runtime
             }
 
             // Write the command and flush it
-            Server.Process.StandardInput.WriteLine(command);
-            Server.Process.StandardInput.Flush();
-        }
-
-        #endregion
-
-        #region Tools
-
-        private static RuntimeInformation GenerateClass(Build build, DataFolder data)
-        {
-            // Store the absolute path of the folder
-            string absolutePath = Path.GetFullPath(build.Folder);
-            string citizenPath = Path.Combine(absolutePath, "citizen");
-
-            // If the file being part of the build does not exists
-            if (!File.Exists(Path.Combine(absolutePath, "FXServer.exe")))
-            {
-                Logger.Error($"The installed build {build.ID} does not contains the server executable.");
-                return null;
-            }
-
-            // Create a new Server object
-            RuntimeInformation newServer = new RuntimeInformation();
-            // Create a new server object and set the correct properties
-            newServer.Process = new Process();
-            newServer.Process.StartInfo.FileName = Path.Combine(absolutePath, "FXServer.exe");
-            newServer.Process.StartInfo.Arguments += $"+set citizen_dir \"{citizenPath}\" ";
-            newServer.Process.StartInfo.Arguments += $"+set sv_licenseKey {Program.Config.CFXToken} ";
-            newServer.Process.StartInfo.Arguments += !string.IsNullOrWhiteSpace(Program.Config.SteamToken) ? "+set steam_webApiKey \"" + Program.Config.SteamToken + "\" " : "";
-            newServer.Process.StartInfo.Arguments += Program.Config.Game == Config.Game.RedDeadRedemption2 ? "+set gamename rdr3 " : "";
-            newServer.Process.StartInfo.Arguments += "+exec server.cfg";
-            newServer.Process.StartInfo.WorkingDirectory = data.Absolute;
-            newServer.Process.StartInfo.UseShellExecute = false;
-            newServer.Process.StartInfo.RedirectStandardError = true;
-            newServer.Process.StartInfo.RedirectStandardInput = true;
-            newServer.Process.StartInfo.RedirectStandardOutput = true;
-            newServer.Process.StartInfo.CreateNoWindow = true;
-            newServer.Process.OutputDataReceived += (S, A) => { if (!string.IsNullOrWhiteSpace(A.Data)) { Logger.Info(A.Data); } };
-            newServer.Process.ErrorDataReceived += (S, A) => { if (!string.IsNullOrWhiteSpace(A.Data)) { Logger.Error(A.Data); } };
-            newServer.Process.Start();
-            newServer.Process.BeginOutputReadLine();
-            newServer.Process.BeginErrorReadLine();
-            // Save the build and data folder
-            newServer.Build = build;
-            newServer.Folder = data;
-            // Finally, return the new class
-            return newServer;
+            Process.StandardInput.WriteLine(command);
+            Process.StandardInput.Flush();
         }
 
         #endregion
@@ -255,19 +244,18 @@ namespace LambentLight.Runtime
         /// <summary>
         /// Event that gets triggered to check if the server has crashed.
         /// </summary>
-        private static void RestartOnBadExitEvent(object sender, EventArgs args)
+        private static async void RestartOnBadExitEvent(object sender, EventArgs args)
         {
             // If the server exists, is not running and has an exit code of not zero
-            if (Server != null && !Server.Process.IsRunning() && Server.Process.ExitCode != 0)
+            if (Process != null && !Process.IsRunning() && Process.ExitCode != 0)
             {
                 // If the user wants to restart
                 if (Program.Config.RestartOnCrash)
                 {
                     // Log a message
-                    Logger.Warn("Server exited with a code {0}, restarting...", Server.Process.ExitCode);
+                    Logger.Warn("Server exited with a code {0}, restarting...", Process.ExitCode);
                     // And start the server again
-                    Server = GenerateClass(Server.Build, Server.Folder);
-                    Server.Process.Start();
+                    await Restart();
                 }
                 // Otherwise
                 else
@@ -277,9 +265,11 @@ namespace LambentLight.Runtime
                     // Unlock the controls
                     Program.Form.Locked = false;
                     // And log a message
-                    Logger.Warn("The FiveM server has exited with a code {0}", Server.Process.ExitCode);
+                    Logger.Warn("The FiveM server has exited with a code {0}", Process.ExitCode);
                     // Set the Server information to null
-                    Server = null;
+                    Process = null;
+                    Build = null;
+                    Folder = null;
                 }
             }
         }
