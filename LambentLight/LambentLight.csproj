@@ -81,6 +81,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="API\APIManager.cs" />
     <Compile Include="API\CitizenPlayer.cs" />
     <Compile Include="API\CitizenResponse.cs" />
     <Compile Include="Checks.cs" />
