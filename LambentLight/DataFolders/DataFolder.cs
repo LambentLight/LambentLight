@@ -118,25 +118,6 @@ namespace LambentLight.DataFolders
 
         #endregion
 
-        #region Private Functions
-
-        /// <summary>
-        /// Creates a secure string via RNGCryptoServiceProvider.
-        /// </summary>
-        /// <param name="Length">The desired lenght of the string.</param>
-        /// <returns>The secure string with the specified length.</returns>
-        private static string GenerateSecureString(int Length)
-        {
-            // Create a place to store the output
-            byte[] Output = new byte[Length];
-            // Create the random string as bytes
-            RNG.GetBytes(Output);
-            // And then, return that byte array as a string
-            return Convert.ToBase64String(Output);
-        }
-
-        #endregion
-
         #region Public Functions
 
         /// <summary>
@@ -147,14 +128,25 @@ namespace LambentLight.DataFolders
         {
             // Get the base configuration
             string baseConfig = Encoding.UTF8.GetString(Properties.Resources.ConfigurationTemplate);
-            // Generate the new configuration formatted with the RCON Password
-            // If the RCON Password sent is whitespaces or null, generate one with the "safe" function
-            string password = string.IsNullOrWhiteSpace(rconPassword) ? GenerateSecureString(32) : rconPassword;
+
+            // If there is no RCON Password, generate one
+            if (string.IsNullOrWhiteSpace(rconPassword))
+            {
+                // Create a place to store the output
+                byte[] randomBytes = new byte[32];
+                // Create the random string as bytes
+                RNG.GetBytes(randomBytes);
+                // And then, return that byte array as a string
+                rconPassword = Convert.ToBase64String(randomBytes);
+            }
+
+            // Convert the bool of the ScriptHook setting to a string with a number
             string scriptHook = allowScriptHook ? "1" : "0";
-            string newConfig = string.Format(baseConfig, password, scriptHook);
-            // Set the configuration
+            // To generate the new configuration
+            string newConfig = string.Format(baseConfig, rconPassword, scriptHook);
+
+            // And finally, save the configuration and return it
             Configuration = newConfig;
-            // Finally, return the new configuration
             return newConfig;
         }
 
