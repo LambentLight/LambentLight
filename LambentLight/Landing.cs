@@ -419,7 +419,7 @@ namespace LambentLight
             foreach (KeyValuePair<Resource, Managers.Version> Requirement in Collected)
             {
                 // And install it
-                await Folder.InstallResource(Requirement.Key, Requirement.Value);
+                await Folder.Install(Requirement.Key, Requirement.Value);
             }
 
             // If the user wants to auto-start the resource
