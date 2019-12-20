@@ -40,10 +40,10 @@ namespace LambentLight
             int Percentage = (int)((float)e.BytesReceived / e.TotalBytesToReceive * 100f);
 
             // Make a sanity check to ensure that the percentage is on the correct location
-            if (Percentage >= Program.Form.MainProgressBar.Minimum && Percentage <= Program.Form.MainProgressBar.Maximum)
+            if (Percentage >= Program.Form.GeneralProgressBar.Minimum && Percentage <= Program.Form.GeneralProgressBar.Maximum)
             {
                 // And set the value of the progress bar
-                Program.Form.MainProgressBar.Value = Percentage;
+                Program.Form.GeneralProgressBar.Value = Percentage;
             }
         }
 
@@ -67,7 +67,7 @@ namespace LambentLight
                 return false;
             }
             // Reset the progress of the health bar
-            Program.Form.MainProgressBar.Value = 0;
+            Program.Form.GeneralProgressBar.Value = 0;
             // Return that we have succeeded
             return true;
         }
@@ -85,7 +85,7 @@ namespace LambentLight
                 // Use the asynchronous method
                 string Output = Client.DownloadString(from);
                 // Reset the progress bar
-                Program.Form.MainProgressBar.Value = 0;
+                Program.Form.GeneralProgressBar.Value = 0;
                 // And return our string
                 return Output;
             }

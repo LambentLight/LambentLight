@@ -262,13 +262,13 @@ namespace LambentLight
 
         #region Server Console
 
-        private void ClearLogButton_Click(object sender, EventArgs e)
+        private void ConsoleClearButton_Click(object sender, EventArgs e)
         {
             // Just wipe everything on the LogTextBox
             ConsoleTextBox.Text = string.Empty;
         }
 
-        private void ConsoleButton_Click(object sender, EventArgs e)
+        private void ConsoleSendButton_Click(object sender, EventArgs e)
         {
             // Send the command to the server
             RuntimeManager.SendCommand(ConsoleInputTextBox.Text);
@@ -280,36 +280,36 @@ namespace LambentLight
 
         #region Resources - Already Installed
 
-        private void UninstallerListBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void InstalledListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             // If there is a resource to uninstall, enable the button
-            UninstallerRemoveButton.Enabled = UninstallerListBox.SelectedItem != null;
-            ResourceStartButton.Enabled = UninstallerListBox.SelectedItem != null && RuntimeManager.IsServerRunning;
-            ResourceRestartButton.Enabled = UninstallerListBox.SelectedItem != null && RuntimeManager.IsServerRunning;
-            ResourceStopButton.Enabled = UninstallerListBox.SelectedItem != null && RuntimeManager.IsServerRunning;
+            InstalledUninstallButton.Enabled = InstalledListBox.SelectedItem != null;
+            ResourceStartButton.Enabled = InstalledListBox.SelectedItem != null && RuntimeManager.IsServerRunning;
+            ResourceRestartButton.Enabled = InstalledListBox.SelectedItem != null && RuntimeManager.IsServerRunning;
+            ResourceStopButton.Enabled = InstalledListBox.SelectedItem != null && RuntimeManager.IsServerRunning;
         }
 
         private void ResourceStartButton_Click(object sender, EventArgs e)
         {
-            RuntimeManager.SendCommand($"start {UninstallerListBox.SelectedItem.ToString()}");
+            RuntimeManager.SendCommand($"start {InstalledListBox.SelectedItem.ToString()}");
         }
 
         private void ResourceRestartButton_Click(object sender, EventArgs e)
         {
-            RuntimeManager.SendCommand($"restart {UninstallerListBox.SelectedItem.ToString()}");
+            RuntimeManager.SendCommand($"restart {InstalledListBox.SelectedItem.ToString()}");
         }
 
         private void ResourceStopButton_Click(object sender, EventArgs e)
         {
-            RuntimeManager.SendCommand($"stop {UninstallerListBox.SelectedItem.ToString()}");
+            RuntimeManager.SendCommand($"stop {InstalledListBox.SelectedItem.ToString()}");
         }
 
-        private void UninstallerRefreshButton_Click(object sender, EventArgs e) => RefreshInstalledResources();
+        private void InstalledRefreshButton_Click(object sender, EventArgs e) => RefreshInstalledResources();
 
-        private void UninstallerRemoveButton_Click(object sender, EventArgs e)
+        private void InstalledUninstallButton_Click(object sender, EventArgs e)
         {
             // Get the resource that we are trying to uninstall
-            InstalledResource Installed = ((InstalledResource)UninstallerListBox.SelectedItem);
+            InstalledResource Installed = ((InstalledResource)InstalledListBox.SelectedItem);
             // Try to find the resource with the same folder as the one to be installed
             Resource Found = ResourceManager.Resources.Where(x => x.More.Install.Destination.ToLower() == Installed.Name.ToLower()).FirstOrDefault();
             // Select the correct name for the resource
@@ -496,18 +496,18 @@ namespace LambentLight
             ResourceStartButton.Enabled = false;
             ResourceRestartButton.Enabled = false;
             ResourceStopButton.Enabled = false;
-            UninstallerRemoveButton.Enabled = false;
+            InstalledUninstallButton.Enabled = false;
 
             // If there is no server data folder selected or it does not exists
             if (DataFolderComboBox.SelectedItem == null || !((DataFolder)DataFolderComboBox.SelectedItem).Exists)
             {
                 // Wipe all of the items and return
-                UninstallerListBox.Items.Clear();
+                InstalledListBox.Items.Clear();
                 return;
             }
 
             // Update the list of installed resources
-            UninstallerListBox.Fill(((DataFolder)DataFolderComboBox.SelectedItem).InstalledResources);
+            InstalledListBox.Fill(((DataFolder)DataFolderComboBox.SelectedItem).InstalledResources);
         }
         private void RefreshResourceInstaller()
         {

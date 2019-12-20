@@ -42,20 +42,20 @@
             this.RestartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CreateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.LogsTabPage = new System.Windows.Forms.TabPage();
+            this.ConsoleTabPage = new System.Windows.Forms.TabPage();
             this.ConsoleClearButton = new System.Windows.Forms.Button();
             this.ConsoleSendButton = new System.Windows.Forms.Button();
             this.ConsoleInputTextBox = new System.Windows.Forms.TextBox();
             this.ConsoleTextBox = new System.Windows.Forms.TextBox();
             this.MainTabControl = new System.Windows.Forms.TabControl();
             this.ResourcesTabPage = new System.Windows.Forms.TabPage();
-            this.UninstallerGroupBox = new System.Windows.Forms.GroupBox();
+            this.InstalledGroupBox = new System.Windows.Forms.GroupBox();
             this.ResourceRestartButton = new System.Windows.Forms.Button();
             this.ResourceStopButton = new System.Windows.Forms.Button();
             this.ResourceStartButton = new System.Windows.Forms.Button();
-            this.UninstallerRefreshButton = new System.Windows.Forms.Button();
-            this.UninstallerListBox = new System.Windows.Forms.ListBox();
-            this.UninstallerRemoveButton = new System.Windows.Forms.Button();
+            this.InstalledRefreshButton = new System.Windows.Forms.Button();
+            this.InstalledListBox = new System.Windows.Forms.ListBox();
+            this.InstalledUninstallButton = new System.Windows.Forms.Button();
             this.InstallerGroupBox = new System.Windows.Forms.GroupBox();
             this.InstallerInstallButton = new System.Windows.Forms.Button();
             this.InstallerRefreshButton = new System.Windows.Forms.Button();
@@ -70,7 +70,7 @@
             this.BuildsImportButton = new System.Windows.Forms.Button();
             this.AboutTabPage = new System.Windows.Forms.TabPage();
             this.AboutRichTextBox = new System.Windows.Forms.RichTextBox();
-            this.MainProgressBar = new System.Windows.Forms.ProgressBar();
+            this.GeneralProgressBar = new System.Windows.Forms.ProgressBar();
             this.BottomStrip = new System.Windows.Forms.StatusStrip();
             this.BottomToolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.BuildFileDialog = new System.Windows.Forms.OpenFileDialog();
@@ -79,10 +79,10 @@
             this.BuildsGroupBox.SuspendLayout();
             this.DataFolderGroupBox.SuspendLayout();
             this.TopMenuStrip.SuspendLayout();
-            this.LogsTabPage.SuspendLayout();
+            this.ConsoleTabPage.SuspendLayout();
             this.MainTabControl.SuspendLayout();
             this.ResourcesTabPage.SuspendLayout();
-            this.UninstallerGroupBox.SuspendLayout();
+            this.InstalledGroupBox.SuspendLayout();
             this.InstallerGroupBox.SuspendLayout();
             this.ConfigurationTabPage.SuspendLayout();
             this.BuildsTabPage.SuspendLayout();
@@ -241,19 +241,19 @@
             this.SettingsToolStripMenuItem.Text = "Application Settings";
             this.SettingsToolStripMenuItem.Click += new System.EventHandler(this.SettingsToolStripMenuItem_Click);
             // 
-            // LogsTabPage
+            // ConsoleTabPage
             // 
-            this.LogsTabPage.Controls.Add(this.ConsoleClearButton);
-            this.LogsTabPage.Controls.Add(this.ConsoleSendButton);
-            this.LogsTabPage.Controls.Add(this.ConsoleInputTextBox);
-            this.LogsTabPage.Controls.Add(this.ConsoleTextBox);
-            this.LogsTabPage.Location = new System.Drawing.Point(4, 22);
-            this.LogsTabPage.Name = "LogsTabPage";
-            this.LogsTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.LogsTabPage.Size = new System.Drawing.Size(743, 294);
-            this.LogsTabPage.TabIndex = 0;
-            this.LogsTabPage.Text = "Console";
-            this.LogsTabPage.UseVisualStyleBackColor = true;
+            this.ConsoleTabPage.Controls.Add(this.ConsoleClearButton);
+            this.ConsoleTabPage.Controls.Add(this.ConsoleSendButton);
+            this.ConsoleTabPage.Controls.Add(this.ConsoleInputTextBox);
+            this.ConsoleTabPage.Controls.Add(this.ConsoleTextBox);
+            this.ConsoleTabPage.Location = new System.Drawing.Point(4, 22);
+            this.ConsoleTabPage.Name = "ConsoleTabPage";
+            this.ConsoleTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.ConsoleTabPage.Size = new System.Drawing.Size(743, 294);
+            this.ConsoleTabPage.TabIndex = 0;
+            this.ConsoleTabPage.Text = "Console";
+            this.ConsoleTabPage.UseVisualStyleBackColor = true;
             // 
             // ConsoleClearButton
             // 
@@ -264,7 +264,7 @@
             this.ConsoleClearButton.TabIndex = 3;
             this.ConsoleClearButton.Text = "Clear";
             this.ConsoleClearButton.UseVisualStyleBackColor = true;
-            this.ConsoleClearButton.Click += new System.EventHandler(this.ClearLogButton_Click);
+            this.ConsoleClearButton.Click += new System.EventHandler(this.ConsoleClearButton_Click);
             // 
             // ConsoleSendButton
             // 
@@ -275,7 +275,7 @@
             this.ConsoleSendButton.TabIndex = 2;
             this.ConsoleSendButton.Text = "Send";
             this.ConsoleSendButton.UseVisualStyleBackColor = true;
-            this.ConsoleSendButton.Click += new System.EventHandler(this.ConsoleButton_Click);
+            this.ConsoleSendButton.Click += new System.EventHandler(this.ConsoleSendButton_Click);
             // 
             // ConsoleInputTextBox
             // 
@@ -304,7 +304,7 @@
             this.MainTabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.MainTabControl.Controls.Add(this.LogsTabPage);
+            this.MainTabControl.Controls.Add(this.ConsoleTabPage);
             this.MainTabControl.Controls.Add(this.ResourcesTabPage);
             this.MainTabControl.Controls.Add(this.ConfigurationTabPage);
             this.MainTabControl.Controls.Add(this.BuildsTabPage);
@@ -318,7 +318,7 @@
             // 
             // ResourcesTabPage
             // 
-            this.ResourcesTabPage.Controls.Add(this.UninstallerGroupBox);
+            this.ResourcesTabPage.Controls.Add(this.InstalledGroupBox);
             this.ResourcesTabPage.Controls.Add(this.InstallerGroupBox);
             this.ResourcesTabPage.Location = new System.Drawing.Point(4, 22);
             this.ResourcesTabPage.Name = "ResourcesTabPage";
@@ -328,22 +328,22 @@
             this.ResourcesTabPage.Text = "Resources";
             this.ResourcesTabPage.UseVisualStyleBackColor = true;
             // 
-            // UninstallerGroupBox
+            // InstalledGroupBox
             // 
-            this.UninstallerGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.InstalledGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.UninstallerGroupBox.Controls.Add(this.ResourceRestartButton);
-            this.UninstallerGroupBox.Controls.Add(this.ResourceStopButton);
-            this.UninstallerGroupBox.Controls.Add(this.ResourceStartButton);
-            this.UninstallerGroupBox.Controls.Add(this.UninstallerRefreshButton);
-            this.UninstallerGroupBox.Controls.Add(this.UninstallerListBox);
-            this.UninstallerGroupBox.Controls.Add(this.UninstallerRemoveButton);
-            this.UninstallerGroupBox.Location = new System.Drawing.Point(6, 6);
-            this.UninstallerGroupBox.Name = "UninstallerGroupBox";
-            this.UninstallerGroupBox.Size = new System.Drawing.Size(262, 267);
-            this.UninstallerGroupBox.TabIndex = 2;
-            this.UninstallerGroupBox.TabStop = false;
-            this.UninstallerGroupBox.Text = "Installed";
+            this.InstalledGroupBox.Controls.Add(this.ResourceRestartButton);
+            this.InstalledGroupBox.Controls.Add(this.ResourceStopButton);
+            this.InstalledGroupBox.Controls.Add(this.ResourceStartButton);
+            this.InstalledGroupBox.Controls.Add(this.InstalledRefreshButton);
+            this.InstalledGroupBox.Controls.Add(this.InstalledListBox);
+            this.InstalledGroupBox.Controls.Add(this.InstalledUninstallButton);
+            this.InstalledGroupBox.Location = new System.Drawing.Point(6, 6);
+            this.InstalledGroupBox.Name = "InstalledGroupBox";
+            this.InstalledGroupBox.Size = new System.Drawing.Size(262, 267);
+            this.InstalledGroupBox.TabIndex = 2;
+            this.InstalledGroupBox.TabStop = false;
+            this.InstalledGroupBox.Text = "Installed";
             // 
             // ResourceRestartButton
             // 
@@ -379,40 +379,40 @@
             this.ResourceStartButton.UseVisualStyleBackColor = true;
             this.ResourceStartButton.Click += new System.EventHandler(this.ResourceStartButton_Click);
             // 
-            // UninstallerRefreshButton
+            // InstalledRefreshButton
             // 
-            this.UninstallerRefreshButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.UninstallerRefreshButton.Location = new System.Drawing.Point(6, 238);
-            this.UninstallerRefreshButton.Name = "UninstallerRefreshButton";
-            this.UninstallerRefreshButton.Size = new System.Drawing.Size(122, 23);
-            this.UninstallerRefreshButton.TabIndex = 2;
-            this.UninstallerRefreshButton.Text = "Refresh";
-            this.UninstallerRefreshButton.UseVisualStyleBackColor = true;
-            this.UninstallerRefreshButton.Click += new System.EventHandler(this.UninstallerRefreshButton_Click);
+            this.InstalledRefreshButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.InstalledRefreshButton.Location = new System.Drawing.Point(6, 238);
+            this.InstalledRefreshButton.Name = "InstalledRefreshButton";
+            this.InstalledRefreshButton.Size = new System.Drawing.Size(122, 23);
+            this.InstalledRefreshButton.TabIndex = 2;
+            this.InstalledRefreshButton.Text = "Refresh";
+            this.InstalledRefreshButton.UseVisualStyleBackColor = true;
+            this.InstalledRefreshButton.Click += new System.EventHandler(this.InstalledRefreshButton_Click);
             // 
-            // UninstallerListBox
+            // InstalledListBox
             // 
-            this.UninstallerListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.InstalledListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.UninstallerListBox.FormattingEnabled = true;
-            this.UninstallerListBox.Location = new System.Drawing.Point(6, 19);
-            this.UninstallerListBox.Name = "UninstallerListBox";
-            this.UninstallerListBox.Size = new System.Drawing.Size(250, 186);
-            this.UninstallerListBox.TabIndex = 1;
-            this.UninstallerListBox.SelectedIndexChanged += new System.EventHandler(this.UninstallerListBox_SelectedIndexChanged);
+            this.InstalledListBox.FormattingEnabled = true;
+            this.InstalledListBox.Location = new System.Drawing.Point(6, 19);
+            this.InstalledListBox.Name = "InstalledListBox";
+            this.InstalledListBox.Size = new System.Drawing.Size(250, 186);
+            this.InstalledListBox.TabIndex = 1;
+            this.InstalledListBox.SelectedIndexChanged += new System.EventHandler(this.InstalledListBox_SelectedIndexChanged);
             // 
-            // UninstallerRemoveButton
+            // InstalledUninstallButton
             // 
-            this.UninstallerRemoveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.UninstallerRemoveButton.Enabled = false;
-            this.UninstallerRemoveButton.Location = new System.Drawing.Point(134, 238);
-            this.UninstallerRemoveButton.Name = "UninstallerRemoveButton";
-            this.UninstallerRemoveButton.Size = new System.Drawing.Size(122, 23);
-            this.UninstallerRemoveButton.TabIndex = 0;
-            this.UninstallerRemoveButton.Text = "Uninstall";
-            this.UninstallerRemoveButton.UseVisualStyleBackColor = true;
-            this.UninstallerRemoveButton.Click += new System.EventHandler(this.UninstallerRemoveButton_Click);
+            this.InstalledUninstallButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.InstalledUninstallButton.Enabled = false;
+            this.InstalledUninstallButton.Location = new System.Drawing.Point(134, 238);
+            this.InstalledUninstallButton.Name = "InstalledUninstallButton";
+            this.InstalledUninstallButton.Size = new System.Drawing.Size(122, 23);
+            this.InstalledUninstallButton.TabIndex = 0;
+            this.InstalledUninstallButton.Text = "Uninstall";
+            this.InstalledUninstallButton.UseVisualStyleBackColor = true;
+            this.InstalledUninstallButton.Click += new System.EventHandler(this.InstalledUninstallButton_Click);
             // 
             // InstallerGroupBox
             // 
@@ -587,14 +587,14 @@
             this.AboutRichTextBox.TabIndex = 0;
             this.AboutRichTextBox.Text = "";
             // 
-            // MainProgressBar
+            // GeneralProgressBar
             // 
-            this.MainProgressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.GeneralProgressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.MainProgressBar.Location = new System.Drawing.Point(36, 396);
-            this.MainProgressBar.Name = "MainProgressBar";
-            this.MainProgressBar.Size = new System.Drawing.Size(751, 23);
-            this.MainProgressBar.TabIndex = 4;
+            this.GeneralProgressBar.Location = new System.Drawing.Point(36, 396);
+            this.GeneralProgressBar.Name = "GeneralProgressBar";
+            this.GeneralProgressBar.Size = new System.Drawing.Size(751, 23);
+            this.GeneralProgressBar.TabIndex = 4;
             // 
             // BottomStrip
             // 
@@ -637,7 +637,7 @@
             this.GameComboBox.TabIndex = 0;
             this.GameComboBox.SelectedIndexChanged += new System.EventHandler(this.GameComboBox_SelectedIndexChanged);
             // 
-            // Landing
+            // FormLanding
             // 
             this.AcceptButton = this.ConsoleSendButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -645,14 +645,14 @@
             this.ClientSize = new System.Drawing.Size(799, 444);
             this.Controls.Add(this.GameGroupBox);
             this.Controls.Add(this.BottomStrip);
-            this.Controls.Add(this.MainProgressBar);
+            this.Controls.Add(this.GeneralProgressBar);
             this.Controls.Add(this.MainTabControl);
             this.Controls.Add(this.DataFolderGroupBox);
             this.Controls.Add(this.TopMenuStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.TopMenuStrip;
             this.MinimumSize = new System.Drawing.Size(815, 483);
-            this.Name = "Landing";
+            this.Name = "FormLanding";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LambentLight: A FiveM Server Manager";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Landing_FormClosing);
@@ -661,11 +661,11 @@
             this.DataFolderGroupBox.ResumeLayout(false);
             this.TopMenuStrip.ResumeLayout(false);
             this.TopMenuStrip.PerformLayout();
-            this.LogsTabPage.ResumeLayout(false);
-            this.LogsTabPage.PerformLayout();
+            this.ConsoleTabPage.ResumeLayout(false);
+            this.ConsoleTabPage.PerformLayout();
             this.MainTabControl.ResumeLayout(false);
             this.ResourcesTabPage.ResumeLayout(false);
-            this.UninstallerGroupBox.ResumeLayout(false);
+            this.InstalledGroupBox.ResumeLayout(false);
             this.InstallerGroupBox.ResumeLayout(false);
             this.ConfigurationTabPage.ResumeLayout(false);
             this.ConfigurationTabPage.PerformLayout();
@@ -687,7 +687,7 @@
         private System.Windows.Forms.MenuStrip TopMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem StartToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem StopToolStripMenuItem;
-        private System.Windows.Forms.TabPage LogsTabPage;
+        private System.Windows.Forms.TabPage ConsoleTabPage;
         private System.Windows.Forms.TabControl MainTabControl;
         private System.Windows.Forms.ToolStripMenuItem CreateToolStripMenuItem;
         private System.Windows.Forms.Button BuildsRefreshButton;
@@ -699,7 +699,7 @@
         private System.Windows.Forms.ListBox InstallerResourcesListBox;
         private System.Windows.Forms.Button InstallerRefreshButton;
         public System.Windows.Forms.TextBox ConsoleTextBox;
-        public System.Windows.Forms.ProgressBar MainProgressBar;
+        public System.Windows.Forms.ProgressBar GeneralProgressBar;
         private System.Windows.Forms.StatusStrip BottomStrip;
         public System.Windows.Forms.ToolStripStatusLabel BottomToolStripStatusLabel;
         private System.Windows.Forms.TabPage ConfigurationTabPage;
@@ -711,10 +711,10 @@
         private System.Windows.Forms.TextBox ConsoleInputTextBox;
         private System.Windows.Forms.TabPage AboutTabPage;
         private System.Windows.Forms.RichTextBox AboutRichTextBox;
-        private System.Windows.Forms.GroupBox UninstallerGroupBox;
-        private System.Windows.Forms.Button UninstallerRemoveButton;
-        private System.Windows.Forms.ListBox UninstallerListBox;
-        private System.Windows.Forms.Button UninstallerRefreshButton;
+        private System.Windows.Forms.GroupBox InstalledGroupBox;
+        private System.Windows.Forms.Button InstalledUninstallButton;
+        private System.Windows.Forms.ListBox InstalledListBox;
+        private System.Windows.Forms.Button InstalledRefreshButton;
         private System.Windows.Forms.ToolStripMenuItem SettingsToolStripMenuItem;
         private System.Windows.Forms.TabPage BuildsTabPage;
         private System.Windows.Forms.ListBox BuildsListBox;
