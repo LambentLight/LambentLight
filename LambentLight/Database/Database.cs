@@ -1,4 +1,4 @@
-﻿using MySql.Data.MySqlClient;
+using MySql.Data.MySqlClient;
 using NLog;
 using System;
 
@@ -9,14 +9,25 @@ namespace LambentLight.Database
     /// </summary>
     public static class DatabaseManager
     {
+        #region Private Fields
+
         /// <summary>
         /// The logger for our current class.
         /// </summary>
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+        #endregion
+
+        #region Public Properties
+
         /// <summary>
         /// The MySQL connection.
         /// </summary>
         public static MySqlConnection Connection { get; private set; } = null;
+
+        #endregion
+
+        #region Public Functions
 
         /// <summary>
         /// Tries to connect into the database from the configuration.
@@ -53,5 +64,7 @@ namespace LambentLight.Database
                 return false;
             }
         }
+
+        #endregion
     }
 }
