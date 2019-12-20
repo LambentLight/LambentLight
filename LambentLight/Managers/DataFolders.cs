@@ -1,3 +1,4 @@
+using LambentLight.Database;
 using MySql.Data.MySqlClient;
 using NLog;
 using System;

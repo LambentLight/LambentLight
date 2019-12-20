@@ -2,7 +2,7 @@
 using NLog;
 using System;
 
-namespace LambentLight.Managers
+namespace LambentLight.Database
 {
     /// <summary>
     /// A manager for the MySQL Database.
