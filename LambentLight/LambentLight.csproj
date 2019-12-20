@@ -84,6 +84,9 @@
     <Compile Include="API\APIManager.cs" />
     <Compile Include="API\CitizenPlayer.cs" />
     <Compile Include="API\CitizenResponse.cs" />
+    <Compile Include="Builds\Build.cs" />
+    <Compile Include="Builds\BuildConverter.cs" />
+    <Compile Include="Builds\BuildManager.cs" />
     <Compile Include="Checks.cs" />
     <Compile Include="Compression.cs" />
     <Compile Include="Configurator.cs">
@@ -105,7 +108,6 @@
     <Compile Include="Downloader.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Locations.cs" />
-    <Compile Include="Managers\Builds.cs" />
     <Compile Include="Managers\Database.cs" />
     <Compile Include="Managers\DataFolders.cs" />
     <Compile Include="Extensions\ListControlExtensions.cs" />
@@ -160,5 +162,6 @@
     <None Include="Resources\Play.png" />
     <None Include="Resources\Add.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
