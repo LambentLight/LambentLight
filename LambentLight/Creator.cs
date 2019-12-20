@@ -41,23 +41,25 @@ namespace LambentLight
 
         private void CreateButton_Click(object sender, EventArgs e)
         {
-            // If the name is null or empty
+            // If the text is whitespaces or null, notify the user and return
             if (string.IsNullOrWhiteSpace(NameTextBox.Text))
             {
-                // Notify the user and return
                 MessageBox.Show("Looks like the Folder Name is empty, please check that the name is valid and try again.", "Invalid Name", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            // Create a new server data folder
+            // Create the object for the data folder
             DataFolder folder = new DataFolder(NameTextBox.Text);
+
             // If the folder does not exists
             if (folder.Exists)
             {
-                // Ask the user if he wants to replace it
-                if (MessageBox.Show("This Data Folder already exists, do you want to replace it?", "Folder Already Exists", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                // Ask the user if he wants to replace the existing folder
+                DialogResult result = MessageBox.Show("This Data Folder already exists, do you want to replace it?", "Folder Already Exists", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                // If he does, delete it
+                if (result == DialogResult.Yes)
                 {
-                    // If he does, delete it
                     folder.Remove();
                 }
                 // Otherwise, return
@@ -67,7 +69,7 @@ namespace LambentLight
                 }
             }
 
-            // Save it and close the form
+            // Finally, save it and close the form
             NewDataFolder = folder;
             Close();
         }
