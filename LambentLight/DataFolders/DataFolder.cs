@@ -287,10 +287,11 @@ namespace LambentLight.DataFolders
             // And finally, notify that we have finished
             Logger.Info("Done! {0} {1} has been installed", resource.Name, version.ReadableVersion);
         }
-
         /// <summary>
-        /// Deletes the existing folder and creates it again.
+        /// Deletes the existing data folder and creates it again.
         /// </summary>
+        /// <param name="rconPassword">The password .</param>
+        /// <param name="allowScriptHook"></param>
         public async Task Recreate(string rconPassword = null, bool allowScriptHook = false)
         {
             // Literally dispose the existing folder
@@ -298,16 +299,14 @@ namespace LambentLight.DataFolders
             // Then call the create data folder again
             await DataFolderManager.Create(Name, rconPassword, allowScriptHook);
         }
-
         /// <summary>
         /// Deletes the folder.
         /// </summary>
         public void Remove()
         {
-            // If the folder exists
+            // If the folder exists, delete it
             if (Exists)
             {
-                // Delete it
                 Directory.Delete(Location, true);
             }
         }
