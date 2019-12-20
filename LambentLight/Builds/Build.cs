@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using NLog;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace LambentLight.Builds
 {
@@ -7,6 +9,19 @@ namespace LambentLight.Builds
     /// </summary>
     public class Build
     {
+        #region Private Fields
+
+        /// <summary>
+        /// The logger for our current class.
+        /// </summary>
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+        /// </summary>
+        /// The download URL for a specific operating system.
+        /// </summary>
+        private static readonly string DownloadBuild = "https://runtime.fivem.net/artifacts/fivem/build_server_windows/master/{0}/server.zip";
+
+        #endregion
+
         #region Public Properties
 
         /// <summary>
@@ -45,6 +60,41 @@ namespace LambentLight.Builds
             // And the other properties that we need
             Folder = Path.Combine(Locations.BuildsForOS, ID);
             Executable = Path.Combine(Folder, "FXServer.exe");
+        }
+
+        #endregion
+
+        #region Public Functions
+
+        /// <summary>
+        /// Downloads this build from the CFX Servers.
+        /// </summary>
+        public async Task<bool> Download()
+        {
+            // Log that we are starting the download
+            Logger.Info("Downloading Build {0}...", ID);
+
+            // Make sure that the Builds folder exists
+            Locations.EnsureBuildsFolder();
+
+            // Create the Uri and destination location
+            string downloadPath = Path.Combine(Locations.Temp, ID + ".zip");
+            // Try to download the file from the location
+            bool success = await Downloader.DownloadFile(string.Format(DownloadBuild, ID), downloadPath);
+
+            // If the download was not completed, return failure
+            if (!success)
+            {
+                return false;
+            }
+
+            // Tell the manager to install the build
+            await BuildManager.Install(downloadPath, ID);
+            // Delete the temporary ZIP file
+            File.Delete(downloadPath);
+
+            // At this point, return success
+            return true;
         }
 
         #endregion

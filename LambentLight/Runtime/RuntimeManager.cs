@@ -80,7 +80,7 @@ namespace LambentLight.Runtime
             if (!build.IsFolderPresent || !build.IsExecutablePresent)
             {
                 // Try to download the CFX Build
-                bool success = await BuildManager.Download(build);
+                bool success = await build.Download();
 
                 // If we failed, notify the user about it and return
                 if (!success)

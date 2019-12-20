@@ -1,11 +1,9 @@
 ﻿using NLog;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace LambentLight.Builds
 {
@@ -24,10 +22,6 @@ namespace LambentLight.Builds
         /// The download URL for the current operating system.
         /// </summary>
         private static readonly string DownloadURL = $"{Program.Config.Builds}/builds.json";
-        /// </summary>
-        /// The download URL for a specific operating system.
-        /// </summary>
-        private static readonly string DownloadBuild = "https://runtime.fivem.net/artifacts/fivem/build_server_windows/master/{0}/server.zip";
 
         #endregion
 
@@ -73,86 +67,47 @@ namespace LambentLight.Builds
         }
 
         /// <summary>
-        /// Downloads the specified build.
+        /// Installs the specified build from a compressed file.
         /// </summary>
-        /// <param name="build">The build to download.</param>
-        public static async Task<bool> Download(Build build)
-        {
-            // If we are running on Linux
-            if (Checks.IsLinux)
-            {
-                // Say that we do not support the automatic download of builds
-                DialogResult Result = MessageBox.Show("Sorry, but we can't download builds right now due to a decompression problem.\nDo you want to open the build on your browser so it can be installed manually?", "Impossible to download", MessageBoxButtons.YesNo);
-                // If the user wants download the build manually
-                if (Result == DialogResult.Yes)
-                {
-                    // Open it up on the browser
-                    Process.Start(string.Format(DownloadBuild, build.ID));
-                }
-            }
-
-            // Log that we are starting the download
-            Logger.Info("Build {0} is not available, downloading...", build.ID);
-
-            // If the builds folder does not exists, create it
-            Locations.EnsureBuildsFolder();
-
-            // Create the Uri and destination location
-            string Destination = Path.Combine(Locations.Temp, build.ID + (Checks.IsWindows ? ".zip" : ".tar.xz"));
-
-            // Try to download the file, and save if we succeeded
-            bool success = await Downloader.DownloadFile(string.Format(DownloadBuild, build.ID), Destination);
-
-            // If we didn't completed the download, return failure
-            if (!success)
-            {
-                return false;
-            }
-
-            // Log that we have finished the download
-            Logger.Info("The download of build {0} has finished, starting extraction...", build.ID);
-            // Install the build from the ZIP file
-            await Install(Destination, build.ID);
-            // Delete the temporary ZIP file
-            File.Delete(Destination);
-
-            // At this point, return success
-            return true;
-        }
-
+        /// <param name="file">The build in a compressed file.</param>
+        /// <param name="name">The name or hash of the build.</param>
         public static async Task Install(string file, string name = null)
         {
             // If the name is null or whitespaces
             if (string.IsNullOrWhiteSpace(name))
             {
-                // Hash the file and use that as the name
+                // Open the file
                 using (FileStream stream = File.OpenRead(file))
-                using (BufferedStream buffered = new BufferedStream(stream))
                 using (SHA1Managed sha = new SHA1Managed())
                 {
-                    byte[] checksum = sha.ComputeHash(buffered);
+                    // Calculate the checksum of it
+                    byte[] checksum = sha.ComputeHash(stream);
+                    // And convert it to a string so we can use it
                     string hash = BitConverter.ToString(checksum).Replace("-", "").ToLowerInvariant();
-
+                    // Finally, format the checksum so we 
                     name = $"custom-{hash}";
                 }
             }
 
+            // Log that we have started the installation of this build
+            Logger.Info("Installing build {0}...", name);
+
             // Create the path of the folder
             string path = Path.Combine(Locations.BuildsForOS, name);
 
-            // If the current build folder exists, delete it
+            // If the build folder exists, delete it
             if (Directory.Exists(path))
             {
                 Directory.Delete(path, true);
             }
-            // Create the folder for the files
+            // And create a new one
             Directory.CreateDirectory(path);
 
-            // Finally, extract the values
+            // Finally, extract the contents of the file
             await Compression.Extract(file, path);
 
             // Log that we have finished the extraction
-            Logger.Info("Build {0} is now available for the server", name);
+            Logger.Info("CFX Build {0} has been installed", name);
         }
 
         #endregion
