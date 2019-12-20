@@ -98,11 +98,11 @@
     <Compile Include="Config\Configuration.cs" />
     <Compile Include="Config\Creator.cs" />
     <Compile Include="Config\MySQL.cs" />
-    <Compile Include="Creator.cs">
+    <Compile Include="FormCreator.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Creator.Designer.cs">
-      <DependentUpon>Creator.cs</DependentUpon>
+    <Compile Include="FormCreator.Designer.cs">
+      <DependentUpon>FormCreator.cs</DependentUpon>
     </Compile>
     <Compile Include="DataFolders\DataFolder.cs" />
     <Compile Include="DataFolders\DataFolderManager.cs" />
@@ -128,8 +128,8 @@
     <EmbeddedResource Include="FormConfig.resx">
       <DependentUpon>FormConfig.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Creator.resx">
-      <DependentUpon>Creator.cs</DependentUpon>
+    <EmbeddedResource Include="FormCreator.resx">
+      <DependentUpon>FormCreator.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormLanding.resx">
       <DependentUpon>FormLanding.cs</DependentUpon>
