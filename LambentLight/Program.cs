@@ -13,7 +13,7 @@ namespace LambentLight
         /// <summary>
         /// The main form of our application.
         /// </summary>
-        public static Landing Form;
+        public static FormLanding Form;
 
         /// <summary>
         /// The main entry point for the application.
@@ -27,7 +27,7 @@ namespace LambentLight
             Application.SetCompatibleTextRenderingDefault(false);
 
             // Create our main form
-            Form = new Landing();
+            Form = new FormLanding();
             // Prepare the downloader for our operations
             Downloader.Prepare();
             // And run the application with our main form

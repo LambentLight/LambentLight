@@ -112,11 +112,11 @@
     <Compile Include="Database\DatabaseManager.cs" />
     <Compile Include="DataFolders\InstalledResource.cs" />
     <Compile Include="Extensions\ListControlExtensions.cs" />
-    <Compile Include="Landing.cs">
+    <Compile Include="FormLanding.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Landing.Designer.cs">
-      <DependentUpon>Landing.cs</DependentUpon>
+    <Compile Include="FormLanding.Designer.cs">
+      <DependentUpon>FormLanding.cs</DependentUpon>
     </Compile>
     <Compile Include="Patterns.cs" />
     <Compile Include="Program.cs" />
@@ -131,8 +131,8 @@
     <EmbeddedResource Include="Creator.resx">
       <DependentUpon>Creator.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Landing.resx">
-      <DependentUpon>Landing.cs</DependentUpon>
+    <EmbeddedResource Include="FormLanding.resx">
+      <DependentUpon>FormLanding.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

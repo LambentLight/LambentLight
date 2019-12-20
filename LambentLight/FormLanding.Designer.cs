@@ -1,6 +1,6 @@
 ﻿namespace LambentLight
 {
-    partial class Landing
+    partial class FormLanding
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Landing));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormLanding));
             this.BuildsGroupBox = new System.Windows.Forms.GroupBox();
             this.BuildsListBox = new System.Windows.Forms.ListBox();
             this.BuildsRefreshButton = new System.Windows.Forms.Button();

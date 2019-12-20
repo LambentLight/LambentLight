@@ -20,7 +20,7 @@ using System.Windows.Forms;
 
 namespace LambentLight
 {
-    public partial class Landing : Form
+    public partial class FormLanding : Form
     {
         #region Properties
 
@@ -59,7 +59,7 @@ namespace LambentLight
 
         #region Constructor and Loading
 
-        public Landing()
+        public FormLanding()
         {
             // Initialize the UI elements
             InitializeComponent();
