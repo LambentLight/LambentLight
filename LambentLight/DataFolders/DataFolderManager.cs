@@ -10,14 +10,25 @@ namespace LambentLight.DataFolders
     /// </summary>
     public static class DataFolderManager
     {
+        #region Private Fields
+
         /// <summary>
         /// The logger for our current class.
         /// </summary>
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+        #endregion
+
+        #region Public Properties
+
         /// <summary>
         /// Our current set of data folders.
         /// </summary>
         public static List<DataFolder> Folders { get; private set; } = new List<DataFolder>();
+
+        #endregion
+
+        #region Public Functions
 
         /// <summary>
         /// Refreshes the builds with data.
@@ -114,5 +125,7 @@ namespace LambentLight.DataFolders
             // Finally, return the data object
             return NewFolder;
         }
+
+        #endregion
     }
 }
