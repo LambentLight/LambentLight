@@ -119,7 +119,7 @@ namespace LambentLight.Runtime
             // And finally load the server configuration file
             process.StartInfo.Arguments += "+exec server.cfg";
             // Then, set the working directory as the server data folder
-            process.StartInfo.WorkingDirectory = folder.Absolute;
+            process.StartInfo.WorkingDirectory = folder.Location;
             // Disable the usage of CMD to launch the process
             process.StartInfo.UseShellExecute = false;
             // Intercept STDOUT, STDIN and STDERR to the program

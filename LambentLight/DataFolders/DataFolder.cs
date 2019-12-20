@@ -39,7 +39,15 @@ namespace LambentLight.DataFolders
         /// <summary>
         /// The location of the server data folder
         /// </summary>
-        public string Location => Path.Combine(Locations.Data, Name);
+        public string Location { get; private set; }
+        /// <summary>
+        /// The path of the Configuration file.
+        /// </summary>
+        public string ConfigurationPath { get; private set; }
+        /// <summary>
+        /// The location of the resources folder.
+        /// </summary>
+        public string Resources { get; private set; }
         /// <summary>
         /// If the data folder exists.
         /// </summary>
@@ -47,15 +55,7 @@ namespace LambentLight.DataFolders
         /// <summary>
         /// If the folder has a FiveM server configuration file.
         /// </summary>
-        public bool HasConfiguration => File.Exists(Path.Combine(Location, "server.cfg"));
-        /// <summary>
-        /// The absolute path of the data folder.
-        /// </summary>
-        public string Absolute => Path.GetFullPath(Location);
-        /// <summary>
-        /// The location of the resources folder.
-        /// </summary>
-        public string Resources => Path.Combine(Absolute, "resources");
+        public bool HasConfiguration => File.Exists(ConfigurationPath);
         /// <summary>
         /// 
         /// </summary>
@@ -91,7 +91,7 @@ namespace LambentLight.DataFolders
                 // If there is a server configuration file
                 if (HasConfiguration)
                 {
-                    return string.Join(Environment.NewLine, File.ReadAllLines(Path.Combine(Absolute, "server.cfg"))) + Environment.NewLine;
+                    return string.Join(Environment.NewLine, File.ReadAllLines(Path.Combine(Location, "server.cfg"))) + Environment.NewLine;
                 }
                 // Otherwise, return a generic string
                 return "# This server data folder does not has a configuration file";
@@ -99,7 +99,7 @@ namespace LambentLight.DataFolders
             set
             {
                 // Write the string to the file
-                File.WriteAllText(Path.Combine(Absolute, "server.cfg"), value);
+                File.WriteAllText(Path.Combine(Location, "server.cfg"), value);
                 // Log that we just saved the configuration
                 Logger.Info("The configuration of {0} has been saved", Name);
             }
@@ -116,6 +116,9 @@ namespace LambentLight.DataFolders
         public DataFolder(string name)
         {
             Name = name;
+            Location = Path.Combine(Locations.Data, Name);
+            ConfigurationPath = Path.Combine(Location, "server.cfg");
+            Resources = Path.Combine(Location, "resources");
         }
 
         #endregion

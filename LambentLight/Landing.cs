@@ -295,7 +295,7 @@ namespace LambentLight
             if (DataFolderComboBox.SelectedItem != null)
             {
                 // Open the folder
-                Process.Start(((DataFolder)DataFolderComboBox.SelectedItem).Absolute);
+                Process.Start(((DataFolder)DataFolderComboBox.SelectedItem).Location);
             }
         }
 
