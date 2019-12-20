@@ -8,21 +8,25 @@ namespace LambentLight.Builds
     public class Build
     {
         /// <summary>
-        /// The ID of the build. This can be either the folder name or Upstream identifier.
+        /// The ID of the build. This can be either the folder name or SHA1 hash.
         /// </summary>
         public string ID { get; private set; }
         /// <summary>
+        /// The local folder where the build can be located.
+        /// </summary>
+        public string Folder { get; private set; }
+        /// <summary>
+        /// The location of the CFX Server executable.
+        /// </summary>
+        public string Executable { get; private set; }
+        /// <summary>
         /// If the server executable is present.
         /// </summary>
-        public bool IsExecutablePresent => File.Exists(Path.Combine(Folder, "FXServer.exe"));
+        public bool IsExecutablePresent => File.Exists(Executable);
         /// <summary>
         /// If the folder for the build exists.
         /// </summary>
         public bool IsFolderPresent => File.Exists(Folder);
-        /// <summary>
-        /// The local folder where the build can be located.
-        /// </summary>
-        public string Folder => Path.Combine(Locations.BuildsForOS, ID);
 
         /// <summary>
         /// Creates a Build to use with LambentLight
@@ -32,6 +36,9 @@ namespace LambentLight.Builds
         {
             // Set our identifier
             ID = identifier;
+            // And the other properties that we need
+            Folder = Path.Combine(Locations.BuildsForOS, ID);
+            Executable = Path.Combine(Folder, "FXServer.exe");
         }
 
         /// <summary>
