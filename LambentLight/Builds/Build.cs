@@ -7,6 +7,8 @@ namespace LambentLight.Builds
     /// </summary>
     public class Build
     {
+        #region Public Properties
+
         /// <summary>
         /// The ID of the build. This can be either the folder name or SHA1 hash.
         /// </summary>
@@ -28,6 +30,10 @@ namespace LambentLight.Builds
         /// </summary>
         public bool IsFolderPresent => File.Exists(Folder);
 
+        #endregion
+
+        #region Constructor
+
         /// <summary>
         /// Creates a Build to use with LambentLight
         /// </summary>
@@ -41,6 +47,10 @@ namespace LambentLight.Builds
             Executable = Path.Combine(Folder, "FXServer.exe");
         }
 
+        #endregion
+
+        #region Overrides
+
         /// <summary>
         /// Gets the string representation of a build.
         /// </summary>
@@ -53,5 +63,7 @@ namespace LambentLight.Builds
         /// Checks if the compared object has the same ID as the current one.
         /// </summary>
         public override bool Equals(object obj) => obj is Build && ID == ((Build)obj).ID;
+
+        #endregion
     }
 }
