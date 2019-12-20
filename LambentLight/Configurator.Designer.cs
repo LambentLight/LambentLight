@@ -237,7 +237,7 @@
             this.LicenseGroupBox.Size = new System.Drawing.Size(364, 74);
             this.LicenseGroupBox.TabIndex = 2;
             this.LicenseGroupBox.TabStop = false;
-            this.LicenseGroupBox.Text = "FiveM License";
+            this.LicenseGroupBox.Text = "CFX License";
             // 
             // LicenseGenerateButton
             // 
