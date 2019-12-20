@@ -149,15 +149,13 @@ namespace LambentLight.DataFolders
             Configuration = newConfig;
             return newConfig;
         }
-
         /// <summary>
         /// Installs the specified resource and version on the data folder.
         /// </summary>
         /// <param name="resource">The resource information.</param>
         /// <param name="version">The version to install.</param>
-        /// <param name="installRequirements">If the resource requirements should be installed.</param>
         /// <returns>true if the installation succeded, false otherwise.</returns>
-        public async Task InstallResource(Resource resource, Managers.Version version, bool installRequirements = true)
+        public async Task InstallResource(Resource resource, Managers.Version version)
         {
             // Notify that we are starting the install of there resource
             Logger.Info("Installing resource {0} {1}", resource.Name, version.ReadableVersion);
