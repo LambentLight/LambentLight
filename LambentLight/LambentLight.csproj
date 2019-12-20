@@ -88,11 +88,11 @@
     <Compile Include="Builds\BuildConverter.cs" />
     <Compile Include="Builds\BuildManager.cs" />
     <Compile Include="Compression.cs" />
-    <Compile Include="Configurator.cs">
+    <Compile Include="FormConfig.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Configurator.Designer.cs">
-      <DependentUpon>Configurator.cs</DependentUpon>
+    <Compile Include="FormConfig.Designer.cs">
+      <DependentUpon>FormConfig.cs</DependentUpon>
     </Compile>
     <Compile Include="Config\AutoRestart.cs" />
     <Compile Include="Config\Configuration.cs" />
@@ -125,8 +125,8 @@
     <Compile Include="Runtime\RuntimeManager.cs" />
     <Compile Include="Targets\BottomStripTarget.cs" />
     <Compile Include="Targets\TextBoxTarget.cs" />
-    <EmbeddedResource Include="Configurator.resx">
-      <DependentUpon>Configurator.cs</DependentUpon>
+    <EmbeddedResource Include="FormConfig.resx">
+      <DependentUpon>FormConfig.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Creator.resx">
       <DependentUpon>Creator.cs</DependentUpon>

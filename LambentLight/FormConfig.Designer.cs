@@ -1,6 +1,6 @@
 ﻿namespace LambentLight
 {
-    partial class Configurator
+    partial class FormConfig
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Configurator));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormConfig));
             this.ConfigTabControl = new System.Windows.Forms.TabControl();
             this.AuthTabPage = new System.Windows.Forms.TabPage();
             this.ConnectionGroupBox = new System.Windows.Forms.GroupBox();

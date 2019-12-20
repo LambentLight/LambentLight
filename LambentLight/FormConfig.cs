@@ -8,11 +8,11 @@ using System.Windows.Forms;
 
 namespace LambentLight
 {
-    public partial class Configurator : Form
+    public partial class FormConfig : Form
     {
         #region Constructor
 
-        public Configurator()
+        public FormConfig()
         {
             // Initialize the UI Elements
             InitializeComponent();
