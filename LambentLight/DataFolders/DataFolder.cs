@@ -1,4 +1,4 @@
-﻿using LambentLight.Database;
+using LambentLight.Database;
 using LambentLight.Managers;
 using MySql.Data.MySqlClient;
 using NLog;
@@ -55,10 +55,6 @@ namespace LambentLight.DataFolders
         /// <summary>
         /// If the folder has a FiveM server configuration file.
         /// </summary>
-        public bool HasConfiguration => File.Exists(ConfigurationPath);
-        /// <summary>
-        /// 
-        /// </summary>
         public List<InstalledResource> InstalledResources
         {
             get
@@ -89,7 +85,7 @@ namespace LambentLight.DataFolders
             get
             {
                 // If there is a server configuration file
-                if (HasConfiguration)
+                if (File.Exists(ConfigurationPath))
                 {
                     return string.Join(Environment.NewLine, File.ReadAllLines(Path.Combine(Location, "server.cfg"))) + Environment.NewLine;
                 }
