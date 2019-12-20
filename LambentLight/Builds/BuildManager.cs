@@ -8,19 +8,18 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace LambentLight.Builds
-{/// <summary>
- /// Class that manages the downloads and updates of builds.
- /// </summary>
+{
+    /// <summary>
+    /// Class that manages the downloads and updates of builds.
+    /// </summary>
     public static class BuildManager
     {
+        #region Private Fields
+
         /// <summary>
         /// The logger for our current class.
         /// </summary>
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-        /// <summary>
-        /// The updated list of builds.
-        /// </summary>
-        public static List<Build> Builds = new List<Build>();
         /// <summary>
         /// The download URL for the current operating system.
         /// </summary>
@@ -28,6 +27,19 @@ namespace LambentLight.Builds
         /// The download URL for a specific operating system.
         /// </summary>
         private static readonly string DownloadBuild = Checks.IsWindows ? "https://runtime.fivem.net/artifacts/fivem/build_server_windows/master/{0}/server.zip" : "https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/{0}/fx.tar.xz";
+
+        #endregion
+
+        #region Public Properties
+
+        /// <summary>
+        /// The updated list of builds.
+        /// </summary>
+        public static List<Build> Builds { get; private set; } = new List<Build>();
+
+        #endregion
+
+        #region Public Functions
 
         /// <summary>
         /// Refreshes the list of builds.
@@ -141,5 +153,7 @@ namespace LambentLight.Builds
             // Log that we have finished the extraction
             Logger.Info("Build {0} is now available for the server", name);
         }
+
+        #endregion
     }
 }
