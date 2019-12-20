@@ -1,4 +1,5 @@
-using LambentLight.Database;
+﻿using LambentLight.Database;
+using LambentLight.Managers;
 using MySql.Data.MySqlClient;
 using NLog;
 using System;
@@ -6,84 +7,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace LambentLight.Managers
+namespace LambentLight.DataFolders
 {
-    /// <summary>
-    /// Class that handles a
-    /// </summary>
-    public class InstalledResource : IDisposable
-    {
-        /// <summary>
-        /// The logger for our current class.
-        /// </summary>
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-        /// <summary>
-        /// The name of the resource.
-        /// </summary>
-        public string Name => Path.GetFileNameWithoutExtension(Location);
-        /// <summary>
-        /// Where the resource is located.
-        /// </summary>
-        public string Location { get; }
-        /// <summary>
-        /// The Data Folder where this resource is located.
-        /// </summary>
-        public DataFolder Source { get; }
-        /// <summary>
-        /// Checks if a resource is present on the specified folder.
-        /// </summary>
-        public bool IsPresent => Directory.Exists(Location);
-
-        public InstalledResource(DataFolder source, string location)
-        {
-            Source = source;
-            Location = location;
-        }
-
-        /// <summary>
-        /// Removes the resource if is present.
-        /// </summary>
-        public void Dispose()
-        {
-            // If the resource exists and is present
-            if (IsPresent)
-            {
-                // If the user wants to remove the configuration value during the uninstall process
-                if (Program.Config.RemoveAfterUninstalling)
-                {
-                    // Create the RegEx pattern for this specific resource
-                    string Pattern = string.Format(Patterns.Resource, Name);
-                    // If there is a match inside of the configuration
-                    if (Regex.IsMatch(Source.Configuration, Pattern))
-                    {
-                        // Remove it
-                        Source.Configuration = Regex.Replace(Source.Configuration, Pattern, string.Empty);
-                    }
-                }
-
-                // Delete the resource
-                Directory.Delete(Location, true);
-                // And notify the user
-                Logger.Warn("Removing existing version of {0} at '{1}' (from Data Folder '{2}')", Name, Location, Source.Name);
-            }
-            // If not
-            else
-            {
-                // Notify the user
-                Logger.Error("The resource {0} could not be found in '{1}' (from Data Folder '{2}')", Name, Location, Source.Name);
-            }
-        }
-
-        public override string ToString()
-        {
-            return Name;
-        }
-    }
-
     /// <summary>
     /// A class that represents a folder with FiveM server data.
     /// </summary>
@@ -220,7 +148,7 @@ namespace LambentLight.Managers
         /// <param name="version">The version to install.</param>
         /// <param name="installRequirements">If the resource requirements should be installed.</param>
         /// <returns>true if the installation succeded, false otherwise.</returns>
-        public async Task InstallResource(Resource resource, Version version, bool installRequirements = true)
+        public async Task InstallResource(Resource resource, Managers.Version version, bool installRequirements = true)
         {
             // Notify that we are starting the install of there resource
             Logger.Info("Installing resource {0} {1}", resource.Name, version.ReadableVersion);
@@ -415,116 +343,5 @@ namespace LambentLight.Managers
         /// Checks if the compared object has the same name as the current one.
         /// </summary>
         public override bool Equals(object obj) => obj is DataFolder && Name == ((DataFolder)obj).Name;
-    }
-
-    /// <summary>
-    /// Managers for the folders that contain our data.
-    /// </summary>
-    public static class DataFolderManager
-    {
-        /// <summary>
-        /// The logger for our current class.
-        /// </summary>
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-        /// <summary>
-        /// Our current set of data folders.
-        /// </summary>
-        public static List<DataFolder> Folders = new List<DataFolder>();
-
-        /// <summary>
-        /// Refreshes the builds with data.
-        /// </summary>
-        public static void Refresh()
-        {
-            // Reset the list of data folders
-            Folders = new List<DataFolder>();
-
-            // If the data folder does not exists
-            Locations.EnsureDataFolder();
-
-            // Iterate over the folders on our Data folder
-            foreach (string Dir in Directory.GetDirectories(Locations.Data))
-            {
-                // And add our data folder
-                Folders.Add(new DataFolder(Path.GetFileName(Dir)));
-            }
-
-            // Log what we have just done
-            Logger.Debug("The list of server data folders has been updated");
-        }
-
-        /// <summary>
-        /// Creates a new server data folder.
-        /// </summary>
-        /// <param name="name">The name of the folder.</param>
-        public static async Task<DataFolder> Create(string name, string rconPassword = null, bool allowScriptHook = false)
-        {
-            // Create the Data folder if it does not exists
-            Locations.EnsureDataFolder();
-
-            // If the text is whitespaces or null, notify the user and return
-            if (string.IsNullOrWhiteSpace(name))
-            {
-                Logger.Warn("The path that you have entered is empty or consists only of whitespaces");
-                return null;
-            }
-
-            // Generate the destination path
-            string NewPath = Path.Combine(Locations.Data, name);
-
-            // If the folder specified already exists, warn the user and return
-            if (Directory.Exists(NewPath))
-            {
-                Logger.Warn("The specified folder name already exists");
-                return null;
-            }
-
-            // If the user wants to download the scripts
-            if (Program.Config.Creator.DownloadScripts)
-            {
-                // Notify the user that we are downloading the repository
-                Logger.Info("Downloading Default Scripts for the Data Folder '{0}', please wait...", name);
-
-                // Create the path for the temporary zip file
-                string ZipPath = Path.Combine(Locations.Temp, "ServerData.zip");
-
-                // If the temporary folder does not exists
-                Locations.EnsureTempFolder();
-
-                // If we didn't managed to download the file, just return
-                if (!await Downloader.DownloadFile("https://github.com/LambentLight/ServerData/archive/master.zip", ZipPath))
-                {
-                    return null;
-                }
-
-                // After the zip file has been downloaded, extract it
-                await Compression.Extract(ZipPath, Locations.Temp);
-                // Then, rename it to the name specified by the user
-                Directory.Move(Path.Combine(Locations.Temp, "ServerData-master"), NewPath);
-                // Delete the temporary file
-                File.Delete(ZipPath);
-            }
-            else
-            {
-                // Create the directory and notify the user
-                Directory.CreateDirectory(NewPath);
-            }
-
-            // Create the object for the new data folder
-            DataFolder NewFolder = new DataFolder(name);
-
-            // Notify the user that we have finished with the creation of the folder
-            Logger.Info("The Data Folder '{0}' has been created", name);
-
-            // If the user wants to generate the configuration
-            if (Program.Config.Creator.CreateConfig)
-            {
-                // Generate the new configuration for the folder
-                NewFolder.GenerateConfig(rconPassword, allowScriptHook);
-            }
-
-            // Finally, return the data object
-            return NewFolder;
-        }
     }
 }

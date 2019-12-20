@@ -105,11 +105,13 @@
     <Compile Include="Creator.Designer.cs">
       <DependentUpon>Creator.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataFolders\DataFolder.cs" />
+    <Compile Include="DataFolders\DataFolderManager.cs" />
     <Compile Include="Downloader.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Locations.cs" />
     <Compile Include="Database\Database.cs" />
-    <Compile Include="Managers\DataFolders.cs" />
+    <Compile Include="DataFolders\InstalledResource.cs" />
     <Compile Include="Extensions\ListControlExtensions.cs" />
     <Compile Include="Landing.cs">
       <SubType>Form</SubType>
