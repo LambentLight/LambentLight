@@ -53,28 +53,27 @@ namespace LambentLight.DataFolders
         /// </summary>
         public bool Exists => Directory.Exists(Location);
         /// <summary>
-        /// If the folder has a FiveM server configuration file.
+        /// The resources that are currently installed on the data folder.
         /// </summary>
         public List<InstalledResource> InstalledResources
         {
             get
             {
                 // Create a temp list of resources
-                List<InstalledResource> TempResources = new List<InstalledResource>();
+                List<InstalledResource> resources = new List<InstalledResource>();
 
                 // Iterate over the directories in the resources folder
-                foreach (string Folder in Directory.EnumerateDirectories(Resources, "*", SearchOption.AllDirectories))
+                foreach (string folder in Directory.EnumerateDirectories(Resources, "*", SearchOption.AllDirectories))
                 {
-                    // If the folder contains a resource metadata for v1 (__resource.lua) of v2 (fxmanifest.lua)
-                    if (File.Exists(Path.Combine(Folder, "__resource.lua")) || File.Exists(Path.Combine(Folder, "fxmanifest.lua")))
+                    // If the folder contains a resource metadata version 1 (__resource.lua) or 2 (fxmanifest.lua), add it
+                    if (File.Exists(Path.Combine(folder, "__resource.lua")) || File.Exists(Path.Combine(folder, "fxmanifest.lua")))
                     {
-                        // Add it
-                        TempResources.Add(new InstalledResource(this, Folder));
+                        resources.Add(new InstalledResource(this, folder));
                     }
                 }
 
                 // Finally, return the installed resources
-                return TempResources;
+                return resources;
             }
         }
         /// <summary>
