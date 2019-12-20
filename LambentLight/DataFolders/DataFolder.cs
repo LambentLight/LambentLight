@@ -296,8 +296,53 @@ namespace LambentLight.DataFolders
         {
             // Literally dispose the existing folder
             Remove();
-            // Then call the create data folder again
-            await DataFolderManager.Create(Name, rconPassword, allowScriptHook);
+
+            // Create the Data folder if it does not exists
+            Locations.EnsureDataFolder();
+            // Generate the destination path
+            string path = Path.Combine(Locations.Data, Name);
+
+            // If the user wants to download the scripts
+            if (Program.Config.Creator.DownloadScripts)
+            {
+                // Notify the user that we are downloading the repository
+                Logger.Info("Downloading Default Scripts for the Data Folder '{0}', please wait...", Name);
+
+                // Create the path for the temporary zip file
+                string zipPath = Path.Combine(Locations.Temp, "ServerData.zip");
+
+                // If the temporary folder does not exists
+                Locations.EnsureTempFolder();
+
+                // Try to download the file
+                // If we failed to do so, return
+                if (!await Downloader.DownloadFile("https://github.com/LambentLight/ServerData/archive/master.zip", zipPath))
+                {
+                    return;
+                }
+
+                // After the zip file has been downloaded, extract it to a temporary folder
+                await Compression.Extract(zipPath, Locations.Temp);
+                // Then, move the location to the folder that we want to use
+                Directory.Move(Path.Combine(Locations.Temp, "ServerData-master"), path);
+                // Delete the temporary file
+                File.Delete(zipPath);
+            }
+            else
+            {
+                // Create the directory and notify the user
+                Directory.CreateDirectory(path);
+            }
+
+            // Notify the user that we have finished with the creation of the folder
+            Logger.Info("The Data Folder '{0}' has been created", Name);
+
+            // If the user wants to generate the configuration
+            if (Program.Config.Creator.CreateConfig)
+            {
+                // Generate the new configuration for the folder
+                GenerateConfig(rconPassword, allowScriptHook);
+            }
         }
         /// <summary>
         /// Deletes the folder.

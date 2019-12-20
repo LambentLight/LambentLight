@@ -53,14 +53,13 @@ namespace LambentLight.DataFolders
         }
 
         /// <summary>
-        /// Creates a new server data folder.
+        /// Creates a new Server Data folder.
         /// </summary>
-        /// <param name="name">The name of the folder.</param>
+        /// <param name="name">The name of the data folder.</param>
+        /// <param name="rconPassword">The RCON password.</param>
+        /// <param name="allowScriptHook">If ScriptHookV should be allowed.</param>
         public static async Task<DataFolder> Create(string name, string rconPassword = null, bool allowScriptHook = false)
         {
-            // Create the Data folder if it does not exists
-            Locations.EnsureDataFolder();
-
             // If the text is whitespaces or null, notify the user and return
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -68,62 +67,20 @@ namespace LambentLight.DataFolders
                 return null;
             }
 
-            // Generate the destination path
-            string NewPath = Path.Combine(Locations.Data, name);
+            // Create the object for the data folder
+            DataFolder folder = new DataFolder(name);
 
             // If the folder specified already exists, warn the user and return
-            if (Directory.Exists(NewPath))
+            if (folder.Exists)
             {
                 Logger.Warn("The specified folder name already exists");
                 return null;
             }
 
-            // If the user wants to download the scripts
-            if (Program.Config.Creator.DownloadScripts)
-            {
-                // Notify the user that we are downloading the repository
-                Logger.Info("Downloading Default Scripts for the Data Folder '{0}', please wait...", name);
-
-                // Create the path for the temporary zip file
-                string ZipPath = Path.Combine(Locations.Temp, "ServerData.zip");
-
-                // If the temporary folder does not exists
-                Locations.EnsureTempFolder();
-
-                // If we didn't managed to download the file, just return
-                if (!await Downloader.DownloadFile("https://github.com/LambentLight/ServerData/archive/master.zip", ZipPath))
-                {
-                    return null;
-                }
-
-                // After the zip file has been downloaded, extract it
-                await Compression.Extract(ZipPath, Locations.Temp);
-                // Then, rename it to the name specified by the user
-                Directory.Move(Path.Combine(Locations.Temp, "ServerData-master"), NewPath);
-                // Delete the temporary file
-                File.Delete(ZipPath);
-            }
-            else
-            {
-                // Create the directory and notify the user
-                Directory.CreateDirectory(NewPath);
-            }
-
-            // Create the object for the new data folder
-            DataFolder NewFolder = new DataFolder(name);
-
-            // Notify the user that we have finished with the creation of the folder
-            Logger.Info("The Data Folder '{0}' has been created", name);
-
-            // If the user wants to generate the configuration
-            if (Program.Config.Creator.CreateConfig)
-            {
-                // Generate the new configuration for the folder
-                NewFolder.GenerateConfig(rconPassword, allowScriptHook);
-            }
-
+            // Call recreate to create the folder
+            await folder.Recreate();
             // Finally, return the data object
-            return NewFolder;
+            return folder;
         }
 
         #endregion
