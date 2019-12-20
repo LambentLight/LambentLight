@@ -1,4 +1,4 @@
-using LambentLight.Database;
+﻿using LambentLight.Database;
 using LambentLight.Managers;
 using MySql.Data.MySqlClient;
 using NLog;
@@ -86,15 +86,15 @@ namespace LambentLight.DataFolders
                 // If there is a server configuration file
                 if (File.Exists(ConfigurationPath))
                 {
-                    return string.Join(Environment.NewLine, File.ReadAllLines(Path.Combine(Location, "server.cfg"))) + Environment.NewLine;
+                    return string.Join(Environment.NewLine, File.ReadAllLines(ConfigurationPath)) + Environment.NewLine;
                 }
                 // Otherwise, return a generic string
                 return "# This server data folder does not has a configuration file";
             }
             set
             {
-                // Write the string to the file
-                File.WriteAllText(Path.Combine(Location, "server.cfg"), value);
+                // Write the string to the configuration file
+                File.WriteAllText(ConfigurationPath, value);
                 // Log that we just saved the configuration
                 Logger.Info("The configuration of {0} has been saved", Name);
             }
