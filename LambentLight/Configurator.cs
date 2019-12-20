@@ -13,11 +13,9 @@ namespace LambentLight
     {
         public Configurator()
         {
+            // Initialize the UI Elements
             InitializeComponent();
-        }
-               
-        private void ReloadSettings()
-        {
+
             // Iterate over the time measurements
             foreach (string value in Enum.GetNames(typeof(Time)))
             {
@@ -25,6 +23,10 @@ namespace LambentLight
                 WaitComboBox.Items.Add(value);
             }
 
+        }
+
+        private void ReloadSettings()
+        {
             // And load all of the settings
             DownloadScriptsCheckBox.Checked = Program.Config.Creator.DownloadScripts;
             CreateConfigCheckBox.Checked = Program.Config.Creator.CreateConfig;
