@@ -87,7 +87,6 @@
     <Compile Include="Builds\Build.cs" />
     <Compile Include="Builds\BuildConverter.cs" />
     <Compile Include="Builds\BuildManager.cs" />
-    <Compile Include="Checks.cs" />
     <Compile Include="Compression.cs" />
     <Compile Include="Configurator.cs">
       <SubType>Form</SubType>

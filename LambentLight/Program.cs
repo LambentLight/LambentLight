@@ -26,18 +26,6 @@ namespace LambentLight
             // Use the classic rendering for compatibility
             Application.SetCompatibleTextRenderingDefault(false);
 
-            // If the program is running on macOS, notify the user and exit
-            if (Checks.IsMacOS)
-            {
-                MessageBox.Show("macOS is not supported by either LambentLight or FiveM!\nThe application will now close.");
-                return 2;
-            }
-            // If we are running Linux, tell the user that only Ubuntu has been tested
-            if (Checks.IsLinux)
-            {
-                MessageBox.Show("Thanks for using LambentLight on Linux!\nPlease note that the only distro that has been tested is Ubuntu.\nIf you find any bugs, please report them. Thanks!");
-            }
-
             // Create our main form
             Form = new Landing();
             // Prepare the downloader for our operations

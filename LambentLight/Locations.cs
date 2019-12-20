@@ -16,7 +16,7 @@ namespace LambentLight
         /// <summary>
         /// Absolute system-aware path for the program.
         /// </summary>
-        public static readonly string Absolute = Base.Substring(Checks.IsWindows ? 6 : 5);
+        public static readonly string Absolute = Base.Substring(6);
         /// <summary>
         /// Absolute path of the builds folder.
         /// </summary>
@@ -24,7 +24,7 @@ namespace LambentLight
         /// <summary>
         /// Absolute path of the builds folder for the current operating system (Windows or Linux).
         /// </summary>
-        public static readonly string BuildsForOS = Path.Combine(BuildsBase, Checks.IsWindows ? "windows" : "linux");
+        public static readonly string BuildsForOS = Path.Combine(BuildsBase, "windows");
         /// <summary>
         /// Absolute path of the server data folder.
         /// </summary>
