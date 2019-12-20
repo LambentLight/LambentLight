@@ -1,6 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using NLog;
 using System;
+using System.Data;
 
 namespace LambentLight.Database
 {
@@ -41,12 +42,8 @@ namespace LambentLight.Database
                 return false;
             }
 
-            // If there is a database running, stop it
-            if (Connection != null)
-            {
-                Connection.Close();
-                Logger.Info("The connection to the existing MySQL Database was closed");
-            }
+            // Disconnect the existing connection if is present
+            Disconnect();
 
             // Now, is time to connect to the database
             try
@@ -70,6 +67,21 @@ namespace LambentLight.Database
                 // And return failure
                 return false;
             }
+        }
+        /// <summary>
+        /// Disconnects the MySQL Connection if is active.
+        /// </summary>
+        public static void Disconnect()
+        {
+            // If no connection exists or is closed, return
+            if (Connection == null || Connection.State == ConnectionState.Closed)
+            {
+                return;
+            }
+
+            // Close the connection
+            Connection.Close();
+            Logger.Info("The connection to the existing MySQL Database was closed");
         }
 
         #endregion

@@ -118,11 +118,8 @@ namespace LambentLight
             {
                 RuntimeManager.Stop();
             }
-            // If the database is open, close it
-            if (DatabaseManager.Connection != null && DatabaseManager.Connection.State == ConnectionState.Open)
-            {
-                DatabaseManager.Connection.Close();
-            }
+            // Disconnect the database if there is an open connection
+            DatabaseManager.Disconnect();
         }
 
         private void MainTabControl_Selected(object sender, TabControlEventArgs e)
