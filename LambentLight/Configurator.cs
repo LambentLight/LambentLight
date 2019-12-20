@@ -1,4 +1,5 @@
 ﻿using LambentLight.Config;
+using LambentLight.Database;
 using LambentLight.Extensions;
 using LambentLight.Managers;
 using Microsoft.VisualBasic;

@@ -1,5 +1,7 @@
 ﻿using LambentLight.Builds;
 using LambentLight.Config;
+using LambentLight.Database;
+using LambentLight.DataFolders;
 using LambentLight.Extensions;
 using LambentLight.Managers;
 using LambentLight.Properties;
