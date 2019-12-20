@@ -41,31 +41,29 @@ namespace LambentLight.Builds
         /// </summary>
         public static void Refresh()
         {
-            // Create a temporary list of builds
-            List<Build> NewBuilds = Downloader.DownloadJSON<List<Build>>(DownloadURL, new BuildConverter()) ?? new List<Build>();
-            // Ensure that the builds folder is present
+            // Get all of the builds available on the CFX Servers
+            List<Build> builds = Downloader.DownloadJSON<List<Build>>(DownloadURL, new BuildConverter()) ?? new List<Build>();
+            // Ensure that the builds folder exists
             Locations.EnsureBuildsFolder();
 
-            // Iterate over the existing builds
-            foreach (string Found in Directory.EnumerateDirectories(Locations.BuildsForOS))
+            // Iterate over the existing build folders
+            foreach (string build in Directory.EnumerateDirectories(Locations.BuildsForOS))
             {
-                // Create a new build object
-                Build NewBuild = new Build(Path.GetFileName(Found));
+                // Create a new object for that folder
+                Build newBuild = new Build(Path.GetFileName(build));
 
-                // If the build is not there
-                if (!NewBuilds.Contains(NewBuild))
+                // If the build is not already on the list, add it
+                if (!builds.Contains(newBuild))
                 {
-                    // Add the new build
-                    NewBuilds.Add(NewBuild);
+                    builds.Add(newBuild);
                 }
             }
 
             // Set the new builds
-            Builds = NewBuilds;
+            Builds = builds;
             // Log what we have just done
             Logger.Debug("The list of builds has been updated");
         }
-
         /// <summary>
         /// Installs the specified build from a compressed file.
         /// </summary>
