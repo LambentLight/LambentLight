@@ -22,12 +22,16 @@ namespace LambentLight
 {
     public partial class FormLanding : Form
     {
-        #region Properties
+        #region Private Fields
 
         /// <summary>
         /// The logger for our current class.
         /// </summary>
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+        #endregion
+
+        #region Public Properties
 
         /// <summary>
         /// Sets the locked status of some of the UI elements.
@@ -140,7 +144,7 @@ namespace LambentLight
 
         #endregion
 
-        #region Top Strip
+        #region Strip Items
 
         private async void StartToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -212,7 +216,7 @@ namespace LambentLight
 
         #endregion
 
-        #region Game Selector
+        #region Selectors
         
         private void GameComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -222,6 +226,36 @@ namespace LambentLight
 
             // And refresh the resources on the installer
             RefreshResourceInstaller();
+        }
+
+        private void DataFolderComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Refresh the list of installed resources
+            RefreshInstalledResources();
+
+            // If the selected tab is the one with the configuration and something is selected
+            if (MainTabControl.SelectedTab == ConfigurationTabPage && DataFolderComboBox.SelectedItem != null)
+            {
+                // Set the text to the configuration of the server
+                ConfigurationTextBox.Text = ((DataFolder)DataFolderComboBox.SelectedItem).Configuration;
+            }
+        }
+
+        private void DataFolderBrowseButton_Click(object sender, EventArgs e)
+        {
+            // If there is something selected
+            if (DataFolderComboBox.SelectedItem != null)
+            {
+                // Open the folder
+                Process.Start(((DataFolder)DataFolderComboBox.SelectedItem).Location);
+            }
+        }
+
+        private void DataFolderRefreshButton_Click(object sender, EventArgs e)
+        {
+            // Refresh the folders of data
+            DataFolderManager.Refresh();
+            DataFolderComboBox.Fill(DataFolderManager.Folders);
         }
 
         #endregion
@@ -244,61 +278,7 @@ namespace LambentLight
 
         #endregion
 
-        #region Builds and Data Folders
-
-        private void BuildsRefreshButton_Click(object sender, EventArgs e)
-        {
-            // Refresh the list of builds
-            BuildManager.Refresh();
-            BuildsListBox.Fill(BuildManager.Builds, true);
-        }
-
-        private async void BuildsImportButton_Click(object sender, EventArgs e)
-        {
-            // Open the file dialog
-            // If the user canceled the operation, return
-            if (BuildFileDialog.ShowDialog() != DialogResult.OK)
-            {
-                return;
-            }
-
-            // Then, install the build from the dialog
-            await BuildManager.Install(BuildFileDialog.FileName);
-        }
-
-        private void DataFolderComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            // Refresh the list of installed resources
-            RefreshInstalledResources();
-
-            // If the selected tab is the one with the configuration and something is selected
-            if (MainTabControl.SelectedTab == ConfigurationTabPage && DataFolderComboBox.SelectedItem != null)
-            {
-                // Set the text to the configuration of the server
-                ConfigurationTextBox.Text = ((DataFolder)DataFolderComboBox.SelectedItem).Configuration;
-            }
-        }
-
-        private void DataFolderRefreshButton_Click(object sender, EventArgs e)
-        {
-            // Refresh the folders of data
-            DataFolderManager.Refresh();
-            DataFolderComboBox.Fill(DataFolderManager.Folders);
-        }
-
-        private void DataFolderBrowseButton_Click(object sender, EventArgs e)
-        {
-            // If there is something selected
-            if (DataFolderComboBox.SelectedItem != null)
-            {
-                // Open the folder
-                Process.Start(((DataFolder)DataFolderComboBox.SelectedItem).Location);
-            }
-        }
-
-        #endregion
-
-        #region Resources - Uninstaller
+        #region Resources - Already Installed
 
         private void UninstallerListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -350,7 +330,7 @@ namespace LambentLight
 
         #endregion
 
-        #region Resources - Installer
+        #region Resources - To be Installed
 
         private void InstallerResourcesListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -376,10 +356,7 @@ namespace LambentLight
             InstallerInstallButton.Enabled = InstallerVersionsListBox.SelectedItem != null;
         }
 
-        private void InstallerRefreshButton_Click(object sender, EventArgs e)
-        {
-            RefreshResourceInstaller();
-        }
+        private void InstallerRefreshButton_Click(object sender, EventArgs e) => RefreshResourceInstaller();
 
         private async void InstallerInstallButton_Click(object sender, EventArgs e)
         {
@@ -486,7 +463,31 @@ namespace LambentLight
         }
 
         #endregion
-        
+
+        #region Builds
+
+        private void BuildsRefreshButton_Click(object sender, EventArgs e)
+        {
+            // Refresh the list of builds
+            BuildManager.Refresh();
+            BuildsListBox.Fill(BuildManager.Builds, true);
+        }
+
+        private async void BuildsImportButton_Click(object sender, EventArgs e)
+        {
+            // Open the file dialog
+            // If the user canceled the operation, return
+            if (BuildFileDialog.ShowDialog() != DialogResult.OK)
+            {
+                return;
+            }
+
+            // Then, install the build from the dialog
+            await BuildManager.Install(BuildFileDialog.FileName);
+        }
+
+        #endregion
+
         #region Tools
 
         private void RefreshInstalledResources()
