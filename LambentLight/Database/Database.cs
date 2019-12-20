@@ -1,4 +1,4 @@
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
 using NLog;
 using System;
 
@@ -30,11 +30,11 @@ namespace LambentLight.Database
         #region Public Functions
 
         /// <summary>
-        /// Tries to connect into the database from the configuration.
+        /// Connects to the MySQL Database specified in the Configuration.
         /// </summary>
         public static bool Connect()
         {
-            // If the connection is empty, notify the user and return
+            // If the user has not provided a MySQL Connection URL, notify him and return
             if (string.IsNullOrWhiteSpace(Program.Config.MySQL.Connection))
             {
                 Logger.Warn("MySQL database is disabled because setting is empty");
@@ -48,19 +48,26 @@ namespace LambentLight.Database
                 Logger.Info("The connection to the existing MySQL Database was closed");
             }
 
-            // Try to connect to the MySQL database
+            // Now, is time to connect to the database
             try
             {
+                // Create the new MySQL Connection object
                 Connection = new MySqlConnection(Program.Config.MySQL.Connection);
+                // And open the connection
                 Connection.Open();
-                Logger.Info("Connected to MySQL Database!");
+                // Notify the user
+                Logger.Info("Connection established to MySQL Database!");
+                // And return success
                 return true;
             }
             // If we got an exception
             catch (Exception ex)
             {
+                // Set connection to null
                 Connection = null;
+                // Notify the user
                 Logger.Error("Error while connecting to MySQL DB: {0}", ex.Message);
+                // And return failure
                 return false;
             }
         }
