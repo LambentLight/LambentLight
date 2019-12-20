@@ -4,14 +4,18 @@ using System;
 namespace LambentLight.Builds
 {
     /// <summary>
-    /// A JSON converter for FiveM builds.
+    /// A JSON converter for reading CFX builds from a list of Identifiers.
     /// </summary>
     public class BuildConverter : JsonConverter<Build>
     {
         public override Build ReadJson(JsonReader reader, Type objectType, Build existingValue, bool hasExistingValue, JsonSerializer serializer)
         {
-            // Return the value from the known color
-            return new Build((string)reader.Value);
+            // Get the identifier as a string
+            string value = (string)reader.Value;
+            // Create the build object with the identifier
+            Build build = new Build(value);
+            // And return it
+            return build;
         }
 
         public override void WriteJson(JsonWriter writer, Build value, JsonSerializer serializer)
