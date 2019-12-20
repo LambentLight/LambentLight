@@ -1,4 +1,4 @@
-﻿using NLog;
+using NLog;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -31,23 +31,25 @@ namespace LambentLight.DataFolders
         #region Public Functions
 
         /// <summary>
-        /// Refreshes the builds with data.
+        /// Refreshes the list of Data Folders.
         /// </summary>
         public static void Refresh()
         {
-            // Reset the list of data folders
-            Folders = new List<DataFolder>();
+            // Create a temporary list of data folders
+            List<DataFolder> folders = new List<DataFolder>();
 
-            // If the data folder does not exists
+            // Make sure that the base data folder exists
             Locations.EnsureDataFolder();
 
             // Iterate over the folders on our Data folder
-            foreach (string Dir in Directory.GetDirectories(Locations.Data))
+            foreach (string folder in Directory.GetDirectories(Locations.Data))
             {
-                // And add our data folder
-                Folders.Add(new DataFolder(Path.GetFileName(Dir)));
+                // And add the data folder onto the temp list
+                folders.Add(new DataFolder(Path.GetFileName(folder)));
             }
 
+            // Save the temporary list of folders
+            Folders = folders;
             // Log what we have just done
             Logger.Debug("The list of server data folders has been updated");
         }
