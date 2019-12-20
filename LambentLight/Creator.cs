@@ -58,7 +58,7 @@ namespace LambentLight
                 if (MessageBox.Show("This Data Folder already exists, do you want to replace it?", "Folder Already Exists", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     // If he does, delete it
-                    folder.Dispose();
+                    folder.Remove();
                 }
                 // Otherwise, return
                 else

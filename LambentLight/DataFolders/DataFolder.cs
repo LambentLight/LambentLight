@@ -1,4 +1,4 @@
-using LambentLight.Database;
+﻿using LambentLight.Database;
 using LambentLight.Managers;
 using MySql.Data.MySqlClient;
 using NLog;
@@ -15,7 +15,7 @@ namespace LambentLight.DataFolders
     /// <summary>
     /// A class that represents a folder with FiveM server data.
     /// </summary>
-    public class DataFolder : IDisposable
+    public class DataFolder
     {
         #region Private Fields
 
@@ -334,7 +334,7 @@ namespace LambentLight.DataFolders
         public async Task Recreate(string rconPassword = null, bool allowScriptHook = false)
         {
             // Literally dispose the existing folder
-            Dispose();
+            Remove();
             // Then call the create data folder again
             await DataFolderManager.Create(Name, rconPassword, allowScriptHook);
         }
@@ -342,7 +342,7 @@ namespace LambentLight.DataFolders
         /// <summary>
         /// Deletes the folder.
         /// </summary>
-        public void Dispose()
+        public void Remove()
         {
             // If the folder exists
             if (Exists)
