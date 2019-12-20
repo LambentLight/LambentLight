@@ -160,78 +160,69 @@ namespace LambentLight.DataFolders
             // Notify that we are starting the install of there resource
             Logger.Info("Installing resource {0} {1}", resource.Name, version.ReadableVersion);
 
-            // Format a path for the output file
-            string ExtractionPath = Path.Combine(Locations.Temp, $"{resource.More.Install.Destination}-{version.ReadableVersion}");
-            string TempFilePath = ExtractionPath + Path.GetExtension(version.Download);
+            // Format a path for the temporary extraction and download locations
+            string extractionPath = Path.Combine(Locations.Temp, $"{resource.More.Install.Destination}-{version.ReadableVersion}");
+            string downloadPath = extractionPath + Path.GetExtension(version.Download);
 
-            // Select the correct path inside of the extraction folder
-            // In order: Version Path, Resource Path or an Empty String
-            string CompressedPath = version.Path ?? "";
-            // Create the path for the folder that we need to move
-            string ChoosenFolder = Path.Combine(ExtractionPath, CompressedPath);
-            // Create the destination directory (aka the path inside of the resources directory)
-            string DestinationFolder = Path.Combine(Resources, resource.More.Install.Destination);
-            // Format the path where the version can be located
-            string versionPath = Path.Combine(DestinationFolder, "version.lambentlight");
+            // Create the path of the folder that contains the resource itself
+            string resourcePath = Path.Combine(extractionPath, version.Path ?? "");
+            // Create the path where the resource should be installed
+            string destinationFolder = Path.Combine(Resources, resource.More.Install.Destination);
+            // Create the path where the version can be located
+            string versionPath = Path.Combine(destinationFolder, "version.lambentlight");
 
-            // If the version file exists and matches the version that we are trying to install, log it and return
+            // If the version file exists and matches one that we are trying to install, log it and return
             if (File.Exists(versionPath) && File.ReadAllText(versionPath) == version.ReadableVersion)
             {
-                Logger.Info("Resource {0} {1} is already installed", resource.Name, version.ReadableVersion);
+                Logger.Info("Resource {0} {1} is already installed, skipping...", resource.Name, version.ReadableVersion);
                 return;
             }
 
-            // If the temporary folder does not exists
+            // Make sure that the temporary download folder exists
             Locations.EnsureTempFolder();
-            // If the temp file exists
-            if (File.Exists(TempFilePath))
+            // If there is something in the temporary download location, remove it
+            if (File.Exists(downloadPath))
             {
-                // Yeet it
-                File.Delete(TempFilePath);
+                File.Delete(downloadPath);
             }
 
-            // If the we tried to download the file and we ended up failing, return
-            if (!await Downloader.DownloadFile(version.Download, TempFilePath))
+            // Try to download the file
+            // If we failed, return and do nothing
+            if (!await Downloader.DownloadFile(version.Download, downloadPath))
             {
                 return;
             }
 
-            // If the resources folder does not exists
+            // If the resources folder does not exists, create it
             if (!Directory.Exists(Resources))
             {
-                // Create it
                 Directory.CreateDirectory(Resources);
             }
 
-            // For every installed resource
+            // Iterate over the list of installed resources
             foreach (InstalledResource Installed in InstalledResources)
             {
-                // If the name matches the resource that we are going to install
+                // If the name matches the resource that we are trying to install, delete it
                 if (Installed.Name == resource.More.Install.Destination)
                 {
-                    // Delete/Dispose it
                     Installed.Dispose();
                 }
             }
 
-            // If the output directory exists
-            if (Directory.Exists(ExtractionPath))
+            // If the extraction location exists, remove it
+            if (Directory.Exists(extractionPath))
             {
-                // Remove it
-                Directory.Delete(ExtractionPath, true);
+                Directory.Delete(extractionPath, true);
             }
-
             // Create the temporary extraction directory
-            Directory.CreateDirectory(ExtractionPath);
+            Directory.CreateDirectory(extractionPath);
 
-            // Notify that we are starting the extraction of the file
-            Logger.Info("Extracting {0} {1}...", resource.Name, version.ReadableVersion);
             // Try to extract the file
             try
             {
-                await Compression.Extract(TempFilePath, ExtractionPath);
+                await Compression.Extract(downloadPath, extractionPath);
             }
-            // If we fail, log the error message and return
+            // If we failed, log the error message and return
             catch (InvalidOperationException e)
             {
                 Logger.Error(e.Message);
@@ -239,13 +230,13 @@ namespace LambentLight.DataFolders
             }
 
             // Remove the temporary compressed file
-            File.Delete(TempFilePath);
+            File.Delete(downloadPath);
 
             // If there is a database running and we want to apply the patches
             if (DatabaseManager.Connection != null && Program.Config.MySQL.Apply)
             {
                 // Get all of the SQL files
-                foreach (string file in Directory.EnumerateFiles(ExtractionPath, "**.sql", SearchOption.AllDirectories))
+                foreach (string file in Directory.EnumerateFiles(extractionPath, "**.sql", SearchOption.AllDirectories))
                 {
                     // If we need a manual confirmation for the file
                     if (Program.Config.MySQL.Manually)
@@ -273,43 +264,27 @@ namespace LambentLight.DataFolders
                 }
             }
 
-            /*
-            // If the resource has aditional configuration instructions
-            if (resource.ConfigInstructions != null)
-            {
-                // Ask the user if he wants to open the configuration instructions
-                DialogResult Result = MessageBox.Show($"The resource {resource.Name} requires aditional configuration\nDo you want to open the configuration instructions in your browser?", "Configuration required", MessageBoxButtons.YesNo);
-
-                // If it does
-                if (Result == DialogResult.Yes)
-                {
-                    // Open it up
-                    Process.Start(resource.ConfigInstructions);
-                }
-            }
-            */
-
             // Try to move the folder with the resource
             try
             {
-                Directory.Move(ChoosenFolder, DestinationFolder);
+                Directory.Move(resourcePath, destinationFolder);
             }
             // If the directory was not found, notify the user and return
             catch (DirectoryNotFoundException)
             {
-                Logger.Error("Unable to find '{0}' inside of the file", CompressedPath);
+                Logger.Error("Unable to find '{0}' inside of the file", resourcePath);
             }
 
-            // And delete the temporary folder if it exists
-            if (Directory.Exists(ExtractionPath))
+            // If the temporary extraction directory exists, remove it
+            if (Directory.Exists(extractionPath))
             {
-                Directory.Delete(ExtractionPath, true);
+                Directory.Delete(extractionPath, true);
             }
 
             // If we got here, write a file with the current version
             File.WriteAllText(versionPath, version.ReadableVersion);
 
-            // Finally, notify that we have finished
+            // And finally, notify that we have finished
             Logger.Info("Done! {0} {1} has been installed", resource.Name, version.ReadableVersion);
         }
 
