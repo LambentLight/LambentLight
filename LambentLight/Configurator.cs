@@ -11,6 +11,8 @@ namespace LambentLight
 {
     public partial class Configurator : Form
     {
+        #region Constructor
+
         public Configurator()
         {
             // Initialize the UI Elements
@@ -24,6 +26,16 @@ namespace LambentLight
             }
 
         }
+
+        private void Config_Load(object sender, EventArgs e)
+        {
+            // Load the settings
+            ReloadSettings();
+        }
+
+        #endregion
+
+        #region Tools
 
         private void ReloadSettings()
         {
@@ -54,11 +66,9 @@ namespace LambentLight
             ClearCacheCheckBox.Checked = Program.Config.ClearCache;
         }
 
-        private void Config_Load(object sender, EventArgs e)
-        {
-            // Load the settings
-            ReloadSettings();
-        }
+        #endregion
+
+        #region Authentication - CFX
 
         private void LicenseVisibleCheckBox_CheckedChanged(object sender, EventArgs e)
         {
@@ -67,15 +77,6 @@ namespace LambentLight
             LicenseSaveButton.Enabled = LicenseVisibleCheckBox.Checked;
             // And populate the License correctly
             LicenseTextBox.Text = LicenseVisibleCheckBox.Checked ? Program.Config.CFXToken : string.Empty;
-        }
-
-        private void SteamVisibleCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            // Change the enabled status of the Steam TextBox and Button
-            SteamTextBox.Enabled = SteamVisibleCheckBox.Checked;
-            SteamSaveButton.Enabled = SteamVisibleCheckBox.Checked;
-            // And populate the API Key correctly
-            SteamTextBox.Text = SteamVisibleCheckBox.Checked ? Program.Config.SteamToken : string.Empty;
         }
 
         private void LicenseGenerateButton_Click(object sender, EventArgs e)
@@ -91,6 +92,19 @@ namespace LambentLight
             Program.Config.Save();
         }
 
+        #endregion
+
+        #region Authentication - Steam
+
+        private void SteamVisibleCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            // Change the enabled status of the Steam TextBox and Button
+            SteamTextBox.Enabled = SteamVisibleCheckBox.Checked;
+            SteamSaveButton.Enabled = SteamVisibleCheckBox.Checked;
+            // And populate the API Key correctly
+            SteamTextBox.Text = SteamVisibleCheckBox.Checked ? Program.Config.SteamToken : string.Empty;
+        }
+
         private void SteamGenerateButton_Click(object sender, EventArgs e)
         {
             // Open the Steam API Key Registration form
@@ -104,38 +118,36 @@ namespace LambentLight
             Program.Config.Save();
         }
 
-        private void SaveAPIsButton_Click(object sender, EventArgs e)
+        #endregion
+
+        #region Authentication - MySQL
+
+        private void ConnectionCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            // Save the build URL on the configuration
-            Program.Config.Builds = BuildsTextBox.Text;
-            Program.Config.Save();
+            // Change the enabled status of the License TextBox and Button
+            ConnectionTextBox.Enabled = ConnectionCheckBox.Checked;
+            ConnectionButton.Enabled = ConnectionCheckBox.Checked;
+            // And populate the TextBox correctly
+            ConnectionTextBox.Text = ConnectionCheckBox.Checked ? Program.Config.MySQL.Connection : string.Empty;
         }
 
-        private void DownloadScriptsCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void ConnectionButton_Click(object sender, EventArgs e)
         {
-            // Save the curent status on the settings
-            Program.Config.Creator.DownloadScripts = DownloadScriptsCheckBox.Checked;
+            // Just save it
+            Program.Config.MySQL.Connection = ConnectionTextBox.Text;
             Program.Config.Save();
+            // And tell the database manager to reconnect
+            DatabaseManager.Connect();
         }
 
-        private void CreateConfigCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            // Save the curent status on the settings
-            Program.Config.Creator.CreateConfig = CreateConfigCheckBox.Checked;
-            Program.Config.Save();
-        }
+        #endregion
 
-        private void AddToConfigCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            // Save the curent status on the settings
-            Program.Config.AddAfterInstalling = AddToConfigCheckBox.Checked;
-            Program.Config.Save();
-        }
+        #region Runtime
 
-        private void RemoveFromConfigCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void ClearCacheCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             // Save the curent status on the settings
-            Program.Config.RemoveAfterUninstalling = RemoveFromConfigCheckBox.Checked;
+            Program.Config.ClearCache = ClearCacheCheckBox.Checked;
             Program.Config.Save();
         }
 
@@ -143,13 +155,6 @@ namespace LambentLight
         {
             // Save the curent status on the settings
             Program.Config.RestartOnCrash = AutoRestartCheckBox.Checked;
-            Program.Config.Save();
-        }
-
-        private void ClearCacheCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            // Save the curent status on the settings
-            Program.Config.ClearCache = ClearCacheCheckBox.Checked;
             Program.Config.Save();
         }
 
@@ -188,17 +193,58 @@ namespace LambentLight
             Program.Config.Save();
         }
 
+        #endregion
+
+        #region Data Folders
+        
+        private void DownloadScriptsCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            // Save the curent status on the settings
+            Program.Config.Creator.DownloadScripts = DownloadScriptsCheckBox.Checked;
+            Program.Config.Save();
+        }
+
+        private void CreateConfigCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            // Save the curent status on the settings
+            Program.Config.Creator.CreateConfig = CreateConfigCheckBox.Checked;
+            Program.Config.Save();
+        }
+
+        private void AddToConfigCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            // Save the curent status on the settings
+            Program.Config.AddAfterInstalling = AddToConfigCheckBox.Checked;
+            Program.Config.Save();
+        }
+
+        private void RemoveFromConfigCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            // Save the curent status on the settings
+            Program.Config.RemoveAfterUninstalling = RemoveFromConfigCheckBox.Checked;
+            Program.Config.Save();
+        }
+
+        private void ApplyCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.Config.MySQL.Apply = ApplyCheckBox.Checked;
+            Program.Config.Save();
+        }
+
+        private void ManuallyCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            Program.Config.MySQL.Manually = ManuallyCheckBox.Checked;
+            Program.Config.Save();
+        }
+
+        #endregion
+
+        #region Schedule
+
         private void RestartEveryCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             // Save the curent status on the settings
             Program.Config.AutoRestart.Cron = RestartEveryCheckBox.Checked;
-            Program.Config.Save();
-        }
-
-        private void RestartAtCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            // Save the curent status on the settings
-            Program.Config.AutoRestart.Daily = RestartAtCheckBox.Checked;
             Program.Config.Save();
         }
 
@@ -219,6 +265,13 @@ namespace LambentLight
             Program.Config.Save();
         }
 
+        private void RestartAtCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            // Save the curent status on the settings
+            Program.Config.AutoRestart.Daily = RestartAtCheckBox.Checked;
+            Program.Config.Save();
+        }
+
         private void RestartAtButton_Click(object sender, EventArgs e)
         {
             // Try to parse the text box contents
@@ -236,33 +289,14 @@ namespace LambentLight
             Program.Config.Save();
         }
 
-        private void ConnectionCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            // Change the enabled status of the License TextBox and Button
-            ConnectionTextBox.Enabled = ConnectionCheckBox.Checked;
-            ConnectionButton.Enabled = ConnectionCheckBox.Checked;
-            // And populate the TextBox correctly
-            ConnectionTextBox.Text = ConnectionCheckBox.Checked ? Program.Config.MySQL.Connection : string.Empty;
-        }
+        #endregion
 
-        private void ConnectionButton_Click(object sender, EventArgs e)
-        {
-            // Just save it
-            Program.Config.MySQL.Connection = ConnectionTextBox.Text;
-            Program.Config.Save();
-            // And tell the database manager to reconnect
-            DatabaseManager.Connect();
-        }
+        #region APIs
 
-        private void ApplyCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void SaveAPIsButton_Click(object sender, EventArgs e)
         {
-            Program.Config.MySQL.Apply = ApplyCheckBox.Checked;
-            Program.Config.Save();
-        }
-
-        private void ManuallyCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            Program.Config.MySQL.Manually = ManuallyCheckBox.Checked;
+            // Save the build URL on the configuration
+            Program.Config.Builds = BuildsTextBox.Text;
             Program.Config.Save();
         }
 
@@ -302,6 +336,10 @@ namespace LambentLight
             ReloadSettings();
         }
 
+        #endregion
+
+        #region Bottom
+
         private void ResetSettingsButton_Click(object sender, EventArgs e)
         {
             // Ask the user if he is sure
@@ -322,5 +360,7 @@ namespace LambentLight
             // Just close the form
             Close();
         }
+
+        #endregion
     }
 }
