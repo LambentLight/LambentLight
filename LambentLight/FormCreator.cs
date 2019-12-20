@@ -6,14 +6,14 @@ using System.Windows.Forms;
 
 namespace LambentLight
 {
-    public partial class Creator : Form
+    public partial class FormCreator : Form
     {
         /// <summary>
         /// The new data folder that should be created.
         /// </summary>
         public DataFolder NewDataFolder { get; set; } = null;
 
-        public Creator()
+        public FormCreator()
         {
             // Initialize the UI elements
             InitializeComponent();

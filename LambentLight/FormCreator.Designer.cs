@@ -1,6 +1,6 @@
 ﻿namespace LambentLight
 {
-    partial class Creator
+    partial class FormCreator
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Creator));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormCreator));
             this.CreatorTabControl = new System.Windows.Forms.TabControl();
             this.BasicsTabPage = new System.Windows.Forms.TabPage();
             this.DownloadGroupBox = new System.Windows.Forms.GroupBox();

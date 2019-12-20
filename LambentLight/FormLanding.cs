@@ -179,7 +179,7 @@ namespace LambentLight
         private async void CreateToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Create the new form
-            Creator CreatorForm = new Creator();
+            FormCreator CreatorForm = new FormCreator();
             // Show the form as a dialog
             CreatorForm.ShowDialog();
             // Finally, dispose the dialog
