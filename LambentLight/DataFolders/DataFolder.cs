@@ -1,4 +1,4 @@
-﻿using LambentLight.Database;
+using LambentLight.Database;
 using LambentLight.Managers;
 using MySql.Data.MySqlClient;
 using NLog;
@@ -17,6 +17,8 @@ namespace LambentLight.DataFolders
     /// </summary>
     public class DataFolder : IDisposable
     {
+        #region Private Fields
+
         /// <summary>
         /// The logger for our current class.
         /// </summary>
@@ -25,6 +27,11 @@ namespace LambentLight.DataFolders
         /// The secure Random Number Generator for RCON passwords.
         /// </summary>
         private static readonly RNGCryptoServiceProvider RNG = new RNGCryptoServiceProvider();
+
+        #endregion
+
+        #region Public Properties
+
         /// <summary>
         /// The name of the folder.
         /// </summary>
@@ -98,6 +105,10 @@ namespace LambentLight.DataFolders
             }
         }
 
+        #endregion
+
+        #region Constructors
+
         /// <summary>
         /// Creates a new instance of the data folder.
         /// </summary>
@@ -106,6 +117,10 @@ namespace LambentLight.DataFolders
         {
             Name = name;
         }
+
+        #endregion
+
+        #region Private Functions
 
         /// <summary>
         /// Creates a secure string via RNGCryptoServiceProvider.
@@ -121,6 +136,10 @@ namespace LambentLight.DataFolders
             // And then, return that byte array as a string
             return Convert.ToBase64String(Output);
         }
+
+        #endregion
+
+        #region Public Functions
 
         /// <summary>
         /// Generates a new configuration for the current data folder.
@@ -330,6 +349,10 @@ namespace LambentLight.DataFolders
             }
         }
 
+        #endregion
+
+        #region Overrides
+
         /// <summary>
         /// Gets the directory name.
         /// </summary>
@@ -343,5 +366,7 @@ namespace LambentLight.DataFolders
         /// Checks if the compared object has the same name as the current one.
         /// </summary>
         public override bool Equals(object obj) => obj is DataFolder && Name == ((DataFolder)obj).Name;
+
+        #endregion
     }
 }
