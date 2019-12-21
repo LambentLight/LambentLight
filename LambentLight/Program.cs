@@ -1,6 +1,9 @@
 ﻿using LambentLight.Config;
+using LambentLight.Database;
+using LambentLight.Targets;
+using NLog;
+using NLog.Config;
 using System;
-using System.Net;
 using System.Windows.Forms;
 
 namespace LambentLight
@@ -29,6 +32,18 @@ namespace LambentLight
 
             // Create our main form
             Form = new FormLanding();
+
+            // Create a new configuration for NLog
+            LoggingConfiguration config = new LoggingConfiguration();
+            // Add new rules for logging into the Console and Strip at the Bottom
+            config.AddRule(LogLevel.Debug, LogLevel.Fatal, new TextBoxTarget() { Layout = "[${date}] [${level}] ${message}" });
+            config.AddRule(LogLevel.Info, LogLevel.Fatal, new BottomStripTarget() { Layout = "${message}" });
+            // And make NLog use this new configuration
+            LogManager.Configuration = config;
+
+            // Try to connect into the MySQL database
+            DatabaseManager.Connect();
+
             // Prepare the downloader for our operations
             Downloader.Prepare();
             // And run the application with our main form

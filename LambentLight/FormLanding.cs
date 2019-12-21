@@ -6,9 +6,7 @@ using LambentLight.Extensions;
 using LambentLight.Managers;
 using LambentLight.Properties;
 using LambentLight.Runtime;
-using LambentLight.Targets;
 using NLog;
-using NLog.Config;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -67,14 +65,6 @@ namespace LambentLight
             // Initialize the UI elements
             InitializeComponent();
 
-            // Create a new configuration for NLog
-            LoggingConfiguration config = new LoggingConfiguration();
-            // Add new rules for logging into the Console and Strip at the Bottom
-            config.AddRule(LogLevel.Debug, LogLevel.Fatal, new TextBoxTarget() { Layout = "[${date}] [${level}] ${message}" });
-            config.AddRule(LogLevel.Info, LogLevel.Fatal, new BottomStripTarget() { Layout = "${message}" });
-            // And make NLog use this new configuration
-            LogManager.Configuration = config;
-
             // Add all of the supported games
             foreach (string value in Enum.GetNames(typeof(Game)))
             {
@@ -83,9 +73,6 @@ namespace LambentLight
 
             // Load the RTF text
             AboutRichTextBox.Rtf = Resources.About;
-
-            // Try to connect into the MySQL database
-            DatabaseManager.Connect();
 
             // Unlock all of the UI Elements
             Locked = false;
