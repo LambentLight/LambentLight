@@ -77,13 +77,13 @@ namespace LambentLight.DataFolders
                 // Delete the resource
                 Directory.Delete(Location, true);
                 // And notify the user
-                Logger.Warn("Removing existing version of {0} at '{1}' (from Data Folder '{2}')", Name, Location, Source.Name);
+                Logger.Warn("Removing existing version of {0} at '{1}' (from Data Folder '{2}')", Name, Location, Source);
             }
             // If not
             else
             {
                 // Notify the user
-                Logger.Error("The resource {0} could not be found in '{1}' (from Data Folder '{2}')", Name, Location, Source.Name);
+                Logger.Error("The resource {0} could not be found in '{1}' (from Data Folder '{2}')", Name, Location, Source);
             }
         }
 
