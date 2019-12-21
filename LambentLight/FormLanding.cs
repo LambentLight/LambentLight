@@ -1,4 +1,4 @@
-﻿using LambentLight.Builds;
+using LambentLight.Builds;
 using LambentLight.Config;
 using LambentLight.Database;
 using LambentLight.DataFolders;
@@ -120,7 +120,7 @@ namespace LambentLight
                 ConfigurationTextBox.Text = ((DataFolder)DataFolderComboBox.SelectedItem).Configuration;
             }
             // If the user selected the Resources tab and there is a data folder selected and it exists
-            else if (e.TabPage == ResourcesTabPage && DataFolderComboBox.SelectedItem != null)
+            else if (e.TabPage == ResourcesTabPage && DataFolderComboBox.SelectedItem != null && InstalledListBox.Items.Count == 0)
             {
                 // Update the list of installed resources
                 RefreshInstalledResources();
