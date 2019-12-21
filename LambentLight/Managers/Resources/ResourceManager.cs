@@ -35,15 +35,15 @@ namespace LambentLight.Managers.Resources
         /// </summary>
         public static void Refresh()
         {
-            // Create a new list of resources
+            // Create a new temporary list of resources
             List<Resource> tempResources = new List<Resource>();
-            // Get the readable name of the game
+            // Get the readable name of the game that is currently selected
             string game = Program.Config.Game == Game.GrandTheftAutoV ? "gtav" : "rdr2";
 
             // For each resource repository
             foreach (string repo in Program.Config.Repos)
             {
-                // Get the lists of resources
+                // Get the lists of resources that are common and specific to this game
                 List<Resource> outputGeneric = Downloader.DownloadJSON<List<Resource>>($"{repo}/resources/common.json");
                 List<Resource> outputGame = Downloader.DownloadJSON<List<Resource>>($"{repo}/resources/{game}.json");
 
@@ -54,7 +54,7 @@ namespace LambentLight.Managers.Resources
 
             // Store the resources in alphabetical order
             Resources = tempResources.OrderBy(x => x.Name).ToList();
-            // Log what we have just done
+            // And log what we have just done
             Logger.Debug("The list of resources has been updated");
         }
 
