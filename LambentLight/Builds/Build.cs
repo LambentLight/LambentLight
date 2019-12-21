@@ -43,7 +43,7 @@ namespace LambentLight.Builds
         /// <summary>
         /// If the folder for the build exists.
         /// </summary>
-        public bool IsFolderPresent => File.Exists(Folder);
+        public bool IsFolderPresent => Directory.Exists(Folder);
 
         #endregion
 
