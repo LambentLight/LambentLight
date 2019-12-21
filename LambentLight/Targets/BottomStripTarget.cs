@@ -19,8 +19,21 @@ namespace LambentLight.Targets
                 return;
             }
 
-            // Get the handle to make sure that is available
-            IntPtr pointer = Program.Form.Handle;
+            // If the form does not has a handle
+            if (!Program.Form.IsHandleCreated)
+            {
+                // Get the handle with or without invoking
+                if (Program.Form.InvokeRequired)
+                {
+                    Program.Form.Invoke(new Action(() => { IntPtr pointer = Program.Form.Handle; }));
+                }
+                else
+                {
+                    // Get the handle to make sure that is available
+                    IntPtr pointer = Program.Form.Handle;
+                }
+            }
+
             // And change the text via Invoke
             Program.Form.Invoke(new Action(() => Program.Form.BottomToolStripStatusLabel.Text = Layout.Render(LogEvent)));
         }
