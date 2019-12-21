@@ -46,7 +46,7 @@ namespace LambentLight.Managers.DataFolders
         /// <summary>
         /// The location of the resources folder.
         /// </summary>
-        public string Resources { get; private set; }
+        public string ResourcesPath { get; private set; }
         /// <summary>
         /// If the data folder exists.
         /// </summary>
@@ -54,7 +54,7 @@ namespace LambentLight.Managers.DataFolders
         /// <summary>
         /// The resources that are currently installed on the data folder.
         /// </summary>
-        public List<InstalledResource> InstalledResources
+        public List<InstalledResource> Resources
         {
             get
             {
@@ -62,7 +62,7 @@ namespace LambentLight.Managers.DataFolders
                 List<InstalledResource> resources = new List<InstalledResource>();
 
                 // Iterate over the directories in the resources folder
-                foreach (string folder in Directory.EnumerateDirectories(Resources, "*", SearchOption.AllDirectories))
+                foreach (string folder in Directory.EnumerateDirectories(ResourcesPath, "*", SearchOption.AllDirectories))
                 {
                     // If the folder contains a resource metadata version 1 (__resource.lua) or 2 (fxmanifest.lua), add it
                     if (File.Exists(Path.Combine(folder, "__resource.lua")) || File.Exists(Path.Combine(folder, "fxmanifest.lua")))
@@ -112,7 +112,7 @@ namespace LambentLight.Managers.DataFolders
             Name = name;
             Location = Path.Combine(Locations.Data, Name);
             ConfigurationPath = Path.Combine(Location, "server.cfg");
-            Resources = Path.Combine(Location, "resources");
+            ResourcesPath = Path.Combine(Location, "resources");
         }
 
         #endregion
@@ -166,7 +166,7 @@ namespace LambentLight.Managers.DataFolders
             // Create the path of the folder that contains the resource itself
             string resourcePath = Path.Combine(extractionPath, version.Path ?? "");
             // Create the path where the resource should be installed
-            string destinationFolder = Path.Combine(Resources, resource.More.Install.Destination);
+            string destinationFolder = Path.Combine(ResourcesPath, resource.More.Install.Destination);
             // Create the path where the version can be located
             string versionPath = Path.Combine(destinationFolder, "version.lambentlight");
 
@@ -193,13 +193,13 @@ namespace LambentLight.Managers.DataFolders
             }
 
             // If the resources folder does not exists, create it
-            if (!Directory.Exists(Resources))
+            if (!Directory.Exists(ResourcesPath))
             {
-                Directory.CreateDirectory(Resources);
+                Directory.CreateDirectory(ResourcesPath);
             }
 
             // Iterate over the list of installed resources
-            foreach (InstalledResource Installed in InstalledResources)
+            foreach (InstalledResource Installed in Resources)
             {
                 // If the name matches the resource that we are trying to install, delete it
                 if (Installed.Name == resource.More.Install.Destination)

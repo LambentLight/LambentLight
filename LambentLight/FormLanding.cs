@@ -492,7 +492,7 @@ namespace LambentLight
             }
 
             // Update the list of installed resources
-            InstalledListBox.Fill(((DataFolder)DataFolderComboBox.SelectedItem).InstalledResources);
+            InstalledListBox.Fill(((DataFolder)DataFolderComboBox.SelectedItem).Resources);
         }
         private void RefreshResourceInstaller()
         {

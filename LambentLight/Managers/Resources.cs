@@ -159,7 +159,7 @@ namespace LambentLight.Managers
             }
 
             // Format the path of the folder
-            string Location = Path.Combine(folder.Resources, More.Install.Destination);
+            string Location = Path.Combine(folder.ResourcesPath, More.Install.Destination);
             // Return if the folder exists
             return Directory.Exists(Location);
         }
