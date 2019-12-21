@@ -24,7 +24,7 @@ namespace LambentLight.Managers.Resources
         /// <summary>
         /// All of the resources that are available for installing.
         /// </summary>
-        public static List<Resource> Resources = new List<Resource>();
+        public static List<Resource> Resources { get; private set; } = new List<Resource>();
 
         #endregion
 
