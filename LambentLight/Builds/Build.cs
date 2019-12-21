@@ -27,15 +27,15 @@ namespace LambentLight.Builds
         /// <summary>
         /// The ID of the build. This can be either the folder name or SHA1 hash.
         /// </summary>
-        public string ID { get; }
+        public string ID { get; private set; }
         /// <summary>
         /// The local folder where the build can be located.
         /// </summary>
-        public string Folder { get; }
+        public string Folder { get; private set; }
         /// <summary>
         /// The location of the CFX Server executable.
         /// </summary>
-        public string Executable { get; }
+        public string Executable { get; private set; }
         /// <summary>
         /// If the server executable is present.
         /// </summary>

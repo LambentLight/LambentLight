@@ -35,19 +35,19 @@ namespace LambentLight.DataFolders
         /// <summary>
         /// The name of the folder.
         /// </summary>
-        public string Name { get; }
+        public string Name { get; private set; }
         /// <summary>
         /// The location of the server data folder
         /// </summary>
-        public string Location { get; }
+        public string Location { get; private set; }
         /// <summary>
         /// The path of the Configuration file.
         /// </summary>
-        public string ConfigurationPath { get; }
+        public string ConfigurationPath { get; private set; }
         /// <summary>
         /// The location of the resources folder.
         /// </summary>
-        public string Resources { get; }
+        public string Resources { get; private set; }
         /// <summary>
         /// If the data folder exists.
         /// </summary>
