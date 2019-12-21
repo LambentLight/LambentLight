@@ -10,14 +10,25 @@ namespace LambentLight.Managers.Resources
     /// </summary>
     public static class ResourceManager
     {
+        #region Private Fields
+
         /// <summary>
         /// The logger for our current class.
         /// </summary>
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+        #endregion
+
+        #region Public Properties
+
         /// <summary>
         /// All of the resources that are available for installing.
         /// </summary>
         public static List<Resource> Resources = new List<Resource>();
+
+        #endregion
+
+        #region Public Functions
 
         /// <summary>
         /// Collects all resources required for an install.
@@ -128,5 +139,7 @@ namespace LambentLight.Managers.Resources
             // Log what we have just done
             Logger.Debug("The list of resources has been updated");
         }
+
+        #endregion
     }
 }
