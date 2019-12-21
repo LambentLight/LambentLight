@@ -8,6 +8,8 @@ namespace LambentLight
 {
     public static class Downloader
     {
+        #region Private Fields
+
         /// <summary>
         /// The logger for our current class.
         /// </summary>
@@ -16,6 +18,10 @@ namespace LambentLight
         /// The client to use for web requests.
         /// </summary>
         private static readonly WebClient Client = new WebClient();
+
+        #endregion
+
+        #region Public Functions
 
         /// <summary>
         /// Prepares the client for the web requests.
@@ -32,22 +38,6 @@ namespace LambentLight
             string name = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name;
             string version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
             Client.Headers["User-Agent"] = $"{name}/{version} (+https://github.com/LambentLight/LambentLight)";
-        }
-
-        /// <summary>
-        /// Event that gets triggered when the download progress of a file changes.
-        /// </summary>
-        private static void OnDownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
-        {
-            // Calculate the percentage of the download
-            int Percentage = (int)((float)e.BytesReceived / e.TotalBytesToReceive * 100f);
-
-            // Make a sanity check to ensure that the percentage is on the correct location
-            if (Percentage >= Program.Form.GeneralProgressBar.Minimum && Percentage <= Program.Form.GeneralProgressBar.Maximum)
-            {
-                // And set the value of the progress bar
-                Program.Form.GeneralProgressBar.Value = Percentage;
-            }
         }
 
         /// <summary>
@@ -136,5 +126,27 @@ namespace LambentLight
             // If the HTTP request failed, return null
             return default(T);
         }
+
+        #endregion
+
+        #region Events
+
+        /// <summary>
+        /// Event that gets triggered when the download progress of a file changes.
+        /// </summary>
+        private static void OnDownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        {
+            // Calculate the percentage of the download
+            int Percentage = (int)((float)e.BytesReceived / e.TotalBytesToReceive * 100f);
+
+            // Make a sanity check to ensure that the percentage is on the correct location
+            if (Percentage >= Program.Form.GeneralProgressBar.Minimum && Percentage <= Program.Form.GeneralProgressBar.Maximum)
+            {
+                // And set the value of the progress bar
+                Program.Form.GeneralProgressBar.Value = Percentage;
+            }
+        }
+
+        #endregion
     }
 }
