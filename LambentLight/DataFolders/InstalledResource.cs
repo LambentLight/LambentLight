@@ -23,7 +23,7 @@ namespace LambentLight.DataFolders
         /// <summary>
         /// The name of the resource.
         /// </summary>
-        public string Name { get; }
+        public string Name => Path.GetFileNameWithoutExtension(Location);
         /// <summary>
         /// Where the resource is located.
         /// </summary>
@@ -44,7 +44,6 @@ namespace LambentLight.DataFolders
 
         public InstalledResource(DataFolder source, string location)
         {
-            Name = Path.GetFileNameWithoutExtension(Location);
             Source = source;
             Location = location;
         }
