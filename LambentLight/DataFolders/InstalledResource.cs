@@ -57,7 +57,7 @@ namespace LambentLight.DataFolders
         /// <summary>
         /// Removes the resource if is present.
         /// </summary>
-        public void Dispose()
+        public void Remove()
         {
             // If the resource exists and is present
             if (IsPresent)

@@ -320,7 +320,7 @@ namespace LambentLight
             if (Result == DialogResult.Yes)
             {
                 // Remove the selected resource
-                Installed.Dispose();
+                Installed.Remove();
                 // And update the list of installed resources
                 RefreshInstalledResources();
             }

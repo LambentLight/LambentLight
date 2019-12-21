@@ -205,7 +205,7 @@ namespace LambentLight.DataFolders
                 // If the name matches the resource that we are trying to install, delete it
                 if (Installed.Name == resource.More.Install.Destination)
                 {
-                    Installed.Dispose();
+                    Installed.Remove();
                 }
             }
 
