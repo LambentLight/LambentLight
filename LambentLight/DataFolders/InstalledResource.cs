@@ -1,5 +1,4 @@
 using NLog;
-using System;
 using System.IO;
 using System.Text.RegularExpressions;
 
@@ -8,7 +7,7 @@ namespace LambentLight.DataFolders
     /// <summary>
     /// Class that handles a
     /// </summary>
-    public class InstalledResource : IDisposable
+    public class InstalledResource
     {
         #region Private Fields
 
