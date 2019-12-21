@@ -101,13 +101,12 @@ namespace LambentLight.Runtime
             }
 
             // Store the absolute path of the build and citizen folders
-            string absolutePath = Path.GetFullPath(build.Folder);
-            string citizenPath = Path.Combine(absolutePath, "citizen");
+            string citizenPath = Path.Combine(build.Folder, "citizen");
 
             // Create a new server object
             Process process = new Process();
             // Set the executable of the server as the file to start
-            process.StartInfo.FileName = Path.Combine(absolutePath, "FXServer.exe");
+            process.StartInfo.FileName = Path.Combine(build.Folder, "FXServer.exe");
             // Set the path of the CFX Scripting stuff (metadata?)
             process.StartInfo.Arguments += $"+set citizen_dir \"{citizenPath}\" ";
             // Set the license from the configuration
