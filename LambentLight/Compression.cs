@@ -1,4 +1,4 @@
-using NLog;
+﻿using NLog;
 using SharpCompress.Archives;
 using SharpCompress.Common;
 using SharpCompress.Readers;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace LambentLight
 {
     /// <summary>
-    /// Class that deals with the extraction of compressed files.
+    /// Tools to handle different types of compressed files.
     /// </summary>
     public static class Compression
     {
@@ -37,7 +37,7 @@ namespace LambentLight
             // Wait just to shut the fucking compiler
             await Task.Delay(0);
 
-            // Open the file as a streamer and feed it into the Compression reader
+            // Open the file as a Stream and feed it into the ArchiveFactory
             using (Stream stream = File.OpenRead(file))
             using (IArchive archive = ArchiveFactory.Open(stream))
             {
@@ -50,12 +50,12 @@ namespace LambentLight
                     // If the entry is not a directory
                     if (!reader.Entry.IsDirectory)
                     {
-                        // If we are on a debug build
+                        // Log a message if we are on a debug build
                         #if DEBUG
                             Logger.Debug("Currently extracting: {0}", reader.Entry.Key);
                         #endif
 
-                        // Write it to our output directory
+                        // And write it to our output directory
                         reader.WriteEntryToDirectory(output, ExtractOpts);
                     }
                 }
