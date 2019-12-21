@@ -368,7 +368,7 @@ namespace LambentLight
             }
 
             // Get all of the requirements by the selected resource
-            Dictionary<Resource, Managers.Resources.Version> Collected = ResourceManager.GetRequirements(NewResource, (Managers.Resources.Version)InstallerVersionsListBox.SelectedItem);
+            Dictionary<Resource, Managers.Resources.Version> Collected = NewResource.GetRequirements((Managers.Resources.Version)InstallerVersionsListBox.SelectedItem);
             // Create the readable list of resources
             string ReadableResources = string.Join(" ", Collected.Select(x => $"{x.Key.Name}-{x.Value.ReadableVersion}"));
 

@@ -31,56 +31,6 @@ namespace LambentLight.Managers.Resources
         #region Public Functions
 
         /// <summary>
-        /// Collects all resources required for an install.
-        /// </summary>
-        /// <param name="resource"></param>
-        /// <returns></returns>
-        public static Dictionary<Resource, Version> GetRequirements(Resource resource, Version version, int level = 0)
-        {
-            // Create a dictionary of resources and versions
-            Dictionary<Resource, Version> TempList = new Dictionary<Resource, Version>();
-
-            // If the level is equal or higher to 3, return
-            if (level >= 3)
-            {
-                return TempList;
-            }
-
-            // Add our base resource and version
-            TempList.Add(resource, version);
-
-            // If we have dependencies
-            if (resource.More.Requires != null)
-            {
-                // For every requirement
-                foreach (string Requirement in resource.More.Requires)
-                {
-                    // Try to find a resource with that name
-                    Resource Found = Resources.Where(res => res.Name == Requirement).FirstOrDefault();
-
-                    // If the resource exists and is not on the list
-                    if (Found != null && !TempList.ContainsKey(Found))
-                    {
-                        // Collect their requirements
-                        Dictionary<Resource, Version> NewReqs = GetRequirements(Found, Found.More.Versions[0], level + 1);
-
-                        // For every new requirement found
-                        foreach (KeyValuePair<Resource, Version> NewReq in NewReqs)
-                        {
-                            // If is not on the list, add it
-                            if (!TempList.ContainsKey(NewReq.Key))
-                            {
-                                TempList.Add(NewReq.Key, NewReq.Value);
-                            }
-                        }
-                    }
-                }
-            }
-
-            // Finally, return the list
-            return TempList;
-        }
-        /// <summary>
         /// Adds the specified enumerator of resources into the list.
         /// </summary>
         /// <param name="resources"></param>
