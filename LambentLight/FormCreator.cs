@@ -1,6 +1,4 @@
-﻿using LambentLight.DataFolders;
-using LambentLight.Managers;
-using LambentLight.Properties;
+﻿using LambentLight.Managers.DataFolders;
 using System;
 using System.Windows.Forms;
 

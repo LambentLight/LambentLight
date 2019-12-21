@@ -1,6 +1,5 @@
-﻿using LambentLight.Builds;
-using LambentLight.DataFolders;
-using LambentLight.Managers;
+﻿using LambentLight.Managers.Builds;
+using LambentLight.Managers.DataFolders;
 using NLog;
 using System;
 using System.Diagnostics;
@@ -8,7 +7,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace LambentLight.Runtime
+namespace LambentLight.Managers.Runtime
 {
     public static class RuntimeManager
     {

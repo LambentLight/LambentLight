@@ -2,7 +2,7 @@ using NLog;
 using System.IO;
 using System.Text.RegularExpressions;
 
-namespace LambentLight.DataFolders
+namespace LambentLight.Managers.DataFolders
 {
     /// <summary>
     /// Class that handles a

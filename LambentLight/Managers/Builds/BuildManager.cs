@@ -5,7 +5,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 
-namespace LambentLight.Builds
+namespace LambentLight.Managers.Builds
 {
     /// <summary>
     /// Class that manages the downloads and updates of builds.

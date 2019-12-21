@@ -1,5 +1,4 @@
-﻿using LambentLight.Database;
-using LambentLight.Managers;
+﻿using LambentLight.Managers.Database;
 using MySql.Data.MySqlClient;
 using NLog;
 using System;
@@ -10,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace LambentLight.DataFolders
+namespace LambentLight.Managers.DataFolders
 {
     /// <summary>
     /// A class that represents a folder with FiveM server data.

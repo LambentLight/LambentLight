@@ -2,7 +2,7 @@
 using System.IO;
 using System.Threading.Tasks;
 
-namespace LambentLight.Builds
+namespace LambentLight.Managers.Builds
 {
     /// <summary>
     /// Class that contains the information of a specific CFX build.

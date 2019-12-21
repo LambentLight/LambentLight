@@ -1,11 +1,11 @@
-using LambentLight.Builds;
 using LambentLight.Config;
-using LambentLight.Database;
-using LambentLight.DataFolders;
 using LambentLight.Extensions;
 using LambentLight.Managers;
+using LambentLight.Managers.Builds;
+using LambentLight.Managers.Database;
+using LambentLight.Managers.DataFolders;
+using LambentLight.Managers.Runtime;
 using LambentLight.Properties;
-using LambentLight.Runtime;
 using NLog;
 using System;
 using System.Collections.Generic;

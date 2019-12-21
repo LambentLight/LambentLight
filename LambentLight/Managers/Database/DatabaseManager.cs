@@ -3,7 +3,7 @@ using NLog;
 using System;
 using System.Data;
 
-namespace LambentLight.Database
+namespace LambentLight.Managers.Database
 {
     /// <summary>
     /// A manager for the MySQL Database.

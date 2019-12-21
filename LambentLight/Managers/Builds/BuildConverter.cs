@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 
-namespace LambentLight.Builds
+namespace LambentLight.Managers.Builds
 {
     /// <summary>
     /// A JSON converter for reading CFX builds from a list of Identifiers.

@@ -1,5 +1,5 @@
 ﻿using LambentLight.Config;
-using LambentLight.Database;
+using LambentLight.Managers.Database;
 using LambentLight.Targets;
 using NLog;
 using NLog.Config;

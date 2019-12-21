@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace LambentLight.DataFolders
+namespace LambentLight.Managers.DataFolders
 {
     /// <summary>
     /// Managers for the folders that contain Server Data.

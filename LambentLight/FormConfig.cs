@@ -1,6 +1,6 @@
 ﻿using LambentLight.Config;
-using LambentLight.Database;
 using LambentLight.Extensions;
+using LambentLight.Managers.Database;
 using Microsoft.VisualBasic;
 using System;
 using System.Diagnostics;

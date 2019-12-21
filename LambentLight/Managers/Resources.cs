@@ -1,5 +1,5 @@
 using LambentLight.Config;
-using LambentLight.DataFolders;
+using LambentLight.Managers.DataFolders;
 using Newtonsoft.Json;
 using NLog;
 using System.Collections.Generic;
