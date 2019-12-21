@@ -1,4 +1,4 @@
-using LambentLight.Managers.DataFolders;
+﻿using LambentLight.Managers.DataFolders;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
@@ -80,14 +80,27 @@ namespace LambentLight.Managers.Resources
 
         #region Public Functions
 
+        /// <summary>
+        /// Collects all of the resources required for this one to be installed.
+        /// </summary>
+        /// <param name="version">The version of this resource to use.</param>
+        /// <returns>A dictionary with the Resource(s) as a Key and the Version(s) as a Value.</returns>
+        public Dictionary<Resource, Version> GetRequirements(Version version)
+        {
+            return GetRequirements(version, 0);
+        }
+
+        #endregion
+
+        #region Private Functions
 
         /// <summary>
-        /// Collects all resources required for an install.
+        /// Collects all of the resources required for this one to be installed.
         /// </summary>
         /// <param name="version">The version of this resource to use.</param>
         /// <param name="level">The level of nested calls.</param>
         /// <returns>A dictionary with the Resource(s) as a Key and the Version(s) as a Value.</returns>
-        public Dictionary<Resource, Version> GetRequirements(Version version, int level = 0)
+        private Dictionary<Resource, Version> GetRequirements(Version version, int level)
         {
             // Create a dictionary of resources and versions
             Dictionary<Resource, Version> resources = new Dictionary<Resource, Version>();
