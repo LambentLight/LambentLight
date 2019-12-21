@@ -76,29 +76,6 @@ namespace LambentLight.Managers.Resources
 
         #endregion
 
-        #region Functions
-
-        /// <summary>
-        /// Checks if a specific resource is installed on a Data Folder.
-        /// </summary>
-        /// <param name="folder">The folder to check against to.</param>
-        /// <returns>true if the resource is installed, false otherwise.</returns>
-        public bool IsInstalledIn(DataFolder folder)
-        {
-            // If there is no More parameter, return
-            if (More == null)
-            {
-                return false;
-            }
-
-            // Format the path of the folder
-            string Location = Path.Combine(folder.ResourcesPath, More.Install.Destination);
-            // Return if the folder exists
-            return Directory.Exists(Location);
-        }
-
-        #endregion
-
         #region Overrides
 
         public override string ToString() => $"{Name} by {Author}";
