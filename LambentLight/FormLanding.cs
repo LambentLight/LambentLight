@@ -4,6 +4,7 @@ using LambentLight.Managers;
 using LambentLight.Managers.Builds;
 using LambentLight.Managers.Database;
 using LambentLight.Managers.DataFolders;
+using LambentLight.Managers.Resources;
 using LambentLight.Managers.Runtime;
 using LambentLight.Properties;
 using NLog;
@@ -367,7 +368,7 @@ namespace LambentLight
             }
 
             // Get all of the requirements by the selected resource
-            Dictionary<Resource, Managers.Version> Collected = ResourceManager.GetRequirements(NewResource, (Managers.Version)InstallerVersionsListBox.SelectedItem);
+            Dictionary<Resource, Managers.Resources.Version> Collected = ResourceManager.GetRequirements(NewResource, (Managers.Resources.Version)InstallerVersionsListBox.SelectedItem);
             // Create the readable list of resources
             string ReadableResources = string.Join(" ", Collected.Select(x => $"{x.Key.Name}-{x.Value.ReadableVersion}"));
 
@@ -375,7 +376,7 @@ namespace LambentLight
             Logger.Info("Installing requirements {0} for {1}", ReadableResources, InstallerResourcesListBox.SelectedItem);
 
             // Iterate over the list of required resources
-            foreach (KeyValuePair<Resource, Managers.Version> Requirement in Collected)
+            foreach (KeyValuePair<Resource, Managers.Resources.Version> Requirement in Collected)
             {
                 // And install it
                 await Folder.Install(Requirement.Key, Requirement.Value);

@@ -1,4 +1,5 @@
 ﻿using LambentLight.Managers.Database;
+using LambentLight.Managers.Resources;
 using MySql.Data.MySqlClient;
 using NLog;
 using System;
@@ -154,7 +155,7 @@ namespace LambentLight.Managers.DataFolders
         /// <param name="resource">The resource information.</param>
         /// <param name="version">The version to install.</param>
         /// <returns>true if the installation succeded, false otherwise.</returns>
-        public async Task Install(Resource resource, Managers.Version version)
+        public async Task Install(Resource resource, Resources.Version version)
         {
             // Notify that we are starting the install of there resource
             Logger.Info("Installing resource {0} {1}", resource.Name, version.ReadableVersion);

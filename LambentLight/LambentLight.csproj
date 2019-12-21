@@ -118,10 +118,15 @@
     <Compile Include="FormLanding.Designer.cs">
       <DependentUpon>FormLanding.cs</DependentUpon>
     </Compile>
+    <Compile Include="Managers\Resources\Compatibility.cs" />
+    <Compile Include="Managers\Resources\ExtendedResource.cs" />
+    <Compile Include="Managers\Resources\InstallInfo.cs" />
+    <Compile Include="Managers\Resources\Resource.cs" />
+    <Compile Include="Managers\Resources\Version.cs" />
     <Compile Include="Patterns.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Managers\Resources.cs" />
+    <Compile Include="Managers\Resources\ResourceManager.cs" />
     <Compile Include="Managers\Runtime\RuntimeManager.cs" />
     <Compile Include="Targets\BottomStripTarget.cs" />
     <Compile Include="Targets\TextBoxTarget.cs" />
