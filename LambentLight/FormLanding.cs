@@ -14,7 +14,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.Linq;
-using System.Net;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -67,47 +66,46 @@ namespace LambentLight
         {
             // Initialize the UI elements
             InitializeComponent();
-        }
 
-        private void Landing_Load(object sender, EventArgs e)
-        {
             // Create a new configuration for NLog
-            LoggingConfiguration NewConfig = new LoggingConfiguration();
-            // Add new rules for logging into specific places
-            NewConfig.AddRule(LogLevel.Debug, LogLevel.Fatal, new TextBoxTarget() { Layout = "[${date}] [${level}] ${message}" });
-            NewConfig.AddRule(LogLevel.Info, LogLevel.Fatal, new BottomStripTarget() { Layout = "${message}" });
-            // Set the already created configuration
-            LogManager.Configuration = NewConfig;
-            // Update the list of builds, folders and resources
-            BuildManager.Refresh();
-            DataFolderManager.Refresh();
-            // And filll the Builds and Data folders
-            BuildsListBox.Fill(BuildManager.Builds, true);
-            DataFolderComboBox.Fill(DataFolderManager.Folders, true);
-            // Set the elements to unlocked
-            Locked = false;
-            // Load the RTF text
-            AboutRichTextBox.Rtf = Resources.About;
+            LoggingConfiguration config = new LoggingConfiguration();
+            // Add new rules for logging into the Console and Strip at the Bottom
+            config.AddRule(LogLevel.Debug, LogLevel.Fatal, new TextBoxTarget() { Layout = "[${date}] [${level}] ${message}" });
+            config.AddRule(LogLevel.Info, LogLevel.Fatal, new BottomStripTarget() { Layout = "${message}" });
+            // And make NLog use this new configuration
+            LogManager.Configuration = config;
 
-            // Iterate over the games supported
+            // Add all of the supported games
             foreach (string value in Enum.GetNames(typeof(Game)))
             {
-                // Add the item into the combo box
                 GameComboBox.Items.Add(value.SpaceOnUpperCase());
             }
-            // And select the correct game
-            GameComboBox.SelectedIndex = (int)Program.Config.Game;
+
+            // Load the RTF text
+            AboutRichTextBox.Rtf = Resources.About;
 
             // Try to connect into the MySQL database
             DatabaseManager.Connect();
 
-            // Tell the Web Clients to use TLS 1.2 instead of SSL3
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            // Unlock all of the UI Elements
+            Locked = false;
+        }
+
+        private void Landing_Load(object sender, EventArgs e)
+        {
+            // Select the same game as the last session
+            GameComboBox.SelectedIndex = (int)Program.Config.Game;
+
+            // Update the list of Builds and Data Folders
+            BuildManager.Refresh();
+            DataFolderManager.Refresh();
+            // And and fill their respective lists
+            BuildsListBox.Fill(BuildManager.Builds, true);
+            DataFolderComboBox.Fill(DataFolderManager.Folders, true);
         }
 
         private void Landing_FormClosing(object sender, FormClosingEventArgs e)
         {
-
             // Ask the user if he wants to close the server
             DialogResult result = MessageBox.Show("Closing LambentLight will stop the server and close the MySQL Connection.\nAre you sure that you want to exit LambentLight?", "Server is Running", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             // If the result is not yes, cancel the event and return

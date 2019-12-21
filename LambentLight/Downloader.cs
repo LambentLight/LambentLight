@@ -25,10 +25,13 @@ namespace LambentLight
             // Set the event to refresh the progress bar
             Client.DownloadProgressChanged += OnDownloadProgressChanged;
 
+            // Tell the Web Clients to use TLS 1.2 instead of SSL3
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
             // Get the name and version of the current program
-            string Name = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name;
-            string Version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
-            Client.Headers["User-Agent"] = $"{Name}/{Version} (+https://github.com/LambentLight/LambentLight)";
+            string name = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name;
+            string version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            Client.Headers["User-Agent"] = $"{name}/{version} (+https://github.com/LambentLight/LambentLight)";
         }
 
         /// <summary>

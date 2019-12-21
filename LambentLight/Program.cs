@@ -1,5 +1,6 @@
 ﻿using LambentLight.Config;
 using System;
+using System.Net;
 using System.Windows.Forms;
 
 namespace LambentLight
