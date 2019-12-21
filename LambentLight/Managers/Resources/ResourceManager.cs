@@ -31,38 +31,6 @@ namespace LambentLight.Managers.Resources
         #region Public Functions
 
         /// <summary>
-        /// Adds the specified enumerator of resources into the list.
-        /// </summary>
-        /// <param name="resources"></param>
-        public static void Add(ref List<Resource> tempResources, List<Resource> newResources, Compatibility compatibility, string repo)
-        {
-            // If one of the lists is null, return
-            if (tempResources == null || newResources == null)
-            {
-                return;
-            }
-
-            // Iterate over the list of resources in the new one
-            foreach (Resource resource in newResources)
-            {
-                // Get the first resource matching the name
-                Resource found = tempResources.Where(x => x.Name == resource.Name).FirstOrDefault();
-
-                // If the big list of resources contains this one, skip it
-                if (found != null)
-                {
-                    Logger.Warn("Repository {0} already contains resource {1}, skipping...", found.Repo, found.Name);
-                    continue;
-                }
-
-                // Save the repo and game
-                resource.Repo = repo;
-                resource.Compatibility = compatibility;
-                // Otherwise, add it
-                tempResources.Add(resource);
-            }
-        }
-        /// <summary>
         /// Refreshes the list of resources.
         /// </summary>
         public static void Refresh()
@@ -88,6 +56,46 @@ namespace LambentLight.Managers.Resources
             Resources = tempResources.OrderBy(x => x.Name).ToList();
             // Log what we have just done
             Logger.Debug("The list of resources has been updated");
+        }
+
+        #endregion
+
+        #region Private Functions
+
+        /// <summary>
+        /// Adds a list of resources onto another one while avoiding duplicates.
+        /// </summary>
+        /// <param name="tempResources">The list to add the resources onto.</param>
+        /// <param name="newResources">The list of new resources that are going to be added.</param>
+        /// <param name="compatibility">The game compatibility of the new resource.</param>
+        /// <param name="repo">The repository URL for the new resources.</param>
+        public static void Add(ref List<Resource> tempResources, List<Resource> newResources, Compatibility compatibility, string repo)
+        {
+            // If one of the lists is null, return
+            if (tempResources == null || newResources == null)
+            {
+                return;
+            }
+
+            // Iterate over the new resources
+            foreach (Resource resource in newResources)
+            {
+                // Try to get the first resource matching the name
+                Resource found = tempResources.Where(x => x.Name == resource.Name).FirstOrDefault();
+
+                // If the big list of resources contains this one, skip it
+                if (found != null)
+                {
+                    Logger.Warn("Repository {0} already contains resource {1}, skipping...", found.Repo, found.Name);
+                    continue;
+                }
+
+                // Save the repo and compatibility of the resource
+                resource.Repo = repo;
+                resource.Compatibility = compatibility;
+                // And add the resource onto the big list
+                tempResources.Add(resource);
+            }
         }
 
         #endregion
