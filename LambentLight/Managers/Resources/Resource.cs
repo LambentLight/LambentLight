@@ -9,10 +9,16 @@ namespace LambentLight.Managers.Resources
     /// </summary>
     public class Resource
     {
+        #region Private Fields
+
         /// <summary>
         /// The private extended information.
         /// </summary>
         private ExtendedResource more = null;
+
+        #endregion
+
+        #region Public Properties
 
         /// <summary>
         /// The readable name of the resource.
@@ -68,6 +74,10 @@ namespace LambentLight.Managers.Resources
             }
         }
 
+        #endregion
+
+        #region Functions
+
         /// <summary>
         /// Checks if a specific resource is installed on a Data Folder.
         /// </summary>
@@ -87,6 +97,12 @@ namespace LambentLight.Managers.Resources
             return Directory.Exists(Location);
         }
 
+        #endregion
+
+        #region Overrides
+
         public override string ToString() => $"{Name} by {Author}";
+
+        #endregion
     }
 }
