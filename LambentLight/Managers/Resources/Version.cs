@@ -7,6 +7,8 @@ namespace LambentLight.Managers.Resources
     /// </summary>
     public class Version
     {
+        #region Public Properties
+
         /// <summary>
         /// The readable version. This can be either semantic versioning or the git commit.
         /// </summary>
@@ -24,10 +26,16 @@ namespace LambentLight.Managers.Resources
         [JsonProperty("path")]
         public string Path { get; set; }
 
+        #endregion
+
+        #region Overrides
+
         /// <summary>
         /// Gets the readable version of the resource.
         /// </summary>
         /// <returns>The readable version of the resource.</returns>
         public override string ToString() => ReadableVersion;
+
+        #endregion
     }
 }
