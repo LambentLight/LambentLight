@@ -10,10 +10,17 @@ namespace LambentLight.DataFolders
     /// </summary>
     public class InstalledResource : IDisposable
     {
+        #region Private Fields
+
         /// <summary>
         /// The logger for our current class.
         /// </summary>
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+        #endregion
+
+        #region Public Properties
+
         /// <summary>
         /// The name of the resource.
         /// </summary>
@@ -26,16 +33,25 @@ namespace LambentLight.DataFolders
         /// The Data Folder where this resource is located.
         /// </summary>
         public DataFolder Source { get; }
+
         /// <summary>
         /// Checks if a resource is present on the specified folder.
         /// </summary>
         public bool IsPresent => Directory.Exists(Location);
+
+        #endregion
+
+        #region Constructor
 
         public InstalledResource(DataFolder source, string location)
         {
             Source = source;
             Location = location;
         }
+
+        #endregion
+
+        #region Public Functions
 
         /// <summary>
         /// Removes the resource if is present.
@@ -71,9 +87,12 @@ namespace LambentLight.DataFolders
             }
         }
 
-        public override string ToString()
-        {
-            return Name;
-        }
+        #endregion
+
+        #region Overrides
+
+        public override string ToString() => Name;
+
+        #endregion
     }
 }
