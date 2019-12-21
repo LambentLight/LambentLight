@@ -13,7 +13,7 @@ namespace LambentLight.Targets
         /// <param name="LogEvent">The log information.</param>
         protected override void Write(LogEventInfo LogEvent)
         {
-            Program.Form.ConsoleTextBox.AppendText(Layout.Render(LogEvent) + Environment.NewLine);
+            Program.Form.Invoke(new Action(() => Program.Form.ConsoleTextBox.AppendText(Layout.Render(LogEvent) + Environment.NewLine)));
         }
     }
 }
