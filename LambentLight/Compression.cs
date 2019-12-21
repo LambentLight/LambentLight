@@ -1,4 +1,4 @@
-﻿using NLog;
+using NLog;
 using SharpCompress.Archives;
 using SharpCompress.Common;
 using SharpCompress.Readers;
@@ -12,6 +12,8 @@ namespace LambentLight
     /// </summary>
     public static class Compression
     {
+        #region Private Fields
+
         /// <summary>
         /// The logger for our current class.
         /// </summary>
@@ -20,7 +22,11 @@ namespace LambentLight
         /// The extraction options for SharpCompress.
         /// </summary>
         private static readonly ExtractionOptions ExtractOpts = new ExtractionOptions() { ExtractFullPath = true };
-        
+
+        #endregion
+
+        #region Public Functions
+
         /// <summary>
         /// Extracts the compressed file to the specified folder.
         /// </summary>
@@ -55,5 +61,7 @@ namespace LambentLight
                 }
             }
         }
+
+        #endregion
     }
 }
