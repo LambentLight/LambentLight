@@ -8,6 +8,8 @@ namespace LambentLight.Managers.Resources
     /// </summary>
     public class ExtendedResource
     {
+        #region Public Properties
+
         /// <summary>
         /// The list of resources that this one requires.
         /// </summary>
@@ -23,5 +25,7 @@ namespace LambentLight.Managers.Resources
         /// </summary>
         [JsonProperty("versions", Required = Required.Always)]
         public List<Version> Versions { get; set; }
+
+        #endregion
     }
 }
