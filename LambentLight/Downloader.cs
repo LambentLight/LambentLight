@@ -2,6 +2,7 @@ using Newtonsoft.Json;
 using NLog;
 using System;
 using System.Net;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace LambentLight
@@ -24,19 +25,20 @@ namespace LambentLight
         #region Public Functions
 
         /// <summary>
-        /// Prepares the client for the web requests.
+        /// Prepares the Web Client with the correct Protocol and Headers.
         /// </summary>
         public static void Prepare()
         {
-            // Set the event to refresh the progress bar
+            // Subscibe the event that changes the progress bar value
             Client.DownloadProgressChanged += OnDownloadProgressChanged;
 
-            // Tell the Web Clients to use TLS 1.2 instead of SSL3
+            // Tell the client to use TLS 1.2 instead of SSL3
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
             // Get the name and version of the current program
-            string name = System.Reflection.Assembly.GetExecutingAssembly().GetName().Name;
-            string version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            string name = Assembly.GetExecutingAssembly().GetName().Name;
+            string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            // And set them as the User-Agent header
             Client.Headers["User-Agent"] = $"{name}/{version} (+https://github.com/LambentLight/LambentLight)";
         }
 
