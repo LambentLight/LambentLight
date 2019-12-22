@@ -9,7 +9,7 @@ namespace LambentLight
         #region Public Properties
 
         /// <summary>
-        /// The new data folder that should be created.
+        /// The new data folder that is going to be created.
         /// </summary>
         public DataFolder NewDataFolder { get; private set; } = null;
 
@@ -25,6 +25,7 @@ namespace LambentLight
 
         private void Creator_Load(object sender, EventArgs e)
         {
+            // Load the options from the configuration
             LoadOptions();
         }
 
@@ -34,7 +35,7 @@ namespace LambentLight
 
         private void SaveOptions()
         {
-            // Just save the settings
+            // Save the settings from the UI Elements
             Program.Config.Creator.DownloadScripts = DownloadCheckBox.Checked;
             Program.Config.Creator.SHVEnabled = SHVCheckBox.Checked;
             Program.Config.Save();
@@ -42,7 +43,7 @@ namespace LambentLight
 
         private void LoadOptions()
         {
-            // Oposite to the function above
+            // Set the values of the UI Elements from the configuration
             DownloadCheckBox.Checked = Program.Config.Creator.DownloadScripts;
             SHVCheckBox.Checked = Program.Config.Creator.SHVEnabled;
         }
@@ -75,10 +76,10 @@ namespace LambentLight
             // Create the object for the data folder
             DataFolder folder = new DataFolder(NameTextBox.Text);
 
-            // If the folder does not exists
+            // If a folder with the same name already exists
             if (folder.Exists)
             {
-                // Ask the user if he wants to replace the existing folder
+                // Ask the user if he wants to replace it
                 DialogResult result = MessageBox.Show("This Data Folder already exists, do you want to replace it?", "Folder Already Exists", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                 // If he does, delete it
@@ -93,8 +94,9 @@ namespace LambentLight
                 }
             }
 
-            // Finally, save it and close the form
+            // Finally, save the new folder
             NewDataFolder = folder;
+            // And close the form
             Close();
         }
 
@@ -106,7 +108,7 @@ namespace LambentLight
 
         private void CloseButton_Click(object sender, EventArgs e)
         {
-            // Self Explanatory, don't you think?
+            // Just close this form
             Close();
         }
 
@@ -121,8 +123,8 @@ namespace LambentLight
 
         private void NextButton_Click(object sender, EventArgs e)
         {
-            // If the selected tab is not over the max, set the next tab
-            if (CreatorTabControl.SelectedIndex != CreatorTabControl.TabCount -1)
+            // If the selected tab is the last one, set the next tab
+            if (CreatorTabControl.SelectedIndex != CreatorTabControl.TabCount - 1)
             {
                 CreatorTabControl.SelectedIndex += 1;
             }
