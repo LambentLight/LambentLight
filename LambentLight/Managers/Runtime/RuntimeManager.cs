@@ -76,6 +76,14 @@ namespace LambentLight.Managers.Runtime
         /// Timer that restarts the server at specific times of the day.
         /// </summary>
         public static Timer RestartAt { get; } = new Timer() { Interval = 1000 };
+        /// <summary>
+        /// If the server is being stopped.
+        /// </summary>
+        public static bool IsShutdownInProgress { get; private set; } = false;
+        /// <summary>
+        /// If the server is being closed, force it to stop.
+        /// </summary>
+        public static bool ForceServerShutdown { get; set; } = false;
 
         #endregion
 
@@ -312,13 +320,26 @@ namespace LambentLight.Managers.Runtime
         #region Private Functions
 
         /// <summary>
-        /// Waits specific time 
+        /// Waits the time specified in the config prior to stopping the server. 
         /// </summary>
         public static async Task Wait()
         {
+            // Say that there is a shutdown in progress
+            IsShutdownInProgress = true;
+
             // Iterate over the wait time
             for (int i = Program.Config.WaitTime; i != 0; i--)
             {
+                // If we are told to force a shutdown
+                if (ForceServerShutdown)
+                {
+                    // Disable the shutdown in progress and force shutdown flags
+                    IsShutdownInProgress = false;
+                    ForceServerShutdown = false;
+                    // And return
+                    return;
+                }
+
                 // If the number is on the dictionary or matches the current wait time
                 if (TimeChecks.ContainsKey(i) || i == Program.Config.WaitTime)
                 {
@@ -333,6 +354,9 @@ namespace LambentLight.Managers.Runtime
                 // And wait a second
                 await Task.Delay(1000);
             }
+
+            // Finally, disable the shutdown flag
+            IsShutdownInProgress = false;
         }
 
         #endregion

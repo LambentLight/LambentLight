@@ -152,8 +152,24 @@ namespace LambentLight
 
         private async void StopToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // Stop the server if is present and unlock the controls
-            Locked = !await RuntimeManager.Stop();
+            // If there is a shutdown in progress
+            if (RuntimeManager.IsShutdownInProgress)
+            {
+                // Ask the user if he wants to force the closure of the server
+                DialogResult result = MessageBox.Show("Do you want to force a server shutdown?", "Force Shutdown?", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                // If he does, mark a forced shutdown and return
+                if (result == DialogResult.Yes)
+                {
+                    RuntimeManager.ForceServerShutdown = true;
+                }
+            }
+            // Otherwise
+            else
+            {
+                // Call a new server shutdown
+                Locked = !await RuntimeManager.Stop();
+            }
         }
 
         private async void RestartToolStripMenuItem_Click(object sender, EventArgs e)
