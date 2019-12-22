@@ -258,14 +258,8 @@ namespace LambentLight.Managers.DataFolders
                         }
                     }
 
-                    // Get the contents of the file
-                    string sql = File.ReadAllText(file);
-                    // Create the MySQL Command
-                    using (MySqlCommand command = new MySqlCommand(sql, DatabaseManager.Connection))
-                    {
-                        // And execute it
-                        await command.ExecuteNonQueryAsync();
-                    }
+                    // Tell the manager to run this file
+                    await DatabaseManager.ImportFile(file);
                 }
             }
 
