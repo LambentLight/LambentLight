@@ -43,56 +43,55 @@ namespace LambentLight
         }
 
         /// <summary>
-        /// Downloads a file from the specified URL.
+        /// Downloads a file.
         /// </summary>
-        /// <param name="from">The URL to download from.</param>
-        /// <param name="to">The file to download to.</param>
-        /// <ret
+        /// <param name="from">The URL of the file.</param>
+        /// <param name="to">The location where the file should be downloaded.</param>
+        /// <returns>true if the operation succeeded, false otherwise.</returns>
         public static async Task<bool> DownloadFile(string from, string to)
         {
-            // Try to download the file
             try
             {
+                // Try to download the file
                 await Client.DownloadFileTaskAsync(from, to);
+                // After downloading the file, reset the ProgressBar Value
+                Program.Form.GeneralProgressBar.Value = 0;
+                // And show that the operation was successful
+                return true;
             }
-            // If we got a HTTP exception
             catch (WebException e)
             {
+                // If we got a HTTP exception, log it and return
                 Logger.Error("Error while downloading '{0}': {1}", from, e.Message);
                 return false;
             }
-            // Reset the progress of the health bar
-            Program.Form.GeneralProgressBar.Value = 0;
-            // Return that we have succeeded
-            return true;
         }
 
         /// <summary>
-        /// Requests a URL as a string.
+        /// Downloads the content of a URL.
         /// </summary>
         /// <param name="from">The URL to fetch.</param>
         /// <returns>The contents of the response if the request succeeded, null otherwise.</returns>
         public static string DownloadString(string from)
         {
-            // Try to download the string
             try
             {
-                // Use the asynchronous method
-                string Output = Client.DownloadString(from);
-                // Reset the progress bar
+                // Try to fetch the string from the URL
+                string output = Client.DownloadString(from);
+                // After fetching the string, reset the ProgressBar Value
                 Program.Form.GeneralProgressBar.Value = 0;
-                // And return our string
-                return Output;
+                // And return the string
+                return output;
             }
-            // If we got a HTTP exception
             catch (WebException er)
             {
+                // If we got a HTTP exception, log it and return
                 Logger.Error("Error while fetching '{0}': {1}", from, er.Message);
                 return null;
             }
-            // If one of the arguments is invalid
             catch (ArgumentException er)
             {
+                // If one of the arguments is invalid, log it and return
                 Logger.Error("Error while fetching '{0}': {1}", from, er.Message);
                 return null;
             }
@@ -107,25 +106,25 @@ namespace LambentLight
         /// <returns>The parsed contents if the request and parsing succeeds, default(T) otherwise.</returns>
         public static T DownloadJSON<T>(string from, params JsonConverter[] converters)
         {
-            // NOTE: This solution can't be built on AppVeyor under the VS 2019 image, so use default(T) for the time being
-
             // Request the string as usual
-            string Contents = DownloadString(from);
+            string contents = DownloadString(from);
+
             // If the content is not null
-            if (Contents != null)
+            if (contents != null)
             {
-                // Try to parse the JSON
+                // Try to deserialize the JSON into a .NET Object
                 try
                 {
-                    return JsonConvert.DeserializeObject<T>(Contents, converters);
+                    return JsonConvert.DeserializeObject<T>(contents, converters);
                 }
-                // If we have failed, return the default value
+                // If we failed, return the default value
                 catch (EntryPointNotFoundException)
                 {
                     return default(T);
                 }
             }
-            // If the HTTP request failed, return null
+
+            // If the HTTP request failed, return the default value
             return default(T);
         }
 
