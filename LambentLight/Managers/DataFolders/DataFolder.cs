@@ -364,7 +364,7 @@ namespace LambentLight.Managers.DataFolders
         public bool DoesResourceAutoStart(Resource resource)
         {
             // Format the RegEx to have the resource folder name
-            string regex = string.Format(Patterns.Resource, resource.More.Install.Destination);
+            string regex = string.Format(StartRegEx, resource.More.Install.Destination);
             // Then, return if the regex matches the configuration file
             return Regex.IsMatch(Configuration, regex);
         }
@@ -382,6 +382,21 @@ namespace LambentLight.Managers.DataFolders
                 // And log it
                 Logger.Info("The resource {0} was set to auto start in {1}", resource.More.Install.Destination, Name);
             }            
+        }
+        /// <summary>
+        /// Removes the resource from auto start if is present.
+        /// </summary>
+        /// <param name="resource">The resource to remove.</param>
+        public void RemoveFromAutoStart(InstalledResource resource)
+        {
+            // Create the RegEx pattern for this specific resource
+            string regex = string.Format(Patterns.Resource, Name);
+
+            // If there is a match inside of the configuration, remove the line
+            if (Regex.IsMatch(Configuration, regex))
+            {
+                Configuration = Regex.Replace(Configuration, regex, string.Empty);
+            }
         }
 
         #endregion

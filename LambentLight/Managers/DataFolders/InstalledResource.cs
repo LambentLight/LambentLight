@@ -60,17 +60,10 @@ namespace LambentLight.Managers.DataFolders
             // If the resource exists and is present
             if (IsPresent)
             {
-                // If the user wants to remove the configuration value during the uninstall process
+                // If the user wants to remove the configuration value for auto start, do it
                 if (Program.Config.RemoveAfterUninstalling)
                 {
-                    // Create the RegEx pattern for this specific resource
-                    string Pattern = string.Format(Patterns.Resource, Name);
-                    // If there is a match inside of the configuration
-                    if (Regex.IsMatch(Source.Configuration, Pattern))
-                    {
-                        // Remove it
-                        Source.Configuration = Regex.Replace(Source.Configuration, Pattern, string.Empty);
-                    }
+                    Source.RemoveFromAutoStart(this);
                 }
 
                 // Delete the resource
