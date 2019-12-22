@@ -9,6 +9,8 @@ namespace LambentLight
     /// </summary>
     public static class Locations
     {
+        #region Public Fields
+
         /// <summary>
         /// Absolute URL path for the program.
         /// </summary>
@@ -25,6 +27,10 @@ namespace LambentLight
         /// Absolute path of the temporary files folder.
         /// </summary>
         public static readonly string Temp = Path.Combine(Base, Configuration.FolderTemp);
+
+        #endregion
+
+        #region Public Functions
 
         /// <summary>
         /// Ensures that the builds folder is present.
@@ -51,5 +57,7 @@ namespace LambentLight
                 Directory.CreateDirectory(folder);
             }
         }
+
+        #endregion
     }
 }
