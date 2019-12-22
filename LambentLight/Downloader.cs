@@ -30,7 +30,7 @@ namespace LambentLight
         public static void Prepare()
         {
             // Subscibe the event that changes the progress bar value
-            Client.DownloadProgressChanged += OnDownloadProgressChanged;
+            Client.DownloadProgressChanged += Client_DownloadProgressChanged;
 
             // Tell the client to use TLS 1.2 instead of SSL3
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
@@ -135,7 +135,7 @@ namespace LambentLight
         /// <summary>
         /// Event that gets triggered when the download progress of a file changes.
         /// </summary>
-        private static void OnDownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        private static void Client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
             // Calculate the percentage of the download
             int Percentage = (int)((float)e.BytesReceived / e.TotalBytesToReceive * 100f);
