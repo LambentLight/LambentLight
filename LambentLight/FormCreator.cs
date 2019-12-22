@@ -6,16 +6,31 @@ namespace LambentLight
 {
     public partial class FormCreator : Form
     {
+        #region Public Properties
+
         /// <summary>
         /// The new data folder that should be created.
         /// </summary>
         public DataFolder NewDataFolder { get; set; } = null;
+
+        #endregion
+
+        #region Constructors and Loading
 
         public FormCreator()
         {
             // Initialize the UI elements
             InitializeComponent();
         }
+
+        private void Creator_Load(object sender, EventArgs e)
+        {
+            LoadOptions();
+        }
+
+        #endregion
+
+        #region Tools
 
         private void SaveOptions()
         {
@@ -32,10 +47,21 @@ namespace LambentLight
             SHVCheckBox.Checked = Program.Config.Creator.SHVEnabled;
         }
 
-        private void Creator_Load(object sender, EventArgs e)
+        #endregion
+
+        #region Tab Change Event
+
+        private void CreatorTabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
-            LoadOptions();
+            // Enable the previous button if the tab is not the first one
+            PreviousButton.Enabled = CreatorTabControl.SelectedIndex != 0;
+            // Enable the last button if the tab is not the last one
+            NextButton.Enabled = CreatorTabControl.SelectedIndex != CreatorTabControl.TabCount - 1;
         }
+
+        #endregion
+
+        #region Buttons at the Bottom
 
         private void CreateButton_Click(object sender, EventArgs e)
         {
@@ -102,12 +128,6 @@ namespace LambentLight
             }
         }
 
-        private void CreatorTabControl_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            // Enable the previous button if the tab is not the first one
-            PreviousButton.Enabled = CreatorTabControl.SelectedIndex != 0;
-            // Enable the last button if the tab is not the last one
-            NextButton.Enabled = CreatorTabControl.SelectedIndex != CreatorTabControl.TabCount - 1;
-        }
+        #endregion
     }
 }
