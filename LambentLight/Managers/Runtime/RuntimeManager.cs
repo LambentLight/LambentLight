@@ -231,7 +231,7 @@ namespace LambentLight.Managers.Runtime
             bool isRunning = APIManager.IsBridgeRunning;
 
             // If there are players in the server
-            if (players.Count == 0)
+            if (players.Count != 0)
             {
                 // If the LambentLight Bridge is not running
                 if (!isRunning)
