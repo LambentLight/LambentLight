@@ -169,7 +169,7 @@ namespace LambentLight
             FormCreator CreatorForm = new FormCreator();
             // Show the form as a dialog
             CreatorForm.ShowDialog();
-            // Finally, dispose the dialog
+            // Once we have returned, dispose the dialog
             CreatorForm.Dispose();
 
             // If there is a valid server data folder
@@ -177,23 +177,24 @@ namespace LambentLight
             {
                 // Lock the fields
                 Locked = true;
-                // Task the Data Folder to recreate itself
+                // Tell the Data Folder to recreate itself
                 await CreatorForm.NewDataFolder.Recreate(CreatorForm.RCONTextBox.Text, CreatorForm.SHVCheckBox.Checked);
-                // Update the fields
+                // Refresh the list of Data Folders and fill them
                 DataFolderManager.Refresh();
                 DataFolderComboBox.Fill(DataFolderManager.Folders);
-                // And select the new item
+                // And select the new Data Folder
                 DataFolderComboBox.SelectedItem = CreatorForm.NewDataFolder;
-                // Then unlock the fields
+                // Finally unlock the fields
                 Locked = false;
             }
         }
 
         private void SettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // Create a new settings window and open it up
+            // Create a new settings window and open it up as a dialog
             FormConfig config = new FormConfig();
             config.ShowDialog();
+            // Once is closed, dispose it
             config.Dispose();
         }
 
@@ -203,7 +204,7 @@ namespace LambentLight
         
         private void GameComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Save the index of the selected game
+            // Save the index of the selected game in the configuration
             Program.Config.Game = (Game)GameComboBox.SelectedIndex;
             Program.Config.Save();
 
@@ -216,27 +217,26 @@ namespace LambentLight
             // Refresh the list of installed resources
             RefreshInstalledResources();
 
-            // If the selected tab is the one with the configuration and something is selected
+            // If the selected tab is the one with the configuration and a Data Folder is selected
             if (MainTabControl.SelectedTab == ConfigurationTabPage && DataFolderComboBox.SelectedItem != null)
             {
-                // Set the text to the configuration of the server
+                // Set the configuration text to the one of the selected Data Folder
                 ConfigurationTextBox.Text = ((DataFolder)DataFolderComboBox.SelectedItem).Configuration;
             }
         }
 
         private void DataFolderBrowseButton_Click(object sender, EventArgs e)
         {
-            // If there is something selected
+            // If there is a Data Folder selected, open it up
             if (DataFolderComboBox.SelectedItem != null)
             {
-                // Open the folder
                 Process.Start(((DataFolder)DataFolderComboBox.SelectedItem).Location);
             }
         }
 
         private void DataFolderRefreshButton_Click(object sender, EventArgs e)
         {
-            // Refresh the folders of data
+            // Refresh the list of Data Folders
             DataFolderManager.Refresh();
             DataFolderComboBox.Fill(DataFolderManager.Folders);
         }
@@ -255,7 +255,7 @@ namespace LambentLight
         {
             // Send the command to the server
             RuntimeManager.SendCommand(ConsoleInputTextBox.Text);
-            // And clear the text
+            // And clear the input TextBox
             ConsoleInputTextBox.Text = string.Empty;
         }
 
@@ -267,6 +267,7 @@ namespace LambentLight
         {
             // If there is a resource to uninstall, enable the button
             InstalledUninstallButton.Enabled = InstalledListBox.SelectedItem != null;
+            // Then, enable the buttons if there is a resource selected and the server is running
             ResourceStartButton.Enabled = InstalledListBox.SelectedItem != null && RuntimeManager.IsServerRunning;
             ResourceRestartButton.Enabled = InstalledListBox.SelectedItem != null && RuntimeManager.IsServerRunning;
             ResourceStopButton.Enabled = InstalledListBox.SelectedItem != null && RuntimeManager.IsServerRunning;
@@ -274,34 +275,42 @@ namespace LambentLight
 
         private void ResourceStartButton_Click(object sender, EventArgs e)
         {
+            // Start the resource via commands
             RuntimeManager.SendCommand($"start {InstalledListBox.SelectedItem.ToString()}");
         }
 
         private void ResourceRestartButton_Click(object sender, EventArgs e)
         {
+            // Restart the resource via commands
             RuntimeManager.SendCommand($"restart {InstalledListBox.SelectedItem.ToString()}");
         }
 
         private void ResourceStopButton_Click(object sender, EventArgs e)
         {
+            // Stop the resource via commands
             RuntimeManager.SendCommand($"stop {InstalledListBox.SelectedItem.ToString()}");
         }
 
-        private void InstalledRefreshButton_Click(object sender, EventArgs e) => RefreshInstalledResources();
+        private void InstalledRefreshButton_Click(object sender, EventArgs e)
+        {
+            // Just refresh the list of resources that are installed
+            RefreshInstalledResources();
+        }
 
         private void InstalledUninstallButton_Click(object sender, EventArgs e)
         {
+            // Get the resource that we are trying to uninstall
             InstalledResource installed = (InstalledResource)InstalledListBox.SelectedItem;
+            // Try to find a resource with the same folder name as the one that we are going to delete
             Resource found = ResourceManager.Resources.Where(x => x.More.Install.Destination.ToLower() == installed.Name.ToLower()).FirstOrDefault();
+            // If a resource was found, use that name
+            // If not, use the folder name
             string name = found == null ? installed.Name : found.Name;
-            Resource Found = ResourceManager.Resources.Where(x => x.More.Install.Destination.ToLower() == Installed.Name.ToLower()).FirstOrDefault();
-            // Select the correct name for the resource
-            string Name = Found == null ? Installed.Name : Found.Name;
 
             // Ask the user if he really wants to remove the resource
             DialogResult Result = MessageBox.Show($"Are you sure that you want to uninstall {name}?", "Uninstall Confirmation", MessageBoxButtons.YesNo);
 
-            // If the user really wants to remove the game
+            // If the user confirmed the process
             if (Result == DialogResult.Yes)
             {
                 // Remove the selected resource
@@ -317,15 +326,16 @@ namespace LambentLight
 
         private void InstallerResourcesListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // Disable the install button and clear the list of versions
+            // Disable the install button
             InstallerInstallButton.Enabled = false;
+            // And clear the list of versions
             InstallerVersionsListBox.Items.Clear();
 
-            // Cast the selected resource
+            // Cast the selected resource and the extended information
             Resource resource = (Resource)InstallerResourcesListBox.SelectedItem;
             ExtendedResource more = resource.More;
 
-            // If there is something selected and the extended information is not null
+            // If there is a resource and the extended information is also present
             if (resource != null && more != null)
             {
                 // Add the builds to our version ListBox
@@ -339,7 +349,11 @@ namespace LambentLight
             InstallerInstallButton.Enabled = InstallerVersionsListBox.SelectedItem != null;
         }
 
-        private void InstallerRefreshButton_Click(object sender, EventArgs e) => RefreshResourceInstaller();
+        private void InstallerRefreshButton_Click(object sender, EventArgs e)
+        {
+            // Refresh the list of resources that can be installed
+            RefreshResourceInstaller();
+        }
 
         private async void InstallerInstallButton_Click(object sender, EventArgs e)
         {
@@ -354,10 +368,12 @@ namespace LambentLight
             DataFolder folder = (DataFolder)DataFolderComboBox.SelectedItem;
             Resource resource = (Resource)InstallerResourcesListBox.SelectedItem;
 
-            // If the resource is deprecated, notify the user and ask him if he wants to continue
+            // If the resource is deprecated and there is a replacement for it
             if (!string.IsNullOrWhiteSpace(resource.SupersededBy))
             {
+                // Ask the user if he wants to continue with the installation
                 DialogResult result = MessageBox.Show($"This resource is no longer updated by it's developer.\nWe recommend that you install {resource.SupersededBy} instad of {resource.Name}.\nDo you want to continue?", "Resource Deprecated", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                // If he does not, return
                 if (result == DialogResult.No)
                 {
                     return;
@@ -369,13 +385,13 @@ namespace LambentLight
             // Create the readable list of resources
             string readable = string.Join(" ", requirements.Select(x => $"{x.Key.Name}-{x.Value.ReadableVersion}"));
 
-            // Notify the user that we are going to install the keys
+            // Notify the user that we are going to install the requirements
             Logger.Info("Installing requirements {0} for {1}", readable, InstallerResourcesListBox.SelectedItem);
 
             // Iterate over the list of required resources
             foreach (KeyValuePair<Resource, Managers.Resources.Version> requirement in requirements)
             {
-                // And install it
+                // And install them
                 await folder.Install(requirement.Key, requirement.Value);
             }
 
@@ -402,7 +418,7 @@ namespace LambentLight
             // If there is a data folder selected
             if (DataFolderComboBox.SelectedItem != null)
             {
-                // Set the text to the configuration of the server
+                // Load the text and place it on the TextBox
                 ConfigurationTextBox.Text = ((DataFolder)DataFolderComboBox.SelectedItem).Configuration;
             }
         }
@@ -429,7 +445,7 @@ namespace LambentLight
             // If there is a data folder selected
             if (DataFolderComboBox.SelectedItem != null)
             {
-                // Set the text of the configuration
+                // Save the configuration from TextBox
                 ((DataFolder)DataFolderComboBox.SelectedItem).Configuration = ConfigurationTextBox.Text;
             }
         }
@@ -442,19 +458,20 @@ namespace LambentLight
         {
             // Refresh the list of builds
             BuildManager.Refresh();
+            // And fill the ListBox while selecting the first item
             BuildsListBox.Fill(BuildManager.Builds, true);
         }
 
         private async void BuildsImportButton_Click(object sender, EventArgs e)
         {
-            // Open the file dialog
-            // If the user canceled the operation, return
+            // Open the file dialog so the user can browse for the ZIP File
+            // If he didn't selected a file, return
             if (BuildFileDialog.ShowDialog() != DialogResult.OK)
             {
                 return;
             }
 
-            // Then, install the build from the dialog
+            // But if he did, install the build from the file
             await BuildManager.Install(BuildFileDialog.FileName);
         }
 
@@ -464,21 +481,21 @@ namespace LambentLight
 
         private void RefreshInstalledResources()
         {
-            // Disable the start, restart, stop and remove buttons
+            // Disable the Start, Restart, Stop and Remove buttons
             ResourceStartButton.Enabled = false;
             ResourceRestartButton.Enabled = false;
             ResourceStopButton.Enabled = false;
             InstalledUninstallButton.Enabled = false;
 
-            // If there is no server data folder selected or it does not exists
+            // If there is no Data Folder selected or it does not exists
             if (DataFolderComboBox.SelectedItem == null || !((DataFolder)DataFolderComboBox.SelectedItem).Exists)
             {
-                // Wipe all of the items and return
+                // Wipe all of the installed resources and return
                 InstalledListBox.Items.Clear();
                 return;
             }
 
-            // Update the list of installed resources
+            // If there is a valid Data Folder, fill the list with the installed resources
             InstalledListBox.Fill(((DataFolder)DataFolderComboBox.SelectedItem).Resources);
         }
         private void RefreshResourceInstaller()
