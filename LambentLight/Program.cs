@@ -10,16 +10,21 @@ namespace LambentLight
 {
     public static class Program
     {
-        #region Fields
+        #region Internal Fields
 
         /// <summary>
         /// The mod/program configuration.
         /// </summary>
         internal static Configuration Config = Configuration.Load();
+
+        #endregion
+
+        #region Public Properties
+
         /// <summary>
         /// The main form of our application.
         /// </summary>
-        public static FormLanding Form;
+        public static FormLanding Form { get; private set; }
 
         #endregion
 
