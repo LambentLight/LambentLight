@@ -1,4 +1,4 @@
-using LambentLight.Config;
+﻿using LambentLight.Config;
 using LambentLight.Managers.Database;
 using LambentLight.Targets;
 using NLog;
@@ -13,7 +13,7 @@ namespace LambentLight
         #region Fields
 
         /// <summary>
-        /// The mod configuration.
+        /// The mod/program configuration.
         /// </summary>
         internal static Configuration Config = Configuration.Load();
         /// <summary>
@@ -33,7 +33,7 @@ namespace LambentLight
         {
             // Enable the visual styles for the application
             Application.EnableVisualStyles();
-            // Use the classic rendering for compatibility
+            // Use GDI+ for rendering instead of GDI
             Application.SetCompatibleTextRenderingDefault(false);
 
             // Create our main form
