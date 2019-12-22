@@ -104,10 +104,7 @@ namespace LambentLight
             }
 
             // If the server is running, stop it
-            if (RuntimeManager.IsServerRunning)
-            {
-                RuntimeManager.Stop();
-            }
+            RuntimeManager.Stop();
             // Disconnect the database if there is an open connection
             DatabaseManager.Disconnect();
         }
