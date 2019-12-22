@@ -11,7 +11,7 @@ namespace LambentLight
         /// <summary>
         /// The new data folder that should be created.
         /// </summary>
-        public DataFolder NewDataFolder { get; set; } = null;
+        public DataFolder NewDataFolder { get; private set; } = null;
 
         #endregion
 
