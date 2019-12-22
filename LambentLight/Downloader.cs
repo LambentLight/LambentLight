@@ -133,18 +133,22 @@ namespace LambentLight
         #region Events
 
         /// <summary>
-        /// Event that gets triggered when the download progress of a file changes.
+        /// Event that gets triggered when the download progress changes.
         /// </summary>
         private static void Client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
         {
-            // Calculate the percentage of the download
-            int Percentage = (int)((float)e.BytesReceived / e.TotalBytesToReceive * 100f);
+            // Get the bytes received and the total number
+            float total = e.TotalBytesToReceive;
+            float current = e.BytesReceived;
 
-            // Make a sanity check to ensure that the percentage is on the correct location
-            if (Percentage >= Program.Form.GeneralProgressBar.Minimum && Percentage <= Program.Form.GeneralProgressBar.Maximum)
+            // Calculate the percentage of the download
+            int percentage = (int)(current / total * 100f);
+
+            // If the percetage is not under 0 or over 100, set it on the progress bar
+            if (percentage >= Program.Form.GeneralProgressBar.Minimum &&
+                percentage <= Program.Form.GeneralProgressBar.Maximum)
             {
-                // And set the value of the progress bar
-                Program.Form.GeneralProgressBar.Value = Percentage;
+                Program.Form.GeneralProgressBar.Value = percentage;
             }
         }
 
