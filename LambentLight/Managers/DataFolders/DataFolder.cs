@@ -1,4 +1,4 @@
-﻿using LambentLight.Managers.Database;
+using LambentLight.Managers.Database;
 using LambentLight.Managers.Resources;
 using MySql.Data.MySqlClient;
 using NLog;
@@ -354,6 +354,34 @@ namespace LambentLight.Managers.DataFolders
             {
                 Directory.Delete(Location, true);
             }
+        }
+
+        /// <summary>
+        /// Checks if the resource is set to auto start (start <resourceName>).
+        /// </summary>
+        /// <param name="resource">The resource to check.</param>
+        /// <returns>true if the resource is set to auto start, false otherwise</returns>
+        public bool DoesResourceAutoStart(Resource resource)
+        {
+            // Format the RegEx to have the resource folder name
+            string regex = string.Format(Patterns.Resource, resource.More.Install.Destination);
+            // Then, return if the regex matches the configuration file
+            return Regex.IsMatch(Configuration, regex);
+        }
+        /// <summary>
+        /// Sets the specified resource to auto start in this configuration folder.
+        /// </summary>
+        /// <param name="resource"></param>
+        public void AddToAutoStart(Resource resource)
+        {
+            // If the resource is not set to auto start
+            if (!DoesResourceAutoStart(resource))
+            {
+                // Add a new line with "start <resourceName>"
+                Configuration = Configuration + $"start {resource.More.Install.Destination}" + Environment.NewLine;
+                // And log it
+                Logger.Info("The resource {0} was set to auto start in {1}", resource.More.Install.Destination, Name);
+            }            
         }
 
         #endregion

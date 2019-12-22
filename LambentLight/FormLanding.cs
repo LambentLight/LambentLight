@@ -382,21 +382,10 @@ namespace LambentLight
                 await Folder.Install(Requirement.Key, Requirement.Value);
             }
 
-            // If the user wants to auto-start the resource
+            // If the user wants to auto-start the resource, add it into the configuration
             if (Program.Config.AddAfterInstalling)
             {
-                // If the resource is already set to auto start
-                if (Regex.IsMatch(Folder.Configuration, string.Format(Patterns.Resource, NewResource.More.Install.Destination)))
-                {
-                    // Notify the user
-                    Logger.Warn("The resource '{0}' is already on the configuration set to auto start", ((Resource)InstallerResourcesListBox.SelectedItem).More.Install.Destination);
-                }
-                // Otherwise
-                else
-                {
-                    // Set the new installed resourced to auto start
-                    Folder.Configuration = Folder.Configuration + $"start {NewResource.More.Install.Destination}" + Environment.NewLine;
-                }
+                Folder.AddToAutoStart(NewResource);
             }
 
             // Tell the server to refresh the list of installed resources
