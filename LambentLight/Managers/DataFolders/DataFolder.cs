@@ -1,4 +1,4 @@
-using LambentLight.Managers.Database;
+﻿using LambentLight.Managers.Database;
 using LambentLight.Managers.Resources;
 using MySql.Data.MySqlClient;
 using NLog;
@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -27,6 +28,10 @@ namespace LambentLight.Managers.DataFolders
         /// The secure Random Number Generator for RCON passwords.
         /// </summary>
         private static readonly RNGCryptoServiceProvider RNG = new RNGCryptoServiceProvider();
+        /// <summary>
+        /// Pattern for finding a resource inside a configuration file.
+        /// </summary>
+        public const string StartRegEx = "(\n|\r|\r\n)start {0}";
 
         #endregion
 
@@ -390,7 +395,7 @@ namespace LambentLight.Managers.DataFolders
         public void RemoveFromAutoStart(InstalledResource resource)
         {
             // Create the RegEx pattern for this specific resource
-            string regex = string.Format(Patterns.Resource, Name);
+            string regex = string.Format(StartRegEx, resource.Name);
 
             // If there is a match inside of the configuration, remove the line
             if (Regex.IsMatch(Configuration, regex))
