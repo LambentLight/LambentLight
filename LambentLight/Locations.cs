@@ -12,23 +12,19 @@ namespace LambentLight
         /// <summary>
         /// Absolute URL path for the program.
         /// </summary>
-        public static readonly string Base = Path.GetDirectoryName(Assembly.GetEntryAssembly().CodeBase);
-        /// <summary>
-        /// Absolute system-aware path for the program.
-        /// </summary>
-        public static readonly string Absolute = Base.Substring(6);
+        public static readonly string Base = Path.GetDirectoryName(Assembly.GetEntryAssembly().CodeBase).Substring(6);
         /// <summary>
         /// Absolute path of the builds folder.
         /// </summary>
-        public static readonly string Builds = Path.Combine(Absolute, Configuration.FolderBuilds, "windows");
+        public static readonly string Builds = Path.Combine(Base, Configuration.FolderBuilds, "windows");
         /// <summary>
         /// Absolute path of the server data folder.
         /// </summary>
-        public static readonly string Data = Path.Combine(Absolute, Configuration.FolderData);
+        public static readonly string Data = Path.Combine(Base, Configuration.FolderData);
         /// <summary>
         /// Absolute path of the temporary files folder.
         /// </summary>
-        public static readonly string Temp = Path.Combine(Absolute, Configuration.FolderTemp);
+        public static readonly string Temp = Path.Combine(Base, Configuration.FolderTemp);
 
         /// <summary>
         /// Ensures that the builds folder is present.
