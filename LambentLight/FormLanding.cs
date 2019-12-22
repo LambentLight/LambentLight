@@ -291,21 +291,21 @@ namespace LambentLight
 
         private void InstalledUninstallButton_Click(object sender, EventArgs e)
         {
-            // Get the resource that we are trying to uninstall
-            InstalledResource Installed = ((InstalledResource)InstalledListBox.SelectedItem);
-            // Try to find the resource with the same folder as the one to be installed
+            InstalledResource installed = (InstalledResource)InstalledListBox.SelectedItem;
+            Resource found = ResourceManager.Resources.Where(x => x.More.Install.Destination.ToLower() == installed.Name.ToLower()).FirstOrDefault();
+            string name = found == null ? installed.Name : found.Name;
             Resource Found = ResourceManager.Resources.Where(x => x.More.Install.Destination.ToLower() == Installed.Name.ToLower()).FirstOrDefault();
             // Select the correct name for the resource
             string Name = Found == null ? Installed.Name : Found.Name;
 
             // Ask the user if he really wants to remove the resource
-            DialogResult Result = MessageBox.Show($"Are you sure that you want to uninstall {Name}?", "Uninstall Confirmation", MessageBoxButtons.YesNo);
+            DialogResult Result = MessageBox.Show($"Are you sure that you want to uninstall {name}?", "Uninstall Confirmation", MessageBoxButtons.YesNo);
 
             // If the user really wants to remove the game
             if (Result == DialogResult.Yes)
             {
                 // Remove the selected resource
-                Installed.Remove();
+                installed.Remove();
                 // And update the list of installed resources
                 RefreshInstalledResources();
             }
@@ -326,7 +326,7 @@ namespace LambentLight
             ExtendedResource more = resource.More;
 
             // If there is something selected and the extended information is not null
-            if (InstallerResourcesListBox.SelectedItem != null && more != null)
+            if (resource != null && more != null)
             {
                 // Add the builds to our version ListBox
                 InstallerVersionsListBox.Fill(more.Versions);
@@ -351,13 +351,13 @@ namespace LambentLight
             }
 
             // Cast the data folder and resource to their real values
-            DataFolder Folder = (DataFolder)DataFolderComboBox.SelectedItem;
-            Resource NewResource = (Resource)InstallerResourcesListBox.SelectedItem;
+            DataFolder folder = (DataFolder)DataFolderComboBox.SelectedItem;
+            Resource resource = (Resource)InstallerResourcesListBox.SelectedItem;
 
             // If the resource is deprecated, notify the user and ask him if he wants to continue
-            if (!string.IsNullOrWhiteSpace(NewResource.SupersededBy))
+            if (!string.IsNullOrWhiteSpace(resource.SupersededBy))
             {
-                DialogResult result = MessageBox.Show($"This resource is no longer updated by it's developer.\nWe recommend that you install {NewResource.SupersededBy} instad of {NewResource.Name}.\nDo you want to continue?", "Resource Deprecated", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                DialogResult result = MessageBox.Show($"This resource is no longer updated by it's developer.\nWe recommend that you install {resource.SupersededBy} instad of {resource.Name}.\nDo you want to continue?", "Resource Deprecated", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (result == DialogResult.No)
                 {
                     return;
@@ -365,30 +365,30 @@ namespace LambentLight
             }
 
             // Get all of the requirements by the selected resource
-            Dictionary<Resource, Managers.Resources.Version> Collected = NewResource.GetRequirements((Managers.Resources.Version)InstallerVersionsListBox.SelectedItem);
+            Dictionary<Resource, Managers.Resources.Version> requirements = resource.GetRequirements((Managers.Resources.Version)InstallerVersionsListBox.SelectedItem);
             // Create the readable list of resources
-            string ReadableResources = string.Join(" ", Collected.Select(x => $"{x.Key.Name}-{x.Value.ReadableVersion}"));
+            string readable = string.Join(" ", requirements.Select(x => $"{x.Key.Name}-{x.Value.ReadableVersion}"));
 
             // Notify the user that we are going to install the keys
-            Logger.Info("Installing requirements {0} for {1}", ReadableResources, InstallerResourcesListBox.SelectedItem);
+            Logger.Info("Installing requirements {0} for {1}", readable, InstallerResourcesListBox.SelectedItem);
 
             // Iterate over the list of required resources
-            foreach (KeyValuePair<Resource, Managers.Resources.Version> Requirement in Collected)
+            foreach (KeyValuePair<Resource, Managers.Resources.Version> requirement in requirements)
             {
                 // And install it
-                await Folder.Install(Requirement.Key, Requirement.Value);
+                await folder.Install(requirement.Key, requirement.Value);
             }
 
             // If the user wants to auto-start the resource, add it into the configuration
             if (Program.Config.AddAfterInstalling)
             {
-                Folder.AddToAutoStart(NewResource);
+                folder.AddToAutoStart(resource);
             }
 
             // Tell the server to refresh the list of installed resources
             RuntimeManager.SendCommand("refresh");
             // Notify that we have installed all of the resources
-            Logger.Info("Successfully installed {0}", ReadableResources);
+            Logger.Info("Successfully installed {0}", readable);
             // And finally, update the list of installed resources
             RefreshInstalledResources();
         }
@@ -413,10 +413,10 @@ namespace LambentLight
             if (DataFolderComboBox.SelectedItem != null)
             {
                 // Ask the user if he is sure about this
-                DialogResult Response = MessageBox.Show("Are you sure that you want to replace the existing configuration?", "Replace Configuration", MessageBoxButtons.YesNo);
+                DialogResult result = MessageBox.Show("Are you sure that you want to replace the existing configuration?", "Replace Configuration", MessageBoxButtons.YesNo);
 
                 // If the response was yes
-                if (Response == DialogResult.Yes)
+                if (result == DialogResult.Yes)
                 {
                     // Set the text of the configuration
                     ConfigurationTextBox.Text = ((DataFolder)DataFolderComboBox.SelectedItem).GenerateConfig();
