@@ -1,4 +1,4 @@
-﻿using LambentLight.Config;
+using LambentLight.Config;
 using LambentLight.Managers.Database;
 using LambentLight.Targets;
 using NLog;
@@ -10,6 +10,8 @@ namespace LambentLight
 {
     public static class Program
     {
+        #region Fields
+
         /// <summary>
         /// The mod configuration.
         /// </summary>
@@ -18,6 +20,10 @@ namespace LambentLight
         /// The main form of our application.
         /// </summary>
         public static FormLanding Form;
+
+        #endregion
+
+        #region Main
 
         /// <summary>
         /// The main entry point for the application.
@@ -51,5 +57,7 @@ namespace LambentLight
             // Once we are back, return a code 0
             return 0;
         }
+
+        #endregion
     }
 }
