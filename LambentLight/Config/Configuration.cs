@@ -19,9 +19,8 @@ namespace LambentLight.Config
     /// </summary>
     public enum Time
     {
-        Hours = 0,
-        Minutes = 1,
-        Seconds = 2
+        Seconds = 0,
+        Minutes = 1
     }
 
     /// <summary>
