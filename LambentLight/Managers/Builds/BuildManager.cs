@@ -47,7 +47,7 @@ namespace LambentLight.Managers.Builds
             Locations.EnsureBuildsFolder();
 
             // Iterate over the existing build folders
-            foreach (string build in Directory.EnumerateDirectories(Locations.BuildsForOS))
+            foreach (string build in Directory.EnumerateDirectories(Locations.Builds))
             {
                 // Create a new object for that folder
                 Build newBuild = new Build(Path.GetFileName(build));
@@ -91,7 +91,7 @@ namespace LambentLight.Managers.Builds
             Logger.Info("Installing build {0}...", name);
 
             // Create the path of the folder
-            string path = Path.Combine(Locations.BuildsForOS, name);
+            string path = Path.Combine(Locations.Builds, name);
 
             // If the build folder exists, delete it
             if (Directory.Exists(path))

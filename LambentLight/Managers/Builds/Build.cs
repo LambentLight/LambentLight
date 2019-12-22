@@ -58,7 +58,7 @@ namespace LambentLight.Managers.Builds
             // Set our identifier
             ID = identifier;
             // And the other properties that we need
-            Folder = Path.Combine(Locations.BuildsForOS, ID);
+            Folder = Path.Combine(Locations.Builds, ID);
             Executable = Path.Combine(Folder, "FXServer.exe");
         }
 

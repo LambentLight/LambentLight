@@ -20,11 +20,7 @@ namespace LambentLight
         /// <summary>
         /// Absolute path of the builds folder.
         /// </summary>
-        public static readonly string BuildsBase = Path.Combine(Absolute, Configuration.FolderBuilds);
-        /// <summary>
-        /// Absolute path of the builds folder for the current operating system (Windows or Linux).
-        /// </summary>
-        public static readonly string BuildsForOS = Path.Combine(BuildsBase, "windows");
+        public static readonly string Builds = Path.Combine(Absolute, Configuration.FolderBuilds, "windows");
         /// <summary>
         /// Absolute path of the server data folder.
         /// </summary>
@@ -37,11 +33,7 @@ namespace LambentLight
         /// <summary>
         /// Ensures that the builds folder is present.
         /// </summary>
-        public static void EnsureBuildsFolder()
-        {
-            EnsureFolder(BuildsBase);
-            EnsureFolder(BuildsForOS);
-        }
+        public static void EnsureBuildsFolder() => EnsureFolder(Builds);
         /// <summary>
         /// Ensures that the server data folder is present.
         /// </summary>
@@ -50,6 +42,7 @@ namespace LambentLight
         /// Ensures that the builds folder is present.
         /// </summary>
         public static void EnsureTempFolder() => EnsureFolder(Temp);
+
         /// <summary>
         /// Ensures that a folder exists.
         /// </summary>
