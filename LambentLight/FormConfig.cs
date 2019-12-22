@@ -38,6 +38,29 @@ namespace LambentLight
 
         private void ReloadSettings()
         {
+            // Start with a special case: the time calculation
+            // If the time is over 3600 seconds (1 hour), set it to the max
+            if (Program.Config.WaitTime > 3600)
+            {
+                Program.Config.WaitTime = 3600;
+            }
+
+            // Create a variable to store the time as a string
+            string time;
+            // Then, check the current measurement format
+            switch (Program.Config.WaitMeasurement)
+            {
+                // If is minutes, divide it by 60 and floor it
+                case Time.Minutes:
+                    time = Math.Floor(Program.Config.WaitTime / 60f).ToString();
+                    break;
+                // Otherwise, is just seconds
+                default:
+                    time = Program.Config.WaitTime.ToString();
+                    break;
+            }
+            WaitTextBox.Text = time;
+
             // And load all of the settings
             DownloadScriptsCheckBox.Checked = Program.Config.Creator.DownloadScripts;
             CreateConfigCheckBox.Checked = Program.Config.Creator.CreateConfig;
@@ -45,7 +68,6 @@ namespace LambentLight
             RemoveFromConfigCheckBox.Checked = Program.Config.RemoveAfterUninstalling;
 
             WaitCheckBox.Checked = Program.Config.Wait;
-            WaitTextBox.Text = Program.Config.WaitTime.ToString();
             WaitComboBox.SelectedIndex = (int)Program.Config.WaitMeasurement;
             KickCheckBox.Checked = Program.Config.KickEveryone;
 
@@ -170,19 +192,44 @@ namespace LambentLight
 
         private void WaitSaveButton_Click(object sender, EventArgs e)
         {
-            // Try to parse the text box contents
             try
             {
-                Program.Config.WaitTime = int.Parse(WaitTextBox.Text);
+                // Try to parse the number from the text box
+                int time = int.Parse(WaitTextBox.Text);
+                // Get the new time format
+                Time timeType = (Time)WaitComboBox.SelectedIndex;
+
+                // Save the new time
+                int newTime;
+                // Do the appropiate check to convert the number to seconds
+                switch (timeType)
+                {
+                    case Time.Minutes:
+                        newTime = time * 60;
+                        break;
+                    default:
+                        newTime = time;
+                        break;
+                }
+
+                // If the new time is higher than 60 minutes/1 hour
+                if (newTime > 3600)
+                {
+                    MessageBox.Show("You can't set a time of restart over 60 minutes/3600 seconds.", "Invalid Time",  MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                // Finally, save the new time and format
+                Program.Config.WaitTime = newTime;
+                Program.Config.WaitMeasurement = timeType;
+                Program.Config.Save();
             }
-            // If we have failed
             catch (FormatException)
             {
+                // If we have failed to parse the time, notify the user and return
                 MessageBox.Show("The format for the 'Wait' time is invalid.");
                 return;
             }
-            // If we succeeded, save it
-            Program.Config.Save();
         }
 
         private void KickCheckBox_CheckedChanged(object sender, EventArgs e)
