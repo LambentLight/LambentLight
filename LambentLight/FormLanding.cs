@@ -92,7 +92,7 @@ namespace LambentLight
             DataFolderComboBox.Fill(DataFolderManager.Folders, true);
         }
 
-        private void Landing_FormClosing(object sender, FormClosingEventArgs e)
+        private async void Landing_FormClosing(object sender, FormClosingEventArgs e)
         {
             // Ask the user if he wants to close the server
             DialogResult result = MessageBox.Show("Closing LambentLight will stop the server and close the MySQL Connection.\nAre you sure that you want to exit LambentLight?", "Server is Running", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -104,7 +104,7 @@ namespace LambentLight
             }
 
             // If the server is running, stop it
-            RuntimeManager.Stop();
+            await RuntimeManager.Stop();
             // Disconnect the database if there is an open connection
             DatabaseManager.Disconnect();
         }
@@ -150,11 +150,10 @@ namespace LambentLight
             Locked = await RuntimeManager.Start((Build)BuildsListBox.SelectedItem, (DataFolder)DataFolderComboBox.SelectedItem);
         }
 
-        private void StopToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void StopToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // Stop the server if is present and unlock the controls
-            RuntimeManager.Stop();
-            Locked = false;
+            Locked = !await RuntimeManager.Stop();
         }
 
         private async void RestartToolStripMenuItem_Click(object sender, EventArgs e)

@@ -1,7 +1,10 @@
-﻿using LambentLight.Managers.Builds;
+﻿using LambentLight.API;
+using LambentLight.Config;
+using LambentLight.Managers.Builds;
 using LambentLight.Managers.DataFolders;
 using NLog;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
@@ -17,6 +20,29 @@ namespace LambentLight.Managers.Runtime
         /// The logger for our current class.
         /// </summary>
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+        /// <summary>
+        /// Every seccond where the players should be notified.
+        /// </summary>
+        private static readonly Dictionary<int, string> TimeChecks = new Dictionary<int, string>
+        {
+            { 3600, "minutes" }, // 60
+            { 1800, "minutes" }, // 30
+            { 900, "minutes" }, // 15
+            { 600, "minutes" }, // 10
+            { 300, "minutes" }, // 5
+            { 240, "minutes" }, // 4
+            { 180, "minutes" }, // 3
+            { 120, "minutes" }, // 2
+            { 60, "seconds" },
+            { 30, "seconds" },
+            { 15, "seconds" },
+            { 10, "seconds" },
+            { 5, "seconds" },
+            { 4, "seconds" },
+            { 3, "seconds" },
+            { 2, "seconds" },
+            { 1, "seconds" },
+        };
 
         #endregion
 
@@ -172,7 +198,7 @@ namespace LambentLight.Managers.Runtime
                 Build build = Build;
                 DataFolder folder = Folder;
                 // Stop the existing server
-                Stop();
+                await Stop();
                 // And start a new one with the same build and data folder
                 return await Start(build, folder);
             }
@@ -183,13 +209,48 @@ namespace LambentLight.Managers.Runtime
         /// <summary>
         /// Stops the server if is running.
         /// </summary>
-        public static void Stop()
+        public static async Task<bool> Stop()
         {
             // If there is no server running, notify the user and return
             if (!IsServerRunning)
             {
                 Logger.Warn("The FiveM server is not running");
-                return;
+                return false;
+            }
+
+            // Get the list of players and if the bridge is running
+            List<CitizenPlayer> players = APIManager.Players;
+            bool isRunning = APIManager.IsBridgeRunning;
+
+            // If there are players in the server
+            if (players.Count == 0)
+            {
+                // If the LambentLight Bridge is not running
+                if (!isRunning)
+                {
+                    // Ask the user if he wants to close the server without warning
+                    DialogResult result = MessageBox.Show("There are players in the server and the LambentLight Bridge is not running.\nThe Players in the server have the risk of crashing if the server is stopped without warnings.\nDo you want to continue?", "Bridge is not running", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                    // If he does not, return
+                    if (result == DialogResult.No)
+                    {
+                        return false;
+                    }
+                }
+                // Otherwise
+                else
+                {
+                    // If we need to wait, do it
+                    if (Program.Config.Wait)
+                    {
+                        await Wait();
+                    }
+                    // If we need to kick everyone, do it
+                    if (Program.Config.KickEveryone)
+                    {
+                        SendCommand("bridgekickall");
+                    }
+                }
             }
 
             // Stop the events if they are running
@@ -223,8 +284,10 @@ namespace LambentLight.Managers.Runtime
             Process = null;
             Build = null;
             Folder = null;
-            // And notify the user
+            // Notify the user
             Logger.Info("The FiveM server has been stopped");
+            // And return success
+            return true;
         }
 
         /// <summary>
@@ -242,6 +305,34 @@ namespace LambentLight.Managers.Runtime
             // Write the command and flush it
             Process.StandardInput.WriteLine(command);
             Process.StandardInput.Flush();
+        }
+
+        #endregion
+
+        #region Private Functions
+
+        /// <summary>
+        /// Waits specific time 
+        /// </summary>
+        public static async Task Wait()
+        {
+            // Iterate over the wait time
+            for (int i = Program.Config.WaitTime; i != 0; i--)
+            {
+                // If the number is on the dictionary or matches the current wait time
+                if (TimeChecks.ContainsKey(i) || i == Program.Config.WaitTime)
+                {
+                    // Generate the string that contains the readable format
+                    string message = TimeChecks.ContainsKey(i) ? TimeChecks[i] : Program.Config.WaitMeasurement.ToString().ToLowerInvariant();
+                    // If the message
+                    int number = message == "minutes" ? (int)Math.Floor(i / 60f) : i;
+                    // Notify everyone on the server and wait
+                    SendCommand($"bridgenotify The server will close on {number} {message}.");
+                }
+
+                // And wait a second
+                await Task.Delay(1000);
+            }
         }
 
         #endregion
