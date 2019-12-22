@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using LambentLight.Managers.Runtime;
+using System.Collections.Generic;
 
 namespace LambentLight.API
 {
@@ -15,5 +16,9 @@ namespace LambentLight.API
         /// The information of the current CitizenFX server.
         /// </summary>
         public static CitizenResponse Info => Downloader.DownloadJSON<CitizenResponse>("http://127.0.0.1:30120/info.json");
+        /// <summary>
+        /// If the LambentLight bridge is running on the server.
+        /// </summary>
+        public static bool IsBridgeRunning => RuntimeManager.IsServerRunning && Info.Resources.Contains("lambentlight");
     }
 }
