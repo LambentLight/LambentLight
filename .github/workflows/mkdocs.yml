@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@master
       - uses: justalemon/MarkdownMaterial@master
         with:
-          cname: "lambentlight.justalemon.ml"
+          cname: "lambentlight.ml"
       - uses: justalemon/DeployToBranch@master
         with:
           token: ${{ secrets.ACCESS_TOKEN }}
