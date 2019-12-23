@@ -17,8 +17,8 @@ LambentLight is an application for managing dedicated FiveM servers. It helps yo
 
 [5mods-img]: https://img.shields.io/badge/5mods-download-20BA4E.svg
 [5mods-url]: https://www.gta5-mods.com/tools/servermanager
-[docs-img]: https://github.com/LambentLight/LambentLight/workflows/Documentation/badge.svg
-[docs-url]: https://github.com/LambentLight/LambentLight/actions?query=workflow%3ADocumentation
+[docs-img]: https://github.com/LambentLight/Documentation/workflows/mkdocs/badge.svg
+[docs-url]: https://github.com/LambentLight/Documentation/actions?query=workflow%3Amkdocs
 [appveyor-img]: https://img.shields.io/appveyor/ci/justalemon/lambentlight.svg?label=appveyor
 [appveyor-url]: https://ci.appveyor.com/project/justalemon/lambentlight
 [codefactor-img]: https://www.codefactor.io/repository/github/lambentlight/lambentlight/badge

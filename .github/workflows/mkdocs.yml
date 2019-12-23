@@ -1,4 +1,4 @@
-name: Documentation
+name: mkdocs
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
       - ".github/workflows/mkdocs.yml"
 
 jobs:
-  build:
+  mkdocs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@master
