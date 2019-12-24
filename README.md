@@ -1,15 +1,8 @@
-# LambentLight <small>for FiveM and RedM</small>
+# LambentLight <small>for FiveM and RedM</small> <br> [![5mods][5mods-img]][5mods-url] [![Documentation][docs-img]][docs-url] [![AppVeyor][appveyor-img]][appveyor-url] [![CodeFactor][codefactor-img]][codefactor-url] [![Discord][discord-img]][discord-url]
 
-[![5mods][5mods-img]][5mods-url] [![Documentation][docs-img]][docs-url] [![AppVeyor][appveyor-img]][appveyor-url] [![CodeFactor][codefactor-img]][codefactor-url] [![Discord][discord-img]][discord-url]
+## FiveM and RedM Servers made easier
 
-LambentLight is an application for managing dedicated FiveM servers. It helps you with a bunch of tedious tasks:
-
-* Keeping your server safe by using the latest available build, no more manual updating of builds
-* Integrated resource installer, so you no longer need to browse the FiveM forums for installing every dependency manually
-* Ability to change your server settings from inside of the application
-* The server is restarted automatically if it crashes, no need to worry for a 24/7 operation
-* Automatic scheduled restarts, so you can update builds and resources at specific times of the day
-* Is 100% Free and Open Source under the MIT License
+LambentLight is a simple and easy to use Server Manager for CitizenFX Collective Projects (FiveM and RedM). It helps with tedious and repetitive tasks like updating CFX Builds and applying MySQL Database changes.
 
 <div align="center">
     <img src="preview.png"/>
