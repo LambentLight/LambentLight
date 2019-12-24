@@ -1,11 +1,9 @@
 site_name: LambentLight for FiveM and RedM
 
 nav:
-  - About: index.md
+  - LambentLight: index.md
   - Getting started: getting-started.md
   - Software License: license.md
-  - Development:
-    - Program: development/program.md
 
 repo_name: LambentLight/LambentLight
 repo_url: https://github.com/LambentLight/LambentLight
@@ -15,6 +13,8 @@ markdown_extensions:
   - pymdownx.details
 
 theme:
+  feature:
+    tabs: true
   name: material
   palette:
     primary: cyan
