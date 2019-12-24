@@ -4,6 +4,7 @@ nav:
   - LambentLight: index.md
   - Getting started: getting-started.md
   - Resource Manager: resources.md
+  - MySQL Database: mysql.md
   - Software License: license.md
 
 repo_name: LambentLight/LambentLight
