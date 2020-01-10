@@ -32,6 +32,10 @@ namespace LambentLight.Managers.DataFolders
         /// Pattern for finding a resource inside a configuration file.
         /// </summary>
         public const string StartRegEx = "(\n|\r|\r\n)start {0}";
+        /// <summary>
+        /// Pattern for finding the Web API port inside a configuration file.
+        /// </summary>
+        public const string PortRegEx = "endpoint_add_tcp +\"?[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}:([0-9]{1,5})\"?";
 
         #endregion
 
@@ -102,6 +106,44 @@ namespace LambentLight.Managers.DataFolders
                 File.WriteAllText(ConfigurationPath, value);
                 // Log that we just saved the configuration
                 Logger.Info("The configuration of {0} has been saved", Name);
+            }
+        }
+        /// <summary>
+        /// The port for the Web API.
+        /// </summary>
+        public ushort WebPort
+        {
+            get
+            {
+                // Try to get the configuration
+                string config = Configuration;
+
+                // If is null, return zero (invalid)
+                if (config == null)
+                {
+                    return 0;
+                }
+
+                // Otherwise, run the regex and try to find that port
+                Match matches = Regex.Match(config, PortRegEx, RegexOptions.Multiline);
+                // If the number of matches is lower than 2, return
+                if (matches.Groups.Count < 2)
+                {
+                    return 0;
+                }
+
+                // Otherwise, select the second group
+                Group group = matches.Groups[1];
+
+                // And try to parse it as a byte
+                if (!ushort.TryParse(group.Value, out ushort result))
+                {
+                    // If we failed, return zero
+                    return 0;
+                }
+
+                // Otherwise return the correct port
+                return result;
             }
         }
 
