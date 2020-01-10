@@ -96,6 +96,35 @@ namespace LambentLight
                 return null;
             }
         }
+        /// <summary>
+        /// Downloads the content of a URL.
+        /// </summary>
+        /// <param name="from">The URL to fetch.</param>
+        /// <returns>The contents of the response if the request succeeded, null otherwise.</returns>
+        public static async Task<string> DownloadStringAsync(string from)
+        {
+            try
+            {
+                // Try to fetch the string from the URL
+                string output = await Client.DownloadStringTaskAsync(from);
+                // After fetching the string, reset the ProgressBar Value
+                Program.Form.GeneralProgressBar.Value = 0;
+                // And return the string
+                return output;
+            }
+            catch (WebException er)
+            {
+                // If we got a HTTP exception, log it and return
+                Logger.Error("Error while fetching '{0}': {1}", from, er.Message);
+                return null;
+            }
+            catch (ArgumentException er)
+            {
+                // If one of the arguments is invalid, log it and return
+                Logger.Error("Error while fetching '{0}': {1}", from, er.Message);
+                return null;
+            }
+        }
 
         /// <summary>
         /// Requests the JSON from the URL and parses it.
@@ -108,6 +137,36 @@ namespace LambentLight
         {
             // Request the string as usual
             string contents = DownloadString(from);
+
+            // If the content is not null
+            if (contents != null)
+            {
+                // Try to deserialize the JSON into a .NET Object
+                try
+                {
+                    return JsonConvert.DeserializeObject<T>(contents, converters);
+                }
+                // If we failed, return the default value
+                catch (EntryPointNotFoundException)
+                {
+                    return default(T);
+                }
+            }
+
+            // If the HTTP request failed, return the default value
+            return default(T);
+        }
+        /// <summary>
+        /// Requests the JSON from the URL and parses it.
+        /// </summary>
+        /// <typeparam name="T">The output type to parse.</typeparam>
+        /// <param name="from">The URL to fetch.</param>
+        /// <param name="converters">Aditional JSON converters to use.</param>
+        /// <returns>The parsed contents if the request and parsing succeeds, default(T) otherwise.</returns>
+        public static async Task<T> DownloadJSONAsync<T>(string from, params JsonConverter[] converters)
+        {
+            // Request the string as usual
+            string contents = await DownloadStringAsync(from);
 
             // If the content is not null
             if (contents != null)
