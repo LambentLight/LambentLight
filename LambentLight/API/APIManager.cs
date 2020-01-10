@@ -1,5 +1,6 @@
 ﻿using LambentLight.Managers.Runtime;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace LambentLight.API
 {
@@ -9,16 +10,69 @@ namespace LambentLight.API
     public static class APIManager
     {
         /// <summary>
-        /// The list of players in the server.
+        /// Gets the list of players in the server.
         /// </summary>
-        public static List<CitizenPlayer> Players => Downloader.DownloadJSON<List<CitizenPlayer>>("http://127.0.0.1:30120/players.json");
+        public static async Task<List<CitizenPlayer>> GetPlayers()
+        {
+            // If the server is not running, return
+            if (!RuntimeManager.IsServerRunning)
+            {
+                return null;
+            }
+
+            // Get the port of the server
+            ushort port = RuntimeManager.Folder.WebPort;
+
+            // If the port of the server is zero, return
+            if (port == 0)
+            {
+                return null;
+            }
+
+            // At this point, return the list of players
+            return await Downloader.DownloadJSONAsync<List<CitizenPlayer>>($"http://127.0.0.1:{port}/players.json");
+        }
+
         /// <summary>
         /// The information of the current CitizenFX server.
         /// </summary>
-        public static CitizenResponse Info => Downloader.DownloadJSON<CitizenResponse>("http://127.0.0.1:30120/info.json");
+        public static async Task<CitizenResponse> GetInfo()
+        {
+            // If the server is not running, return
+            if (!RuntimeManager.IsServerRunning)
+            {
+                return null;
+            }
+
+            // Get the port of the server
+            ushort port = RuntimeManager.Folder.WebPort;
+
+            // If the port of the server is zero, return
+            if (port == 0)
+            {
+                return null;
+            }
+
+            // At this point, return the list of players
+            return await Downloader.DownloadJSONAsync<CitizenResponse>($"http://127.0.0.1:{port}/info.json");
+        }
+
         /// <summary>
         /// If the LambentLight bridge is running on the server.
         /// </summary>
-        public static bool IsBridgeRunning => RuntimeManager.IsServerRunning && Info.Resources.Contains("lambentlight");
+        public static async Task<bool> IsBridgeRunning()
+        {
+            // Try to get the server information
+            CitizenResponse response = await GetInfo();
+
+            // If the response is empty, return
+            if (response == null)
+            {
+                return false;
+            }
+
+            // Otherwise, do the correct checks
+            return RuntimeManager.IsServerRunning && response.Resources.Contains("lambentlight");
+        }
     }
 }

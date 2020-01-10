@@ -227,8 +227,8 @@ namespace LambentLight.Managers.Runtime
             }
 
             // Get the list of players and if the bridge is running
-            List<CitizenPlayer> players = APIManager.Players;
-            bool isRunning = APIManager.IsBridgeRunning;
+            List<CitizenPlayer> players = await APIManager.GetPlayers();
+            bool isRunning = await APIManager.IsBridgeRunning();
 
             // If there are players in the server
             if (players.Count != 0)
@@ -331,7 +331,7 @@ namespace LambentLight.Managers.Runtime
             for (int i = Program.Config.WaitTime; i != 0; i--)
             {
                 // If we are told to force a shutdown or the server is already empty
-                if (ForceServerShutdown || APIManager.Players.Count == 0)
+                if (ForceServerShutdown || (await APIManager.GetPlayers()).Count == 0)
                 {
                     // Disable the shutdown in progress and force shutdown flags
                     IsShutdownInProgress = false;
