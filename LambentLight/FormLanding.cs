@@ -146,6 +146,12 @@ namespace LambentLight
                 return;
             }
 
+            // Lock the UI Elements just in case
+            Locked = true;
+            StopToolStripMenuItem.Enabled = false;
+            ConsoleInputTextBox.Enabled = false;
+            ConsoleSendButton.Enabled = false;
+
             // Start the build with the selected options
             Locked = await RuntimeManager.Start((Build)BuildsListBox.SelectedItem, (DataFolder)DataFolderComboBox.SelectedItem);
         }
