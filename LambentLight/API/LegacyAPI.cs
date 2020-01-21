@@ -7,7 +7,7 @@ namespace LambentLight.API
     /// <summary>
     /// Manager for the CitizenFX REST API.
     /// </summary>
-    public static class APIManager
+    public static class LegacyAPI
     {
         /// <summary>
         /// Gets the list of players in the server.
