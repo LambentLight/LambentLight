@@ -1,6 +1,7 @@
 ﻿using LambentLight.Config;
 using LambentLight.Managers.Database;
 using LambentLight.Targets;
+using Nancy.Hosting.Self;
 using NLog;
 using NLog.Config;
 using System;
@@ -25,6 +26,10 @@ namespace LambentLight
         /// The main form of our application.
         /// </summary>
         public static FormLanding Form { get; private set; }
+        /// <summary>
+        /// The Nancy Web Server.
+        /// </summary>
+        public static NancyHost WebServer = new NancyHost(new Uri("http://127.0.0.1:42069"));
 
         #endregion
 
@@ -57,6 +62,8 @@ namespace LambentLight
 
             // Prepare the downloader for our operations
             Downloader.Prepare();
+            // Start the web server
+            WebServer.Start();
             // And run the application with our main form
             Application.Run(Form);
             // Once we are back, return a code 0
