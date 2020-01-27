@@ -1,11 +1,9 @@
-﻿using LambentLight.Managers.Builds;
+﻿using LambentLight.Extensions;
+using LambentLight.Managers.Builds;
 using Nancy;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LambentLight.WebApi.Routes
 {
@@ -19,14 +17,15 @@ namespace LambentLight.WebApi.Routes
         public Builds()
         {
             // Add the routes that we need
-            Get("/build", param => Build());
+            Get("/build", _ => BuildGet());
+            Post("/build", _ => BuildPost());
         }
 
         #endregion
 
         #region Routes
 
-        public Response Build()
+        public Response BuildGet()
         {
             // Make a dictionary with the IDs of the builds and if is installed or not
             Dictionary<string, bool> names = new Dictionary<string, bool>();
@@ -39,6 +38,21 @@ namespace LambentLight.WebApi.Routes
             Response list = JsonConvert.SerializeObject(names);
             list.ContentType = "application/json";
             list.StatusCode = HttpStatusCode.OK;
+            return list;
+        }
+        public Response BuildPost()
+        {
+            // Just update the list of builds
+            BuildManager.Refresh();
+            // And the respective UI element
+            Program.Form.Invoke(new Action(() => Program.Form.BuildsListBox.Fill(BuildManager.Builds, true)));
+
+            // And return a 204
+            Response list = new Response
+            {
+                ContentType = "application/json",
+                StatusCode = HttpStatusCode.NoContent
+            };
             return list;
         }
 

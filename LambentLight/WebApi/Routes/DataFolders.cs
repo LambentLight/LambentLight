@@ -1,12 +1,14 @@
-﻿using LambentLight.Managers.DataFolders;
+﻿using LambentLight.Extensions;
+using LambentLight.Managers.DataFolders;
 using Nancy;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace LambentLight.WebApi.Routes
 {
     /// <summary>
-    /// Rroutes for starting 
+    /// Routes for managing the Data Folders.
     /// </summary>
     public class DataFolders : NancyModule
     {
@@ -15,7 +17,8 @@ namespace LambentLight.WebApi.Routes
         public DataFolders()
         {
             // Add the routes that we need
-            Get("/datafolder", param => DataFolder());
+            Get("/datafolder", param => DataFolderGet());
+            Post("/datafolder", param => DataFolderPost());
             Get("/datafolder/{folder}/installed", param => Installed(FindFolder(param)));
         }
 
@@ -44,7 +47,7 @@ namespace LambentLight.WebApi.Routes
 
         #region Routes
 
-        public Response DataFolder()
+        public Response DataFolderGet()
         {
             // Make a list with the names of the data folders
             List<string> names = new List<string>();
@@ -57,6 +60,21 @@ namespace LambentLight.WebApi.Routes
             Response list = JsonConvert.SerializeObject(names);
             list.ContentType = "application/json";
             list.StatusCode = HttpStatusCode.OK;
+            return list;
+        }
+        public Response DataFolderPost()
+        {
+            // Just update the list of data folders
+            DataFolderManager.Refresh();
+            // And the respective UI element
+            Program.Form.Invoke(new Action(() => Program.Form.DataFolderComboBox.Fill(DataFolderManager.Folders, true)));
+
+            // And return a 204
+            Response list = new Response
+            {
+                ContentType = "application/json",
+                StatusCode = HttpStatusCode.NoContent
+            };
             return list;
         }
 
