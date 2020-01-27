@@ -8,4 +8,12 @@
         public string Build { get; set; }
         public string Folder { get; set; }
     }
+
+    /// <summary>
+    /// Information send when trying to execute a command.
+    /// </summary>
+    public class Commands
+    {
+        public string Command { get; set; }
+    }
 }

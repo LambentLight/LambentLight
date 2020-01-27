@@ -24,6 +24,7 @@ namespace LambentLight.WebApi.Routes
             Post("/start", async _ => await Start());
             Post("/restart", async _ => await Restart());
             Post("/stop", async _ => await Stop());
+            Post("/command", _ => Command());
         }
 
         #endregion
@@ -158,6 +159,38 @@ namespace LambentLight.WebApi.Routes
             Response success = JsonConvert.SerializeObject(new Dictionary<string, string>() { { "message", $"The server was stopped." } });
             success.ContentType = "application/json";
             success.StatusCode = HttpStatusCode.OK;
+            return success;
+        }
+
+        public Response Command()
+        {
+            // If the server is not running, return a 409
+            if (!RuntimeManager.IsServerRunning)
+            {
+                Response response = JsonConvert.SerializeObject(new Dictionary<string, string>() { { "message", "The CFX Server is not running." } });
+                response.ContentType = "application/json";
+                response.StatusCode = HttpStatusCode.Conflict;
+                return response;
+            }
+
+            // Bind the data to the correct class
+            Commands data = this.Bind<Commands>();
+
+            // If no command was specified, return a 400
+            if (string.IsNullOrWhiteSpace(data.Command))
+            {
+                Response response = JsonConvert.SerializeObject(new Dictionary<string, string>() { { "message", "You need to specify a command to execute." } });
+                response.ContentType = "application/json";
+                response.StatusCode = HttpStatusCode.BadRequest;
+                return response;
+            }
+
+            // Otherwise, just send the command to the server
+            RuntimeManager.SendCommand(data.Command);
+            // And return a 202
+            Response success = JsonConvert.SerializeObject(new Dictionary<string, string>() { { "message", $"The command '{data.Command}' was executed." } });
+            success.ContentType = "application/json";
+            success.StatusCode = HttpStatusCode.Accepted;
             return success;
         }
 
