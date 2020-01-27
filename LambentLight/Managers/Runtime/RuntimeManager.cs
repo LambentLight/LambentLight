@@ -227,8 +227,8 @@ namespace LambentLight.Managers.Runtime
             }
 
             // Get the list of players and if the bridge is running
-            List<CitizenPlayer> players = await LegacyAPI.GetPlayers();
-            bool isRunning = await LegacyAPI.IsBridgeRunning();
+            List<CitizenPlayer> players = new List<CitizenPlayer>();
+            bool isRunning = false;
 
             // If there are players in the server
             if (players.Count != 0)
