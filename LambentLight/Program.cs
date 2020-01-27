@@ -15,6 +15,10 @@ namespace LambentLight
         #region Internal Fields
 
         /// <summary>
+        /// The logger for our current class.
+        /// </summary>
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+        /// <summary>
         /// The mod/program configuration.
         /// </summary>
         internal static Configuration Config = Configuration.Load();
@@ -30,7 +34,7 @@ namespace LambentLight
         /// <summary>
         /// The Nancy Web Server.
         /// </summary>
-        public static NancyHost WebServer = new NancyHost(new Uri("http://127.0.0.1:42069"));
+        public static NancyHost WebServer = new NancyHost(new Uri(Config.API.BindTo));
         /// <summary>
         /// The version as a string of the current executable.
         /// </summary>
@@ -67,8 +71,16 @@ namespace LambentLight
 
             // Prepare the downloader for our operations
             Downloader.Prepare();
-            // Start the web server
-            WebServer.Start();
+
+            // If the web server is enabled
+            if (Config.API.Enabled)
+            {
+                // Start the web server
+                WebServer.Start();
+                // And log it
+                Logger.Info($"LambentLight Web Server started at {Config.API.BindTo}");
+            }
+
             // And run the application with our main form
             Application.Run(Form);
             // Once we are back, return a code 0

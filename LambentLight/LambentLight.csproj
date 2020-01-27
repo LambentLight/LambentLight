@@ -93,6 +93,7 @@
     <Compile Include="API\LegacyAPI.cs" />
     <Compile Include="API\CitizenPlayer.cs" />
     <Compile Include="API\CitizenResponse.cs" />
+    <Compile Include="Config\WebAPI.cs" />
     <Compile Include="Managers\Builds\Build.cs" />
     <Compile Include="Managers\Builds\BuildConverter.cs" />
     <Compile Include="Managers\Builds\BuildManager.cs" />

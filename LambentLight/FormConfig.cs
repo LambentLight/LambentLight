@@ -85,6 +85,9 @@ namespace LambentLight
 
             AutoRestartCheckBox.Checked = Program.Config.RestartOnCrash;
             ClearCacheCheckBox.Checked = Program.Config.ClearCache;
+
+            EnableAPICheckBox.Checked = Program.Config.API.Enabled;
+            BindToTextBox.Text = Program.Config.API.BindTo;
         }
 
         #endregion
@@ -380,6 +383,24 @@ namespace LambentLight
             Program.Config.Save();
             // And reload the settings on the UI
             ReloadSettings();
+        }
+
+        #endregion
+
+        #region Web API
+
+        private void EnableAPICheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            // Save the correct configuration value
+            Program.Config.API.Enabled = EnableAPICheckBox.Checked;
+            Program.Config.Save();
+        }
+
+        private void BindToButton_Click(object sender, EventArgs e)
+        {
+            // Save the correct configuration value
+            Program.Config.API.BindTo = BindToTextBox.Text;
+            Program.Config.Save();
         }
 
         #endregion

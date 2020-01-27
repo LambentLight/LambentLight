@@ -70,6 +70,8 @@ namespace LambentLight.Config
         public Creator Creator { get; set; } = new Creator();
         [JsonProperty("auto_restart")]
         public AutoRestart AutoRestart { get; set; } = new AutoRestart();
+        [JsonProperty("api")]
+        public WebAPI API { get; set; } = new WebAPI();
 
         private static string GetConfigLocation()
         {
