@@ -683,7 +683,6 @@
 
         private System.Windows.Forms.GroupBox BuildsGroupBox;
         private System.Windows.Forms.GroupBox DataFolderGroupBox;
-        private System.Windows.Forms.ComboBox DataFolderComboBox;
         private System.Windows.Forms.MenuStrip TopMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem StartToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem StopToolStripMenuItem;
@@ -717,7 +716,6 @@
         private System.Windows.Forms.Button InstalledRefreshButton;
         private System.Windows.Forms.ToolStripMenuItem SettingsToolStripMenuItem;
         private System.Windows.Forms.TabPage BuildsTabPage;
-        private System.Windows.Forms.ListBox BuildsListBox;
         private System.Windows.Forms.Button DataFolderBrowseButton;
         private System.Windows.Forms.Button ConsoleClearButton;
         private System.Windows.Forms.Button BuildsImportButton;
@@ -728,6 +726,8 @@
         private System.Windows.Forms.Button ResourceStartButton;
         private System.Windows.Forms.GroupBox GameGroupBox;
         private System.Windows.Forms.ComboBox GameComboBox;
+        internal System.Windows.Forms.ListBox BuildsListBox;
+        internal System.Windows.Forms.ComboBox DataFolderComboBox;
     }
 }
 
