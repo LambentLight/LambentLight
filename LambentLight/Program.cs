@@ -5,6 +5,7 @@ using Nancy.Hosting.Self;
 using NLog;
 using NLog.Config;
 using System;
+using System.Reflection;
 using System.Windows.Forms;
 
 namespace LambentLight
@@ -30,6 +31,10 @@ namespace LambentLight
         /// The Nancy Web Server.
         /// </summary>
         public static NancyHost WebServer = new NancyHost(new Uri("http://127.0.0.1:42069"));
+        /// <summary>
+        /// The version as a string of the current executable.
+        /// </summary>
+        public static string Version => Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
         #endregion
 

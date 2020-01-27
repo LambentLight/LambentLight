@@ -138,6 +138,8 @@
     <Compile Include="Managers\Runtime\RuntimeManager.cs" />
     <Compile Include="Targets\BottomStripTarget.cs" />
     <Compile Include="Targets\TextBoxTarget.cs" />
+    <Compile Include="WebApi\Binds\Runtime.cs" />
+    <Compile Include="WebApi\Routes\Runtime.cs" />
     <EmbeddedResource Include="FormConfig.resx">
       <DependentUpon>FormConfig.cs</DependentUpon>
     </EmbeddedResource>
