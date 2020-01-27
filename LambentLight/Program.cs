@@ -34,7 +34,7 @@ namespace LambentLight
         /// <summary>
         /// The Nancy Web Server.
         /// </summary>
-        public static NancyHost WebServer = new NancyHost(new Uri(Config.API.BindTo));
+        public static NancyHost WebServer { get; private set; } = null;
         /// <summary>
         /// The version as a string of the current executable.
         /// </summary>
@@ -75,10 +75,22 @@ namespace LambentLight
             // If the web server is enabled
             if (Config.API.Enabled)
             {
-                // Start the web server
-                WebServer.Start();
-                // And log it
-                Logger.Info($"LambentLight Web Server started at {Config.API.BindTo}");
+                // Just try to process it inside of a try
+                try
+                {
+                    // Try to create the Uri and server object
+                    Uri uri = new Uri(Config.API.BindTo);
+                    WebServer = new NancyHost(uri);
+                    // Start the server
+                    WebServer.Start();
+                    // And log it
+                    Logger.Info($"LambentLight Web Server started at {Config.API.BindTo}");
+                }
+                // If the format of the URL is invalid
+                catch (UriFormatException)
+                {
+                    Logger.Error($"The bind address for the Web API is invalid!");
+                }
             }
 
             // And run the application with our main form

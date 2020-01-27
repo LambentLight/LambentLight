@@ -107,8 +107,20 @@ namespace LambentLight
             await RuntimeManager.Stop();
             // Disconnect the database if there is an open connection
             DatabaseManager.Disconnect();
-            // If the Nancy web server is running, stop it
-            Program.WebServer.Stop();
+
+            // If there was a web server available at any point
+            if (Program.WebServer != null)
+            {
+                // Try to stop it
+                try
+                {
+                    Program.WebServer.Stop();
+                }
+                // And ignore any possible exception
+                catch
+                {
+                }
+            }
         }
 
         private void MainTabControl_Selected(object sender, TabControlEventArgs e)
