@@ -15,6 +15,7 @@ namespace LambentLight.WebApi.Routes
         public DataFolders()
         {
             // Add the routes that we need
+            Get("/datafolder", param => DataFolder());
             Get("/datafolder/{folder}/installed", param => Installed(FindFolder(param)));
         }
 
@@ -42,6 +43,22 @@ namespace LambentLight.WebApi.Routes
         #endregion
 
         #region Routes
+
+        public Response DataFolder()
+        {
+            // Make a list with the names of the data folders
+            List<string> names = new List<string>();
+            foreach (DataFolder folder in DataFolderManager.Folders)
+            {
+                names.Add(folder.Name);
+            }
+
+            // And return it
+            Response list = JsonConvert.SerializeObject(names);
+            list.ContentType = "application/json";
+            list.StatusCode = HttpStatusCode.OK;
+            return list;
+        }
 
         public Response Installed(DataFolder folder)
         {
