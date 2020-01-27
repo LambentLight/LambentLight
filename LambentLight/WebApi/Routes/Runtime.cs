@@ -22,6 +22,7 @@ namespace LambentLight.WebApi.Routes
         {
             // Add the routes that we need
             Post("/start", async _ => await Start());
+            Post("/restart", async _ => await Restart());
             Post("/stop", async _ => await Stop());
         }
 
@@ -116,6 +117,27 @@ namespace LambentLight.WebApi.Routes
             return success;
         }
 
+        public async Task<Response> Restart()
+        {
+            // If the server is not running, return a 409
+            if (!RuntimeManager.IsServerRunning)
+            {
+                Response response = JsonConvert.SerializeObject(new Dictionary<string, string>() { { "message", "The CFX Server is not running." } });
+                response.ContentType = "application/json";
+                response.StatusCode = HttpStatusCode.Conflict;
+                return response;
+            }
+
+            // Otherwise, restart the server
+            await RuntimeManager.Restart();
+
+            // And return a 200
+            Response success = JsonConvert.SerializeObject(new Dictionary<string, string>() { { "message", $"The server was restarted." } });
+            success.ContentType = "application/json";
+            success.StatusCode = HttpStatusCode.OK;
+            return success;
+        }
+
         public async Task<Response> Stop()
         {
             // If the server is not running, return a 409
@@ -131,6 +153,7 @@ namespace LambentLight.WebApi.Routes
             await RuntimeManager.Stop();
             // Unlock the UI elements
             Program.Form.Invoke(new Action(() => Program.Form.Locked = false));
+
             // And return a 200
             Response success = JsonConvert.SerializeObject(new Dictionary<string, string>() { { "message", $"The server was stopped." } });
             success.ContentType = "application/json";
