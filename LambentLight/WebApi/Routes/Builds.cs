@@ -33,15 +33,8 @@ namespace LambentLight.WebApi.Routes
                 return error;
             }
 
-            // Make a dictionary with the IDs of the builds and if is installed or not
-            Dictionary<string, bool> names = new Dictionary<string, bool>();
-            foreach (Build folder in BuildManager.Builds)
-            {
-                names.Add(folder.ID, folder.IsExecutablePresent);
-            }
-
             // And return it
-            Response list = JsonConvert.SerializeObject(names);
+            Response list = JsonConvert.SerializeObject(BuildManager.Builds);
             list.ContentType = "application/json";
             list.StatusCode = HttpStatusCode.OK;
             return list;

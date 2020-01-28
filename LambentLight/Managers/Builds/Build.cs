@@ -1,4 +1,5 @@
-﻿using NLog;
+﻿using Newtonsoft.Json;
+using NLog;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -27,22 +28,27 @@ namespace LambentLight.Managers.Builds
         /// <summary>
         /// The ID of the build. This can be either the folder name or SHA1 hash.
         /// </summary>
+        [JsonProperty("id")]
         public string ID { get; private set; }
         /// <summary>
         /// The local folder where the build can be located.
         /// </summary>
+        [JsonIgnore]
         public string Folder { get; private set; }
         /// <summary>
         /// The location of the CFX Server executable.
         /// </summary>
+        [JsonIgnore]
         public string Executable { get; private set; }
         /// <summary>
         /// If the server executable is present.
         /// </summary>
+        [JsonProperty("exe_present")]
         public bool IsExecutablePresent => File.Exists(Executable);
         /// <summary>
         /// If the folder for the build exists.
         /// </summary>
+        [JsonProperty("folder_present")]
         public bool IsFolderPresent => Directory.Exists(Folder);
 
         #endregion
