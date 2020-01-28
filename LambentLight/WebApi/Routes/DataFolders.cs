@@ -55,15 +55,8 @@ namespace LambentLight.WebApi.Routes
                 return error;
             }
 
-            // Make a list with the names of the data folders
-            List<string> names = new List<string>();
-            foreach (DataFolder folder in DataFolderManager.Folders)
-            {
-                names.Add(folder.Name);
-            }
-
-            // And return it
-            Response list = JsonConvert.SerializeObject(names);
+            // Then, just send the list of data folders
+            Response list = JsonConvert.SerializeObject(DataFolderManager.Folders);
             list.ContentType = "application/json";
             list.StatusCode = HttpStatusCode.OK;
             return list;
