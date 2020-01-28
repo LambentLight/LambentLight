@@ -143,6 +143,7 @@
     <Compile Include="WebApi\Routes\Builds.cs" />
     <Compile Include="WebApi\Routes\DataFolders.cs" />
     <Compile Include="WebApi\Routes\Runtime.cs" />
+    <Compile Include="WebApi\Tools.cs" />
     <EmbeddedResource Include="FormConfig.resx">
       <DependentUpon>FormConfig.cs</DependentUpon>
     </EmbeddedResource>

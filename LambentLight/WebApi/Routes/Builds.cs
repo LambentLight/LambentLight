@@ -27,6 +27,12 @@ namespace LambentLight.WebApi.Routes
 
         public Response BuildGet()
         {
+            // If the request is not authenticated, return
+            if (!Tools.IsAuthCorrect(Request, out Response error))
+            {
+                return error;
+            }
+
             // Make a dictionary with the IDs of the builds and if is installed or not
             Dictionary<string, bool> names = new Dictionary<string, bool>();
             foreach (Build folder in BuildManager.Builds)
@@ -42,6 +48,12 @@ namespace LambentLight.WebApi.Routes
         }
         public Response BuildPost()
         {
+            // If the request is not authenticated, return
+            if (!Tools.IsAuthCorrect(Request, out Response error))
+            {
+                return error;
+            }
+
             // Just update the list of builds
             BuildManager.Refresh();
             // And the respective UI element

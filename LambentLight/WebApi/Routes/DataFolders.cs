@@ -49,6 +49,12 @@ namespace LambentLight.WebApi.Routes
 
         public Response DataFolderGet()
         {
+            // If the request is not authenticated, return
+            if (!Tools.IsAuthCorrect(Request, out Response error))
+            {
+                return error;
+            }
+
             // Make a list with the names of the data folders
             List<string> names = new List<string>();
             foreach (DataFolder folder in DataFolderManager.Folders)
@@ -64,6 +70,12 @@ namespace LambentLight.WebApi.Routes
         }
         public Response DataFolderPost()
         {
+            // If the request is not authenticated, return
+            if (!Tools.IsAuthCorrect(Request, out Response error))
+            {
+                return error;
+            }
+
             // Just update the list of data folders
             DataFolderManager.Refresh();
             // And the respective UI element
@@ -80,6 +92,12 @@ namespace LambentLight.WebApi.Routes
 
         public Response Installed(DataFolder folder)
         {
+            // If the request is not authenticated, return
+            if (!Tools.IsAuthCorrect(Request, out Response error))
+            {
+                return error;
+            }
+
             // If there is no data folder, return a 404
             if (folder == null)
             {

@@ -33,6 +33,12 @@ namespace LambentLight.WebApi.Routes
 
         public async Task<Response> Start()
         {
+            // If the request is not authenticated, return
+            if (!Tools.IsAuthCorrect(Request, out Response error))
+            {
+                return error;
+            }
+
             // If the server is already running, return 409
             if (RuntimeManager.IsServerRunning)
             {
@@ -120,6 +126,12 @@ namespace LambentLight.WebApi.Routes
 
         public async Task<Response> Restart()
         {
+            // If the request is not authenticated, return
+            if (!Tools.IsAuthCorrect(Request, out Response error))
+            {
+                return error;
+            }
+
             // If the server is not running, return a 409
             if (!RuntimeManager.IsServerRunning)
             {
@@ -141,6 +153,12 @@ namespace LambentLight.WebApi.Routes
 
         public async Task<Response> Stop()
         {
+            // If the request is not authenticated, return
+            if (!Tools.IsAuthCorrect(Request, out Response error))
+            {
+                return error;
+            }
+
             // If the server is not running, return a 409
             if (!RuntimeManager.IsServerRunning)
             {
@@ -164,6 +182,12 @@ namespace LambentLight.WebApi.Routes
 
         public Response Command()
         {
+            // If the request is not authenticated, return
+            if (!Tools.IsAuthCorrect(Request, out Response error))
+            {
+                return error;
+            }
+
             // If the server is not running, return a 409
             if (!RuntimeManager.IsServerRunning)
             {
