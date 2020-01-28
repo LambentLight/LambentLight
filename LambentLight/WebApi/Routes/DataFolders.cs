@@ -100,15 +100,8 @@ namespace LambentLight.WebApi.Routes
                 return response;
             }
 
-            // If is running, make a list with just the names of the resources
-            List<string> installed = new List<string>();
-            foreach (InstalledResource resource in folder.Resources)
-            {
-                installed.Add(resource.Name);
-            }
-
             // And return the list of resources
-            Response list = JsonConvert.SerializeObject(installed);
+            Response list = JsonConvert.SerializeObject(folder.Resources);
             list.ContentType = "application/json";
             list.StatusCode = HttpStatusCode.OK;
             return list;
