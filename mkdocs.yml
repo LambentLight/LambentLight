@@ -5,6 +5,13 @@ nav:
   - Getting started: getting-started.md
   - Resource Manager: resources.md
   - MySQL Database: mysql.md
+  - Web API:
+    - About: api/about.md
+    - Authentication: api/authentication.md
+    - Objects: api/objects.md
+    - Endpoints - Builds: api/e_builds.md
+    - Endpoints - Data Folders: api/e_datafolders.md
+    - Endpoints - Runtime: api/e_runtime.md
   - Development:
     - Development Tools: development/tools.md
     - Metadata Repos: development/metadata.md
