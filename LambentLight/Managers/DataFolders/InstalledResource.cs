@@ -4,6 +4,17 @@ using System.Text.RegularExpressions;
 
 namespace LambentLight.Managers.DataFolders
 {
+    #region Enums
+
+    public enum MetadataType
+    {
+        Invalid = -1,
+        ResourceLua = 0,
+        FXManifest = 1,
+    }
+
+    #endregion
+
     /// <summary>
     /// Class that handles a
     /// </summary>
@@ -32,6 +43,30 @@ namespace LambentLight.Managers.DataFolders
         /// The Data Folder where this resource is located.
         /// </summary>
         public DataFolder Source { get; }
+        /// <summary>
+        /// The type of metadata file that this resource has
+        /// </summary>
+        public MetadataType MetadataType
+        {
+            get
+            {
+                // If fxmanifest.lua exists
+                if (File.Exists(Path.Combine(Location, "fxmanifest.lua")))
+                {
+                    return MetadataType.FXManifest;
+                }
+                // If __resource.lua exists
+                else if (File.Exists(Path.Combine(Location, "__resource.lua")))
+                {
+                    return MetadataType.ResourceLua;
+                }
+                // Otherwise, return -1
+                else
+                {
+                    return MetadataType.Invalid;
+                }
+            }
+        }
 
         /// <summary>
         /// Checks if a resource is present on the specified folder.
