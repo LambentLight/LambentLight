@@ -1,6 +1,6 @@
+using Newtonsoft.Json;
 using NLog;
 using System.IO;
-using System.Text.RegularExpressions;
 
 namespace LambentLight.Managers.DataFolders
 {
@@ -34,18 +34,22 @@ namespace LambentLight.Managers.DataFolders
         /// <summary>
         /// The name of the resource.
         /// </summary>
+        [JsonProperty("name")]
         public string Name => Path.GetFileNameWithoutExtension(Location);
         /// <summary>
         /// Where the resource is located.
         /// </summary>
+        [JsonIgnore]
         public string Location { get; }
         /// <summary>
         /// The Data Folder where this resource is located.
         /// </summary>
+        [JsonIgnore]
         public DataFolder Source { get; }
         /// <summary>
         /// The type of metadata file that this resource has
         /// </summary>
+        [JsonProperty("metadata_type")]
         public MetadataType MetadataType
         {
             get
@@ -71,6 +75,7 @@ namespace LambentLight.Managers.DataFolders
         /// <summary>
         /// Checks if a resource is present on the specified folder.
         /// </summary>
+        [JsonIgnore]
         public bool IsPresent => Directory.Exists(Location);
 
         #endregion
