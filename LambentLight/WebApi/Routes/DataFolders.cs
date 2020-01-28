@@ -17,9 +17,9 @@ namespace LambentLight.WebApi.Routes
         public DataFolders()
         {
             // Add the routes that we need
-            Get("/datafolder", param => DataFolderGet());
-            Post("/datafolder", param => DataFolderPost());
-            Get("/datafolder/{folder}/installed", param => Installed(FindFolder(param)));
+            Get("/datafolders", param => DataFolderGet());
+            Post("/datafolders", param => DataFolderPost());
+            Get("/datafolders/{folder}/installed", param => Installed(FindFolder(param)));
         }
 
         #endregion

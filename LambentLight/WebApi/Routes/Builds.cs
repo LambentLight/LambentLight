@@ -17,8 +17,8 @@ namespace LambentLight.WebApi.Routes
         public Builds()
         {
             // Add the routes that we need
-            Get("/build", _ => BuildGet());
-            Post("/build", _ => BuildPost());
+            Get("/builds", _ => BuildGet());
+            Post("/builds", _ => BuildPost());
         }
 
         #endregion
