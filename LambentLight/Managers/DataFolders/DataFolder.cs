@@ -56,6 +56,10 @@ namespace LambentLight.Managers.DataFolders
         /// </summary>
         public bool Exists => Directory.Exists(Location);
         /// <summary>
+        /// If the data folder has a configuration file.
+        /// </summary>
+        public bool HasConfiguration => File.Exists(ConfigurationPath);
+        /// <summary>
         /// The resources that are currently installed on the data folder.
         /// </summary>
         public List<InstalledResource> Resources
@@ -87,7 +91,7 @@ namespace LambentLight.Managers.DataFolders
             get
             {
                 // If there is a server configuration file
-                if (File.Exists(ConfigurationPath))
+                if (HasConfiguration)
                 {
                     return string.Join(Environment.NewLine, File.ReadAllLines(ConfigurationPath)) + Environment.NewLine;
                 }
