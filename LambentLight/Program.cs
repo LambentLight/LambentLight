@@ -6,6 +6,7 @@ using NLog;
 using NLog.Config;
 using System;
 using System.Reflection;
+using System.Security.Cryptography;
 using System.Windows.Forms;
 
 namespace LambentLight
@@ -18,6 +19,10 @@ namespace LambentLight
         /// The logger for our current class.
         /// </summary>
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+        /// <summary>
+        /// The secure Random Number Generator for RCON passwords.
+        /// </summary>
+        private static readonly RNGCryptoServiceProvider RNG = new RNGCryptoServiceProvider();
         /// <summary>
         /// The mod/program configuration.
         /// </summary>
@@ -97,6 +102,20 @@ namespace LambentLight
             Application.Run(Form);
             // Once we are back, return a code 0
             return 0;
+        }
+
+        #endregion
+
+        #region Tools
+
+        public static string GenerateSecureString(int size = 32)
+        {
+            // Create a place to store the output
+            byte[] randomBytes = new byte[size];
+            // Create the random string as bytes
+            RNG.GetBytes(randomBytes);
+            // And then, return that byte array as a string
+            return Convert.ToBase64String(randomBytes);
         }
 
         #endregion

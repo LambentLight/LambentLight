@@ -1,11 +1,9 @@
 ﻿using LambentLight.Managers.Database;
 using LambentLight.Managers.Resources;
-using MySql.Data.MySqlClient;
 using NLog;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -24,10 +22,6 @@ namespace LambentLight.Managers.DataFolders
         /// The logger for our current class.
         /// </summary>
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
-        /// <summary>
-        /// The secure Random Number Generator for RCON passwords.
-        /// </summary>
-        private static readonly RNGCryptoServiceProvider RNG = new RNGCryptoServiceProvider();
         /// <summary>
         /// Pattern for finding a resource inside a configuration file.
         /// </summary>
@@ -179,12 +173,7 @@ namespace LambentLight.Managers.DataFolders
             // If there is no RCON Password, generate one
             if (string.IsNullOrWhiteSpace(rconPassword))
             {
-                // Create a place to store the output
-                byte[] randomBytes = new byte[32];
-                // Create the random string as bytes
-                RNG.GetBytes(randomBytes);
-                // And then, return that byte array as a string
-                rconPassword = Convert.ToBase64String(randomBytes);
+                rconPassword = Program.GenerateSecureString();
             }
 
             // Convert the bool of the ScriptHook setting to a string with a number
