@@ -117,10 +117,11 @@ namespace LambentLight.WebApi.Routes
             // And lock the UI elements
             Program.Form.Invoke(new Action(() => Program.Form.Locked = true));
 
-            // And return a 200
-            Response success = JsonConvert.SerializeObject(new Dictionary<string, string>() { { "message", $"The server has been started with Build {data.Build} and Data Folder '{data.Folder}'." } });
-            success.ContentType = "application/json";
-            success.StatusCode = HttpStatusCode.OK;
+            // And return a 204
+            Response success = new Response
+            {
+                StatusCode = HttpStatusCode.NoContent
+            };
             return success;
         }
 
@@ -144,10 +145,11 @@ namespace LambentLight.WebApi.Routes
             // Otherwise, restart the server
             await RuntimeManager.Restart();
 
-            // And return a 200
-            Response success = JsonConvert.SerializeObject(new Dictionary<string, string>() { { "message", $"The server was restarted." } });
-            success.ContentType = "application/json";
-            success.StatusCode = HttpStatusCode.OK;
+            // And return a 204
+            Response success = new Response
+            {
+                StatusCode = HttpStatusCode.NoContent
+            };
             return success;
         }
 
@@ -173,10 +175,11 @@ namespace LambentLight.WebApi.Routes
             // Unlock the UI elements
             Program.Form.Invoke(new Action(() => Program.Form.Locked = false));
 
-            // And return a 200
-            Response success = JsonConvert.SerializeObject(new Dictionary<string, string>() { { "message", $"The server was stopped." } });
-            success.ContentType = "application/json";
-            success.StatusCode = HttpStatusCode.OK;
+            // And return a 204
+            Response success = new Response
+            {
+                StatusCode = HttpStatusCode.NoContent
+            };
             return success;
         }
 
