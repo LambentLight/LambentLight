@@ -91,6 +91,11 @@ namespace LambentLight
                     // And log it
                     Logger.Info($"LambentLight Web Server started at {Config.API.BindTo}");
                 }
+                // If Nancy failed to bind the URL
+                catch (AutomaticUrlReservationCreationFailureException)
+                {
+                    Logger.Error("Unable to reserve the URL for the Web API, make sure that the URL and Port are correct and try again");
+                }
                 // If the format of the URL is invalid
                 catch (UriFormatException)
                 {
