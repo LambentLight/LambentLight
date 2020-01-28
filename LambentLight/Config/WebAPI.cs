@@ -11,5 +11,7 @@ namespace LambentLight.Config
         public bool Enabled { get; set; } = true;
         [JsonProperty("bind")]
         public string BindTo { get; set; } = "http://127.0.0.1:4810";
+        [JsonProperty("token")]
+        public string Token { get; set; } = Program.GenerateSecureString();
     }
 }

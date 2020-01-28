@@ -428,6 +428,43 @@ namespace LambentLight
             Close();
         }
 
+        private void ShowTokenCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            // Change the enabled status of the TextBox and Button(s)
+            TokenTextBox.Enabled = ShowTokenCheckBox.Checked;
+            TokenGenerateButton.Enabled = ShowTokenCheckBox.Checked;
+            TokenSaveButton.Enabled = ShowTokenCheckBox.Checked;
+            // And populate the License correctly
+            TokenTextBox.Text = ShowTokenCheckBox.Checked ? Program.Config.API.Token : string.Empty;
+        }
+
+        private void TokenGenerateButton_Click(object sender, EventArgs e)
+        {
+            // Ask the user if he wants to generate a new token
+            DialogResult result = MessageBox.Show("Are you sure that you want to generate a new token?\nAll of your existing applications using this token will stop working!", "Token Generation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            // If the user said no, return
+            if (result == DialogResult.No)
+            {
+                return;
+            }
+
+            // Otherwise, generate a new token
+            string token = Program.GenerateSecureString();
+            // Save it
+            Program.Config.API.Token = token;
+            Program.Config.Save();
+            // And show it to the user
+            TokenTextBox.Text = token;
+        }
+
+        private void TokenSaveButton_Click(object sender, EventArgs e)
+        {
+            // This just saves the token
+            Program.Config.API.Token = TokenTextBox.Text;
+            Program.Config.Save();
+        }
+
         #endregion
     }
 }

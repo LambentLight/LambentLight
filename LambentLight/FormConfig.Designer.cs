@@ -79,15 +79,20 @@
             this.BuildsGroupBox = new System.Windows.Forms.GroupBox();
             this.BuildsSaveButton = new System.Windows.Forms.Button();
             this.BuildsTextBox = new System.Windows.Forms.TextBox();
+            this.WebAPITabPage = new System.Windows.Forms.TabPage();
+            this.TokenGroupBox = new System.Windows.Forms.GroupBox();
+            this.ShowTokenCheckBox = new System.Windows.Forms.CheckBox();
+            this.TokenTextBox = new System.Windows.Forms.TextBox();
+            this.TokenGenerateButton = new System.Windows.Forms.Button();
+            this.TokenSaveButton = new System.Windows.Forms.Button();
+            this.BasicsGroupBox = new System.Windows.Forms.GroupBox();
+            this.BindToLabel = new System.Windows.Forms.Label();
+            this.BindToButton = new System.Windows.Forms.Button();
+            this.BindToTextBox = new System.Windows.Forms.TextBox();
+            this.EnableAPICheckBox = new System.Windows.Forms.CheckBox();
+            this.APIDescriptionLabel = new System.Windows.Forms.Label();
             this.CloseButton = new System.Windows.Forms.Button();
             this.ResetSettingsButton = new System.Windows.Forms.Button();
-            this.WebAPITabPage = new System.Windows.Forms.TabPage();
-            this.APIDescriptionLabel = new System.Windows.Forms.Label();
-            this.BasicsGroupBox = new System.Windows.Forms.GroupBox();
-            this.EnableAPICheckBox = new System.Windows.Forms.CheckBox();
-            this.BindToTextBox = new System.Windows.Forms.TextBox();
-            this.BindToButton = new System.Windows.Forms.Button();
-            this.BindToLabel = new System.Windows.Forms.Label();
             this.ConfigTabControl.SuspendLayout();
             this.AuthTabPage.SuspendLayout();
             this.ConnectionGroupBox.SuspendLayout();
@@ -104,6 +109,7 @@
             this.ResourcesGroupBox.SuspendLayout();
             this.BuildsGroupBox.SuspendLayout();
             this.WebAPITabPage.SuspendLayout();
+            this.TokenGroupBox.SuspendLayout();
             this.BasicsGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -675,6 +681,136 @@
             this.BuildsTextBox.Size = new System.Drawing.Size(352, 20);
             this.BuildsTextBox.TabIndex = 1;
             // 
+            // WebAPITabPage
+            // 
+            this.WebAPITabPage.Controls.Add(this.TokenGroupBox);
+            this.WebAPITabPage.Controls.Add(this.BasicsGroupBox);
+            this.WebAPITabPage.Controls.Add(this.APIDescriptionLabel);
+            this.WebAPITabPage.Location = new System.Drawing.Point(4, 22);
+            this.WebAPITabPage.Name = "WebAPITabPage";
+            this.WebAPITabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.WebAPITabPage.Size = new System.Drawing.Size(376, 250);
+            this.WebAPITabPage.TabIndex = 5;
+            this.WebAPITabPage.Text = "Web API";
+            this.WebAPITabPage.UseVisualStyleBackColor = true;
+            // 
+            // TokenGroupBox
+            // 
+            this.TokenGroupBox.Controls.Add(this.ShowTokenCheckBox);
+            this.TokenGroupBox.Controls.Add(this.TokenTextBox);
+            this.TokenGroupBox.Controls.Add(this.TokenGenerateButton);
+            this.TokenGroupBox.Controls.Add(this.TokenSaveButton);
+            this.TokenGroupBox.Location = new System.Drawing.Point(6, 174);
+            this.TokenGroupBox.Name = "TokenGroupBox";
+            this.TokenGroupBox.Size = new System.Drawing.Size(364, 73);
+            this.TokenGroupBox.TabIndex = 2;
+            this.TokenGroupBox.TabStop = false;
+            this.TokenGroupBox.Text = "Token";
+            // 
+            // ShowTokenCheckBox
+            // 
+            this.ShowTokenCheckBox.AutoSize = true;
+            this.ShowTokenCheckBox.Location = new System.Drawing.Point(6, 49);
+            this.ShowTokenCheckBox.Name = "ShowTokenCheckBox";
+            this.ShowTokenCheckBox.Size = new System.Drawing.Size(115, 17);
+            this.ShowTokenCheckBox.TabIndex = 3;
+            this.ShowTokenCheckBox.Text = "Make token visible";
+            this.ShowTokenCheckBox.UseVisualStyleBackColor = true;
+            this.ShowTokenCheckBox.CheckedChanged += new System.EventHandler(this.ShowTokenCheckBox_CheckedChanged);
+            // 
+            // TokenTextBox
+            // 
+            this.TokenTextBox.Enabled = false;
+            this.TokenTextBox.Location = new System.Drawing.Point(6, 19);
+            this.TokenTextBox.Name = "TokenTextBox";
+            this.TokenTextBox.Size = new System.Drawing.Size(352, 20);
+            this.TokenTextBox.TabIndex = 2;
+            // 
+            // TokenGenerateButton
+            // 
+            this.TokenGenerateButton.Enabled = false;
+            this.TokenGenerateButton.Location = new System.Drawing.Point(203, 45);
+            this.TokenGenerateButton.Name = "TokenGenerateButton";
+            this.TokenGenerateButton.Size = new System.Drawing.Size(75, 23);
+            this.TokenGenerateButton.TabIndex = 1;
+            this.TokenGenerateButton.Text = "Generate";
+            this.TokenGenerateButton.UseVisualStyleBackColor = true;
+            this.TokenGenerateButton.Click += new System.EventHandler(this.TokenGenerateButton_Click);
+            // 
+            // TokenSaveButton
+            // 
+            this.TokenSaveButton.Enabled = false;
+            this.TokenSaveButton.Location = new System.Drawing.Point(283, 45);
+            this.TokenSaveButton.Name = "TokenSaveButton";
+            this.TokenSaveButton.Size = new System.Drawing.Size(75, 23);
+            this.TokenSaveButton.TabIndex = 0;
+            this.TokenSaveButton.Text = "Save";
+            this.TokenSaveButton.UseVisualStyleBackColor = true;
+            this.TokenSaveButton.Click += new System.EventHandler(this.TokenSaveButton_Click);
+            // 
+            // BasicsGroupBox
+            // 
+            this.BasicsGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.BasicsGroupBox.Controls.Add(this.BindToLabel);
+            this.BasicsGroupBox.Controls.Add(this.BindToButton);
+            this.BasicsGroupBox.Controls.Add(this.BindToTextBox);
+            this.BasicsGroupBox.Controls.Add(this.EnableAPICheckBox);
+            this.BasicsGroupBox.Location = new System.Drawing.Point(6, 96);
+            this.BasicsGroupBox.Name = "BasicsGroupBox";
+            this.BasicsGroupBox.Size = new System.Drawing.Size(364, 72);
+            this.BasicsGroupBox.TabIndex = 1;
+            this.BasicsGroupBox.TabStop = false;
+            this.BasicsGroupBox.Text = "Basics";
+            // 
+            // BindToLabel
+            // 
+            this.BindToLabel.AutoSize = true;
+            this.BindToLabel.Location = new System.Drawing.Point(6, 45);
+            this.BindToLabel.Name = "BindToLabel";
+            this.BindToLabel.Size = new System.Drawing.Size(40, 13);
+            this.BindToLabel.TabIndex = 3;
+            this.BindToLabel.Text = "Bind to";
+            // 
+            // BindToButton
+            // 
+            this.BindToButton.Location = new System.Drawing.Point(283, 40);
+            this.BindToButton.Name = "BindToButton";
+            this.BindToButton.Size = new System.Drawing.Size(75, 23);
+            this.BindToButton.TabIndex = 2;
+            this.BindToButton.Text = "Save";
+            this.BindToButton.UseVisualStyleBackColor = true;
+            this.BindToButton.Click += new System.EventHandler(this.BindToButton_Click);
+            // 
+            // BindToTextBox
+            // 
+            this.BindToTextBox.Location = new System.Drawing.Point(52, 42);
+            this.BindToTextBox.Name = "BindToTextBox";
+            this.BindToTextBox.Size = new System.Drawing.Size(225, 20);
+            this.BindToTextBox.TabIndex = 1;
+            // 
+            // EnableAPICheckBox
+            // 
+            this.EnableAPICheckBox.AutoSize = true;
+            this.EnableAPICheckBox.Location = new System.Drawing.Point(6, 19);
+            this.EnableAPICheckBox.Name = "EnableAPICheckBox";
+            this.EnableAPICheckBox.Size = new System.Drawing.Size(272, 17);
+            this.EnableAPICheckBox.TabIndex = 0;
+            this.EnableAPICheckBox.Text = "Enable Web API (Required for LambentLight Bridge)";
+            this.EnableAPICheckBox.UseVisualStyleBackColor = true;
+            this.EnableAPICheckBox.CheckedChanged += new System.EventHandler(this.EnableAPICheckBox_CheckedChanged);
+            // 
+            // APIDescriptionLabel
+            // 
+            this.APIDescriptionLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.APIDescriptionLabel.Location = new System.Drawing.Point(6, 3);
+            this.APIDescriptionLabel.Name = "APIDescriptionLabel";
+            this.APIDescriptionLabel.Size = new System.Drawing.Size(364, 90);
+            this.APIDescriptionLabel.TabIndex = 0;
+            this.APIDescriptionLabel.Text = resources.GetString("APIDescriptionLabel.Text");
+            this.APIDescriptionLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // CloseButton
             // 
             this.CloseButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -698,81 +834,6 @@
             this.ResetSettingsButton.UseVisualStyleBackColor = true;
             this.ResetSettingsButton.Click += new System.EventHandler(this.ResetSettingsButton_Click);
             // 
-            // WebAPITabPage
-            // 
-            this.WebAPITabPage.Controls.Add(this.BasicsGroupBox);
-            this.WebAPITabPage.Controls.Add(this.APIDescriptionLabel);
-            this.WebAPITabPage.Location = new System.Drawing.Point(4, 22);
-            this.WebAPITabPage.Name = "WebAPITabPage";
-            this.WebAPITabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.WebAPITabPage.Size = new System.Drawing.Size(376, 250);
-            this.WebAPITabPage.TabIndex = 5;
-            this.WebAPITabPage.Text = "Web API";
-            this.WebAPITabPage.UseVisualStyleBackColor = true;
-            // 
-            // APIDescriptionLabel
-            // 
-            this.APIDescriptionLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.APIDescriptionLabel.Location = new System.Drawing.Point(6, 3);
-            this.APIDescriptionLabel.Name = "APIDescriptionLabel";
-            this.APIDescriptionLabel.Size = new System.Drawing.Size(364, 84);
-            this.APIDescriptionLabel.TabIndex = 0;
-            this.APIDescriptionLabel.Text = resources.GetString("APIDescriptionLabel.Text");
-            this.APIDescriptionLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // BasicsGroupBox
-            // 
-            this.BasicsGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.BasicsGroupBox.Controls.Add(this.BindToLabel);
-            this.BasicsGroupBox.Controls.Add(this.BindToButton);
-            this.BasicsGroupBox.Controls.Add(this.BindToTextBox);
-            this.BasicsGroupBox.Controls.Add(this.EnableAPICheckBox);
-            this.BasicsGroupBox.Location = new System.Drawing.Point(6, 90);
-            this.BasicsGroupBox.Name = "BasicsGroupBox";
-            this.BasicsGroupBox.Size = new System.Drawing.Size(364, 72);
-            this.BasicsGroupBox.TabIndex = 1;
-            this.BasicsGroupBox.TabStop = false;
-            this.BasicsGroupBox.Text = "Basics";
-            // 
-            // EnableAPICheckBox
-            // 
-            this.EnableAPICheckBox.AutoSize = true;
-            this.EnableAPICheckBox.Location = new System.Drawing.Point(6, 19);
-            this.EnableAPICheckBox.Name = "EnableAPICheckBox";
-            this.EnableAPICheckBox.Size = new System.Drawing.Size(272, 17);
-            this.EnableAPICheckBox.TabIndex = 0;
-            this.EnableAPICheckBox.Text = "Enable Web API (Required for LambentLight Bridge)";
-            this.EnableAPICheckBox.UseVisualStyleBackColor = true;
-            this.EnableAPICheckBox.CheckedChanged += new System.EventHandler(this.EnableAPICheckBox_CheckedChanged);
-            // 
-            // BindToTextBox
-            // 
-            this.BindToTextBox.Location = new System.Drawing.Point(52, 42);
-            this.BindToTextBox.Name = "BindToTextBox";
-            this.BindToTextBox.Size = new System.Drawing.Size(225, 20);
-            this.BindToTextBox.TabIndex = 1;
-            // 
-            // BindToButton
-            // 
-            this.BindToButton.Location = new System.Drawing.Point(283, 40);
-            this.BindToButton.Name = "BindToButton";
-            this.BindToButton.Size = new System.Drawing.Size(75, 23);
-            this.BindToButton.TabIndex = 2;
-            this.BindToButton.Text = "Save";
-            this.BindToButton.UseVisualStyleBackColor = true;
-            this.BindToButton.Click += new System.EventHandler(this.BindToButton_Click);
-            // 
-            // BindToLabel
-            // 
-            this.BindToLabel.AutoSize = true;
-            this.BindToLabel.Location = new System.Drawing.Point(6, 45);
-            this.BindToLabel.Name = "BindToLabel";
-            this.BindToLabel.Size = new System.Drawing.Size(40, 13);
-            this.BindToLabel.TabIndex = 3;
-            this.BindToLabel.Text = "Bind to";
-            // 
             // FormConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -788,7 +849,7 @@
             this.MinimizeBox = false;
             this.Name = "FormConfig";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Settings";
+            this.Text = " ";
             this.Load += new System.EventHandler(this.Config_Load);
             this.ConfigTabControl.ResumeLayout(false);
             this.AuthTabPage.ResumeLayout(false);
@@ -814,6 +875,8 @@
             this.BuildsGroupBox.ResumeLayout(false);
             this.BuildsGroupBox.PerformLayout();
             this.WebAPITabPage.ResumeLayout(false);
+            this.TokenGroupBox.ResumeLayout(false);
+            this.TokenGroupBox.PerformLayout();
             this.BasicsGroupBox.ResumeLayout(false);
             this.BasicsGroupBox.PerformLayout();
             this.ResumeLayout(false);
@@ -881,5 +944,10 @@
         private System.Windows.Forms.Label BindToLabel;
         private System.Windows.Forms.Button BindToButton;
         private System.Windows.Forms.TextBox BindToTextBox;
+        private System.Windows.Forms.GroupBox TokenGroupBox;
+        private System.Windows.Forms.TextBox TokenTextBox;
+        private System.Windows.Forms.Button TokenGenerateButton;
+        private System.Windows.Forms.Button TokenSaveButton;
+        private System.Windows.Forms.CheckBox ShowTokenCheckBox;
     }
 }
