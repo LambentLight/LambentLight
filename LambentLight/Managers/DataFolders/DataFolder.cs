@@ -25,11 +25,11 @@ namespace LambentLight.Managers.DataFolders
         /// <summary>
         /// Pattern for finding a resource inside a configuration file.
         /// </summary>
-        public const string StartRegEx = "(\n|\r|\r\n)start {0}";
+        private const string StartRegEx = "(\n|\r|\r\n)start {0}";
         /// <summary>
         /// Pattern for finding the Web API port inside a configuration file.
         /// </summary>
-        public const string PortRegEx = "endpoint_add_tcp +\"?[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}:([0-9]{1,5})\"?";
+        private const string PortRegEx = "endpoint_add_tcp +\"?[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}:([0-9]{1,5})\"?";
 
         #endregion
 
