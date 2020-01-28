@@ -55,7 +55,6 @@ namespace LambentLight.WebApi.Routes
             // And return a 204
             Response list = new Response
             {
-                ContentType = "application/json",
                 StatusCode = HttpStatusCode.NoContent
             };
             return list;
