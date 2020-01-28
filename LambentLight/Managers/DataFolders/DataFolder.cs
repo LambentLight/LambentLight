@@ -1,5 +1,6 @@
 ﻿using LambentLight.Managers.Database;
 using LambentLight.Managers.Resources;
+using Newtonsoft.Json;
 using NLog;
 using System;
 using System.Collections.Generic;
@@ -38,30 +39,37 @@ namespace LambentLight.Managers.DataFolders
         /// <summary>
         /// The name of the folder.
         /// </summary>
+        [JsonProperty("name")]
         public string Name { get; private set; }
         /// <summary>
         /// The location of the server data folder
         /// </summary>
+        [JsonIgnore]
         public string Location { get; private set; }
         /// <summary>
         /// The path of the Configuration file.
         /// </summary>
+        [JsonIgnore]
         public string ConfigurationPath { get; private set; }
         /// <summary>
         /// The location of the resources folder.
         /// </summary>
+        [JsonIgnore]
         public string ResourcesPath { get; private set; }
         /// <summary>
         /// If the data folder exists.
         /// </summary>
+        [JsonProperty("exists")]
         public bool Exists => Directory.Exists(Location);
         /// <summary>
         /// If the data folder has a configuration file.
         /// </summary>
+        [JsonProperty("has_config")]
         public bool HasConfiguration => File.Exists(ConfigurationPath);
         /// <summary>
         /// The resources that are currently installed on the data folder.
         /// </summary>
+        [JsonIgnore]
         public List<InstalledResource> Resources
         {
             get
@@ -86,6 +94,7 @@ namespace LambentLight.Managers.DataFolders
         /// <summary>
         /// The server configuration for the data folder.
         /// </summary>
+        [JsonIgnore]
         public string Configuration
         {
             get
@@ -109,6 +118,7 @@ namespace LambentLight.Managers.DataFolders
         /// <summary>
         /// The port for the Web API.
         /// </summary>
+        [JsonIgnore]
         public ushort WebPort
         {
             get
