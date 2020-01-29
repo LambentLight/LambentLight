@@ -76,6 +76,7 @@
             this.BuildFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.GameGroupBox = new System.Windows.Forms.GroupBox();
             this.GameComboBox = new System.Windows.Forms.ComboBox();
+            this.BuildBrowserButton = new System.Windows.Forms.Button();
             this.BuildsGroupBox.SuspendLayout();
             this.DataFolderGroupBox.SuspendLayout();
             this.TopMenuStrip.SuspendLayout();
@@ -540,6 +541,7 @@
             // 
             // BuildsTabPage
             // 
+            this.BuildsTabPage.Controls.Add(this.BuildBrowserButton);
             this.BuildsTabPage.Controls.Add(this.BuildsImportButton);
             this.BuildsTabPage.Controls.Add(this.BuildsRefreshButton);
             this.BuildsTabPage.Controls.Add(this.BuildsGroupBox);
@@ -637,6 +639,16 @@
             this.GameComboBox.TabIndex = 0;
             this.GameComboBox.SelectedIndexChanged += new System.EventHandler(this.GameComboBox_SelectedIndexChanged);
             // 
+            // BuildBrowserButton
+            // 
+            this.BuildBrowserButton.Location = new System.Drawing.Point(587, 64);
+            this.BuildBrowserButton.Name = "BuildBrowserButton";
+            this.BuildBrowserButton.Size = new System.Drawing.Size(150, 23);
+            this.BuildBrowserButton.TabIndex = 3;
+            this.BuildBrowserButton.Text = "Open in Broswer";
+            this.BuildBrowserButton.UseVisualStyleBackColor = true;
+            this.BuildBrowserButton.Click += new System.EventHandler(this.BuildBrowserButton_Click);
+            // 
             // FormLanding
             // 
             this.AcceptButton = this.ConsoleSendButton;
@@ -728,6 +740,7 @@
         private System.Windows.Forms.ComboBox GameComboBox;
         internal System.Windows.Forms.ListBox BuildsListBox;
         internal System.Windows.Forms.ComboBox DataFolderComboBox;
+        private System.Windows.Forms.Button BuildBrowserButton;
     }
 }
 

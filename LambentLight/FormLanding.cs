@@ -517,6 +517,24 @@ namespace LambentLight
             await BuildManager.Install(BuildFileDialog.FileName);
         }
 
+        private void BuildBrowserButton_Click(object sender, EventArgs e)
+        {
+            // Try to cast the selected item
+            Build build = (Build)BuildsListBox.SelectedItem;
+
+            // If there is nothing selected, return
+            if (build == null)
+            {
+                return;
+            }
+
+            // If this is a CFX Build, open it up in a browser
+            if (build.IsCFX)
+            {
+                build.OpenInBroswer();
+            }
+        }
+
         #endregion
 
         #region Tools

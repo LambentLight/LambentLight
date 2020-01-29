@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using NLog;
+using System.Diagnostics;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -25,6 +26,10 @@ namespace LambentLight.Managers.Builds
         /// The download URL for a specific operating system.
         /// </summary>
         private static readonly string DownloadBuild = "https://runtime.fivem.net/artifacts/fivem/build_server_windows/master/{0}/server.zip";
+        /// <summary>
+        /// The page where the user can manually download the file.
+        /// </summary>
+        private static readonly string DownloadPage = "https://runtime.fivem.net/artifacts/fivem/build_server_windows/master/{0}/";
 
         #endregion
 
@@ -111,6 +116,13 @@ namespace LambentLight.Managers.Builds
 
             // At this point, return success
             return true;
+        }
+        /// <summary>
+        /// Opens the download page for the build in a browser.
+        /// </summary>
+        public void OpenInBroswer()
+        {
+            Process.Start(string.Format(DownloadPage, ID));
         }
 
         #endregion
