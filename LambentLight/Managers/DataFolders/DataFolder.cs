@@ -320,6 +320,7 @@ namespace LambentLight.Managers.DataFolders
             catch (DirectoryNotFoundException)
             {
                 Logger.Error("Unable to find '{0}' inside of the file", resourcePath);
+                return;
             }
 
             // If the temporary extraction directory exists, remove it
