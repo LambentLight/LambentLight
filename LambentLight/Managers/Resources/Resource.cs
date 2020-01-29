@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace LambentLight.Managers.Resources
 {
@@ -47,34 +48,6 @@ namespace LambentLight.Managers.Resources
         /// </summary>
         [JsonIgnore]
         public Compatibility Compatibility { get; set; }
-        /// <summary>
-        /// The extended information for this resource.
-        /// </summary>
-        [JsonIgnore]
-        public ExtendedResource More
-        {
-            get
-            {
-                if (more == null)
-                {
-                    string game;
-                    switch (Compatibility)
-                    {
-                        case Compatibility.GrandTheftAutoV:
-                            game = "gtav";
-                            break;
-                        case Compatibility.RedDeadRedemption2:
-                            game = "rdr2";
-                            break;
-                        default:
-                            game = "common";
-                            break;
-                    }
-                    more = Downloader.DownloadJSONAsync<ExtendedResource>($"{Repo}/resources/{game}/{Name}.json").Result;
-                }
-                return more;
-            }
-        }
 
         #endregion
 
@@ -85,9 +58,41 @@ namespace LambentLight.Managers.Resources
         /// </summary>
         /// <param name="version">The version of this resource to use.</param>
         /// <returns>A dictionary with the Resource(s) as a Key and the Version(s) as a Value.</returns>
-        public Dictionary<Resource, Version> GetRequirements(Version version)
+        public async Task<Dictionary<Resource, Version>> GetRequirements(Version version)
         {
-            return GetRequirements(version, 0);
+            return await GetRequirements(version, 0);
+        }
+
+        /// <summary>
+        /// Gets the extended information of the resource.
+        /// </summary>
+        /// <returns>The extended resource information.</returns>
+        public async Task<ExtendedResource> GetExtendedInformation()
+        {
+            // If there is no extended information
+            if (more == null)
+            {
+                // Get the correct game name for the resource compatibility
+                string game;
+                switch (Compatibility)
+                {
+                    case Compatibility.GrandTheftAutoV:
+                        game = "gtav";
+                        break;
+                    case Compatibility.RedDeadRedemption2:
+                        game = "rdr2";
+                        break;
+                    default:
+                        game = "common";
+                        break;
+                }
+                // And request the extended resource information
+                more = await Downloader.DownloadJSONAsync<ExtendedResource>($"{Repo}/resources/{game}/{Name}.json");
+            }
+
+            // At this point, we should have the extended information
+            // Just return it
+            return more;
         }
 
         #endregion
@@ -100,7 +105,7 @@ namespace LambentLight.Managers.Resources
         /// <param name="version">The version of this resource to use.</param>
         /// <param name="level">The level of nested calls.</param>
         /// <returns>A dictionary with the Resource(s) as a Key and the Version(s) as a Value.</returns>
-        private Dictionary<Resource, Version> GetRequirements(Version version, int level)
+        private async Task<Dictionary<Resource, Version>> GetRequirements(Version version, int level)
         {
             // Create a dictionary of resources and versions
             Dictionary<Resource, Version> resources = new Dictionary<Resource, Version>();
@@ -115,10 +120,10 @@ namespace LambentLight.Managers.Resources
             resources.Add(this, version);
 
             // If the current resource has more requirements
-            if (More.Requires != null)
+            if ((await GetExtendedInformation()).Requires != null)
             {
                 // Iterate over the requirements
-                foreach (string requirement in More.Requires)
+                foreach (string requirement in (await GetExtendedInformation()).Requires)
                 {
                     // First, try to find the version on this resource
                     Resource found = ResourceManager.Resources.Where(res => res.Name == requirement).FirstOrDefault();
@@ -127,7 +132,7 @@ namespace LambentLight.Managers.Resources
                     if (found != null && !resources.ContainsKey(found))
                     {
                         // Collect their requirements
-                        Dictionary<Resource, Version> requirements = found.GetRequirements(found.More.Versions[0], level + 1);
+                        Dictionary<Resource, Version> requirements = await found.GetRequirements((await found.GetExtendedInformation()).Versions[0], level + 1);
 
                         // For every new requirement found
                         foreach (KeyValuePair<Resource, Version> newRequirement in requirements)

@@ -332,12 +332,19 @@ namespace LambentLight
             RefreshInstalledResources();
         }
 
-        private void InstalledUninstallButton_Click(object sender, EventArgs e)
+        private async void InstalledUninstallButton_Click(object sender, EventArgs e)
         {
             // Get the resource that we are trying to uninstall
             InstalledResource installed = (InstalledResource)InstalledListBox.SelectedItem;
             // Try to find a resource with the same folder name as the one that we are going to delete
-            Resource found = ResourceManager.Resources.Where(x => x.More.Install.Destination.ToLower() == installed.Name.ToLower()).FirstOrDefault();
+            Resource found = null;
+            foreach (Resource resource in ResourceManager.Resources)
+            {
+                if ((await resource.GetExtendedInformation()).Install.Destination.ToLower() == installed.Name.ToLower())
+                {
+                    found = resource;
+                }
+            }
             // If a resource was found, use that name
             // If not, use the folder name
             string name = found == null ? installed.Name : found.Name;
@@ -359,7 +366,7 @@ namespace LambentLight
 
         #region Resources - To be Installed
 
-        private void InstallerResourcesListBox_SelectedIndexChanged(object sender, EventArgs e)
+        private async void InstallerResourcesListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             // Disable the install button
             InstallerInstallButton.Enabled = false;
@@ -368,7 +375,7 @@ namespace LambentLight
 
             // Cast the selected resource and the extended information
             Resource resource = (Resource)InstallerResourcesListBox.SelectedItem;
-            ExtendedResource more = resource.More;
+            ExtendedResource more = await resource.GetExtendedInformation();
 
             // If there is a resource and the extended information is also present
             if (resource != null && more != null)
@@ -416,7 +423,7 @@ namespace LambentLight
             }
 
             // Get all of the requirements by the selected resource
-            Dictionary<Resource, Managers.Resources.Version> requirements = resource.GetRequirements((Managers.Resources.Version)InstallerVersionsListBox.SelectedItem);
+            Dictionary<Resource, Managers.Resources.Version> requirements = await resource.GetRequirements((Managers.Resources.Version)InstallerVersionsListBox.SelectedItem);
             // Create the readable list of resources
             string readable = string.Join(" ", requirements.Select(x => $"{x.Key.Name}-{x.Value.ReadableVersion}"));
 
@@ -433,7 +440,7 @@ namespace LambentLight
             // If the user wants to auto-start the resource, add it into the configuration
             if (Program.Config.AddAfterInstalling)
             {
-                folder.AddToAutoStart(resource);
+                await folder.AddToAutoStart(resource);
             }
 
             // Tell the server to refresh the list of installed resources

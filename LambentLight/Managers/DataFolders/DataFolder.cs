@@ -210,14 +210,17 @@ namespace LambentLight.Managers.DataFolders
             // Notify that we are starting the install of there resource
             Logger.Info("Installing resource {0} {1}", resource.Name, version.ReadableVersion);
 
+            // Get the extended information of the resource
+            ExtendedResource extended = await resource.GetExtendedInformation();
+
             // Format a path for the temporary extraction and download locations
-            string extractionPath = Path.Combine(Locations.Temp, $"{resource.More.Install.Destination}-{version.ReadableVersion}");
+            string extractionPath = Path.Combine(Locations.Temp, $"{extended.Install.Destination}-{version.ReadableVersion}");
             string downloadPath = extractionPath + Path.GetExtension(version.Download);
 
             // Create the path of the folder that contains the resource itself
             string resourcePath = Path.Combine(extractionPath, version.Path ?? "");
             // Create the path where the resource should be installed
-            string destinationFolder = Path.Combine(ResourcesPath, resource.More.Install.Destination);
+            string destinationFolder = Path.Combine(ResourcesPath, extended.Install.Destination);
             // Create the path where the version can be located
             string versionPath = Path.Combine(destinationFolder, "version.lambentlight");
 
@@ -253,7 +256,7 @@ namespace LambentLight.Managers.DataFolders
             foreach (InstalledResource Installed in Resources)
             {
                 // If the name matches the resource that we are trying to install, delete it
-                if (Installed.Name == resource.More.Install.Destination)
+                if (Installed.Name == extended.Install.Destination)
                 {
                     Installed.Remove();
                 }
@@ -405,10 +408,12 @@ namespace LambentLight.Managers.DataFolders
         /// </summary>
         /// <param name="resource">The resource to check.</param>
         /// <returns>true if the resource is set to auto start, false otherwise</returns>
-        public bool DoesResourceAutoStart(Resource resource)
+        public async Task<bool> DoesResourceAutoStart(Resource resource)
         {
+            // Get the extended information of the resource
+            ExtendedResource extended = await resource.GetExtendedInformation();
             // Format the RegEx to have the resource folder name
-            string regex = string.Format(StartRegEx, resource.More.Install.Destination);
+            string regex = string.Format(StartRegEx, extended.Install.Destination);
             // Then, return if the regex matches the configuration file
             return Regex.IsMatch(Configuration, regex);
         }
@@ -416,15 +421,18 @@ namespace LambentLight.Managers.DataFolders
         /// Sets the specified resource to auto start in this configuration folder.
         /// </summary>
         /// <param name="resource"></param>
-        public void AddToAutoStart(Resource resource)
+        public async Task AddToAutoStart(Resource resource)
         {
             // If the resource is not set to auto start
-            if (!DoesResourceAutoStart(resource))
+            if (!await DoesResourceAutoStart(resource))
             {
+                // Get the extended information of the resource
+                ExtendedResource extended = await resource.GetExtendedInformation();
+
                 // Add a new line with "start <resourceName>"
-                Configuration = Configuration + $"start {resource.More.Install.Destination}" + Environment.NewLine;
+                Configuration = Configuration + $"start {extended.Install.Destination}" + Environment.NewLine;
                 // And log it
-                Logger.Info("The resource {0} was set to auto start in {1}", resource.More.Install.Destination, Name);
+                Logger.Info("The resource {0} was set to auto start in {1}", extended.Install.Destination, Name);
             }            
         }
         /// <summary>
