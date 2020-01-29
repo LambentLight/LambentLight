@@ -146,11 +146,12 @@ namespace LambentLight
             // Calculate the percentage of the download
             int percentage = (int)(current / total * 100f);
 
-            // If the percetage is not under 0 or over 100, set it on the progress bar
+            // If the percetage is not under 0 or over 100
             if (percentage >= Program.Form.GeneralProgressBar.Minimum &&
                 percentage <= Program.Form.GeneralProgressBar.Maximum)
             {
-                Program.Form.GeneralProgressBar.Value = percentage;
+                // Set it on the progress bar
+                Program.Form.Invoke(new Action(() => Program.Form.GeneralProgressBar.Value = percentage));
             }
         }
 
