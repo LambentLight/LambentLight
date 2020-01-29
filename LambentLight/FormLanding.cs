@@ -535,6 +535,21 @@ namespace LambentLight
             }
         }
 
+        private async void BuildDownloadButton_Click(object sender, EventArgs e)
+        {
+            // Try to cast the selected item
+            Build build = (Build)BuildsListBox.SelectedItem;
+
+            // If there is nothing selected, return
+            if (build == null)
+            {
+                return;
+            }
+
+            // Otherwise, just (re)download the build
+            await build.Download();
+        }
+
         #endregion
 
         #region Tools

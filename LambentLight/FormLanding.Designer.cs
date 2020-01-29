@@ -77,6 +77,7 @@
             this.GameGroupBox = new System.Windows.Forms.GroupBox();
             this.GameComboBox = new System.Windows.Forms.ComboBox();
             this.BuildBrowserButton = new System.Windows.Forms.Button();
+            this.BuildDownloadButton = new System.Windows.Forms.Button();
             this.BuildsGroupBox.SuspendLayout();
             this.DataFolderGroupBox.SuspendLayout();
             this.TopMenuStrip.SuspendLayout();
@@ -541,6 +542,7 @@
             // 
             // BuildsTabPage
             // 
+            this.BuildsTabPage.Controls.Add(this.BuildDownloadButton);
             this.BuildsTabPage.Controls.Add(this.BuildBrowserButton);
             this.BuildsTabPage.Controls.Add(this.BuildsImportButton);
             this.BuildsTabPage.Controls.Add(this.BuildsRefreshButton);
@@ -649,6 +651,16 @@
             this.BuildBrowserButton.UseVisualStyleBackColor = true;
             this.BuildBrowserButton.Click += new System.EventHandler(this.BuildBrowserButton_Click);
             // 
+            // BuildDownloadButton
+            // 
+            this.BuildDownloadButton.Location = new System.Drawing.Point(587, 93);
+            this.BuildDownloadButton.Name = "BuildDownloadButton";
+            this.BuildDownloadButton.Size = new System.Drawing.Size(150, 23);
+            this.BuildDownloadButton.TabIndex = 4;
+            this.BuildDownloadButton.Text = "Download";
+            this.BuildDownloadButton.UseVisualStyleBackColor = true;
+            this.BuildDownloadButton.Click += new System.EventHandler(this.BuildDownloadButton_Click);
+            // 
             // FormLanding
             // 
             this.AcceptButton = this.ConsoleSendButton;
@@ -741,6 +753,7 @@
         internal System.Windows.Forms.ListBox BuildsListBox;
         internal System.Windows.Forms.ComboBox DataFolderComboBox;
         private System.Windows.Forms.Button BuildBrowserButton;
+        private System.Windows.Forms.Button BuildDownloadButton;
     }
 }
 
