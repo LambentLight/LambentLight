@@ -34,9 +34,6 @@ namespace LambentLight
         /// <param name="output">Where the files should be extracted.</param>
         public static async Task Extract(string file, string output)
         {
-            // Wait just to shut the fucking compiler
-            await Task.Delay(0);
-
             // Open the file as a Stream and feed it into the ArchiveFactory
             using (Stream stream = File.OpenRead(file))
             using (IArchive archive = ArchiveFactory.Open(stream))
@@ -56,7 +53,7 @@ namespace LambentLight
                         #endif
 
                         // And write it to our output directory
-                        reader.WriteEntryToDirectory(output, ExtractOpts);
+                        await Task.Run(() => reader.WriteEntryToDirectory(output, ExtractOpts));
                     }
                 }
             }
