@@ -9,12 +9,14 @@ The following are all of the JSON Objects that the API can return:
 | id             | The identifier of this build (either the folder name or number + SHA1 hash) |
 | exe_present    | If the executable is present on the build folder                            |
 | folder_present | If there is a folder that has been used for this build                      |
+| is_cfx         | If this build is an official CFX Build                                      |
 
 ```json
 {
     "id": "2024-4097bd1aee1804eaa7d1120ec84bae795c80703d",
     "exe_present": true,
-    "folder_present": true
+    "folder_present": true,
+    "is_cfx": true
 }
 ```
 

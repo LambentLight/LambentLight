@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using NLog;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace LambentLight.Managers.Builds
@@ -16,6 +17,10 @@ namespace LambentLight.Managers.Builds
         /// The logger for our current class.
         /// </summary>
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+        /// <summary>
+        /// RegEx for checking if a build is from CFX.
+        /// </summary>
+        private const string CFXRegEx = "([0-9]{3,4}-[0-9a-z]{40})";
         /// </summary>
         /// The download URL for a specific operating system.
         /// </summary>
@@ -50,6 +55,11 @@ namespace LambentLight.Managers.Builds
         /// </summary>
         [JsonProperty("folder_present")]
         public bool IsFolderPresent => Directory.Exists(Folder);
+        /// <summary>
+        /// If this is an official build from the CitizenFX Collective.
+        /// </summary>
+        [JsonProperty("is_cfx")]
+        public bool IsCFX => Regex.IsMatch(ID, CFXRegEx);
 
         #endregion
 
