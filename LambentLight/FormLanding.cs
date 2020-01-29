@@ -492,6 +492,16 @@ namespace LambentLight
 
         #region Builds
 
+        private void BuildsListBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Cast the selected item
+            Build build = (Build)BuildsListBox.SelectedItem;
+
+            // And toggle the activation of certain buttons
+            BuildBrowserButton.Enabled = build != null && build.IsCFX;
+            BuildDownloadButton.Enabled = build != null && build.IsCFX && !(RuntimeManager.IsServerRunning && RuntimeManager.Build == build);
+        }
+
         private async void BuildsRefreshButton_Click(object sender, EventArgs e)
         {
             // Refresh the list of builds

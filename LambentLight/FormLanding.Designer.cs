@@ -116,6 +116,7 @@
             this.BuildsListBox.Name = "BuildsListBox";
             this.BuildsListBox.Size = new System.Drawing.Size(563, 238);
             this.BuildsListBox.TabIndex = 2;
+            this.BuildsListBox.SelectedIndexChanged += new System.EventHandler(this.BuildsListBox_SelectedIndexChanged);
             // 
             // BuildsRefreshButton
             // 
