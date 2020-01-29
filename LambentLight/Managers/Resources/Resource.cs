@@ -70,7 +70,7 @@ namespace LambentLight.Managers.Resources
                             game = "common";
                             break;
                     }
-                    more = Downloader.DownloadJSON<ExtendedResource>($"{Repo}/resources/{game}/{Name}.json");
+                    more = Downloader.DownloadJSONAsync<ExtendedResource>($"{Repo}/resources/{game}/{Name}.json").Result;
                 }
                 return more;
             }

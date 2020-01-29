@@ -238,7 +238,7 @@ namespace LambentLight.Managers.DataFolders
 
             // Try to download the file
             // If we failed, return and do nothing
-            if (!await Downloader.DownloadFile(version.Download, downloadPath))
+            if (!await Downloader.DownloadFileAsync(version.Download, downloadPath))
             {
                 return;
             }
@@ -360,7 +360,7 @@ namespace LambentLight.Managers.DataFolders
 
                 // Try to download the file
                 // If we failed to do so, return
-                if (!await Downloader.DownloadFile("https://github.com/LambentLight/ServerData/archive/master.zip", zipPath))
+                if (!await Downloader.DownloadFileAsync("https://github.com/LambentLight/ServerData/archive/master.zip", zipPath))
                 {
                     return;
                 }

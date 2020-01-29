@@ -4,6 +4,7 @@ using Nancy;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace LambentLight.WebApi.Routes
 {
@@ -18,7 +19,7 @@ namespace LambentLight.WebApi.Routes
         {
             // Add the routes that we need
             Get("/builds", _ => BuildGet());
-            Post("/builds", _ => BuildPost());
+            Post("/builds", async _ => await BuildPost());
         }
 
         #endregion
@@ -39,7 +40,7 @@ namespace LambentLight.WebApi.Routes
             list.StatusCode = HttpStatusCode.OK;
             return list;
         }
-        public Response BuildPost()
+        public async Task<Response> BuildPost()
         {
             // If the request is not authenticated, return
             if (!Tools.IsAuthCorrect(Request, out Response error))
@@ -48,7 +49,7 @@ namespace LambentLight.WebApi.Routes
             }
 
             // Just update the list of builds
-            BuildManager.Refresh();
+            await BuildManager.Refresh();
             // And the respective UI element
             Program.Form.Invoke(new Action(() => Program.Form.BuildsListBox.Fill(BuildManager.Builds, true)));
 

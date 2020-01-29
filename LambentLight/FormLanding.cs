@@ -79,13 +79,13 @@ namespace LambentLight
             Locked = false;
         }
 
-        private void Landing_Load(object sender, EventArgs e)
+        private async void Landing_Load(object sender, EventArgs e)
         {
             // Select the same game as the last session
             GameComboBox.SelectedIndex = (int)Program.Config.Game;
 
             // Update the list of Builds and Data Folders
-            BuildManager.Refresh();
+            await BuildManager.Refresh();
             DataFolderManager.Refresh();
             // And and fill their respective lists
             BuildsListBox.Fill(BuildManager.Builds, true);
@@ -489,10 +489,10 @@ namespace LambentLight
 
         #region Builds
 
-        private void BuildsRefreshButton_Click(object sender, EventArgs e)
+        private async void BuildsRefreshButton_Click(object sender, EventArgs e)
         {
             // Refresh the list of builds
-            BuildManager.Refresh();
+            await BuildManager.Refresh();
             // And fill the ListBox while selecting the first item
             BuildsListBox.Fill(BuildManager.Builds, true);
         }
@@ -533,13 +533,13 @@ namespace LambentLight
             // If there is a valid Data Folder, fill the list with the installed resources
             InstalledListBox.Fill(((DataFolder)DataFolderComboBox.SelectedItem).Resources);
         }
-        private void RefreshResourceInstaller()
+        private async void RefreshResourceInstaller()
         {
             // Disable the install button and clear the list of versions
             InstallerInstallButton.Enabled = false;
             InstallerVersionsListBox.Items.Clear();
             // And add the updated set of resource
-            ResourceManager.Refresh();
+            await ResourceManager.Refresh();
             InstallerResourcesListBox.Fill(ResourceManager.Resources);
         }
 

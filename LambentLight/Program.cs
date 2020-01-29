@@ -5,6 +5,7 @@ using Nancy.Hosting.Self;
 using NLog;
 using NLog.Config;
 using System;
+using System.Net;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Windows.Forms;
@@ -60,6 +61,9 @@ namespace LambentLight
             // Use GDI+ for rendering instead of GDI
             Application.SetCompatibleTextRenderingDefault(false);
 
+            // Use TLS 1.2 instead of SSL3 for all web requests
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
             // Create our main form
             Form = new FormLanding();
 
@@ -73,9 +77,6 @@ namespace LambentLight
 
             // Try to connect into the MySQL database
             DatabaseManager.Connect();
-
-            // Prepare the downloader for our operations
-            Downloader.Prepare();
 
             // If the web server is enabled
             if (Config.API.Enabled)

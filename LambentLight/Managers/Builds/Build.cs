@@ -86,7 +86,7 @@ namespace LambentLight.Managers.Builds
             // Create the Uri and destination location
             string downloadPath = Path.Combine(Locations.Temp, ID + ".zip");
             // Try to download the file from the location
-            bool success = await Downloader.DownloadFile(string.Format(DownloadBuild, ID), downloadPath);
+            bool success = await Downloader.DownloadFileAsync(string.Format(DownloadBuild, ID), downloadPath);
 
             // If the download was not completed, return failure
             if (!success)

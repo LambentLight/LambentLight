@@ -2,6 +2,7 @@ using LambentLight.Config;
 using NLog;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace LambentLight.Managers.Resources
 {
@@ -33,7 +34,7 @@ namespace LambentLight.Managers.Resources
         /// <summary>
         /// Refreshes the list of resources.
         /// </summary>
-        public static void Refresh()
+        public static async Task Refresh()
         {
             // Create a new temporary list of resources
             List<Resource> tempResources = new List<Resource>();
@@ -44,8 +45,8 @@ namespace LambentLight.Managers.Resources
             foreach (string repo in Program.Config.Repos)
             {
                 // Get the lists of resources that are common and specific to this game
-                List<Resource> outputGeneric = Downloader.DownloadJSON<List<Resource>>($"{repo}/resources/common.json");
-                List<Resource> outputGame = Downloader.DownloadJSON<List<Resource>>($"{repo}/resources/{game}.json");
+                List<Resource> outputGeneric = await Downloader.DownloadJSONAsync<List<Resource>>($"{repo}/resources/common.json");
+                List<Resource> outputGame = await Downloader.DownloadJSONAsync<List<Resource>>($"{repo}/resources/{game}.json");
 
                 // And add them
                 Add(ref tempResources, outputGeneric, Compatibility.Common, repo);

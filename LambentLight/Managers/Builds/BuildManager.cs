@@ -39,10 +39,10 @@ namespace LambentLight.Managers.Builds
         /// <summary>
         /// Refreshes the list of builds.
         /// </summary>
-        public static void Refresh()
+        public static async Task Refresh()
         {
             // Get all of the builds available on the CFX Servers
-            List<Build> builds = Downloader.DownloadJSON<List<Build>>(DownloadURL, new BuildConverter()) ?? new List<Build>();
+            List<Build> builds = await Downloader.DownloadJSONAsync<List<Build>>(DownloadURL, new BuildConverter()) ?? new List<Build>();
             // Ensure that the builds folder exists
             Locations.EnsureBuildsFolder();
 

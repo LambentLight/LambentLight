@@ -15,32 +15,34 @@ namespace LambentLight
         /// The logger for our current class.
         /// </summary>
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+        #endregion
+
+        #region Private Functions
+
         /// <summary>
-        /// The client to use for web requests.
+        /// Creates a new WebClient object.
         /// </summary>
-        private static readonly WebClient Client = new WebClient();
+        /// <returns>The ready to use WebClient.</returns>
+        public static WebClient CreateWebClient()
+        {
+            // Create a new WebClient object
+            WebClient client = new WebClient();
+            // Set the correct User-Agent header
+            string name = Assembly.GetExecutingAssembly().GetName().Name;
+            string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
+            client.Headers["User-Agent"] = $"{name}/{version} (+https://github.com/LambentLight/LambentLight)";
+            // Subscribe the event that changes the progress bar value
+            client.DownloadProgressChanged += Client_DownloadProgressChanged;
+            client.DownloadStringCompleted += Client_DownloadStringCompleted;
+            client.DownloadFileCompleted += Client_DownloadFileCompleted;
+            // Finally, return the new WebClient
+            return client;
+        }
 
         #endregion
 
         #region Public Functions
-
-        /// <summary>
-        /// Prepares the Web Client with the correct Protocol and Headers.
-        /// </summary>
-        public static void Prepare()
-        {
-            // Subscibe the event that changes the progress bar value
-            Client.DownloadProgressChanged += Client_DownloadProgressChanged;
-
-            // Tell the client to use TLS 1.2 instead of SSL3
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-
-            // Get the name and version of the current program
-            string name = Assembly.GetExecutingAssembly().GetName().Name;
-            string version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-            // And set them as the User-Agent header
-            Client.Headers["User-Agent"] = $"{name}/{version} (+https://github.com/LambentLight/LambentLight)";
-        }
 
         /// <summary>
         /// Downloads a file.
@@ -48,16 +50,18 @@ namespace LambentLight
         /// <param name="from">The URL of the file.</param>
         /// <param name="to">The location where the file should be downloaded.</param>
         /// <returns>true if the operation succeeded, false otherwise.</returns>
-        public static async Task<bool> DownloadFile(string from, string to)
+        public static async Task<bool> DownloadFileAsync(string from, string to)
         {
             try
             {
-                // Try to download the file
-                await Client.DownloadFileTaskAsync(from, to);
-                // After downloading the file, reset the ProgressBar Value
-                Program.Form.GeneralProgressBar.Value = 0;
-                // And show that the operation was successful
-                return true;
+                // Create a new web client
+                using (WebClient client = CreateWebClient())
+                {
+                    // Try to download the file
+                    await client.DownloadFileTaskAsync(from, to);
+                    // And show that the operation was successful
+                    return true;
+                }
             }
             catch (WebException e)
             {
@@ -66,38 +70,8 @@ namespace LambentLight
                 return false;
             }
         }
-
         /// <summary>
-        /// Downloads the content of a URL.
-        /// </summary>
-        /// <param name="from">The URL to fetch.</param>
-        /// <returns>The contents of the response if the request succeeded, null otherwise.</returns>
-        public static string DownloadString(string from)
-        {
-            try
-            {
-                // Try to fetch the string from the URL
-                string output = Client.DownloadString(from);
-                // After fetching the string, reset the ProgressBar Value
-                Program.Form.GeneralProgressBar.Value = 0;
-                // And return the string
-                return output;
-            }
-            catch (WebException er)
-            {
-                // If we got a HTTP exception, log it and return
-                Logger.Error("Error while fetching '{0}': {1}", from, er.Message);
-                return null;
-            }
-            catch (ArgumentException er)
-            {
-                // If one of the arguments is invalid, log it and return
-                Logger.Error("Error while fetching '{0}': {1}", from, er.Message);
-                return null;
-            }
-        }
-        /// <summary>
-        /// Downloads the content of a URL.
+        /// Downloads the content of a URL as a string.
         /// </summary>
         /// <param name="from">The URL to fetch.</param>
         /// <returns>The contents of the response if the request succeeded, null otherwise.</returns>
@@ -105,12 +79,12 @@ namespace LambentLight
         {
             try
             {
-                // Try to fetch the string from the URL
-                string output = await Client.DownloadStringTaskAsync(from);
-                // After fetching the string, reset the ProgressBar Value
-                Program.Form.GeneralProgressBar.Value = 0;
-                // And return the string
-                return output;
+                // Create a new web client
+                using (WebClient client = CreateWebClient())
+                {
+                    // Try to download the string and return it
+                    return await client.DownloadStringTaskAsync(from);
+                }
             }
             catch (WebException er)
             {
@@ -124,37 +98,6 @@ namespace LambentLight
                 Logger.Error("Error while fetching '{0}': {1}", from, er.Message);
                 return null;
             }
-        }
-
-        /// <summary>
-        /// Requests the JSON from the URL and parses it.
-        /// </summary>
-        /// <typeparam name="T">The output type to parse.</typeparam>
-        /// <param name="from">The URL to fetch.</param>
-        /// <param name="converters">Aditional JSON converters to use.</param>
-        /// <returns>The parsed contents if the request and parsing succeeds, default(T) otherwise.</returns>
-        public static T DownloadJSON<T>(string from, params JsonConverter[] converters)
-        {
-            // Request the string as usual
-            string contents = DownloadString(from);
-
-            // If the content is not null
-            if (contents != null)
-            {
-                // Try to deserialize the JSON into a .NET Object
-                try
-                {
-                    return JsonConvert.DeserializeObject<T>(contents, converters);
-                }
-                // If we failed, return the default value
-                catch (EntryPointNotFoundException)
-                {
-                    return default(T);
-                }
-            }
-
-            // If the HTTP request failed, return the default value
-            return default(T);
         }
         /// <summary>
         /// Requests the JSON from the URL and parses it.
@@ -209,6 +152,24 @@ namespace LambentLight
             {
                 Program.Form.GeneralProgressBar.Value = percentage;
             }
+        }
+
+        /// <summary>
+        /// Event triggered when a file download is completed.
+        /// </summary>
+        private static void Client_DownloadFileCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
+        {
+            // Reset the ProgressBar Value
+            Program.Form.Invoke(new Action(() => Program.Form.GeneralProgressBar.Value = 0));
+        }
+
+        /// <summary>
+        /// Event triggered when a string download is completed.
+        /// </summary>
+        private static void Client_DownloadStringCompleted(object sender, DownloadStringCompletedEventArgs e)
+        {
+            // Reset the ProgressBar Value
+            Program.Form.Invoke(new Action(() => Program.Form.GeneralProgressBar.Value = 0));
         }
 
         #endregion
