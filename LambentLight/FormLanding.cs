@@ -1,6 +1,5 @@
 using LambentLight.Config;
 using LambentLight.Extensions;
-using LambentLight.Managers;
 using LambentLight.Managers.Builds;
 using LambentLight.Managers.Database;
 using LambentLight.Managers.DataFolders;
@@ -13,7 +12,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace LambentLight
@@ -43,8 +41,6 @@ namespace LambentLight
                 RestartToolStripMenuItem.Enabled = value;
                 CreateToolStripMenuItem.Enabled = !value;
 
-                BuildsListBox.Enabled = !value;
-                BuildsRefreshButton.Enabled = !value;
                 DataFolderComboBox.Enabled = !value;
                 DataFolderRefreshButton.Enabled = !value;
 
