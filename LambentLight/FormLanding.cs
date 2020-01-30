@@ -248,8 +248,9 @@ namespace LambentLight
             // Refresh the list of installed resources
             RefreshInstalledResources();
 
-            // Set the status of the browse button
+            // Set the status of the browse and delete buttons
             DataFolderBrowseButton.Enabled = DataFolderComboBox.SelectedItem != null;
+            DataFolderDeleteButton.Enabled = DataFolderComboBox.SelectedItem != null;
 
             // If the selected tab is the one with the configuration and a Data Folder is selected
             if (MainTabControl.SelectedTab == ConfigurationTabPage && DataFolderComboBox.SelectedItem != null)
@@ -268,10 +269,39 @@ namespace LambentLight
             }
         }
 
+        private void DataFolderDeleteButton_Click(object sender, EventArgs e)
+        {
+            // Cast the data folder object
+            DataFolder folder = (DataFolder)DataFolderComboBox.SelectedItem;
+
+            // If there is no Data Folder selected, return
+            if (folder== null)
+            {
+                return;
+            }
+
+            // Ask the user if he wants to delete it
+            DialogResult result = MessageBox.Show($"Are you sure that you want to delete '{folder.Name}'?\nThis is an irreversible operation!", "Do you want to delete the data folder", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            // If he does
+            if (result == DialogResult.Yes)
+            {
+                // Remove the folder
+                folder.Remove();
+                // Tell the manager to update the list
+                DataFolderManager.Refresh();
+                // Add the data folder objects
+                DataFolderComboBox.Fill(DataFolderManager.Folders, true);
+                // And set the status of the browse and delete buttons
+                DataFolderBrowseButton.Enabled = DataFolderComboBox.SelectedItem != null;
+                DataFolderDeleteButton.Enabled = DataFolderComboBox.SelectedItem != null;
+            }
+        }
+
         private void DataFolderRefreshButton_Click(object sender, EventArgs e)
         {
-            // Disable the browse button
+            // Disable the browse and delete buttons
             DataFolderBrowseButton.Enabled = false;
+            DataFolderDeleteButton.Enabled = false;
             // Refresh the list of Data Folders
             DataFolderManager.Refresh();
             DataFolderComboBox.Fill(DataFolderManager.Folders, true);

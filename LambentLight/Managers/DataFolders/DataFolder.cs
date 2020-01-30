@@ -397,10 +397,13 @@ namespace LambentLight.Managers.DataFolders
         /// </summary>
         public void Remove()
         {
-            // If the folder exists, delete it
+            // If the folder exists
             if (Exists)
             {
+                // Delete it
                 Directory.Delete(Location, true);
+                // And log it
+                Logger.Info($"The data folder '{Name}' was deleted");
             }
         }
 

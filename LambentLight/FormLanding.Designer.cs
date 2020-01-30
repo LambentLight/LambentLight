@@ -67,6 +67,8 @@
             this.ConfigurationLoadButton = new System.Windows.Forms.Button();
             this.ConfigurationTextBox = new System.Windows.Forms.TextBox();
             this.BuildsTabPage = new System.Windows.Forms.TabPage();
+            this.BuildDownloadButton = new System.Windows.Forms.Button();
+            this.BuildBrowserButton = new System.Windows.Forms.Button();
             this.BuildsImportButton = new System.Windows.Forms.Button();
             this.AboutTabPage = new System.Windows.Forms.TabPage();
             this.AboutRichTextBox = new System.Windows.Forms.RichTextBox();
@@ -76,8 +78,7 @@
             this.BuildFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.GameGroupBox = new System.Windows.Forms.GroupBox();
             this.GameComboBox = new System.Windows.Forms.ComboBox();
-            this.BuildBrowserButton = new System.Windows.Forms.Button();
-            this.BuildDownloadButton = new System.Windows.Forms.Button();
+            this.DataFolderDeleteButton = new System.Windows.Forms.Button();
             this.BuildsGroupBox.SuspendLayout();
             this.DataFolderGroupBox.SuspendLayout();
             this.TopMenuStrip.SuspendLayout();
@@ -133,6 +134,7 @@
             // 
             this.DataFolderGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.DataFolderGroupBox.Controls.Add(this.DataFolderDeleteButton);
             this.DataFolderGroupBox.Controls.Add(this.DataFolderBrowseButton);
             this.DataFolderGroupBox.Controls.Add(this.DataFolderRefreshButton);
             this.DataFolderGroupBox.Controls.Add(this.DataFolderComboBox);
@@ -147,7 +149,7 @@
             // 
             this.DataFolderBrowseButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.DataFolderBrowseButton.Enabled = false;
-            this.DataFolderBrowseButton.Location = new System.Drawing.Point(424, 18);
+            this.DataFolderBrowseButton.Location = new System.Drawing.Point(343, 18);
             this.DataFolderBrowseButton.Name = "DataFolderBrowseButton";
             this.DataFolderBrowseButton.Size = new System.Drawing.Size(75, 23);
             this.DataFolderBrowseButton.TabIndex = 2;
@@ -174,7 +176,7 @@
             this.DataFolderComboBox.FormattingEnabled = true;
             this.DataFolderComboBox.Location = new System.Drawing.Point(6, 19);
             this.DataFolderComboBox.Name = "DataFolderComboBox";
-            this.DataFolderComboBox.Size = new System.Drawing.Size(412, 21);
+            this.DataFolderComboBox.Size = new System.Drawing.Size(331, 21);
             this.DataFolderComboBox.TabIndex = 0;
             this.DataFolderComboBox.SelectedIndexChanged += new System.EventHandler(this.DataFolderComboBox_SelectedIndexChanged);
             // 
@@ -557,6 +559,26 @@
             this.BuildsTabPage.Text = "Build Selector";
             this.BuildsTabPage.UseVisualStyleBackColor = true;
             // 
+            // BuildDownloadButton
+            // 
+            this.BuildDownloadButton.Location = new System.Drawing.Point(587, 93);
+            this.BuildDownloadButton.Name = "BuildDownloadButton";
+            this.BuildDownloadButton.Size = new System.Drawing.Size(150, 23);
+            this.BuildDownloadButton.TabIndex = 4;
+            this.BuildDownloadButton.Text = "Download";
+            this.BuildDownloadButton.UseVisualStyleBackColor = true;
+            this.BuildDownloadButton.Click += new System.EventHandler(this.BuildDownloadButton_Click);
+            // 
+            // BuildBrowserButton
+            // 
+            this.BuildBrowserButton.Location = new System.Drawing.Point(587, 64);
+            this.BuildBrowserButton.Name = "BuildBrowserButton";
+            this.BuildBrowserButton.Size = new System.Drawing.Size(150, 23);
+            this.BuildBrowserButton.TabIndex = 3;
+            this.BuildBrowserButton.Text = "Open in Broswer";
+            this.BuildBrowserButton.UseVisualStyleBackColor = true;
+            this.BuildBrowserButton.Click += new System.EventHandler(this.BuildBrowserButton_Click);
+            // 
             // BuildsImportButton
             // 
             this.BuildsImportButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -643,25 +665,17 @@
             this.GameComboBox.TabIndex = 0;
             this.GameComboBox.SelectedIndexChanged += new System.EventHandler(this.GameComboBox_SelectedIndexChanged);
             // 
-            // BuildBrowserButton
+            // DataFolderDeleteButton
             // 
-            this.BuildBrowserButton.Location = new System.Drawing.Point(587, 64);
-            this.BuildBrowserButton.Name = "BuildBrowserButton";
-            this.BuildBrowserButton.Size = new System.Drawing.Size(150, 23);
-            this.BuildBrowserButton.TabIndex = 3;
-            this.BuildBrowserButton.Text = "Open in Broswer";
-            this.BuildBrowserButton.UseVisualStyleBackColor = true;
-            this.BuildBrowserButton.Click += new System.EventHandler(this.BuildBrowserButton_Click);
-            // 
-            // BuildDownloadButton
-            // 
-            this.BuildDownloadButton.Location = new System.Drawing.Point(587, 93);
-            this.BuildDownloadButton.Name = "BuildDownloadButton";
-            this.BuildDownloadButton.Size = new System.Drawing.Size(150, 23);
-            this.BuildDownloadButton.TabIndex = 4;
-            this.BuildDownloadButton.Text = "Download";
-            this.BuildDownloadButton.UseVisualStyleBackColor = true;
-            this.BuildDownloadButton.Click += new System.EventHandler(this.BuildDownloadButton_Click);
+            this.DataFolderDeleteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.DataFolderDeleteButton.Enabled = false;
+            this.DataFolderDeleteButton.Location = new System.Drawing.Point(424, 18);
+            this.DataFolderDeleteButton.Name = "DataFolderDeleteButton";
+            this.DataFolderDeleteButton.Size = new System.Drawing.Size(75, 23);
+            this.DataFolderDeleteButton.TabIndex = 3;
+            this.DataFolderDeleteButton.Text = "Delete";
+            this.DataFolderDeleteButton.UseVisualStyleBackColor = true;
+            this.DataFolderDeleteButton.Click += new System.EventHandler(this.DataFolderDeleteButton_Click);
             // 
             // FormLanding
             // 
@@ -756,6 +770,7 @@
         internal System.Windows.Forms.ComboBox DataFolderComboBox;
         private System.Windows.Forms.Button BuildBrowserButton;
         private System.Windows.Forms.Button BuildDownloadButton;
+        private System.Windows.Forms.Button DataFolderDeleteButton;
     }
 }
 
