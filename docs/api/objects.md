@@ -2,6 +2,22 @@
 
 The following are all of the JSON Objects that the API can return:
 
+## Basics
+
+| Name       | Description                                                                     |
+| ---------- | ------------------------------------------------------------------------------- |
+| version    | The version of LambentLight that is running                                     |
+| is_running | If the CFX server is running or not                                             |
+| build      | A [Build](#build) object if the server is running, `null` otherwise             |
+| folder     | A [Data Folder](#data-folder) object if the server is running, `null` otherwise |
+
+```json
+{
+    "version": "2.2.0.0",
+    "is_running": true
+}
+```
+
 ## Build
 
 | Name           | Description                                                                 |

@@ -9,6 +9,7 @@ nav:
     - About: api/about.md
     - Authentication: api/authentication.md
     - Objects: api/objects.md
+    - Endpoints - Basics: api/e_basics.md
     - Endpoints - Builds: api/e_builds.md
     - Endpoints - Data Folders: api/e_datafolders.md
     - Endpoints - Runtime: api/e_runtime.md
