@@ -248,6 +248,9 @@ namespace LambentLight
             // Refresh the list of installed resources
             RefreshInstalledResources();
 
+            // Set the status of the browse button
+            DataFolderBrowseButton.Enabled = DataFolderComboBox.SelectedItem != null;
+
             // If the selected tab is the one with the configuration and a Data Folder is selected
             if (MainTabControl.SelectedTab == ConfigurationTabPage && DataFolderComboBox.SelectedItem != null)
             {
@@ -267,9 +270,11 @@ namespace LambentLight
 
         private void DataFolderRefreshButton_Click(object sender, EventArgs e)
         {
+            // Disable the browse button
+            DataFolderBrowseButton.Enabled = false;
             // Refresh the list of Data Folders
             DataFolderManager.Refresh();
-            DataFolderComboBox.Fill(DataFolderManager.Folders);
+            DataFolderComboBox.Fill(DataFolderManager.Folders, true);
         }
 
         #endregion

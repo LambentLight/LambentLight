@@ -146,6 +146,7 @@
             // DataFolderBrowseButton
             // 
             this.DataFolderBrowseButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.DataFolderBrowseButton.Enabled = false;
             this.DataFolderBrowseButton.Location = new System.Drawing.Point(424, 18);
             this.DataFolderBrowseButton.Name = "DataFolderBrowseButton";
             this.DataFolderBrowseButton.Size = new System.Drawing.Size(75, 23);
