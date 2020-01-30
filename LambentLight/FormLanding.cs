@@ -41,6 +41,8 @@ namespace LambentLight
                 RestartToolStripMenuItem.Enabled = value;
                 CreateToolStripMenuItem.Enabled = !value;
 
+                GameComboBox.Enabled = !value;
+
                 DataFolderComboBox.Enabled = !value;
                 DataFolderRefreshButton.Enabled = !value;
 
