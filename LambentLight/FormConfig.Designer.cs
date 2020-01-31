@@ -127,7 +127,7 @@
             this.ConfigTabControl.Location = new System.Drawing.Point(0, 0);
             this.ConfigTabControl.Name = "ConfigTabControl";
             this.ConfigTabControl.SelectedIndex = 0;
-            this.ConfigTabControl.Size = new System.Drawing.Size(384, 276);
+            this.ConfigTabControl.Size = new System.Drawing.Size(609, 276);
             this.ConfigTabControl.TabIndex = 0;
             // 
             // AuthTabPage
@@ -138,19 +138,21 @@
             this.AuthTabPage.Location = new System.Drawing.Point(4, 22);
             this.AuthTabPage.Name = "AuthTabPage";
             this.AuthTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.AuthTabPage.Size = new System.Drawing.Size(376, 250);
+            this.AuthTabPage.Size = new System.Drawing.Size(601, 250);
             this.AuthTabPage.TabIndex = 0;
             this.AuthTabPage.Text = "Authentication";
             this.AuthTabPage.UseVisualStyleBackColor = true;
             // 
             // ConnectionGroupBox
             // 
+            this.ConnectionGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ConnectionGroupBox.Controls.Add(this.ConnectionCheckBox);
             this.ConnectionGroupBox.Controls.Add(this.ConnectionButton);
             this.ConnectionGroupBox.Controls.Add(this.ConnectionTextBox);
             this.ConnectionGroupBox.Location = new System.Drawing.Point(6, 167);
             this.ConnectionGroupBox.Name = "ConnectionGroupBox";
-            this.ConnectionGroupBox.Size = new System.Drawing.Size(364, 75);
+            this.ConnectionGroupBox.Size = new System.Drawing.Size(589, 75);
             this.ConnectionGroupBox.TabIndex = 8;
             this.ConnectionGroupBox.TabStop = false;
             this.ConnectionGroupBox.Text = "Connection URL";
@@ -169,8 +171,9 @@
             // 
             // ConnectionButton
             // 
+            this.ConnectionButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.ConnectionButton.Enabled = false;
-            this.ConnectionButton.Location = new System.Drawing.Point(283, 45);
+            this.ConnectionButton.Location = new System.Drawing.Point(507, 45);
             this.ConnectionButton.Name = "ConnectionButton";
             this.ConnectionButton.Size = new System.Drawing.Size(75, 23);
             this.ConnectionButton.TabIndex = 1;
@@ -180,21 +183,25 @@
             // 
             // ConnectionTextBox
             // 
+            this.ConnectionTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.ConnectionTextBox.Enabled = false;
             this.ConnectionTextBox.Location = new System.Drawing.Point(6, 19);
             this.ConnectionTextBox.Name = "ConnectionTextBox";
-            this.ConnectionTextBox.Size = new System.Drawing.Size(352, 20);
+            this.ConnectionTextBox.Size = new System.Drawing.Size(577, 20);
             this.ConnectionTextBox.TabIndex = 0;
             // 
             // SteamGroupBox
             // 
+            this.SteamGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.SteamGroupBox.Controls.Add(this.SteamGenerateButton);
             this.SteamGroupBox.Controls.Add(this.SteamSaveButton);
             this.SteamGroupBox.Controls.Add(this.SteamVisibleCheckBox);
             this.SteamGroupBox.Controls.Add(this.SteamTextBox);
             this.SteamGroupBox.Location = new System.Drawing.Point(6, 87);
             this.SteamGroupBox.Name = "SteamGroupBox";
-            this.SteamGroupBox.Size = new System.Drawing.Size(364, 74);
+            this.SteamGroupBox.Size = new System.Drawing.Size(589, 74);
             this.SteamGroupBox.TabIndex = 5;
             this.SteamGroupBox.TabStop = false;
             this.SteamGroupBox.Text = "Steam Web API Key";
@@ -202,7 +209,7 @@
             // SteamGenerateButton
             // 
             this.SteamGenerateButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.SteamGenerateButton.Location = new System.Drawing.Point(201, 45);
+            this.SteamGenerateButton.Location = new System.Drawing.Point(426, 45);
             this.SteamGenerateButton.Name = "SteamGenerateButton";
             this.SteamGenerateButton.Size = new System.Drawing.Size(75, 23);
             this.SteamGenerateButton.TabIndex = 4;
@@ -214,7 +221,7 @@
             // 
             this.SteamSaveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.SteamSaveButton.Enabled = false;
-            this.SteamSaveButton.Location = new System.Drawing.Point(282, 45);
+            this.SteamSaveButton.Location = new System.Drawing.Point(507, 45);
             this.SteamSaveButton.Name = "SteamSaveButton";
             this.SteamSaveButton.Size = new System.Drawing.Size(75, 23);
             this.SteamSaveButton.TabIndex = 3;
@@ -236,21 +243,25 @@
             // 
             // SteamTextBox
             // 
+            this.SteamTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.SteamTextBox.Enabled = false;
             this.SteamTextBox.Location = new System.Drawing.Point(6, 19);
             this.SteamTextBox.Name = "SteamTextBox";
-            this.SteamTextBox.Size = new System.Drawing.Size(351, 20);
+            this.SteamTextBox.Size = new System.Drawing.Size(577, 20);
             this.SteamTextBox.TabIndex = 0;
             // 
             // LicenseGroupBox
             // 
+            this.LicenseGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.LicenseGroupBox.Controls.Add(this.LicenseGenerateButton);
             this.LicenseGroupBox.Controls.Add(this.LicenseSaveButton);
             this.LicenseGroupBox.Controls.Add(this.LicenseVisibleCheckBox);
             this.LicenseGroupBox.Controls.Add(this.LicenseTextBox);
             this.LicenseGroupBox.Location = new System.Drawing.Point(6, 6);
             this.LicenseGroupBox.Name = "LicenseGroupBox";
-            this.LicenseGroupBox.Size = new System.Drawing.Size(364, 74);
+            this.LicenseGroupBox.Size = new System.Drawing.Size(589, 74);
             this.LicenseGroupBox.TabIndex = 2;
             this.LicenseGroupBox.TabStop = false;
             this.LicenseGroupBox.Text = "CFX License";
@@ -258,7 +269,7 @@
             // LicenseGenerateButton
             // 
             this.LicenseGenerateButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.LicenseGenerateButton.Location = new System.Drawing.Point(202, 45);
+            this.LicenseGenerateButton.Location = new System.Drawing.Point(427, 45);
             this.LicenseGenerateButton.Name = "LicenseGenerateButton";
             this.LicenseGenerateButton.Size = new System.Drawing.Size(75, 23);
             this.LicenseGenerateButton.TabIndex = 3;
@@ -270,7 +281,7 @@
             // 
             this.LicenseSaveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.LicenseSaveButton.Enabled = false;
-            this.LicenseSaveButton.Location = new System.Drawing.Point(283, 45);
+            this.LicenseSaveButton.Location = new System.Drawing.Point(508, 45);
             this.LicenseSaveButton.Name = "LicenseSaveButton";
             this.LicenseSaveButton.Size = new System.Drawing.Size(75, 23);
             this.LicenseSaveButton.TabIndex = 2;
@@ -297,7 +308,7 @@
             this.LicenseTextBox.Enabled = false;
             this.LicenseTextBox.Location = new System.Drawing.Point(6, 19);
             this.LicenseTextBox.Name = "LicenseTextBox";
-            this.LicenseTextBox.Size = new System.Drawing.Size(352, 20);
+            this.LicenseTextBox.Size = new System.Drawing.Size(577, 20);
             this.LicenseTextBox.TabIndex = 0;
             // 
             // RuntimeTabPage
@@ -306,7 +317,7 @@
             this.RuntimeTabPage.Location = new System.Drawing.Point(4, 22);
             this.RuntimeTabPage.Name = "RuntimeTabPage";
             this.RuntimeTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.RuntimeTabPage.Size = new System.Drawing.Size(376, 250);
+            this.RuntimeTabPage.Size = new System.Drawing.Size(601, 250);
             this.RuntimeTabPage.TabIndex = 3;
             this.RuntimeTabPage.Text = "Runtime";
             this.RuntimeTabPage.UseVisualStyleBackColor = true;
@@ -324,7 +335,7 @@
             this.StartStopGroupBox.Controls.Add(this.WaitTextBox);
             this.StartStopGroupBox.Location = new System.Drawing.Point(6, 6);
             this.StartStopGroupBox.Name = "StartStopGroupBox";
-            this.StartStopGroupBox.Size = new System.Drawing.Size(364, 139);
+            this.StartStopGroupBox.Size = new System.Drawing.Size(589, 113);
             this.StartStopGroupBox.TabIndex = 5;
             this.StartStopGroupBox.TabStop = false;
             this.StartStopGroupBox.Text = "Start/Stop";
@@ -332,7 +343,7 @@
             // KickCheckBox
             // 
             this.KickCheckBox.AutoSize = true;
-            this.KickCheckBox.Location = new System.Drawing.Point(6, 114);
+            this.KickCheckBox.Location = new System.Drawing.Point(6, 88);
             this.KickCheckBox.Name = "KickCheckBox";
             this.KickCheckBox.Size = new System.Drawing.Size(220, 17);
             this.KickCheckBox.TabIndex = 4;
@@ -342,7 +353,8 @@
             // 
             // WaitSaveButton
             // 
-            this.WaitSaveButton.Location = new System.Drawing.Point(283, 86);
+            this.WaitSaveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.WaitSaveButton.Location = new System.Drawing.Point(508, 61);
             this.WaitSaveButton.Name = "WaitSaveButton";
             this.WaitSaveButton.Size = new System.Drawing.Size(75, 23);
             this.WaitSaveButton.TabIndex = 5;
@@ -374,9 +386,10 @@
             // 
             // WaitComboBox
             // 
+            this.WaitComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.WaitComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.WaitComboBox.FormattingEnabled = true;
-            this.WaitComboBox.Location = new System.Drawing.Point(141, 88);
+            this.WaitComboBox.Location = new System.Drawing.Point(366, 61);
             this.WaitComboBox.Name = "WaitComboBox";
             this.WaitComboBox.Size = new System.Drawing.Size(136, 21);
             this.WaitComboBox.TabIndex = 2;
@@ -394,7 +407,8 @@
             // 
             // WaitTextBox
             // 
-            this.WaitTextBox.Location = new System.Drawing.Point(6, 88);
+            this.WaitTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.WaitTextBox.Location = new System.Drawing.Point(231, 61);
             this.WaitTextBox.Name = "WaitTextBox";
             this.WaitTextBox.Size = new System.Drawing.Size(129, 20);
             this.WaitTextBox.TabIndex = 0;
@@ -405,7 +419,7 @@
             this.DataFolderTabPage.Controls.Add(this.InstallerGroupBox);
             this.DataFolderTabPage.Location = new System.Drawing.Point(4, 22);
             this.DataFolderTabPage.Name = "DataFolderTabPage";
-            this.DataFolderTabPage.Size = new System.Drawing.Size(376, 250);
+            this.DataFolderTabPage.Size = new System.Drawing.Size(601, 250);
             this.DataFolderTabPage.TabIndex = 4;
             this.DataFolderTabPage.Text = "Data Folders";
             this.DataFolderTabPage.UseVisualStyleBackColor = true;
@@ -416,7 +430,7 @@
             this.CreatorGroupBox.Controls.Add(this.DownloadScriptsCheckBox);
             this.CreatorGroupBox.Location = new System.Drawing.Point(6, 3);
             this.CreatorGroupBox.Name = "CreatorGroupBox";
-            this.CreatorGroupBox.Size = new System.Drawing.Size(364, 66);
+            this.CreatorGroupBox.Size = new System.Drawing.Size(589, 66);
             this.CreatorGroupBox.TabIndex = 4;
             this.CreatorGroupBox.TabStop = false;
             this.CreatorGroupBox.Text = "Creator";
@@ -451,7 +465,7 @@
             this.InstallerGroupBox.Controls.Add(this.AddToConfigCheckBox);
             this.InstallerGroupBox.Location = new System.Drawing.Point(6, 75);
             this.InstallerGroupBox.Name = "InstallerGroupBox";
-            this.InstallerGroupBox.Size = new System.Drawing.Size(364, 109);
+            this.InstallerGroupBox.Size = new System.Drawing.Size(589, 109);
             this.InstallerGroupBox.TabIndex = 0;
             this.InstallerGroupBox.TabStop = false;
             this.InstallerGroupBox.Text = "Resource Installer";
@@ -506,7 +520,7 @@
             this.ScheduleTabPage.Location = new System.Drawing.Point(4, 22);
             this.ScheduleTabPage.Name = "ScheduleTabPage";
             this.ScheduleTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.ScheduleTabPage.Size = new System.Drawing.Size(376, 250);
+            this.ScheduleTabPage.Size = new System.Drawing.Size(601, 250);
             this.ScheduleTabPage.TabIndex = 2;
             this.ScheduleTabPage.Text = "Schedule";
             this.ScheduleTabPage.UseVisualStyleBackColor = true;
@@ -521,7 +535,7 @@
             this.AutomatedRestartGroupBox.Controls.Add(this.RestartEveryCheckBox);
             this.AutomatedRestartGroupBox.Location = new System.Drawing.Point(6, 6);
             this.AutomatedRestartGroupBox.Name = "AutomatedRestartGroupBox";
-            this.AutomatedRestartGroupBox.Size = new System.Drawing.Size(364, 75);
+            this.AutomatedRestartGroupBox.Size = new System.Drawing.Size(589, 75);
             this.AutomatedRestartGroupBox.TabIndex = 5;
             this.AutomatedRestartGroupBox.TabStop = false;
             this.AutomatedRestartGroupBox.Text = "Automated Restarts";
@@ -529,7 +543,7 @@
             // RestartAtButton
             // 
             this.RestartAtButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.RestartAtButton.Location = new System.Drawing.Point(283, 42);
+            this.RestartAtButton.Location = new System.Drawing.Point(508, 42);
             this.RestartAtButton.Name = "RestartAtButton";
             this.RestartAtButton.Size = new System.Drawing.Size(75, 23);
             this.RestartAtButton.TabIndex = 5;
@@ -540,7 +554,7 @@
             // RestartEveryButton
             // 
             this.RestartEveryButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.RestartEveryButton.Location = new System.Drawing.Point(283, 15);
+            this.RestartEveryButton.Location = new System.Drawing.Point(508, 15);
             this.RestartEveryButton.Name = "RestartEveryButton";
             this.RestartEveryButton.Size = new System.Drawing.Size(75, 23);
             this.RestartEveryButton.TabIndex = 4;
@@ -551,7 +565,7 @@
             // RestartAtTextBox
             // 
             this.RestartAtTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.RestartAtTextBox.Location = new System.Drawing.Point(177, 42);
+            this.RestartAtTextBox.Location = new System.Drawing.Point(402, 42);
             this.RestartAtTextBox.Name = "RestartAtTextBox";
             this.RestartAtTextBox.Size = new System.Drawing.Size(100, 20);
             this.RestartAtTextBox.TabIndex = 3;
@@ -571,7 +585,7 @@
             // RestartEveryTextBox
             // 
             this.RestartEveryTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.RestartEveryTextBox.Location = new System.Drawing.Point(177, 17);
+            this.RestartEveryTextBox.Location = new System.Drawing.Point(402, 17);
             this.RestartEveryTextBox.Name = "RestartEveryTextBox";
             this.RestartEveryTextBox.Size = new System.Drawing.Size(100, 20);
             this.RestartEveryTextBox.TabIndex = 1;
@@ -595,7 +609,7 @@
             this.APITabPage.Location = new System.Drawing.Point(4, 22);
             this.APITabPage.Name = "APITabPage";
             this.APITabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.APITabPage.Size = new System.Drawing.Size(376, 250);
+            this.APITabPage.Size = new System.Drawing.Size(601, 250);
             this.APITabPage.TabIndex = 1;
             this.APITabPage.Text = "APIs";
             this.APITabPage.UseVisualStyleBackColor = true;
@@ -610,7 +624,7 @@
             this.ResourcesGroupBox.Controls.Add(this.ResourcesListBox);
             this.ResourcesGroupBox.Location = new System.Drawing.Point(6, 83);
             this.ResourcesGroupBox.Name = "ResourcesGroupBox";
-            this.ResourcesGroupBox.Size = new System.Drawing.Size(364, 161);
+            this.ResourcesGroupBox.Size = new System.Drawing.Size(589, 161);
             this.ResourcesGroupBox.TabIndex = 3;
             this.ResourcesGroupBox.TabStop = false;
             this.ResourcesGroupBox.Text = "Resources";
@@ -618,7 +632,7 @@
             // AddButton
             // 
             this.AddButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.AddButton.Location = new System.Drawing.Point(202, 132);
+            this.AddButton.Location = new System.Drawing.Point(427, 132);
             this.AddButton.Name = "AddButton";
             this.AddButton.Size = new System.Drawing.Size(75, 23);
             this.AddButton.TabIndex = 2;
@@ -629,7 +643,7 @@
             // RemoveButton
             // 
             this.RemoveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.RemoveButton.Location = new System.Drawing.Point(283, 132);
+            this.RemoveButton.Location = new System.Drawing.Point(508, 132);
             this.RemoveButton.Name = "RemoveButton";
             this.RemoveButton.Size = new System.Drawing.Size(75, 23);
             this.RemoveButton.TabIndex = 1;
@@ -645,7 +659,7 @@
             this.ResourcesListBox.FormattingEnabled = true;
             this.ResourcesListBox.Location = new System.Drawing.Point(6, 19);
             this.ResourcesListBox.Name = "ResourcesListBox";
-            this.ResourcesListBox.Size = new System.Drawing.Size(352, 108);
+            this.ResourcesListBox.Size = new System.Drawing.Size(577, 108);
             this.ResourcesListBox.TabIndex = 0;
             // 
             // BuildsGroupBox
@@ -656,7 +670,7 @@
             this.BuildsGroupBox.Controls.Add(this.BuildsTextBox);
             this.BuildsGroupBox.Location = new System.Drawing.Point(6, 6);
             this.BuildsGroupBox.Name = "BuildsGroupBox";
-            this.BuildsGroupBox.Size = new System.Drawing.Size(364, 71);
+            this.BuildsGroupBox.Size = new System.Drawing.Size(589, 71);
             this.BuildsGroupBox.TabIndex = 2;
             this.BuildsGroupBox.TabStop = false;
             this.BuildsGroupBox.Text = "Builds";
@@ -664,7 +678,7 @@
             // BuildsSaveButton
             // 
             this.BuildsSaveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.BuildsSaveButton.Location = new System.Drawing.Point(283, 42);
+            this.BuildsSaveButton.Location = new System.Drawing.Point(508, 42);
             this.BuildsSaveButton.Name = "BuildsSaveButton";
             this.BuildsSaveButton.Size = new System.Drawing.Size(75, 23);
             this.BuildsSaveButton.TabIndex = 4;
@@ -678,7 +692,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.BuildsTextBox.Location = new System.Drawing.Point(6, 19);
             this.BuildsTextBox.Name = "BuildsTextBox";
-            this.BuildsTextBox.Size = new System.Drawing.Size(352, 20);
+            this.BuildsTextBox.Size = new System.Drawing.Size(577, 20);
             this.BuildsTextBox.TabIndex = 1;
             // 
             // WebAPITabPage
@@ -689,7 +703,7 @@
             this.WebAPITabPage.Location = new System.Drawing.Point(4, 22);
             this.WebAPITabPage.Name = "WebAPITabPage";
             this.WebAPITabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.WebAPITabPage.Size = new System.Drawing.Size(376, 250);
+            this.WebAPITabPage.Size = new System.Drawing.Size(601, 250);
             this.WebAPITabPage.TabIndex = 5;
             this.WebAPITabPage.Text = "Web API";
             this.WebAPITabPage.UseVisualStyleBackColor = true;
@@ -702,7 +716,7 @@
             this.TokenGroupBox.Controls.Add(this.TokenSaveButton);
             this.TokenGroupBox.Location = new System.Drawing.Point(6, 174);
             this.TokenGroupBox.Name = "TokenGroupBox";
-            this.TokenGroupBox.Size = new System.Drawing.Size(364, 73);
+            this.TokenGroupBox.Size = new System.Drawing.Size(589, 73);
             this.TokenGroupBox.TabIndex = 2;
             this.TokenGroupBox.TabStop = false;
             this.TokenGroupBox.Text = "Token";
@@ -720,16 +734,19 @@
             // 
             // TokenTextBox
             // 
+            this.TokenTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.TokenTextBox.Enabled = false;
             this.TokenTextBox.Location = new System.Drawing.Point(6, 19);
             this.TokenTextBox.Name = "TokenTextBox";
-            this.TokenTextBox.Size = new System.Drawing.Size(352, 20);
+            this.TokenTextBox.Size = new System.Drawing.Size(577, 20);
             this.TokenTextBox.TabIndex = 2;
             // 
             // TokenGenerateButton
             // 
+            this.TokenGenerateButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.TokenGenerateButton.Enabled = false;
-            this.TokenGenerateButton.Location = new System.Drawing.Point(203, 45);
+            this.TokenGenerateButton.Location = new System.Drawing.Point(428, 45);
             this.TokenGenerateButton.Name = "TokenGenerateButton";
             this.TokenGenerateButton.Size = new System.Drawing.Size(75, 23);
             this.TokenGenerateButton.TabIndex = 1;
@@ -739,8 +756,9 @@
             // 
             // TokenSaveButton
             // 
+            this.TokenSaveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.TokenSaveButton.Enabled = false;
-            this.TokenSaveButton.Location = new System.Drawing.Point(283, 45);
+            this.TokenSaveButton.Location = new System.Drawing.Point(508, 45);
             this.TokenSaveButton.Name = "TokenSaveButton";
             this.TokenSaveButton.Size = new System.Drawing.Size(75, 23);
             this.TokenSaveButton.TabIndex = 0;
@@ -758,7 +776,7 @@
             this.BasicsGroupBox.Controls.Add(this.EnableAPICheckBox);
             this.BasicsGroupBox.Location = new System.Drawing.Point(6, 96);
             this.BasicsGroupBox.Name = "BasicsGroupBox";
-            this.BasicsGroupBox.Size = new System.Drawing.Size(364, 72);
+            this.BasicsGroupBox.Size = new System.Drawing.Size(589, 72);
             this.BasicsGroupBox.TabIndex = 1;
             this.BasicsGroupBox.TabStop = false;
             this.BasicsGroupBox.Text = "Basics";
@@ -774,7 +792,8 @@
             // 
             // BindToButton
             // 
-            this.BindToButton.Location = new System.Drawing.Point(283, 40);
+            this.BindToButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BindToButton.Location = new System.Drawing.Point(508, 40);
             this.BindToButton.Name = "BindToButton";
             this.BindToButton.Size = new System.Drawing.Size(75, 23);
             this.BindToButton.TabIndex = 2;
@@ -784,9 +803,11 @@
             // 
             // BindToTextBox
             // 
+            this.BindToTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.BindToTextBox.Location = new System.Drawing.Point(52, 42);
             this.BindToTextBox.Name = "BindToTextBox";
-            this.BindToTextBox.Size = new System.Drawing.Size(225, 20);
+            this.BindToTextBox.Size = new System.Drawing.Size(450, 20);
             this.BindToTextBox.TabIndex = 1;
             // 
             // EnableAPICheckBox
@@ -806,15 +827,15 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.APIDescriptionLabel.Location = new System.Drawing.Point(6, 3);
             this.APIDescriptionLabel.Name = "APIDescriptionLabel";
-            this.APIDescriptionLabel.Size = new System.Drawing.Size(364, 90);
+            this.APIDescriptionLabel.Size = new System.Drawing.Size(589, 90);
             this.APIDescriptionLabel.TabIndex = 0;
             this.APIDescriptionLabel.Text = resources.GetString("APIDescriptionLabel.Text");
-            this.APIDescriptionLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.APIDescriptionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // CloseButton
             // 
             this.CloseButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.CloseButton.Location = new System.Drawing.Point(297, 282);
+            this.CloseButton.Location = new System.Drawing.Point(522, 282);
             this.CloseButton.Name = "CloseButton";
             this.CloseButton.Size = new System.Drawing.Size(75, 23);
             this.CloseButton.TabIndex = 1;
@@ -828,7 +849,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ResetSettingsButton.Location = new System.Drawing.Point(12, 282);
             this.ResetSettingsButton.Name = "ResetSettingsButton";
-            this.ResetSettingsButton.Size = new System.Drawing.Size(279, 23);
+            this.ResetSettingsButton.Size = new System.Drawing.Size(504, 23);
             this.ResetSettingsButton.TabIndex = 6;
             this.ResetSettingsButton.Text = "Reset Settings to their Default Values";
             this.ResetSettingsButton.UseVisualStyleBackColor = true;
@@ -838,7 +859,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(384, 317);
+            this.ClientSize = new System.Drawing.Size(609, 317);
             this.Controls.Add(this.ResetSettingsButton);
             this.Controls.Add(this.CloseButton);
             this.Controls.Add(this.ConfigTabControl);
@@ -849,7 +870,7 @@
             this.MinimizeBox = false;
             this.Name = "FormConfig";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = " ";
+            this.Text = " LambentLight Settings";
             this.Load += new System.EventHandler(this.Config_Load);
             this.ConfigTabControl.ResumeLayout(false);
             this.AuthTabPage.ResumeLayout(false);
