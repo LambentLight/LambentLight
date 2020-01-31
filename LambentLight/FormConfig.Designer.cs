@@ -45,8 +45,8 @@
             this.LicenseSaveButton = new System.Windows.Forms.Button();
             this.LicenseVisibleCheckBox = new System.Windows.Forms.CheckBox();
             this.LicenseTextBox = new System.Windows.Forms.TextBox();
-            this.RuntimeTabPage = new System.Windows.Forms.TabPage();
-            this.StartStopGroupBox = new System.Windows.Forms.GroupBox();
+            this.CFXServerTabPage = new System.Windows.Forms.TabPage();
+            this.StartupGroupBox = new System.Windows.Forms.GroupBox();
             this.KickCheckBox = new System.Windows.Forms.CheckBox();
             this.WaitSaveButton = new System.Windows.Forms.Button();
             this.ClearCacheCheckBox = new System.Windows.Forms.CheckBox();
@@ -93,13 +93,15 @@
             this.APIDescriptionLabel = new System.Windows.Forms.Label();
             this.CloseButton = new System.Windows.Forms.Button();
             this.ResetSettingsButton = new System.Windows.Forms.Button();
+            this.RunningGroupBox = new System.Windows.Forms.GroupBox();
+            this.ShutdownGroupBox = new System.Windows.Forms.GroupBox();
             this.ConfigTabControl.SuspendLayout();
             this.AuthTabPage.SuspendLayout();
             this.ConnectionGroupBox.SuspendLayout();
             this.SteamGroupBox.SuspendLayout();
             this.LicenseGroupBox.SuspendLayout();
-            this.RuntimeTabPage.SuspendLayout();
-            this.StartStopGroupBox.SuspendLayout();
+            this.CFXServerTabPage.SuspendLayout();
+            this.StartupGroupBox.SuspendLayout();
             this.DataFolderTabPage.SuspendLayout();
             this.CreatorGroupBox.SuspendLayout();
             this.InstallerGroupBox.SuspendLayout();
@@ -111,6 +113,8 @@
             this.WebAPITabPage.SuspendLayout();
             this.TokenGroupBox.SuspendLayout();
             this.BasicsGroupBox.SuspendLayout();
+            this.RunningGroupBox.SuspendLayout();
+            this.ShutdownGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // ConfigTabControl
@@ -118,8 +122,8 @@
             this.ConfigTabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.ConfigTabControl.Controls.Add(this.CFXServerTabPage);
             this.ConfigTabControl.Controls.Add(this.AuthTabPage);
-            this.ConfigTabControl.Controls.Add(this.RuntimeTabPage);
             this.ConfigTabControl.Controls.Add(this.DataFolderTabPage);
             this.ConfigTabControl.Controls.Add(this.ScheduleTabPage);
             this.ConfigTabControl.Controls.Add(this.APITabPage);
@@ -311,39 +315,35 @@
             this.LicenseTextBox.Size = new System.Drawing.Size(577, 20);
             this.LicenseTextBox.TabIndex = 0;
             // 
-            // RuntimeTabPage
+            // CFXServerTabPage
             // 
-            this.RuntimeTabPage.Controls.Add(this.StartStopGroupBox);
-            this.RuntimeTabPage.Location = new System.Drawing.Point(4, 22);
-            this.RuntimeTabPage.Name = "RuntimeTabPage";
-            this.RuntimeTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.RuntimeTabPage.Size = new System.Drawing.Size(601, 250);
-            this.RuntimeTabPage.TabIndex = 3;
-            this.RuntimeTabPage.Text = "Runtime";
-            this.RuntimeTabPage.UseVisualStyleBackColor = true;
+            this.CFXServerTabPage.Controls.Add(this.ShutdownGroupBox);
+            this.CFXServerTabPage.Controls.Add(this.RunningGroupBox);
+            this.CFXServerTabPage.Controls.Add(this.StartupGroupBox);
+            this.CFXServerTabPage.Location = new System.Drawing.Point(4, 22);
+            this.CFXServerTabPage.Name = "CFXServerTabPage";
+            this.CFXServerTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.CFXServerTabPage.Size = new System.Drawing.Size(601, 250);
+            this.CFXServerTabPage.TabIndex = 3;
+            this.CFXServerTabPage.Text = "CFX Server";
+            this.CFXServerTabPage.UseVisualStyleBackColor = true;
             // 
-            // StartStopGroupBox
+            // StartupGroupBox
             // 
-            this.StartStopGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.StartupGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.StartStopGroupBox.Controls.Add(this.KickCheckBox);
-            this.StartStopGroupBox.Controls.Add(this.WaitSaveButton);
-            this.StartStopGroupBox.Controls.Add(this.ClearCacheCheckBox);
-            this.StartStopGroupBox.Controls.Add(this.AutoRestartCheckBox);
-            this.StartStopGroupBox.Controls.Add(this.WaitComboBox);
-            this.StartStopGroupBox.Controls.Add(this.WaitCheckBox);
-            this.StartStopGroupBox.Controls.Add(this.WaitTextBox);
-            this.StartStopGroupBox.Location = new System.Drawing.Point(6, 6);
-            this.StartStopGroupBox.Name = "StartStopGroupBox";
-            this.StartStopGroupBox.Size = new System.Drawing.Size(589, 113);
-            this.StartStopGroupBox.TabIndex = 5;
-            this.StartStopGroupBox.TabStop = false;
-            this.StartStopGroupBox.Text = "Start/Stop";
+            this.StartupGroupBox.Controls.Add(this.ClearCacheCheckBox);
+            this.StartupGroupBox.Location = new System.Drawing.Point(6, 6);
+            this.StartupGroupBox.Name = "StartupGroupBox";
+            this.StartupGroupBox.Size = new System.Drawing.Size(589, 42);
+            this.StartupGroupBox.TabIndex = 5;
+            this.StartupGroupBox.TabStop = false;
+            this.StartupGroupBox.Text = "Startup";
             // 
             // KickCheckBox
             // 
             this.KickCheckBox.AutoSize = true;
-            this.KickCheckBox.Location = new System.Drawing.Point(6, 88);
+            this.KickCheckBox.Location = new System.Drawing.Point(6, 42);
             this.KickCheckBox.Name = "KickCheckBox";
             this.KickCheckBox.Size = new System.Drawing.Size(220, 17);
             this.KickCheckBox.TabIndex = 4;
@@ -354,7 +354,7 @@
             // WaitSaveButton
             // 
             this.WaitSaveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.WaitSaveButton.Location = new System.Drawing.Point(508, 61);
+            this.WaitSaveButton.Location = new System.Drawing.Point(508, 15);
             this.WaitSaveButton.Name = "WaitSaveButton";
             this.WaitSaveButton.Size = new System.Drawing.Size(75, 23);
             this.WaitSaveButton.TabIndex = 5;
@@ -367,16 +367,16 @@
             this.ClearCacheCheckBox.AutoSize = true;
             this.ClearCacheCheckBox.Location = new System.Drawing.Point(6, 19);
             this.ClearCacheCheckBox.Name = "ClearCacheCheckBox";
-            this.ClearCacheCheckBox.Size = new System.Drawing.Size(223, 17);
+            this.ClearCacheCheckBox.Size = new System.Drawing.Size(328, 17);
             this.ClearCacheCheckBox.TabIndex = 1;
-            this.ClearCacheCheckBox.Text = "Clear the cache prior to starting the server";
+            this.ClearCacheCheckBox.Text = "Remove the Server Cache if is present before starting the server";
             this.ClearCacheCheckBox.UseVisualStyleBackColor = true;
             this.ClearCacheCheckBox.CheckedChanged += new System.EventHandler(this.ClearCacheCheckBox_CheckedChanged);
             // 
             // AutoRestartCheckBox
             // 
             this.AutoRestartCheckBox.AutoSize = true;
-            this.AutoRestartCheckBox.Location = new System.Drawing.Point(6, 42);
+            this.AutoRestartCheckBox.Location = new System.Drawing.Point(6, 19);
             this.AutoRestartCheckBox.Name = "AutoRestartCheckBox";
             this.AutoRestartCheckBox.Size = new System.Drawing.Size(226, 17);
             this.AutoRestartCheckBox.TabIndex = 0;
@@ -389,7 +389,7 @@
             this.WaitComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.WaitComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.WaitComboBox.FormattingEnabled = true;
-            this.WaitComboBox.Location = new System.Drawing.Point(366, 61);
+            this.WaitComboBox.Location = new System.Drawing.Point(370, 16);
             this.WaitComboBox.Name = "WaitComboBox";
             this.WaitComboBox.Size = new System.Drawing.Size(136, 21);
             this.WaitComboBox.TabIndex = 2;
@@ -397,18 +397,18 @@
             // WaitCheckBox
             // 
             this.WaitCheckBox.AutoSize = true;
-            this.WaitCheckBox.Location = new System.Drawing.Point(6, 65);
+            this.WaitCheckBox.Location = new System.Drawing.Point(6, 19);
             this.WaitCheckBox.Name = "WaitCheckBox";
-            this.WaitCheckBox.Size = new System.Drawing.Size(224, 17);
+            this.WaitCheckBox.Size = new System.Drawing.Size(232, 17);
             this.WaitCheckBox.TabIndex = 3;
-            this.WaitCheckBox.Text = "Wait some time before stopping the server";
+            this.WaitCheckBox.Text = "Warn the users before closing the server for";
             this.WaitCheckBox.UseVisualStyleBackColor = true;
             this.WaitCheckBox.CheckedChanged += new System.EventHandler(this.WaitCheckBox_CheckedChanged);
             // 
             // WaitTextBox
             // 
             this.WaitTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.WaitTextBox.Location = new System.Drawing.Point(231, 61);
+            this.WaitTextBox.Location = new System.Drawing.Point(235, 17);
             this.WaitTextBox.Name = "WaitTextBox";
             this.WaitTextBox.Size = new System.Drawing.Size(129, 20);
             this.WaitTextBox.TabIndex = 0;
@@ -855,6 +855,30 @@
             this.ResetSettingsButton.UseVisualStyleBackColor = true;
             this.ResetSettingsButton.Click += new System.EventHandler(this.ResetSettingsButton_Click);
             // 
+            // RunningGroupBox
+            // 
+            this.RunningGroupBox.Controls.Add(this.AutoRestartCheckBox);
+            this.RunningGroupBox.Location = new System.Drawing.Point(6, 54);
+            this.RunningGroupBox.Name = "RunningGroupBox";
+            this.RunningGroupBox.Size = new System.Drawing.Size(589, 44);
+            this.RunningGroupBox.TabIndex = 6;
+            this.RunningGroupBox.TabStop = false;
+            this.RunningGroupBox.Text = "While is Running";
+            // 
+            // ShutdownGroupBox
+            // 
+            this.ShutdownGroupBox.Controls.Add(this.WaitSaveButton);
+            this.ShutdownGroupBox.Controls.Add(this.WaitTextBox);
+            this.ShutdownGroupBox.Controls.Add(this.WaitComboBox);
+            this.ShutdownGroupBox.Controls.Add(this.KickCheckBox);
+            this.ShutdownGroupBox.Controls.Add(this.WaitCheckBox);
+            this.ShutdownGroupBox.Location = new System.Drawing.Point(6, 104);
+            this.ShutdownGroupBox.Name = "ShutdownGroupBox";
+            this.ShutdownGroupBox.Size = new System.Drawing.Size(589, 69);
+            this.ShutdownGroupBox.TabIndex = 7;
+            this.ShutdownGroupBox.TabStop = false;
+            this.ShutdownGroupBox.Text = "Shutdown";
+            // 
             // FormConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -880,9 +904,9 @@
             this.SteamGroupBox.PerformLayout();
             this.LicenseGroupBox.ResumeLayout(false);
             this.LicenseGroupBox.PerformLayout();
-            this.RuntimeTabPage.ResumeLayout(false);
-            this.StartStopGroupBox.ResumeLayout(false);
-            this.StartStopGroupBox.PerformLayout();
+            this.CFXServerTabPage.ResumeLayout(false);
+            this.StartupGroupBox.ResumeLayout(false);
+            this.StartupGroupBox.PerformLayout();
             this.DataFolderTabPage.ResumeLayout(false);
             this.CreatorGroupBox.ResumeLayout(false);
             this.CreatorGroupBox.PerformLayout();
@@ -900,6 +924,10 @@
             this.TokenGroupBox.PerformLayout();
             this.BasicsGroupBox.ResumeLayout(false);
             this.BasicsGroupBox.PerformLayout();
+            this.RunningGroupBox.ResumeLayout(false);
+            this.RunningGroupBox.PerformLayout();
+            this.ShutdownGroupBox.ResumeLayout(false);
+            this.ShutdownGroupBox.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -936,7 +964,7 @@
         private System.Windows.Forms.ListBox ResourcesListBox;
         private System.Windows.Forms.Button AddButton;
         private System.Windows.Forms.Button RemoveButton;
-        private System.Windows.Forms.TabPage RuntimeTabPage;
+        private System.Windows.Forms.TabPage CFXServerTabPage;
         private System.Windows.Forms.TabPage DataFolderTabPage;
         private System.Windows.Forms.GroupBox InstallerGroupBox;
         private System.Windows.Forms.CheckBox RemoveFromConfigCheckBox;
@@ -950,7 +978,7 @@
         private System.Windows.Forms.TextBox ConnectionTextBox;
         private System.Windows.Forms.CheckBox ManuallyCheckBox;
         private System.Windows.Forms.CheckBox ApplyCheckBox;
-        private System.Windows.Forms.GroupBox StartStopGroupBox;
+        private System.Windows.Forms.GroupBox StartupGroupBox;
         private System.Windows.Forms.CheckBox ClearCacheCheckBox;
         private System.Windows.Forms.CheckBox AutoRestartCheckBox;
         private System.Windows.Forms.Button WaitSaveButton;
@@ -970,5 +998,7 @@
         private System.Windows.Forms.Button TokenGenerateButton;
         private System.Windows.Forms.Button TokenSaveButton;
         private System.Windows.Forms.CheckBox ShowTokenCheckBox;
+        private System.Windows.Forms.GroupBox RunningGroupBox;
+        private System.Windows.Forms.GroupBox ShutdownGroupBox;
     }
 }
