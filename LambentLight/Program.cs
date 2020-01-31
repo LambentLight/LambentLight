@@ -95,12 +95,12 @@ namespace LambentLight
                 // If Nancy failed to bind the URL
                 catch (AutomaticUrlReservationCreationFailureException)
                 {
-                    Logger.Error("Unable to reserve the URL for the Web API, make sure that the URL and Port are correct and try again");
+                    Logger.Error("Unable to reserve the URL for the REST API, make sure that the URL and Port are correct and try again");
                 }
                 // If the format of the URL is invalid
                 catch (UriFormatException)
                 {
-                    Logger.Error($"The bind address for the Web API is invalid!");
+                    Logger.Error($"The bind address for the REST API is invalid!");
                 }
             }
 

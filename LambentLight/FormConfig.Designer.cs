@@ -79,7 +79,7 @@
             this.BuildsGroupBox = new System.Windows.Forms.GroupBox();
             this.BuildsSaveButton = new System.Windows.Forms.Button();
             this.BuildsTextBox = new System.Windows.Forms.TextBox();
-            this.WebAPITabPage = new System.Windows.Forms.TabPage();
+            this.RESTAPITabPage = new System.Windows.Forms.TabPage();
             this.TokenGroupBox = new System.Windows.Forms.GroupBox();
             this.ShowTokenCheckBox = new System.Windows.Forms.CheckBox();
             this.TokenTextBox = new System.Windows.Forms.TextBox();
@@ -109,7 +109,7 @@
             this.ReposTabPage.SuspendLayout();
             this.ResourcesGroupBox.SuspendLayout();
             this.BuildsGroupBox.SuspendLayout();
-            this.WebAPITabPage.SuspendLayout();
+            this.RESTAPITabPage.SuspendLayout();
             this.TokenGroupBox.SuspendLayout();
             this.BasicsGroupBox.SuspendLayout();
             this.RunningGroupBox.SuspendLayout();
@@ -127,7 +127,7 @@
             this.ConfigTabControl.Controls.Add(this.DataFolderTabPage);
             this.ConfigTabControl.Controls.Add(this.ScheduleTabPage);
             this.ConfigTabControl.Controls.Add(this.ReposTabPage);
-            this.ConfigTabControl.Controls.Add(this.WebAPITabPage);
+            this.ConfigTabControl.Controls.Add(this.RESTAPITabPage);
             this.ConfigTabControl.Location = new System.Drawing.Point(0, 0);
             this.ConfigTabControl.Name = "ConfigTabControl";
             this.ConfigTabControl.SelectedIndex = 0;
@@ -695,18 +695,18 @@
             this.BuildsTextBox.Size = new System.Drawing.Size(577, 20);
             this.BuildsTextBox.TabIndex = 1;
             // 
-            // WebAPITabPage
+            // RESTAPITabPage
             // 
-            this.WebAPITabPage.Controls.Add(this.BindGroupBox);
-            this.WebAPITabPage.Controls.Add(this.TokenGroupBox);
-            this.WebAPITabPage.Controls.Add(this.BasicsGroupBox);
-            this.WebAPITabPage.Location = new System.Drawing.Point(4, 22);
-            this.WebAPITabPage.Name = "WebAPITabPage";
-            this.WebAPITabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.WebAPITabPage.Size = new System.Drawing.Size(601, 250);
-            this.WebAPITabPage.TabIndex = 5;
-            this.WebAPITabPage.Text = "Web API";
-            this.WebAPITabPage.UseVisualStyleBackColor = true;
+            this.RESTAPITabPage.Controls.Add(this.BindGroupBox);
+            this.RESTAPITabPage.Controls.Add(this.TokenGroupBox);
+            this.RESTAPITabPage.Controls.Add(this.BasicsGroupBox);
+            this.RESTAPITabPage.Location = new System.Drawing.Point(4, 22);
+            this.RESTAPITabPage.Name = "RESTAPITabPage";
+            this.RESTAPITabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.RESTAPITabPage.Size = new System.Drawing.Size(601, 250);
+            this.RESTAPITabPage.TabIndex = 5;
+            this.RESTAPITabPage.Text = "REST API";
+            this.RESTAPITabPage.UseVisualStyleBackColor = true;
             // 
             // TokenGroupBox
             // 
@@ -803,9 +803,9 @@
             this.EnableAPICheckBox.AutoSize = true;
             this.EnableAPICheckBox.Location = new System.Drawing.Point(6, 19);
             this.EnableAPICheckBox.Name = "EnableAPICheckBox";
-            this.EnableAPICheckBox.Size = new System.Drawing.Size(272, 17);
+            this.EnableAPICheckBox.Size = new System.Drawing.Size(278, 17);
             this.EnableAPICheckBox.TabIndex = 0;
-            this.EnableAPICheckBox.Text = "Enable Web API (Required for LambentLight Bridge)";
+            this.EnableAPICheckBox.Text = "Enable REST API (Required for LambentLight Bridge)";
             this.EnableAPICheckBox.UseVisualStyleBackColor = true;
             this.EnableAPICheckBox.CheckedChanged += new System.EventHandler(this.EnableAPICheckBox_CheckedChanged);
             // 
@@ -907,7 +907,7 @@
             this.ResourcesGroupBox.ResumeLayout(false);
             this.BuildsGroupBox.ResumeLayout(false);
             this.BuildsGroupBox.PerformLayout();
-            this.WebAPITabPage.ResumeLayout(false);
+            this.RESTAPITabPage.ResumeLayout(false);
             this.TokenGroupBox.ResumeLayout(false);
             this.TokenGroupBox.PerformLayout();
             this.BasicsGroupBox.ResumeLayout(false);
@@ -976,7 +976,7 @@
         private System.Windows.Forms.CheckBox WaitCheckBox;
         private System.Windows.Forms.ComboBox WaitComboBox;
         private System.Windows.Forms.TextBox WaitTextBox;
-        private System.Windows.Forms.TabPage WebAPITabPage;
+        private System.Windows.Forms.TabPage RESTAPITabPage;
         private System.Windows.Forms.GroupBox BasicsGroupBox;
         private System.Windows.Forms.CheckBox EnableAPICheckBox;
         private System.Windows.Forms.Button BindToButton;

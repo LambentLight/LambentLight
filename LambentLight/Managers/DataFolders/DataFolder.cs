@@ -28,7 +28,7 @@ namespace LambentLight.Managers.DataFolders
         /// </summary>
         private const string StartRegEx = "(\n|\r|\r\n)start {0}";
         /// <summary>
-        /// Pattern for finding the Web API port inside a configuration file.
+        /// Pattern for finding the API port inside a configuration file.
         /// </summary>
         private const string PortRegEx = "endpoint_add_tcp +\"?[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}:([0-9]{1,5})\"?";
 
@@ -116,7 +116,7 @@ namespace LambentLight.Managers.DataFolders
             }
         }
         /// <summary>
-        /// The port for the Web API.
+        /// The port for the HTTP API.
         /// </summary>
         [JsonIgnore]
         public ushort WebPort

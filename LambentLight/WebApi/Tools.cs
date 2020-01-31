@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace LambentLight.WebApi
 {
     /// <summary>
-    /// Classes for dealing with the Web API.
+    /// Classes for dealing with the REST API endpoint.
     /// </summary>
     public static class Tools
     {

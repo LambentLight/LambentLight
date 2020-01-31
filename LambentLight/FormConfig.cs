@@ -387,7 +387,7 @@ namespace LambentLight
 
         #endregion
 
-        #region Web API
+        #region REST API
 
         private void EnableAPICheckBox_CheckedChanged(object sender, EventArgs e)
         {
