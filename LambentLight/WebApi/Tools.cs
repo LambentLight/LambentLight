@@ -21,7 +21,7 @@ namespace LambentLight.WebApi
             // If there is no Authorization header, set the correct response and return
             if (string.IsNullOrWhiteSpace(request.Headers.Authorization))
             {
-                response = JsonConvert.SerializeObject(new Dictionary<string, string>() { { "message", "You need to specify a bearer token. See PLACEHOLDER for more information." } });
+                response = JsonConvert.SerializeObject(new Dictionary<string, string>() { { "message", "You need to specify a bearer token. See https://lambentlight.ml/api/authentication/ for more information." } });
                 response.ContentType = "application/json";
                 response.StatusCode = HttpStatusCode.Unauthorized;
                 return false;
@@ -30,7 +30,7 @@ namespace LambentLight.WebApi
             // If the Authorization does not starts with bearer and a space, set the correct response and return
             if (!request.Headers.Authorization.ToLowerInvariant().StartsWith("bearer "))
             {
-                response = JsonConvert.SerializeObject(new Dictionary<string, string>() { { "message", "You need to specify a bearer token. See PLACEHOLDER for more information." } });
+                response = JsonConvert.SerializeObject(new Dictionary<string, string>() { { "message", "You need to specify a bearer token. See https://lambentlight.ml/api/authentication/ for more information." } });
                 response.ContentType = "application/json";
                 response.StatusCode = HttpStatusCode.Unauthorized;
                 return false;
@@ -41,7 +41,7 @@ namespace LambentLight.WebApi
             // If the token does not matches, set the correct response and return
             if (token != Program.Config.API.Token)
             {
-                response = JsonConvert.SerializeObject(new Dictionary<string, string>() { { "message", "The token is not valid. See PLACEHOLDER for more information." } });
+                response = JsonConvert.SerializeObject(new Dictionary<string, string>() { { "message", "The token is not valid. See https://lambentlight.ml/api/authentication/ for more information." } });
                 response.ContentType = "application/json";
                 response.StatusCode = HttpStatusCode.Unauthorized;
                 return false;
