@@ -96,6 +96,8 @@
             this.ResetSettingsButton = new System.Windows.Forms.Button();
             this.AboutTabPage = new System.Windows.Forms.TabPage();
             this.AboutRichTextBox = new System.Windows.Forms.RichTextBox();
+            this.LicensesTabPage = new System.Windows.Forms.TabPage();
+            this.LicensesRichTextBox = new System.Windows.Forms.RichTextBox();
             this.ConfigTabControl.SuspendLayout();
             this.CFXServerTabPage.SuspendLayout();
             this.ShutdownGroupBox.SuspendLayout();
@@ -118,6 +120,7 @@
             this.TokenGroupBox.SuspendLayout();
             this.BasicsGroupBox.SuspendLayout();
             this.AboutTabPage.SuspendLayout();
+            this.LicensesTabPage.SuspendLayout();
             this.SuspendLayout();
             // 
             // ConfigTabControl
@@ -132,6 +135,7 @@
             this.ConfigTabControl.Controls.Add(this.ReposTabPage);
             this.ConfigTabControl.Controls.Add(this.RESTAPITabPage);
             this.ConfigTabControl.Controls.Add(this.AboutTabPage);
+            this.ConfigTabControl.Controls.Add(this.LicensesTabPage);
             this.ConfigTabControl.Location = new System.Drawing.Point(0, 0);
             this.ConfigTabControl.Name = "ConfigTabControl";
             this.ConfigTabControl.SelectedIndex = 0;
@@ -894,6 +898,29 @@
             this.AboutRichTextBox.TabIndex = 0;
             this.AboutRichTextBox.Text = "";
             // 
+            // LicensesTabPage
+            // 
+            this.LicensesTabPage.Controls.Add(this.LicensesRichTextBox);
+            this.LicensesTabPage.Location = new System.Drawing.Point(4, 22);
+            this.LicensesTabPage.Name = "LicensesTabPage";
+            this.LicensesTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.LicensesTabPage.Size = new System.Drawing.Size(601, 250);
+            this.LicensesTabPage.TabIndex = 7;
+            this.LicensesTabPage.Text = "Licenses";
+            this.LicensesTabPage.UseVisualStyleBackColor = true;
+            // 
+            // LicensesRichTextBox
+            // 
+            this.LicensesRichTextBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.LicensesRichTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.LicensesRichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.LicensesRichTextBox.Location = new System.Drawing.Point(3, 3);
+            this.LicensesRichTextBox.Name = "LicensesRichTextBox";
+            this.LicensesRichTextBox.ReadOnly = true;
+            this.LicensesRichTextBox.Size = new System.Drawing.Size(595, 244);
+            this.LicensesRichTextBox.TabIndex = 0;
+            this.LicensesRichTextBox.Text = "";
+            // 
             // FormConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -946,6 +973,7 @@
             this.BasicsGroupBox.ResumeLayout(false);
             this.BasicsGroupBox.PerformLayout();
             this.AboutTabPage.ResumeLayout(false);
+            this.LicensesTabPage.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1019,5 +1047,7 @@
         private System.Windows.Forms.GroupBox BindGroupBox;
         private System.Windows.Forms.TabPage AboutTabPage;
         private System.Windows.Forms.RichTextBox AboutRichTextBox;
+        private System.Windows.Forms.TabPage LicensesTabPage;
+        private System.Windows.Forms.RichTextBox LicensesRichTextBox;
     }
 }

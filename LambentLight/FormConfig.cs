@@ -27,6 +27,7 @@ namespace LambentLight
 
             // Load the RTF text
             AboutRichTextBox.Rtf = Resources.About;
+            LicensesRichTextBox.Rtf = Resources.Licenses;
         }
 
         private void Config_Load(object sender, EventArgs e)
