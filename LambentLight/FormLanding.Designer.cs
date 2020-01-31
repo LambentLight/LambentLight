@@ -589,7 +589,7 @@
             this.BuildBrowserButton.Name = "BuildBrowserButton";
             this.BuildBrowserButton.Size = new System.Drawing.Size(150, 23);
             this.BuildBrowserButton.TabIndex = 3;
-            this.BuildBrowserButton.Text = "Open in Broswer";
+            this.BuildBrowserButton.Text = "Open in Browser";
             this.BuildBrowserButton.UseVisualStyleBackColor = true;
             this.BuildBrowserButton.Click += new System.EventHandler(this.BuildBrowserButton_Click);
             // 
