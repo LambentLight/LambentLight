@@ -61,12 +61,12 @@ namespace LambentLight.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Microsoft Sans Serif;}}
+        ///   Looks up a localized string similar to {\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset2 Symbol;}}
         ///{\colortbl ;\red0\green0\blue255;}
         ///{\*\generator Riched20 10.0.18362}\viewkind4\uc1 
-        ///\pard\sa200\sl276\slmult1\qc\b\f0\fs20\lang9 LambentLight (Previously ServerManager)\par
-        ///\b0 Thank you for using LambentLight!\par
-        ///LambentLight is my little Server Manager for FiveM that I&apos;ve created to make the life of new users easy, so they can play with their friends in custom servers without long hours of confi [rest of string was truncated]&quot;;.
+        ///\pard\sa200\sl276\slmult1\b\f0\fs24\lang9 About LambentLight (Previously ServerManager)\par
+        ///\b0\fs20 Thank you for using LambentLight!\par
+        ///LambentLight started as ServerManager for FiveM, the program just did the basic operations: starting, stopping and updating the server. With time, it became the La [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string About {
             get {
@@ -91,6 +91,20 @@ namespace LambentLight.Properties {
             get {
                 object obj = ResourceManager.GetObject("ConfigurationTemplate", resourceCulture);
                 return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset2 Symbol;}}
+        ///{\*\generator Riched20 10.0.18362}\viewkind4\uc1 
+        ///\pard\sa200\sl276\slmult1\b\f0\fs24\lang9 LambentLight (previously ServerManager)\par
+        ///\b0\fs20 MIT License\par
+        ///Copyright (c) 2019-2020 Hannele Ruiz\par
+        ///Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &quot;Software&quot;), to deal in the Software without restri [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string Licenses {
+            get {
+                return ResourceManager.GetString("Licenses", resourceCulture);
             }
         }
         

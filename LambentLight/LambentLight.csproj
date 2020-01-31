@@ -174,6 +174,7 @@
     <None Include="Resources\About.rtf" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\Licenses.rtf" />
     <None Include="Resources\server.cfg" />
   </ItemGroup>
   <ItemGroup>
