@@ -1,15 +1,15 @@
-# About the Web API
+# About the REST API
 
 !!! danger
     The REST API is an experimental feature. Breaking changes might happen between releases. This is not a production ready feature.
 
-## What is the Web API?
+## What is the REST API?
 
-The Web API is a RESTful JSON Web API for managing the FiveM Server via HTTP Requests. This allows you to control the server from anything that supports HTTP Requests like Discord Bots or Mobile Apps.
+The REST API is a RESTful JSON API for managing the FiveM Server via HTTP Requests. This allows you to control the server from anything that supports HTTP Requests like Discord Bots or Mobile Apps.
 
 ## How can I use it?
 
-To use the Web API, you need to enable it on the LambentLight settings:
+To use the REST API, you need to enable it on the LambentLight settings:
 
 ![The API Settings](../images/api/settings.png)
 

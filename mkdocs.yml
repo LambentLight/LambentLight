@@ -5,7 +5,7 @@ nav:
   - Getting started: getting-started.md
   - Resource Manager: resources.md
   - MySQL Database: mysql.md
-  - Web API:
+  - REST API:
     - About: api/about.md
     - Authentication: api/authentication.md
     - Objects: api/objects.md
