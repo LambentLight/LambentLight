@@ -1,6 +1,7 @@
 ﻿using LambentLight.Config;
 using LambentLight.Extensions;
 using LambentLight.Managers.Database;
+using LambentLight.Properties;
 using Microsoft.VisualBasic;
 using System;
 using System.Diagnostics;
@@ -24,6 +25,8 @@ namespace LambentLight
                 WaitComboBox.Items.Add(value);
             }
 
+            // Load the RTF text
+            AboutRichTextBox.Rtf = Resources.About;
         }
 
         private void Config_Load(object sender, EventArgs e)

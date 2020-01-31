@@ -70,9 +70,6 @@ namespace LambentLight
                 GameComboBox.Items.Add(value.SpaceOnUpperCase());
             }
 
-            // Load the RTF text
-            AboutRichTextBox.Rtf = Resources.About;
-
             // Unlock all of the UI Elements
             Locked = false;
         }

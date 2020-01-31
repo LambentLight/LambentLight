@@ -71,8 +71,6 @@
             this.BuildDownloadButton = new System.Windows.Forms.Button();
             this.BuildBrowserButton = new System.Windows.Forms.Button();
             this.BuildsImportButton = new System.Windows.Forms.Button();
-            this.AboutTabPage = new System.Windows.Forms.TabPage();
-            this.AboutRichTextBox = new System.Windows.Forms.RichTextBox();
             this.GeneralProgressBar = new System.Windows.Forms.ProgressBar();
             this.BottomStrip = new System.Windows.Forms.StatusStrip();
             this.BottomToolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
@@ -89,7 +87,6 @@
             this.InstallerGroupBox.SuspendLayout();
             this.ConfigurationTabPage.SuspendLayout();
             this.BuildsTabPage.SuspendLayout();
-            this.AboutTabPage.SuspendLayout();
             this.BottomStrip.SuspendLayout();
             this.GameGroupBox.SuspendLayout();
             this.SuspendLayout();
@@ -326,7 +323,6 @@
             this.MainTabControl.Controls.Add(this.ResourcesTabPage);
             this.MainTabControl.Controls.Add(this.ConfigurationTabPage);
             this.MainTabControl.Controls.Add(this.BuildsTabPage);
-            this.MainTabControl.Controls.Add(this.AboutTabPage);
             this.MainTabControl.Location = new System.Drawing.Point(36, 70);
             this.MainTabControl.Name = "MainTabControl";
             this.MainTabControl.SelectedIndex = 0;
@@ -604,31 +600,6 @@
             this.BuildsImportButton.UseVisualStyleBackColor = true;
             this.BuildsImportButton.Click += new System.EventHandler(this.BuildsImportButton_Click);
             // 
-            // AboutTabPage
-            // 
-            this.AboutTabPage.Controls.Add(this.AboutRichTextBox);
-            this.AboutTabPage.Location = new System.Drawing.Point(4, 22);
-            this.AboutTabPage.Name = "AboutTabPage";
-            this.AboutTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.AboutTabPage.Size = new System.Drawing.Size(743, 294);
-            this.AboutTabPage.TabIndex = 4;
-            this.AboutTabPage.Text = "About";
-            this.AboutTabPage.UseVisualStyleBackColor = true;
-            // 
-            // AboutRichTextBox
-            // 
-            this.AboutRichTextBox.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.AboutRichTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.AboutRichTextBox.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.AboutRichTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.AboutRichTextBox.Location = new System.Drawing.Point(3, 3);
-            this.AboutRichTextBox.Name = "AboutRichTextBox";
-            this.AboutRichTextBox.ReadOnly = true;
-            this.AboutRichTextBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            this.AboutRichTextBox.Size = new System.Drawing.Size(737, 288);
-            this.AboutRichTextBox.TabIndex = 0;
-            this.AboutRichTextBox.Text = "";
-            // 
             // GeneralProgressBar
             // 
             this.GeneralProgressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
@@ -712,7 +683,6 @@
             this.ConfigurationTabPage.ResumeLayout(false);
             this.ConfigurationTabPage.PerformLayout();
             this.BuildsTabPage.ResumeLayout(false);
-            this.AboutTabPage.ResumeLayout(false);
             this.BottomStrip.ResumeLayout(false);
             this.BottomStrip.PerformLayout();
             this.GameGroupBox.ResumeLayout(false);
@@ -750,8 +720,6 @@
         private System.Windows.Forms.Button ConfigurationSaveButton;
         private System.Windows.Forms.Button ConsoleSendButton;
         private System.Windows.Forms.TextBox ConsoleInputTextBox;
-        private System.Windows.Forms.TabPage AboutTabPage;
-        private System.Windows.Forms.RichTextBox AboutRichTextBox;
         private System.Windows.Forms.GroupBox InstalledGroupBox;
         private System.Windows.Forms.Button InstalledUninstallButton;
         private System.Windows.Forms.ListBox InstalledListBox;
