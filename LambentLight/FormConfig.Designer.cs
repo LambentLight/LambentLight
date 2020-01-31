@@ -155,7 +155,7 @@
             this.ConnectionGroupBox.Size = new System.Drawing.Size(589, 75);
             this.ConnectionGroupBox.TabIndex = 8;
             this.ConnectionGroupBox.TabStop = false;
-            this.ConnectionGroupBox.Text = "Connection URL";
+            this.ConnectionGroupBox.Text = "MySQL Connection URL";
             // 
             // ConnectionCheckBox
             // 
