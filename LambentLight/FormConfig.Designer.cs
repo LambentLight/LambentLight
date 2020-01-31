@@ -71,7 +71,7 @@
             this.RestartAtCheckBox = new System.Windows.Forms.CheckBox();
             this.RestartEveryTextBox = new System.Windows.Forms.TextBox();
             this.RestartEveryCheckBox = new System.Windows.Forms.CheckBox();
-            this.APITabPage = new System.Windows.Forms.TabPage();
+            this.ReposTabPage = new System.Windows.Forms.TabPage();
             this.ResourcesGroupBox = new System.Windows.Forms.GroupBox();
             this.AddButton = new System.Windows.Forms.Button();
             this.RemoveButton = new System.Windows.Forms.Button();
@@ -107,7 +107,7 @@
             this.InstallerGroupBox.SuspendLayout();
             this.ScheduleTabPage.SuspendLayout();
             this.AutomatedRestartGroupBox.SuspendLayout();
-            this.APITabPage.SuspendLayout();
+            this.ReposTabPage.SuspendLayout();
             this.ResourcesGroupBox.SuspendLayout();
             this.BuildsGroupBox.SuspendLayout();
             this.WebAPITabPage.SuspendLayout();
@@ -126,7 +126,7 @@
             this.ConfigTabControl.Controls.Add(this.AuthTabPage);
             this.ConfigTabControl.Controls.Add(this.DataFolderTabPage);
             this.ConfigTabControl.Controls.Add(this.ScheduleTabPage);
-            this.ConfigTabControl.Controls.Add(this.APITabPage);
+            this.ConfigTabControl.Controls.Add(this.ReposTabPage);
             this.ConfigTabControl.Controls.Add(this.WebAPITabPage);
             this.ConfigTabControl.Location = new System.Drawing.Point(0, 0);
             this.ConfigTabControl.Name = "ConfigTabControl";
@@ -208,7 +208,7 @@
             this.SteamGroupBox.Size = new System.Drawing.Size(589, 74);
             this.SteamGroupBox.TabIndex = 5;
             this.SteamGroupBox.TabStop = false;
-            this.SteamGroupBox.Text = "Steam Web API Key";
+            this.SteamGroupBox.Text = "Steam API Key";
             // 
             // SteamGenerateButton
             // 
@@ -239,9 +239,9 @@
             this.SteamVisibleCheckBox.AutoSize = true;
             this.SteamVisibleCheckBox.Location = new System.Drawing.Point(6, 49);
             this.SteamVisibleCheckBox.Name = "SteamVisibleCheckBox";
-            this.SteamVisibleCheckBox.Size = new System.Drawing.Size(127, 17);
+            this.SteamVisibleCheckBox.Size = new System.Drawing.Size(107, 17);
             this.SteamVisibleCheckBox.TabIndex = 2;
-            this.SteamVisibleCheckBox.Text = "Make API Key Visible";
+            this.SteamVisibleCheckBox.Text = "Make Key Visible";
             this.SteamVisibleCheckBox.UseVisualStyleBackColor = true;
             this.SteamVisibleCheckBox.CheckedChanged += new System.EventHandler(this.SteamVisibleCheckBox_CheckedChanged);
             // 
@@ -602,17 +602,17 @@
             this.RestartEveryCheckBox.UseVisualStyleBackColor = true;
             this.RestartEveryCheckBox.CheckedChanged += new System.EventHandler(this.RestartEveryCheckBox_CheckedChanged);
             // 
-            // APITabPage
+            // ReposTabPage
             // 
-            this.APITabPage.Controls.Add(this.ResourcesGroupBox);
-            this.APITabPage.Controls.Add(this.BuildsGroupBox);
-            this.APITabPage.Location = new System.Drawing.Point(4, 22);
-            this.APITabPage.Name = "APITabPage";
-            this.APITabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.APITabPage.Size = new System.Drawing.Size(601, 250);
-            this.APITabPage.TabIndex = 1;
-            this.APITabPage.Text = "APIs";
-            this.APITabPage.UseVisualStyleBackColor = true;
+            this.ReposTabPage.Controls.Add(this.ResourcesGroupBox);
+            this.ReposTabPage.Controls.Add(this.BuildsGroupBox);
+            this.ReposTabPage.Location = new System.Drawing.Point(4, 22);
+            this.ReposTabPage.Name = "ReposTabPage";
+            this.ReposTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.ReposTabPage.Size = new System.Drawing.Size(601, 250);
+            this.ReposTabPage.TabIndex = 1;
+            this.ReposTabPage.Text = "Repositories";
+            this.ReposTabPage.UseVisualStyleBackColor = true;
             // 
             // ResourcesGroupBox
             // 
@@ -915,7 +915,7 @@
             this.ScheduleTabPage.ResumeLayout(false);
             this.AutomatedRestartGroupBox.ResumeLayout(false);
             this.AutomatedRestartGroupBox.PerformLayout();
-            this.APITabPage.ResumeLayout(false);
+            this.ReposTabPage.ResumeLayout(false);
             this.ResourcesGroupBox.ResumeLayout(false);
             this.BuildsGroupBox.ResumeLayout(false);
             this.BuildsGroupBox.PerformLayout();
@@ -942,7 +942,7 @@
         private System.Windows.Forms.Button LicenseSaveButton;
         private System.Windows.Forms.CheckBox LicenseVisibleCheckBox;
         private System.Windows.Forms.TextBox LicenseTextBox;
-        private System.Windows.Forms.TabPage APITabPage;
+        private System.Windows.Forms.TabPage ReposTabPage;
         private System.Windows.Forms.GroupBox BuildsGroupBox;
         private System.Windows.Forms.Button BuildsSaveButton;
         private System.Windows.Forms.TextBox BuildsTextBox;
