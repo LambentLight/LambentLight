@@ -6,7 +6,7 @@
 To use the endpoints, you need to authenticate your calls via the `Authorization` header, like this:
 
 ```
-Authorization: Bearer CZJkbuYKkml4i42xd9kb5IhmGMPwYNwNxjZmU4ZCNdU=
+Authorization: Bearer xpprPHN8xdsGC3HC0JS95lAVJiEJlUo5ocEAZiL+FMA=
 ```
 
 You can get your token by clicking "Make token visible" and copying from the text box:
