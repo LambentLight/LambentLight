@@ -33,6 +33,7 @@
             this.BuildsListBox = new System.Windows.Forms.ListBox();
             this.BuildsRefreshButton = new System.Windows.Forms.Button();
             this.DataFolderGroupBox = new System.Windows.Forms.GroupBox();
+            this.DataFolderDeleteButton = new System.Windows.Forms.Button();
             this.DataFolderBrowseButton = new System.Windows.Forms.Button();
             this.DataFolderRefreshButton = new System.Windows.Forms.Button();
             this.DataFolderComboBox = new System.Windows.Forms.ComboBox();
@@ -78,7 +79,6 @@
             this.BuildFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.GameGroupBox = new System.Windows.Forms.GroupBox();
             this.GameComboBox = new System.Windows.Forms.ComboBox();
-            this.DataFolderDeleteButton = new System.Windows.Forms.Button();
             this.BuildsGroupBox.SuspendLayout();
             this.DataFolderGroupBox.SuspendLayout();
             this.TopMenuStrip.SuspendLayout();
@@ -144,6 +144,18 @@
             this.DataFolderGroupBox.TabIndex = 1;
             this.DataFolderGroupBox.TabStop = false;
             this.DataFolderGroupBox.Text = "Data Folder";
+            // 
+            // DataFolderDeleteButton
+            // 
+            this.DataFolderDeleteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.DataFolderDeleteButton.Enabled = false;
+            this.DataFolderDeleteButton.Location = new System.Drawing.Point(424, 18);
+            this.DataFolderDeleteButton.Name = "DataFolderDeleteButton";
+            this.DataFolderDeleteButton.Size = new System.Drawing.Size(75, 23);
+            this.DataFolderDeleteButton.TabIndex = 3;
+            this.DataFolderDeleteButton.Text = "Delete";
+            this.DataFolderDeleteButton.UseVisualStyleBackColor = true;
+            this.DataFolderDeleteButton.Click += new System.EventHandler(this.DataFolderDeleteButton_Click);
             // 
             // DataFolderBrowseButton
             // 
@@ -561,6 +573,7 @@
             // 
             // BuildDownloadButton
             // 
+            this.BuildDownloadButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BuildDownloadButton.Location = new System.Drawing.Point(587, 93);
             this.BuildDownloadButton.Name = "BuildDownloadButton";
             this.BuildDownloadButton.Size = new System.Drawing.Size(150, 23);
@@ -571,6 +584,7 @@
             // 
             // BuildBrowserButton
             // 
+            this.BuildBrowserButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BuildBrowserButton.Location = new System.Drawing.Point(587, 64);
             this.BuildBrowserButton.Name = "BuildBrowserButton";
             this.BuildBrowserButton.Size = new System.Drawing.Size(150, 23);
@@ -664,18 +678,6 @@
             this.GameComboBox.Size = new System.Drawing.Size(147, 21);
             this.GameComboBox.TabIndex = 0;
             this.GameComboBox.SelectedIndexChanged += new System.EventHandler(this.GameComboBox_SelectedIndexChanged);
-            // 
-            // DataFolderDeleteButton
-            // 
-            this.DataFolderDeleteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.DataFolderDeleteButton.Enabled = false;
-            this.DataFolderDeleteButton.Location = new System.Drawing.Point(424, 18);
-            this.DataFolderDeleteButton.Name = "DataFolderDeleteButton";
-            this.DataFolderDeleteButton.Size = new System.Drawing.Size(75, 23);
-            this.DataFolderDeleteButton.TabIndex = 3;
-            this.DataFolderDeleteButton.Text = "Delete";
-            this.DataFolderDeleteButton.UseVisualStyleBackColor = true;
-            this.DataFolderDeleteButton.Click += new System.EventHandler(this.DataFolderDeleteButton_Click);
             // 
             // FormLanding
             // 
