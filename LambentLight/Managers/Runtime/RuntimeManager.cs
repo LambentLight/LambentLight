@@ -148,6 +148,8 @@ namespace LambentLight.Managers.Runtime
             process.StartInfo.Arguments += !string.IsNullOrWhiteSpace(Program.Config.SteamToken) ? "+set steam_webApiKey \"" + Program.Config.SteamToken + "\" " : "";
             // If the game is Red Dead Redemption 2, enable the respective flag
             process.StartInfo.Arguments += Program.Config.Game == Config.Game.RedDeadRedemption2 ? "+set gamename rdr3 " : "";
+            // If the REST API is enabled, add the token
+            process.StartInfo.Arguments += Program.Config.API.Enabled ? $"+set lambentlight_token {Program.Config.API.Token} " : "";
             // And finally load the server configuration file
             process.StartInfo.Arguments += "+exec server.cfg";
             // Then, set the working directory as the server data folder
