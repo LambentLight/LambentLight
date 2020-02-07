@@ -81,6 +81,14 @@ namespace LambentLight.Managers.Runtime
         /// </summary>
         public static bool IsShutdownInProgress { get; private set; } = false;
         /// <summary>
+        /// If the LambentLight Bridge is available.
+        /// </summary>
+        public static bool IsBridgeAvailable { get; set; } = false;
+        /// <summary>
+        /// If the server is empty.
+        /// </summary>
+        public static bool IsServerEmpty { get; set; } = false;
+        /// <summary>
         /// If the server is being closed, force it to stop.
         /// </summary>
         public static bool ForceServerShutdown { get; set; } = false;
