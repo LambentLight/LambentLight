@@ -141,6 +141,7 @@
     <Compile Include="Targets\TextBoxTarget.cs" />
     <Compile Include="WebApi\Binds\Runtime.cs" />
     <Compile Include="WebApi\Routes\Basics.cs" />
+    <Compile Include="WebApi\Routes\Bridge.cs" />
     <Compile Include="WebApi\Routes\Builds.cs" />
     <Compile Include="WebApi\Routes\DataFolders.cs" />
     <Compile Include="WebApi\Routes\Runtime.cs" />
