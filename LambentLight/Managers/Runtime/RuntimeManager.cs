@@ -118,6 +118,12 @@ namespace LambentLight.Managers.Runtime
                 return false;
             }
 
+            // Disable some values
+            IsShutdownInProgress = false;
+            IsBridgeAvailable = false;
+            IsServerEmpty = false;
+            ForceServerShutdown = false;
+
             // If the build folder is not there or the executable is missing
             if (!build.IsFolderPresent || !build.IsExecutablePresent)
             {
@@ -237,38 +243,22 @@ namespace LambentLight.Managers.Runtime
                 return false;
             }
 
-            // Get the list of players and if the bridge is running
-            List<CitizenPlayer> players = new List<CitizenPlayer>();
-            bool isRunning = false;
+            // Save that there is a shutdown in progress and the server is not empty
+            IsShutdownInProgress = true;
+            IsServerEmpty = false;
 
-            // If there are players in the server
-            if (players.Count != 0)
+            // If the server is not being stopped by force
+            if (!force)
             {
-                // If the LambentLight Bridge is not running
-                if (!isRunning)
+                // If the LambentLight Bridge is available
+                if (IsBridgeAvailable)
                 {
-                    // Ask the user if he wants to close the server without warning
-                    DialogResult result = MessageBox.Show("There are players in the server and the LambentLight Bridge is not running.\nThe Players in the server have the risk of crashing if the server is stopped without warnings.\nDo you want to continue?", "Bridge is not running", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-                    // If he does not, return
-                    if (result == DialogResult.No)
-                    {
-                        return false;
-                    }
-                }
-                // Otherwise
-                else
-                {
-                    // If we need to wait, do it
-                    if (Program.Config.Wait)
-                    {
-                        await Wait();
-                    }
-                    // If we need to kick everyone, do it
-                    if (Program.Config.KickEveryone)
-                    {
-                        SendCommand("bridgekickall");
-                    }
+                    // Send the command to start a shutdown
+                    SendCommand("bridgeshutdown");
+                    // And wait until the server is empty
+                    await Wait();
+                    // Once we got here, kick everyone just in case
+                    SendCommand("bridgekickall");
                 }
             }
 
@@ -299,6 +289,9 @@ namespace LambentLight.Managers.Runtime
             {
                 // Do nothing
             }
+            // Disable the flags that we used
+            IsShutdownInProgress = false;
+            IsServerEmpty = false;
             // Remove the server information
             Process = null;
             Build = null;
@@ -358,9 +351,6 @@ namespace LambentLight.Managers.Runtime
                 // And wait a second
                 await Task.Delay(1000);
             }
-
-            // Finally, disable the shutdown flag
-            IsShutdownInProgress = false;
         }
 
         #endregion
