@@ -170,8 +170,8 @@ namespace LambentLight.WebApi.Routes
                 return response;
             }
 
-            // Otherwise, stop the server
-            await RuntimeManager.Stop();
+            // Otherwise, stop the server by force
+            await RuntimeManager.Stop(true);
             // Unlock the UI elements
             Program.Form.Invoke(new Action(() => Program.Form.Locked = false));
 

@@ -228,7 +228,7 @@ namespace LambentLight.Managers.Runtime
         /// <summary>
         /// Stops the server if is running.
         /// </summary>
-        public static async Task<bool> Stop()
+        public static async Task<bool> Stop(bool force = false)
         {
             // If there is no server running, notify the user and return
             if (!IsServerRunning)
@@ -335,19 +335,12 @@ namespace LambentLight.Managers.Runtime
         /// </summary>
         public static async Task Wait()
         {
-            // Say that there is a shutdown in progress
-            IsShutdownInProgress = true;
-
             // Iterate over the wait time
             for (int i = Program.Config.WaitTime; i != 0; i--)
             {
-                // If we are told to force a shutdown or the server is already empty
-                if (ForceServerShutdown || (await LegacyAPI.GetPlayers()).Count == 0)
+                // If we are told to force a shutdown or the server is already empty, return
+                if (ForceServerShutdown || IsServerEmpty)
                 {
-                    // Disable the shutdown in progress and force shutdown flags
-                    IsShutdownInProgress = false;
-                    ForceServerShutdown = false;
-                    // And return
                     return;
                 }
 
