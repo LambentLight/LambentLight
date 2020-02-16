@@ -267,12 +267,10 @@ namespace LambentLight.Managers.Runtime
             RestartEvery.Enabled = false;
             RestartAt.Enabled = false;
 
-            // Kill it
-            Process.Kill();
-            // And terminate any orphan processes just in case
+            // Terminate the process with any other ones left
             Process process = new Process();
             process.StartInfo.FileName = "taskkill.exe";
-            process.StartInfo.Arguments = "/f /im FXServer.exe";
+            process.StartInfo.Arguments = $"/pid {Process.Id} /f /t";
             process.StartInfo.UseShellExecute = false;
             process.StartInfo.CreateNoWindow = true;
             process.Start();
@@ -297,7 +295,7 @@ namespace LambentLight.Managers.Runtime
             Build = null;
             Folder = null;
             // Notify the user
-            Logger.Info("The FiveM server has been stopped");
+            Program.Form.Invoke(new Action(() => Logger.Info("The FiveM server has been stopped")));
             // And return success
             return true;
         }
