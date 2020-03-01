@@ -102,6 +102,11 @@ namespace LambentLight
                 {
                     Logger.Error($"The bind address for the REST API is invalid!");
                 }
+                // If the address is already being used
+                catch (HttpListenerException)
+                {
+                    Logger.Error($"The address '{Config.API.BindTo}' is already being used by another application");
+                }
             }
 
             // And run the application with our main form
