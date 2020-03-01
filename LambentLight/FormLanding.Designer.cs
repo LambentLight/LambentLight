@@ -709,10 +709,8 @@
         private System.Windows.Forms.ListBox InstallerVersionsListBox;
         private System.Windows.Forms.ListBox InstallerResourcesListBox;
         private System.Windows.Forms.Button InstallerRefreshButton;
-        public System.Windows.Forms.TextBox ConsoleTextBox;
         public System.Windows.Forms.ProgressBar GeneralProgressBar;
         private System.Windows.Forms.StatusStrip BottomStrip;
-        public System.Windows.Forms.ToolStripStatusLabel BottomToolStripStatusLabel;
         private System.Windows.Forms.TabPage ConfigurationTabPage;
         private System.Windows.Forms.Button ConfigurationLoadButton;
         private System.Windows.Forms.TextBox ConfigurationTextBox;
@@ -741,6 +739,8 @@
         private System.Windows.Forms.Button BuildBrowserButton;
         private System.Windows.Forms.Button BuildDownloadButton;
         private System.Windows.Forms.Button DataFolderDeleteButton;
+        internal System.Windows.Forms.TextBox ConsoleTextBox;
+        internal System.Windows.Forms.ToolStripStatusLabel BottomToolStripStatusLabel;
     }
 }
 

@@ -1,6 +1,6 @@
 ﻿using LambentLight.Config;
 using LambentLight.Managers.Database;
-using LambentLight.Targets;
+using Lemon.NLog.WinForms;
 using Nancy.Hosting.Self;
 using NLog;
 using NLog.Config;
@@ -70,8 +70,8 @@ namespace LambentLight
             // Create a new configuration for NLog
             LoggingConfiguration config = new LoggingConfiguration();
             // Add new rules for logging into the Console and Strip at the Bottom
-            config.AddRule(LogLevel.Debug, LogLevel.Fatal, new TextBoxTarget() { Layout = "[${date}] [${level}] ${message}" });
-            config.AddRule(LogLevel.Info, LogLevel.Fatal, new BottomStripTarget() { Layout = "${message}" });
+            config.AddRule(LogLevel.Debug, LogLevel.Fatal, new TextBoxTarget(Form.ConsoleTextBox) { Layout = "[${date}] [${level}] ${message}" });
+            config.AddRule(LogLevel.Info, LogLevel.Fatal, new ToolStripStatusLabelTarget(Form.BottomToolStripStatusLabel) { Layout = "${message}" });
             // And make NLog use this new configuration
             LogManager.Configuration = config;
 

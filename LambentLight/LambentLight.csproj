@@ -40,6 +40,9 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Lemon.NLog.WinForms, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Lemon.NLog.WinForms.1.0.0\lib\net35\Lemon.NLog.WinForms.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="MySqlConnector, Version=0.61.0.0, Culture=neutral, PublicKeyToken=d33d3e53aa5f8c92, processorArchitecture=MSIL">
       <HintPath>..\packages\MySqlConnector.0.61.0\lib\net45\MySqlConnector.dll</HintPath>
@@ -137,8 +140,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Managers\Resources\ResourceManager.cs" />
     <Compile Include="Managers\Runtime\RuntimeManager.cs" />
-    <Compile Include="Targets\BottomStripTarget.cs" />
-    <Compile Include="Targets\TextBoxTarget.cs" />
     <Compile Include="WebApi\Binds\Runtime.cs" />
     <Compile Include="WebApi\Routes\Basics.cs" />
     <Compile Include="WebApi\Routes\Bridge.cs" />
