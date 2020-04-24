@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Windows.Forms;
 
 namespace LambentLight
@@ -20,6 +21,9 @@ namespace LambentLight
         [STAThread]
         public static int Main()
         {
+            // Before doing anything, make sure that we use TLS 1.2 instead of SSL 3 for network requests
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+
             // Enable the Vista+ visual styles and GDI+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
