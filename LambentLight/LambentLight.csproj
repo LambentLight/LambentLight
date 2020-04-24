@@ -17,6 +17,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="ConsoleControl" Version="1.2.1" />
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
 
