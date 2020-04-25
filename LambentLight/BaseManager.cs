@@ -1,4 +1,5 @@
 ﻿using Serilog;
+using System;
 using System.Threading.Tasks;
 
 namespace LambentLight
@@ -42,11 +43,11 @@ namespace LambentLight
         /// <summary>
         /// Loads the existing items from the cache (if present).
         /// </summary>
-        public abstract bool LoadCache();
+        public virtual bool LoadCache() => throw new NotImplementedException();
         /// <summary>
         /// Saves the existing items onto the cache directory.
         /// </summary>
-        public abstract void SaveCache();
+        public virtual void SaveCache() => throw new NotImplementedException();
 
         #endregion
     }
