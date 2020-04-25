@@ -33,6 +33,7 @@ namespace LambentLight
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
                 .WriteTo.File("LambentLight.log")
+                .WriteTo.Debug()
                 .CreateLogger();
 
             // Enable the Vista+ visual styles and GDI+
