@@ -60,7 +60,7 @@ namespace LambentLight.Builds
                 return false;
             }
             // If the file is old, return
-            if (File.GetLastWriteTimeUtc(cacheFile) < (DateTime.UtcNow + TimeSpan.FromHours(6)))
+            if (File.GetLastWriteTimeUtc(cacheFile) < (DateTime.UtcNow - TimeSpan.FromHours(6)))
             {
                 Log.Warning("Cache for the Builds is older than 6 hours");
                 return false;
@@ -71,7 +71,7 @@ namespace LambentLight.Builds
             {
                 string cache = File.ReadAllText(cacheFile);
                 Builds = JsonConvert.DeserializeObject<List<Build>>(cache);
-                Log.Information("CFX Build cache was loaded");
+                Log.Information("List of Builds was loaded from Cache");
                 return true;
             }
             catch (JsonReaderException e)
