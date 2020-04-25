@@ -1,5 +1,6 @@
 ﻿using Flurl.Http;
 using Newtonsoft.Json;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -37,10 +38,12 @@ namespace LambentLight.Builds
         /// </summary>
         public override async Task Update()
         {
+            Log.Information("Starting update of the CFX Builds");
             // Get the builds from the repository
             Builds builds = await Program.Config.DownloadBuilds.GetJsonAsync<Builds>();
             // Save them for later use
             Builds = builds.RemoteBuilds;
+            Log.Information("Finished update of the CFX Builds");
             // And save them to the cache
             SaveCache();
         }
@@ -50,9 +53,16 @@ namespace LambentLight.Builds
         /// <returns>True if they were loaded from the drive, false otherwise.</returns>
         public override bool LoadCache()
         {
-            // If the file does not exists or is old, return
-            if (!File.Exists(cacheFile) || File.GetLastWriteTimeUtc(cacheFile) < (DateTime.UtcNow + TimeSpan.FromHours(6)))
+            // If the file does not exists, return
+            if (!File.Exists(cacheFile))
             {
+                Log.Warning("Cache for the Builds is not present");
+                return false;
+            }
+            // If the file is old, return
+            if (File.GetLastWriteTimeUtc(cacheFile) < (DateTime.UtcNow + TimeSpan.FromHours(6)))
+            {
+                Log.Warning("Cache for the Builds is older than 6 hours");
                 return false;
             }
 
@@ -61,10 +71,12 @@ namespace LambentLight.Builds
             {
                 string cache = File.ReadAllText(cacheFile);
                 Builds = JsonConvert.DeserializeObject<List<Build>>(cache);
+                Log.Information("CFX Build cache was loaded");
                 return true;
             }
-            catch (JsonReaderException)
+            catch (JsonReaderException e)
             {
+                Log.Error(e, "Error while loading the Build cache");
                 return false;
             }
         }
@@ -77,6 +89,7 @@ namespace LambentLight.Builds
             Directory.CreateDirectory("cache");
             // Just write the entire list of builds into the cache
             File.WriteAllText(cacheFile, JsonConvert.SerializeObject(Builds));
+            Log.Information("CFX Build cache was saved");
         }
 
         #endregion

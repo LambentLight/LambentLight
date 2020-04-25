@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using Serilog;
+using System.Threading.Tasks;
 
 namespace LambentLight
 {
@@ -24,6 +25,7 @@ namespace LambentLight
         /// <returns></returns>
         public async Task Initialize()
         {
+            Log.Information($"Initializing {GetType().Name}");
             // If the cache could not be loaded
             if (!LoadCache())
             {

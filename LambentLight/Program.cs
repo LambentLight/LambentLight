@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Serilog;
+using System;
 using System.Net;
 using System.Windows.Forms;
 
@@ -28,6 +29,12 @@ namespace LambentLight
             // Before doing anything, make sure that we use TLS 1.2 instead of SSL 3 for network requests
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
+            // Set the correct Serilog configuration
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
+                .WriteTo.File("LambentLight.log")
+                .CreateLogger();
+
             // Enable the Vista+ visual styles and GDI+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
@@ -35,6 +42,9 @@ namespace LambentLight
             Landing = new FormLanding();
             // And run the app with the default form
             Application.Run(Landing);
+
+            // Once we have finished, terminate the logger and exit
+            Log.CloseAndFlush();
             return 0;
         }
     }
