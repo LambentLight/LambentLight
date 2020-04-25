@@ -10,6 +10,10 @@ namespace LambentLight
     public static class Program
     {
         /// <summary>
+        /// The configuration of the application.
+        /// </summary>
+        public static Configuration Config { get; private set; } = new Configuration();
+        /// <summary>
         /// The Landing Screen for the program.
         /// </summary>
         public static FormLanding Landing { get; private set; } = null;
