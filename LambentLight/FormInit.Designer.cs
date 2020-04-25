@@ -38,7 +38,7 @@
             this.InitProgressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.InitProgressBar.Location = new System.Drawing.Point(12, 56);
-            this.InitProgressBar.Maximum = 1;
+            this.InitProgressBar.Maximum = 2;
             this.InitProgressBar.Name = "InitProgressBar";
             this.InitProgressBar.Size = new System.Drawing.Size(285, 23);
             this.InitProgressBar.Step = 1;

@@ -21,6 +21,10 @@ namespace LambentLight
             Log.Information("Performing initialization of managers");
 
             // Build Manager
+            LabelTask.Text = "Populating Data Folders";
+            await Managers.FolderManager.Initialize();
+            InitProgressBar.PerformStep();
+            // Build Manager
             LabelTask.Text = "Populating CFX Builds";
             await Managers.BuildManager.Initialize();
             InitProgressBar.PerformStep();
