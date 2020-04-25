@@ -39,13 +39,23 @@ namespace LambentLight.Builds
         public override async Task Update()
         {
             Log.Information("Starting update of the CFX Builds");
-            // Get the builds from the repository
-            Builds builds = await Program.Config.DownloadBuilds.GetJsonAsync<Builds>();
-            // Save them for later use
-            Builds = builds.RemoteBuilds;
-            Log.Information("Finished update of the CFX Builds");
-            // And save them to the cache
-            SaveCache();
+            // Try to get the builds from the repository and save them
+            try
+            {
+                Builds builds = await Program.Config.DownloadBuilds.GetJsonAsync<Builds>();
+                Builds = builds.RemoteBuilds;
+                Log.Information("Finished update of the CFX Builds");
+                SaveCache();
+            }
+            // If we failed, log it and ignore it
+            catch (FlurlHttpException e)
+            {
+                Log.Error(e, "Unable to fetch the list of CFX Builds");
+            }
+            catch (JsonException e)
+            {
+                Log.Error(e, "Unable to parse the list of CFX Builds");
+            }
         }
         /// <summary>
         /// Loads the builds from the cache if they have been written recently.
