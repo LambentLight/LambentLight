@@ -14,7 +14,7 @@ namespace LambentLight
         /// <summary>
         /// If this manager is ready to work.
         /// </summary>
-        public bool ReadyToWork { get; private set; } = false;
+        public bool ReadyToWork { get; protected set; } = false;
 
         #endregion
 
