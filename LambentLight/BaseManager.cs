@@ -24,7 +24,7 @@ namespace LambentLight
         /// Initializes the current manager
         /// </summary>
         /// <returns></returns>
-        public async Task Initialize()
+        public virtual async Task Initialize()
         {
             Log.Information($"Initializing {GetType().Name}");
             // If the cache could not be loaded
