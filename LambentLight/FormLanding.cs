@@ -14,6 +14,7 @@ namespace LambentLight
         private void FormLanding_Shown(object sender, EventArgs e)
         {
             Log.Debug("Landing Form was shown to the user");
+            new FormInit().ShowDialog();
         }
     }
 }
