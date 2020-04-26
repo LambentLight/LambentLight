@@ -38,8 +38,8 @@
             this.ConsoleTabPage = new System.Windows.Forms.TabPage();
             this.ServerConsoleControl = new ConsoleControl.ConsoleControl();
             this.DataFoldersGroupBox = new System.Windows.Forms.GroupBox();
-            this.DataFoldersComboBox = new System.Windows.Forms.ComboBox();
             this.DataFoldersRefreshButton = new System.Windows.Forms.Button();
+            this.DataFoldersComboBox = new System.Windows.Forms.ComboBox();
             this.ManagerToolStrip.SuspendLayout();
             this.MainTabControl.SuspendLayout();
             this.ConsoleTabPage.SuspendLayout();
@@ -156,6 +156,17 @@
             this.DataFoldersGroupBox.TabStop = false;
             this.DataFoldersGroupBox.Text = "Data Folders";
             // 
+            // DataFoldersRefreshButton
+            // 
+            this.DataFoldersRefreshButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.DataFoldersRefreshButton.Location = new System.Drawing.Point(667, 17);
+            this.DataFoldersRefreshButton.Name = "DataFoldersRefreshButton";
+            this.DataFoldersRefreshButton.Size = new System.Drawing.Size(75, 23);
+            this.DataFoldersRefreshButton.TabIndex = 1;
+            this.DataFoldersRefreshButton.Text = "Refresh";
+            this.DataFoldersRefreshButton.UseVisualStyleBackColor = true;
+            this.DataFoldersRefreshButton.Click += new System.EventHandler(this.DataFoldersRefreshButton_Click);
+            // 
             // DataFoldersComboBox
             // 
             this.DataFoldersComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -166,16 +177,6 @@
             this.DataFoldersComboBox.Name = "DataFoldersComboBox";
             this.DataFoldersComboBox.Size = new System.Drawing.Size(655, 21);
             this.DataFoldersComboBox.TabIndex = 0;
-            // 
-            // DataFoldersRefreshButton
-            // 
-            this.DataFoldersRefreshButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.DataFoldersRefreshButton.Location = new System.Drawing.Point(667, 17);
-            this.DataFoldersRefreshButton.Name = "DataFoldersRefreshButton";
-            this.DataFoldersRefreshButton.Size = new System.Drawing.Size(75, 23);
-            this.DataFoldersRefreshButton.TabIndex = 1;
-            this.DataFoldersRefreshButton.Text = "Refresh";
-            this.DataFoldersRefreshButton.UseVisualStyleBackColor = true;
             // 
             // FormLanding
             // 
