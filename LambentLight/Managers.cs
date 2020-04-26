@@ -1,5 +1,6 @@
 ﻿using LambentLight.Builds;
 using LambentLight.DataFolders;
+using LambentLight.Runtime;
 
 namespace LambentLight
 {
@@ -8,6 +9,10 @@ namespace LambentLight
     /// </summary>
     public static class Managers
     {
+        /// <summary>
+        /// Manager for the server process.
+        /// </summary>
+        public static RuntimeManager RuntimeManager = new RuntimeManager();
         /// <summary>
         /// Manager for the CFX Builds.
         /// </summary>
