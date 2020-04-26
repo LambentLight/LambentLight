@@ -8,6 +8,11 @@ namespace LambentLight.DataFolders
     public class DataFolderConfig
     {
         /// <summary>
+        /// The desired game for this Data Folder.
+        /// </summary>
+        [JsonProperty("game")]
+        public Game Game { get; set; } = Game.GrandTheftAutoV;
+        /// <summary>
         /// If this data folder should use the most up to date build.
         /// </summary>
         [JsonProperty("use_recent")]
@@ -18,10 +23,15 @@ namespace LambentLight.DataFolders
         [JsonProperty("specific_build")]
         public string SpecificBuild { get; set; } = "";
         /// <summary>
-        /// The desired game for this Data Folder.
+        /// If OneSync should be enabled or not.
         /// </summary>
-        [JsonProperty("game")]
-        public Game Game { get; set; } = Game.GrandTheftAutoV;
+        [JsonProperty("onesync")]
+        public bool OneSync { get; set; } = false;
+        /// <summary>
+        /// If OneSync Infinity should be enabled or not.
+        /// </summary>
+        [JsonProperty("onesyncinf")]
+        public bool OneSyncInfinity { get; set; } = false;
         /// <summary>
         /// The name of the main Server Configuration file.
         /// </summary>
