@@ -167,6 +167,6 @@
         private System.Windows.Forms.ToolStripButton SettingsToolStripButton;
         private System.Windows.Forms.TabControl MainTabControl;
         private System.Windows.Forms.TabPage ConsoleTabPage;
-        private ConsoleControl.ConsoleControl ServerConsoleControl;
+        public ConsoleControl.ConsoleControl ServerConsoleControl;
     }
 }
