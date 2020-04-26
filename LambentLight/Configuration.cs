@@ -8,12 +8,6 @@ namespace LambentLight
     public class Configuration
     {
         /// <summary>
-        /// The last build used by the player.
-        /// </summary>
-        [JsonProperty("last_build")]
-        public string LastBuild { get; set; } = null;
-
-        /// <summary>
         /// The page that contains the download list of the CFX Builds.
         /// </summary>
         [JsonProperty("download_builds")]
