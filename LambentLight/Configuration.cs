@@ -18,5 +18,16 @@ namespace LambentLight
         /// </summary>
         [JsonProperty("download_builds")]
         public string DownloadBuilds { get; set; } = "https://raw.githubusercontent.com/LambentLight/Builds/master/builds.json";
+
+        /// <summary>
+        /// The Server License key.
+        /// </summary>
+        [JsonProperty("token_cfx")]
+        public string CFXLicense { get; set; } = "";
+        /// <summary>
+        /// The Steam API Token for Steam Identifiers.
+        /// </summary>
+        [JsonProperty("token_steam")]
+        public string SteamKey { get; set; } = "";
     }
 }
