@@ -1,5 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using Flurl.Http;
+using Newtonsoft.Json;
+using Serilog;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace LambentLight.Builds
 {
@@ -52,5 +55,31 @@ namespace LambentLight.Builds
         /// </summary>
         [JsonIgnore]
         public bool IsInstalled => File.Exists(Executable);
+
+        /// <summary>
+        /// Downloads the build, even if is already present.
+        /// </summary>
+        public async Task Download()
+        {
+            // Download the file
+            try
+            {
+                Log.Information($"Downloading {DownloadURL} to {tempPath}");
+                await DownloadURL.DownloadFileAsync(tempPath, $"{Name}.zip");
+            }
+            catch (FlurlHttpException e)
+            {
+                Log.Error(e, $"Error while downloading {DownloadURL}");
+                return;
+            }
+
+            // If the folder with the build exists, delete it
+            if (Directory.Exists(Folder))
+            {
+                Directory.Delete(Folder, true);
+            }
+            // And create it again
+            Directory.CreateDirectory(Folder);
+        }
     }
 }
