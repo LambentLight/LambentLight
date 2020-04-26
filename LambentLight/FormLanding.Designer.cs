@@ -40,6 +40,7 @@
             this.DataFoldersGroupBox = new System.Windows.Forms.GroupBox();
             this.DataFoldersRefreshButton = new System.Windows.Forms.Button();
             this.DataFoldersComboBox = new System.Windows.Forms.ComboBox();
+            this.DataFolderSettingsButton = new System.Windows.Forms.Button();
             this.ManagerToolStrip.SuspendLayout();
             this.MainTabControl.SuspendLayout();
             this.ConsoleTabPage.SuspendLayout();
@@ -147,6 +148,7 @@
             // 
             this.DataFoldersGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.DataFoldersGroupBox.Controls.Add(this.DataFolderSettingsButton);
             this.DataFoldersGroupBox.Controls.Add(this.DataFoldersRefreshButton);
             this.DataFoldersGroupBox.Controls.Add(this.DataFoldersComboBox);
             this.DataFoldersGroupBox.Location = new System.Drawing.Point(40, 12);
@@ -175,8 +177,19 @@
             this.DataFoldersComboBox.FormattingEnabled = true;
             this.DataFoldersComboBox.Location = new System.Drawing.Point(6, 19);
             this.DataFoldersComboBox.Name = "DataFoldersComboBox";
-            this.DataFoldersComboBox.Size = new System.Drawing.Size(655, 21);
+            this.DataFoldersComboBox.Size = new System.Drawing.Size(574, 21);
             this.DataFoldersComboBox.TabIndex = 0;
+            // 
+            // DataFolderSettingsButton
+            // 
+            this.DataFolderSettingsButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.DataFolderSettingsButton.Location = new System.Drawing.Point(586, 17);
+            this.DataFolderSettingsButton.Name = "DataFolderSettingsButton";
+            this.DataFolderSettingsButton.Size = new System.Drawing.Size(75, 23);
+            this.DataFolderSettingsButton.TabIndex = 2;
+            this.DataFolderSettingsButton.Text = "Settings";
+            this.DataFolderSettingsButton.UseVisualStyleBackColor = true;
+            this.DataFolderSettingsButton.Click += new System.EventHandler(this.DataFolderSettingsButton_Click);
             // 
             // FormLanding
             // 
@@ -212,5 +225,6 @@
         private System.Windows.Forms.GroupBox DataFoldersGroupBox;
         private System.Windows.Forms.ComboBox DataFoldersComboBox;
         private System.Windows.Forms.Button DataFoldersRefreshButton;
+        private System.Windows.Forms.Button DataFolderSettingsButton;
     }
 }

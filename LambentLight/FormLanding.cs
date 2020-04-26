@@ -45,6 +45,14 @@ namespace LambentLight
 
         #region Buttons
 
+        private void DataFolderSettingsButton_Click(object sender, EventArgs e)
+        {
+            if (DataFoldersComboBox.SelectedItem != null)
+            {
+                new FormFolderConfig((DataFolder)DataFoldersComboBox.SelectedItem).ShowDialog();
+            }
+        }
+
         private async void DataFoldersRefreshButton_Click(object sender, EventArgs e)
         {
             await Managers.FolderManager.Update();
