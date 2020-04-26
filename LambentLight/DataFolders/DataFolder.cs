@@ -97,6 +97,10 @@ namespace LambentLight.DataFolders
             string config = JsonConvert.SerializeObject(Config);
             File.WriteAllText(path, config);
         }
+        /// <summary>
+        /// Returns the name of the data folder.
+        /// </summary>
+        public override string ToString() => Name;
 
         #endregion
     }

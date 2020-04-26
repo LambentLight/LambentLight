@@ -81,5 +81,9 @@ namespace LambentLight.Builds
             // And create it again
             Directory.CreateDirectory(Folder);
         }
+        /// <summary>
+        /// Returns the Name or Identifier of the build.
+        /// </summary>
+        public override string ToString() => Name;
     }
 }
