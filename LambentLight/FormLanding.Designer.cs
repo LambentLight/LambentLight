@@ -37,9 +37,13 @@
             this.MainTabControl = new System.Windows.Forms.TabControl();
             this.ConsoleTabPage = new System.Windows.Forms.TabPage();
             this.ServerConsoleControl = new ConsoleControl.ConsoleControl();
+            this.DataFoldersGroupBox = new System.Windows.Forms.GroupBox();
+            this.DataFoldersComboBox = new System.Windows.Forms.ComboBox();
+            this.DataFoldersRefreshButton = new System.Windows.Forms.Button();
             this.ManagerToolStrip.SuspendLayout();
             this.MainTabControl.SuspendLayout();
             this.ConsoleTabPage.SuspendLayout();
+            this.DataFoldersGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // ManagerToolStrip
@@ -109,10 +113,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.MainTabControl.Controls.Add(this.ConsoleTabPage);
-            this.MainTabControl.Location = new System.Drawing.Point(40, 12);
+            this.MainTabControl.Location = new System.Drawing.Point(40, 66);
             this.MainTabControl.Name = "MainTabControl";
             this.MainTabControl.SelectedIndex = 0;
-            this.MainTabControl.Size = new System.Drawing.Size(748, 426);
+            this.MainTabControl.Size = new System.Drawing.Size(748, 372);
             this.MainTabControl.TabIndex = 1;
             // 
             // ConsoleTabPage
@@ -121,7 +125,7 @@
             this.ConsoleTabPage.Location = new System.Drawing.Point(4, 22);
             this.ConsoleTabPage.Name = "ConsoleTabPage";
             this.ConsoleTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.ConsoleTabPage.Size = new System.Drawing.Size(740, 400);
+            this.ConsoleTabPage.Size = new System.Drawing.Size(740, 346);
             this.ConsoleTabPage.TabIndex = 0;
             this.ConsoleTabPage.Text = "Console";
             this.ConsoleTabPage.UseVisualStyleBackColor = true;
@@ -136,14 +140,49 @@
             this.ServerConsoleControl.Name = "ServerConsoleControl";
             this.ServerConsoleControl.SendKeyboardCommandsToProcess = false;
             this.ServerConsoleControl.ShowDiagnostics = false;
-            this.ServerConsoleControl.Size = new System.Drawing.Size(734, 394);
+            this.ServerConsoleControl.Size = new System.Drawing.Size(734, 340);
             this.ServerConsoleControl.TabIndex = 0;
+            // 
+            // DataFoldersGroupBox
+            // 
+            this.DataFoldersGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.DataFoldersGroupBox.Controls.Add(this.DataFoldersRefreshButton);
+            this.DataFoldersGroupBox.Controls.Add(this.DataFoldersComboBox);
+            this.DataFoldersGroupBox.Location = new System.Drawing.Point(40, 12);
+            this.DataFoldersGroupBox.Name = "DataFoldersGroupBox";
+            this.DataFoldersGroupBox.Size = new System.Drawing.Size(748, 48);
+            this.DataFoldersGroupBox.TabIndex = 2;
+            this.DataFoldersGroupBox.TabStop = false;
+            this.DataFoldersGroupBox.Text = "Data Folders";
+            // 
+            // DataFoldersComboBox
+            // 
+            this.DataFoldersComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.DataFoldersComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.DataFoldersComboBox.FormattingEnabled = true;
+            this.DataFoldersComboBox.Location = new System.Drawing.Point(6, 19);
+            this.DataFoldersComboBox.Name = "DataFoldersComboBox";
+            this.DataFoldersComboBox.Size = new System.Drawing.Size(655, 21);
+            this.DataFoldersComboBox.TabIndex = 0;
+            // 
+            // DataFoldersRefreshButton
+            // 
+            this.DataFoldersRefreshButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.DataFoldersRefreshButton.Location = new System.Drawing.Point(667, 17);
+            this.DataFoldersRefreshButton.Name = "DataFoldersRefreshButton";
+            this.DataFoldersRefreshButton.Size = new System.Drawing.Size(75, 23);
+            this.DataFoldersRefreshButton.TabIndex = 1;
+            this.DataFoldersRefreshButton.Text = "Refresh";
+            this.DataFoldersRefreshButton.UseVisualStyleBackColor = true;
             // 
             // FormLanding
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.DataFoldersGroupBox);
             this.Controls.Add(this.MainTabControl);
             this.Controls.Add(this.ManagerToolStrip);
             this.Name = "FormLanding";
@@ -154,6 +193,7 @@
             this.ManagerToolStrip.PerformLayout();
             this.MainTabControl.ResumeLayout(false);
             this.ConsoleTabPage.ResumeLayout(false);
+            this.DataFoldersGroupBox.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -168,5 +208,8 @@
         private System.Windows.Forms.TabControl MainTabControl;
         private System.Windows.Forms.TabPage ConsoleTabPage;
         public ConsoleControl.ConsoleControl ServerConsoleControl;
+        private System.Windows.Forms.GroupBox DataFoldersGroupBox;
+        private System.Windows.Forms.ComboBox DataFoldersComboBox;
+        private System.Windows.Forms.Button DataFoldersRefreshButton;
     }
 }
