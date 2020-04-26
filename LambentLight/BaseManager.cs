@@ -39,7 +39,7 @@ namespace LambentLight
         /// <summary>
         /// Updates the information of this manager.
         /// </summary>
-        public abstract Task Update();
+        public virtual async Task Update() => throw new NotImplementedException();
         /// <summary>
         /// Loads the existing items from the cache (if present).
         /// </summary>
