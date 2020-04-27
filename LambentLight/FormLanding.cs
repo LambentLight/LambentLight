@@ -20,7 +20,7 @@ namespace LambentLight
         {
             // Show the dialog initializing the managers
             Log.Debug("Landing Form was shown to the user");
-            new FormInit().ShowDialog();
+            FormProgress.Initialization().ShowDialog();
 
             // Once we go back, load the list of data folders
             UpdateDataFolders();

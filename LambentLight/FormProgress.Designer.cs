@@ -1,6 +1,6 @@
 ﻿namespace LambentLight
 {
-    partial class FormInit
+    partial class FormProgress
     {
         /// <summary>
         /// Required designer variable.
