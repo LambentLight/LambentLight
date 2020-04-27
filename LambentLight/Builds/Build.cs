@@ -64,8 +64,7 @@ namespace LambentLight.Builds
             // Download the file
             try
             {
-                Log.Information($"Downloading {DownloadURL} to {tempPath}");
-                await DownloadURL.DownloadFileAsync(tempPath, $"{Name}.zip");
+                FormProgress.Download(DownloadURL, tempPath, $"{Name}.zip").ShowDialog();
             }
             catch (FlurlHttpException e)
             {
@@ -80,6 +79,9 @@ namespace LambentLight.Builds
             }
             // And create it again
             Directory.CreateDirectory(Folder);
+
+            // Once everything is ready, start the extraction
+            FormProgress.Extract(Path.Combine(tempPath, $"{Name}.zip"), Folder).ShowDialog();
         }
         /// <summary>
         /// Returns the Name or Identifier of the build.
