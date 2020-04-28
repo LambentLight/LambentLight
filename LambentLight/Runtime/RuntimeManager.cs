@@ -58,7 +58,9 @@ namespace LambentLight.Runtime
             // Format the launch parameters
             string arguments = $"+set citizen_dir\"{Path.Combine(build.Folder, "citizen")}\" " +
                 $"+set sv_licenseKey {license} " +
-                $"+set steam_webApiKey \"{Program.Config.SteamKey}\" " + 
+                $"+set steam_webApiKey \"{Program.Config.SteamKey}\" " +
+                $"+set onesync_enabled " + (folder.Config.OneSync || folder.Config.OneSyncInfinity ? $"1 " : "0 ") +
+                $"+set onesync_enableInfinity " + (folder.Config.OneSyncInfinity ? $"1 " : "0 ") +
                 $"+set gamename {game} " +
                 $"+exec {folder.Config.Config}";
             // And launch the server
