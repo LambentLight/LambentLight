@@ -56,8 +56,8 @@ namespace LambentLight.Runtime
             string game = folder.Config.Game == Game.RedDeadRedemption2 ? "rdr3 " : "gtav";
             string license = folder.Config.LicenseUseCustom ? folder.Config.LicenseCustom : Program.Config.CFXLicense;
             // Format the launch parameters
-            string arguments = $"+set citizen_dir\"{Path.Combine(build.Folder, "citizen")}\" " +
-                $"+set sv_licenseKey {license} " +
+            string arguments = $"+set citizen_dir \"{Path.Combine(build.Folder, "citizen")}\" " +
+                $"+set sv_licenseKey \"{license}\" " +
                 $"+set steam_webApiKey \"{Program.Config.SteamKey}\" " +
                 $"+set onesync_enabled " + (folder.Config.OneSync || folder.Config.OneSyncInfinity ? $"1 " : "0 ") +
                 $"+set onesync_enableInfinity " + (folder.Config.OneSyncInfinity ? $"1 " : "0 ") +
