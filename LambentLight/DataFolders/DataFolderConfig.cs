@@ -13,6 +13,16 @@ namespace LambentLight.DataFolders
         [JsonProperty("game")]
         public Game Game { get; set; } = Game.GrandTheftAutoV;
         /// <summary>
+        /// If this Data Folder should use a custom license.
+        /// </summary>
+        [JsonProperty("license_usecustom")]
+        public bool LicenseUseCustom { get; set; } = false;
+        /// <summary>
+        /// A custom CFX License to use.
+        /// </summary>
+        [JsonProperty("license_custom")]
+        public string LicenseCustom { get; set; } = "";
+        /// <summary>
         /// If this data folder should use the most up to date build.
         /// </summary>
         [JsonProperty("build_recent")]

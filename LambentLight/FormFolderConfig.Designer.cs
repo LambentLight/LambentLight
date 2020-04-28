@@ -41,17 +41,21 @@
             this.ConfigTextBox = new System.Windows.Forms.TextBox();
             this.CancelButton = new System.Windows.Forms.Button();
             this.AcceptButton = new System.Windows.Forms.Button();
+            this.LicenseGroupBox = new System.Windows.Forms.GroupBox();
+            this.LicenseCheckBox = new System.Windows.Forms.CheckBox();
+            this.LicenseTextBox = new System.Windows.Forms.TextBox();
             this.OneSyncGroupBox.SuspendLayout();
             this.GameGroupBox.SuspendLayout();
             this.BuildsGroupBox.SuspendLayout();
             this.ConfigGroupBox.SuspendLayout();
+            this.LicenseGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // OneSyncGroupBox
             // 
             this.OneSyncGroupBox.Controls.Add(this.OneSyncInfCheckBox);
             this.OneSyncGroupBox.Controls.Add(this.OneSyncCheckBox);
-            this.OneSyncGroupBox.Location = new System.Drawing.Point(12, 68);
+            this.OneSyncGroupBox.Location = new System.Drawing.Point(12, 144);
             this.OneSyncGroupBox.Name = "OneSyncGroupBox";
             this.OneSyncGroupBox.Size = new System.Drawing.Size(300, 65);
             this.OneSyncGroupBox.TabIndex = 0;
@@ -161,7 +165,7 @@
             // CancelButton
             // 
             this.CancelButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.CancelButton.Location = new System.Drawing.Point(543, 159);
+            this.CancelButton.Location = new System.Drawing.Point(543, 186);
             this.CancelButton.Name = "CancelButton";
             this.CancelButton.Size = new System.Drawing.Size(75, 23);
             this.CancelButton.TabIndex = 4;
@@ -172,7 +176,7 @@
             // AcceptButton
             // 
             this.AcceptButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.AcceptButton.Location = new System.Drawing.Point(462, 159);
+            this.AcceptButton.Location = new System.Drawing.Point(462, 186);
             this.AcceptButton.Name = "AcceptButton";
             this.AcceptButton.Size = new System.Drawing.Size(75, 23);
             this.AcceptButton.TabIndex = 5;
@@ -180,11 +184,41 @@
             this.AcceptButton.UseVisualStyleBackColor = true;
             this.AcceptButton.Click += new System.EventHandler(this.AcceptButton_Click);
             // 
+            // LicenseGroupBox
+            // 
+            this.LicenseGroupBox.Controls.Add(this.LicenseTextBox);
+            this.LicenseGroupBox.Controls.Add(this.LicenseCheckBox);
+            this.LicenseGroupBox.Location = new System.Drawing.Point(12, 68);
+            this.LicenseGroupBox.Name = "LicenseGroupBox";
+            this.LicenseGroupBox.Size = new System.Drawing.Size(300, 70);
+            this.LicenseGroupBox.TabIndex = 6;
+            this.LicenseGroupBox.TabStop = false;
+            this.LicenseGroupBox.Text = "License";
+            // 
+            // LicenseCheckBox
+            // 
+            this.LicenseCheckBox.AutoSize = true;
+            this.LicenseCheckBox.Location = new System.Drawing.Point(6, 19);
+            this.LicenseCheckBox.Name = "LicenseCheckBox";
+            this.LicenseCheckBox.Size = new System.Drawing.Size(166, 17);
+            this.LicenseCheckBox.TabIndex = 0;
+            this.LicenseCheckBox.Text = "Use custom CFX License Key";
+            this.LicenseCheckBox.UseVisualStyleBackColor = true;
+            this.LicenseCheckBox.CheckedChanged += new System.EventHandler(this.LicenseCheckBox_CheckedChanged);
+            // 
+            // LicenseTextBox
+            // 
+            this.LicenseTextBox.Location = new System.Drawing.Point(6, 42);
+            this.LicenseTextBox.Name = "LicenseTextBox";
+            this.LicenseTextBox.Size = new System.Drawing.Size(288, 20);
+            this.LicenseTextBox.TabIndex = 1;
+            // 
             // FormFolderConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(631, 189);
+            this.ClientSize = new System.Drawing.Size(631, 216);
+            this.Controls.Add(this.LicenseGroupBox);
             this.Controls.Add(this.AcceptButton);
             this.Controls.Add(this.CancelButton);
             this.Controls.Add(this.ConfigGroupBox);
@@ -201,6 +235,8 @@
             this.BuildsGroupBox.PerformLayout();
             this.ConfigGroupBox.ResumeLayout(false);
             this.ConfigGroupBox.PerformLayout();
+            this.LicenseGroupBox.ResumeLayout(false);
+            this.LicenseGroupBox.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -220,5 +256,8 @@
         private System.Windows.Forms.TextBox ConfigTextBox;
         private System.Windows.Forms.Button CancelButton;
         private System.Windows.Forms.Button AcceptButton;
+        private System.Windows.Forms.GroupBox LicenseGroupBox;
+        private System.Windows.Forms.CheckBox LicenseCheckBox;
+        private System.Windows.Forms.TextBox LicenseTextBox;
     }
 }

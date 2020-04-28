@@ -1,5 +1,6 @@
 ﻿using LambentLight.Builds;
 using LambentLight.DataFolders;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
@@ -51,11 +52,12 @@ namespace LambentLight.Runtime
                 await build.Download();
             }
 
-            // Select the correct game
+            // Select the correct game and license
             string game = folder.Config.Game == Game.RedDeadRedemption2 ? "rdr3 " : "gtav";
+            string license = folder.Config.LicenseUseCustom ? folder.Config.LicenseCustom : Program.Config.CFXLicense;
             // Format the launch parameters
             string arguments = $"+set citizen_dir\"{Path.Combine(build.Folder, "citizen")}\" " +
-                $"+set sv_licenseKey {Program.Config.CFXLicense} " +
+                $"+set sv_licenseKey {license} " +
                 $"+set steam_webApiKey \"{Program.Config.SteamKey}\" " + 
                 $"+set gamename {game} " +
                 $"+exec {folder.Config.Config}";

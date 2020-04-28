@@ -38,6 +38,10 @@ namespace LambentLight
             // And load the settings
             // Game
             GameComboBox.SelectedIndex = (int)folder.Config.Game;
+            // License
+            LicenseCheckBox.Checked = folder.Config.LicenseUseCustom;
+            LicenseTextBox.Enabled = folder.Config.LicenseUseCustom;
+            LicenseTextBox.Text = folder.Config.LicenseCustom;
             // CFX Build
             if (folder.Config.BuildUseRecent)
             {
@@ -62,6 +66,9 @@ namespace LambentLight
         {
             // Game
             Folder.Config.Game = (Game)GameComboBox.SelectedIndex;
+            // License
+            Folder.Config.LicenseUseCustom = LicenseCheckBox.Checked;
+            Folder.Config.LicenseCustom = LicenseTextBox.Text;
             // CFX Build
             Folder.Config.BuildUseRecent = BuildsLatestCheckBox.Checked;
             if (BuildsLatestCheckBox.Checked)
@@ -79,6 +86,11 @@ namespace LambentLight
             Folder.Config.Config = ConfigTextBox.Text;
 
             Folder.SaveConfig();
+        }
+
+        private void LicenseCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            LicenseTextBox.Enabled = LicenseCheckBox.Checked;
         }
 
         private void OneSyncCheckBox_CheckedChanged(object sender, EventArgs e)
