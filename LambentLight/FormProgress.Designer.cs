@@ -65,7 +65,7 @@
             this.LabelTask.TabIndex = 2;
             this.LabelTask.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // FormInit
+            // FormProgress
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -76,9 +76,8 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "FormInit";
+            this.Name = "FormProgress";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "LambentLight - Starting...";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormInit_FormClosing);
             this.Shown += new System.EventHandler(this.FormInit_Shown);
             this.ResumeLayout(false);

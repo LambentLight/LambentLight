@@ -137,7 +137,8 @@ namespace LambentLight
         private async Task PerformInitialization()
         {
             Log.Information("Performing initialization of managers");
-            // Set the maximum value
+            // Configure the UI
+            Text = "Initializing...";
             InitProgressBar.Maximum = 2;
 
             // Initialize the managers
@@ -154,13 +155,14 @@ namespace LambentLight
         private async Task PerformDownload()
         {
             Log.Information($"Downloading {url} to {path} as {filename}");
-            LabelTask.Text = "Downloading file...";
+            Text = "Downloading...";
             await url.DownloadFileAsync(path, filename);
         }
 
         private async Task PerformExtraction()
         {
             Log.Information($"Extracting {file} to {destination}");
+            Text = "Extracting...";
 
             using (IArchive archive = ArchiveFactory.Open(file))
             {
