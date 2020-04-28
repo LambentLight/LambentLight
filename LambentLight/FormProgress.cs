@@ -15,6 +15,8 @@ namespace LambentLight
     /// </summary>
     public partial class FormProgress : Form
     {
+        #region Task Type
+
         /// <summary>
         /// The type of task to use in the progress form.
         /// </summary>
@@ -27,18 +29,22 @@ namespace LambentLight
         }
 
         /// <summary>
-        /// The options used to extract the files.
-        /// </summary>
-        private static readonly ExtractionOptions options = new ExtractionOptions() { ExtractFullPath = true };
-
-        /// <summary>
         /// The type of task that this form should perform.
         /// </summary>
         private TaskType task = TaskType.Invalid;
+
+        #endregion
+
+        #region Fields - Common
+
         /// <summary>
         /// If this task has been completed or not.
         /// </summary>
         private bool finished = false;
+
+        #endregion
+
+        #region Fields - Download
 
         /// <summary>
         /// The URL to download a file from.
@@ -53,6 +59,14 @@ namespace LambentLight
         /// </summary>
         private string filename = "";
 
+        #endregion
+
+        #region Fields - Extraction
+
+        /// <summary>
+        /// The options used to extract the files.
+        /// </summary>
+        private static readonly ExtractionOptions options = new ExtractionOptions() { ExtractFullPath = true };
         /// <summary>
         /// The file to extract.
         /// </summary>
@@ -62,10 +76,18 @@ namespace LambentLight
         /// </summary>
         private string destination = "";
 
+        #endregion
+
+        #region Constructor
+
         private FormProgress()
         {
             InitializeComponent();
         }
+
+        #endregion
+
+        #region Public Functions
 
         /// <summary>
         /// Creates a progress form to perform the program initialization.
@@ -113,6 +135,10 @@ namespace LambentLight
             };
         }
 
+        #endregion
+
+        #region Local Events
+
         private async void FormInit_Shown(object sender, EventArgs e)
         {
             switch (task)
@@ -133,6 +159,19 @@ namespace LambentLight
             finished = true;
             Close();
         }
+
+        private void FormInit_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // If the initialization has not finished, prevent the form from being closed
+            if (!finished)
+            {
+                e.Cancel = true;
+            }
+        }
+
+        #endregion
+
+        #region Private Functions
 
         private async Task PerformInitialization()
         {
@@ -182,13 +221,6 @@ namespace LambentLight
             }
         }
 
-        private void FormInit_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            // If the initialization has not finished, prevent the form from being closed
-            if (!finished)
-            {
-                e.Cancel = true;
-            }
-        }
+        #endregion
     }
 }
