@@ -64,7 +64,7 @@ namespace LambentLight.Runtime
                 $"+set gamename {game} " +
                 $"+exec {folder.Config.Config}";
             // And launch the server
-            Program.Landing.ServerConsoleControl.StartProcess(build.Executable, arguments);
+            Program.Landing.ServerConsoleControl.StartProcess(new ProcessStartInfo(build.Executable, arguments) { WorkingDirectory = folder.Location });
         }
 
         #endregion
