@@ -22,8 +22,9 @@ namespace LambentLight
             Log.Debug("Landing Form was shown to the user");
             FormProgress.Initialization().ShowDialog();
 
-            // Once we go back, load the list of data folders
+            // Once we go back, load the lists
             UpdateDataFolders();
+            UpdateBuilds();
         }
 
         #endregion
@@ -40,6 +41,15 @@ namespace LambentLight
             if (DataFoldersComboBox.Items.Count != 0)
             {
                 DataFoldersComboBox.SelectedIndex = 0;
+            }
+        }
+
+        public void UpdateBuilds()
+        {
+            BuildsListBox.Items.Clear();
+            foreach (Build build in Managers.BuildManager.Builds)
+            {
+                BuildsListBox.Items.Add(build);
             }
         }
 
@@ -114,6 +124,16 @@ namespace LambentLight
 
             // Finally, go ahead and start the build
             await Managers.RuntimeManager.Start(build, folder);
+        }
+
+        #endregion
+
+        #region Builds
+
+        private async void BuildsRefreshButton_Click(object sender, EventArgs e)
+        {
+            await Managers.BuildManager.Update();
+            UpdateBuilds();
         }
 
         #endregion
