@@ -23,5 +23,10 @@ namespace LambentLight
         /// </summary>
         [JsonProperty("token_steam")]
         public string SteamKey { get; set; } = "";
+        /// <summary>
+        /// If a cmd window should be used instead of the integrated terminal.
+        /// </summary>
+        [JsonProperty("external_console")]
+        public bool UseExternalConsole { get; set; } = true;
     }
 }

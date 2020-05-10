@@ -2,6 +2,7 @@
 using LambentLight.DataFolders;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -64,8 +65,23 @@ namespace LambentLight.Runtime
                 $"+set onesync_enableInfinity " + (folder.Config.OneSyncInfinity ? $"1 " : "0 ") +
                 $"+set gamename {game} " +
                 $"+exec {folder.Config.Config}";
+
+            // Create the object that contains the process information
+            ProcessStartInfo info = new ProcessStartInfo(Path.GetFullPath(build.Executable), arguments) 
+            {
+                WorkingDirectory = folder.Location
+            };
+
             // And launch the server
-            Program.Landing.ServerConsoleControl.StartProcess(new ProcessStartInfo(build.Executable, arguments) { WorkingDirectory = folder.Location });
+            if (Program.Config.UseExternalConsole)
+            {
+                Program.Landing.ServerConsoleControl.WriteOutput("Running FXServer via External CMD Window", Color.Pink);
+                Process.Start(info);
+            }
+            else
+            {
+                Program.Landing.ServerConsoleControl.StartProcess(info);
+            }
         }
 
         #endregion
