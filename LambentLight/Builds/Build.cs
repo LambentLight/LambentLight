@@ -1,6 +1,4 @@
-﻿using Flurl.Http;
-using Newtonsoft.Json;
-using Serilog;
+﻿using Newtonsoft.Json;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -59,17 +57,16 @@ namespace LambentLight.Builds
         /// <summary>
         /// Downloads the build, even if is already present.
         /// </summary>
-        public async Task Download()
+        public async Task<bool> Download()
         {
             // Download the file
-            try
+            FormProgress download = FormProgress.Download(DownloadURL, tempPath, $"{Name}.zip");
+            download.ShowDialog();
+
+            // If we failed, return
+            if (!download.Completed)
             {
-                FormProgress.Download(DownloadURL, tempPath, $"{Name}.zip").ShowDialog();
-            }
-            catch (FlurlHttpException e)
-            {
-                Log.Error(e, $"Error while downloading {DownloadURL}");
-                return;
+                return false;
             }
 
             // If the folder with the build exists, delete it
@@ -81,7 +78,16 @@ namespace LambentLight.Builds
             Directory.CreateDirectory(Folder);
 
             // Once everything is ready, start the extraction
-            FormProgress.Extract(Path.Combine(tempPath, $"{Name}.zip"), Folder).ShowDialog();
+            FormProgress extraction = FormProgress.Extract(Path.Combine(tempPath, $"{Name}.zip"), Folder);
+            extraction.ShowDialog();
+
+            // If we failed, say so and return;
+            if (!extraction.Completed)
+            {
+                return false;
+            }
+            // Otherwise, show sucess
+            return true;
         }
         /// <summary>
         /// Returns the Name or Identifier of the build.

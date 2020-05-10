@@ -1,9 +1,7 @@
 ﻿using LambentLight.Builds;
 using LambentLight.DataFolders;
 using Serilog;
-using System.ComponentModel;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -51,7 +49,11 @@ namespace LambentLight.Runtime
             // If the build is not available, download it
             if (!build.IsInstalled)
             {
-                await build.Download();
+                // If we failed, notify the user and return
+                if (!await build.Download())
+                {
+                    return;
+                }
             }
 
             // Select the correct game and license
