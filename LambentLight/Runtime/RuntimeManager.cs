@@ -1,5 +1,6 @@
 ﻿using LambentLight.Builds;
 using LambentLight.DataFolders;
+using Serilog;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
@@ -65,6 +66,7 @@ namespace LambentLight.Runtime
                 $"+set onesync_enableInfinity " + (folder.Config.OneSyncInfinity ? $"1 " : "0 ") +
                 $"+set gamename {game} " +
                 $"+exec {folder.Config.Config}";
+            Log.Information($"Starting CFX Server with parameters {arguments.Replace(license, "REDACTED")}");
 
             // Create the object that contains the process information
             ProcessStartInfo info = new ProcessStartInfo(Path.GetFullPath(build.Executable), arguments) 
@@ -75,11 +77,13 @@ namespace LambentLight.Runtime
             // And launch the server
             if (Program.Config.UseExternalConsole)
             {
-                Program.Landing.ServerConsoleControl.WriteOutput("Running FXServer via External CMD Window", Color.Pink);
+                Log.Information("Using external Terminal Window");
+                Program.Landing.ServerConsoleControl.WriteOutput("Running FXServer via external Terminal Window", Color.Pink);
                 Process.Start(info);
             }
             else
             {
+                Log.Information("Using integrated Terminal Window");
                 Program.Landing.ServerConsoleControl.StartProcess(info);
             }
         }
