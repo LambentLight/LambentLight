@@ -42,8 +42,9 @@
             this.CancelButton = new System.Windows.Forms.Button();
             this.AcceptButton = new System.Windows.Forms.Button();
             this.LicenseGroupBox = new System.Windows.Forms.GroupBox();
-            this.LicenseCheckBox = new System.Windows.Forms.CheckBox();
+            this.LicenseVisibleCheckBox = new System.Windows.Forms.CheckBox();
             this.LicenseTextBox = new System.Windows.Forms.TextBox();
+            this.LicenseCheckBox = new System.Windows.Forms.CheckBox();
             this.OneSyncGroupBox.SuspendLayout();
             this.GameGroupBox.SuspendLayout();
             this.BuildsGroupBox.SuspendLayout();
@@ -186,6 +187,7 @@
             // 
             // LicenseGroupBox
             // 
+            this.LicenseGroupBox.Controls.Add(this.LicenseVisibleCheckBox);
             this.LicenseGroupBox.Controls.Add(this.LicenseTextBox);
             this.LicenseGroupBox.Controls.Add(this.LicenseCheckBox);
             this.LicenseGroupBox.Location = new System.Drawing.Point(12, 68);
@@ -194,6 +196,26 @@
             this.LicenseGroupBox.TabIndex = 6;
             this.LicenseGroupBox.TabStop = false;
             this.LicenseGroupBox.Text = "License";
+            // 
+            // LicenseVisibleCheckBox
+            // 
+            this.LicenseVisibleCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.LicenseVisibleCheckBox.AutoSize = true;
+            this.LicenseVisibleCheckBox.Location = new System.Drawing.Point(238, 19);
+            this.LicenseVisibleCheckBox.Name = "LicenseVisibleCheckBox";
+            this.LicenseVisibleCheckBox.Size = new System.Drawing.Size(56, 17);
+            this.LicenseVisibleCheckBox.TabIndex = 2;
+            this.LicenseVisibleCheckBox.Text = "Visible";
+            this.LicenseVisibleCheckBox.UseVisualStyleBackColor = true;
+            this.LicenseVisibleCheckBox.CheckedChanged += new System.EventHandler(this.LicenseVisibleCheckBox_CheckedChanged);
+            // 
+            // LicenseTextBox
+            // 
+            this.LicenseTextBox.Location = new System.Drawing.Point(6, 42);
+            this.LicenseTextBox.Name = "LicenseTextBox";
+            this.LicenseTextBox.Size = new System.Drawing.Size(288, 20);
+            this.LicenseTextBox.TabIndex = 1;
+            this.LicenseTextBox.UseSystemPasswordChar = true;
             // 
             // LicenseCheckBox
             // 
@@ -204,14 +226,6 @@
             this.LicenseCheckBox.TabIndex = 0;
             this.LicenseCheckBox.Text = "Use custom CFX License Key";
             this.LicenseCheckBox.UseVisualStyleBackColor = true;
-            this.LicenseCheckBox.CheckedChanged += new System.EventHandler(this.LicenseCheckBox_CheckedChanged);
-            // 
-            // LicenseTextBox
-            // 
-            this.LicenseTextBox.Location = new System.Drawing.Point(6, 42);
-            this.LicenseTextBox.Name = "LicenseTextBox";
-            this.LicenseTextBox.Size = new System.Drawing.Size(288, 20);
-            this.LicenseTextBox.TabIndex = 1;
             // 
             // FormFolderConfig
             // 
@@ -259,5 +273,6 @@
         private System.Windows.Forms.GroupBox LicenseGroupBox;
         private System.Windows.Forms.CheckBox LicenseCheckBox;
         private System.Windows.Forms.TextBox LicenseTextBox;
+        private System.Windows.Forms.CheckBox LicenseVisibleCheckBox;
     }
 }
