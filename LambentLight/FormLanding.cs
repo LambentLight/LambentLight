@@ -126,6 +126,8 @@ namespace LambentLight
             await Managers.RuntimeManager.Start(build, folder);
         }
 
+        private void StopToolStripButton_Click(object sender, EventArgs e) => ServerConsoleControl.StopProcess();
+
         #endregion
 
         #region Builds

@@ -37,19 +37,19 @@
             this.MainTabControl = new System.Windows.Forms.TabControl();
             this.ConsoleTabPage = new System.Windows.Forms.TabPage();
             this.ServerConsoleControl = new ConsoleControl.ConsoleControl();
+            this.BuildsTabPage = new System.Windows.Forms.TabPage();
+            this.BuildsRefreshButton = new System.Windows.Forms.Button();
+            this.BuildsDownloadButton = new System.Windows.Forms.Button();
+            this.BuildsListBox = new System.Windows.Forms.ListBox();
             this.DataFoldersGroupBox = new System.Windows.Forms.GroupBox();
             this.DataFolderSettingsButton = new System.Windows.Forms.Button();
             this.DataFoldersRefreshButton = new System.Windows.Forms.Button();
             this.DataFoldersComboBox = new System.Windows.Forms.ComboBox();
-            this.BuildsTabPage = new System.Windows.Forms.TabPage();
-            this.BuildsListBox = new System.Windows.Forms.ListBox();
-            this.BuildsDownloadButton = new System.Windows.Forms.Button();
-            this.BuildsRefreshButton = new System.Windows.Forms.Button();
             this.ManagerToolStrip.SuspendLayout();
             this.MainTabControl.SuspendLayout();
             this.ConsoleTabPage.SuspendLayout();
-            this.DataFoldersGroupBox.SuspendLayout();
             this.BuildsTabPage.SuspendLayout();
+            this.DataFoldersGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // ManagerToolStrip
@@ -91,6 +91,7 @@
             this.StopToolStripButton.Padding = new System.Windows.Forms.Padding(2);
             this.StopToolStripButton.Size = new System.Drawing.Size(33, 33);
             this.StopToolStripButton.Text = "toolStripButton2";
+            this.StopToolStripButton.Click += new System.EventHandler(this.StopToolStripButton_Click);
             // 
             // RestartToolStripButton
             // 
@@ -151,6 +152,51 @@
             this.ServerConsoleControl.Size = new System.Drawing.Size(734, 340);
             this.ServerConsoleControl.TabIndex = 0;
             // 
+            // BuildsTabPage
+            // 
+            this.BuildsTabPage.Controls.Add(this.BuildsRefreshButton);
+            this.BuildsTabPage.Controls.Add(this.BuildsDownloadButton);
+            this.BuildsTabPage.Controls.Add(this.BuildsListBox);
+            this.BuildsTabPage.Location = new System.Drawing.Point(4, 22);
+            this.BuildsTabPage.Name = "BuildsTabPage";
+            this.BuildsTabPage.Padding = new System.Windows.Forms.Padding(3);
+            this.BuildsTabPage.Size = new System.Drawing.Size(740, 346);
+            this.BuildsTabPage.TabIndex = 1;
+            this.BuildsTabPage.Text = "Builds";
+            this.BuildsTabPage.UseVisualStyleBackColor = true;
+            // 
+            // BuildsRefreshButton
+            // 
+            this.BuildsRefreshButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BuildsRefreshButton.Location = new System.Drawing.Point(582, 6);
+            this.BuildsRefreshButton.Name = "BuildsRefreshButton";
+            this.BuildsRefreshButton.Size = new System.Drawing.Size(152, 23);
+            this.BuildsRefreshButton.TabIndex = 2;
+            this.BuildsRefreshButton.Text = "Refresh";
+            this.BuildsRefreshButton.UseVisualStyleBackColor = true;
+            this.BuildsRefreshButton.Click += new System.EventHandler(this.BuildsRefreshButton_Click);
+            // 
+            // BuildsDownloadButton
+            // 
+            this.BuildsDownloadButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.BuildsDownloadButton.Location = new System.Drawing.Point(582, 35);
+            this.BuildsDownloadButton.Name = "BuildsDownloadButton";
+            this.BuildsDownloadButton.Size = new System.Drawing.Size(152, 23);
+            this.BuildsDownloadButton.TabIndex = 1;
+            this.BuildsDownloadButton.Text = "Download";
+            this.BuildsDownloadButton.UseVisualStyleBackColor = true;
+            // 
+            // BuildsListBox
+            // 
+            this.BuildsListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.BuildsListBox.FormattingEnabled = true;
+            this.BuildsListBox.Location = new System.Drawing.Point(6, 6);
+            this.BuildsListBox.Name = "BuildsListBox";
+            this.BuildsListBox.Size = new System.Drawing.Size(570, 329);
+            this.BuildsListBox.TabIndex = 0;
+            // 
             // DataFoldersGroupBox
             // 
             this.DataFoldersGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -198,51 +244,6 @@
             this.DataFoldersComboBox.Size = new System.Drawing.Size(574, 21);
             this.DataFoldersComboBox.TabIndex = 0;
             // 
-            // BuildsTabPage
-            // 
-            this.BuildsTabPage.Controls.Add(this.BuildsRefreshButton);
-            this.BuildsTabPage.Controls.Add(this.BuildsDownloadButton);
-            this.BuildsTabPage.Controls.Add(this.BuildsListBox);
-            this.BuildsTabPage.Location = new System.Drawing.Point(4, 22);
-            this.BuildsTabPage.Name = "BuildsTabPage";
-            this.BuildsTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.BuildsTabPage.Size = new System.Drawing.Size(740, 346);
-            this.BuildsTabPage.TabIndex = 1;
-            this.BuildsTabPage.Text = "Builds";
-            this.BuildsTabPage.UseVisualStyleBackColor = true;
-            // 
-            // BuildsListBox
-            // 
-            this.BuildsListBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.BuildsListBox.FormattingEnabled = true;
-            this.BuildsListBox.Location = new System.Drawing.Point(6, 6);
-            this.BuildsListBox.Name = "BuildsListBox";
-            this.BuildsListBox.Size = new System.Drawing.Size(570, 329);
-            this.BuildsListBox.TabIndex = 0;
-            // 
-            // BuildsDownloadButton
-            // 
-            this.BuildsDownloadButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BuildsDownloadButton.Location = new System.Drawing.Point(582, 35);
-            this.BuildsDownloadButton.Name = "BuildsDownloadButton";
-            this.BuildsDownloadButton.Size = new System.Drawing.Size(152, 23);
-            this.BuildsDownloadButton.TabIndex = 1;
-            this.BuildsDownloadButton.Text = "Download";
-            this.BuildsDownloadButton.UseVisualStyleBackColor = true;
-            // 
-            // BuildsRefreshButton
-            // 
-            this.BuildsRefreshButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.BuildsRefreshButton.Location = new System.Drawing.Point(582, 6);
-            this.BuildsRefreshButton.Name = "BuildsRefreshButton";
-            this.BuildsRefreshButton.Size = new System.Drawing.Size(152, 23);
-            this.BuildsRefreshButton.TabIndex = 2;
-            this.BuildsRefreshButton.Text = "Refresh";
-            this.BuildsRefreshButton.UseVisualStyleBackColor = true;
-            this.BuildsRefreshButton.Click += new System.EventHandler(this.BuildsRefreshButton_Click);
-            // 
             // FormLanding
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -259,8 +260,8 @@
             this.ManagerToolStrip.PerformLayout();
             this.MainTabControl.ResumeLayout(false);
             this.ConsoleTabPage.ResumeLayout(false);
-            this.DataFoldersGroupBox.ResumeLayout(false);
             this.BuildsTabPage.ResumeLayout(false);
+            this.DataFoldersGroupBox.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
