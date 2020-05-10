@@ -1,10 +1,11 @@
-﻿using Flurl.Http;
-using Serilog;
+﻿using Serilog;
 using SharpCompress.Archives;
 using SharpCompress.Common;
 using SharpCompress.Readers;
 using System;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -193,9 +194,18 @@ namespace LambentLight
 
         private async Task PerformDownload()
         {
+            // We use WebClient directly because Flurl does not supports file downloads
+
             Log.Information($"Downloading {url} to {path} as {filename}");
             Text = "Downloading...";
-            await url.DownloadFileAsync(path, filename);
+            InitProgressBar.Maximum = 100;
+            LabelTask.Text = filename;
+
+            using (WebClient client = new WebClient())
+            {
+                client.DownloadProgressChanged += (s, e) => Invoke(new Action(() => InitProgressBar.Value = e.ProgressPercentage)); ;
+                await client.DownloadFileTaskAsync(url, Path.Combine(path, filename));
+            }
         }
 
         private async Task PerformExtraction()
