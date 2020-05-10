@@ -68,24 +68,12 @@ namespace LambentLight.Runtime
                 $"+exec {folder.Config.Config}";
             Log.Information($"Starting CFX Server with parameters {arguments.Replace(license, "REDACTED")}");
 
-            // Create the object that contains the process information
+            // Create the object that contains the process information and launch the server
             ProcessStartInfo info = new ProcessStartInfo(Path.GetFullPath(build.Executable), arguments) 
             {
                 WorkingDirectory = folder.Location
             };
-
-            // And launch the server
-            if (Program.Config.UseExternalConsole)
-            {
-                Log.Information("Using external Terminal Window");
-                Program.Landing.ServerConsoleControl.WriteOutput("Running FXServer via external Terminal Window", Color.Pink);
-                Process.Start(info);
-            }
-            else
-            {
-                Log.Information("Using integrated Terminal Window");
-                Program.Landing.ServerConsoleControl.StartProcess(info);
-            }
+            Program.Landing.ServerConsoleControl.StartProcess(info);
         }
 
         #endregion
