@@ -1,0 +1,3 @@
+[submodule "ConsoleControl"]
+	path = ConsoleControl
+	url = https://github.com/LambentLight/ConsoleControl.git

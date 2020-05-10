@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30014.187
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LambentLight", "LambentLight\LambentLight.csproj", "{EA110F39-E2D7-43B4-814B-361C2591B36A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LambentLight", "LambentLight\LambentLight.csproj", "{EA110F39-E2D7-43B4-814B-361C2591B36A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleControl", "ConsoleControl\source\ConsoleControl\ConsoleControl.csproj", "{737CC7F2-EC7C-4800-B7EB-72637E892C42}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleControlAPI", "ConsoleControl\source\ConsoleControlAPI\ConsoleControlAPI.csproj", "{A4B8573F-EBFC-4140-B8AA-7C037919EF57}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{EA110F39-E2D7-43B4-814B-361C2591B36A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA110F39-E2D7-43B4-814B-361C2591B36A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA110F39-E2D7-43B4-814B-361C2591B36A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{737CC7F2-EC7C-4800-B7EB-72637E892C42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{737CC7F2-EC7C-4800-B7EB-72637E892C42}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{737CC7F2-EC7C-4800-B7EB-72637E892C42}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{737CC7F2-EC7C-4800-B7EB-72637E892C42}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4B8573F-EBFC-4140-B8AA-7C037919EF57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4B8573F-EBFC-4140-B8AA-7C037919EF57}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4B8573F-EBFC-4140-B8AA-7C037919EF57}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4B8573F-EBFC-4140-B8AA-7C037919EF57}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
