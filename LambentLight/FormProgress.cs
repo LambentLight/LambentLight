@@ -36,6 +36,15 @@ namespace LambentLight
 
         #endregion
 
+        #region Properties
+
+        /// <summary>
+        /// If the task has been completed successfully.
+        /// </summary>
+        public bool Completed { get; private set; } = false;
+
+        #endregion
+
         #region Fields - Common
 
         /// <summary>
@@ -190,6 +199,9 @@ namespace LambentLight
             LabelTask.Text = "Populating CFX Builds";
             await Managers.BuildManager.Initialize();
             InitProgressBar.PerformStep();
+
+            // And say that we succeded
+            Completed = true;
         }
 
         private async Task PerformDownload()
@@ -204,7 +216,18 @@ namespace LambentLight
             using (WebClient client = new WebClient())
             {
                 client.DownloadProgressChanged += (s, e) => Invoke(new Action(() => InitProgressBar.Value = e.ProgressPercentage)); ;
-                await client.DownloadFileTaskAsync(url, Path.Combine(path, filename));
+
+                try
+                {
+                    await client.DownloadFileTaskAsync(url, Path.Combine(path, filename));
+                    Completed = true;
+                }
+                catch (WebException e)
+                {
+                    Log.Error(e, $"Unable to download {url}");
+                    MessageBox.Show($"Unable to download {url}\n\nMake sure that you are connected to the internet and LambentLight is allowed on your system firewall.", "Unable to download file", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
             }
         }
 
@@ -225,10 +248,21 @@ namespace LambentLight
                     {
                         LabelTask.Text = reader.Entry.Key;
                         InitProgressBar.PerformStep();
-                        await Task.Run(() => reader.WriteEntryToDirectory(destination, options));
+                        try
+                        {
+                            await Task.Run(() => reader.WriteEntryToDirectory(destination, options));
+                        }
+                        catch (UnauthorizedAccessException e)
+                        {
+                            Log.Error(e, $"Unable to extract {reader.Entry.Key}");
+                            MessageBox.Show($"Unable to extract {reader.Entry.Key}\n\nMake sure that your Windows user is allowed to write into {destination} and try again.", "Unable to extract file", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
                     }
                 }
             }
+
+            Completed = true;
         }
 
         #endregion
