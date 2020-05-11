@@ -13,7 +13,7 @@ namespace LambentLight
         /// <summary>
         /// The configuration of the application.
         /// </summary>
-        public static Configuration Config { get; private set; } = new Configuration();
+        public static Configuration Config { get; private set; } = null;
         /// <summary>
         /// The Landing Screen for the program.
         /// </summary>
@@ -35,6 +35,14 @@ namespace LambentLight
                 .WriteTo.File("LambentLight.log")
                 .WriteTo.Debug()
                 .CreateLogger();
+
+            // Try to load the configuration
+            Config = Configuration.Load();
+            // If is invalid, exit
+            if (Config == null)
+            {
+                return 1;
+            }
 
             // Enable the Vista+ visual styles and GDI+
             Application.EnableVisualStyles();
