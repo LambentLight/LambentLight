@@ -128,6 +128,12 @@ namespace LambentLight
 
         private void StopToolStripButton_Click(object sender, EventArgs e) => ServerConsoleControl.StopProcess();
 
+        private void SettingsToolStripButton_Click(object sender, EventArgs e)
+        {
+            Program.ConfigW.Populate();
+            Program.ConfigW.ShowDialog();
+        }
+
         #endregion
 
         #region Builds

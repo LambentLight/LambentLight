@@ -18,6 +18,10 @@ namespace LambentLight
         /// The Landing Screen for the program.
         /// </summary>
         public static FormLanding Landing { get; private set; } = null;
+        /// <summary>
+        /// The configuration screen of the program.
+        /// </summary>
+        public static FormConfig ConfigW { get; private set; } = null;
 
         /// <summary>
         /// Main Entry Point of the application.
@@ -49,6 +53,7 @@ namespace LambentLight
             Application.SetCompatibleTextRenderingDefault(false);
             // Create the forms
             Landing = new FormLanding();
+            ConfigW = new FormConfig();
             // And run the app with the default form
             Application.Run(Landing);
 

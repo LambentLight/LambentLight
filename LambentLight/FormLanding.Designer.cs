@@ -114,6 +114,7 @@
             this.SettingsToolStripButton.Padding = new System.Windows.Forms.Padding(2);
             this.SettingsToolStripButton.Size = new System.Drawing.Size(33, 33);
             this.SettingsToolStripButton.Text = "toolStripButton4";
+            this.SettingsToolStripButton.Click += new System.EventHandler(this.SettingsToolStripButton_Click);
             // 
             // MainTabControl
             // 
