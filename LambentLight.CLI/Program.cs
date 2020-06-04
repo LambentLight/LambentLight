@@ -1,4 +1,6 @@
 ﻿using CommandLine;
+using System.Threading;
+using WatsonWebsocket;
 
 namespace LambentLight.CLI
 {
@@ -12,7 +14,13 @@ namespace LambentLight.CLI
 
         public static void Run(Arguments args)
         {
-
+            // If we need to start in daemon mode, run the websocket server
+            if (args.Daemon)
+            {
+                WatsonWsServer server = new WatsonWsServer(args.Address, args.Port, args.SSL);
+                server.Start();
+                Thread.Sleep(Timeout.Infinite);
+            }
         }
     }
 }
