@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Serilog;
 using System;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using WatsonWebsocket;
@@ -24,6 +25,23 @@ namespace LambentLight.Daemon
                 .MinimumLevel.Debug()
                 .WriteTo.Console()
                 .CreateLogger();
+
+            // Print the a message with information about the current system
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                Log.Information($"Starting LambentLight Daemon in Windows");
+            }
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                Log.Information($"Starting LambentLight Daemon in Linux");
+            }
+            // If we are on something not supported, return
+            else
+            {
+                Log.Fatal("Unsuported operating system detected!");
+                Log.Fatal("LambentLight can only be used on Windows and Linux");
+                Environment.Exit(1);
+            }
 
             // And run the websocket server
             WatsonWsServer server = new WatsonWsServer(args.IP, args.Port, args.SSL);
