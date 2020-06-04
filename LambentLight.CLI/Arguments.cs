@@ -13,7 +13,7 @@ namespace LambentLight.CLI
 
         [Option('b', "bind", Default = "127.0.0.1", HelpText = "Address to bind in Daemon mode.")]
         public string Address { get; set; }
-        [Option('p', "port", Default = 4168, HelpText = "Port to bind in Daemon mode.")]
+        [Option('p', "port", Default = 7013, HelpText = "Port to bind in Daemon mode.")]
         public int Port { get; set; }
         [Option('s', "ssl", Default = false, HelpText = "If Daemon mode should use SSL or not.")]
         public bool SSL { get; set; }
