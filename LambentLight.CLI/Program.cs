@@ -37,6 +37,12 @@ namespace LambentLight.CLI
                 server.Start();
                 Thread.Sleep(Timeout.Infinite);
             }
+            // Otherwise, exit with code 1 because we have not implemented anything
+            else
+            {
+                Log.Error("CLI Client has not been yet implemented");
+                Environment.Exit(1);
+            }
         }
 
         private static void Server_MessageReceived(object sender, MessageReceivedEventArgs e)
