@@ -1,12 +1,18 @@
-﻿using System;
+﻿using CommandLine;
 
 namespace LambentLight.CLI
 {
-    class Program
+    public static class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            // Parse the command line arguments and launch the program
+            Parser.Default.ParseArguments<Arguments>(args).WithParsed(x => Run(x));
+        }
+
+        public static void Run(Arguments args)
+        {
+
         }
     }
 }
