@@ -1,5 +1,6 @@
 ﻿using CommandLine;
 using Serilog;
+using System;
 using System.Threading;
 using WatsonWebsocket;
 
@@ -24,11 +25,29 @@ namespace LambentLight.CLI
             // If we need to start in daemon mode, run the websocket server
             if (args.Daemon)
             {
-                Log.Information("Starting LambentLight in Daemon Mode on {0}:{1}", args.Address, args.Port);
                 WatsonWsServer server = new WatsonWsServer(args.Address, args.Port, args.SSL);
+                server.ClientConnected += Server_ClientConnected;
+                server.ClientDisconnected += Server_ClientDisconnected;
+                server.ServerStopped += Server_ServerStopped;
+                Log.Information("Starting LambentLight in Daemon Mode on {0}:{1}", args.Address, args.Port);
                 server.Start();
                 Thread.Sleep(Timeout.Infinite);
             }
+        }
+
+        private static void Server_ClientConnected(object sender, ClientConnectedEventArgs e)
+        {
+            Log.Information("Client {0} connected", e.IpPort);
+        }
+
+        private static void Server_ClientDisconnected(object sender, ClientDisconnectedEventArgs e)
+        {
+            Log.Information("Client {0} disconnected", e.IpPort);
+        }
+
+        private static void Server_ServerStopped(object sender, EventArgs e)
+        {
+            Log.Information("Websocket Server has been stopped");
         }
     }
 }
