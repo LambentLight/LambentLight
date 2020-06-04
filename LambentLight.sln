@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleControl", "ConsoleCo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleControlAPI", "ConsoleControl\source\ConsoleControlAPI\ConsoleControlAPI.csproj", "{A4B8573F-EBFC-4140-B8AA-7C037919EF57}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LambentLight.CLI", "LambentLight.CLI\LambentLight.CLI.csproj", "{55520250-5375-4DDF-B090-A2A23D202F0C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{A4B8573F-EBFC-4140-B8AA-7C037919EF57}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A4B8573F-EBFC-4140-B8AA-7C037919EF57}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A4B8573F-EBFC-4140-B8AA-7C037919EF57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55520250-5375-4DDF-B090-A2A23D202F0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55520250-5375-4DDF-B090-A2A23D202F0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55520250-5375-4DDF-B090-A2A23D202F0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55520250-5375-4DDF-B090-A2A23D202F0C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
