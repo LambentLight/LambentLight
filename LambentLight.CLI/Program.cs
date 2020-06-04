@@ -1,6 +1,9 @@
 ﻿using CommandLine;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Serilog;
 using System;
+using System.Text;
 using System.Threading;
 using WatsonWebsocket;
 
@@ -26,12 +29,26 @@ namespace LambentLight.CLI
             if (args.Daemon)
             {
                 WatsonWsServer server = new WatsonWsServer(args.Address, args.Port, args.SSL);
+                server.MessageReceived += Server_MessageReceived;
                 server.ClientConnected += Server_ClientConnected;
                 server.ClientDisconnected += Server_ClientDisconnected;
                 server.ServerStopped += Server_ServerStopped;
                 Log.Information("Starting LambentLight in Daemon Mode on {0}:{1}", args.Address, args.Port);
                 server.Start();
                 Thread.Sleep(Timeout.Infinite);
+            }
+        }
+
+        private static void Server_MessageReceived(object sender, MessageReceivedEventArgs e)
+        {
+            // Convert the data to a string
+            string json = Encoding.UTF8.GetString(e.Data);
+            // Convert it to JSON
+            JObject info = JsonConvert.DeserializeObject<JObject>(json);
+
+            // And check for the information requested by the server
+            switch (info["data"].ToString())
+            {
             }
         }
 
