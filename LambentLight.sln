@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleControl", "ConsoleCo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleControlAPI", "ConsoleControl\source\ConsoleControlAPI\ConsoleControlAPI.csproj", "{A4B8573F-EBFC-4140-B8AA-7C037919EF57}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LambentLight.CLI", "LambentLight.CLI\LambentLight.CLI.csproj", "{55520250-5375-4DDF-B090-A2A23D202F0C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LambentLight.Daemon", "LambentLight.Daemon\LambentLight.Daemon.csproj", "{55520250-5375-4DDF-B090-A2A23D202F0C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

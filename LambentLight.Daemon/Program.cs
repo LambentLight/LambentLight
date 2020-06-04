@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading;
 using WatsonWebsocket;
 
-namespace LambentLight.CLI
+namespace LambentLight.Daemon
 {
     public static class Program
     {
@@ -25,24 +25,15 @@ namespace LambentLight.CLI
                 .WriteTo.Console()
                 .CreateLogger();
 
-            // If we need to start in daemon mode, run the websocket server
-            if (args.Daemon)
-            {
-                WatsonWsServer server = new WatsonWsServer(args.Address, args.Port, args.SSL);
-                server.MessageReceived += Server_MessageReceived;
-                server.ClientConnected += Server_ClientConnected;
-                server.ClientDisconnected += Server_ClientDisconnected;
-                server.ServerStopped += Server_ServerStopped;
-                Log.Information("Starting LambentLight in Daemon Mode on {0}:{1}", args.Address, args.Port);
-                server.Start();
-                Thread.Sleep(Timeout.Infinite);
-            }
-            // Otherwise, exit with code 1 because we have not implemented anything
-            else
-            {
-                Log.Error("CLI Client has not been yet implemented");
-                Environment.Exit(1);
-            }
+            // And run the websocket server
+            WatsonWsServer server = new WatsonWsServer(args.IP, args.Port, args.SSL);
+            server.MessageReceived += Server_MessageReceived;
+            server.ClientConnected += Server_ClientConnected;
+            server.ClientDisconnected += Server_ClientDisconnected;
+            server.ServerStopped += Server_ServerStopped;
+            Log.Information("Starting LambentLight in Daemon Mode on {0}:{1}", args.IP, args.Port);
+            server.Start();
+            Thread.Sleep(Timeout.Infinite);
         }
 
         private static void Server_MessageReceived(object sender, MessageReceivedEventArgs e)
