@@ -1,4 +1,5 @@
-﻿using Serilog;
+﻿using LibGit2Sharp;
+using Serilog;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
@@ -10,12 +11,29 @@ namespace LambentLight.DataFolders
     /// </summary>
     public class DataFolderManager : BaseManager
     {
+        #region Fields
+
+        /// <summary>
+        /// The GIT URL for the Server Data Repository.
+        /// </summary>
+        private const string RepoURL = "https://github.com/LambentLight/ServerData.git";
+        /// <summary>
+        /// The location of the repository folder.
+        /// </summary>
+        public readonly string RepoFolder = Path.Combine("repo");
+
+        #endregion
+
         #region Properties
 
         /// <summary>
         /// The list of data folders available to be used.
         /// </summary>
         public List<DataFolder> Folders { get; private set; } = new List<DataFolder>();
+        /// <summary>
+        /// If the Server Data Repository exists.
+        /// </summary>
+        public bool RepoExists => Directory.Exists(RepoFolder);
 
         #endregion
 
@@ -54,6 +72,19 @@ namespace LambentLight.DataFolders
             // Finally, set the temp list as the real one
             Folders = temp;
             Log.Information($"Found {temp.Count} Data Folders");
+        }
+        /// <summary>
+        /// Downloads the Server Data repository.
+        /// </summary>
+        public void DownloadRepo()
+        {
+            // If the repository already exists, delete it
+            if (RepoExists)
+            {
+                Directory.Delete(RepoFolder);
+            }
+            // Clone the repo with libgit
+            Repository.Clone(RepoURL, RepoFolder);
         }
 
         #endregion
