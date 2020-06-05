@@ -17,6 +17,15 @@ namespace LambentLight.Daemon
 #else
             "/var/lib/lambentlight";
 #endif
+        /// <summary>
+        /// The OS-aware log file.
+        /// </summary>
+        private const string log =
+#if WINDOWS
+            "C:\\ProgramData\\LambentLight\\LambentLight.log";
+#else
+            "/var/log/lambentlight/lambentlight.log";
+#endif
 
         /// <summary>
         /// The IP that the WebSocket will be binded to.
@@ -33,6 +42,11 @@ namespace LambentLight.Daemon
         /// </summary>
         [Option('d', "dir", Default = directory, HelpText = "The directory used to store Builds and Data Folders.")]
         public string Directory { get; set; }
+        /// <summary>
+        /// The working directory of the program.
+        /// </summary>
+        [Option('l', "log-file", Default = log, HelpText = "The file used to store a log file.")]
+        public string LogFile { get; set; }
         /// <summary>
         /// If SSL should be used for the WebSocket.
         /// </summary>

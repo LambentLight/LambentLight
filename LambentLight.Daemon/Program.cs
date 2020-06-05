@@ -32,6 +32,7 @@ namespace LambentLight.Daemon
             // Configure the Serilog Logging
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
+                .WriteTo.File(args.LogFile)
                 .WriteTo.Console()
                 .CreateLogger();
 
