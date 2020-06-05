@@ -92,6 +92,7 @@ namespace LambentLight.Daemon
         private static void Server_ServerStopped(object sender, EventArgs e)
         {
             Log.Information("Websocket Server has been stopped");
+            Environment.Exit(0);
         }
     }
 }
