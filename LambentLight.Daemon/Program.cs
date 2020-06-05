@@ -71,7 +71,16 @@ namespace LambentLight.Daemon
             // Convert the data to a string
             string json = Encoding.UTF8.GetString(e.Data);
             // Convert it to JSON
-            JObject info = JsonConvert.DeserializeObject<JObject>(json);
+            JObject info;
+            try
+            {
+                info = JsonConvert.DeserializeObject<JObject>(json);
+            }
+            catch (JsonReaderException er)
+            {
+                Log.Error(er, "Error when trying to parse the information sent by {0}", e.IpPort);
+                return;
+            }
 
             // And check for the information requested by the server
             switch (info["data"].ToString())
