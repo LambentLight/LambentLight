@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Serilog;
 using System;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
@@ -52,7 +53,10 @@ namespace LambentLight.Daemon
             }
 
             // And run the websocket server
-            WatsonWsServer server = new WatsonWsServer(args.IP, args.Port, args.SSL);
+            WatsonWsServer server = new WatsonWsServer(args.IP, args.Port, args.SSL)
+            {
+                PermittedIpAddresses = args.Allowed.ToList()
+            };
             server.MessageReceived += Server_MessageReceived;
             server.ClientConnected += Server_ClientConnected;
             server.ClientDisconnected += Server_ClientDisconnected;
