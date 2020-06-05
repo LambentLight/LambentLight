@@ -54,7 +54,7 @@ namespace LambentLight.Daemon
             }
 
             // And run the websocket server
-            WatsonWsServer server = new WatsonWsServer(args.IP, args.Port, args.SSL)
+            WatsonWsServer server = new WatsonWsServer(args.WebSocketIP, args.WebSocketPort, args.WebSocketSSL)
             {
                 PermittedIpAddresses = args.Allowed.ToList()
             };
@@ -62,7 +62,7 @@ namespace LambentLight.Daemon
             server.ClientConnected += Server_ClientConnected;
             server.ClientDisconnected += Server_ClientDisconnected;
             server.ServerStopped += Server_ServerStopped;
-            Log.Information("Starting LambentLight in Daemon Mode on {0}:{1}", args.IP, args.Port);
+            Log.Information("Starting LambentLight in Daemon Mode on {0}:{1}", args.WebSocketIP, args.WebSocketPort);
             server.Start();
             Thread.Sleep(Timeout.Infinite);
         }

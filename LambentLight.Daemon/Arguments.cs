@@ -30,28 +30,28 @@ namespace LambentLight.Daemon
         /// <summary>
         /// The IP that the WebSocket will be binded to.
         /// </summary>
-        [Option('i', "ip", Default = "127.0.0.1", HelpText = "IP Address to bind.")]
-        public string IP { get; set; }
+        [Option("websocket-ip", Default = "127.0.0.1", HelpText = "WebSocket: IP Address to bind.")]
+        public string WebSocketIP { get; set; }
         /// <summary>
         /// The port that the WebSocket will be binded to.
         /// </summary>
-        [Option('p', "port", Default = 7013, HelpText = "Port to bind.")]
-        public int Port { get; set; }
+        [Option("websocket-port", Default = 7013, HelpText = "WebSocket: Port to bind.")]
+        public int WebSocketPort { get; set; }
+        /// <summary>
+        /// If SSL should be used for the WebSocket.
+        /// </summary>
+        [Option("websocket-ssl", Default = false, HelpText = "WebSocket: If SSL should be used or not.")]
+        public bool WebSocketSSL { get; set; }
         /// <summary>
         /// The working directory of the program.
         /// </summary>
-        [Option('d', "dir", Default = directory, HelpText = "The directory used to store Builds and Data Folders.")]
+        [Option('d', "directory", Default = directory, HelpText = "The directory used to store Builds and Data Folders.")]
         public string Directory { get; set; }
         /// <summary>
         /// The working directory of the program.
         /// </summary>
         [Option('l', "log-file", Default = log, HelpText = "The file used to store a log file.")]
         public string LogFile { get; set; }
-        /// <summary>
-        /// If SSL should be used for the WebSocket.
-        /// </summary>
-        [Option('s', "ssl", Default = false, HelpText = "If SSL should be used or not.")]
-        public bool SSL { get; set; }
         /// <summary>
         /// The IPs that are authorized to make WebSocket requests.
         /// </summary>
