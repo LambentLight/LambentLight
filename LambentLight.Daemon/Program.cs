@@ -12,6 +12,11 @@ namespace LambentLight.Daemon
 {
     public static class Program
     {
+        /// <summary>
+        /// The arguments passed on the command line.
+        /// </summary>
+        public static Arguments Args { get; private set; } = null;
+
         public static void Main(string[] args)
         {
             // Parse the command line arguments and launch the program
@@ -20,6 +25,9 @@ namespace LambentLight.Daemon
 
         public static void Run(Arguments args)
         {
+            // Save the configuration for later
+            Args = args;
+
             // Configure the Serilog Logging
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
