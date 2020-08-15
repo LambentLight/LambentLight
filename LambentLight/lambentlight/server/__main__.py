@@ -1,16 +1,28 @@
 import asyncio
+import logging
 
 from aiohttp import web
 
 from .arguments import arguments
 from .web import app
+from lambentlight import __version__
 
 
 async def main():
+    # Configure the logging levels in all of the loggers
+    logger = logging.getLogger("lambentlight")
+    logger.setLevel(logging.INFO)
+    formatter = logging.Formatter("[%(asctime)s - %(levelname)s] %(message)s")
+    stream = logging.StreamHandler()
+    stream.setFormatter(formatter)
+    logger.addHandler(stream)
+    # Notify that we are stating the server
+    logger.info(f"Starting LambentLight {__version__}")
     # And start the web server
     runner = web.AppRunner(app)
     await runner.setup()
     site = web.TCPSite(runner, arguments.host, arguments.web_port)
+    logger.info(f"Starting Web Server at {arguments.host}:{arguments.web_port}")
     await site.start()
 
 
