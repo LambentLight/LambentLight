@@ -22,3 +22,6 @@ def parse_arguments():
                         help="the port of the web server")
     # And return them parsed
     return parser.parse_args()
+
+
+arguments = parse_arguments()
