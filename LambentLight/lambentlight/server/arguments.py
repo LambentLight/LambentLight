@@ -14,7 +14,11 @@ def parse_arguments():
                                      epilog="Check https://justalemon.ml/LambentLight for more info.",
                                      add_help=True, formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     # Add the arguments
-    parser.add_argument("-w", "--work-dir", dest="work_dir", default=default_work_dir,
+    parser.add_argument("--work-dir", dest="work_dir", default=default_work_dir,
                         help="folder used to store the server data")
+    parser.add_argument("--host", dest="host", default="127.0.0.1",
+                        help="the host or IP address to bind")
+    parser.add_argument("--web-port", dest="web_port", default=8019,
+                        help="the port of the web server")
     # And return them parsed
     return parser.parse_args()
