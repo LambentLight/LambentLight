@@ -18,4 +18,7 @@ if __name__ == "__main__":
     if not hasattr(arguments, "help"):
         loop = asyncio.get_event_loop()
         loop.create_task(main())
-        loop.run_forever()
+        try:
+            loop.run_forever()
+        except KeyboardInterrupt:
+            loop.stop()
