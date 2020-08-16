@@ -5,6 +5,7 @@ from aiohttp import web
 
 from .arguments import arguments
 from .checks import is_valid
+from .manager import manager
 from .web import app
 from lambentlight import __version__
 
@@ -23,19 +24,22 @@ async def main():
     if not is_valid:
         logger.critical("Operating system is not Compatible (needs to be Windows or Ubuntu)")
         return
+    # Perform the manager initialization
+    if not await manager.initialize():
+        logger.error("Manager Initialization Failed")
+        return
     # And start the web server
     runner = web.AppRunner(app)
     await runner.setup()
     site = web.TCPSite(runner, arguments.host, arguments.web_port)
     logger.info(f"Starting Web Server at {arguments.host}:{arguments.web_port}")
     await site.start()
+    # Then, just block the server
+    while True:
+        await asyncio.sleep(0)
 
 
 if __name__ == "__main__":
     if not hasattr(arguments, "help"):
         loop = asyncio.get_event_loop()
-        loop.create_task(main())
-        try:
-            loop.run_forever()
-        except KeyboardInterrupt:
-            loop.stop()
+        loop.run_until_complete(main())
