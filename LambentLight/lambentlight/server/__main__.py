@@ -33,7 +33,10 @@ async def main():
     await runner.setup()
     site = web.TCPSite(runner, arguments.host, arguments.web_port)
     logger.info(f"Starting Web Server at {arguments.host}:{arguments.web_port}")
-    await site.start()
+    try:
+        await site.start()
+    except OSError as e:
+        logger.info(f"Web server could not be started: Code {e.errno}")
     # Then, just block the server
     while True:
         await asyncio.sleep(0)
