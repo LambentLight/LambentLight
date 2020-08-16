@@ -4,6 +4,7 @@ import logging
 from aiohttp import web
 
 from .arguments import arguments
+from .checks import is_valid
 from .web import app
 from lambentlight import __version__
 
@@ -18,6 +19,10 @@ async def main():
     logger.addHandler(stream)
     # Notify that we are stating the server
     logger.info(f"Starting LambentLight {__version__}")
+    # If we are not running a valid operating system, return
+    if not is_valid:
+        logger.critical("Operating system is not Compatible (needs to be Windows or Ubuntu)")
+        return
     # And start the web server
     runner = web.AppRunner(app)
     await runner.setup()

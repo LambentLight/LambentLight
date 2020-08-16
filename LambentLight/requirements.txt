@@ -1,1 +1,2 @@
 aiohttp==3.6.2
+distro==1.5.0
