@@ -45,4 +45,8 @@ async def main():
 if __name__ == "__main__":
     if not hasattr(arguments, "help"):
         loop = asyncio.get_event_loop()
-        loop.run_until_complete(main())
+        try:
+            loop.run_until_complete(main())
+        except KeyboardInterrupt:
+            loop.stop()
+            asyncio.get_event_loop().run_until_complete(manager.close())

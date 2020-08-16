@@ -58,6 +58,14 @@ class Manager:
         # Finally, tell the main script that we finished the init
         return True
 
+    async def close(self):
+        """
+        Stops all of the servers and web sessions in use.
+        """
+        logger.info("Stopping LambentLight")
+        # Close the session used for aiohttp web requests
+        await self.session.close()
+
     async def update_builds(self):
         """
         Updates the list of known CFX Builds.
