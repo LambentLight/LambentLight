@@ -33,7 +33,13 @@ class Manager:
         # If the configuration exists, load it
         if path.isfile(self.config_path):
             with open(self.config_path) as file:
-                self.config = default.update(json.load(file))
+                loaded = json.load(file)
+                self.config = {}
+                for key, value in default.items():
+                    if key in loaded:
+                        self.config[key] = loaded[key]
+                    else:
+                        self.config[key] = value
             logger.info(f"Loaded configuration from {self.config_path}")
         # Otherwise, write the default values
         else:
