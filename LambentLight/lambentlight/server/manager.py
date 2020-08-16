@@ -6,6 +6,8 @@ import os.path as path
 import aiohttp
 
 from .arguments import arguments
+from .build import Build
+from .checks import is_ubuntu, is_windows
 
 
 logger = logging.getLogger("lambentlight")
@@ -28,8 +30,6 @@ class Manager:
         """
         Initializes the basics of the Manager.
         """
-        # Create the Client Session
-        self.session = aiohttp.ClientSession()
         # If the configuration exists, load it
         if path.isfile(self.config_path):
             with open(self.config_path) as file:
@@ -37,10 +37,61 @@ class Manager:
             logger.info(f"Loaded configuration from {self.config_path}")
         # Otherwise, write the default values
         else:
-            os.makedirs(arguments.work_dir, exist_ok=True)
-            with open(self.config_path, "w+") as file:
-                json.dump(default, file, indent=4)
-            logger.warning(f"Created default configuration at {self.config_path}")
+            try:
+                os.makedirs(arguments.work_dir, exist_ok=True)
+                with open(self.config_path, "w+") as file:
+                    json.dump(default, file, indent=4)
+                logger.warning(f"Created default configuration at {self.config_path}")
+            except PermissionError:
+                logger.warning("Unable to save the Default Configuration (no permission)")
+
+        # Create the Client Session
+        self.session = aiohttp.ClientSession()
+        # And fetch the information required by the manager
+        await self.update_builds()
+        # Finally, tell the main script that we finished the init
+        return True
+
+    async def update_builds(self):
+        """
+        Updates the list of known CFX Builds.
+        """
+        # Request the list of builds
+        async with self.session.get(self.config["dl_builds"]) as resp:
+            # If the code is not 200, log it and return
+            if resp.status != 200:
+                logger.error(f"Unable to fetch updated builds: Code {resp.status}")
+                return
+            # Otherwise, convert it to JSON
+            try:
+                new = await resp.json(content_type=None)
+            except json.JSONDecodeError:
+                logger.error(f"Unable to fetch updated builds because response is not JSON")
+                return
+        # If the request didn't included the list of builds, return
+        if "builds" not in new:
+            logger.error("Request didn't included list of builds.")
+            return
+        # Then, continue and iterate the builds that we got
+        found = []
+        for build in new["builds"]:
+            # If one of the parts is missing, log it and continue
+            if "name" not in build:
+                logger.error("Name of Build is missing.")
+                continue
+            elif "download" not in build:
+                logger.error("Download URL of Build is missing.")
+                continue
+            elif "target" not in build:
+                logger.error("Target Operating System of Build was not found.")
+                continue
+            # If we got here, create a new one if it matches the os
+            if (build["target"] == 0 and is_windows) or (build["target"] == 1 and is_ubuntu):
+                found.append(Build(name=build["name"], download=build["download"]))
+
+        # At this point, replace the builds and notify it
+        self.builds = found
+        logger.info(f"Builds have been updated (Total: {len(found)})")
 
 
 manager = Manager()
