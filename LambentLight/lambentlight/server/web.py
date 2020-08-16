@@ -31,9 +31,9 @@ async def builds(request):
     for build in manager.builds:
         binfo = {
             "name": build.name,
-            "installed": build.installed
+            "ready": build.is_ready
         }
-        blist.add(binfo)
+        blist.append(binfo)
     # And return it as JSON
     headers = {
         "Cache-Control": f"max-age={60 * 60}"  # 1 hour
