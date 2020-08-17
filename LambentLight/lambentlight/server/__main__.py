@@ -39,7 +39,7 @@ async def start():
     try:
         await site.start()
     except OSError as e:
-        logger.info(f"Web server could not be started: Code {e.errno}")
+        logger.error(f"Web server could not be started: Code {e.errno}")
     # Then, just block the server
     while True:
         await asyncio.sleep(0)
