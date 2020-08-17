@@ -6,7 +6,25 @@ from .manager import manager
 from lambentlight import __version__
 
 
-app = web.Application()
+@web.middleware
+async def auth(request: web.Request, handler):
+    """
+    Checks the token auth.
+    """
+    # If the request does not has an authentication header, return a 401
+    if "Authorization" not in request.headers:
+        return web.json_response({"message": "Token not specified."}, status=401)
+    # If the header does not starts with Bearer
+    elif not request.headers["Authorization"].lower().startswith("bearer "):
+        return web.json_response({"message": "Auth Token is not using the right format."}, status=401)
+    # If the second part does not matches the token in the config, return
+    elif request.headers["Authorization"].split(" ")[1] != manager.config["token"]:
+        return web.json_response({"message": "Auth Token is not valid."}, status=401)
+    # Otherwise, return a the response of the handler
+    return await handler(request)
+
+
+app = web.Application(middlewares=[auth])
 routes = web.RouteTableDef()
 
 
@@ -22,6 +40,7 @@ async def info(request):
         "Cache-Control": f"max-age={60 * 60}"  # 1 hour
     }
     return web.json_response(pinfo, headers=headers)
+
 
 @routes.get("/builds")
 async def builds(request):
