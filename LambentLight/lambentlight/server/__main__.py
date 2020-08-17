@@ -10,7 +10,10 @@ from .web import app
 from lambentlight import __version__
 
 
-async def main():
+async def start():
+    """
+    Starts the LambentLight Server.
+    """
     # Configure the logging levels in all of the loggers
     logger = logging.getLogger("lambentlight")
     logger.setLevel(logging.INFO)
@@ -42,11 +45,18 @@ async def main():
         await asyncio.sleep(0)
 
 
-if __name__ == "__main__":
+def main():
+    """
+    Initializes the LambentLight Server Loop.
+    """
     if not hasattr(arguments, "help"):
         loop = asyncio.get_event_loop()
         try:
-            loop.run_until_complete(main())
+            loop.run_until_complete(start())
         except KeyboardInterrupt:
             loop.stop()
             asyncio.get_event_loop().run_until_complete(manager.close())
+
+
+if __name__ == "__main__":
+    main()
