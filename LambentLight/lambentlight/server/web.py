@@ -104,4 +104,24 @@ async def download_build(request: web.Request):
             return web.json_response({"messages": "Error when downloading the build."}, status=500)
 
 
+@routes.get("/folders")
+async def folders(request):
+    """
+    Gets the Data Folders known by LambentLight.
+    """
+    # Create the list of data folders based from the manager
+    flist = []
+    for folder in manager.folders:
+        finfo = {
+            "name": folder.name,
+            "path": folder.path
+        }
+        flist.append(finfo)
+    # And return it as JSON
+    headers = {
+        "Cache-Control": f"max-age={2 * 60}"  # 2 minutes
+    }
+    return web.json_response(flist, headers=headers)
+
+
 app.add_routes(routes)

@@ -8,6 +8,7 @@ import string
 import aiohttp
 
 from .arguments import arguments
+from .datafolder import DataFolder
 from .build import Build
 from .checks import is_ubuntu, is_windows
 
@@ -28,6 +29,7 @@ class Manager:
         self.config_path = path.join(arguments.work_dir, "config.json")
         self.config = default
         self.builds = []
+        self.folders = []
 
     async def initialize(self):
         """
@@ -58,6 +60,7 @@ class Manager:
         self.session = aiohttp.ClientSession()
         # And fetch the information required by the manager
         await self.update_builds()
+        await self.update_folders()
         # Finally, tell the main script that we finished the init
         return True
 
@@ -109,6 +112,20 @@ class Manager:
         # At this point, replace the builds and notify it
         self.builds = found
         logger.info(f"Builds have been updated (Total: {len(found)})")
+
+    async def update_folders(self):
+        """
+        Updates the list of Data Folders.
+        """
+        # Get the subdirectories of data and save them as Data Folders
+        dpath = os.path.join(arguments.work_dir, "data")
+        if os.path.isdir(dpath):
+            local = [DataFolder(x, True) for x in os.scandir(dpath) if x.is_dir()]
+        else:
+            logger.warning("Directory with Data Folder does not exists, skipping...")
+            local = []
+        logger.info(f"Data Folders have been updated (Total: {len(local)})")
+        self.folders = local
 
 
 manager = Manager()
