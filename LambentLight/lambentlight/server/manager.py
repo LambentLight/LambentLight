@@ -22,7 +22,7 @@ class Manager:
     """
     def __init__(self):
         self.session = None
-        self.config_path = path.join(arguments.work_dir, "Config.json")
+        self.config_path = path.join(arguments.work_dir, "config.json")
         self.config = default
         self.builds = []
 
