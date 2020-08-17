@@ -62,6 +62,16 @@ async def builds(request):
     return web.json_response(blist, headers=headers)
 
 
+@routes.post("/builds")
+async def update_builds(request):
+    """
+    Updates the list of Builds.
+    """
+    # Just call the method to update builds and return the total number
+    await manager.update_builds()
+    return web.json_response({"count": len(manager.builds)})
+
+
 @routes.post("/builds/download")
 async def download_build(request: web.Request):
     """
