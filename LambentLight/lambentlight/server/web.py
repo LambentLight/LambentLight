@@ -57,7 +57,7 @@ async def builds(request):
         blist.append(binfo)
     # And return it as JSON
     headers = {
-        "Cache-Control": f"max-age={60 * 60}"  # 1 hour
+        "Cache-Control": f"max-age={2 * 60}"  # 2 minutes
     }
     return web.json_response(blist, headers=headers)
 
