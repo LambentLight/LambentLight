@@ -6,7 +6,8 @@ logger = logging.getLogger("lambentlight")
 default = {
     "token_cfx": "",
     "token_steam": "",
-    "game": "gtav"
+    "game": "gtav",
+    "exec": ["server.cfg"]
 }
 
 
