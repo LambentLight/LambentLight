@@ -18,7 +18,7 @@ class DataFolder:
         self.path = os.path.abspath(path)
         self.name = os.path.basename(self.path)
         self.local = local
-        self.config = None
+        self.config = {}
         self.reload_configuration()
 
     @property
