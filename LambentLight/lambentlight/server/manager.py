@@ -16,6 +16,7 @@ from .checks import is_ubuntu, is_windows
 logger = logging.getLogger("lambentlight")
 default = {
     "token_api": "".join(secrets.choice(string.ascii_letters + string.digits) for _ in range(32)),
+    "token_cfx": "",
     "dl_builds": "https://raw.githubusercontent.com/LambentLight/Builds/master/builds.json"
 }
 
