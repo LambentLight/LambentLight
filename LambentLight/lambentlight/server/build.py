@@ -39,13 +39,26 @@ class Build:
         """
         Checks if the Build is ready to be used.
         """
-        # Check for the presence of the correct file for Windows and Linux
+        return os.path.isfile(self.executable)
+
+    @property
+    def executable(self):
+        """
+        Returns the name of the server executable.
+        """
         if is_windows:
-            return os.path.isfile(os.path.join(self.folder, "FXServer.exe"))
+            return os.path.join(self.folder, "FXServer.exe")
         elif is_ubuntu:
-            return os.path.isfile(os.path.join(self.folder, "run.sh"))
+            return os.path.join(self.folder, "run.sh")
         else:
-            return False
+            return None
+
+    @property
+    def citizen_dir(self):
+        """
+        Returns the value of the citizen subdirectory.
+        """
+        return os.path.join(self.folder, "citizen")
 
     async def download(self, session: aiohttp.ClientSession):
         """
