@@ -1,9 +1,13 @@
 import json
+import logging
 
+import aiohttp
 from aiohttp import web
 
 from .manager import manager
 from lambentlight import __version__
+
+logger = logging.getLogger("lambentlight")
 
 
 @web.middleware
@@ -26,6 +30,27 @@ async def auth(request: web.Request, handler):
 
 app = web.Application(middlewares=[auth])
 routes = web.RouteTableDef()
+
+
+@routes.get("/ws")
+async def websocket(request: web.Request):
+    """
+    WebSocket used for the communication of changes.
+    """
+    logger.info(f"WebSocket connection opened from {request.remote}")
+    # Prepare the WebSocket Response for the Connection
+    ws = web.WebSocketResponse()
+    await ws.prepare(request)
+    # Add it to the list of clients
+    manager.ws_clients.append(ws)
+    # And start checking the messages that are coming in
+    async for message in ws:
+        if message.type == aiohttp.WSMessage.CLOSE:
+            break
+    # Finally, remove the client from the list
+    manager.ws_clients.remove(ws)
+    logger.info(f"WebSocket connection of {request.remote} has been closed")
+    return ws
 
 
 @routes.get("/")
