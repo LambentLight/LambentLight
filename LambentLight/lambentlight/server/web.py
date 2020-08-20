@@ -73,19 +73,10 @@ async def builds(request):
     """
     Shows a list of builds.
     """
-    # Create the list of builds based on the manager builds
-    blist = []
-    for build in manager.builds:
-        binfo = {
-            "name": build.name,
-            "ready": build.is_ready
-        }
-        blist.append(binfo)
-    # And return it as JSON
     headers = {
         "Cache-Control": f"max-age={2 * 60}"  # 2 minutes
     }
-    return web.json_response(blist, headers=headers)
+    return web.json_response([dict(x) for x in manager.builds], headers=headers)
 
 
 @routes.post("/builds")
@@ -135,19 +126,10 @@ async def folders(request):
     """
     Gets the Data Folders known by LambentLight.
     """
-    # Create the list of data folders based from the manager
-    flist = []
-    for folder in manager.folders:
-        finfo = {
-            "name": folder.name,
-            "path": folder.path
-        }
-        flist.append(finfo)
-    # And return it as JSON
     headers = {
         "Cache-Control": f"max-age={2 * 60}"  # 2 minutes
     }
-    return web.json_response(flist, headers=headers)
+    return web.json_response([dict(x) for x in manager.folders], headers=headers)
 
 
 @routes.put("/servers")

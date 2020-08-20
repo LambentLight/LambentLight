@@ -17,6 +17,10 @@ class Server:
         self.folder = folder
         self.process = process
 
+    def __iter__(self):
+        yield "build", dict(self.build)
+        yield "folder", dict(self.folder)
+
     @staticmethod
     async def start(build: Build, folder: DataFolder):
         """

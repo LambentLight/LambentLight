@@ -22,6 +22,10 @@ class DataFolder:
         self.config = {}
         self.reload_configuration()
 
+    def __iter__(self):
+        yield "name", self.name
+        yield "path", self.path
+
     @property
     def can_be_used(self):
         """

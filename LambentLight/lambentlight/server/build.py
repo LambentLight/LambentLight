@@ -34,6 +34,11 @@ class Build:
             self.name = name
             self.url = download
 
+    def __iter__(self):
+        yield "name", self.name
+        yield "url", self.url,
+        yield "is_ready", self.is_ready
+
     @property
     def is_ready(self):
         """
