@@ -145,5 +145,24 @@ class Manager:
             }
             await ws.send_json(data)
 
+    async def fetch_output(self):
+        """
+        Fetches the input of the CFX Server processes.
+        """
+        # Iterate over the processes and check for the stdout contents
+        for server in self.servers:
+            # If the process is not running, continue
+            if server.process.poll() is not None:
+                continue
+
+            # Otherwise, get a line and send it to the websockets connected
+            line = server.process.stdout.readline()
+            if line:
+                data = {
+                    "folder": server.folder.name,
+                    "message": line.strip("\n")
+                }
+                await self.send_data("console", data)
+
 
 manager = Manager()
