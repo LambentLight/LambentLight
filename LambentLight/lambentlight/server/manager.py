@@ -130,5 +130,16 @@ class Manager:
         logger.info(f"Data Folders have been updated (Total: {len(local)})")
         self.folders = local
 
+    async def send_data(self, event: str, data):
+        """
+        Sends some data to the connected Clients via WebSockets.
+        """
+        for ws in self.ws_clients:
+            data = {
+                "e": event,
+                "d": data
+            }
+            await ws.send_json(data)
+
 
 manager = Manager()
