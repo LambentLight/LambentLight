@@ -5,6 +5,7 @@ import aiohttp
 from aiohttp import web
 
 from .manager import manager
+from .server import Server
 from lambentlight import __version__
 
 logger = logging.getLogger("lambentlight")
@@ -147,6 +148,47 @@ async def folders(request):
         "Cache-Control": f"max-age={2 * 60}"  # 2 minutes
     }
     return web.json_response(flist, headers=headers)
+
+
+@routes.put("/servers")
+async def start(request):
+    """
+    Starts a new CFX Server.
+    """
+    # Try to get the request as JSON and return a 400 if failed
+    try:
+        data = await request.json()
+    except json.JSONDecodeError:
+        return web.json_response({"message": "Body is not JSON or is malformed."}, status=400)
+
+    # Make sure that the required parameters are present
+    if "data" not in data:
+        return web.json_response({"message": "Data Folder was not specified."}, status=400)
+    elif "build" not in data:
+        return web.json_response({"message": "Build was not specified."}, status=400)
+
+    # Go ahead and search for the Data Folder
+    found_folders = [x for x in manager.folders if x.name == data["data"]]
+    if not found_folders:
+        return web.json_response({"message": "Data Folder was not found."}, status=404)
+    folder = found_folders[0]
+    # Then, check if there is a Server running with the same Data folder
+    found_servers = [x for x in manager.servers if x.folder == folder]
+    if found_servers:
+        return web.json_response({"message": "Found a server running with the specified Data Folder."}, status=409)
+
+    # Now, time to find the Build
+    found_builds = [x for x in manager.builds if x.name == data["build"]]
+    if not found_builds:
+        return web.json_response({"message": "CFX Build was not found."}, status=404)
+    build = found_builds[0]
+
+    # If we have everything, go ahead and start it
+    server = await Server.start(build, folder)
+    if server:
+        return web.json_response({"pid": server.process.pid}, status=201)
+    else:
+        return web.json_response({"message": "Unable to start the server. Check the console."}, status=500)
 
 
 app.add_routes(routes)

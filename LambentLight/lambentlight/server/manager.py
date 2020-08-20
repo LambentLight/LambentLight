@@ -31,6 +31,7 @@ class Manager:
         self.config = default
         self.builds = []
         self.folders = []
+        self.servers = []
         self.ws_clients = []
 
     async def initialize(self):
