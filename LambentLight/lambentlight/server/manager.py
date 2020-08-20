@@ -74,6 +74,10 @@ class Manager:
         logger.info("Stopping LambentLight")
         # Close the session used for aiohttp web requests
         await self.session.close()
+        # And disconnect all of the WS Clients
+        for ws in self.ws_clients:
+            if not ws.closed:
+                await ws.close(message="LambentLight is Closing")
 
     async def update_builds(self):
         """
