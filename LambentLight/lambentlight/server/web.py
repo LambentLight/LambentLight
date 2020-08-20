@@ -18,7 +18,7 @@ async def auth(request: web.Request, handler):
     elif not request.headers["Authorization"].lower().startswith("bearer "):
         return web.json_response({"message": "Auth Token is not using the right format."}, status=401)
     # If the second part does not matches the token in the config, return
-    elif request.headers["Authorization"].split(" ")[1] != manager.config["token"]:
+    elif request.headers["Authorization"].split(" ")[1] != manager.config["token_api"]:
         return web.json_response({"message": "Auth Token is not valid."}, status=401)
     # Otherwise, return a the response of the handler
     return await handler(request)
