@@ -151,8 +151,8 @@ class Manager:
         """
         # Iterate over the processes and check for the stdout contents
         for server in self.servers:
-            # If the process is not running, continue
-            if server.process.poll() is not None:
+            # If there is no process or is no longer running, continue
+            if server.process is None or server.process.poll() is not None:
                 continue
 
             # Otherwise, get a line and send it to the websockets connected

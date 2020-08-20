@@ -166,8 +166,9 @@ async def start(request):
     build = found_builds[0]
 
     # If we have everything, go ahead and start it
-    server = await Server.start(build, folder)
-    if server:
+    server = Server(build, folder)
+    if await server.start():
+        manager.servers.append(server)
         return web.json_response({"pid": server.process.pid}, status=201)
     else:
         return web.json_response({"message": "Unable to start the server. Check the console."}, status=500)
