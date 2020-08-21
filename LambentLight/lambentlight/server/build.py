@@ -27,7 +27,7 @@ class Build:
         # Otherwise, store the information in the correct format
         if folder:
             self.folder = folder
-            self.name = os.path.dirname(folder)
+            self.name = os.path.basename(folder)
             self.url = None
         else:
             self.folder = os.path.join(arguments.work_dir, "builds", name)
