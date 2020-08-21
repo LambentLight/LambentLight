@@ -1,6 +1,7 @@
 import logging
 import signal
-import subprocess
+from asyncio import create_subprocess_exec, sleep
+from asyncio.subprocess import PIPE
 
 from .build import Build
 from .datafolder import DataFolder
@@ -43,9 +44,12 @@ class Server:
         Starts or Restarts the game server.
         """
         # If the server is running, stop it
-        if self.process and self.process.poll() is not None:
-            self.process.send_signal(signal.SIGINT)
-            self.process.wait()
+        if self.process and self.process.returncode is None:
+            if terminate:
+                self.process.terminate()
+            else:
+                self.process.send_signal(signal.SIGINT)
+            await self.process.wait()
 
         # If the build is not ready to be used, download it
         if not self.build.is_ready:
@@ -64,7 +68,6 @@ class Server:
 
         # Format the launch parameters
         params = [
-            self.build.executable,
             "+set", "citizen_dir", f"\"{self.build.citizen_dir}\"",
             "+set", "sv_licenseKey", token,
             "+set", "gamename", self.folder.config["game"]
@@ -75,7 +78,7 @@ class Server:
             params.append(config)
 
         # Then, start the process and save it
-        process = subprocess.Popen(params, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
-                                   shell=False, cwd=self.folder.path, universal_newlines=True)
+        process = await create_subprocess_exec(self.build.executable, *params, cwd=self.folder.path,
+                                               stdin=PIPE, stdout=PIPE, stderr=PIPE)
         self.process = process
         return True

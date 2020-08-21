@@ -4,7 +4,7 @@ import logging
 from aiohttp import web
 
 from .arguments import arguments
-from .checks import is_valid
+from .checks import is_valid, is_windows
 from .manager import manager
 from .web import app
 from lambentlight import __version__
@@ -51,6 +51,8 @@ def main():
     Initializes the LambentLight Server Loop.
     """
     if not hasattr(arguments, "help"):
+        if is_windows:
+            asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
         loop = asyncio.get_event_loop()
         try:
             loop.run_until_complete(start())

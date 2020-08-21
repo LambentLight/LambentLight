@@ -1,4 +1,5 @@
 import json
+import locale
 import logging
 import os
 import os.path as path
@@ -8,9 +9,9 @@ import string
 import aiohttp
 
 from .arguments import arguments
-from .datafolder import DataFolder
 from .build import Build
 from .checks import is_ubuntu, is_windows
+from .datafolder import DataFolder
 
 
 logger = logging.getLogger("lambentlight")
@@ -152,15 +153,14 @@ class Manager:
         # Iterate over the processes and check for the stdout contents
         for server in self.servers:
             # If there is no process or is no longer running, continue
-            if server.process is None or server.process.poll() is not None:
+            if server.process is None or server.process.returncode is not None:
                 continue
 
-            # Otherwise, get a line and send it to the websockets connected
-            line = server.process.stdout.readline()
-            if line:
+            # Otherwise, get a line and send it to the WS Clients connected
+            async for line in server.process.stdout:
                 data = {
                     "folder": server.folder.name,
-                    "message": line.strip("\n")
+                    "message": line.decode(locale.getpreferredencoding(False)).strip("\n")
                 }
                 await self.send_data("console", data)
 

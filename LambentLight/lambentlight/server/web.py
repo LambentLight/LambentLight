@@ -132,8 +132,19 @@ async def folders(request):
     return web.json_response([dict(x) for x in manager.folders], headers=headers)
 
 
+@routes.get("/servers")
+async def servers_get(request):
+    """
+    Returns a list of servers.
+    """
+    headers = {
+        "Cache-Control": f"max-age={2 * 60}"  # 2 minutes
+    }
+    return web.json_response([dict(x) for x in manager.servers], headers=headers)
+
+
 @routes.put("/servers")
-async def start(request):
+async def servers_put(request):
     """
     Starts a new CFX Server.
     """
