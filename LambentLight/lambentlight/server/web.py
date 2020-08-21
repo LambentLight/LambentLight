@@ -185,4 +185,18 @@ async def servers_put(request):
         return web.json_response({"message": "Unable to start the server. Check the console."}, status=500)
 
 
+@routes.get("/servers/{name}")
+async def server_get(request):
+    """
+    Gets the information of a server.
+    """
+    # Try to find servers with the specified name and return a 404 if none were found
+    servers = [x for x in manager.servers if x.folder.name == request.match_info["name"]]
+    if not servers:
+        return web.json_response({"message": "No servers were found with the specified name."}, status=404)
+
+    # Then, return the information of the server
+    return web.json_response(dict(servers[0]))
+
+
 app.add_routes(routes)
