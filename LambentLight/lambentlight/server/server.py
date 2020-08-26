@@ -1,10 +1,11 @@
 import logging
 import signal
-from asyncio import create_subprocess_exec, sleep
 import subprocess
+from asyncio import create_subprocess_exec
 from asyncio.subprocess import PIPE
 
 from .build import Build
+from .checks import is_windows
 from .datafolder import DataFolder
 from .manager import manager
 
@@ -40,17 +41,30 @@ class Server:
             logger.error(f"No CFX Token is available for Data Folder {self.folder.name}")
             return None
 
+    async def stop(self, terminate=False):
+        """
+        Stops or Terminates the game server.
+        """
+        # If the process is not running, return
+        if not self.process or self.process.returncode is not None:
+            return
+
+        # If we want to terminate it, do it
+        if terminate:
+            self.process.terminate()
+        # Otherwise, send the interrupt
+        else:
+            self.process.send_signal(signal.CTRL_BREAK_EVENT if is_windows else signal.SIGINT)
+        # And wait for the process to exit
+        await self.process.wait()
+        self.process = None
+
     async def start(self, terminate=False):
         """
         Starts or Restarts the game server.
         """
-        # If the server is running, stop it
-        if self.process and self.process.returncode is None:
-            if terminate:
-                self.process.terminate()
-            else:
-                self.process.send_signal(signal.SIGINT)
-            await self.process.wait()
+        # Make sure to stop the server
+        await self.stop(terminate)
 
         # If the build is not ready to be used, download it
         if not self.build.is_ready:

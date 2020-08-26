@@ -199,4 +199,15 @@ async def server_get(request):
     return web.json_response(dict(servers[0]))
 
 
+@routes.delete("/servers/{name}")
+async def server_delete(request):
+    # Try to find servers with the specified name and return a 404 if none were found
+    servers = [x for x in manager.servers if x.folder.name == request.match_info["name"]]
+    if not servers:
+        return web.json_response({"message": "No servers were found with the specified name."}, status=404)
+    # If we got here, stop the server and return a 204
+    await servers[0].stop()
+    return web.Response(status=204)
+
+
 app.add_routes(routes)
