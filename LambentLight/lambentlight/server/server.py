@@ -1,6 +1,7 @@
 import logging
 import signal
 from asyncio import create_subprocess_exec, sleep
+import subprocess
 from asyncio.subprocess import PIPE
 
 from .build import Build
@@ -77,8 +78,11 @@ class Server:
             params.append("+exec")
             params.append(config)
 
+        # Select the correct creation flags
+        flags = subprocess.CREATE_NEW_PROCESS_GROUP if is_windows else 0
+
         # Then, start the process and save it
         process = await create_subprocess_exec(self.build.executable, *params, cwd=self.folder.path,
-                                               stdin=PIPE, stdout=PIPE, stderr=PIPE)
+                                               stdin=PIPE, stdout=PIPE, stderr=PIPE, creationflags=flags)
         self.process = process
         return True
