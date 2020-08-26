@@ -101,7 +101,7 @@ class Manager:
             logger.error("Request didn't included list of builds.")
             return
         # Then, continue and iterate the builds that we got
-        found = []
+        remote = []
         for build in new["builds"]:
             # If one of the parts is missing, log it and continue
             if "name" not in build:
@@ -115,11 +115,17 @@ class Manager:
                 continue
             # If we got here, create a new one if it matches the os
             if (build["target"] == 0 and is_windows) or (build["target"] == 1 and is_ubuntu):
-                found.append(Build(name=build["name"], download=build["download"]))
+                remote.append(Build(name=build["name"], download=build["download"]))
+
+        # Now, load the local builds that do not match existing ones
+        local = []
+        for directory in os.scandir(os.path.join(arguments.work_dir, "builds")):
+            if not any(x for x in remote if directory.is_dir() and x.name == directory.name):
+                local.append(Build(folder=directory))
 
         # At this point, replace the builds and notify it
-        self.builds = found
-        logger.info(f"Builds have been updated (Total: {len(found)})")
+        self.builds = remote + local
+        logger.info(f"Builds have been updated (Total: {len(self.builds)})")
 
     async def update_folders(self):
         """
