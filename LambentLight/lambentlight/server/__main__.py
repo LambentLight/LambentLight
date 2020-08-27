@@ -15,31 +15,35 @@ async def start():
     Starts the LambentLight Server.
     """
     # Configure the logging levels in all of the loggers
-    logger = logging.getLogger("lambentlight")
-    logger.setLevel(logging.INFO)
+    loggers = [
+        logging.getLogger("lambentlight"),
+        logging.getLogger("aiohttp.access"),
+    ]
     formatter = logging.Formatter("[%(asctime)s - %(levelname)s] %(message)s")
     stream = logging.StreamHandler()
     stream.setFormatter(formatter)
-    logger.addHandler(stream)
+    for logger in loggers:
+        logger.setLevel(logging.INFO)
+        logger.addHandler(stream)
     # Notify that we are stating the server
-    logger.info(f"Starting LambentLight {__version__}")
+    loggers[0].info(f"Starting LambentLight {__version__}")
     # If we are not running a valid operating system, return
     if not is_valid:
-        logger.critical("Operating system is not Compatible (needs to be Windows or Ubuntu)")
+        loggers[0].critical("Operating system is not Compatible (needs to be Windows or Ubuntu)")
         return
     # Perform the manager initialization
     if not await manager.initialize():
-        logger.error("Manager Initialization Failed")
+        loggers[0].error("Manager Initialization Failed")
         return
     # And start the web server
-    runner = web.AppRunner(app)
+    runner = web.AppRunner(app, access_log_format="HTTP Request from %a: %r (%s)")
     await runner.setup()
     site = web.TCPSite(runner, arguments.host, arguments.web_port)
-    logger.info(f"Starting Web Server at {arguments.host}:{arguments.web_port}")
+    loggers[0].info(f"Starting Web Server at {arguments.host}:{arguments.web_port}")
     try:
         await site.start()
     except OSError as e:
-        logger.error(f"Web server could not be started: Code {e.errno}")
+        loggers[0].error(f"Web server could not be started: Code {e.errno}")
     # Then, just block the server
     while True:
         await asyncio.sleep(0)
