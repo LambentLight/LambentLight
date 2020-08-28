@@ -97,7 +97,8 @@ class Manager:
         # And disconnect all of the WS Clients
         for ws in self.ws_clients:
             if not ws.closed:
-                await ws.close(message="LambentLight is Closing")
+                await ws.close(code=aiohttp.WSCloseCode.GOING_AWAY,
+                               message="LambentLight is Closing")
 
     async def update_builds(self):
         """
