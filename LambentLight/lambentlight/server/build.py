@@ -91,7 +91,7 @@ class Build:
         # Time to extract it!
         # Make the paths and extract it
         ext_path = os.path.join(tempfile.gettempdir(), "lambentlight", "builds", self.name)
-        extracted = extract(temp_file, ext_path)
+        extracted = await extract(temp_file, ext_path)
         # If we were unable to extract the file, log a message
         if not extracted:
             logger.error(f"Installation of Build {self.name} failed: Unable to Extract")
