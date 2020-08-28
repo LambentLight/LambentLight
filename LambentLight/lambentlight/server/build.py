@@ -97,6 +97,6 @@ class Build:
             logger.error(f"Installation of Build {self.name} failed: Unable to Extract")
             return False
         # Finish by moving the directory to the target and notifying it
-        os.makedirs(self.builds_dir)
+        os.makedirs(self.builds_dir, exist_ok=True)
         shutil.move(ext_path, self.builds_dir)
         return True
