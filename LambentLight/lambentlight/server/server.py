@@ -28,6 +28,13 @@ class Server:
         yield "folder", dict(self.folder)
 
     @property
+    def is_running(self):
+        """
+        Checks if the server is running or not.
+        """
+        return self.process is not None and self.process.returncode is None
+
+    @property
     def token(self):
         """
         Gets a CFX Token that can be used to start the server.
@@ -109,7 +116,7 @@ class Server:
         Reads the STDOUT of the process.
         """
         # If there is no process or it has exited, return
-        if self.process is None or self.process.returncode is not None:
+        if not self.is_running:
             return
 
         # Otherwise, start sending the lines to the WS Clients
