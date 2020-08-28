@@ -4,11 +4,9 @@ import os.path
 import shutil
 import tempfile
 
-from .arguments import arguments
-from .checks import is_ubuntu, is_windows
-from .compression import extract
-
 import aiohttp
+
+import lambentlight.server as server
 
 logger = logging.getLogger("lambentlight")
 
@@ -17,7 +15,7 @@ class Build:
     """
     The information of a CFX Build.
     """
-    builds_dir: str = os.path.join(arguments.work_dir, "builds")
+    builds_dir: str = os.path.join(server.arguments.work_dir, "builds")
 
     def __init__(self, *, folder: str = None, download: str = None, name: str = None):
         # If the parameters are mixed in an invalid format, raise an exception
@@ -30,7 +28,7 @@ class Build:
             self.name = os.path.basename(folder)
             self.url = None
         else:
-            self.folder = os.path.join(arguments.work_dir, "builds", name)
+            self.folder = os.path.join(server.arguments.work_dir, "builds", name)
             self.name = name
             self.url = download
 
@@ -51,9 +49,9 @@ class Build:
         """
         Returns the name of the server executable.
         """
-        if is_windows:
+        if server.is_windows:
             return os.path.join(self.folder, "FXServer.exe")
-        elif is_ubuntu:
+        elif server.is_ubuntu:
             return os.path.join(self.folder, "run.sh")
         else:
             return None
@@ -91,7 +89,7 @@ class Build:
         # Time to extract it!
         # Make the paths and extract it
         ext_path = os.path.join(tempfile.gettempdir(), "lambentlight", "builds", self.name)
-        extracted = await extract(temp_file, ext_path)
+        extracted = await server.extract(temp_file, ext_path)
         # If we were unable to extract the file, log a message
         if not extracted:
             logger.error(f"Installation of Build {self.name} failed: Unable to Extract")

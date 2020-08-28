@@ -1,5 +1,4 @@
 import json
-import locale
 import logging
 import os
 import os.path as path
@@ -8,10 +7,7 @@ import string
 
 import aiohttp
 
-from .arguments import arguments
-from .build import Build
-from .checks import is_ubuntu, is_windows
-from .datafolder import DataFolder
+import lambentlight.server as server
 
 
 logger = logging.getLogger("lambentlight")
@@ -28,7 +24,7 @@ class Manager:
     """
     def __init__(self):
         self.session = None
-        self.config_path = path.join(arguments.work_dir, "config.json")
+        self.config_path = path.join(server.arguments.work_dir, "config.json")
         self.config = default
         self.builds = []
         self.folders = []
@@ -53,7 +49,7 @@ class Manager:
         # Otherwise, write the default values
         else:
             try:
-                os.makedirs(arguments.work_dir, exist_ok=True)
+                os.makedirs(server.arguments.work_dir, exist_ok=True)
                 with open(self.config_path, "w+") as file:
                     json.dump(default, file, indent=4)
                 logger.warning(f"Created default configuration at {self.config_path}")
@@ -114,14 +110,14 @@ class Manager:
                 logger.error("Target Operating System of Build was not found.")
                 continue
             # If we got here, create a new one if it matches the os
-            if (build["target"] == 0 and is_windows) or (build["target"] == 1 and is_ubuntu):
-                remote.append(Build(name=build["name"], download=build["download"]))
+            if (build["target"] == 0 and server.is_windows) or (build["target"] == 1 and server.is_ubuntu):
+                remote.append(server.Build(name=build["name"], download=build["download"]))
 
         # Now, load the local builds that do not match existing ones
         local = []
-        for directory in os.scandir(os.path.join(arguments.work_dir, "builds")):
+        for directory in os.scandir(os.path.join(server.arguments.work_dir, "builds")):
             if not any(x for x in remote if directory.is_dir() and x.name == directory.name):
-                local.append(Build(folder=directory))
+                local.append(server.Build(folder=directory))
 
         # At this point, replace the builds and notify it
         self.builds = remote + local
@@ -132,9 +128,9 @@ class Manager:
         Updates the list of Data Folders.
         """
         # Get the subdirectories of data and save them as Data Folders
-        dpath = os.path.join(arguments.work_dir, "data")
+        dpath = os.path.join(server.arguments.work_dir, "data")
         if os.path.isdir(dpath):
-            local = [DataFolder(x, True) for x in os.scandir(dpath) if x.is_dir()]
+            local = [server.DataFolder(x, True) for x in os.scandir(dpath) if x.is_dir()]
         else:
             logger.warning("Directory with Data Folder does not exists, skipping...")
             local = []

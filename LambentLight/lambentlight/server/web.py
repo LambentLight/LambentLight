@@ -4,9 +4,8 @@ import logging
 import aiohttp
 from aiohttp import web
 
-from .manager import manager
-from .server import Server
-from lambentlight import __version__
+import lambentlight
+import lambentlight.server as server
 
 logger = logging.getLogger("lambentlight")
 
@@ -23,7 +22,7 @@ async def auth(request: web.Request, handler):
     elif not request.headers["Authorization"].lower().startswith("bearer "):
         return web.json_response({"message": "Auth Token is not using the right format."}, status=401)
     # If the second part does not matches the token in the config, return
-    elif request.headers["Authorization"].split(" ")[1] != manager.config["token_api"]:
+    elif request.headers["Authorization"].split(" ")[1] != server.manager.config["token_api"]:
         return web.json_response({"message": "Auth Token is not valid."}, status=401)
     # Otherwise, return a the response of the handler
     return await handler(request)
@@ -43,13 +42,13 @@ async def websocket(request: web.Request):
     await ws.prepare(request)
     logger.info(f"WebSocket connection opened from {request.remote}")
     # Add it to the list of clients
-    manager.ws_clients.append(ws)
+    server.manager.ws_clients.append(ws)
     # And start checking the messages that are coming in
     async for message in ws:
         if message.type == aiohttp.WSMessage.CLOSE:
             break
     # Finally, remove the client from the list
-    manager.ws_clients.remove(ws)
+    server.manager.ws_clients.remove(ws)
     logger.info(f"WebSocket connection of {request.remote} has been closed")
     return ws
 
@@ -60,7 +59,7 @@ async def info(request):
     Shows the LambentLight information.
     """
     pinfo = {
-        "version": __version__
+        "version": lambentlight.__version__
     }
     headers = {
         "Cache-Control": f"max-age={60 * 60}"  # 1 hour
@@ -80,14 +79,14 @@ class BuildsView(web.View):
         headers = {
             "Cache-Control": f"max-age={2 * 60}"  # 2 minutes
         }
-        return web.json_response([dict(x) for x in manager.builds], headers=headers)
+        return web.json_response([dict(x) for x in server.manager.builds], headers=headers)
 
     async def post(self):
         """
         Triggers an update for the list of Builds.
         """
-        await manager.update_builds()
-        return web.json_response({"count": len(manager.builds)})
+        await server.manager.update_builds()
+        return web.json_response({"count": len(server.manager.builds)})
 
 
 @routes.view("/builds/{name}")
@@ -100,7 +99,7 @@ class BuildView(web.View):
         Gets the information of a specific build.
         """
         # Try to get the builds that match the name
-        matches = [x for x in manager.builds if x.name == self.request.match_info["name"]]
+        matches = [x for x in server.manager.builds if x.name == self.request.match_info["name"]]
         # If none were found, show an error message
         if not matches:
             return web.json_response({"message": "No Builds were found with that name."}, status=404)
@@ -112,7 +111,7 @@ class BuildView(web.View):
         Downloads a specific build.
         """
         # Try to get the builds that match the name
-        matches = [x for x in manager.builds if x.name == self.request.match_info["name"]]
+        matches = [x for x in server.manager.builds if x.name == self.request.match_info["name"]]
         # If no matches were found, return a 404
         if not matches:
             return web.json_response({"message": "No Builds were found with that name."}, status=404)
@@ -123,7 +122,7 @@ class BuildView(web.View):
             return web.json_response({"message": "Build is already Downloaded and Ready."}, status=409)
         # Otherwise, start the download and notify if it was a success
         else:
-            success = await build.download(manager.session)
+            success = await build.download(server.manager.session)
             if success:
                 return web.Response(status=204)
             else:
@@ -142,7 +141,7 @@ class FoldersView(web.View):
         headers = {
             "Cache-Control": f"max-age={2 * 60}"  # 2 minutes
         }
-        return web.json_response([dict(x) for x in manager.folders], headers=headers)
+        return web.json_response([dict(x) for x in server.manager.folders], headers=headers)
 
 
 @routes.view("/servers")
@@ -157,7 +156,7 @@ class ServersView(web.View):
         headers = {
             "Cache-Control": f"max-age={2 * 60}"  # 2 minutes
         }
-        return web.json_response([dict(x) for x in manager.servers], headers=headers)
+        return web.json_response([dict(x) for x in server.manager.servers], headers=headers)
 
     async def put(self):
         """
@@ -176,26 +175,26 @@ class ServersView(web.View):
             return web.json_response({"message": "Build was not specified."}, status=400)
 
         # Go ahead and search for the Data Folder
-        found_folders = [x for x in manager.folders if x.name == data["data"]]
+        found_folders = [x for x in server.manager.folders if x.name == data["data"]]
         if not found_folders:
             return web.json_response({"message": "Data Folder was not found."}, status=404)
         folder = found_folders[0]
         # Then, check if there is a Server running with the same Data folder
-        found_servers = [x for x in manager.servers if x.folder == folder]
+        found_servers = [x for x in server.manager.servers if x.folder == folder]
         if found_servers:
             return web.json_response({"message": "Found a server running with the specified Data Folder."}, status=409)
 
         # Now, time to find the Build
-        found_builds = [x for x in manager.builds if x.name == data["build"]]
+        found_builds = [x for x in server.manager.builds if x.name == data["build"]]
         if not found_builds:
             return web.json_response({"message": "CFX Build was not found."}, status=404)
         build = found_builds[0]
 
         # If we have everything, go ahead and start it
-        server = Server(build, folder)
-        if await server.start():
-            manager.servers.append(server)
-            return web.json_response(dict(server), status=201)
+        new = server.Server(build, folder)
+        if await new.start():
+            server.manager.servers.append(server)
+            return web.json_response(dict(new), status=201)
         else:
             return web.json_response({"message": "Unable to start the server. Check the console."}, status=500)
 
@@ -210,7 +209,7 @@ class ServerView(web.View):
         Gets the information of a server.
         """
         # Try to find servers with the specified name and return a 404 if none were found
-        servers = [x for x in manager.servers if x.folder.name == self.request.match_info["name"]]
+        servers = [x for x in server.manager.servers if x.folder.name == self.request.match_info["name"]]
         if not servers:
             return web.json_response({"message": "No servers were found with the specified name."}, status=404)
 
@@ -222,7 +221,7 @@ class ServerView(web.View):
         Stops a specific server.
         """
         # Try to find servers with the specified name and return a 404 if none were found
-        servers = [x for x in manager.servers if x.folder.name == self.request.match_info["name"]]
+        servers = [x for x in server.manager.servers if x.folder.name == self.request.match_info["name"]]
         if not servers:
             return web.json_response({"message": "No servers were found with the specified name."}, status=404)
         # If we got here, stop the server and return a 204

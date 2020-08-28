@@ -3,11 +3,8 @@ import logging
 
 from aiohttp import web
 
-from .arguments import arguments
-from .checks import is_valid, is_windows
-from .manager import manager
-from .web import app
-from lambentlight import __version__
+import lambentlight
+import lambentlight.server as server
 
 
 async def start():
@@ -26,20 +23,20 @@ async def start():
         logger.setLevel(logging.INFO)
         logger.addHandler(stream)
     # Notify that we are stating the server
-    loggers[0].info(f"Starting LambentLight {__version__}")
+    loggers[0].info(f"Starting LambentLight {lambentlight.__version__}")
     # If we are not running a valid operating system, return
-    if not is_valid:
+    if not server.is_valid:
         loggers[0].critical("Operating system is not Compatible (needs to be Windows or Ubuntu)")
         return
     # Perform the manager initialization
-    if not await manager.initialize():
+    if not await server.manager.initialize():
         loggers[0].error("Manager Initialization Failed")
         return
     # And start the web server
-    runner = web.AppRunner(app, access_log_format="HTTP Request from %a: %r (%s)")
+    runner = web.AppRunner(server.app, access_log_format="HTTP Request from %a: %r (%s)")
     await runner.setup()
-    site = web.TCPSite(runner, arguments.host, arguments.web_port)
-    loggers[0].info(f"Starting Web Server at {arguments.host}:{arguments.web_port}")
+    site = web.TCPSite(runner, server.arguments.host, server.arguments.web_port)
+    loggers[0].info(f"Starting Web Server at {server.arguments.host}:{server.arguments.web_port}")
     try:
         await site.start()
     except OSError as e:
@@ -53,15 +50,15 @@ def main():
     """
     Initializes the LambentLight Server Loop.
     """
-    if not hasattr(arguments, "help"):
-        if is_windows:
+    if not hasattr(server.arguments, "help"):
+        if server.is_windows:
             asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
         loop = asyncio.get_event_loop()
         try:
             loop.run_until_complete(start())
         except KeyboardInterrupt:
             loop.stop()
-            asyncio.get_event_loop().run_until_complete(manager.close())
+            asyncio.get_event_loop().run_until_complete(server.manager.close())
 
 
 if __name__ == "__main__":

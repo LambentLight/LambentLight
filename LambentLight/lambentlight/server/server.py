@@ -6,10 +6,7 @@ import subprocess
 from asyncio import create_subprocess_exec
 from asyncio.subprocess import PIPE
 
-from .build import Build
-from .checks import is_windows
-from .datafolder import DataFolder
-from .manager import manager
+import lambentlight.server as server
 
 logger = logging.getLogger("lambentlight")
 
@@ -18,7 +15,7 @@ class Server:
     """
     Represents a server currently running.
     """
-    def __init__(self, build: Build, folder: DataFolder):
+    def __init__(self, build: server.Build, folder: server.DataFolder):
         self.build = build
         self.folder = folder
         self.process = None
@@ -45,9 +42,9 @@ class Server:
         # If it was not possible, return None
         if self.folder.config["token_cfx"]:
             return self.folder.config["token_cfx"]
-        elif manager.config["token_cfx"]:
+        elif server.manager.config["token_cfx"]:
             logger.warning(f"Using global CFX Token for Data Folder {self.folder.name}")
-            return manager.config["token_cfx"]
+            return server.manager.config["token_cfx"]
         else:
             logger.error(f"No CFX Token is available for Data Folder {self.folder.name}")
             return None
@@ -65,7 +62,7 @@ class Server:
             self.process.terminate()
         # Otherwise, send the interrupt
         else:
-            self.process.send_signal(signal.CTRL_BREAK_EVENT if is_windows else signal.SIGINT)
+            self.process.send_signal(signal.CTRL_BREAK_EVENT if server.is_windows else signal.SIGINT)
         # And wait for the process to exit
         await self.process.wait()
         self.process = None
@@ -79,7 +76,7 @@ class Server:
 
         # If the build is not ready to be used, download it
         if not self.build.is_ready:
-            if not await self.build.download(manager.session):
+            if not await self.build.download(server.manager.session):
                 logger.error("The server can't be started")
                 return False
         # Make sure that the Data Folder is there
@@ -104,7 +101,7 @@ class Server:
             params.append(config)
 
         # Select the correct creation flags
-        flags = subprocess.CREATE_NEW_PROCESS_GROUP if is_windows else 0
+        flags = subprocess.CREATE_NEW_PROCESS_GROUP if server.is_windows else 0
 
         # Then, start the process and save it
         process = await create_subprocess_exec(self.build.executable, *params, cwd=self.folder.path,
@@ -127,4 +124,4 @@ class Server:
                 "folder": self.folder.name,
                 "message": line.decode(locale.getpreferredencoding(False)).strip("\n")
             }
-            await manager.send_data("console", data)
+            await server.manager.send_data("console", data)
