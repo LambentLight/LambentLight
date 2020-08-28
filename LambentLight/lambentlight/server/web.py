@@ -38,10 +38,10 @@ async def websocket(request: web.Request):
     """
     WebSocket used for the communication of changes.
     """
-    logger.info(f"WebSocket connection opened from {request.remote}")
     # Prepare the WebSocket Response for the Connection
     ws = web.WebSocketResponse()
     await ws.prepare(request)
+    logger.info(f"WebSocket connection opened from {request.remote}")
     # Add it to the list of clients
     manager.ws_clients.append(ws)
     # And start checking the messages that are coming in
