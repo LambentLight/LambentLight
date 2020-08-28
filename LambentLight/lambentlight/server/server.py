@@ -28,7 +28,7 @@ class Server:
         yield "folder", dict(self.folder)
 
     @property
-    async def token(self):
+    def token(self):
         """
         Gets a CFX Token that can be used to start the server.
         """
@@ -78,7 +78,7 @@ class Server:
             logger.error(f"Unable to start the server because the Data Folder is not present")
             return False
         # Get the token and return if is invalid
-        token = await self.token
+        token = self.token
         if not token:
             logger.info(f"Unable to start {self.folder.name}: Invalid Token")
             return False
