@@ -1,3 +1,5 @@
+import asyncio
+import locale
 import logging
 import signal
 import subprocess
@@ -99,4 +101,21 @@ class Server:
         process = await create_subprocess_exec(self.build.executable, *params, cwd=self.folder.path,
                                                stdin=PIPE, stdout=PIPE, stderr=PIPE, creationflags=flags)
         self.process = process
+        asyncio.create_task(self.read_process_stdout())
         return True
+
+    async def read_process_stdout(self):
+        """
+        Reads the STDOUT of the process.
+        """
+        # If there is no process or it has exited, return
+        if self.process is None or self.process.returncode is not None:
+            return
+
+        # Otherwise, start sending the lines to the WS Clients
+        async for line in self.process.stdout:
+            data = {
+                "folder": self.folder.name,
+                "message": line.decode(locale.getpreferredencoding(False)).strip("\n")
+            }
+            await manager.send_data("console", data)

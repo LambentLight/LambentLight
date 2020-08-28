@@ -152,23 +152,5 @@ class Manager:
             }
             await ws.send_json(data)
 
-    async def fetch_output(self):
-        """
-        Fetches the input of the CFX Server processes.
-        """
-        # Iterate over the processes and check for the stdout contents
-        for server in self.servers:
-            # If there is no process or is no longer running, continue
-            if server.process is None or server.process.returncode is not None:
-                continue
-
-            # Otherwise, get a line and send it to the WS Clients connected
-            async for line in server.process.stdout:
-                data = {
-                    "folder": server.folder.name,
-                    "message": line.decode(locale.getpreferredencoding(False)).strip("\n")
-                }
-                await self.send_data("console", data)
-
 
 manager = Manager()
