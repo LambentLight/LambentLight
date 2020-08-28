@@ -24,6 +24,8 @@ class Server:
         self.process = None
 
     def __iter__(self):
+        yield "is_running", self.is_running
+        yield "pid", self.process.pid if self.is_running else 0
         yield "build", dict(self.build)
         yield "folder", dict(self.folder)
 
