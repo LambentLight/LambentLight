@@ -28,7 +28,6 @@ class Manager:
         self.config = default
         self.builds = []
         self.folders = []
-        self.servers = []
         self.ws_clients = []
 
     async def initialize(self):
@@ -79,8 +78,7 @@ class Manager:
                 build = self.builds[0]
 
             # Then, try to start the server
-            new = server.Server(build, folder)
-            if not await new.start():
+            if not await folder.start(build):
                 logger.error(f"Unable to automatically start Folder {folder.name}")
                 continue
 
