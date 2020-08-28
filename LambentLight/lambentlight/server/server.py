@@ -108,6 +108,7 @@ class Server:
                                                stdin=PIPE, stdout=PIPE, stderr=PIPE, creationflags=flags)
         self.process = process
         asyncio.create_task(self.read_process_stdout())
+        logger.info(f"Started Data Folder {self.folder.name} with Build {self.build.name}")
         return True
 
     async def read_process_stdout(self):
