@@ -187,7 +187,7 @@ class ServersView(web.View):
         server = Server(build, folder)
         if await server.start():
             manager.servers.append(server)
-            return web.json_response({"pid": server.process.pid}, status=201)
+            return web.json_response(dict(server), status=201)
         else:
             return web.json_response({"message": "Unable to start the server. Check the console."}, status=500)
 
