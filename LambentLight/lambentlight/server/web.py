@@ -68,25 +68,26 @@ async def info(request):
     return web.json_response(pinfo, headers=headers)
 
 
-@routes.get("/builds")
-async def builds(request):
+@routes.view("/builds")
+class BuildsView(web.View):
     """
-    Shows a list of builds.
+    Route for managing the list of Builds.
     """
-    headers = {
-        "Cache-Control": f"max-age={2 * 60}"  # 2 minutes
-    }
-    return web.json_response([dict(x) for x in manager.builds], headers=headers)
+    async def get(self):
+        """
+        Shows a list of builds.
+        """
+        headers = {
+            "Cache-Control": f"max-age={2 * 60}"  # 2 minutes
+        }
+        return web.json_response([dict(x) for x in manager.builds], headers=headers)
 
-
-@routes.post("/builds")
-async def update_builds(request):
-    """
-    Updates the list of Builds.
-    """
-    # Just call the method to update builds and return the total number
-    await manager.update_builds()
-    return web.json_response({"count": len(manager.builds)})
+    async def post(self):
+        """
+        Triggers an update for the list of Builds.
+        """
+        await manager.update_builds()
+        return web.json_response({"count": len(manager.builds)})
 
 
 @routes.post("/builds/download")
@@ -121,93 +122,104 @@ async def download_build(request: web.Request):
             return web.json_response({"messages": "Error when downloading the build."}, status=500)
 
 
-@routes.get("/folders")
-async def folders(request):
+@routes.view("/folders")
+class FoldersView(web.View):
     """
-    Gets the Data Folders known by LambentLight.
+    Route for managing the list of Data Folders.
     """
-    headers = {
-        "Cache-Control": f"max-age={2 * 60}"  # 2 minutes
-    }
-    return web.json_response([dict(x) for x in manager.folders], headers=headers)
+    async def get(self):
+        """
+        Gets the Data Folders known by LambentLight.
+        """
+        headers = {
+            "Cache-Control": f"max-age={2 * 60}"  # 2 minutes
+        }
+        return web.json_response([dict(x) for x in manager.folders], headers=headers)
 
 
-@routes.get("/servers")
-async def servers_get(request):
+@routes.view("/servers")
+class ServersView(web.View):
     """
-    Returns a list of servers.
+    Route for managing the CFX Servers running (also called instances).
     """
-    headers = {
-        "Cache-Control": f"max-age={2 * 60}"  # 2 minutes
-    }
-    return web.json_response([dict(x) for x in manager.servers], headers=headers)
+    async def get(self):
+        """
+        Returns a list of servers.
+        """
+        headers = {
+            "Cache-Control": f"max-age={2 * 60}"  # 2 minutes
+        }
+        return web.json_response([dict(x) for x in manager.servers], headers=headers)
+
+    async def put(self):
+        """
+        Starts a new CFX Server.
+        """
+        # Try to get the request as JSON and return a 400 if failed
+        try:
+            data = await self.request.json()
+        except json.JSONDecodeError:
+            return web.json_response({"message": "Body is not JSON or is malformed."}, status=400)
+
+        # Make sure that the required parameters are present
+        if "data" not in data:
+            return web.json_response({"message": "Data Folder was not specified."}, status=400)
+        elif "build" not in data:
+            return web.json_response({"message": "Build was not specified."}, status=400)
+
+        # Go ahead and search for the Data Folder
+        found_folders = [x for x in manager.folders if x.name == data["data"]]
+        if not found_folders:
+            return web.json_response({"message": "Data Folder was not found."}, status=404)
+        folder = found_folders[0]
+        # Then, check if there is a Server running with the same Data folder
+        found_servers = [x for x in manager.servers if x.folder == folder]
+        if found_servers:
+            return web.json_response({"message": "Found a server running with the specified Data Folder."}, status=409)
+
+        # Now, time to find the Build
+        found_builds = [x for x in manager.builds if x.name == data["build"]]
+        if not found_builds:
+            return web.json_response({"message": "CFX Build was not found."}, status=404)
+        build = found_builds[0]
+
+        # If we have everything, go ahead and start it
+        server = Server(build, folder)
+        if await server.start():
+            manager.servers.append(server)
+            return web.json_response({"pid": server.process.pid}, status=201)
+        else:
+            return web.json_response({"message": "Unable to start the server. Check the console."}, status=500)
 
 
-@routes.put("/servers")
-async def servers_put(request):
+@routes.view("/servers/{name}")
+class ServerView(web.View):
     """
-    Starts a new CFX Server.
+    Route used for managing specific servers.
     """
-    # Try to get the request as JSON and return a 400 if failed
-    try:
-        data = await request.json()
-    except json.JSONDecodeError:
-        return web.json_response({"message": "Body is not JSON or is malformed."}, status=400)
+    async def get(self):
+        """
+        Gets the information of a server.
+        """
+        # Try to find servers with the specified name and return a 404 if none were found
+        servers = [x for x in manager.servers if x.folder.name == self.request.match_info["name"]]
+        if not servers:
+            return web.json_response({"message": "No servers were found with the specified name."}, status=404)
 
-    # Make sure that the required parameters are present
-    if "data" not in data:
-        return web.json_response({"message": "Data Folder was not specified."}, status=400)
-    elif "build" not in data:
-        return web.json_response({"message": "Build was not specified."}, status=400)
+        # Then, return the information of the server
+        return web.json_response(dict(servers[0]))
 
-    # Go ahead and search for the Data Folder
-    found_folders = [x for x in manager.folders if x.name == data["data"]]
-    if not found_folders:
-        return web.json_response({"message": "Data Folder was not found."}, status=404)
-    folder = found_folders[0]
-    # Then, check if there is a Server running with the same Data folder
-    found_servers = [x for x in manager.servers if x.folder == folder]
-    if found_servers:
-        return web.json_response({"message": "Found a server running with the specified Data Folder."}, status=409)
-
-    # Now, time to find the Build
-    found_builds = [x for x in manager.builds if x.name == data["build"]]
-    if not found_builds:
-        return web.json_response({"message": "CFX Build was not found."}, status=404)
-    build = found_builds[0]
-
-    # If we have everything, go ahead and start it
-    server = Server(build, folder)
-    if await server.start():
-        manager.servers.append(server)
-        return web.json_response({"pid": server.process.pid}, status=201)
-    else:
-        return web.json_response({"message": "Unable to start the server. Check the console."}, status=500)
-
-
-@routes.get("/servers/{name}")
-async def server_get(request):
-    """
-    Gets the information of a server.
-    """
-    # Try to find servers with the specified name and return a 404 if none were found
-    servers = [x for x in manager.servers if x.folder.name == request.match_info["name"]]
-    if not servers:
-        return web.json_response({"message": "No servers were found with the specified name."}, status=404)
-
-    # Then, return the information of the server
-    return web.json_response(dict(servers[0]))
-
-
-@routes.delete("/servers/{name}")
-async def server_delete(request):
-    # Try to find servers with the specified name and return a 404 if none were found
-    servers = [x for x in manager.servers if x.folder.name == request.match_info["name"]]
-    if not servers:
-        return web.json_response({"message": "No servers were found with the specified name."}, status=404)
-    # If we got here, stop the server and return a 204
-    await servers[0].stop()
-    return web.Response(status=204)
+    async def delete(self):
+        """
+        Stops a specific server.
+        """
+        # Try to find servers with the specified name and return a 404 if none were found
+        servers = [x for x in manager.servers if x.folder.name == self.request.match_info["name"]]
+        if not servers:
+            return web.json_response({"message": "No servers were found with the specified name."}, status=404)
+        # If we got here, stop the server and return a 204
+        await servers[0].stop()
+        return web.Response(status=204)
 
 
 app.add_routes(routes)
