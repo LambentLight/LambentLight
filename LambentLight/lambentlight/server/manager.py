@@ -61,6 +61,29 @@ class Manager:
         # And fetch the information required by the manager
         await self.update_builds()
         await self.update_folders()
+
+        # Then, check if one of the data folders should be started on boot
+        for folder in self.folders:
+            # If this one does not, continue to the next one
+            if not folder.config["auto_start"]:
+                continue
+            # Otherwise, try to get the build required or use the latest one
+            name = folder.config["auto_start_build"]
+            if name:
+                found = [x for x in self.builds if x.name == name]
+                if not found:
+                    logger.error(f"Unable to find Build {name} to Auto Start Folder {folder.name}")
+                    continue
+                build = found[0]
+            else:
+                build = self.builds[0]
+
+            # Then, try to start the server
+            new = server.Server(build, folder)
+            if not await new.start():
+                logger.error(f"Unable to automatically start Folder {folder.name}")
+                continue
+
         # Finally, tell the main script that we finished the init
         return True
 
