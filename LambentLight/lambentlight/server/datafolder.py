@@ -130,18 +130,16 @@ class DataFolder:
         """
         Stops or Terminates the game server.
         """
-        # If the process is not running, return
-        if not self.is_running:
-            return
-
-        # If we want to terminate it, do it
-        if terminate:
-            self.process.terminate()
-        # Otherwise, send the interrupt
-        else:
-            self.process.send_signal(signal.CTRL_BREAK_EVENT if server.is_windows else signal.SIGINT)
-        # And wait for the process to exit
-        await self.process.wait()
+        # If the process is running
+        if self.is_running:
+            # Stop the process by force or gracefully
+            if terminate:
+                self.process.terminate()
+            else:
+                self.process.send_signal(signal.CTRL_BREAK_EVENT if server.is_windows else signal.SIGINT)
+            # And wait for it to be closed
+            await self.process.wait()
+        # Finally, set the process and build to None
         self.process = None
         self.build = None
 
