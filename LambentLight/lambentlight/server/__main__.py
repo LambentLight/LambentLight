@@ -44,6 +44,7 @@ async def start():
     # Then, just block the server
     while True:
         await asyncio.sleep(0)
+        await server.manager.process()
 
 
 def main():

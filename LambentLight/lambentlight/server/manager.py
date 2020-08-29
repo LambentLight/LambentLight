@@ -172,5 +172,30 @@ class Manager:
             }
             await ws.send_json(data)
 
+    async def process(self):
+        """
+        Processes checks for the Manager.
+        """
+        await self.restart_on_crash()
+
+    async def restart_on_crash(self):
+        """
+        Checks if the servers have exited with non zero codes and restart them if they do.
+        """
+        for folder in self.folders:
+            # If there is no process or there is one and is running, continue
+            if folder.process is None or folder.is_running:
+                continue
+            # If we got here, the process is no longer running
+            # If the exit code is zero, notify it and continue
+            code = folder.process.returncode
+            if code == 0:
+                logger.info(f"Server {folder.name} exited with Code {code}")
+                await folder.stop()
+            # Otherwise, restart the process
+            else:
+                logger.warning(f"Restarting Server {folder.name} because it exited with Code {code}")
+                await folder.start(folder.build, terminate=True)
+
 
 manager = Manager()
