@@ -5,6 +5,7 @@ import os.path as path
 import secrets
 import string
 
+import aiofiles
 import aiohttp
 
 import lambentlight.server as server
@@ -36,8 +37,8 @@ class Manager:
         """
         # If the configuration exists, load it
         if path.isfile(self.config_path):
-            with open(self.config_path) as file:
-                loaded = json.load(file)
+            async with aiofiles.open(self.config_path) as file:
+                loaded = json.loads(await file.read())
                 self.config = {}
                 for key, value in default.items():
                     if key in loaded:
@@ -49,8 +50,9 @@ class Manager:
         else:
             try:
                 os.makedirs(server.arguments.work_dir, exist_ok=True)
-                with open(self.config_path, "w+") as file:
-                    json.dump(default, file, indent=4)
+                async with aiofiles.open(self.config_path, "w+") as file:
+                    js = json.dumps(default, indent=4)
+                    await file.write(js)
                 logger.warning(f"Created default configuration at {self.config_path}")
             except PermissionError:
                 logger.warning("Unable to save the Default Configuration (no permission)")

@@ -4,6 +4,7 @@ import os.path
 import shutil
 import tempfile
 
+import aiofiles
 import aiohttp
 
 import lambentlight.server as server
@@ -80,12 +81,12 @@ class Build:
         logger.info(f"Downloading build {self.name} from {self.url} to {temp_file}")
         # Then, request it and save it in chunks
         async with session.get(self.url) as resp:
-            with open(temp_file, "wb") as file:
+            async with aiofiles.open(temp_file, "wb") as file:
                 while True:
                     chunk = await resp.content.read(1024 * 1024)
                     if not chunk:
                         break
-                    file.write(chunk)
+                    await file.write(chunk)
         # Time to extract it!
         # Make the paths and extract it
         ext_path = os.path.join(tempfile.gettempdir(), "lambentlight", "builds", self.name)
