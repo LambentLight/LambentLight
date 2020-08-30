@@ -59,6 +59,7 @@ async def info(request):
     Shows the LambentLight information.
     """
     pinfo = {
+        "prog": "LambentLight",
         "version": lambentlight.__version__
     }
     headers = {
