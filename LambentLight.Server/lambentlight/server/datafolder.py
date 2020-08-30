@@ -5,10 +5,12 @@ import logging
 import os.path
 import signal
 import subprocess
-
 from asyncio.subprocess import create_subprocess_exec, PIPE
 
+import psutil
+
 import lambentlight.server as server
+
 
 logger = logging.getLogger("lambentlight")
 default = {
@@ -32,6 +34,7 @@ class DataFolder:
         self.config = {}
         self.build = None
         self.process = None
+        self.process_info = None
         self.reload_configuration()
 
     def __iter__(self):
@@ -44,10 +47,13 @@ class DataFolder:
         The information of the process.
         """
         if self.is_running:
-            return {
-                "pid": self.process.pid if self.is_running else 0,
-                "build": dict(self.build) if self.build else None
-            }
+            with self.process_info.oneshot():
+                return {
+                    "pid": self.process.pid,
+                    "cpu": self.process_info.cpu_percent(),
+                    "mem": self.process_info.memory_info().rss,
+                    "build": dict(self.build)
+                }
         else:
             return None
 
@@ -122,6 +128,8 @@ class DataFolder:
                                                stdin=PIPE, stdout=PIPE, stderr=PIPE, creationflags=flags)
         self.process = process
         self.build = build
+        self.process_info = psutil.Process(process.pid)
+        self.process_info.cpu_percent()
         asyncio.create_task(self.read_process_stdout())
         logger.info(f"Started Data Folder {self.name} with Build {build.name}")
         return True
@@ -142,6 +150,7 @@ class DataFolder:
         # Finally, set the process and build to None
         self.process = None
         self.build = None
+        self.process_info = None
 
     def reload_configuration(self):
         """
