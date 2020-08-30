@@ -15,22 +15,16 @@ async def print_servers():
     if not servers:
         print("There are no servers running.")
         return
-    # Calculate the tabs required for the big names
-    biggest = 0
-    for key in servers:
-        newlen = len(key)
-        if newlen > biggest:
-            biggest = newlen
-    maxsize = math.floor((biggest / 8) + 1)
-    # And print the information of the servers
-    for key, item in servers.items():
-        # Start with the title
-        print(key, end=" ")
-        # The print the number of tabs required after the name
-        tabcount = maxsize - math.floor(len(key) / 8)
-        while tabcount:
-            print("\t", end="")
-            tabcount -= 1
-        # Then, go for the CPU Usage and finish with the readable Memory
-        print(item["cpu"], end="\t")
-        print(humanize.naturalsize(item["mem"]))
+    # Create the header for the values
+    values = [
+        [
+            "Name",
+            "CPU%",
+            "Memory Usage"
+        ]
+    ]
+    # And add the server information
+    for name, info in servers.items():
+        values.append([name, info["cpu"], humanize.naturalsize(info["mem"])])
+    # Finally, print the entire thing
+    client.print_list(*values)
