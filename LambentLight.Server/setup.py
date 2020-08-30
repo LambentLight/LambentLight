@@ -6,13 +6,13 @@ with open("requirements.txt") as file:
 
 
 setup(
-    name="lambentlight",
+    name="lambentlight.server",
     version="3.0",
-    packages=[],
+    packages=["lambentlight.server"],
     install_requires=requirements,
     author="justalemon",
     author_email="justlemoncl@gmail.com",
-    description="Meta Package for installing the LambentLight Server, Client and Metadata Tools.",
+    description="LambentLight Server Manager for FiveM and RedM.",
     keywords="fivem redm cfx manager",
     url="https://github.com/LambentLight/LambentLight",
     project_urls={
