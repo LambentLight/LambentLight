@@ -3,7 +3,6 @@ import logging
 
 from aiohttp import web
 
-import lambentlight
 import lambentlight.server as server
 
 
@@ -23,7 +22,7 @@ async def start():
         logger.setLevel(logging.INFO)
         logger.addHandler(stream)
     # Notify that we are stating the server
-    loggers[0].info(f"Starting LambentLight {lambentlight.__version__}")
+    loggers[0].info(f"Starting LambentLight {server.__version__}")
     # If we are not running a valid operating system, return
     if not server.is_valid:
         loggers[0].critical("Operating system is not Compatible (needs to be Windows or Ubuntu)")

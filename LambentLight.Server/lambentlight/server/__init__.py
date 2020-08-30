@@ -5,3 +5,6 @@ from .compression import CompressionType, detect, extract
 from .datafolder import DataFolder
 from .manager import manager
 from .web import app
+
+
+__version__ = "3.0"
