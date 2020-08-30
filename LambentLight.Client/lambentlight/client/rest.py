@@ -40,3 +40,10 @@ async def get(route: str):
     Makes a GET Request.
     """
     return await request("GET", route)
+
+
+async def post(route: str):
+    """
+    Makes a POST Request.
+    """
+    return await request("POST", route)
