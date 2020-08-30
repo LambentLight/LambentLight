@@ -60,7 +60,7 @@ async def info(request):
     """
     pinfo = {
         "prog": "LambentLight",
-        "version": lambentlight.__version__
+        "version": server.__version__
     }
     headers = {
         "Cache-Control": f"max-age={60 * 60}"  # 1 hour
