@@ -3,6 +3,7 @@ import zipfile
 from enum import Enum
 
 import aiofiles
+import py7zr as py7zr
 
 
 class CompressionType(Enum):
@@ -43,3 +44,10 @@ async def extract(path, destination):
         with zipfile.ZipFile(path) as zipf:
             zipf.extractall(destination)
             return True
+    # If we have a 7Z File, use py7zr
+    elif file_type == CompressionType.SEVENZIP:
+        with py7zr.SevenZipFile as sevenzip:
+            sevenzip.extractall(destination)
+            return True
+    # If we got here, the file is not a supported format
+    return False
