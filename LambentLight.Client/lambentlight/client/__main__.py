@@ -13,6 +13,8 @@ async def run():
     subparsers = parser.add_subparsers(dest="command")
     server = subparsers.add_parser("servers", aliases=["s"],
                                    help="Lists the Servers currently running")
+    info = subparsers.add_parser("info", aliases=["i"],
+                                 help="Shows basic information of the current instance")
     # Then, parse the arguments
     args = parser.parse_args()
 
@@ -22,6 +24,8 @@ async def run():
     # Otherwise, check the correct command and invoke the respective function
     if args.command == "servers":
         await client.print_servers()
+    elif args.command == "info":
+        await client.show_info()
 
 
 def main():
