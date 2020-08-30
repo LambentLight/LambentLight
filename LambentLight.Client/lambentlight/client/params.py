@@ -3,7 +3,7 @@ import os
 import lambentlight.client as client
 
 
-user_agent = f"LambentLight/{client.__version__} (+https://justalemon.ml/LambentLight)"
+user_agent = f"LambentLight Client/{client.__version__} (+https://justalemon.ml/LambentLight)"
 token = os.environ.get("LAMBENTLIGHT_TOKEN", "")
 headers = {
     "Authorization": f"Bearer {token}",
