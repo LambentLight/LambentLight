@@ -4,7 +4,7 @@ import asyncio
 import lambentlight.client as client
 
 
-async def main():
+async def run():
     """
     The main function that parses the arguments.
     """
@@ -24,5 +24,9 @@ async def main():
         await client.print_servers()
 
 
+def main():
+    asyncio.run(run())
+
+
 if __name__ == "__main__":
-    asyncio.run(main())
+    asyncio.run(run())
