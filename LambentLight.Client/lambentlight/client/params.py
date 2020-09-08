@@ -11,8 +11,4 @@ headers = {
 } if token else {
     "User-Agent": user_agent
 }
-ssl = os.environ.get("LAMBENTLIGHT_SSL", "1") == "1"
-address = os.environ.get("LAMBENTLIGHT_ADDRESS", "127.0.0.1")
-port = os.environ.get("LAMBENTLIGHT_PORT", "8019")
-protocol = "https" if ssl else "http"
-url = f"{protocol}://{address}:{port}"
+host = os.environ.get("LAMBENTLIGHT_HOST", "http://127.0.0.1:8019")

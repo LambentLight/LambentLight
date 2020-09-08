@@ -26,7 +26,7 @@ async def request(method: str, route: str):
     Makes a request with the specified method.
     """
     async with aiohttp.ClientSession(headers=client.headers) as session:
-        url = client.url + route
+        url = client.host + route
         try:
             async with session.request(method, url) as resp:
                 return await handle_response(resp)
