@@ -138,9 +138,11 @@ class Manager:
 
         # Now, load the local builds that do not match existing ones
         local = []
-        for directory in os.scandir(os.path.join(server.arguments.work_dir, "builds")):
-            if not any(x for x in remote if directory.is_dir() and x.name == directory.name):
-                local.append(server.Build(folder=directory))
+        builds_dir = os.path.join(server.arguments.work_dir, "builds")
+        if os.path.isdir(builds_dir):
+            for directory in os.scandir(builds_dir):
+                if not any(x for x in remote if directory.is_dir() and x.name == directory.name):
+                    local.append(server.Build(folder=directory))
 
         # At this point, replace the builds and notify it
         self.builds = remote + local
