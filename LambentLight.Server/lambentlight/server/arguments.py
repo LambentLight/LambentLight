@@ -2,7 +2,8 @@ import argparse
 from platform import system
 
 
-default_work_dir = "C:\\ProgramData\\LambentLight" if system() == "Windows" else "/var/lib/LambentLight"
+work_dir = "C:\\ProgramData\\LambentLight" if system() == "Windows" else "/var/lib/lambentlight"
+config_file = f"{work_dir}\\LambentLight.json" if system() == "Windows" else f"{work_dir}/lambentlight.json"
 
 
 def parse_arguments():
@@ -14,7 +15,9 @@ def parse_arguments():
                                      epilog="Check https://justalemon.ml/LambentLight for more info.",
                                      add_help=True, formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     # Add the arguments
-    parser.add_argument("--work-dir", dest="work_dir", default=default_work_dir,
+    parser.add_argument("--config", dest="config", default=config_file,
+                        help="the configuration file used for parameters")
+    parser.add_argument("--work-dir", dest="work_dir", default=work_dir,
                         help="folder used to store the server data")
     parser.add_argument("--host", dest="host", default="127.0.0.1",
                         help="the host or IP address to bind")

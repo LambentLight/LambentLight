@@ -25,7 +25,6 @@ class Manager:
     """
     def __init__(self):
         self.session = None
-        self.config_path = path.join(server.arguments.work_dir, "config.json")
         self.config = default
         self.builds = []
         self.folders = []
@@ -36,8 +35,8 @@ class Manager:
         Initializes the basics of the Manager.
         """
         # If the configuration exists, load it
-        if path.isfile(self.config_path):
-            async with aiofiles.open(self.config_path) as file:
+        if path.isfile(server.arguments.config):
+            async with aiofiles.open(server.arguments.config) as file:
                 loaded = json.loads(await file.read())
                 self.config = {}
                 for key, value in default.items():
@@ -45,15 +44,15 @@ class Manager:
                         self.config[key] = loaded[key]
                     else:
                         self.config[key] = value
-            logger.info(f"Loaded configuration from {self.config_path}")
+            logger.info(f"Loaded configuration from {server.arguments.config}")
         # Otherwise, write the default values
         else:
             try:
                 os.makedirs(server.arguments.work_dir, exist_ok=True)
-                async with aiofiles.open(self.config_path, "w+") as file:
+                async with aiofiles.open(server.arguments.config, "w+") as file:
                     js = json.dumps(default, indent=4)
                     await file.write(js)
-                logger.warning(f"Created default configuration at {self.config_path}")
+                logger.warning(f"Created default configuration at {server.arguments.config}")
             except PermissionError:
                 logger.warning("Unable to save the Default Configuration (no permission)")
 
