@@ -1,13 +1,24 @@
 import json
 import logging
+import traceback
 
 import aiohttp
 from aiohttp import web
 
-import lambentlight
 import lambentlight.server as server
 
 logger = logging.getLogger("lambentlight")
+
+
+async def exception_as_response(e: Exception):
+    """
+    Wraps an exception into a JSON Response.
+    """
+    data = {
+        "message": str(e),
+        "traceback": "".join(traceback.TracebackException.from_exception(e).format())
+    }
+    return web.json_response(data, status=500)
 
 
 @web.middleware
@@ -24,8 +35,13 @@ async def auth(request: web.Request, handler):
     # If the second part does not matches the token in the config, return
     elif request.headers["Authorization"].split(" ")[1] != server.manager.config["token_api"]:
         return web.json_response({"message": "Auth Token is not valid."}, status=401)
-    # Otherwise, return a the response of the handler
-    return await handler(request)
+    # Otherwise, return a the response of the handler and catch any errors found
+    try:
+        return await handler(request)
+    except Exception as e:
+        if isinstance(e, web.HTTPMethodNotAllowed):
+            raise
+        return await exception_as_response(e)
 
 
 app = web.Application(middlewares=[auth])
@@ -58,6 +74,7 @@ async def info(request):
     """
     Shows the LambentLight information.
     """
+    raise Exception("Test")
     pinfo = {
         "prog": "LambentLight",
         "version": server.__version__
@@ -95,30 +112,20 @@ class BuildView(web.View):
     """
     Route to manage specific builds.
     """
-    async def get(self):
+    @server.requires_build
+    async def get(self, build):
         """
         Gets the information of a specific build.
         """
-        # Try to get the builds that match the name
-        matches = [x for x in server.manager.builds if x.name == self.request.match_info["name"]]
-        # If none were found, show an error message
-        if not matches:
-            return web.json_response({"message": "No Builds were found with that name."}, status=404)
-        # Otherwise, return the build information
-        return web.json_response(dict(matches[0]))
+        # Just return the build information
+        return web.json_response(dict(build))
 
-    async def post(self):
+    @server.requires_build
+    async def post(self, build):
         """
         Downloads a specific build.
         """
-        # Try to get the builds that match the name
-        matches = [x for x in server.manager.builds if x.name == self.request.match_info["name"]]
-        # If no matches were found, return a 404
-        if not matches:
-            return web.json_response({"message": "No Builds were found with that name."}, status=404)
-        # Get the build that we plan to manage
-        build = matches[0]
-        # If is already ready to be used and is not forced, return
+        # If we are using the build and is not forced, return
         if build.is_ready and self.request.query.get("force", "0") != "1":
             return web.json_response({"message": "Build is already Downloaded and Ready."}, status=409)
         # Otherwise, start the download and notify if it was a success
@@ -165,22 +172,22 @@ class ServerView(web.View):
     """
     Route used for managing specific servers.
     """
-    async def get(self):
+    @server.requires_server
+    async def get(self, serv):
         """
         Gets the information of a server.
         """
-        # Try to find Data Folders with the specified name
-        folders = [x for x in server.manager.folders if x.name == self.request.match_info["name"] and x.is_running]
-        # If none were found, return a 404
-        if not folders:
-            return web.json_response({"message": "No servers were found with the specified name."}, status=404)
-        # Otherwise, send the process information
-        return web.json_response(folders[0].proc_info)
+        return web.json_response(serv.proc_info)
 
-    async def put(self):
+    @server.requires_folder
+    async def put(self, folder):
         """
         Starts a new CFX Server for the Data Folder.
         """
+        # Then, check if the Data folder is running
+        if folder.is_running:
+            return web.json_response({"message": "The Server is already running."}, status=409)
+
         # Try to get the request as JSON and return a 400 if failed
         try:
             data = await self.request.json()
@@ -190,15 +197,6 @@ class ServerView(web.View):
         # Make sure that the required parameters are present
         if "build" not in data:
             return web.json_response({"message": "Build was not specified."}, status=400)
-
-        # Go ahead and search for the Data Folder
-        found_folders = [x for x in server.manager.folders if x.name == self.request.match_info["name"]]
-        if not found_folders:
-            return web.json_response({"message": "Data Folder was not found."}, status=404)
-        folder = found_folders[0]
-        # Then, check if the Data folder is running
-        if folder.is_running:
-            return web.json_response({"message": "Found a server running with the specified Data Folder."}, status=409)
 
         # Now, time to find the Build
         found_builds = [x for x in server.manager.builds if x.name == data["build"]]
@@ -212,17 +210,13 @@ class ServerView(web.View):
         else:
             return web.json_response({"message": "Unable to start the server. Check the console."}, status=500)
 
-    async def delete(self):
+    @server.requires_server
+    async def delete(self, serv):
         """
         Stops a specific server.
         """
-        # Try to find Data Folders that are running with that name
-        folders = [x for x in server.manager.folders if x.name == self.request.match_info["name"] and x.is_running]
-        # If none were found, return a 404
-        if not folders:
-            return web.json_response({"message": "No servers were found with the specified name."}, status=404)
-        # Otherwise, call the stop function and return a 204 No Content
-        await folders[0].stop()
+        # Just call the stop function and return a 204 No Content
+        await serv.stop()
         return web.Response(status=204)
 
 
