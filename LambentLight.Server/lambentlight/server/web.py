@@ -151,6 +151,19 @@ class FoldersView(web.View):
         return web.json_response([dict(x) for x in server.manager.folders], headers=headers)
 
 
+@routes.view("/folders/{name}")
+class FolderView(web.View):
+    """
+    Route for getting the information of individual Data Folders.
+    """
+    @server.requires_folder
+    async def get(self, folder):
+        """
+        Prints the information of the Data Folder.
+        """
+        return web.json_response(dict(folder))
+
+
 @routes.view("/servers")
 class ServersView(web.View):
     """
