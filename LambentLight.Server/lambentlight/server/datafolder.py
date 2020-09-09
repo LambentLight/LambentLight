@@ -32,8 +32,12 @@ def get_resources_in_dir(path, datafolder):
         # If is not a directory, continue to the next iteration
         if not found.is_dir():
             continue
-        # If is a subdirectory, yield those values
+        # Get the name of the directory
         name = os.path.basename(found.path)
+        # If is called .git, skip it (just in case)
+        if name == ".git":
+            continue
+        # If it has [], is a subdirectory so also fetch those
         if name.startswith("[") and name.endswith("]"):
             yield from get_resources_in_dir(found.path, datafolder)
             continue
