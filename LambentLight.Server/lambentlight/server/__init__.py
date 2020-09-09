@@ -5,6 +5,7 @@ from .compression import CompressionType, detect, extract
 from .datafolder import DataFolder
 from .decorators import requires_build, requires_folder, requires_server
 from .manager import manager
+from .resources import LocalResource
 from .web import app
 
 

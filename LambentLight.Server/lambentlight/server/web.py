@@ -164,6 +164,22 @@ class FolderView(web.View):
         return web.json_response(dict(folder))
 
 
+@routes.view("/folders/{name}/resources")
+class InstalledResourcesView(web.View):
+    """
+    Route for getting the resources on Data Folders.
+    """
+    @server.requires_folder
+    async def get(self, folder):
+        """
+        Gets the list of Resources on the Data Folder.
+        """
+        if self.request.query.get("simple", "0") != "1":
+            return web.json_response([dict(x) for x in folder.resources])
+        else:
+            return web.json_response([x.name for x in folder.resources])
+
+
 @routes.view("/servers")
 class ServersView(web.View):
     """

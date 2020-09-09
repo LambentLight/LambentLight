@@ -23,6 +23,24 @@ default = {
 }
 
 
+def get_resources_in_dir(path, datafolder):
+    """
+    Gets the resources installed in the folder.
+    """
+    # Iterate over the items inside of the resources directory
+    for found in os.scandir(os.path.join(path)):
+        # If is not a directory, continue to the next iteration
+        if not found.is_dir():
+            continue
+        # If is a subdirectory, yield those values
+        name = os.path.basename(found.path)
+        if name.startswith("[") and name.endswith("]"):
+            yield from get_resources_in_dir(found.path, datafolder)
+            continue
+        # Otherwise, yield a resource
+        yield server.LocalResource(datafolder, found.path)
+
+
 class DataFolder:
     """
     Represents an independent folder with Resources.
@@ -86,6 +104,13 @@ class DataFolder:
         Checks if the Data Folder can be used for a server.
         """
         return os.path.isdir(self.path)
+
+    @property
+    def resources(self):
+        """
+        Returns an iterator with the list of Local Resources.
+        """
+        yield from get_resources_in_dir(os.path.join(self.path, "resources"), self)
 
     async def start(self, build, terminate=False):
         """
