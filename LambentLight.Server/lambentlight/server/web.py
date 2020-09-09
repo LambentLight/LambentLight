@@ -74,7 +74,6 @@ async def info(request):
     """
     Shows the LambentLight information.
     """
-    raise Exception("Test")
     pinfo = {
         "prog": "LambentLight",
         "version": server.__version__
