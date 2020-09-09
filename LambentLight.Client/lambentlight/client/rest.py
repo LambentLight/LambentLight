@@ -47,3 +47,10 @@ async def post(route: str):
     Makes a POST Request.
     """
     return await request("POST", route)
+
+
+async def delete(route: str):
+    """
+    Makes a DELETE Request.
+    """
+    return await request("DELETE", route)
