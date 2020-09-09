@@ -163,7 +163,7 @@ class DataFolder:
         logger.info(f"Started Data Folder {self.name} with Build {build.name}")
         return True
 
-    async def stop(self, terminate=False):
+    async def stop(self, terminate=False, wait=True):
         """
         Stops or Terminates the game server.
         """
@@ -174,8 +174,9 @@ class DataFolder:
                 self.process.terminate()
             else:
                 self.process.send_signal(signal.CTRL_BREAK_EVENT if server.is_windows else signal.SIGINT)
-            # And wait for it to be closed
-            await self.process.wait()
+            # And wait for it to be closed (if required)
+            if wait:
+                await self.process.wait()
         # Finally, set the process and build to None
         self.process = None
         self.build = None
