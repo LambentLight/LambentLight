@@ -4,6 +4,7 @@ import os
 import os.path as path
 import secrets
 import string
+from typing import Union
 
 import aiofiles
 import aiohttp
@@ -161,6 +162,42 @@ class Manager:
             local = []
         logger.info(f"Data Folders have been updated (Total: {len(local)})")
         self.folders = local
+
+    async def remove(self, obj: Union[server.DataFolder, server.Build], *, stop=True):
+        """
+        Removes a Data Folder or Build.
+        """
+        # If is on none of the lists, return
+        if obj not in self.folders and obj not in self.builds:
+            return False
+
+        # If is a Data Folder
+        if isinstance(obj, server.DataFolder):
+            # If there is a server running, stop it if required
+            # Raise an exception otherwise
+            if obj.is_running:
+                if not stop:
+                    raise server.ServerRunningException()
+                await obj.stop(terminate=False)
+            # And then delete it
+            self.folders.remove(obj)
+            return True
+        # If is a Build
+        elif isinstance(obj, server.Build):
+            # Try to find servers running with the Data Folder
+            servers = [x for x in server.manager.folders if x.build == obj]
+            if servers:
+                if not stop:
+                    raise server.ServerRunningException()
+                for srv in servers:
+                    await srv.stop()
+            # If the build is installed, delete it
+            if obj.is_ready:
+                await obj.delete()
+            # And then remove it
+            self.builds.remove(obj)
+        # If we got here, say that we were unable to delete it
+        return False
 
     async def send_data(self, event: str, data):
         """
