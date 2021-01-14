@@ -1,3 +1,4 @@
+import contextlib
 import logging
 import os
 import os.path
@@ -5,6 +6,7 @@ import shutil
 import tempfile
 
 import aiofiles
+import aiofiles.os
 import aiohttp
 
 import lambentlight.server as server
@@ -103,3 +105,10 @@ class Build:
         os.makedirs(self.builds_dir, exist_ok=True)
         shutil.move(ext_path, self.builds_dir)
         return True
+
+    async def delete(self):
+        """
+        Deletes the Build.
+        """
+        with contextlib.suppress(FileNotFoundError):
+            await aiofiles.os.rmtree(self.folder)
