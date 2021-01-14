@@ -133,7 +133,25 @@ class BuildView(web.View):
             if success:
                 return web.Response(status=204)
             else:
-                return web.json_response({"messages": "Error when downloading the build."}, status=500)
+                return web.json_response({"message": "Error when downloading the build."}, status=500)
+
+    @server.requires_build
+    async def delete(self, build: server.Build):
+        """
+        Deletes the Build from the server.
+        """
+        # Check if we were requested a force
+        force = self.request.query.get("force", "0") != "1"
+        # Then, try to remove the build with the force parameter
+        try:
+            await server.manager.remove(build, stop=force)
+        # If there is a server running
+        except server.ServerRunningException:
+            # And we were not requested to force it, return a message
+            if not force:
+                return web.json_response({"message": "There are servers running with this Build."}, status=400)
+            # If we got here, something went wrong so raise an exception
+            raise
 
 
 @routes.view("/folders")
