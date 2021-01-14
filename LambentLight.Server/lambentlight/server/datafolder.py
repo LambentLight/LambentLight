@@ -116,6 +116,17 @@ class DataFolder:
         """
         yield from get_resources_in_dir(os.path.join(self.path, "resources"), self)
 
+    async def send_command(self, command: str):
+        """
+        Sends a command to the console, if is running.
+        """
+        # If the server is not running, return
+        if not self.is_running:
+            return
+        # Otherwise, send it to stdin
+        self.process.stdin.write(command)
+        await self.process.stdin.drain()
+
     async def start(self, build, terminate=False):
         """
         Starts or Restarts the game server.
