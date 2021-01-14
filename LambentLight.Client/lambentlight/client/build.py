@@ -29,3 +29,20 @@ async def show_builds():
     for build in builds:
         values.append([build["name"], "Yes" if build["is_ready"] else "No"])
     client.print_list(*values)
+
+
+async def show_build(build):
+    """
+    Shows the information of a Build.
+    """
+    json = await client.get(f"/builds/{build}")
+    print("Name", json["name"], sep="\t\t\t")
+    print("Download URL", json["url"] if json["url"] else "Not Present", sep="\t\t")
+    print("Ready to be Used", json["is_ready"], sep="\t")
+
+
+async def delete_build(build):
+    """
+    Deletes/Uninstalls the specified Build.
+    """
+    await client.delete(f"/builds/{build}")
