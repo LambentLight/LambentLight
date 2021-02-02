@@ -87,6 +87,15 @@ class Manager:
         # Finally, tell the main script that we finished the init
         return True
 
+    async def save_settings(self):
+        """
+        Saves the settings.
+        """
+        async with aiofiles.open(server.arguments.config, "w") as file:
+            text = json.dumps(self.config, indent=4) + "\n"
+            await file.write(text)
+            logger.info("Settings have been saved")
+
     async def close(self):
         """
         Stops all of the servers and web sessions in use.
