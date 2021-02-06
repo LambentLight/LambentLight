@@ -100,6 +100,21 @@ class Manager:
                 await ws.close(code=aiohttp.WSCloseCode.GOING_AWAY,
                                message="LambentLight is Closing")
 
+    async def create_folder(self, name: str):
+        """
+        Creates a new Data Folder.
+        """
+        path = os.path.join(server.arguments.work_dir, "data", name)
+        # Create the folder with an empty configuration file
+        os.makedirs(path, exist_ok=True)
+        async with aiofiles.open(os.path.join(path, "lambentlight.json"), "w") as file:
+            await file.write("{\n}\n")
+        # Now, update the list of folders
+        await self.update_folders()
+        # And return the one with the same exact name
+        # TODO: Make this safer
+        return [x for x in self.folders if x.name == name][0]
+
     async def update_builds(self):
         """
         Updates the list of known CFX Builds.

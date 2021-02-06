@@ -168,6 +168,30 @@ class FoldersView(web.View):
         }
         return web.json_response([dict(x) for x in server.manager.folders], headers=headers)
 
+    async def put(self):
+        """
+        Creates a data folder with the specified name.
+        """
+        # Try to get the request as JSON and return a 400 if failed
+        try:
+            data = await self.request.json()
+        except json.JSONDecodeError:
+            return web.json_response({"message": "Body is not JSON or is malformed."}, status=400)
+
+        # If the name does not exists, return a 400
+        name = data.get("name", "")
+        if not name:
+            return web.json_response({"message": "Name was not specified."},
+                                     status=400)
+
+        # If there is a folder with the same name, return a 409 Conflict
+        if [x for x in server.manager.folders if x.name == name]:
+            return web.json_response({"message": "Folder with the same name already exists."},
+                                     status=409)
+        # Otherwise, tell the manager to create it
+        folder = await server.manager.create_folder(name)
+        return web.json_response(dict(folder))
+
 
 @routes.view("/folders/{name}")
 class FolderView(web.View):
