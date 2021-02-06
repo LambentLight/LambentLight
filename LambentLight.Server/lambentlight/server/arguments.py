@@ -15,8 +15,6 @@ def parse_arguments():
                                      epilog="Check https://justalemon.ml/LambentLight for more info.",
                                      add_help=True, formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     # Add the arguments
-    parser.add_argument("--config", dest="config", default=config_file,
-                        help="the configuration file used for parameters")
     parser.add_argument("--work-dir", dest="work_dir", default=work_dir,
                         help="folder used to store the server data")
     parser.add_argument("--host", dest="host", default="127.0.0.1",

@@ -35,27 +35,25 @@ class Manager:
         """
         Initializes the basics of the Manager.
         """
-        # If the configuration exists, load it
-        if path.isfile(server.arguments.config):
-            async with aiofiles.open(server.arguments.config) as file:
-                loaded = json.loads(await file.read())
-                self.config = {}
-                for key, value in default.items():
-                    if key in loaded:
-                        self.config[key] = loaded[key]
-                    else:
-                        self.config[key] = value
-            logger.info(f"Loaded configuration from {server.arguments.config}")
-        # Otherwise, write the default values
-        else:
-            try:
-                os.makedirs(server.arguments.work_dir, exist_ok=True)
-                async with aiofiles.open(server.arguments.config, "w+") as file:
-                    js = json.dumps(default, indent=4)
-                    await file.write(js)
-                logger.warning(f"Created default configuration at {server.arguments.config}")
-            except PermissionError:
-                logger.warning("Unable to save the Default Configuration (no permission)")
+        # Format the path of the configuration file
+        config = os.path.join(server.arguments.work_dir, "config.json")
+
+        # If the configuration file is missing, raise an exception
+        if not path.isfile(config):
+            logger.error("Configuration file is missing!")
+            logger.error("Please run LambentLight with the --init parameter to create it")
+            return False
+
+        # Otherwise, just load it
+        async with aiofiles.open(config) as file:
+            loaded = json.loads(await file.read())
+            self.config = {}
+            for key, value in default.items():
+                if key in loaded:
+                    self.config[key] = loaded[key]
+                else:
+                    self.config[key] = value
+        logger.info(f"Loaded configuration from {config}")
 
         # Create the Client Session
         self.session = aiohttp.ClientSession()
@@ -91,7 +89,7 @@ class Manager:
         """
         Saves the settings.
         """
-        async with aiofiles.open(server.arguments.config, "w") as file:
+        async with aiofiles.open(os.path.join(server.arguments.work_dir, "config.json"), "w") as file:
             text = json.dumps(self.config, indent=4) + "\n"
             await file.write(text)
             logger.info("Settings have been saved")
