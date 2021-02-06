@@ -189,7 +189,7 @@ class FoldersView(web.View):
             return web.json_response({"message": "Folder with the same name already exists."},
                                      status=409)
         # Otherwise, tell the manager to create it
-        folder = await server.manager.create_folder(name)
+        folder = await server.manager.create_folder(name, data.get("from_repo", True))
         return web.json_response(dict(folder))
 
 

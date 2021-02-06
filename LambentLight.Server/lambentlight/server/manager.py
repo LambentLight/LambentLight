@@ -6,6 +6,7 @@ from typing import Union
 
 import aiofiles
 import aiohttp
+from git import Repo
 
 import lambentlight.server as server
 
@@ -100,13 +101,26 @@ class Manager:
                 await ws.close(code=aiohttp.WSCloseCode.GOING_AWAY,
                                message="LambentLight is Closing")
 
-    async def create_folder(self, name: str):
+    async def create_folder(self, name: str, clone: bool):
         """
         Creates a new Data Folder.
         """
         path = os.path.join(server.arguments.work_dir, "data", name)
-        # Create the folder with an empty configuration file
-        os.makedirs(path, exist_ok=True)
+
+        # Create the folder or clone the repository
+        if clone:
+            # From https://gitpython.readthedocs.io/en/stable/intro.html:
+            # GitPython is not suited for long-running processes (like daemons) as
+            # it tends to leak system resources. It was written in a time where destructors
+            # (as implemented in the __del__ method) still ran deterministically.
+            # In case you still want to use it in such a context, you will want to search the
+            # codebase for __del__ implementations and call these yourself when you see fit.
+            repo = Repo.clone_from("https://github.com/LambentLight/ServerData.git", path)
+            del repo
+        else:
+            os.makedirs(path, exist_ok=True)
+
+        # Then, create an empty configuration file
         async with aiofiles.open(os.path.join(path, "lambentlight.json"), "w") as file:
             await file.write("{\n}\n")
         # Now, update the list of folders
