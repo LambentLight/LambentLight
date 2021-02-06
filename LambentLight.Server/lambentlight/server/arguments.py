@@ -17,6 +17,8 @@ def parse_arguments():
     # Add the arguments
     parser.add_argument("--work-dir", dest="work_dir", default=work_dir,
                         help="folder used to store the server data")
+    parser.add_argument("--init", dest="init", action="store_true",
+                        help="initializes the configuration file")
     parser.add_argument("--host", dest="host", default="127.0.0.1",
                         help="the host or IP address to bind")
     parser.add_argument("--web-port", dest="web_port", default=8019,

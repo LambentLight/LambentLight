@@ -1,6 +1,10 @@
 import asyncio
+import contextlib
+import json
 import logging
+import os
 
+import aiofiles
 from aiohttp import web
 
 import lambentlight.server as server
@@ -21,6 +25,20 @@ async def start():
     for logger in loggers:
         logger.setLevel(logging.INFO)
         logger.addHandler(stream)
+
+    # If we only need to initialize the config, do it and exit
+    if server.arguments.init:
+        config = os.path.join(server.arguments.work_dir, "config.json")
+        if os.path.isfile(config):
+            loggers[0].warning(f"Configuration file '{config}' exists")
+        with contextlib.suppress(FileNotFoundError):
+            await aiofiles.os.mkdir(server.arguments.work_dir)
+        async with aiofiles.open(config, "w") as file:
+            text = json.dumps(server.default_config, indent=4) + "\n"
+            await file.write(text)
+        loggers[0].info(f"Configuration was written to '{config}'")
+        return
+
     # Notify that we are stating the server
     loggers[0].info(f"Starting LambentLight {server.__version__}")
     # If we are not running a valid operating system, return
