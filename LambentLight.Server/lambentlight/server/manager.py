@@ -2,8 +2,6 @@ import json
 import logging
 import os
 import os.path as path
-import secrets
-import string
 from typing import Union
 
 import aiofiles
@@ -13,11 +11,6 @@ import lambentlight.server as server
 
 
 logger = logging.getLogger("lambentlight")
-default = {
-    "token_api": "".join(secrets.choice(string.ascii_letters + string.digits) for _ in range(32)),
-    "token_cfx": "",
-    "dl_builds": "https://raw.githubusercontent.com/LambentLight/Builds/master/builds.json"
-}
 
 
 class Manager:
@@ -26,7 +19,7 @@ class Manager:
     """
     def __init__(self):
         self.session = None
-        self.config = default
+        self.config = server.default_config
         self.builds = []
         self.folders = []
         self.ws_clients = []
@@ -48,7 +41,7 @@ class Manager:
         async with aiofiles.open(config) as file:
             loaded = json.loads(await file.read())
             self.config = {}
-            for key, value in default.items():
+            for key, value in server.default_config.items():
                 if key in loaded:
                     self.config[key] = loaded[key]
                 else:
