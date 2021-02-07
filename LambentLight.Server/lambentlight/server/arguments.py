@@ -3,7 +3,6 @@ from platform import system
 
 
 work_dir = "C:\\ProgramData\\LambentLight" if system() == "Windows" else "/var/lib/lambentlight"
-config_file = f"{work_dir}\\LambentLight.json" if system() == "Windows" else f"{work_dir}/lambentlight.json"
 
 
 def parse_arguments():
