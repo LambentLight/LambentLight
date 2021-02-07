@@ -7,5 +7,4 @@ async def show_info():
     """
     # Request the basic info and print it
     info = await client.get("/")
-    print("Program:", "\t", info["prog"], sep=" ")
-    print("Version:", "\t", info["version"], sep=" ")
+    print("{0} v{1} running on {2}".format(info["prog"], info["version"], client.host))
