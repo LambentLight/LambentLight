@@ -6,7 +6,7 @@
 Name "LambentLight"
 OutFile "dist\LambentLightInstaller.exe"
 Unicode True
-InstallDir "$PROGRAMFILES64\LambentLight"
+InstallDir "$PROGRAMFILES\LambentLight"
 InstallDirRegKey HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\LambentLight" "InstallLocation"
 RequestExecutionLevel admin
 
