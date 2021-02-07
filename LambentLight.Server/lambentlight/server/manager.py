@@ -169,9 +169,15 @@ class Manager:
                         logger.error("Target Operating System of Build was not found.")
                         continue
 
+                    # If there is already a build with the same name, skip it and raise a warning
+                    name = build["name"]
+                    if any(x for x in remote if x.name == name):
+                        logger.warning(f"Ignoring build '{name}' because one with the same name already exists")
+                        continue
+
                     # If we got here, create a new one if it matches the os
                     if (build["target"] == 0 and server.is_windows) or (build["target"] == 1 and server.is_ubuntu):
-                        remote.append(server.Build(name=build["name"], download=build["download"]))
+                        remote.append(server.Build(name=name, download=build["download"]))
 
         # Now is time for the local builds
         local = []
