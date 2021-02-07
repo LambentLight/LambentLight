@@ -154,18 +154,23 @@ class BuildView(web.View):
         """
         Deletes the Build from the server.
         """
-        # Check if we were requested a force
-        force = self.request.query.get("force", "0") != "1"
+        # If the body is not empty, try to parse it as json
+        if self.request.body_exists:
+            body = await self.request.json()
+        else:
+            body = {}
+
+        # Check if we need to stop the servers
+        stop = body.get("stop", True)
         # Then, try to remove the build with the force parameter
         try:
-            await server.manager.remove(build, stop=force)
-        # If there is a server running
+            await server.manager.remove(build, stop=stop)
+        # If there is a server running, return a 409 Conflict
+        # This is only raised if stop is True
         except server.ServerRunningException:
-            # And we were not requested to force it, return a message
-            if not force:
-                return web.json_response({"message": "There are servers running with this Build."}, status=400)
-            # If we got here, something went wrong so raise an exception
-            raise
+            return web.json_response({"message": "There are servers running with this Build."}, status=409)
+        # If we got here, every went ok so return a 204 No Content
+        return web.Response(status=204)
 
 
 @routes.view("/folders")
