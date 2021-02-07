@@ -31,7 +31,7 @@ class Build:
             self.name = os.path.basename(folder)
             self.url = None
         else:
-            self.folder = os.path.join(server.arguments.work_dir, "builds", name)
+            self.folder = os.path.join(self.builds_dir, name)
             self.name = name
             self.url = download
 
