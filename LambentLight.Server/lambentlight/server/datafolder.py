@@ -11,7 +11,6 @@ import psutil
 
 import lambentlight.server as server
 
-
 logger = logging.getLogger("lambentlight")
 default = {
     "auto_start": False,
@@ -80,22 +79,6 @@ class DataFolder:
             return None
 
     @property
-    def token(self):
-        """
-        Gets a CFX Token that can be used to start the server.
-        """
-        # Try to get the token from the Data Folder and Manager config
-        # If it was not possible, return None
-        if self.config["token_cfx"]:
-            return self.config["token_cfx"]
-        elif server.manager.config["token_cfx"]:
-            logger.warning(f"Using global CFX Token for Data Folder {self.name}")
-            return server.manager.config["token_cfx"]
-        else:
-            logger.error(f"No CFX Token is available for Data Folder {self.name}")
-            return None
-
-    @property
     def is_running(self):
         """
         Checks if the server is running or not.
@@ -144,10 +127,10 @@ class DataFolder:
             logger.error("Unable to start the server because the Data Folder is not present")
             return False
         # Get the token and return if is invalid
-        token = self.token
+        token = self.config.get("token_cfx", None)
         if not token:
-            logger.info(f"Unable to start {self.name}: Invalid Token")
-            return False
+            logger.info(f"Unable to start {self.name}: Token not set")
+            raise server.MissingTokenException(self)
 
         # Format the launch parameters
         params = [
