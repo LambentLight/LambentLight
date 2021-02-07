@@ -28,13 +28,17 @@ async def auth(request: web.Request, handler):
     """
     # If the request does not has an authentication header, return a 401
     if "Authorization" not in request.headers:
-        return web.json_response({"message": "Token not specified."}, status=401)
+        return web.json_response({"message": "Authentication Token was not specified."},
+                                 status=401)
     # If the header does not starts with Bearer
     elif not request.headers["Authorization"].lower().startswith("bearer "):
-        return web.json_response({"message": "Auth Token is not using the right format."}, status=401)
+        return web.json_response({"message": "Authentication Token is not using the right format."},
+                                 status=400)
     # If the second part does not matches the token in the config, return
     elif request.headers["Authorization"].split(" ")[1] != server.manager.config["token_api"]:
-        return web.json_response({"message": "Auth Token is not valid."}, status=401)
+        return web.json_response({"message": "Authentication Token is not valid."},
+                                 status=401)
+
     # Otherwise, return a the response of the handler and catch any errors found
     try:
         return await handler(request)
