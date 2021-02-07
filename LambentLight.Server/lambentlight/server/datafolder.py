@@ -141,7 +141,7 @@ class DataFolder:
                 return False
         # Make sure that the Data Folder is there
         if not self.can_be_used:
-            logger.error(f"Unable to start the server because the Data Folder is not present")
+            logger.error("Unable to start the server because the Data Folder is not present")
             return False
         # Get the token and return if is invalid
         token = self.token

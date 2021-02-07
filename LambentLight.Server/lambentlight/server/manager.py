@@ -143,7 +143,7 @@ class Manager:
             try:
                 new = await resp.json(content_type=None)
             except json.JSONDecodeError:
-                logger.error(f"Unable to fetch updated builds because response is not JSON")
+                logger.error("Unable to fetch updated builds because response is not JSON")
                 return
         # If the request didn't included the list of builds, return
         if "builds" not in new:
