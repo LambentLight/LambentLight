@@ -1,3 +1,0 @@
-lambentlight.client==3.0
-lambentlight.server==3.0
-lambentlight.tools==3.0
