@@ -31,7 +31,7 @@ async def start():
         config = os.path.join(server.arguments.work_dir, "config.json")
         if os.path.isfile(config):
             loggers[0].warning(f"Configuration file '{config}' exists")
-        with contextlib.suppress(FileNotFoundError):
+        with contextlib.suppress(FileExistsError):
             await aiofiles.os.mkdir(server.arguments.work_dir)
         async with aiofiles.open(config, "w") as file:
             text = json.dumps(server.default_config, indent=4) + "\n"
