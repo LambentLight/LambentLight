@@ -275,19 +275,19 @@ class ServersView(web.View):
         # If none were found, return a 404 not found
         if not folders:
             return web.json_response({"message": "No Data Folders were found with the specified Name."},
-                                     status=400)
+                                     status=404)
         # Otherwise, select a folder
         folder = folders[0]
 
         # Then, check if the Data folder is running and return a 409 if it does
         if folder.is_running:
-            return web.json_response({"message": "The Server is already running."},
+            return web.json_response({"message": "The Data Folder is already in use by a Server."},
                                      status=409)
 
         # Now, time to find the Build
         found_builds = [x for x in server.manager.builds if x.name == data["build"]]
         if not found_builds:
-            return web.json_response({"message": "The CFX Build was not found."},
+            return web.json_response({"message": "No Builds were found with the specified Name."},
                                      status=404)
         build = found_builds[0]
 
@@ -297,7 +297,7 @@ class ServersView(web.View):
             return web.json_response(folder.proc_info, status=201)
         except server.MissingTokenException as e:
             return web.json_response({"message": str(e)},
-                                     status=400)
+                                     status=500)
 
 
 @routes.view("/servers/{name}")
