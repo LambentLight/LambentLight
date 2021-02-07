@@ -29,6 +29,11 @@ Section "Server" Server
     File "dist\lambentlightd.exe"
 SectionEnd
 
+Section "Client" Client
+    SetOutPath "$INSTDIR"
+    File "dist\lambentlight.exe"
+SectionEnd
+
 Section "Uninstaller" Uninstaller
     SectionIn RO
     SetOutPath "$INSTDIR"
@@ -51,8 +56,10 @@ Section "Uninstall"
 SectionEnd
 
 LangString DESC_Server ${LANG_ENGLISH} "Installs the Server component. It allows you to host your own CFX Server Instances."
+LangString DESC_Client ${LANG_ENGLISH} "Installs the Client Command Line. It allows you manage CFX Servers from the Command Line (cmd.exe)."
 LangString DESC_Uninstaller ${LANG_ENGLISH} "Creates Uninstall information to remove the program from Apps and Features."
 !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
 !insertmacro MUI_DESCRIPTION_TEXT ${Server} $(DESC_Server)
+!insertmacro MUI_DESCRIPTION_TEXT ${Client} $(DESC_Client)
 !insertmacro MUI_DESCRIPTION_TEXT ${Uninstaller} $(DESC_Uninstaller)
 !insertmacro MUI_FUNCTION_DESCRIPTION_END
