@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 
 with open("requirements.txt") as file:
@@ -8,7 +8,7 @@ with open("requirements.txt") as file:
 setup(
     name="lambentlight.tools",
     version="3.0",
-    packages=["lambentlight.tools"],
+    packages=find_packages(),
     install_requires=requirements,
     author="justalemon",
     author_email="justlemoncl@gmail.com",
