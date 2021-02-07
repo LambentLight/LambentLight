@@ -13,12 +13,7 @@ def parse_arguments():
     # Then, add the subparsers
     # LIST SERVERS
     server = subparsers.add_parser("servers",
-                                   help="lists the Servers currently running")
-    # INFORMATION
-    # TODO: Make this the default behavior
-    info = subparsers.add_parser("info", aliases=["i"],
-                                 help="Shows basic information of the current instance")
-    # LIST BUILDS
+                                   help="lists the Servers currently running")   # LIST BUILDS
     builds = subparsers.add_parser("builds", aliases=["bl"],
                                    help="Lists the Builds known by LambentLight")
     builds.add_argument("-U", "--update", action="store_true",

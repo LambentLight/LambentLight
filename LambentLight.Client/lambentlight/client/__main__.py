@@ -16,8 +16,6 @@ async def run():
     # Otherwise, check the correct command and invoke the respective function
     if args.command == "servers":
         await client.print_servers()
-    elif args.command == "info":
-        await client.show_info()
     elif args.command == "builds":
         if args.update:
             await client.update_builds()
@@ -29,6 +27,8 @@ async def run():
             await client.delete_build(args.build)
         else:
             await client.show_build(args.build)
+    else:
+        await client.show_info()
 
 
 def main():
