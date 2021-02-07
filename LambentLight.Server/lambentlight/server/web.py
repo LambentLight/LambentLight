@@ -255,6 +255,50 @@ class ServersView(web.View):
         }
         return web.json_response({x.name: x.proc_info for x in server.manager.folders if x.is_running}, headers=headers)
 
+    async def put(self):
+        """
+        Starts a new CFX Server for the Data Folder.
+        """
+        # Parse the contents of the body as JSON
+        data = await self.request.json()
+
+        # Make sure that the required parameters are present
+        if "folder" not in data:
+            return web.json_response({"message": "The Target Data Folder was not specified."},
+                                     status=400)
+        if "build" not in data:
+            return web.json_response({"message": "The Target Build was not specified."},
+                                     status=400)
+
+        # Try to find a data folder with a matching name
+        folders = [x for x in server.manager.folders if x.name == data["folder"]]
+        # If none were found, return a 404 not found
+        if not folders:
+            return web.json_response({"message": "No Data Folders were found with the specified Name."},
+                                     status=400)
+        # Otherwise, select a folder
+        folder = folders[0]
+
+        # Then, check if the Data folder is running and return a 409 if it does
+        if folder.is_running:
+            return web.json_response({"message": "The Server is already running."},
+                                     status=409)
+
+        # Now, time to find the Build
+        found_builds = [x for x in server.manager.builds if x.name == data["build"]]
+        if not found_builds:
+            return web.json_response({"message": "The CFX Build was not found."},
+                                     status=404)
+        build = found_builds[0]
+
+        # If we have everything, go ahead and start it
+        try:
+            await folder.start(build)
+            return web.json_response(folder.proc_info, status=201)
+        except server.MissingTokenException as e:
+            return web.json_response({"message": str(e)},
+                                     status=400)
+
 
 @routes.view("/servers/{name}")
 class ServerView(web.View):
@@ -267,34 +311,6 @@ class ServerView(web.View):
         Gets the information of a server.
         """
         return web.json_response(serv.proc_info)
-
-    @server.requires_folder
-    async def put(self, folder):
-        """
-        Starts a new CFX Server for the Data Folder.
-        """
-        # Then, check if the Data folder is running
-        if folder.is_running:
-            return web.json_response({"message": "The Server is already running."}, status=409)
-
-        # Try to get the request as JSON and return a 400 if failed
-        data = await self.request.json()
-
-        # Make sure that the required parameters are present
-        if "build" not in data:
-            return web.json_response({"message": "Build was not specified."}, status=400)
-
-        # Now, time to find the Build
-        found_builds = [x for x in server.manager.builds if x.name == data["build"]]
-        if not found_builds:
-            return web.json_response({"message": "CFX Build was not found."}, status=404)
-        build = found_builds[0]
-
-        # If we have everything, go ahead and start it
-        if await folder.start(build):
-            return web.json_response(folder.proc_info, status=201)
-        else:
-            return web.json_response({"message": "Unable to start the server. Check the console."}, status=500)
 
     @server.requires_server
     async def delete(self, serv):

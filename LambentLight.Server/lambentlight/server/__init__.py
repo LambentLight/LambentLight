@@ -5,7 +5,8 @@ from .compression import CompressionType, detect, extract
 from .config import default_config
 from .datafolder import DataFolder
 from .decorators import requires_build, requires_folder, requires_server
-from .exceptions import LambentLightServerException, ServerRunningException
+from .exceptions import LambentLightServerException, ServerRunningException, \
+    MissingTokenException
 from .manager import manager
 from .resources import LocalResource
 from .web import app
