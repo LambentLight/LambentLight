@@ -18,6 +18,8 @@ class Manager:
     """
     The main manager of LambentLight.
     """
+    builds_dir: str = os.path.join(server.arguments.work_dir, "builds")
+
     def __init__(self):
         self.session = None
         self.config = server.default_config
@@ -133,46 +135,55 @@ class Manager:
         """
         Updates the list of known CFX Builds.
         """
-        # Request the list of builds
-        async with self.session.get(self.config["dl_builds"]) as resp:
-            # If the code is not 200, log it and return
-            if resp.status != 200:
-                logger.error(f"Unable to fetch updated builds: Code {resp.status}")
-                return
-            # Otherwise, convert it to JSON
-            try:
-                new = await resp.json(content_type=None)
-            except json.JSONDecodeError:
-                logger.error("Unable to fetch updated builds because response is not JSON")
-                return
-        # If the request didn't included the list of builds, return
-        if "builds" not in new:
-            logger.error("Request didn't included list of builds.")
-            return
-        # Then, continue and iterate the builds that we got
+        # Start with the remote builds from the URLs
         remote = []
-        for build in new["builds"]:
-            # If one of the parts is missing, log it and continue
-            if "name" not in build:
-                logger.error("Name of Build is missing.")
-                continue
-            elif "download" not in build:
-                logger.error("Download URL of Build is missing.")
-                continue
-            elif "target" not in build:
-                logger.error("Target Operating System of Build was not found.")
-                continue
-            # If we got here, create a new one if it matches the os
-            if (build["target"] == 0 and server.is_windows) or (build["target"] == 1 and server.is_ubuntu):
-                remote.append(server.Build(name=build["name"], download=build["download"]))
+        for url in self.config["builds"]:
+            logger.info(f"Fetching builds from '{url}'")
+            # Try to make the request
+            async with self.session.get(url) as resp:
+                # Discard any code 200 errors
+                if resp.status != 200:
+                    logger.error(f"Unable to fetch builds from '{url}': Code {resp.status}")
+                    continue
+                # And try to convert it to a dict from JSON
+                try:
+                    new = await resp.json(content_type=None)
+                except json.JSONDecodeError as e:
+                    logger.error(f"Unable to parse builds from '{url}': {e}")
+                    continue
+                # If no builds are present in the json, skip it
+                if "builds" not in new:
+                    logger.error(f"Response from {url} does not has any builds.")
+                    continue
 
-        # Now, load the local builds that do not match existing ones
+                # Now, time to add the builds one by one
+                for build in new["builds"]:
+                    # If one of the parts is missing, log it and continue
+                    if "name" not in build:
+                        logger.error("Name of Build is missing.")
+                        continue
+                    elif "download" not in build:
+                        logger.error("Download URL of Build is missing.")
+                        continue
+                    elif "target" not in build:
+                        logger.error("Target Operating System of Build was not found.")
+                        continue
+
+                    # If we got here, create a new one if it matches the os
+                    if (build["target"] == 0 and server.is_windows) or (build["target"] == 1 and server.is_ubuntu):
+                        remote.append(server.Build(name=build["name"], download=build["download"]))
+
+        # Now is time for the local builds
         local = []
-        builds_dir = os.path.join(server.arguments.work_dir, "builds")
-        if os.path.isdir(builds_dir):
-            for directory in os.scandir(builds_dir):
-                if not any(x for x in remote if directory.is_dir() and x.name == directory.name):
-                    local.append(server.Build(folder=directory))
+        if os.path.isdir(self.builds_dir):
+            # Iterate over the entries in the directory
+            for entry in os.scandir(self.builds_dir):
+                # If the entry is not a directory, skip it
+                if not entry.is_dir():
+                    continue
+                # If there is no remote build that matches the name, add it as a local build
+                if not any(x for x in remote if x.name == entry.name):
+                    local.append(server.Build(folder=entry))
 
         # At this point, replace the builds and notify it
         self.builds = remote + local
