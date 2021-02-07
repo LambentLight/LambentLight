@@ -1,5 +1,8 @@
 !include "MUI2.nsh"
 
+!define MUI_ICON "icon.ico" 
+!define MUI_UNICON "icon.ico"
+
 Name "LambentLight"
 OutFile "dist\LambentLightInstaller.exe"
 Unicode True
