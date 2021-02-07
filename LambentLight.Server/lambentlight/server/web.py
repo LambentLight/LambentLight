@@ -200,7 +200,7 @@ class FoldersView(web.View):
         # If the name does not exists, return a 400
         name = data.get("name", "")
         if not name:
-            return web.json_response({"message": "Name was not specified."},
+            return web.json_response({"message": "The Data Folder Name was not specified."},
                                      status=400)
 
         # If there is a folder with the same name, return a 409 Conflict
