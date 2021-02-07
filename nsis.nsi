@@ -4,7 +4,7 @@
 !define MUI_UNICON "icon.ico"
 
 Name "LambentLight"
-OutFile "dist\LambentLightInstaller.exe"
+OutFile "bin\Installer\LambentLightInstaller.exe"
 Unicode True
 InstallDir "$PROGRAMFILES\LambentLight"
 InstallDirRegKey HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\LambentLight" "InstallLocation"
@@ -26,12 +26,12 @@ RequestExecutionLevel admin
 
 Section "Server" Server
     SetOutPath "$INSTDIR"
-    File "dist\lambentlightd.exe"
+    File "bin\Executables\lambentlightd.exe"
 SectionEnd
 
 Section "Client" Client
     SetOutPath "$INSTDIR"
-    File "dist\lambentlight.exe"
+    File "bin\Executables\lambentlight.exe"
 SectionEnd
 
 Section "Uninstaller" Uninstaller
