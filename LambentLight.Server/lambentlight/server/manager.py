@@ -117,7 +117,7 @@ class Manager:
             # (as implemented in the __del__ method) still ran deterministically.
             # In case you still want to use it in such a context, you will want to search the
             # codebase for __del__ implementations and call these yourself when you see fit.
-            repo = Repo.clone_from("https://github.com/LambentLight/ServerData.git", path)
+            repo = Repo.clone_from("https://github.com/LambentLight/ServerData.git", path)  # noqa: F841
             del repo
         else:
             os.makedirs(path, exist_ok=True)
