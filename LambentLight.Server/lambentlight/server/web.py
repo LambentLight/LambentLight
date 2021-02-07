@@ -26,8 +26,15 @@ async def auth(request: web.Request, handler):
     """
     Checks the token auth.
     """
+    # If the client is not whitelisted to connect, send a 403
+    if request.remote not in server.manager.config["allowed_ips"]:
+        return web.json_response({"message": "Your IP is not Whitelisted."},
+                                 status=403)
+    # If is localhost/127.0.0.1 and we are allowed to do unauthenticated calls, skip the auth checks
+    elif request.remote == "127.0.0.1" and server.manager.config["no_auth_local"]:
+        pass
     # If the request does not has an authentication header, return a 401
-    if "Authorization" not in request.headers:
+    elif "Authorization" not in request.headers:
         return web.json_response({"message": "Authentication Token was not specified."},
                                  status=401)
     # If the header does not starts with Bearer
