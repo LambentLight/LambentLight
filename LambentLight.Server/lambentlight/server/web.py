@@ -52,6 +52,9 @@ async def auth(request: web.Request, handler):
     except Exception as e:
         if isinstance(e, web.HTTPMethodNotAllowed):
             raise
+        elif isinstance(e, json.JSONDecodeError):
+            return web.json_response({"message": "Body is not JSON or is malformed."},
+                                     status=400)
         return await exception_as_response(e)
 
 
@@ -183,11 +186,11 @@ class FoldersView(web.View):
         """
         Creates a data folder with the specified name.
         """
-        # Try to get the request as JSON and return a 400 if failed
-        try:
+        # Try to get the request as JSON
+        if self.request.body_exists:
             data = await self.request.json()
-        except json.JSONDecodeError:
-            return web.json_response({"message": "Body is not JSON or is malformed."}, status=400)
+        else:
+            data = {}
 
         # If the name does not exists, return a 400
         name = data.get("name", "")
@@ -270,10 +273,7 @@ class ServerView(web.View):
             return web.json_response({"message": "The Server is already running."}, status=409)
 
         # Try to get the request as JSON and return a 400 if failed
-        try:
-            data = await self.request.json()
-        except json.JSONDecodeError:
-            return web.json_response({"message": "Body is not JSON or is malformed."}, status=400)
+        data = await self.request.json()
 
         # Make sure that the required parameters are present
         if "build" not in data:
