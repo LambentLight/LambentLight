@@ -42,6 +42,24 @@ def __print(*data: List[List[Any]]):
             header = True
 
 
+def print_as_table(data: dict, *, capitalize: bool = False):
+    """
+    Prints the data of a dictionary as a simple table.
+    """
+    # Get the largest key
+    size = 0
+    for key in data.keys():
+        if len(key) > size:
+            size = len(key)
+
+    # Now, time to start printing
+    for key, value in data.items():
+        if capitalize:
+            key = key[0].upper() + key[1:]
+
+        print(key + ":" + (" " * (size - len(key) + 3)) + " " + value)
+
+
 def print_with_header(header: List, *data: List[List[Any]]):
     """
     Prints the data with a header.

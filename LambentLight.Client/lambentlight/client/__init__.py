@@ -7,6 +7,6 @@ from .builds import show_builds, update_builds
 from .folders import show_folders
 from .info import show_info
 from .params import headers, host, token
-from .printing import print_with_header
 from .rest import delete, get, post
+from .printing import print_as_table, print_with_header
 from .servers import print_servers
