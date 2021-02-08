@@ -40,6 +40,8 @@ def parse_arguments():
                                      help="creates a new data folder")
     foldernew.add_argument("--no-resources", action="store_true",
                            help="skips the download of stock resources")
+    foldersub.add_parser("info",
+                         help="shows the information of the Data Folder")
     folder.add_argument("folder",
                         help="the folder to manage or create")
     # FOLDERS
