@@ -16,9 +16,9 @@ def parse_arguments():
                           help="lists the Servers currently running")
     # LIST BUILDS
     builds = subparsers.add_parser("builds",
-                                   help="Lists the Builds known by LambentLight")
+                                   help="lists the known CFX Builds")
     builds.add_argument("-U", "--update", action="store_true",
-                        help="Updates the list of Builds before requesting them.")
+                        help="updates the list of builds before showing them")
     # BUILD INFORMATION
     build = subparsers.add_parser("build",
                                   help="shows the information of a specific build")
