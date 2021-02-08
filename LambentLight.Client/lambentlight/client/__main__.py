@@ -14,19 +14,23 @@ async def run():
     if hasattr(args, "help"):
         return
     # Otherwise, check the correct command and invoke the respective function
-    if args.command == "servers":
-        await client.print_servers()
-    elif args.command == "builds":
-        if args.update:
-            await client.update_builds()
-        await client.show_builds(args.ready_only)
-    elif args.command == "build":
+    # BUILD
+    if args.command == "build":
         if args.action == "delete":
             await client.delete_build(args.build)
         elif args.action == "download":
             await client.download_build(args.build, args.force)
         elif args.action == "info":
             await client.show_build(args.build)
+    # BUILDS
+    elif args.command == "builds":
+        if args.update:
+            await client.update_builds()
+        await client.show_builds(args.ready_only)
+    # SERVERS
+    elif args.command == "servers":
+        await client.print_servers()
+    # INFO
     else:
         await client.show_info()
 
