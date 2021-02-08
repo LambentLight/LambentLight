@@ -111,4 +111,4 @@ class Build:
         Deletes the Build.
         """
         with contextlib.suppress(FileNotFoundError):
-            await aiofiles.os.rmtree(self.folder)
+            shutil.rmtree(self.folder)
