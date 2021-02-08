@@ -9,20 +9,9 @@ async def print_servers():
     """
     # Request the list of servers
     servers = await client.get("/servers")
-    # If there are none, return
-    if not servers:
-        print("There are no servers running.")
-        return
-    # Create the header for the values
-    values = [
-        [
-            "Name",
-            "CPU%",
-            "Memory Usage"
-        ]
-    ]
-    # And add the server information
+    # Format them to the correct value
+    values = []
     for name, info in servers.items():
         values.append([name, info["cpu"], humanize.naturalsize(info["mem"])])
-    # Finally, print the entire thing
-    client.print_list(*values)
+    # And print them to the user
+    client.print_with_header(["Name", "CPU%", "Memory Usage"], *values)
