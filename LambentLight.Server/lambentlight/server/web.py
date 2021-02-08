@@ -198,10 +198,7 @@ class FoldersView(web.View):
         Creates a data folder with the specified name.
         """
         # Try to get the request as JSON
-        if self.request.body_exists:
-            data = await self.request.json()
-        else:
-            data = {}
+        data = await self.request.json()
 
         # If the name does not exists, return a 400
         name = data.get("name", "")
