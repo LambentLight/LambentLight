@@ -7,11 +7,7 @@ async def show_builds(ready_only: bool):
     """
     # Get the list of builds
     builds = await client.get("/builds")
-    # If none were found, show a message and return
-    if not builds:
-        print("There are no builds.")
-        return
-    # Otherwise, print them in the console
+    # And print those needed
     values = []
     for build in builds:
         if ready_only and not build["is_ready"]:
