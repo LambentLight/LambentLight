@@ -269,8 +269,8 @@ class ServersView(web.View):
         if "folder" not in data:
             return web.json_response({"message": "The Target Data Folder was not specified."},
                                      status=400)
-        if "build" not in data:
-            return web.json_response({"message": "The Target Build was not specified."},
+        if "build" not in data and not data.get("use_latest", False):
+            return web.json_response({"message": "The Target Build was not specified and use_latest is not true."},
                                      status=400)
 
         # Try to find a data folder with a matching name
@@ -287,12 +287,16 @@ class ServersView(web.View):
             return web.json_response({"message": "The Data Folder is already in use by a Server."},
                                      status=409)
 
-        # Now, time to find the Build
-        found_builds = [x for x in server.manager.builds if x.name == data["build"]]
-        if not found_builds:
-            return web.json_response({"message": "No Builds were found with the specified Name."},
-                                     status=404)
-        build = found_builds[0]
+        # If we need to use the latest build, grab the first one from the list
+        if data.get("use_latest", False):
+            build = server.manager.builds[0]
+        # Otherwise, find the correct build
+        else:
+            found_builds = [x for x in server.manager.builds if x.name == data["build"]]
+            if not found_builds:
+                return web.json_response({"message": "No Builds were found with the specified Name."},
+                                         status=404)
+            build = found_builds[0]
 
         # If we have everything, go ahead and start it
         try:
