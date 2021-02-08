@@ -50,6 +50,13 @@ async def post(route: str, data: dict = None):
     return await request("POST", route, data)
 
 
+async def put(route: str, data: dict = None):
+    """
+    Makes a PUT Request.
+    """
+    return await request("PUT", route, data)
+
+
 async def delete(route: str):
     """
     Makes a DELETE Request.
