@@ -32,6 +32,9 @@ def parse_arguments():
                         help="updates the list of builds before showing them")
     builds.add_argument("-R", "--ready-only", action="store_true",
                         help="only list the builds ready to be used")
+    # FOLDERS
+    subparsers.add_parser("folders",
+                          help="lists the Data Folders available")
     # LIST SERVERS
     subparsers.add_parser("servers",
                           help="lists the Servers currently running")
