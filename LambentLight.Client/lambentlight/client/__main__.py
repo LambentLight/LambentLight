@@ -42,6 +42,8 @@ async def run():
     elif args.command == "server":
         if args.action == "start":
             await client.start_server(args.server, args.build)
+        elif args.action == "info":
+            await client.get_server(args.server)
     # SERVERS
     elif args.command == "servers":
         await client.print_servers()

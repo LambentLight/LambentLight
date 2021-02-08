@@ -57,6 +57,8 @@ def parse_arguments():
                                      help="starts a new server")
     serversta.add_argument("-B", "--build", default="latest",
                            help="the build used to start the server")
+    serversub.add_parser("info",
+                         help="gets the information of the server")
     server.add_argument("server",
                         help="the server to start or manage")
     # SERVERS
