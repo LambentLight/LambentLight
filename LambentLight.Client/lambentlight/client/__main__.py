@@ -19,7 +19,7 @@ async def run():
     elif args.command == "builds":
         if args.update:
             await client.update_builds()
-        await client.show_builds()
+        await client.show_builds(args.ready_only)
     elif args.command == "build":
         if args.action == "delete":
             await client.delete_build(args.build)

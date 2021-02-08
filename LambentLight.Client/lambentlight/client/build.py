@@ -9,7 +9,7 @@ async def update_builds():
     await client.post("/builds")
 
 
-async def show_builds():
+async def show_builds(ready_only: bool):
     """
     Shows the full list of builds.
     """
@@ -27,6 +27,8 @@ async def show_builds():
         ]
     ]
     for build in builds:
+        if ready_only and not build["is_ready"]:
+            continue
         values.append([build["name"], "Yes" if build["is_ready"] else "No"])
     client.print_list(*values)
 

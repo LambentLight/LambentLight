@@ -19,6 +19,8 @@ def parse_arguments():
                                    help="lists the known CFX Builds")
     builds.add_argument("-U", "--update", action="store_true",
                         help="updates the list of builds before showing them")
+    builds.add_argument("-R", "--ready-only", action="store_true",
+                        help="only list the builds ready to be used")
     # BUILD INFORMATION
     build = subparsers.add_parser("build",
                                   help="shows the information of a specific build")
