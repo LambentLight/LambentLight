@@ -1,3 +1,4 @@
+import json
 import sys
 from typing import Union
 
@@ -6,13 +7,19 @@ import aiohttp
 import lambentlight.client as client
 
 
-async def handle_response(resp):
+async def handle_response(resp: aiohttp.ClientResponse):
     """
     Handles the response returned by the HTTP Request.
     """
     # If the code is 400 or 500,
     if resp.status >= 400:
-        print(f"Request failed with code {resp.status}")
+        try:
+            data = await resp.json(content_type=None)
+            print(data["message"])
+            sys.exit(2)
+        except json.JSONDecodeError:
+            pass
+        print(f"Request failed with code {resp.status} (Reason Unknown)")
         sys.exit(2)
     # If we got a 204 no content, return None
     elif resp.status == 204:
