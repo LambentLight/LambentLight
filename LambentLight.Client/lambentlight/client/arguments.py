@@ -32,6 +32,16 @@ def parse_arguments():
                         help="updates the list of builds before showing them")
     builds.add_argument("-R", "--ready-only", action="store_true",
                         help="only list the builds ready to be used")
+    # FOLDER
+    folder = subparsers.add_parser("folder",
+                                   help="manages a specific Data Folder")
+    foldersub = folder.add_subparsers(dest="action")
+    foldernew = foldersub.add_parser("create",
+                                     help="creates a new data folder")
+    foldernew.add_argument("--no-resources", action="store_true",
+                           help="skips the download of stock resources")
+    folder.add_argument("folder",
+                        help="the folder to manage or create")
     # FOLDERS
     subparsers.add_parser("folders",
                           help="lists the Data Folders available")

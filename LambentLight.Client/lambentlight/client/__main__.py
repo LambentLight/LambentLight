@@ -27,6 +27,10 @@ async def run():
         if args.update:
             await client.update_builds()
         await client.show_builds(args.ready_only)
+    # FOLDER
+    elif args.command == "folder":
+        if args.action == "create":
+            await client.create_folder(args.folder, args.no_resources)
     # FOLDERS
     elif args.command == "folders":
         await client.show_folders()
