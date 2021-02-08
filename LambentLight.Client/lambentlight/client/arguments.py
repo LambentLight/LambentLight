@@ -13,22 +13,26 @@ def parse_arguments():
     # Then, add the subparsers
     # LIST SERVERS
     server = subparsers.add_parser("servers",
-                                   help="lists the Servers currently running")   # LIST BUILDS
+                                   help="lists the Servers currently running")
+    # LIST BUILDS
     builds = subparsers.add_parser("builds",
                                    help="Lists the Builds known by LambentLight")
     builds.add_argument("-U", "--update", action="store_true",
                         help="Updates the list of Builds before requesting them.")
-    # MANAGE BUILDS
+    # BUILD INFORMATION
     build = subparsers.add_parser("build",
-                                  help="Manages specific Builds")
-    build.add_argument("build")
-    build_tasks = build.add_mutually_exclusive_group()
-    build_tasks.add_argument("-d", "--download", action="store_true",
-                             help="downloads the build")
-    build_tasks.add_argument("-r", "--remove", action="store_true",
-                             help="removes or uninstalls the build")
-    build.add_argument("--force", action="store_true",
-                       help="forces the operation to be completed")
+                                  help="shows the information of a specific build")
+    buildsub = build.add_subparsers(dest="action")
+    builddel = buildsub.add_parser("delete",
+                                   help="deletes the build from the server")
+    builddll = buildsub.add_parser("download",
+                                   help="downloads the build")
+    builddll.add_argument("--force", action="store_true",
+                          help="redownloads the build even if is present")
+    buildinf = buildsub.add_parser("info",
+                                   help="shows the information of the build")
+    build.add_argument("build",
+                       help="the build to get the information from")
     # And return them parsed
     return parser.parse_args()
 

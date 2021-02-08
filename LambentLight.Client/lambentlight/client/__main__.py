@@ -21,11 +21,11 @@ async def run():
             await client.update_builds()
         await client.show_builds()
     elif args.command == "build":
-        if args.download:
-            pass
-        elif args.remove:
+        if args.action == "delete":
             await client.delete_build(args.build)
-        else:
+        elif args.action == "download":
+            await client.download_build(args.build, args.force)
+        elif args.action == "info":
             await client.show_build(args.build)
     else:
         await client.show_info()
