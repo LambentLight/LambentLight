@@ -10,4 +10,5 @@ from .info import show_info
 from .params import headers, host, token
 from .printing import print_as_table, print_with_header
 from .rest import delete, get, post, put
+from .server import start_server
 from .servers import print_servers

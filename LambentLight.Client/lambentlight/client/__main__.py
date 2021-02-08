@@ -38,6 +38,10 @@ async def run():
     # FOLDERS
     elif args.command == "folders":
         await client.show_folders()
+    # SERVER
+    elif args.command == "server":
+        if args.action == "start":
+            await client.start_server(args.server, args.build)
     # SERVERS
     elif args.command == "servers":
         await client.print_servers()

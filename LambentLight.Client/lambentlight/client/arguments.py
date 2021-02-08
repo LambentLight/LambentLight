@@ -49,7 +49,17 @@ def parse_arguments():
     # FOLDERS
     subparsers.add_parser("folders",
                           help="lists the Data Folders available")
-    # LIST SERVERS
+    # SERVER
+    server = subparsers.add_parser("server",
+                                   help="manages individual servers")
+    serversub = server.add_subparsers(dest="action")
+    serversta = serversub.add_parser("start",
+                                     help="starts a new server")
+    serversta.add_argument("-B", "--build", default="latest",
+                           help="the build used to start the server")
+    server.add_argument("server",
+                        help="the server to start or manage")
+    # SERVERS
     subparsers.add_parser("servers",
                           help="lists the Servers currently running")
     # And return them parsed
