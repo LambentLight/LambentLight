@@ -33,6 +33,8 @@ async def run():
             await client.create_folder(args.folder, args.no_resources)
         elif args.action == "info":
             await client.get_folder(args.folder)
+        elif args.action == "resources":
+            await client.get_resources(args.folder)
     # FOLDERS
     elif args.command == "folders":
         await client.show_folders()

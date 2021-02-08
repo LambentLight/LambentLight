@@ -42,6 +42,8 @@ def parse_arguments():
                            help="skips the download of stock resources")
     foldersub.add_parser("info",
                          help="shows the information of the Data Folder")
+    foldersub.add_parser("resources",
+                         help="lists the resources on the Data Folder")
     folder.add_argument("folder",
                         help="the folder to manage or create")
     # FOLDERS
