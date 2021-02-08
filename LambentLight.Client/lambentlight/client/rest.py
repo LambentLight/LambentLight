@@ -1,4 +1,5 @@
 import sys
+from typing import Union
 
 import aiohttp
 
@@ -21,14 +22,14 @@ async def handle_response(resp):
         return await resp.json()
 
 
-async def request(method: str, route: str):
+async def request(method: str, route: str, data: Union[dict, list] = None):
     """
     Makes a request with the specified method.
     """
     async with aiohttp.ClientSession(headers=client.headers) as session:
         url = client.host + route
         try:
-            async with session.request(method, url) as resp:
+            async with session.request(method, url, json=data) as resp:
                 return await handle_response(resp)
         except aiohttp.ClientConnectionError as e:
             print(str(e))
@@ -42,11 +43,11 @@ async def get(route: str):
     return await request("GET", route)
 
 
-async def post(route: str):
+async def post(route: str, data: dict = None):
     """
     Makes a POST Request.
     """
-    return await request("POST", route)
+    return await request("POST", route, data)
 
 
 async def delete(route: str):
