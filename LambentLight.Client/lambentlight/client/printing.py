@@ -54,6 +54,9 @@ def print_as_table(data: dict, *, capitalize: bool = False):
 
     # Now, time to start printing
     for key, value in data.items():
+        key = str(key)
+        value = str(value)
+
         if capitalize:
             key = key[0].upper() + key[1:]
 
