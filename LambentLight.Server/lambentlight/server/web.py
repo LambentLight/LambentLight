@@ -138,8 +138,14 @@ class BuildView(web.View):
         """
         Downloads a specific build.
         """
+        # Get the body as JSON, if present
+        if self.request.body_exists:
+            body = await self.request.json()
+        else:
+            body = {}
+
         # If we are using the build and is not forced, return
-        if build.is_ready and self.request.query.get("force", "0") != "1":
+        if build.is_ready and not body.get("force", True):
             return web.json_response({"message": "Build is already Downloaded and Ready."}, status=409)
         # Otherwise, start the download and notify if it was a success
         else:
