@@ -12,17 +12,12 @@ async def show_builds(ready_only: bool):
         print("There are no builds.")
         return
     # Otherwise, print them in the console
-    values = [
-        [
-            "Name",
-            "Ready"
-        ]
-    ]
+    values = []
     for build in builds:
         if ready_only and not build["is_ready"]:
             continue
         values.append([build["name"], "Yes" if build["is_ready"] else "No"])
-    client.print_list(*values)
+    client.print_with_header(["Name", "Ready"], *values)
 
 
 async def update_builds():

@@ -1,7 +1,7 @@
-from typing import List
+from typing import Any, List
 
 
-def print_list(*data: List[List[str]]):
+def __print(*data: List[List[Any]]):
     """
     Prints a list of dict.
     """
@@ -40,3 +40,10 @@ def print_list(*data: List[List[str]]):
                 print("=" * number, end="=")
             print()
             header = True
+
+
+def print_with_header(header: List, *data: List[List[Any]]):
+    """
+    Prints the data with a header.
+    """
+    __print(header, *data)
