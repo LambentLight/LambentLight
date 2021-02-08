@@ -5,7 +5,7 @@ import logging
 import os.path
 import signal
 import subprocess
-from asyncio.subprocess import create_subprocess_exec, PIPE
+from asyncio.subprocess import PIPE, create_subprocess_exec
 
 import psutil
 

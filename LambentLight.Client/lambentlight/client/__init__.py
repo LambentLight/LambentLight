@@ -2,9 +2,9 @@ __version__ = "3.0"
 
 
 from .arguments import arguments
-from .build import update_builds, show_builds, delete_build, show_build, download_build
+from .build import delete_build, download_build, show_build, show_builds, update_builds
 from .info import show_info
-from .params import token, headers, host
-from .rest import get, post, delete
+from .params import headers, host, token
+from .rest import delete, get, post
 from .servers import print_servers
 from .tools import print_list
