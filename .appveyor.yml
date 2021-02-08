@@ -16,6 +16,7 @@ install:
 
 # Build the solution with the same name as the AppVeyor project
 build_script:
+  - flake8
   - scripts\build.bat
   - scripts\nsis.bat
 
