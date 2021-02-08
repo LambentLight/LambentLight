@@ -44,6 +44,8 @@ async def run():
             await client.start_server(args.server, args.build)
         elif args.action == "info":
             await client.get_server(args.server)
+        elif args.action == "stop":
+            await client.stop_server(args.server)
     # SERVERS
     elif args.command == "servers":
         await client.print_servers()

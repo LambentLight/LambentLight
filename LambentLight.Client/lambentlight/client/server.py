@@ -32,3 +32,11 @@ async def get_server(name: str):
     info["mem"] = humanize.naturalsize(info["mem"])
     info["build"] = info["build"]["name"]
     client.print_as_table(info, capitalize=True)
+
+
+async def stop_server(name: str):
+    """
+    Stops a CFX Server.
+    """
+    await client.delete(f"/servers/{name}")
+    print(f"Server {name} was stopped")

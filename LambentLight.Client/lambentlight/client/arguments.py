@@ -59,6 +59,8 @@ def parse_arguments():
                            help="the build used to start the server")
     serversub.add_parser("info",
                          help="gets the information of the server")
+    serversub.add_parser("stop",
+                         help="stops a specific CFX Server")
     server.add_argument("server",
                         help="the server to start or manage")
     # SERVERS
