@@ -8,6 +8,7 @@ from .decorators import requires_build, requires_folder, requires_server
 from .exceptions import InUseException, LambentLightServerException, MissingTokenException, ServerRunningException
 from .manager import manager
 from .resources import LocalResource
+from .tools import rmtree
 from .web import app
 
 

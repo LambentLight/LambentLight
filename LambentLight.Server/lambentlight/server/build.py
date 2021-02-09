@@ -100,7 +100,7 @@ class Build:
         # If the target folder exists, remove it
         target = os.path.join(self.builds_dir, self.name)
         if os.path.isdir(target):
-            shutil.rmtree(target)
+            server.rmtree(target)
         # Finish by moving the directory to the target and notifying it
         os.makedirs(self.builds_dir, exist_ok=True)
         shutil.move(ext_path, self.builds_dir)
@@ -111,4 +111,4 @@ class Build:
         Deletes the Build.
         """
         with contextlib.suppress(FileNotFoundError):
-            shutil.rmtree(self.folder)
+            server.rmtree(self.folder)
