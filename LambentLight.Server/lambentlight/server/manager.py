@@ -177,7 +177,7 @@ class Manager:
 
                     # If we got here, create a new one if it matches the os
                     if (build["target"] == 0 and server.is_windows) or (build["target"] == 1 and server.is_ubuntu):
-                        remote.append(server.Build(name=name, download=build["download"]))
+                        remote.append(server.Build(self, name=name, download=build["download"]))
 
         # Now is time for the local builds
         local = []

@@ -149,7 +149,7 @@ class BuildView(web.View):
             return web.json_response({"message": "Build is already Downloaded and Ready."}, status=409)
         # Otherwise, start the download and notify if it was a success
         else:
-            success = await build.download(server.manager.session)
+            success = await build.download()
             if success:
                 return web.Response(status=204)
             else:

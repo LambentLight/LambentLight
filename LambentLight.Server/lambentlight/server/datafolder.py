@@ -112,7 +112,7 @@ class DataFolder:
 
         # If the build is not ready to be used, download it
         if not build.is_ready:
-            if not await build.download(self.manager.session):
+            if not await build.download():
                 logger.error("The server can't be started")
                 return False
         # Make sure that the Data Folder is there

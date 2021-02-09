@@ -20,7 +20,9 @@ class Build:
     """
     builds_dir: str = os.path.join(server.arguments.work_dir, "builds")
 
-    def __init__(self, *, folder: str = None, download: str = None, name: str = None):
+    def __init__(self, manager, *, folder: str = None, download: str = None, name: str = None):
+        self.manager = manager
+
         # If the parameters are mixed in an invalid format, raise an exception
         if folder and (download or name):
             raise ValueError("You can't specify a Download or ID in combination with a Folder.")
@@ -66,7 +68,7 @@ class Build:
         """
         return os.path.join(self.folder, "citizen")
 
-    async def download(self, session: aiohttp.ClientSession):
+    async def download(self):
         """
         Downloads the Build.
 
@@ -82,7 +84,7 @@ class Build:
         temp_file = os.path.join(temp_dir, self.name + "_dl")
         logger.info(f"Downloading build {self.name} from {self.url} to {temp_file}")
         # Then, request it and save it in chunks
-        async with session.get(self.url) as resp:
+        async with self.manager.session.get(self.url) as resp:
             async with aiofiles.open(temp_file, "wb") as file:
                 while True:
                     chunk = await resp.content.read(1024 * 1024)
