@@ -227,6 +227,20 @@ class FolderView(web.View):
         """
         return web.json_response(dict(folder))
 
+    @server.requires_folder
+    async def delete(self, folder):
+        """
+        Deletes the data folder.
+        """
+        # If there is a body, parse it as JSON
+        if self.request.body_exists:
+            json = await self.request.json()
+        else:
+            json = {}
+        # Then, just delete the folder
+        await folder.delete(stop=json.get("stop", True))
+        return web.Response(status=204)
+
 
 @routes.view("/folders/{name}/resources")
 class InstalledResourcesView(web.View):

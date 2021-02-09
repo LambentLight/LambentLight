@@ -1,4 +1,5 @@
 import asyncio
+import contextlib
 import json
 import locale
 import logging
@@ -189,6 +190,24 @@ class DataFolder:
         else:
             logger.warning(f"Data Folder {self.name} does not has a LambentLight Configuration File")
             self.config = server.default_folder
+
+    async def delete(self, *, stop=False):
+        """
+        Deletes the Data Folder.
+        """
+        # If the server is running, stop it or raise an exception
+        if self.is_running:
+            if stop:
+                await self.stop(wait=True)
+            else:
+                raise server.InUseException(self)
+
+        # Then, just delete the directory
+        with contextlib.suppress(FileNotFoundError):
+            server.rmtree(self.path)
+        # And remove the data folder from the list
+        with contextlib.suppress(ValueError):  # Avoiding race conditions
+            server.manager.folders.remove(self)
 
     async def read_process_stdout(self):
         """
