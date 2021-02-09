@@ -19,6 +19,15 @@ class MissingTokenException(LambentLightServerException):
         self.folder = folder
 
 
+class ConfigurationMissingException(LambentLightServerException):
+    """
+    Exception raised when the Manager configuration is missing.
+    """
+    def __init__(self, where):
+        super().__init__(f"Configuration file {where} is missing.")
+        self.file = where
+
+
 class InUseException(LambentLightServerException):
     """
     Exception raised when the Build or Data Folder is being used.

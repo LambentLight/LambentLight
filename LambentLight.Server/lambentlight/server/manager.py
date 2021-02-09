@@ -9,7 +9,8 @@ import aiohttp
 from git import Repo
 
 import lambentlight.server as server
-
+from .config import default_server
+from .exceptions import ConfigurationMissingException
 
 logger = logging.getLogger("lambentlight")
 
@@ -20,56 +21,49 @@ class Manager:
     """
     builds_dir: str = os.path.join(server.arguments.work_dir, "builds")
 
-    def __init__(self):
-        self.session = None
+    def __init__(self, directory):
+        config = os.path.join(server.arguments.work_dir, "config.json")
+
+        # If the configuration file does not exists, raise an exception
+        if not path.isfile(config):
+            raise ConfigurationMissingException(config)
+
+        # Otherwise, just load it
+        with open(config) as file:
+            loaded = json.loads(file.read())
+        # And patch the missing keys from the default values
+        self.config = {}
+        for key, value in default_server.items():
+            if key in loaded:
+                self.config[key] = loaded[key]
+            else:
+                self.config[key] = value
+        logger.info(f"Loaded configuration from {config}")
+
+        self.session = aiohttp.ClientSession()
         self.config = server.default_server
         self.builds = []
         self.folders = []
         self.ws_clients = []
 
-    async def initialize(self):
+    async def autostart_servers(self):
         """
-        Initializes the basics of the Manager.
+        Automatically starts the servers configured to do so.
         """
-        # Format the path of the configuration file
-        config = os.path.join(server.arguments.work_dir, "config.json")
-
-        # If the configuration file is missing, raise an exception
-        if not path.isfile(config):
-            logger.error("Configuration file is missing!")
-            logger.error("Please run LambentLight with the --init parameter to create it")
-            return False
-
-        # Otherwise, just load it
-        async with aiofiles.open(config) as file:
-            loaded = json.loads(await file.read())
-            self.config = {}
-            for key, value in server.default_server.items():
-                if key in loaded:
-                    self.config[key] = loaded[key]
-                else:
-                    self.config[key] = value
-        logger.info(f"Loaded configuration from {config}")
-
-        # Create the Client Session
-        self.session = aiohttp.ClientSession()
-        # And fetch the information required by the manager
-        await self.update_builds()
-        await self.update_folders()
-
-        # Then, check if one of the data folders should be started on boot
+        # Iterate over the list of folders
         for folder in self.folders:
-            # If this one does not, continue to the next one
-            if not folder.config["auto_start"]:
+            # If the folder is not set to auto start, skip it
+            if not folder.config.get("auto_start", False):
                 continue
-            # Otherwise, try to get the build required or use the latest one
-            name = folder.config["auto_start_build"]
+            # Then, find the build set on the options
+            name = folder.config.get("auto_start_build", "")
             if name:
                 found = [x for x in self.builds if x.name == name]
                 if not found:
-                    logger.error(f"Unable to find Build {name} to Auto Start Folder {folder.name}")
+                    logger.warning(f"Unable to find Build {name} to Auto Start Folder {folder.name}")
                     continue
                 build = found[0]
+            # If no build was specified, use the latest one
             else:
                 build = self.builds[0]
 
@@ -297,6 +291,3 @@ class Manager:
             else:
                 logger.warning(f"Restarting Server {folder.name} because it exited with Code {code}")
                 await folder.start(folder.build, terminate=True)
-
-
-manager = Manager()

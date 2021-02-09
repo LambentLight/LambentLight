@@ -1,83 +1,66 @@
 import asyncio
-import contextlib
-import json
 import logging
-import os
 
-import aiofiles
-from aiohttp import web
+from .arguments import parse_arguments
+from .checks import is_valid, is_windows
+from .startup import configure_loggers, create_manager, initialize_config
 
-import lambentlight.server as server
+logger = logging.getLogger("lambentlight")
 
 
-async def start():
+async def start(args=None):
     """
     Starts the LambentLight Server.
     """
-    # Configure the logging levels in all of the loggers
-    loggers = [
-        logging.getLogger("lambentlight"),
-        logging.getLogger("aiohttp.access"),
-    ]
-    formatter = logging.Formatter("[%(asctime)s - %(levelname)s] %(message)s")
-    stream = logging.StreamHandler()
-    stream.setFormatter(formatter)
-    for logger in loggers:
-        logger.setLevel(logging.INFO)
-        logger.addHandler(stream)
+    # Parse the arguments if they were not passed
+    if not args:
+        args = parse_arguments()
 
     # If we only need to initialize the config, do it and exit
-    if server.arguments.init:
-        config = os.path.join(server.arguments.work_dir, "config.json")
-        if os.path.isfile(config):
-            loggers[0].warning(f"Configuration file '{config}' exists")
-        with contextlib.suppress(FileExistsError):
-            await aiofiles.os.mkdir(server.arguments.work_dir)
-        async with aiofiles.open(config, "w") as file:
-            text = json.dumps(server.default_server, indent=4) + "\n"
-            await file.write(text)
-        loggers[0].info(f"Configuration was written to '{config}'")
-        return
+    if args.init:
+        await initialize_config(args.work_dir)
+    # Otherwise, start the server
+    else:
+        if not is_valid:
+            logger.critical("Operating system is not Compatible (needs to be Windows or Ubuntu)")
+            return
+        return await create_manager(args.work_dir, args.host, args.web_port)
 
-    # Notify that we are stating the server
-    loggers[0].info(f"Starting LambentLight {server.__version__}")
-    # If we are not running a valid operating system, return
-    if not server.is_valid:
-        loggers[0].critical("Operating system is not Compatible (needs to be Windows or Ubuntu)")
-        return
-    # Perform the manager initialization
-    if not await server.manager.initialize():
-        loggers[0].error("Manager Initialization Failed")
-        return
-    # And start the web server
-    server.app["manager"] = server.manager
-    runner = web.AppRunner(server.app, access_log_format="HTTP Request from %a: %r (%s) [%{User-Agent}i]")
-    await runner.setup()
-    site = web.TCPSite(runner, server.arguments.host, server.arguments.web_port)
-    loggers[0].info(f"Starting Web Server at {server.arguments.host}:{server.arguments.web_port}")
-    try:
-        await site.start()
-    except OSError as e:
-        loggers[0].error(f"Web server could not be started: Code {e.errno}")
-    # Then, just block the server
+
+async def block(manager):
+    """
+    Blocks the current thread via asyncio.sleep
+    """
     while True:
         await asyncio.sleep(0)
-        await server.manager.process()
+        await manager.process()
 
 
 def main():
     """
     Initializes the LambentLight Server Loop.
     """
-    if not hasattr(server.arguments, "help"):
-        if server.is_windows:
-            asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
-        loop = asyncio.get_event_loop()
-        try:
-            loop.run_until_complete(start())
-        except KeyboardInterrupt:
-            loop.stop()
-            asyncio.get_event_loop().run_until_complete(server.manager.close())
+    # Get the command line arguments
+    args = parse_arguments()
+
+    # First, configure the loggers
+    configure_loggers()
+
+    # If the help command was used, do nothing and return
+    if hasattr(args, "help"):
+        return
+
+    if is_windows:
+        asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
+    loop = asyncio.get_event_loop()
+    manager = None
+    try:
+        manager = loop.run_until_complete(start())
+        loop.run_until_complete(block(manager))
+    except KeyboardInterrupt:
+        loop.stop()
+        if manager:
+            asyncio.get_event_loop().run_until_complete(manager.close())
 
 
 if __name__ == "__main__":
