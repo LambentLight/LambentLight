@@ -28,8 +28,8 @@ def parse_arguments():
     # BUILDS
     builds = subparsers.add_parser("builds",
                                    help="lists the known CFX Builds")
-    builds.add_argument("-U", "--update", action="store_true",
-                        help="updates the list of builds before showing them")
+    builds.add_argument("-R", "--refresh", action="store_true",
+                        help="refreshes the list of builds before showing them")
     builds.add_argument("-R", "--ready-only", action="store_true",
                         help="only list the builds ready to be used")
     # FOLDER

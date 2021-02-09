@@ -24,7 +24,7 @@ async def run():
             await client.show_build(args.build)
     # BUILDS
     elif args.command == "builds":
-        if args.update:
+        if args.refresh:
             await client.update_builds()
         await client.show_builds(args.ready_only)
     # FOLDER
