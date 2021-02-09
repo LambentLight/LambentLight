@@ -1,4 +1,3 @@
-from .arguments import arguments
 from .build import Build
 from .checks import is_ubuntu, is_valid, is_windows
 from .compression import CompressionType, detect, extract

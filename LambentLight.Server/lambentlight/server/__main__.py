@@ -2,9 +2,8 @@ import asyncio
 import logging
 import sys
 
-from .arguments import parse_arguments
 from .checks import is_windows
-from .startup import configure_loggers, create_manager, initialize_config
+from .startup import configure_loggers, create_manager, get_arguments, initialize_config
 
 logger = logging.getLogger("lambentlight")
 
@@ -23,7 +22,7 @@ def main():
     Initializes the LambentLight Server Loop.
     """
     # Get the command line arguments
-    args = parse_arguments()
+    args = get_arguments()
 
     # First, configure the loggers
     configure_loggers()

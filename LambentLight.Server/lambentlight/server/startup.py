@@ -1,7 +1,9 @@
+import argparse
 import contextlib
 import json
 import logging
 import os
+from platform import system
 
 import aiofiles
 from aiohttp import web
@@ -13,6 +15,28 @@ from .manager import Manager
 from .web import app
 
 logger = logging.getLogger("lambentlight")
+
+
+def get_arguments():
+    """
+    Gets the parsed launch arguments.
+    """
+    # Create the parser
+    parser = argparse.ArgumentParser(description="Daemon for managing your CFX Servers.",
+                                     epilog="Check https://justalemon.ml/LambentLight for more info.",
+                                     add_help=True, formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    # Add the arguments
+    work_dir = "C:\\ProgramData\\LambentLight" if system() == "Windows" else "/var/lib/lambentlight"
+    parser.add_argument("--work-dir", dest="work_dir", default=work_dir,
+                        help="folder used to store the server data")
+    parser.add_argument("--init", dest="init", action="store_true",
+                        help="initializes the configuration file")
+    parser.add_argument("--host", dest="host", default="127.0.0.1",
+                        help="the host or IP address to bind")
+    parser.add_argument("--port", dest="port", default=8019,
+                        help="the port of the web server")
+    # And return them parsed
+    return parser.parse_args()
 
 
 def configure_loggers():
