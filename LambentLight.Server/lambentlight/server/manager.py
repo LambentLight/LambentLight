@@ -202,7 +202,7 @@ class Manager:
         # Get the subdirectories of data and save them as Data Folders
         dpath = os.path.join(server.arguments.work_dir, "data")
         if os.path.isdir(dpath):
-            local = [server.DataFolder(x, True) for x in os.scandir(dpath) if x.is_dir()]
+            local = [server.DataFolder(x) for x in os.scandir(dpath) if x.is_dir()]
         else:
             logger.warning("Directory with Data Folder does not exists, skipping...")
             local = []

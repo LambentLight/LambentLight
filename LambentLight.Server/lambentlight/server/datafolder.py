@@ -41,10 +41,9 @@ class DataFolder:
     """
     Represents an independent folder with Resources.
     """
-    def __init__(self, path: str, local: bool):
+    def __init__(self, path: str):
         self.path = os.path.abspath(path)
         self.name = os.path.basename(self.path)
-        self.local = local
         self.config = {}
         self.build = None
         self.process = None
