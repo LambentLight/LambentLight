@@ -1,30 +1,12 @@
 import asyncio
 import logging
+import sys
 
 from .arguments import parse_arguments
-from .checks import is_valid, is_windows
+from .checks import is_windows
 from .startup import configure_loggers, create_manager, initialize_config
 
 logger = logging.getLogger("lambentlight")
-
-
-async def start(args=None):
-    """
-    Starts the LambentLight Server.
-    """
-    # Parse the arguments if they were not passed
-    if not args:
-        args = parse_arguments()
-
-    # If we only need to initialize the config, do it and exit
-    if args.init:
-        await initialize_config(args.work_dir)
-    # Otherwise, start the server
-    else:
-        if not is_valid:
-            logger.critical("Operating system is not Compatible (needs to be Windows or Ubuntu)")
-            return
-        return await create_manager(args.work_dir, args.host, args.web_port)
 
 
 async def block(manager):
@@ -50,18 +32,34 @@ def main():
     if hasattr(args, "help"):
         return
 
+    # Set the correct loop policy for the operating system
     if is_windows:
         asyncio.set_event_loop_policy(asyncio.WindowsProactorEventLoopPolicy())
     loop = asyncio.get_event_loop()
-    manager = None
-    try:
-        manager = loop.run_until_complete(start())
-        loop.run_until_complete(block(manager))
-    except KeyboardInterrupt:
-        loop.stop()
-        if manager:
-            asyncio.get_event_loop().run_until_complete(manager.close())
+
+    # If we need to create the configuration, do so and exit
+    if args.init:
+        return loop.run_until_complete(initialize_config(args.work_dir))
+    # Otherwise, start the server
+    else:
+        # Create a place to store the manager
+        manager = None
+
+        try:
+            # Try to initialize the manager
+            manager = loop.run_until_complete(create_manager(args.work_dir, args.host, args.port))
+            # If is a number, is an exit code so return it
+            if manager is int:
+                return manager
+            # Otherwise, block the thread because everything went OK
+            loop.run_until_complete(block(manager))
+        except KeyboardInterrupt:
+            # Stop the loop
+            loop.stop()
+            # And if there is a manager, close the connections
+            if manager:
+                asyncio.get_event_loop().run_until_complete(manager.close())
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

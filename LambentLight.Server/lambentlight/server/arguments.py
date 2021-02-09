@@ -20,7 +20,7 @@ def parse_arguments():
                         help="initializes the configuration file")
     parser.add_argument("--host", dest="host", default="127.0.0.1",
                         help="the host or IP address to bind")
-    parser.add_argument("--web-port", dest="web_port", default=8019,
+    parser.add_argument("--port", dest="port", default=8019,
                         help="the port of the web server")
     # And return them parsed
     return parser.parse_args()

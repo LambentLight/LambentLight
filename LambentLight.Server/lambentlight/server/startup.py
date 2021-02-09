@@ -1,4 +1,3 @@
-import asyncio
 import contextlib
 import json
 import logging
@@ -55,6 +54,7 @@ async def initialize_config(directory):
         text = json.dumps(default_server, indent=4) + "\n"
         await file.write(text)
     logger.info(f"Configuration was written to '{path}'")
+    return 0
 
 
 async def create_manager(directory, host, port):
