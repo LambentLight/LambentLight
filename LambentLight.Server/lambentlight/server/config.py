@@ -1,7 +1,7 @@
 import secrets
 import string
 
-default_config = {
+default_server = {
     "token": "".join(secrets.choice(string.ascii_letters + string.digits) for _ in range(32)),
     "builds": [
         "https://raw.githubusercontent.com/LambentLight/Builds/master/builds.json"

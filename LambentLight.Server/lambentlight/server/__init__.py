@@ -2,7 +2,7 @@ from .arguments import arguments
 from .build import Build
 from .checks import is_ubuntu, is_valid, is_windows
 from .compression import CompressionType, detect, extract
-from .config import default_config
+from .config import default_server
 from .datafolder import DataFolder
 from .decorators import requires_build, requires_folder, requires_server
 from .exceptions import InUseException, LambentLightServerException, MissingTokenException, ServerRunningException

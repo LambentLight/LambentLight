@@ -34,7 +34,7 @@ async def start():
         with contextlib.suppress(FileExistsError):
             await aiofiles.os.mkdir(server.arguments.work_dir)
         async with aiofiles.open(config, "w") as file:
-            text = json.dumps(server.default_config, indent=4) + "\n"
+            text = json.dumps(server.default_server, indent=4) + "\n"
             await file.write(text)
         loggers[0].info(f"Configuration was written to '{config}'")
         return

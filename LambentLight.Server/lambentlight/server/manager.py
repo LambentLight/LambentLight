@@ -22,7 +22,7 @@ class Manager:
 
     def __init__(self):
         self.session = None
-        self.config = server.default_config
+        self.config = server.default_server
         self.builds = []
         self.folders = []
         self.ws_clients = []
@@ -44,7 +44,7 @@ class Manager:
         async with aiofiles.open(config) as file:
             loaded = json.loads(await file.read())
             self.config = {}
-            for key, value in server.default_config.items():
+            for key, value in server.default_server.items():
                 if key in loaded:
                     self.config[key] = loaded[key]
                 else:
