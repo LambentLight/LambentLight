@@ -219,7 +219,7 @@ class Manager:
                 # Otherwise, create a new one
                 else:
                     logger.info(f"Creating new Data Folder object for {name}")
-                    local.append(server.DataFolder(entry))
+                    local.append(server.DataFolder(self, entry))
         else:
             logger.warning("Directory with Data Folder does not exists, skipping...")
             local = []

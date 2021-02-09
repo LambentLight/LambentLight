@@ -41,7 +41,8 @@ class DataFolder:
     """
     Represents an independent folder with Resources.
     """
-    def __init__(self, path: str):
+    def __init__(self, manager, path: str):
+        self.manager = manager
         self.path = os.path.abspath(path)
         self.name = os.path.basename(self.path)
         self.config = {}
@@ -111,7 +112,7 @@ class DataFolder:
 
         # If the build is not ready to be used, download it
         if not build.is_ready:
-            if not await build.download(server.manager.session):
+            if not await build.download(self.manager.session):
                 logger.error("The server can't be started")
                 return False
         # Make sure that the Data Folder is there
@@ -206,7 +207,7 @@ class DataFolder:
             server.rmtree(self.path)
         # And remove the data folder from the list
         with contextlib.suppress(ValueError):  # Avoiding race conditions
-            server.manager.folders.remove(self)
+            self.manager.folders.remove(self)
 
     async def read_process_stdout(self):
         """
@@ -222,4 +223,4 @@ class DataFolder:
                 "folder": self.name,
                 "message": line.decode(locale.getpreferredencoding(False)).strip("\n")
             }
-            await server.manager.send_data("console", data)
+            await self.manager.send_data("console", data)
