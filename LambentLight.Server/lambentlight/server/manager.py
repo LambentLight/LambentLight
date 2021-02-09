@@ -199,10 +199,27 @@ class Manager:
         """
         Updates the list of Data Folders.
         """
-        # Get the subdirectories of data and save them as Data Folders
         dpath = os.path.join(server.arguments.work_dir, "data")
+
+        # If the data directory exists, get the folders
         if os.path.isdir(dpath):
-            local = [server.DataFolder(x) for x in os.scandir(dpath) if x.is_dir()]
+            local = []
+            for entry in os.scandir(dpath):
+                if not entry.is_dir():
+                    continue
+
+                # Check if there are any data folders with a matching name
+                name = os.path.basename(os.path.abspath(entry))
+                found = [x for x in self.folders if x.name == name]
+
+                # If there are, reuse it
+                if found:
+                    logger.info(f"Using existing {name} Data Folder object")
+                    local.append(found[0])
+                # Otherwise, create a new one
+                else:
+                    logger.info(f"Creating new Data Folder object for {name}")
+                    local.append(server.DataFolder(entry))
         else:
             logger.warning("Directory with Data Folder does not exists, skipping...")
             local = []
