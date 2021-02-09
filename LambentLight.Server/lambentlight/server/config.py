@@ -11,3 +11,11 @@ default_server = {
         "127.0.0.1"
     ]
 }
+default_folder = {
+    "auto_start": False,
+    "auto_start_build": "",
+    "token_cfx": "",
+    "token_steam": "",
+    "game": "gtav",
+    "exec": ["server.cfg"]
+}

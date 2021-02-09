@@ -12,14 +12,6 @@ import psutil
 import lambentlight.server as server
 
 logger = logging.getLogger("lambentlight")
-default = {
-    "auto_start": False,
-    "auto_start_build": "",
-    "token_cfx": "",
-    "token_steam": "",
-    "game": "gtav",
-    "exec": ["server.cfg"]
-}
 
 
 def get_resources_in_dir(path, datafolder):
@@ -187,7 +179,7 @@ class DataFolder:
             newconfig = {}
             with open(path) as file:
                 loaded = json.load(file)
-                for key, item in default.items():
+                for key, item in server.default_folder.items():
                     if key in loaded:
                         newconfig[key] = loaded[key]
                     else:
@@ -196,7 +188,7 @@ class DataFolder:
         # Otherwise, use the default values
         else:
             logger.warning(f"Data Folder {self.name} does not has a LambentLight Configuration File")
-            self.config = default
+            self.config = server.default_folder
 
     async def read_process_stdout(self):
         """
