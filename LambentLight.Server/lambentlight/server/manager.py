@@ -2,14 +2,16 @@ import json
 import logging
 import os
 import os.path as path
-from typing import Union
 
 import aiofiles
 import aiohttp
 from git import Repo
 
 import lambentlight.server as server
-from .config import default_server
+from .build import Build
+from .checks import is_ubuntu, is_windows
+from .config import default_server as default
+from .datafolder import DataFolder
 from .exceptions import ConfigurationMissingException
 
 logger = logging.getLogger("lambentlight")
@@ -33,7 +35,7 @@ class Manager:
             loaded = json.loads(file.read())
         # And patch the missing keys from the default values
         self.config = {}
-        for key, value in default_server.items():
+        for key, value in default.items():
             if key in loaded:
                 self.config[key] = loaded[key]
             else:
@@ -41,7 +43,7 @@ class Manager:
         logger.info(f"Loaded configuration from {config}")
 
         self.session = aiohttp.ClientSession()
-        self.config = server.default_server
+        self.config = default
         self.builds = []
         self.folders = []
         self.ws_clients = []
@@ -170,8 +172,8 @@ class Manager:
                         continue
 
                     # If we got here, create a new one if it matches the os
-                    if (build["target"] == 0 and server.is_windows) or (build["target"] == 1 and server.is_ubuntu):
-                        remote.append(server.Build(self, name=name, download=build["download"]))
+                    if (build["target"] == 0 and is_windows) or (build["target"] == 1 and is_ubuntu):
+                        remote.append(Build(self, name=name, download=build["download"]))
 
         # Now is time for the local builds
         local = []
@@ -213,14 +215,14 @@ class Manager:
                 # Otherwise, create a new one
                 else:
                     logger.info(f"Creating new Data Folder object for {name}")
-                    local.append(server.DataFolder(self, entry))
+                    local.append(DataFolder(self, entry))
         else:
             logger.warning("Directory with Data Folder does not exists, skipping...")
             local = []
         logger.info(f"Data Folders have been updated (Total: {len(local)})")
         self.folders = local
 
-    async def remove(self, obj: Union[server.DataFolder, server.Build], *, stop=True):
+    async def remove(self, obj, *, stop=True):
         """
         Removes a Data Folder or Build.
         """
@@ -229,7 +231,7 @@ class Manager:
             return False
 
         # If is a Data Folder
-        if isinstance(obj, server.DataFolder):
+        if isinstance(obj, DataFolder):
             # If there is a server running, stop it if required
             # Raise an exception otherwise
             if obj.is_running:
@@ -240,9 +242,9 @@ class Manager:
             self.folders.remove(obj)
             return True
         # If is a Build
-        elif isinstance(obj, server.Build):
+        elif isinstance(obj, Build):
             # Try to find servers running with the Data Folder
-            servers = [x for x in server.manager.folders if x.build == obj]
+            servers = [x for x in self.folders if x.build == obj]
             if servers:
                 if not stop:
                     raise server.ServerRunningException()

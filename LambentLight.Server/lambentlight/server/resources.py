@@ -1,14 +1,12 @@
 import contextlib
 import os.path
 
-import lambentlight.server as server
-
 
 class LocalResource:
     """
     Represents a resource locally found in a Data Folder.
     """
-    def __init__(self, folder: server.DataFolder, path: str):
+    def __init__(self, folder, path: str):
         """
         Creates a new Local Resource object.
         """

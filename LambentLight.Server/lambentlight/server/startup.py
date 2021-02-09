@@ -9,7 +9,7 @@ import aiofiles
 from aiohttp import web
 
 from lambentlight.server import __version__ as version
-from .config import default_server
+from .config import default_server as default
 from .exceptions import LambentLightServerException
 from .manager import Manager
 from .web import app
@@ -75,7 +75,7 @@ async def initialize_config(directory):
 
     # Then, go ahead and write the default configuration
     async with aiofiles.open(path, "w") as file:
-        text = json.dumps(default_server, indent=4) + "\n"
+        text = json.dumps(default, indent=4) + "\n"
         await file.write(text)
     logger.info(f"Configuration was written to '{path}'")
     return 0

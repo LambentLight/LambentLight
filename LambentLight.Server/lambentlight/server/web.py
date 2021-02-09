@@ -5,7 +5,9 @@ import traceback
 import aiohttp
 from aiohttp import web
 
-import lambentlight.server as server
+from lambentlight.server import __version__ as version
+from .decorators import requires_build, requires_folder, requires_server
+from .exceptions import MissingTokenException, ServerRunningException
 
 logger = logging.getLogger("lambentlight")
 
@@ -90,7 +92,7 @@ async def info(request):
     """
     pinfo = {
         "prog": "LambentLight",
-        "version": server.__version__
+        "version": version
     }
     headers = {
         "Cache-Control": f"max-age={60 * 60}"  # 1 hour
@@ -125,7 +127,7 @@ class BuildView(web.View):
     """
     Route to manage specific builds.
     """
-    @server.requires_build
+    @requires_build
     async def get(self, build):
         """
         Gets the information of a specific build.
@@ -133,7 +135,7 @@ class BuildView(web.View):
         # Just return the build information
         return web.json_response(dict(build))
 
-    @server.requires_build
+    @requires_build
     async def post(self, build):
         """
         Downloads a specific build.
@@ -155,8 +157,8 @@ class BuildView(web.View):
             else:
                 return web.json_response({"message": "Error when downloading the build."}, status=500)
 
-    @server.requires_build
-    async def delete(self, build: server.Build):
+    @requires_build
+    async def delete(self, build):
         """
         Deletes the Build from the server.
         """
@@ -173,7 +175,7 @@ class BuildView(web.View):
             await self.request.app["manager"].remove(build, stop=stop)
         # If there is a server running, return a 409 Conflict
         # This is only raised if stop is True
-        except server.ServerRunningException:
+        except ServerRunningException:
             return web.json_response({"message": "There are servers running with this Build."}, status=409)
         # If we got here, every went ok so return a 204 No Content
         return web.Response(status=204)
@@ -227,14 +229,14 @@ class FolderView(web.View):
     """
     Route for getting the information of individual Data Folders.
     """
-    @server.requires_folder
+    @requires_folder
     async def get(self, folder):
         """
         Prints the information of the Data Folder.
         """
         return web.json_response(dict(folder))
 
-    @server.requires_folder
+    @requires_folder
     async def delete(self, folder):
         """
         Deletes the data folder.
@@ -254,7 +256,7 @@ class InstalledResourcesView(web.View):
     """
     Route for getting the resources on Data Folders.
     """
-    @server.requires_folder
+    @requires_folder
     async def get(self, folder):
         """
         Gets the list of Resources on the Data Folder.
@@ -324,7 +326,7 @@ class ServersView(web.View):
         try:
             await folder.start(build)
             return web.json_response(folder.proc_info, status=201)
-        except server.MissingTokenException as e:
+        except MissingTokenException as e:
             return web.json_response({"message": str(e)},
                                      status=500)
 
@@ -334,14 +336,14 @@ class ServerView(web.View):
     """
     Route used for managing specific servers.
     """
-    @server.requires_server
+    @requires_server
     async def get(self, serv):
         """
         Gets the information of a server.
         """
         return web.json_response(serv.proc_info)
 
-    @server.requires_server
+    @requires_server
     async def delete(self, serv):
         """
         Stops a specific server.

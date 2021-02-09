@@ -11,6 +11,9 @@ from asyncio.subprocess import PIPE, create_subprocess_exec
 import psutil
 
 import lambentlight.server as server
+from .config import default_folder as default
+from .resources import LocalResource
+from .tools import rmtree
 
 logger = logging.getLogger("lambentlight")
 
@@ -34,7 +37,7 @@ def get_resources_in_dir(path, datafolder):
             yield from get_resources_in_dir(found.path, datafolder)
             continue
         # Otherwise, yield a resource
-        yield server.LocalResource(datafolder, found.path)
+        yield LocalResource(datafolder, found.path)
 
 
 class DataFolder:
@@ -180,7 +183,7 @@ class DataFolder:
             newconfig = {}
             with open(path) as file:
                 loaded = json.load(file)
-                for key, item in server.default_folder.items():
+                for key, item in default.items():
                     if key in loaded:
                         newconfig[key] = loaded[key]
                     else:
@@ -189,7 +192,7 @@ class DataFolder:
         # Otherwise, use the default values
         else:
             logger.warning(f"Data Folder {self.name} does not has a LambentLight Configuration File")
-            self.config = server.default_folder
+            self.config = default
 
     async def delete(self, *, stop=False):
         """
@@ -204,7 +207,7 @@ class DataFolder:
 
         # Then, just delete the directory
         with contextlib.suppress(FileNotFoundError):
-            server.rmtree(self.path)
+            rmtree(self.path)
         # And remove the data folder from the list
         with contextlib.suppress(ValueError):  # Avoiding race conditions
             self.manager.folders.remove(self)

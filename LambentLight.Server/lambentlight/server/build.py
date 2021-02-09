@@ -9,6 +9,8 @@ import aiofiles
 import aiofiles.os
 
 import lambentlight.server as server
+from .compression import extract
+from .tools import rmtree
 
 logger = logging.getLogger("lambentlight")
 
@@ -91,7 +93,7 @@ class Build:
         # Time to extract it!
         # Make the paths and extract it
         ext_path = os.path.join(tempfile.gettempdir(), "lambentlight", "builds", self.name)
-        extracted = await server.extract(temp_file, ext_path)
+        extracted = await extract(temp_file, ext_path)
         # If we were unable to extract the file, log a message
         if not extracted:
             logger.error(f"Installation of Build {self.name} failed: Unable to Extract")
@@ -99,7 +101,7 @@ class Build:
         # If the target folder exists, remove it
         target = os.path.join(self.manager.builds_dir, self.name)
         if os.path.isdir(target):
-            server.rmtree(target)
+            rmtree(target)
         # Finish by moving the directory to the target and notifying it
         os.makedirs(self.manager.builds_dir, exist_ok=True)
         shutil.move(ext_path, self.manager.builds_dir)
@@ -110,4 +112,4 @@ class Build:
         Deletes the Build.
         """
         with contextlib.suppress(FileNotFoundError):
-            server.rmtree(self.folder)
+            rmtree(self.folder)
