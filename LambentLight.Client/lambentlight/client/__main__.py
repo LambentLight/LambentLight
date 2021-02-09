@@ -35,6 +35,8 @@ async def run():
             await client.get_folder(args.folder)
         elif args.action == "resources":
             await client.get_resources(args.folder)
+        elif args.action == "delete":
+            await client.delete_folder(args.folder)
     # FOLDERS
     elif args.command == "folders":
         await client.show_folders()

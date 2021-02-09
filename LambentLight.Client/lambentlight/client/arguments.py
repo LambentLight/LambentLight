@@ -44,6 +44,8 @@ def parse_arguments():
                          help="shows the information of the Data Folder")
     foldersub.add_parser("resources",
                          help="lists the resources on the Data Folder")
+    foldersub.add_parser("delete",
+                         help="deletes the Data Folder with all of the resources")
     folder.add_argument("folder",
                         help="the folder to manage or create")
     # FOLDERS

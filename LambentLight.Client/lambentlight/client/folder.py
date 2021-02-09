@@ -23,3 +23,11 @@ async def get_resources(name: str):
     """
     info = await client.get(f"/folders/{name}/resources")
     client.print_with_header(["Name", "Path"], *[[x["name"], x["path"]] for x in info])
+
+
+async def delete_folder(name: str):
+    """
+    Deletes a specific data folder.
+    """
+    await client.delete(f"/folders/{name}")
+    print(f"Folder {name} was deleted")
