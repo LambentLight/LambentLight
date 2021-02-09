@@ -4,7 +4,7 @@ class LambentLightServerException(Exception):
     """
 
 
-class ServerRunningException(Exception):
+class ServerRunningException(LambentLightServerException):
     """
     Exception raised when an operation can't be completed because there is a server running.
     """
