@@ -50,6 +50,7 @@ async def start():
         loggers[0].error("Manager Initialization Failed")
         return
     # And start the web server
+    server.app["manager"] = server.manager
     runner = web.AppRunner(server.app, access_log_format="HTTP Request from %a: %r (%s) [%{User-Agent}i]")
     await runner.setup()
     site = web.TCPSite(runner, server.arguments.host, server.arguments.web_port)

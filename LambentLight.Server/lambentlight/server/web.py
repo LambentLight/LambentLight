@@ -27,11 +27,11 @@ async def auth(request: web.Request, handler):
     Checks the token auth.
     """
     # If the client is not whitelisted to connect, send a 403
-    if request.remote not in server.manager.config["allowed_ips"]:
+    if request.remote not in request.app["manager"].config["allowed_ips"]:
         return web.json_response({"message": "Your IP is not Whitelisted."},
                                  status=403)
     # If is localhost/127.0.0.1 and we are allowed to do unauthenticated calls, skip the auth checks
-    elif request.remote == "127.0.0.1" and server.manager.config["no_auth_local"]:
+    elif request.remote == "127.0.0.1" and request.app["manager"].config["no_auth_local"]:
         pass
     # If the request does not has an authentication header, return a 401
     elif "Authorization" not in request.headers:
@@ -42,7 +42,7 @@ async def auth(request: web.Request, handler):
         return web.json_response({"message": "Authentication Token is not using the right format."},
                                  status=400)
     # If the second part does not matches the token in the config, return
-    elif request.headers["Authorization"].split(" ")[1] != server.manager.config["token"]:
+    elif request.headers["Authorization"].split(" ")[1] != request.app["manager"].config["token"]:
         return web.json_response({"message": "Authentication Token is not valid."},
                                  status=401)
 
@@ -72,13 +72,13 @@ async def websocket(request: web.Request):
     await ws.prepare(request)
     logger.info(f"WebSocket connection opened from {request.remote}")
     # Add it to the list of clients
-    server.manager.ws_clients.append(ws)
+    request.app["manager"].ws_clients.append(ws)
     # And start checking the messages that are coming in
     async for message in ws:
         if message.type == aiohttp.WSMessage.CLOSE:
             break
     # Finally, remove the client from the list
-    server.manager.ws_clients.remove(ws)
+    request.app["manager"].ws_clients.remove(ws)
     logger.info(f"WebSocket connection of {request.remote} has been closed")
     return ws
 
@@ -110,14 +110,14 @@ class BuildsView(web.View):
         headers = {
             "Cache-Control": f"max-age={2 * 60}"  # 2 minutes
         }
-        return web.json_response([dict(x) for x in server.manager.builds], headers=headers)
+        return web.json_response([dict(x) for x in self.request.app["manager"].builds], headers=headers)
 
     async def post(self):
         """
         Triggers an update for the list of Builds.
         """
-        await server.manager.update_builds()
-        return web.json_response({"count": len(server.manager.builds)})
+        await self.request.app["manager"].update_builds()
+        return web.json_response({"count": len(self.request.app["manager"].builds)})
 
 
 @routes.view("/builds/{name}")
@@ -170,7 +170,7 @@ class BuildView(web.View):
         stop = body.get("stop", True)
         # Then, try to remove the build with the force parameter
         try:
-            await server.manager.remove(build, stop=stop)
+            await self.request.app["manager"].remove(build, stop=stop)
         # If there is a server running, return a 409 Conflict
         # This is only raised if stop is True
         except server.ServerRunningException:
@@ -191,14 +191,14 @@ class FoldersView(web.View):
         headers = {
             "Cache-Control": f"max-age={2 * 60}"  # 2 minutes
         }
-        return web.json_response([dict(x) for x in server.manager.folders], headers=headers)
+        return web.json_response([dict(x) for x in self.request.app["manager"].folders], headers=headers)
 
     async def post(self):
         """
         Updates the list of Data Folders.
         """
-        await server.manager.update_folders()
-        return web.json_response({"count": len(server.manager.folders)})
+        await self.request.app["manager"].update_folders()
+        return web.json_response({"count": len(self.request.app["manager"].folders)})
 
     async def put(self):
         """
@@ -214,11 +214,11 @@ class FoldersView(web.View):
                                      status=400)
 
         # If there is a folder with the same name, return a 409 Conflict
-        if [x for x in server.manager.folders if x.name == name]:
+        if [x for x in self.request.app["manager"].folders if x.name == name]:
             return web.json_response({"message": "Folder with the same name already exists."},
                                      status=409)
         # Otherwise, tell the manager to create it
-        folder = await server.manager.create_folder(name, not data.get("skip_resources", True))
+        folder = await self.request.app["manager"].create_folder(name, not data.get("skip_resources", True))
         return web.json_response(dict(folder))
 
 
@@ -277,7 +277,8 @@ class ServersView(web.View):
         headers = {
             "Cache-Control": f"max-age={2 * 60}"  # 2 minutes
         }
-        return web.json_response({x.name: x.proc_info for x in server.manager.folders if x.is_running}, headers=headers)
+        return web.json_response({x.name: x.proc_info for x in self.request.app["manager"].folders if x.is_running},
+                                 headers=headers)
 
     async def put(self):
         """
@@ -295,7 +296,7 @@ class ServersView(web.View):
                                      status=400)
 
         # Try to find a data folder with a matching name
-        folders = [x for x in server.manager.folders if x.name == data["folder"]]
+        folders = [x for x in self.request.app["manager"].folders if x.name == data["folder"]]
         # If none were found, return a 404 not found
         if not folders:
             return web.json_response({"message": "No Data Folders were found with the specified Name."},
@@ -310,10 +311,10 @@ class ServersView(web.View):
 
         # If we need to use the latest build, grab the first one from the list
         if data.get("use_latest", False):
-            build = server.manager.builds[0]
+            build = self.request.app["manager"].builds[0]
         # Otherwise, find the correct build
         else:
-            found_builds = [x for x in server.manager.builds if x.name == data["build"]]
+            found_builds = [x for x in self.request.app["manager"].builds if x.name == data["build"]]
             if not found_builds:
                 return web.json_response({"message": "No Builds were found with the specified Name."},
                                          status=404)
