@@ -17,8 +17,6 @@ class Build:
     """
     The information of a CFX Build.
     """
-    builds_dir: str = os.path.join(server.arguments.work_dir, "builds")
-
     def __init__(self, manager, *, folder: str = None, download: str = None, name: str = None):
         self.manager = manager
 
@@ -32,7 +30,7 @@ class Build:
             self.name = os.path.basename(folder)
             self.url = None
         else:
-            self.folder = os.path.join(self.builds_dir, name)
+            self.folder = os.path.join(manager.dir, name)
             self.name = name
             self.url = download
 
@@ -99,12 +97,12 @@ class Build:
             logger.error(f"Installation of Build {self.name} failed: Unable to Extract")
             return False
         # If the target folder exists, remove it
-        target = os.path.join(self.builds_dir, self.name)
+        target = os.path.join(self.manager.builds_dir, self.name)
         if os.path.isdir(target):
             server.rmtree(target)
         # Finish by moving the directory to the target and notifying it
-        os.makedirs(self.builds_dir, exist_ok=True)
-        shutil.move(ext_path, self.builds_dir)
+        os.makedirs(self.manager.builds_dir, exist_ok=True)
+        shutil.move(ext_path, self.manager.builds_dir)
         return True
 
     async def delete(self):

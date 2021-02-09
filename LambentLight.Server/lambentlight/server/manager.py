@@ -19,10 +19,10 @@ class Manager:
     """
     The main manager of LambentLight.
     """
-    builds_dir: str = os.path.join(server.arguments.work_dir, "builds")
-
     def __init__(self, directory):
-        config = os.path.join(server.arguments.work_dir, "config.json")
+        self.dir = directory
+        self.builds_dir = os.path.join(directory, "builds")
+        config = os.path.join(directory, "config.json")
 
         # If the configuration file does not exists, raise an exception
         if not path.isfile(config):
@@ -79,7 +79,7 @@ class Manager:
         """
         Saves the settings.
         """
-        async with aiofiles.open(os.path.join(server.arguments.work_dir, "config.json"), "w") as file:
+        async with aiofiles.open(os.path.join(self.dir, "config.json"), "w") as file:
             text = json.dumps(self.config, indent=4) + "\n"
             await file.write(text)
             logger.info("Settings have been saved")
@@ -101,7 +101,7 @@ class Manager:
         """
         Creates a new Data Folder.
         """
-        path = os.path.join(server.arguments.work_dir, "data", name)
+        path = os.path.join(self.dir, "data", name)
 
         # Create the folder or clone the repository
         if clone:
@@ -193,7 +193,7 @@ class Manager:
         """
         Updates the list of Data Folders.
         """
-        dpath = os.path.join(server.arguments.work_dir, "data")
+        dpath = os.path.join(self.dir, "data")
 
         # If the data directory exists, get the folders
         if os.path.isdir(dpath):
