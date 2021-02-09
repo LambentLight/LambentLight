@@ -193,6 +193,13 @@ class FoldersView(web.View):
         }
         return web.json_response([dict(x) for x in server.manager.folders], headers=headers)
 
+    async def post(self):
+        """
+        Updates the list of Data Folders.
+        """
+        await server.manager.update_folders()
+        return web.json_response({"count": len(server.manager.folders)})
+
     async def put(self):
         """
         Creates a data folder with the specified name.
