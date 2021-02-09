@@ -7,7 +7,6 @@ import tempfile
 
 import aiofiles
 import aiofiles.os
-import aiohttp
 
 import lambentlight.server as server
 
