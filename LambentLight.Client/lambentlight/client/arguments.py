@@ -49,8 +49,10 @@ def parse_arguments():
     folder.add_argument("folder",
                         help="the folder to manage or create")
     # FOLDERS
-    subparsers.add_parser("folders",
-                          help="lists the Data Folders available")
+    folders = subparsers.add_parser("folders",
+                                    help="lists the Data Folders available")
+    folders.add_argument("-R", "--refresh", action="store_true",
+                         help="refreshes the list of folders before showing them")
     # SERVER
     server = subparsers.add_parser("server",
                                    help="manages individual servers")

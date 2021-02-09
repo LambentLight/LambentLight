@@ -39,6 +39,8 @@ async def run():
             await client.delete_folder(args.folder)
     # FOLDERS
     elif args.command == "folders":
+        if args.refresh:
+            await client.post("/folders")
         await client.show_folders()
     # SERVER
     elif args.command == "server":
