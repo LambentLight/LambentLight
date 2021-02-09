@@ -1,3 +1,8 @@
+from typing import Union
+
+import lambentlight.server as server
+
+
 class LambentLightServerException(Exception):
     """
     Base Exception for the LambentLight Server.
@@ -17,3 +22,12 @@ class MissingTokenException(LambentLightServerException):
     def __init__(self, folder):
         super().__init__(f"Folder {folder.name} has no token set.")
         self.folder = folder
+
+
+class InUseException(LambentLightServerException):
+    """
+    Exception raised when the Build or Data Folder is being used.
+    """
+    def __init__(self, in_use: Union[server.Build, server.DataFolder]):
+        super().__init__(f"{in_use.name} is being used by a Server or Data Folder")
+        self.in_use = in_use
