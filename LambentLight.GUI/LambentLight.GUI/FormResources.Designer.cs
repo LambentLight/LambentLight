@@ -64,6 +64,7 @@ namespace LambentLight.GUI
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.ResourcesGroupBox);
             this.Name = "FormResources";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Resources of";
             this.Load += new System.EventHandler(this.FormResources_Load);
             this.ResourcesGroupBox.ResumeLayout(false);
