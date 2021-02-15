@@ -606,6 +606,7 @@
             this.Name = "FormManager";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LambentLight: Connected to";
+            this.Load += new System.EventHandler(this.FormManager_Load);
             this.BuildsGroupBox.ResumeLayout(false);
             this.DataFolderGroupBox.ResumeLayout(false);
             this.TopMenuStrip.ResumeLayout(false);
