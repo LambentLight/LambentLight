@@ -22,8 +22,12 @@ def get_resources_in_dir(path, datafolder):
     """
     Gets the resources installed in the folder.
     """
+    # If the directory does not exists, return
+    if not os.path.isdir(path):
+        return
+
     # Iterate over the items inside of the resources directory
-    for found in os.scandir(os.path.join(path)):
+    for found in os.scandir(path):
         # If is not a directory, continue to the next iteration
         if not found.is_dir():
             continue
