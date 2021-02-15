@@ -147,6 +147,7 @@
             this.DataFolderDeleteButton.TabIndex = 3;
             this.DataFolderDeleteButton.Text = "Delete";
             this.DataFolderDeleteButton.UseVisualStyleBackColor = true;
+            this.DataFolderDeleteButton.Click += new System.EventHandler(this.DataFolderDeleteButton_Click);
             // 
             // DataFolderBrowseButton
             // 

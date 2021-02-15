@@ -50,5 +50,18 @@ namespace LambentLight.GUI.API
                 return new List<InstalledResource>();
             }
         }
+        /// <summary>
+        /// Deletes the Data Folder from the Server.
+        /// </summary>
+        public async Task Delete()
+        {
+            try
+            {
+                await client.client.Request($"/folders/{Name}").DeleteAsync();
+            }
+            catch (FlurlHttpException)
+            {
+            }
+        }
     }
 }

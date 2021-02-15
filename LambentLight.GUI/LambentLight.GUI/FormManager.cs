@@ -1,5 +1,6 @@
 using LambentLight.GUI.API;
 using System;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace LambentLight.GUI
@@ -24,10 +25,11 @@ namespace LambentLight.GUI
 
         #endregion
 
-        #region Events - Loading
+        #region Tools
 
-        private async void FormManager_Load(object sender, EventArgs e)
+        private async Task UpdateFolders()
         {
+            DataFolderComboBox.Items.Clear();
             foreach (DataFolder folder in await client.GetDataFolders())
             {
                 DataFolderComboBox.Items.Add(folder);
@@ -36,6 +38,15 @@ namespace LambentLight.GUI
             {
                 DataFolderComboBox.SelectedIndex = 0;
             }
+        }
+
+        #endregion
+
+        #region Events - Loading
+
+        private async void FormManager_Load(object sender, EventArgs e)
+        {
+            await UpdateFolders();
         }
 
         #endregion
@@ -52,6 +63,15 @@ namespace LambentLight.GUI
         private void DataFolderBrowseButton_Click(object sender, EventArgs e)
         {
             new FormResources((DataFolder)DataFolderComboBox.SelectedItem).ShowDialog();
+        }
+
+        private async void DataFolderDeleteButton_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure that you want to remove the Data Folder?\nEVERYTHING WILL BE LOST!", "Deletion Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                await ((DataFolder)DataFolderComboBox.SelectedItem).Delete();
+                await UpdateFolders();
+            }
         }
 
         #endregion
