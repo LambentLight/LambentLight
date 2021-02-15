@@ -1,3 +1,9 @@
+# Output directory
+[Bb]in/
+
+# Jetbrains IDEs .idea directory
+.idea/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
