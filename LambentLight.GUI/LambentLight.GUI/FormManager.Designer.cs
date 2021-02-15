@@ -1,4 +1,4 @@
-﻿namespace LambentLight
+﻿namespace LambentLight.GUI
 {
     partial class FormManager
     {
@@ -601,6 +601,7 @@
             this.Controls.Add(this.MainTabControl);
             this.Controls.Add(this.DataFolderGroupBox);
             this.Controls.Add(this.TopMenuStrip);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.TopMenuStrip;
             this.MinimumSize = new System.Drawing.Size(815, 483);
             this.Name = "FormManager";

@@ -2,7 +2,7 @@ using LambentLight.GUI.Api;
 using System;
 using System.Windows.Forms;
 
-namespace LambentLight
+namespace LambentLight.GUI
 {
     public partial class FormManager : Form
     {
