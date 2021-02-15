@@ -34,6 +34,14 @@ Section "Client" Client
     File "bin\Executables\lambentlight.exe"
 SectionEnd
 
+Section "GUI" GUI
+    SetOutPath "$INSTDIR\gui"
+    File "bin\GUI\Release\*.exe"
+    File "bin\GUI\Release\*.dll"
+    File "bin\GUI\Release\*.pdb"
+    File "bin\GUI\Release\*.config"
+SectionEnd
+
 Section "Uninstaller" Uninstaller
     SectionIn RO
     SetOutPath "$INSTDIR"
@@ -57,9 +65,11 @@ SectionEnd
 
 LangString DESC_Server ${LANG_ENGLISH} "Installs the Server component. It allows you to host your own CFX Server Instances."
 LangString DESC_Client ${LANG_ENGLISH} "Installs the Client Command Line. It allows you manage CFX Servers from the Command Line (cmd.exe)."
+LangString DESC_GUI ${LANG_ENGLISH} "Installs a Graphical User Interface that can be used to control the LambentLight Server."
 LangString DESC_Uninstaller ${LANG_ENGLISH} "Creates Uninstall information to remove the program from Apps and Features."
 !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
 !insertmacro MUI_DESCRIPTION_TEXT ${Server} $(DESC_Server)
 !insertmacro MUI_DESCRIPTION_TEXT ${Client} $(DESC_Client)
+!insertmacro MUI_DESCRIPTION_TEXT ${GUI} $(DESC_GUI)
 !insertmacro MUI_DESCRIPTION_TEXT ${Uninstaller} $(DESC_Uninstaller)
 !insertmacro MUI_FUNCTION_DESCRIPTION_END

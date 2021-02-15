@@ -8,9 +8,13 @@
     <UseWindowsForms>true</UseWindowsForms>
     <Version>1.0</Version>
     <ApplicationIcon>..\..\icon.ico</ApplicationIcon>
-    <OutputPath>..\..\bin\GUI\$(Configuration)\</OutputPath>
+    <OutputPath>..\..\bin\Executables\gui\$(Configuration)\</OutputPath>
     <DebugType>pdbonly</DebugType>
     <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>..\..\bin\Executables\gui\</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
