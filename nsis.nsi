@@ -36,10 +36,10 @@ SectionEnd
 
 Section "GUI" GUI
     SetOutPath "$INSTDIR\gui"
-    File "bin\GUI\Release\*.exe"
-    File "bin\GUI\Release\*.dll"
-    File "bin\GUI\Release\*.pdb"
-    File "bin\GUI\Release\*.config"
+    File "bin\Executables\gui\*.exe"
+    File "bin\Executables\gui\*.dll"
+    File "bin\Executables\gui\*.pdb"
+    File "bin\Executables\gui\*.config"
 SectionEnd
 
 Section "Uninstaller" Uninstaller
