@@ -1,6 +1,4 @@
-﻿using Flurl;
-using Flurl.Http;
-using LambentLight.GUI.Api;
+﻿using LambentLight.GUI.Api;
 using System;
 using System.Windows.Forms;
 
@@ -44,13 +42,9 @@ namespace LambentLight.GUI
             // Disable the items to prevent them from being pressed
             SetItemVisibility(false);
             // And check if the host is valid by calling /
-            try
+            if (!await new Client(IPTextBox.Text, TokenTextBox.Text).IsValid())
             {
-                await $"http://{IPTextBox.Text}".WithHeader("Authorization", $"Bearer {TokenTextBox.Text}").GetJsonAsync<ServerInfo>();
-            }
-            catch (FlurlHttpException ex)
-            {
-                MessageBox.Show($"Error while checking Host:\n\n{ex.Message}", "Invalid Host", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"The host refused to connect.", "Invalid Host", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 SetItemVisibility(true);
                 return;
             }
