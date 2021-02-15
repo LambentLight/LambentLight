@@ -88,11 +88,13 @@ namespace LambentLight.GUI
             // RememberCheckBox
             // 
             this.RememberCheckBox.AutoSize = true;
+            this.RememberCheckBox.Checked = true;
+            this.RememberCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.RememberCheckBox.Location = new System.Drawing.Point(6, 19);
             this.RememberCheckBox.Name = "RememberCheckBox";
-            this.RememberCheckBox.Size = new System.Drawing.Size(148, 17);
+            this.RememberCheckBox.Size = new System.Drawing.Size(157, 17);
             this.RememberCheckBox.TabIndex = 2;
-            this.RememberCheckBox.Text = "Remember details for later";
+            this.RememberCheckBox.Text = "Remember Host and Token";
             this.RememberCheckBox.UseVisualStyleBackColor = true;
             // 
             // OptionsGroupBox
@@ -161,11 +163,11 @@ namespace LambentLight.GUI
 
         private System.Windows.Forms.GroupBox IPGroupBox;
         private System.Windows.Forms.GroupBox TokenGroupBox;
-        private System.Windows.Forms.CheckBox RememberCheckBox;
         private System.Windows.Forms.GroupBox OptionsGroupBox;
-        private System.Windows.Forms.CheckBox AutoCheckBox;
         private System.Windows.Forms.Button ConnectButton;
         public System.Windows.Forms.TextBox IPTextBox;
         public System.Windows.Forms.TextBox TokenTextBox;
+        public System.Windows.Forms.CheckBox RememberCheckBox;
+        public System.Windows.Forms.CheckBox AutoCheckBox;
     }
 }
