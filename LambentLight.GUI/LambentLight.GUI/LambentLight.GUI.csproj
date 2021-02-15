@@ -4,10 +4,13 @@
     <TargetFramework>net48</TargetFramework>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-    <DefineConstants>CLIENT,GUI</DefineConstants>
-    <OutputPath>..\bin\$(Configuration)\</OutputPath>
-    <UseWindowsForms>true</UseWindowsForms>
     <OutputType>WinExe</OutputType>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Version>1.0</Version>
+    <ApplicationIcon>..\..\icon.ico</ApplicationIcon>
+    <OutputPath>..\..\bin\GUI\$(Configuration)\</OutputPath>
+    <DebugType>pdbonly</DebugType>
+    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
 
   <ItemGroup>
