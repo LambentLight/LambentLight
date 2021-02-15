@@ -29,6 +29,7 @@ namespace LambentLight.GUI
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormResources));
             this.ResourcesGroupBox = new System.Windows.Forms.GroupBox();
             this.ResourcesListBox = new System.Windows.Forms.ListBox();
             this.ResourcesGroupBox.SuspendLayout();
@@ -63,6 +64,7 @@ namespace LambentLight.GUI
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.ResourcesGroupBox);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormResources";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Resources of";
