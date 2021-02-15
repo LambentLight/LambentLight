@@ -29,6 +29,7 @@ namespace LambentLight.GUI
 
         private async Task UpdateFolders()
         {
+            await client.UpdateFolders();
             DataFolderComboBox.Items.Clear();
             foreach (DataFolder folder in await client.GetDataFolders())
             {

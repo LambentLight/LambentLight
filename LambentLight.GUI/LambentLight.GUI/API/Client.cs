@@ -49,6 +49,19 @@ namespace LambentLight.GUI.API
             }
         }
         /// <summary>
+        /// Updates the List of Data Folders on the server.
+        /// </summary>
+        public async Task UpdateFolders()
+        {
+            try
+            {
+                await client.Request("/folders").PostAsync();
+            }
+            catch (FlurlHttpException)
+            {
+            }
+        }
+        /// <summary>
         /// Gets the Data Folders known on the server.
         /// </summary>
         /// <returns>A list of Data Folders.</returns>
