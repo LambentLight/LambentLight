@@ -40,6 +40,12 @@ namespace LambentLight.GUI
                 DataFolderComboBox.SelectedIndex = 0;
             }
         }
+        private void ToggleFolderButtons()
+        {
+            bool check = DataFolderComboBox.SelectedItem != null;
+            DataFolderBrowseButton.Enabled = check;
+            DataFolderDeleteButton.Enabled = check;
+        }
 
         #endregion
 
@@ -54,12 +60,7 @@ namespace LambentLight.GUI
 
         #region Events - Data Folder
 
-        private void DataFolderComboBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            bool check = DataFolderComboBox.SelectedItem != null;
-            DataFolderBrowseButton.Enabled = check;
-            DataFolderDeleteButton.Enabled = check;
-        }
+        private void DataFolderComboBox_SelectedIndexChanged(object sender, EventArgs e) => ToggleFolderButtons();
 
         private void DataFolderBrowseButton_Click(object sender, EventArgs e)
         {
@@ -73,6 +74,12 @@ namespace LambentLight.GUI
                 await ((DataFolder)DataFolderComboBox.SelectedItem).Delete();
                 await UpdateFolders();
             }
+        }
+
+        private async void DataFolderRefreshButton_Click(object sender, EventArgs e)
+        {
+            await UpdateFolders();
+            ToggleFolderButtons();
         }
 
         #endregion

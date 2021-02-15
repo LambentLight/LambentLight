@@ -170,6 +170,7 @@
             this.DataFolderRefreshButton.TabIndex = 1;
             this.DataFolderRefreshButton.Text = "Refresh";
             this.DataFolderRefreshButton.UseVisualStyleBackColor = true;
+            this.DataFolderRefreshButton.Click += new System.EventHandler(this.DataFolderRefreshButton_Click);
             // 
             // DataFolderComboBox
             // 
