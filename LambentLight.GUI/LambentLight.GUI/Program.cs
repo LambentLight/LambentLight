@@ -19,9 +19,12 @@ namespace LambentLight.GUI
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            // Show the login window
+            // Show the login window and exit with code 2 if it was cancelled
             FormLogin login = new FormLogin();
-            login.ShowDialog();
+            if (login.ShowDialog() != DialogResult.OK)
+            {
+                return 2;
+            }
 
             // If everything went well, exit with code 0
             return 0;
