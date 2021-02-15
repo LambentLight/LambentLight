@@ -220,7 +220,7 @@ class FoldersView(web.View):
             return web.json_response({"message": "Folder with the same name already exists."},
                                      status=409)
         # Otherwise, tell the manager to create it
-        folder = await self.request.app["manager"].create_folder(name, not data.get("skip_resources", True))
+        folder = await self.request.app["manager"].create_folder(name, not data.get("skip_resources", False))
         return web.json_response(dict(folder))
 
 
