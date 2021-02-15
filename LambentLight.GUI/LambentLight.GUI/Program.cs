@@ -26,6 +26,10 @@ namespace LambentLight.GUI
                 return 2;
             }
 
+            // Otherwise, open the manager with the connection
+            FormManager manager = new FormManager(login.IPTextBox.Text, login.TokenTextBox.Text);
+            manager.ShowDialog();
+
             // If everything went well, exit with code 0
             return 0;
         }
