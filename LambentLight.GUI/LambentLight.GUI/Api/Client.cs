@@ -1,4 +1,5 @@
 ﻿using Flurl.Http;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace LambentLight.GUI.Api
@@ -45,6 +46,21 @@ namespace LambentLight.GUI.Api
             catch (FlurlHttpException)  // Unable to connect to the remote server
             {
                 return false;
+            }
+        }
+        /// <summary>
+        /// Gets the Data Folders known on the server.
+        /// </summary>
+        /// <returns>A list of Data Folders.</returns>
+        public async Task<List<DataFolder>> GetDataFolders()
+        {
+            try
+            {
+                return await client.Request("/folders").GetJsonAsync<List<DataFolder>>();
+            }
+            catch (FlurlHttpException)
+            {
+                return new List<DataFolder>();
             }
         }
 
