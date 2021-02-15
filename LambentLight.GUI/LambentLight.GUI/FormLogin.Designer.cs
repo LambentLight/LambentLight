@@ -132,6 +132,7 @@ namespace LambentLight.GUI
             // 
             // FormLogin
             // 
+            this.AcceptButton = this.ConnectButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(351, 235);
@@ -159,12 +160,12 @@ namespace LambentLight.GUI
         #endregion
 
         private System.Windows.Forms.GroupBox IPGroupBox;
-        private System.Windows.Forms.TextBox IPTextBox;
         private System.Windows.Forms.GroupBox TokenGroupBox;
-        private System.Windows.Forms.TextBox TokenTextBox;
         private System.Windows.Forms.CheckBox RememberCheckBox;
         private System.Windows.Forms.GroupBox OptionsGroupBox;
         private System.Windows.Forms.CheckBox AutoCheckBox;
         private System.Windows.Forms.Button ConnectButton;
+        public System.Windows.Forms.TextBox IPTextBox;
+        public System.Windows.Forms.TextBox TokenTextBox;
     }
 }
