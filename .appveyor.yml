@@ -17,7 +17,8 @@ install:
 # Build the solution with the same name as the AppVeyor project
 build_script:
   - flake8
-  - scripts\build.bat
+  - scripts\build_cli.bat
+  - scripts\build_gui.bat
   - scripts\nsis.bat
 
 # After building everything, package it in a 7zip and upload it as an Artifact
