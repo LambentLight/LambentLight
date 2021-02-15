@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace LambentLight.GUI.Api
+namespace LambentLight.GUI.API
 {
     /// <summary>
     /// Represents the information of a LambentLight Server.

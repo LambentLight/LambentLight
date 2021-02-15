@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace LambentLight.GUI.Api
+namespace LambentLight.GUI.API
 {
     /// <summary>
     /// Represnets a Data Folder stored in the server.

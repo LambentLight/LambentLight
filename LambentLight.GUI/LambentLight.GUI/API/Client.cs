@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace LambentLight.GUI.Api
+namespace LambentLight.GUI.API
 {
     /// <summary>
     /// Main Client for managing the LambentLight Server.

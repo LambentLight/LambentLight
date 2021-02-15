@@ -1,4 +1,4 @@
-﻿using LambentLight.GUI.Api;
+﻿using LambentLight.GUI.API;
 using System;
 using System.Windows.Forms;
 
