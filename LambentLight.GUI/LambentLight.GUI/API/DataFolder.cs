@@ -1,4 +1,7 @@
-﻿using Newtonsoft.Json;
+﻿using Flurl.Http;
+using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace LambentLight.GUI.API
 {
@@ -25,5 +28,27 @@ namespace LambentLight.GUI.API
         /// </summary>
         /// <returns>The Name of the Data Folder.</returns>
         public override string ToString() => Name;
+
+        /// <summary>
+        /// Gets the list of Resources present on this Data Folder.
+        /// </summary>
+        /// <returns>A List with the Resources installed on this Data Folder.</returns>
+        public async Task<List<InstalledResource>> GetResources()
+        {
+            try
+            {
+                List<InstalledResource> folders = await client.client.Request($"/folders/{Name}/resources").GetJsonAsync<List<InstalledResource>>();
+                foreach (InstalledResource resource in folders)
+                {
+                    resource.client = client;
+                    resource.Folder = this;
+                }
+                return folders;
+            }
+            catch (FlurlHttpException)
+            {
+                return new List<InstalledResource>();
+            }
+        }
     }
 }

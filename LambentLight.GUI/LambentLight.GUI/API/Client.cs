@@ -11,7 +11,7 @@ namespace LambentLight.GUI.API
     {
         #region Fields
 
-        private readonly FlurlClient client = new FlurlClient();
+        internal readonly FlurlClient client = new FlurlClient();
 
         #endregion
 
@@ -56,7 +56,12 @@ namespace LambentLight.GUI.API
         {
             try
             {
-                return await client.Request("/folders").GetJsonAsync<List<DataFolder>>();
+                List<DataFolder> folders = await client.Request("/folders").GetJsonAsync<List<DataFolder>>();
+                foreach (DataFolder folder in folders)
+                {
+                    folder.client = this;
+                }
+                return folders;
             }
             catch (FlurlHttpException)
             {

@@ -24,7 +24,7 @@ namespace LambentLight.GUI
 
         #endregion
 
-        #region Events
+        #region Events - Loading
 
         private async void FormManager_Load(object sender, EventArgs e)
         {
@@ -36,6 +36,22 @@ namespace LambentLight.GUI
             {
                 DataFolderComboBox.SelectedIndex = 0;
             }
+        }
+
+        #endregion
+
+        #region Events - Data Folder
+
+        private void DataFolderComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            bool check = DataFolderComboBox.SelectedItem != null;
+            DataFolderBrowseButton.Enabled = check;
+            DataFolderDeleteButton.Enabled = check;
+        }
+
+        private void DataFolderBrowseButton_Click(object sender, EventArgs e)
+        {
+            new FormResources((DataFolder)DataFolderComboBox.SelectedItem).ShowDialog();
         }
 
         #endregion

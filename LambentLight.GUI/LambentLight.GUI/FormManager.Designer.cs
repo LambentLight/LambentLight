@@ -158,6 +158,7 @@
             this.DataFolderBrowseButton.TabIndex = 2;
             this.DataFolderBrowseButton.Text = "Browse";
             this.DataFolderBrowseButton.UseVisualStyleBackColor = true;
+            this.DataFolderBrowseButton.Click += new System.EventHandler(this.DataFolderBrowseButton_Click);
             // 
             // DataFolderRefreshButton
             // 
@@ -179,6 +180,7 @@
             this.DataFolderComboBox.Name = "DataFolderComboBox";
             this.DataFolderComboBox.Size = new System.Drawing.Size(496, 21);
             this.DataFolderComboBox.TabIndex = 0;
+            this.DataFolderComboBox.SelectedIndexChanged += new System.EventHandler(this.DataFolderComboBox_SelectedIndexChanged);
             // 
             // TopMenuStrip
             // 
