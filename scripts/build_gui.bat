@@ -1,2 +1,2 @@
 @echo off
-msbuild LambentLight.GUI\LambentLight.GUI.sln /t:Build /p:Configuration=Release
+dotnet build LambentLight.GUI\LambentLight.GUI.sln  --configuration Debug
