@@ -1,0 +1,42 @@
+# The Version to use and the Build Image
+version: "3.0.0.{build}"
+image: Visual Studio 2019
+
+# If this build is from a tag, use the tag as the version without the V at the start
+init:
+  - ps: if ($env:APPVEYOR_REPO_TAG -eq "true") { Update-AppveyorBuild -Version "$($env:APPVEYOR_REPO_TAG_NAME.TrimStart("v"))" }
+  - set PATH=C:\Python38-x64;C:\Python38-x64\Scripts;%PATH%
+
+# Restore Git Submodules and NuGet Packages
+install:
+  - git submodule update --init --recursive
+  - python -m pip install -U pip
+  - pip install -r requirements.txt
+  - nuget restore LambentLight.GUI\LambentLight.GUI.sln
+  - pip install -e .\LambentLight.Client .\LambentLight.Server .\LambentLight.Tools
+
+# Build the solution with the same name as the AppVeyor project
+build_script:
+  - flake8
+  - scripts\build_cli.bat
+  - scripts\build_gui.bat
+  - scripts\nsis.bat
+
+# After building everything, package it in a 7zip and upload it as an Artifact
+after_build:
+  - 7z a %APPVEYOR_PROJECT_NAME%.7z %APPVEYOR_BUILD_FOLDER%\bin\Executables\*
+  - appveyor PushArtifact %APPVEYOR_PROJECT_NAME%.7z
+  - appveyor PushArtifact bin\Installer\%APPVEYOR_PROJECT_NAME%Installer.exe
+
+# If this is a tag, deploy the 7zip file(s) to GitHub Releases
+deploy:
+  release: v$(APPVEYOR_BUILD_VERSION)
+  provider: GitHub
+  auth_token:
+    secure: "DkvKC8KRj8AipGu/oWW/J2e6jMWt2xXQfKU7oefFMsp0ZMfzz+OR9Y9XpML+ZmG4"
+  artifact: /.*(?:(?:\.7z)|(?:Installer\.exe))/
+  draft: false
+  prerelease: false
+  on:
+    branch: master
+    appveyor_repo_tag: true

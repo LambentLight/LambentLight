@@ -1,0 +1,4 @@
+pyinstaller~=4.0
+wheel~=0.35.1
+flake8~=3.8.4
+flake8-import-order~=0.18.1

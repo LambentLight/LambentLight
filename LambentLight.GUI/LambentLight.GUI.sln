@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30404.54
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LambentLight.GUI", "LambentLight.GUI\LambentLight.GUI.csproj", "{B72F5347-D215-446A-BB99-CC7B364BECDE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B72F5347-D215-446A-BB99-CC7B364BECDE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B72F5347-D215-446A-BB99-CC7B364BECDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B72F5347-D215-446A-BB99-CC7B364BECDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B72F5347-D215-446A-BB99-CC7B364BECDE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FA03EF5E-45CE-4BE3-B49D-59D6039FA2B7}
+	EndGlobalSection
+EndGlobal
